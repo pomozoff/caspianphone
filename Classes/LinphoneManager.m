@@ -23,6 +23,7 @@
 #include <netdb.h>
 #include <sys/sysctl.h>
 
+#import <AVFoundation/AVAsset.h>
 #import <AVFoundation/AVAudioSession.h>
 #import <AudioToolbox/AudioToolbox.h>
 #import <SystemConfiguration/SystemConfiguration.h>
@@ -591,6 +592,14 @@ static void linphone_iphone_display_status(struct _LinphoneCore * lc, const char
     }
 }
 
+- (NSTimeInterval)durationOfMediaFileNamed:(NSString *)ringtoneFileName {
+    NSURL *audioFileURL = [[NSBundle mainBundle] URLForResource:[ringtoneFileName stringByDeletingPathExtension]
+                                                  withExtension:[ringtoneFileName pathExtension]];
+    AVURLAsset* audioAsset = [AVURLAsset URLAssetWithURL:audioFileURL options:nil];
+    CMTime audioDuration = audioAsset.duration;
+    return CMTimeGetSeconds(audioDuration);
+}
+
 - (void)onCall:(LinphoneCall*)call StateChanged:(LinphoneCallState)state withMessage:(const char *)message {
     
 	// Handling wrapper
@@ -669,12 +678,14 @@ static void linphone_iphone_display_status(struct _LinphoneCore * lc, const char
 				// Create a new local notification
 				data->notification = [[UILocalNotification alloc] init];
 				if (data->notification) {
-                    data->timer = [NSTimer scheduledTimerWithTimeInterval:4.0 target:self selector:@selector(localNotifContinue:) userInfo:data->notification repeats:TRUE];
+                    NSString *ringtoneFileName = @"shortring.caf";
+                    NSTimeInterval trackDuration = [self durationOfMediaFileNamed:ringtoneFileName];
+                    data->timer = [NSTimer scheduledTimerWithTimeInterval:trackDuration target:self selector:@selector(localNotifContinue:) userInfo:data->notification repeats:TRUE];
 
                     data->notification.repeatInterval = 0;
 					data->notification.alertBody =[NSString  stringWithFormat:NSLocalizedString(@"IC_MSG",nil), address];
 					data->notification.alertAction = NSLocalizedString(@"Answer", nil);
-					data->notification.soundName = @"shortring.caf";
+					data->notification.soundName = ringtoneFileName;
 					data->notification.userInfo = @{@"callId": callId, @"timer":[NSNumber numberWithInt:1] };
                     data->notification.applicationIconBadgeNumber = 1;
 
