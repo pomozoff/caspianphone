@@ -625,11 +625,14 @@ static void linphone_iphone_display_status(struct _LinphoneCore * lc, const char
             ms_free(lAddress);
         }
         if(useLinphoneAddress) {
-            const char* lDisplayName = linphone_address_get_display_name(addr);
+            //const char* lDisplayName = linphone_address_get_display_name(addr);
             const char* lUserName = linphone_address_get_username(addr);
+            /*
             if (lDisplayName)
                 address = [NSString stringWithUTF8String:lDisplayName];
             else if(lUserName)
+            */
+            if(lUserName)
                 address = [NSString stringWithUTF8String:lUserName];
         }
     }
@@ -879,11 +882,11 @@ static void linphone_iphone_registration_state(LinphoneCore *lc, LinphoneProxyCo
         if(contact) {
             address = [FastAddressBook getContactDisplayName:contact];
         } else {
-            if ([[LinphoneManager instance] lpConfigBoolForKey:@"show_contacts_emails_preference"] == true) {
+            //if ([[LinphoneManager instance] lpConfigBoolForKey:@"show_contacts_emails_preference"] == true) {
                 LinphoneAddress *linphoneAddress = linphone_address_new([address cStringUsingEncoding:[NSString defaultCStringEncoding]]);
                 address = [NSString stringWithUTF8String:linphone_address_get_username(linphoneAddress)];
                 linphone_address_destroy(linphoneAddress);
-            }
+            //}
         }
         if(address == nil) {
             address = @"Unknown";
