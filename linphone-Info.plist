@@ -10,10 +10,10 @@
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIconFiles</key>
 	<array>
-		<string>linphone_icon_57.png</string>
-		<string>linphone_icon_72.png</string>
-		<string>linphone_icon_57@2x.png</string>
-		<string>linphone_icon_72@2x.png</string>
+		<string>onecall_icon_57.png</string>
+		<string>onecall_icon_72.png</string>
+		<string>onecall_icon_57@2x.png</string>
+		<string>onecall_icon_72@2x.png</string>
 	</array>
 	<key>CFBundleIcons</key>
 	<dict>
@@ -21,11 +21,12 @@
 		<dict>
 			<key>CFBundleIconFiles</key>
 			<array>
-				<string>linphone_icon_120</string>
-				<string>linphone_icon_57.png</string>
-				<string>linphone_icon_72.png</string>
-				<string>linphone_icon_57@2x.png</string>
-				<string>linphone_icon_72@2x.png</string>
+				<string>onecall_icon_57</string>
+				<string>onecall_icon_120</string>
+				<string>onecall_icon_57.png</string>
+				<string>onecall_icon_72.png</string>
+				<string>onecall_icon_57@2x.png</string>
+				<string>onecall_icon_72@2x.png</string>
 			</array>
 		</dict>
 	</dict>
@@ -35,6 +36,9 @@
 		<dict>
 			<key>CFBundleIconFiles</key>
 			<array>
+				<string>onecall_icon_152</string>
+				<string>onecall_icon_76</string>
+				<string>onecall_icon_72</string>
 				<string>linphone_icon_152</string>
 				<string>linphone_icon_76</string>
 				<string>linphone_icon_120</string>
@@ -129,8 +133,8 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 		<string>UIInterfaceOrientationLandscapeLeft</string>
+		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
