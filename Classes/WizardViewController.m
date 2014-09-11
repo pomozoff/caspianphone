@@ -450,11 +450,19 @@ static UICompositeViewDescription *compositeDescription = nil;
     LinphoneAddress* linphoneAddress = linphone_address_new(identity);
     linphone_address_set_username(linphoneAddress, normalizedUserName);
 
+    /*
+     This code cuts off specefied transport type from uri
+     for example here is setting from xml config:
+         sip:212.159.80.157:5060;transport=tcp
+     this code changes uri to:
+         sip:212.159.80.157
+     
     if( domain && [domain length] != 0) {
         // when the domain is specified (for external login), take it as the server address
         linphone_proxy_config_set_server_addr(proxyCfg, [domain UTF8String]);
         linphone_address_set_domain(linphoneAddress, [domain UTF8String]);
     }
+    */
 
     identity = linphone_address_as_string_uri_only(linphoneAddress);
 
