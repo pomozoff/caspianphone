@@ -338,6 +338,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (void)changeView:(UIView *)view back:(BOOL)back animation:(BOOL)animation {
 
+    /*
     static BOOL placement_done = NO; // indicates if the button placement has been done in the wizard choice view
 
     // Change toolbar buttons following view
@@ -396,7 +397,7 @@ static UICompositeViewDescription *compositeDescription = nil;
             view = connectAccountView;
         }
     }
-    
+    */
     // Animation
     if(animation && [[LinphoneManager instance] lpConfigBoolForKey:@"animations_preference"] == true) {
       CATransition* trans = [CATransition animation];
