@@ -1,5 +1,5 @@
 [sip]
-contact="Linphone iPhone" <sip:linphone.iphone@unknown-host>
+contact="My iPhone" <sip:my.iphone@unknown-host>
 keepalive_period=30000
 default_proxy=0
 
