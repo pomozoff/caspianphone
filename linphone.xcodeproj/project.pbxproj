@@ -2413,6 +2413,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				226CDAE014E2D0B800513B67 /* libmsbcg729.a in Frameworks */,
 				1560821F18EEF26100765332 /* libmsopenh264.a in Frameworks */,
 				22509042196BD902007863F6 /* libopenh264.a in Frameworks */,
 				15017E701773578400784ACB /* libxml2.a in Frameworks */,
@@ -2460,7 +2461,6 @@
 				22A10F3B11F8960300373793 /* libortp.a in Frameworks */,
 				226F2ED71344B0EF00F6EF27 /* libopencore-amrnb.a in Frameworks */,
 				226F2ED61344B0EF00F6EF27 /* libopencore-amrwb.a in Frameworks */,
-				226CDAE014E2D0B800513B67 /* libmsbcg729.a in Frameworks */,
 				220FAD3810765B400068D98F /* libspeex.a in Frameworks */,
 				220FAD3910765B400068D98F /* libspeexdsp.a in Frameworks */,
 				226183AE1472527D0037138E /* libsrtp.a in Frameworks */,
@@ -5481,6 +5481,7 @@
 					HAVE_OPENH264,
 					HAVE_SILK,
 					HAVE_SSL,
+					HAVE_G729,
 					DEBUG,
 				);
 				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
@@ -5496,6 +5497,7 @@
 					"$(SRCROOT)/liblinphone-sdk/apple-darwin/lib",
 					"$(SRCROOT)/liblinphone-sdk/apple-darwin/lib/mediastreamer/plugins",
 					"$(PROJECT_DIR)/liblinphone-sdk/apple-darwin/lib",
+					"$(PROJECT_DIR)/liblinphone-sdk/apple-darwin/lib/mediastreamer/plugins",
 				);
 				LINK_WITH_STANDARD_LIBRARIES = YES;
 				ORDER_FILE = "";
@@ -5550,6 +5552,7 @@
 					VIDEO_ENABLED,
 					HAVE_SILK,
 					HAVE_SSL,
+					HAVE_G729,
 				);
 				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
 				HEADER_SEARCH_PATHS = (
@@ -5564,6 +5567,7 @@
 					"$(SRCROOT)/liblinphone-sdk/apple-darwin/lib/mediastreamer/plugins",
 					"$(SRCROOT)/liblinphone-sdk/apple-darwin/lib",
 					"$(PROJECT_DIR)/liblinphone-sdk/apple-darwin/lib",
+					"$(PROJECT_DIR)/liblinphone-sdk/apple-darwin/lib/mediastreamer/plugins",
 				);
 				LINK_WITH_STANDARD_LIBRARIES = YES;
 				ORDER_FILE = "";
@@ -5775,6 +5779,7 @@
 					VIDEO_ENABLED,
 					HAVE_SILK,
 					HAVE_SSL,
+					HAVE_G729,
 				);
 				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
 				HEADER_SEARCH_PATHS = (
@@ -5789,6 +5794,7 @@
 					"$(SRCROOT)/liblinphone-sdk/apple-darwin/lib/mediastreamer/plugins",
 					"$(SRCROOT)/liblinphone-sdk/apple-darwin/lib",
 					"$(PROJECT_DIR)/liblinphone-sdk/apple-darwin/lib",
+					"$(PROJECT_DIR)/liblinphone-sdk/apple-darwin/lib/mediastreamer/plugins",
 				);
 				LINK_WITH_STANDARD_LIBRARIES = YES;
 				ORDER_FILE = "";
@@ -5843,6 +5849,7 @@
 					VIDEO_ENABLED,
 					HAVE_SILK,
 					HAVE_SSL,
+					HAVE_G729,
 				);
 				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
 				HEADER_SEARCH_PATHS = (
@@ -5857,6 +5864,7 @@
 					"$(SRCROOT)/liblinphone-sdk/apple-darwin/lib/mediastreamer/plugins",
 					"$(SRCROOT)/liblinphone-sdk/apple-darwin/lib",
 					"$(PROJECT_DIR)/liblinphone-sdk/apple-darwin/lib",
+					"$(PROJECT_DIR)/liblinphone-sdk/apple-darwin/lib/mediastreamer/plugins",
 				);
 				LINK_WITH_STANDARD_LIBRARIES = YES;
 				ORDER_FILE = "";
