@@ -211,6 +211,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (void)fillDefaultValues {
 
+    /*
     LinphoneCore* lc = [LinphoneManager getLc];
     [self resetTextFields];
 
@@ -253,7 +254,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     [self changeView:provisionedAccountView back:FALSE animation:TRUE];
 
     linphone_proxy_config_destroy(default_conf);
-
+    */
 }
 
 - (void)resetTextFields {
