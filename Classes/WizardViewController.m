@@ -37,7 +37,7 @@ typedef enum _ViewElement {
     ViewElement_Username_Error      = 404
 } ViewElement;
 
-static const NSString *caspianDomain = @"212.159.80.157";
+static NSString *caspianDomain = @"212.159.80.157";
 
 @implementation WizardViewController
 
