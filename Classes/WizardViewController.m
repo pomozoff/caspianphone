@@ -729,12 +729,14 @@ static UICompositeViewDescription *compositeDescription = nil;
     NSMutableString *errors = [NSMutableString string];
     if ([username length] == 0) {
         
-        [errors appendString:[NSString stringWithFormat:NSLocalizedString(@"Please enter a phone number.\n", nil)]];
+        [errors appendString:[NSString stringWithFormat:NSLocalizedString(@"Please enter a username.\n", nil)]];
     }
     
-    if ([password length] == 0) {
-        [errors appendString:[NSString stringWithFormat:NSLocalizedString(@"Please enter a password.\n", nil)]];
+    /*
+    if ([domain length] == 0) {
+        [errors appendString:[NSString stringWithFormat:NSLocalizedString(@"Please enter a domain.\n", nil)]];
     }
+    */
     
     if([errors length]) {
         UIAlertView* errorView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Check error(s)",nil)
