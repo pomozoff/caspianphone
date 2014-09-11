@@ -32,4 +32,4 @@ autoanswer_notif_preference=1
 
 
 [default_values]
-reg_expires=600
+reg_expires=3600
