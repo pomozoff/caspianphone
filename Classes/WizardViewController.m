@@ -300,6 +300,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     [waitView setHidden:TRUE];
     
     [self loadWizardConfig:@"wizard_external_sip_caspian.rc"];
+    [self changeView:caspianAccountView back:FALSE animation:FALSE];
 }
 
 + (UIView*)findView:(ViewElement)tag view:(UIView*)view {
