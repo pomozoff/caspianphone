@@ -48,6 +48,7 @@
 
 @property (nonatomic, retain) IBOutlet UIView *waitView;
 
+@property (nonatomic, retain) IBOutlet UIButton *cancelButton;
 @property (nonatomic, retain) IBOutlet UIButton *backButton;
 @property (nonatomic, retain) IBOutlet UIButton *startButton;
 @property (nonatomic, retain) IBOutlet UIButton *createAccountButton;

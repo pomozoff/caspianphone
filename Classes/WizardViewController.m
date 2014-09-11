@@ -53,6 +53,7 @@ static NSString *caspianDomain = @"212.159.80.157";
 @synthesize provisionedAccountView;
 @synthesize waitView;
 
+@synthesize cancelButton;
 @synthesize backButton;
 @synthesize startButton;
 @synthesize createAccountButton;
@@ -97,6 +98,7 @@ static NSString *caspianDomain = @"212.159.80.157";
     
     [waitView release];
     
+    [cancelButton release];
     [backButton release];
     [startButton release];
     [createAccountButton release];
