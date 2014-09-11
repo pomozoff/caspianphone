@@ -37,6 +37,8 @@ typedef enum _ViewElement {
     ViewElement_Username_Error      = 404
 } ViewElement;
 
+static const NSString *caspianDomain = @"212.159.80.157";
+
 @implementation WizardViewController
 
 @synthesize contentView;
@@ -698,7 +700,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 - (IBAction)onSignInExternalClick:(id)sender {
     NSString *username = [WizardViewController findTextField:ViewElement_Username  view:contentView].text;
     NSString *password = [WizardViewController findTextField:ViewElement_Password  view:contentView].text;
-    NSString *domain = [WizardViewController findTextField:ViewElement_Domain  view:contentView].text;
+    //NSString *domain = [WizardViewController findTextField:ViewElement_Domain  view:contentView].text;
     
     
     NSMutableString *errors = [NSMutableString string];
@@ -721,7 +723,7 @@ static UICompositeViewDescription *compositeDescription = nil;
         [errorView release];
     } else {
         [self.waitView setHidden:false];
-        [self addProxyConfig:username password:password domain:domain];
+        [self addProxyConfig:username password:password domain:caspianDomain];
     }
 }
 
