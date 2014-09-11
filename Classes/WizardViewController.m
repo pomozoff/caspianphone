@@ -288,11 +288,15 @@ static UICompositeViewDescription *compositeDescription = nil;
     linphone_core_set_stun_server(lc, NULL);
     linphone_core_set_firewall_policy(lc, LinphonePolicyNoFirewall);
     [self resetTextFields];
+
+    /*
     if ([[LinphoneManager instance] lpConfigBoolForKey:@"hide_wizard_welcome_view_preference"] == true) {
         [self changeView:choiceView back:FALSE animation:FALSE];
     } else {
         [self changeView:welcomeView back:FALSE animation:FALSE];
     }
+    */
+    
     [waitView setHidden:TRUE];
 }
 
