@@ -42,6 +42,7 @@
 @property (nonatomic, retain) IBOutlet UIView *createAccountView;
 @property (nonatomic, retain) IBOutlet UIView *connectAccountView;
 @property (nonatomic, retain) IBOutlet UIView *externalAccountView;
+@property (nonatomic, retain) IBOutlet UIView *caspianAccountView;
 @property (nonatomic, retain) IBOutlet UIView *validateAccountView;
 @property (retain, nonatomic) IBOutlet UIView *provisionedAccountView;
 

@@ -48,6 +48,7 @@ static NSString *caspianDomain = @"212.159.80.157";
 @synthesize createAccountView;
 @synthesize connectAccountView;
 @synthesize externalAccountView;
+@synthesize caspianAccountView;
 @synthesize validateAccountView;
 @synthesize provisionedAccountView;
 @synthesize waitView;
@@ -91,6 +92,7 @@ static NSString *caspianDomain = @"212.159.80.157";
     [createAccountView release];
     [connectAccountView release];
     [externalAccountView release];
+    [caspianAccountView release];
     [validateAccountView release];
     
     [waitView release];
@@ -191,6 +193,7 @@ static UICompositeViewDescription *compositeDescription = nil;
         [LinphoneUtils adjustFontSize:createAccountView mult:2.22f];
         [LinphoneUtils adjustFontSize:connectAccountView mult:2.22f];
         [LinphoneUtils adjustFontSize:externalAccountView mult:2.22f];
+        [LinphoneUtils adjustFontSize:caspianAccountView mult:2.22f];
         [LinphoneUtils adjustFontSize:validateAccountView mult:2.22f];
         [LinphoneUtils adjustFontSize:provisionedAccountView mult:2.22f];
     }
@@ -263,6 +266,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     [WizardViewController cleanTextField:createAccountView];
     [WizardViewController cleanTextField:connectAccountView];
     [WizardViewController cleanTextField:externalAccountView];
+    [WizardViewController cleanTextField:caspianAccountView];
     [WizardViewController cleanTextField:validateAccountView];
     [WizardViewController cleanTextField:provisionedAccountView];
 }
