@@ -1,11 +1,11 @@
 /* SIP account */
-"SIP account" = "Учётная запись SIP";
+"SIP account" = "Учётная запись";
 
 /* Wizard */
-"Wizard" = "Помощник";
+"Wizard" = "Выход";
 
 /* User name */
-"User name" = "Имя пользователя";
+"User name" = "Номер телефона";
 
 /* User name */
 "User ID" = "ID пользователя";

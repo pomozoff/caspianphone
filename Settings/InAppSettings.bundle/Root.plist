@@ -30,7 +30,7 @@
 			<key>Key</key>
 			<string>username_preference</string>
 			<key>KeyboardType</key>
-			<string>Alphabet</string>
+			<string>NumberPad</string>
 			<key>Title</key>
 			<string>User name</string>
 			<key>Type</key>

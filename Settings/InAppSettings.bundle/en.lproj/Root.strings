@@ -1,11 +1,11 @@
 /* SIP account */
-"SIP account" = "SIP account";
+"SIP account" = "Account";
 
 /* Wizard */
-"Wizard" = "Run assistant";
+"Wizard" = "Sign out";
 
 /* User name */
-"User name" = "User name";
+"User name" = "Phone number";
 
 /* User ID */
 "User ID" = "User ID";

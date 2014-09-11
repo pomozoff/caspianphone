@@ -305,5 +305,5 @@
 
 /* Alert view for Wizard in Settings */
 "Warning" = "Warning";
-"Launching the Wizard will delete any existing proxy config.\nAre you sure to want it?" = "Launching the Wizard will delete any existing proxy config.\nAre you sure to want it?";
-"Launch Wizard" = "Launch Wizard";
+"Launching the Wizard will delete any existing proxy config.\nAre you sure to want it?" = "Signing out will delete any existing personal config.\nAre you sure to want it?";
+"Launch Wizard" = "Sign out";
