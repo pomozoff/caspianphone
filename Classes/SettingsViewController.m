@@ -743,6 +743,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     if([key isEqual:@"console_button"]) {
         [[PhoneMainView instance] changeCurrentView:[ConsoleViewController compositeViewDescription] push:TRUE];
     } else if([key isEqual:@"wizard_button"]) {
+        /*
         UIAlertView* alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Warning",nil)
                                                         message:NSLocalizedString(@"Launching the Wizard will delete any existing proxy config.\nAre you sure to want it?",nil)
                                                        delegate:self
@@ -750,6 +751,7 @@ static UICompositeViewDescription *compositeDescription = nil;
                                               otherButtonTitles:NSLocalizedString(@"Launch Wizard",nil), nil];
         [alert show];
         [alert release];
+        */
     } else if([key isEqual:@"about_button"]) {
         [[PhoneMainView instance] changeCurrentView:[AboutViewController compositeViewDescription] push:TRUE];
     }
