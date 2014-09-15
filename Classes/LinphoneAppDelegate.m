@@ -30,6 +30,8 @@
 #include "LinphoneManager.h"
 #include "linphone/linphonecore.h"
 
+#import <Crashlytics/Crashlytics.h>
+
 @implementation UILinphoneWindow
 
 @end
@@ -121,6 +123,9 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
+    [Crashlytics startWithAPIKey:@"33dd028ded3a518de0afb500f5a3839a2af9f021"];
+    
     [[UIApplication sharedApplication] registerForRemoteNotificationTypes:UIRemoteNotificationTypeAlert|UIRemoteNotificationTypeSound|UIRemoteNotificationTypeBadge|UIRemoteNotificationTypeNewsstandContentAvailability];
     
 

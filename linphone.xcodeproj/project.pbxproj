@@ -186,6 +186,7 @@
 		22E0A824111C44E100B04932 /* ConsoleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22E0A81F111C44E100B04932 /* ConsoleViewController.m */; };
 		22F2508E107141E100AC9B3F /* DialerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22F2508C107141E100AC9B3F /* DialerViewController.m */; };
 		22F254811073D99800AC9B3F /* ringback.wav in Resources */ = {isa = PBXBuildFile; fileRef = 22F254801073D99800AC9B3F /* ringback.wav */; };
+		26A74D8B19C1D458002A3DA7 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26A74D8A19C1D458002A3DA7 /* Crashlytics.framework */; };
 		26DFD65F19BF2F3400D1395A /* background-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 26DFD65219BF2F3400D1395A /* background-1.png */; };
 		26DFD66019BF2F3400D1395A /* logo-large.png in Resources */ = {isa = PBXBuildFile; fileRef = 26DFD65319BF2F3400D1395A /* logo-large.png */; };
 		26DFD66119BF2F3400D1395A /* logo-small.png in Resources */ = {isa = PBXBuildFile; fileRef = 26DFD65419BF2F3400D1395A /* logo-small.png */; };
@@ -1627,6 +1628,7 @@
 		22F2508B107141E100AC9B3F /* DialerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialerViewController.h; sourceTree = "<group>"; };
 		22F2508C107141E100AC9B3F /* DialerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = DialerViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		22F254801073D99800AC9B3F /* ringback.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = ringback.wav; path = Resources/ringback.wav; sourceTree = "<group>"; };
+		26A74D8A19C1D458002A3DA7 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		26DFD65219BF2F3400D1395A /* background-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background-1.png"; sourceTree = "<group>"; };
 		26DFD65319BF2F3400D1395A /* logo-large.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo-large.png"; sourceTree = "<group>"; };
 		26DFD65419BF2F3400D1395A /* logo-small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo-small.png"; sourceTree = "<group>"; };
@@ -2453,6 +2455,7 @@
 				223148E41178A08200637D6A /* libilbc.a in Frameworks */,
 				F476004B147AAF2800FFF19B /* liblinphone.a in Frameworks */,
 				D37EE10916032DA4003608A6 /* libmediastreamer_base.a in Frameworks */,
+				26A74D8B19C1D458002A3DA7 /* Crashlytics.framework in Frameworks */,
 				D37EE10A16032DA4003608A6 /* libmediastreamer_voip.a in Frameworks */,
 				226F2ED81344B0EF00F6EF27 /* libmsamr.a in Frameworks */,
 				223148E61178A09900637D6A /* libmsilbc.a in Frameworks */,
@@ -2895,6 +2898,7 @@
 				22276E8813C73DC000210156 /* CoreMedia.framework */,
 				340751961506459A00B89C47 /* CoreTelephony.framework */,
 				22276E8613C73D8A00210156 /* CoreVideo.framework */,
+				26A74D8A19C1D458002A3DA7 /* Crashlytics.framework */,
 				1D30AB110D05D00D00671497 /* Foundation.framework */,
 				F0BB8C4A193631B300974404 /* ImageIO.framework */,
 				F0B89C2118DC89E30050B60E /* MediaPlayer.framework */,
@@ -3650,6 +3654,7 @@
 				1D60588E0D05DD3D006BFB54 /* Sources */,
 				1D60588F0D05DD3D006BFB54 /* Frameworks */,
 				2247673A129C3B9C002B94B4 /* CopyFiles */,
+				26A74D8919C1D40A002A3DA7 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -4901,6 +4906,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		26A74D8919C1D40A002A3DA7 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Crashlytics.framework/run 33dd028ded3a518de0afb500f5a3839a2af9f021 00be292e53678c94c0057937e1509ff25df44b4ecac3369157624a267c41e3e2";
+		};
 		D33CF34715D3985000CD4B85 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -5470,7 +5488,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COMPRESS_PNG_FILES = NO;
 				COPY_PHASE_STRIP = NO;
-				FRAMEWORK_SEARCH_PATHS = "";
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -5542,7 +5560,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COMPRESS_PNG_FILES = NO;
 				COPY_PHASE_STRIP = NO;
-				FRAMEWORK_SEARCH_PATHS = "";
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = s;
@@ -5769,7 +5787,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COMPRESS_PNG_FILES = NO;
 				COPY_PHASE_STRIP = NO;
-				FRAMEWORK_SEARCH_PATHS = "";
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = s;
@@ -5839,7 +5857,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COMPRESS_PNG_FILES = NO;
 				COPY_PHASE_STRIP = NO;
-				FRAMEWORK_SEARCH_PATHS = "";
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = s;
