@@ -1228,8 +1228,40 @@ static LinphoneCoreVTable linphonec_vtable = {
 			[LinphoneLogger logc:LinphoneLoggerWarning format:"SILK/24000 and video disabled on old iPhone 3G"];
 		}
 		linphone_core_enable_video(theLinphoneCore, FALSE, FALSE);
-	}
+    } else {
+		PayloadType *pt = linphone_core_find_payload_type(theLinphoneCore,"SILK", 24000, -1);
+		if (pt) {
+			linphone_core_enable_payload_type(theLinphoneCore, pt, TRUE);
+		}
+    }
 
+    // Enable some audio codecs for Caspian
+    PayloadType *pt;
+    pt = linphone_core_find_payload_type(theLinphoneCore, "silk" , 16000, -1);
+    if (pt) {
+        linphone_core_enable_payload_type(theLinphoneCore, pt, TRUE);
+    }
+    pt = linphone_core_find_payload_type(theLinphoneCore, "g722" , 8000, -1);
+    if (pt) {
+        linphone_core_enable_payload_type(theLinphoneCore, pt, TRUE);
+    }
+    pt = linphone_core_find_payload_type(theLinphoneCore, "g729" , 8000, -1);
+    if (pt) {
+        linphone_core_enable_payload_type(theLinphoneCore, pt, TRUE);
+    }
+    pt = linphone_core_find_payload_type(theLinphoneCore, "gsm" , 8000, -1);
+    if (pt) {
+        linphone_core_enable_payload_type(theLinphoneCore, pt, TRUE);
+    }
+    pt = linphone_core_find_payload_type(theLinphoneCore, "pcmu" , 8000, -1);
+    if (pt) {
+        linphone_core_enable_payload_type(theLinphoneCore, pt, TRUE);
+    }
+    pt = linphone_core_find_payload_type(theLinphoneCore, "pcma" , 8000, -1);
+    if (pt) {
+        linphone_core_enable_payload_type(theLinphoneCore, pt, TRUE);
+    }
+    
     [LinphoneLogger logc:LinphoneLoggerWarning format:"Linphone [%s]  started on [%s]", linphone_core_get_version(), [[UIDevice currentDevice].model cStringUsingEncoding:[NSString defaultCStringEncoding]]];
     
 
