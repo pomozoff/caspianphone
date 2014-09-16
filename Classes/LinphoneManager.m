@@ -1257,7 +1257,7 @@ static BOOL libStarted = FALSE;
 
 	connectivity = none;
 	signal(SIGPIPE, SIG_IGN);
-
+/*
 	ms_init(); // Need to initialize mediastreamer2 before loading the plugins
 
 	libmsilbc_init();
@@ -1277,7 +1277,7 @@ static BOOL libStarted = FALSE;
 #if HAVE_G729
 	libmsbcg729_init(); // load g729 plugin
 #endif
-
+*/
 	/*to make sure we don't loose debug trace*/
 	if ([self  lpConfigBoolForKey:@"debugenable_preference"]) {
 		linphone_core_enable_logs_with_cb((OrtpLogFunc)linphone_iphone_log_handler);
@@ -1315,7 +1315,27 @@ static BOOL libStarted = FALSE;
 }
 
 - (void)createLinphoneCore {
-
+    
+	ms_init(); // Need to initialize mediastreamer2 before loading the plugins
+    
+	libmsilbc_init();
+#if defined (HAVE_SILK)
+    libmssilk_init();
+#endif
+#ifdef HAVE_AMR
+    libmsamr_init(); //load amr plugin if present from the liblinphone sdk
+#endif
+#ifdef HAVE_X264
+	libmsx264_init(); //load x264 plugin if present from the liblinphone sdk
+#endif
+#ifdef HAVE_OPENH264
+	libmsopenh264_init(); //load openh264 plugin if present from the liblinphone sdk
+#endif
+    
+#if HAVE_G729
+	libmsbcg729_init(); // load g729 plugin
+#endif
+    
     if (theLinphoneCore != nil) {
         [LinphoneLogger logc:LinphoneLoggerLog format:"linphonecore is already created"];
         return;
