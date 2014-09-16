@@ -716,6 +716,36 @@ static UICompositeViewDescription *compositeDescription = nil;
         [hiddenKeys addObject:@"avpf_preference"];
     }
 
+    // *** Caspian hidden keys ***
+    // Root
+    [hiddenKeys addObject:@"domain_preference"];
+    [hiddenKeys addObject:@"transport_preference"];
+    [hiddenKeys addObject:@"advanced_account_preference"];
+    [hiddenKeys addObject:@"enable_video_preference"];
+    // Call
+    [hiddenKeys addObject:@"substitute_+_by_00_preference"];
+    // Advanced
+    [hiddenKeys addObject:@"debugenable_preference"];
+    [hiddenKeys addObject:@"animations_preference"];
+    [hiddenKeys addObject:@"rotation_preference"];
+    [hiddenKeys addObject:@"backgroundmode_preference"];
+    [hiddenKeys addObject:@"autoanswer_notif_preference"];
+    [hiddenKeys addObject:@"expire_preference"];
+    [hiddenKeys addObject:@"primary_displayname_preference"];
+    [hiddenKeys addObject:@"primary_username_preference"];
+    [hiddenKeys addObject:@"expire_preference"];
+    [hiddenKeys addObject:@"sharing_server_preference"];
+    // Audio
+    [hiddenKeys addObject:@"speex_16k_preference"];
+    [hiddenKeys addObject:@"speex_8k_preference"];
+    [hiddenKeys addObject:@"opus_preference"];
+    [hiddenKeys addObject:@"silk_24k_preference"];
+    [hiddenKeys addObject:@"aaceld_22k_preference"];
+    [hiddenKeys addObject:@"aaceld_44k_preference"];
+    [hiddenKeys addObject:@"amr_preference"];
+    [hiddenKeys addObject:@"ilbc_preference"];
+    [hiddenKeys addObject:@"aaceld_44k_preference"];
+    
     return hiddenKeys;
 }
 
