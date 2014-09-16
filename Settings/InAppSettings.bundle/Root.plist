@@ -11,14 +11,6 @@
 			<string>PSGroupSpecifier</string>
 		</dict>
 		<dict>
-			<key>Key</key>
-			<string>wizard_button</string>
-			<key>Title</key>
-			<string>Wizard</string>
-			<key>Type</key>
-			<string>IASKButtonSpecifier</string>
-		</dict>
-		<dict>
 			<key>AutocapitalizationType</key>
 			<string>None</string>
 			<key>AutocorrectionType</key>
@@ -159,6 +151,14 @@
 			<string>advanced_account_preference</string>
 			<key>DefaultValue</key>
 			<false/>
+		</dict>
+		<dict>
+			<key>Key</key>
+			<string>wizard_button</string>
+			<key>Title</key>
+			<string>Wizard</string>
+			<key>Type</key>
+			<string>IASKButtonSpecifier</string>
 		</dict>
 		<dict>
 			<key>Title</key>
