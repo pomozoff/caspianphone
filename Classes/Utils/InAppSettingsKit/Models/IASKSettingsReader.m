@@ -105,6 +105,10 @@ hiddenKeys = _hiddenKeys;
 			continue;
 		}
 		if ([(NSString*)[specifier objectForKey:kIASKType] isEqualToString:kIASKPSGroupSpecifier]) {
+            if ([dataSource lastObject] && [[dataSource lastObject] count] == 1) {
+                [dataSource removeLastObject];
+                sectionCount--;
+            }
 			NSMutableArray *newArray = [[NSMutableArray alloc] init];
 			
 			[newArray addObject:specifier];
