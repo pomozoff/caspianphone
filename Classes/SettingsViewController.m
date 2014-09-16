@@ -752,6 +752,7 @@ static UICompositeViewDescription *compositeDescription = nil;
         [alert show];
         [alert release];
         */
+        [self alertView:nil clickedButtonAtIndex:1];
     } else if([key isEqual:@"about_button"]) {
         [[PhoneMainView instance] changeCurrentView:[AboutViewController compositeViewDescription] push:TRUE];
     }
