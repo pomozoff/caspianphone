@@ -104,7 +104,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>2.2.5</string>
+	<string>2.2.6</string>
 	<key>NSMainNibFile</key>
 	<string>LinphoneApp</string>
 	<key>NSMainNibFile~ipad</key>
