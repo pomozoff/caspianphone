@@ -12,7 +12,6 @@
 		2206D2D3177AC70900C40726 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2206D2C6177AC70900C40726 /* InfoPlist.strings */; };
 		2206D2D4177AC70900C40726 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2206D2C8177AC70900C40726 /* MainWindow.xib */; };
 		2206D2D5177AC70900C40726 /* mediastreamViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2206D2CA177AC70900C40726 /* mediastreamViewController.xib */; };
-		2206D2D6177AC70900C40726 /* mediastream-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2206D2CC177AC70900C40726 /* mediastream-Info.plist */; };
 		2206D2D7177AC70900C40726 /* mediastreamAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2206D2CF177AC70900C40726 /* mediastreamAppDelegate.m */; };
 		2206D2D8177AC70900C40726 /* mediastreamViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2206D2D1177AC70900C40726 /* mediastreamViewController.m */; };
 		2206D2D9177AC70900C40726 /* mediastream.c in Sources */ = {isa = PBXBuildFile; fileRef = 2206D2D2177AC70900C40726 /* mediastream.c */; };
@@ -2080,7 +2079,7 @@
 		0867D690FE84028FC02AAC07 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0430;
+				LastUpgradeCheck = 0510;
 			};
 			buildConfigurationList = 1DEB922208733DC00010E9CD /* Build configuration list for PBXProject "liblinphone" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -2116,7 +2115,6 @@
 				2206D2D3177AC70900C40726 /* InfoPlist.strings in Resources */,
 				2206D2D4177AC70900C40726 /* MainWindow.xib in Resources */,
 				2206D2D5177AC70900C40726 /* mediastreamViewController.xib in Resources */,
-				2206D2D6177AC70900C40726 /* mediastream-Info.plist in Resources */,
 				2206D2E1177ACF5700C40726 /* nowebcamCIF.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2404,7 +2402,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				COPY_PHASE_STRIP = NO;
 				DSTROOT = /tmp/liblinphone.dst;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -2443,7 +2440,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				DSTROOT = /tmp/liblinphone.dst;
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -2478,7 +2474,6 @@
 		1DEB922308733DC00010E9CD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -2515,6 +2510,7 @@
 					externals/exosip/include,
 					externals/speex/include,
 				);
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
 				VALID_ARCHS = "armv6 armv7 i386";
@@ -2524,7 +2520,6 @@
 		1DEB922408733DC00010E9CD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"_BYTE_ORDER=_LITTLE_ENDIAN",
@@ -3077,7 +3072,6 @@
 		229A615513DF03B200090183 /* DistributionAdhoc */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"_BYTE_ORDER=_LITTLE_ENDIAN",
@@ -3124,7 +3118,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				DSTROOT = /tmp/liblinphone.dst;
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -3160,7 +3153,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -3380,7 +3372,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -3431,7 +3422,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
