@@ -186,6 +186,11 @@
 		22E0A824111C44E100B04932 /* ConsoleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22E0A81F111C44E100B04932 /* ConsoleViewController.m */; };
 		22F2508E107141E100AC9B3F /* DialerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22F2508C107141E100AC9B3F /* DialerViewController.m */; };
 		22F254811073D99800AC9B3F /* ringback.wav in Resources */ = {isa = PBXBuildFile; fileRef = 22F254801073D99800AC9B3F /* ringback.wav */; };
+		2622BD6A19C9AFC00048AE69 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F03A9B3318C0CF7000C4D7FE /* XCTest.framework */; };
+		2622BD6B19C9AFC00048AE69 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
+		2622BD6C19C9AFC00048AE69 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
+		2622BD7219C9AFC00048AE69 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2622BD7019C9AFC00048AE69 /* InfoPlist.strings */; };
+		2622BD7419C9AFC00048AE69 /* linphone_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2622BD7319C9AFC00048AE69 /* linphone_Tests.m */; };
 		26A74D8B19C1D458002A3DA7 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26A74D8A19C1D458002A3DA7 /* Crashlytics.framework */; };
 		26DFD65F19BF2F3400D1395A /* background-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 26DFD65219BF2F3400D1395A /* background-1.png */; };
 		26DFD66019BF2F3400D1395A /* logo-large.png in Resources */ = {isa = PBXBuildFile; fileRef = 26DFD65319BF2F3400D1395A /* logo-large.png */; };
@@ -1451,6 +1456,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		2622BD7619C9AFC00048AE69 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1D6058900D05DD3D006BFB54;
+			remoteInfo = linphone;
+		};
 		D3554ED015CA79AA00478841 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D3554EC515CA79A900478841 /* XMLRPC.xcodeproj */;
@@ -1642,6 +1654,11 @@
 		22F2508B107141E100AC9B3F /* DialerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialerViewController.h; sourceTree = "<group>"; };
 		22F2508C107141E100AC9B3F /* DialerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = DialerViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		22F254801073D99800AC9B3F /* ringback.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = ringback.wav; path = Resources/ringback.wav; sourceTree = "<group>"; };
+		2622BD6919C9AFBF0048AE69 /* linphone Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "linphone Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2622BD6F19C9AFC00048AE69 /* linphone Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "linphone Tests-Info.plist"; sourceTree = "<group>"; };
+		2622BD7119C9AFC00048AE69 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		2622BD7319C9AFC00048AE69 /* linphone_Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = linphone_Tests.m; sourceTree = "<group>"; };
+		2622BD7519C9AFC00048AE69 /* linphone Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "linphone Tests-Prefix.pch"; sourceTree = "<group>"; };
 		26A74D8A19C1D458002A3DA7 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		26DFD65219BF2F3400D1395A /* background-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background-1.png"; sourceTree = "<group>"; };
 		26DFD65319BF2F3400D1395A /* logo-large.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo-large.png"; sourceTree = "<group>"; };
@@ -2545,6 +2562,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		2622BD6619C9AFBF0048AE69 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2622BD6A19C9AFC00048AE69 /* XCTest.framework in Frameworks */,
+				2622BD6C19C9AFC00048AE69 /* UIKit.framework in Frameworks */,
+				2622BD6B19C9AFC00048AE69 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F08F118119C09C6A007D70C2 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -2701,6 +2728,7 @@
 				22D8F187147548E2008C97DB /* linphone-no-gpl-thirdparties.app */,
 				F0BB8BD51936208100974404 /* LinphoneTester.app */,
 				F08F118419C09C6A007D70C2 /* LinphoneTester Tests.xctest */,
+				2622BD6919C9AFBF0048AE69 /* linphone Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -2794,6 +2822,25 @@
 			path = LinphoneUI;
 			sourceTree = "<group>";
 		};
+		2622BD6D19C9AFC00048AE69 /* linphone Tests */ = {
+			isa = PBXGroup;
+			children = (
+				2622BD7319C9AFC00048AE69 /* linphone_Tests.m */,
+				2622BD6E19C9AFC00048AE69 /* Supporting Files */,
+			);
+			path = "linphone Tests";
+			sourceTree = "<group>";
+		};
+		2622BD6E19C9AFC00048AE69 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				2622BD6F19C9AFC00048AE69 /* linphone Tests-Info.plist */,
+				2622BD7019C9AFC00048AE69 /* InfoPlist.strings */,
+				2622BD7519C9AFC00048AE69 /* linphone Tests-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		26DFD64F19BF2E7F00D1395A /* images caspian */ = {
 			isa = PBXGroup;
 			children = (
@@ -2819,6 +2866,7 @@
 			isa = PBXGroup;
 			children = (
 				080E96DDFE201D6D7F000001 /* Classes */,
+				2622BD6D19C9AFC00048AE69 /* linphone Tests */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				F04892FE180C3296002FED35 /* ImageOptim.sh */,
 				F0938158188E629800A55DFA /* iTunesArtwork */,
@@ -3722,6 +3770,24 @@
 			productReference = 22D8F187147548E2008C97DB /* linphone-no-gpl-thirdparties.app */;
 			productType = "com.apple.product-type.application";
 		};
+		2622BD6819C9AFBF0048AE69 /* linphone Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2622BD7819C9AFC00048AE69 /* Build configuration list for PBXNativeTarget "linphone Tests" */;
+			buildPhases = (
+				2622BD6519C9AFBF0048AE69 /* Sources */,
+				2622BD6619C9AFBF0048AE69 /* Frameworks */,
+				2622BD6719C9AFBF0048AE69 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2622BD7719C9AFC00048AE69 /* PBXTargetDependency */,
+			);
+			name = "linphone Tests";
+			productName = "linphone Tests";
+			productReference = 2622BD6919C9AFBF0048AE69 /* linphone Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		F08F118319C09C6A007D70C2 /* LinphoneTester Tests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = F08F119319C09C6B007D70C2 /* Build configuration list for PBXNativeTarget "LinphoneTester Tests" */;
@@ -3772,6 +3838,9 @@
 					22D8F11D147548E2008C97DB = {
 						DevelopmentTeam = Z2V957B3D6;
 					};
+					2622BD6819C9AFBF0048AE69 = {
+						TestTargetID = 1D6058900D05DD3D006BFB54;
+					};
 					F08F118319C09C6A007D70C2 = {
 						TestTargetID = F0BB8BD41936208100974404;
 					};
@@ -3812,6 +3881,7 @@
 				22D8F11D147548E2008C97DB /* linphone-no-gpl-thirdparties */,
 				F0BB8BD41936208100974404 /* LinphoneTester */,
 				F08F118319C09C6A007D70C2 /* LinphoneTester Tests */,
+				2622BD6819C9AFBF0048AE69 /* linphone Tests */,
 			);
 		};
 /* End PBXProject section */
@@ -4937,6 +5007,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		2622BD6719C9AFBF0048AE69 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2622BD7219C9AFC00048AE69 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F08F118219C09C6A007D70C2 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -5224,6 +5302,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		2622BD6519C9AFBF0048AE69 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2622BD7419C9AFC00048AE69 /* linphone_Tests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F08F118019C09C6A007D70C2 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -5249,6 +5335,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		2622BD7719C9AFC00048AE69 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1D6058900D05DD3D006BFB54 /* linphone */;
+			targetProxy = 2622BD7619C9AFC00048AE69 /* PBXContainerItemProxy */;
+		};
 		D3554ED515CA79B900478841 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = libXMLRPC;
@@ -5285,6 +5376,14 @@
 				FD979F30169E84670022A8B4 /* ru */,
 			);
 			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		2622BD7019C9AFC00048AE69 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2622BD7119C9AFC00048AE69 /* en */,
+			);
+			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 		D37EE11016035793003608A6 /* ImageViewController.xib */ = {
@@ -5594,6 +5693,7 @@
 					HAVE_G729,
 					DEBUG,
 				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
 				HEADER_SEARCH_PATHS = (
 					"$(SRCROOT)/liblinphone-sdk/apple-darwin/include",
@@ -5669,6 +5769,7 @@
 					HAVE_SSL,
 					HAVE_G729,
 				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
 				HEADER_SEARCH_PATHS = (
 					"$(SRCROOT)/liblinphone-sdk/apple-darwin/include",
@@ -5679,8 +5780,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(BUILT_PRODUCTS_DIR)",
-					"$(SRCROOT)/liblinphone-sdk/apple-darwin/lib/mediastreamer/plugins",
 					"$(SRCROOT)/liblinphone-sdk/apple-darwin/lib",
+					"$(SRCROOT)/liblinphone-sdk/apple-darwin/lib/mediastreamer/plugins",
 					"$(PROJECT_DIR)/liblinphone-sdk/apple-darwin/lib",
 					"$(PROJECT_DIR)/liblinphone-sdk/apple-darwin/lib/mediastreamer/plugins",
 				);
@@ -5901,6 +6002,7 @@
 					HAVE_SSL,
 					HAVE_G729,
 				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
 				HEADER_SEARCH_PATHS = (
 					"$(SRCROOT)/liblinphone-sdk/apple-darwin/include",
@@ -5911,8 +6013,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(BUILT_PRODUCTS_DIR)",
-					"$(SRCROOT)/liblinphone-sdk/apple-darwin/lib/mediastreamer/plugins",
 					"$(SRCROOT)/liblinphone-sdk/apple-darwin/lib",
+					"$(SRCROOT)/liblinphone-sdk/apple-darwin/lib/mediastreamer/plugins",
 					"$(PROJECT_DIR)/liblinphone-sdk/apple-darwin/lib",
 					"$(PROJECT_DIR)/liblinphone-sdk/apple-darwin/lib/mediastreamer/plugins",
 				);
@@ -5976,6 +6078,7 @@
 					HAVE_SSL,
 					HAVE_G729,
 				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
 				HEADER_SEARCH_PATHS = (
 					"$(SRCROOT)/liblinphone-sdk/apple-darwin/include",
@@ -5986,8 +6089,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(BUILT_PRODUCTS_DIR)",
-					"$(SRCROOT)/liblinphone-sdk/apple-darwin/lib/mediastreamer/plugins",
 					"$(SRCROOT)/liblinphone-sdk/apple-darwin/lib",
+					"$(SRCROOT)/liblinphone-sdk/apple-darwin/lib/mediastreamer/plugins",
 					"$(PROJECT_DIR)/liblinphone-sdk/apple-darwin/lib",
 					"$(PROJECT_DIR)/liblinphone-sdk/apple-darwin/lib/mediastreamer/plugins",
 				);
@@ -6000,6 +6103,163 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Distribution;
+		};
+		2622BD7919C9AFC00048AE69 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/linphone.app/linphone";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "linphone Tests/linphone Tests-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/liblinphone-sdk/apple-darwin/include",
+					"$(SRCROOT)/Classes/Utils/NinePatch/",
+					"$(SRCROOT)/Classes/Utils/XMLRPC/",
+				);
+				INFOPLIST_FILE = "linphone Tests/linphone Tests-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				LIBRARY_SEARCH_PATHS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		2622BD7A19C9AFC00048AE69 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/linphone.app/linphone";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "linphone Tests/linphone Tests-Prefix.pch";
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/liblinphone-sdk/apple-darwin/include",
+					"$(SRCROOT)/Classes/Utils/NinePatch/",
+					"$(SRCROOT)/Classes/Utils/XMLRPC/",
+				);
+				INFOPLIST_FILE = "linphone Tests/linphone Tests-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				LIBRARY_SEARCH_PATHS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				VALIDATE_PRODUCT = YES;
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+		2622BD7B19C9AFC00048AE69 /* Distribution */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/linphone.app/linphone";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "linphone Tests/linphone Tests-Prefix.pch";
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/liblinphone-sdk/apple-darwin/include",
+					"$(SRCROOT)/Classes/Utils/NinePatch/",
+					"$(SRCROOT)/Classes/Utils/XMLRPC/",
+				);
+				INFOPLIST_FILE = "linphone Tests/linphone Tests-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				LIBRARY_SEARCH_PATHS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				VALIDATE_PRODUCT = YES;
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Distribution;
+		};
+		2622BD7C19C9AFC00048AE69 /* DistributionAdhoc */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/linphone.app/linphone";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "linphone Tests/linphone Tests-Prefix.pch";
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/liblinphone-sdk/apple-darwin/include",
+					"$(SRCROOT)/Classes/Utils/NinePatch/",
+					"$(SRCROOT)/Classes/Utils/XMLRPC/",
+				);
+				INFOPLIST_FILE = "linphone Tests/linphone Tests-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				LIBRARY_SEARCH_PATHS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				VALIDATE_PRODUCT = YES;
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = DistributionAdhoc;
 		};
 		C01FCF4F08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -6451,6 +6711,16 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
+		};
+		2622BD7819C9AFC00048AE69 /* Build configuration list for PBXNativeTarget "linphone Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2622BD7919C9AFC00048AE69 /* Debug */,
+				2622BD7A19C9AFC00048AE69 /* Release */,
+				2622BD7B19C9AFC00048AE69 /* Distribution */,
+				2622BD7C19C9AFC00048AE69 /* DistributionAdhoc */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "linphone" */ = {
 			isa = XCConfigurationList;
