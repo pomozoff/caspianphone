@@ -141,7 +141,7 @@ static UICompositeViewDescription *compositeDescription = nil;
             ms_free(lAddress);
         }
         if(useLinphoneAddress) {
-            const char* lDisplayName = linphone_address_get_display_name(addr);
+            const char* lDisplayName = NULL; //linphone_address_get_display_name(addr);
             const char* lUserName = linphone_address_get_username(addr);
             if (lDisplayName) 
                 address = [NSString stringWithUTF8String:lDisplayName];

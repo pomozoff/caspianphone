@@ -130,7 +130,8 @@ extern void linphone_iphone_log_handler(int lev, const char *fmt, va_list args);
 	{
 		LinphoneAddress *parsed = linphone_core_get_primary_contact_parsed(lc);
 		if(parsed != NULL) {
-			[self setString: linphone_address_get_display_name(parsed) forKey:@"primary_displayname_preference"];
+			//[self setString: linphone_address_get_display_name(parsed) forKey:@"primary_displayname_preference"];
+			[self setString: linphone_address_get_username(parsed) forKey:@"primary_displayname_preference"];
 			[self setString: linphone_address_get_username(parsed) forKey:@"primary_username_preference"];
 		}
 		linphone_address_destroy(parsed);

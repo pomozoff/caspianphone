@@ -492,7 +492,7 @@ static void hideSpinner(LinphoneCall* call, void* user_data) {
     
     const char* lUserNameChars = linphone_address_get_username(linphone_call_get_remote_address(call));
     NSString* lUserName = lUserNameChars?[[[NSString alloc] initWithUTF8String:lUserNameChars] autorelease]:NSLocalizedString(@"Unknown",nil);
-    const char* lDisplayNameChars =  linphone_address_get_display_name(linphone_call_get_remote_address(call));        
+    const char* lDisplayNameChars =  linphone_address_get_username(linphone_call_get_remote_address(call));        
 	NSString* lDisplayName = [lDisplayNameChars?[[NSString alloc] initWithUTF8String:lDisplayNameChars]:@"" autorelease];
     
     NSString* title = [NSString stringWithFormat : NSLocalizedString(@"'%@' would like to enable video",nil), ([lDisplayName length] > 0)?lDisplayName:lUserName];
