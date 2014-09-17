@@ -1129,6 +1129,26 @@ static LinphoneCoreVTable linphonec_vtable = {
     }
 }
 
+- (void)enableCaspianCodecs {
+    NSString *keyName = @"name";
+    NSString *keyRate = @"rate";
+
+    NSArray *caspianCodecs = @[ @{keyName : @"silk", keyRate : @16000}
+                              , @{keyName : @"silk", keyRate : @24000}
+                              , @{keyName : @"g722", keyRate :  @8000}
+                              , @{keyName : @"g729", keyRate :  @8000}
+                              , @{keyName : @"gsm",  keyRate :  @8000}
+                              , @{keyName : @"pcmu", keyRate :  @8000}
+                              , @{keyName : @"pcma", keyRate :  @8000}
+                                ];
+    for (NSDictionary *codec in caspianCodecs) {
+        PayloadType *pt = linphone_core_find_payload_type(theLinphoneCore, [codec[keyName] UTF8String], [codec[keyRate] intValue], -1);
+        if (pt) {
+            linphone_core_enable_payload_type(theLinphoneCore, pt, TRUE);
+        }
+    }
+}
+
 /** Should be called once per linphone_core_new() */
 - (void)finishCoreConfiguration {
 
@@ -1235,32 +1255,7 @@ static LinphoneCoreVTable linphonec_vtable = {
 		}
     }
 
-    // Enable some audio codecs for Caspian
-    PayloadType *pt;
-    pt = linphone_core_find_payload_type(theLinphoneCore, "silk" , 16000, -1);
-    if (pt) {
-        linphone_core_enable_payload_type(theLinphoneCore, pt, TRUE);
-    }
-    pt = linphone_core_find_payload_type(theLinphoneCore, "g722" , 8000, -1);
-    if (pt) {
-        linphone_core_enable_payload_type(theLinphoneCore, pt, TRUE);
-    }
-    pt = linphone_core_find_payload_type(theLinphoneCore, "g729" , 8000, -1);
-    if (pt) {
-        linphone_core_enable_payload_type(theLinphoneCore, pt, TRUE);
-    }
-    pt = linphone_core_find_payload_type(theLinphoneCore, "gsm" , 8000, -1);
-    if (pt) {
-        linphone_core_enable_payload_type(theLinphoneCore, pt, TRUE);
-    }
-    pt = linphone_core_find_payload_type(theLinphoneCore, "pcmu" , 8000, -1);
-    if (pt) {
-        linphone_core_enable_payload_type(theLinphoneCore, pt, TRUE);
-    }
-    pt = linphone_core_find_payload_type(theLinphoneCore, "pcma" , 8000, -1);
-    if (pt) {
-        linphone_core_enable_payload_type(theLinphoneCore, pt, TRUE);
-    }
+    [self enableCaspianCodecs];
     
     [LinphoneLogger logc:LinphoneLoggerWarning format:"Linphone [%s]  started on [%s]", linphone_core_get_version(), [[UIDevice currentDevice].model cStringUsingEncoding:[NSString defaultCStringEncoding]]];
     
