@@ -179,7 +179,7 @@
 "Not activated" = "Не активировано";
 
 /* No comment provided by engineer. */
-"Not registered" = "Не зарегистрировано";
+"Not registered" = "Отключён";
 
 /* No comment provided by engineer. */
 "Ok" = "Ок";
@@ -212,16 +212,16 @@
 "Please terminate GSM call" = "Пожалуйста прервите звонок в сети GSM";
 
 /* No comment provided by engineer. */
-"Registered" = "Зарегистирован";
+"Registered" = "Подключён";
 
 /* No comment provided by engineer. */
-"Registration failed" = "Ошибка регистрации";
+"Registration failed" = "Ошибка";
 
 /* No comment provided by engineer. */
 "Registration failure" = "Ошибка регистрации";
 
 /* No comment provided by engineer. */
-"Registration in progress" = "Идёт регистрация";
+"Registration in progress" = "Пожалуйста, подождите";
 
 /* ICE has established a connection through a relay */
 "Relay connection" = "Ретранслируемое соединение";

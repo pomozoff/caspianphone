@@ -179,7 +179,7 @@
 "Not activated" = "Pas activée";
 
 /* No comment provided by engineer. */
-"Not registered" = "Non enregistré";
+"Not registered" = "Hors ligne";
 
 /* No comment provided by engineer. */
 "Ok" = "Ok";
@@ -212,16 +212,16 @@
 "Please terminate GSM call" = "Veuillez terminer l'appel GSM";
 
 /* No comment provided by engineer. */
-"Registered" = "Enregistré";
+"Registered" = "Actif";
 
 /* No comment provided by engineer. */
-"Registration failed" = "Enregistrement échoué";
+"Registration failed" = "Manqué";
 
 /* No comment provided by engineer. */
 "Registration failure" = "Échec de l'enregistrement";
 
 /* No comment provided by engineer. */
-"Registration in progress" = "Enregistrement en cours";
+"Registration in progress" = "S'il vous plaît, attendez";
 
 /* ICE has established a connection through a relay */
 "Relay connection" = "Connexion relayée";
