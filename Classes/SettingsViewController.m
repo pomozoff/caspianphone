@@ -739,7 +739,6 @@ static UICompositeViewDescription *compositeDescription = nil;
     [hiddenKeys addObject:@"speex_16k_preference"];
     [hiddenKeys addObject:@"speex_8k_preference"];
     [hiddenKeys addObject:@"opus_preference"];
-    [hiddenKeys addObject:@"silk_24k_preference"];
     [hiddenKeys addObject:@"aaceld_22k_preference"];
     [hiddenKeys addObject:@"aaceld_44k_preference"];
     [hiddenKeys addObject:@"amr_preference"];
