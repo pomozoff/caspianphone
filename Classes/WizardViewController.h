@@ -64,6 +64,8 @@
 
 @property (nonatomic, retain) IBOutlet UITapGestureRecognizer *viewTapGestureRecognizer;
 
+@property (retain, nonatomic) IBOutlet UISwitch *rememberMeSwitch;
+
 - (void)reset;
 - (void)fillDefaultValues;
 

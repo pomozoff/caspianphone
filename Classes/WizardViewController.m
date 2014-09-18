@@ -69,6 +69,8 @@ static NSString *caspianPasswordKey = @"uk.co.onecallcaspian.phone.password";
 
 @synthesize viewTapGestureRecognizer;
 
+@synthesize rememberMeSwitch;
+
 
 #pragma mark - Lifecycle Functions
 
@@ -118,6 +120,7 @@ static NSString *caspianPasswordKey = @"uk.co.onecallcaspian.phone.password";
     [provisionedUsername release];
     [provisionedPassword release];
     [provisionedDomain release];
+    [rememberMeSwitch release];
     [super dealloc];
 }
 
@@ -339,14 +342,22 @@ static UICompositeViewDescription *compositeDescription = nil;
 }
 
 - (void)saveCredentials {
-    UITextField *usernameTextField = [WizardViewController findTextField:ViewElement_Username view:caspianAccountView];
-    UITextField *passwordTextField = [WizardViewController findTextField:ViewElement_Password view:caspianAccountView];
+    NSString *username = @"";
+    NSString *password = @"";
+    
+    if (rememberMeSwitch.isOn) {
+        UITextField *usernameTextField = [WizardViewController findTextField:ViewElement_Username view:caspianAccountView];
+        UITextField *passwordTextField = [WizardViewController findTextField:ViewElement_Password view:caspianAccountView];
+        
+        username = usernameTextField.text;
+        password = passwordTextField.text;
+    }
     
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     
-    [userDefaults setObject:usernameTextField.text forKey:caspianUsernameKey];
-    [userDefaults setObject:passwordTextField.text forKey:caspianPasswordKey];
-
+    [userDefaults setObject:username forKey:caspianUsernameKey];
+    [userDefaults setObject:password forKey:caspianPasswordKey];
+    
     [userDefaults synchronize];
 }
 
