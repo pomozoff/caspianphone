@@ -38,6 +38,8 @@ typedef enum _ViewElement {
 } ViewElement;
 
 static NSString *caspianDomain = @"212.159.80.157";
+static NSString *caspianUsernameKey = @"uk.co.onecallcaspian.phone.username";
+static NSString *caspianPasswordKey = @"uk.co.onecallcaspian.phone.password";
 
 @implementation WizardViewController
 
@@ -336,6 +338,28 @@ static UICompositeViewDescription *compositeDescription = nil;
     [historyViews removeAllObjects];
 }
 
+- (void)saveCredentials {
+    UITextField *usernameTextField = [WizardViewController findTextField:ViewElement_Username view:contentView];
+    UITextField *passwordTextField = [WizardViewController findTextField:ViewElement_Password view:contentView];
+    
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    
+    [userDefaults setObject:usernameTextField.text forKey:caspianUsernameKey];
+    [userDefaults setObject:passwordTextField.text forKey:caspianPasswordKey];
+
+    [userDefaults synchronize];
+}
+
+- (void)fillCredentials {
+    UITextField *usernameTextField = [WizardViewController findTextField:ViewElement_Username view:contentView];
+    UITextField *passwordTextField = [WizardViewController findTextField:ViewElement_Password view:contentView];
+    
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    
+    usernameTextField.text = [userDefaults objectForKey:caspianUsernameKey];
+    passwordTextField.text = [userDefaults objectForKey:caspianPasswordKey];
+}
+
 - (void)changeView:(UIView *)view back:(BOOL)back animation:(BOOL)animation {
 
     /*
@@ -398,6 +422,9 @@ static UICompositeViewDescription *compositeDescription = nil;
         }
     }
     */
+    
+    [self fillCredentials];
+    
     // Animation
     if(animation && [[LinphoneManager instance] lpConfigBoolForKey:@"animations_preference"] == true) {
       CATransition* trans = [CATransition animation];
@@ -575,6 +602,8 @@ static UICompositeViewDescription *compositeDescription = nil;
 - (void)registrationUpdate:(LinphoneRegistrationState)state message:(NSString*)message{
     switch (state) {
         case LinphoneRegistrationOk: {
+            [self saveCredentials];
+
             [waitView setHidden:true];
             [[PhoneMainView instance] changeCurrentView:[DialerViewController compositeViewDescription]];
             break;
