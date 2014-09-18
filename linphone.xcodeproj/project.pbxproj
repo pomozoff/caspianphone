@@ -6721,6 +6721,7 @@
 				2622BD7C19C9AFC00048AE69 /* DistributionAdhoc */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
 		};
 		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "linphone" */ = {
 			isa = XCConfigurationList;
