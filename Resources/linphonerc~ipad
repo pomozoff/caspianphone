@@ -1,9 +1,10 @@
 [sip]
-contact="Linphone iPhone" <sip:linphone.iphone@unknown-host>
+contact="My iPad" <sip:linphone.iphone@unknown-host>
 keepalive_period=30000
 default_proxy=0
 sip_port=-1
 sip_tcp_port=-1
+verify_server_certs=0
 
 [rtp]
 audio_rtp_port=7076

@@ -32,6 +32,7 @@
 		<entry name="sip_port" overwrite="true">-1</entry>
 		<entry name="sip_tcp_port" overwrite="true">-1</entry>
 		<entry name="sip_tls_port" overwrite="true">-1</entry>
+		<entry name="verify_server_certs" overwrite="true">0</entry>
 	</section>
 
 </config>
