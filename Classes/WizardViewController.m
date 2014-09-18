@@ -339,8 +339,8 @@ static UICompositeViewDescription *compositeDescription = nil;
 }
 
 - (void)saveCredentials {
-    UITextField *usernameTextField = [WizardViewController findTextField:ViewElement_Username view:contentView];
-    UITextField *passwordTextField = [WizardViewController findTextField:ViewElement_Password view:contentView];
+    UITextField *usernameTextField = [WizardViewController findTextField:ViewElement_Username view:caspianAccountView];
+    UITextField *passwordTextField = [WizardViewController findTextField:ViewElement_Password view:caspianAccountView];
     
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     
@@ -351,8 +351,8 @@ static UICompositeViewDescription *compositeDescription = nil;
 }
 
 - (void)fillCredentials {
-    UITextField *usernameTextField = [WizardViewController findTextField:ViewElement_Username view:contentView];
-    UITextField *passwordTextField = [WizardViewController findTextField:ViewElement_Password view:contentView];
+    UITextField *usernameTextField = [WizardViewController findTextField:ViewElement_Username view:caspianAccountView];
+    UITextField *passwordTextField = [WizardViewController findTextField:ViewElement_Password view:caspianAccountView];
     
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     
