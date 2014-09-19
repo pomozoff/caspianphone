@@ -246,6 +246,26 @@
 				<integer>128</integer>
 			</array>
 		</dict>
+		<dict>
+			<key>DefaultValue</key>
+			<true/>
+			<key>Key</key>
+			<string>voiceproc_preference</string>
+			<key>Title</key>
+			<string>Enable Voice Processing</string>
+			<key>Type</key>
+			<string>PSToggleSwitchSpecifier</string>
+		</dict>
+		<dict>
+			<key>DefaultValue</key>
+			<false/>
+			<key>Key</key>
+			<string>eq_active</string>
+			<key>Title</key>
+			<string>Enable Bass Boost</string>
+			<key>Type</key>
+			<string>PSToggleSwitchSpecifier</string>
+		</dict>
 	</array>
 </dict>
 </plist>

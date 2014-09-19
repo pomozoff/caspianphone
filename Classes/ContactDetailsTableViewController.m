@@ -74,6 +74,12 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
 
 - (void)initContactDetailsTableViewController {
     dataCache = [[NSMutableArray alloc] init];
+
+	// pre-fill the data-cache with empty arrays
+	for(int i=ContactSections_Number; i< ContactSections_MAX; i++){
+		[dataCache addObject:@[]];
+	}
+
     labelArray = [[NSMutableArray alloc] initWithObjects:
                   [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"],
                   [NSString stringWithString:(NSString*)kABPersonPhoneMobileLabel], 
@@ -136,8 +142,6 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
 }
 
 - (NSMutableArray*)getSectionData:(int)section {
-    if(dataCache.count == 0)
-        return nil;
     if(contactSections[section] == ContactSections_Number) {
         return [dataCache objectAtIndex:0];
     } else if(contactSections[section] == ContactSections_Sip) {
