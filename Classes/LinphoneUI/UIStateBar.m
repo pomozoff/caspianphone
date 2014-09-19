@@ -41,6 +41,10 @@ static NSTimer *callQualityTimer;
 static NSTimer *callSecurityTimer;
 static NSTimer *balanceTimer;
 
+const static NSTimeInterval balanceIntervalMax = 10.0;
+const static NSTimeInterval balanceInterval = 1.0;
+
+static NSTimeInterval balanceIntervalCurrent = balanceIntervalMax;
 
 #pragma mark - Properties
 
@@ -295,7 +299,28 @@ static NSTimer *balanceTimer;
     }
 }
 
+- (void)pullBalanceCompletionBlock:(void(^)(NSString *))block {
+}
+
 - (void)updateBalance {
+    BOOL isOnCall = NO;
+    if([LinphoneManager isLcReady]) {
+        LinphoneCall *call = linphone_core_get_current_call([LinphoneManager getLc]);
+        isOnCall = call != NULL;
+    }
+
+    if (!isOnCall) {
+        if (balanceIntervalCurrent > balanceIntervalMax) {
+            balanceIntervalCurrent = 0.0;
+        } else {
+            balanceIntervalCurrent++;
+            return;
+        }
+    }
+    
+    [self pullBalanceCompletionBlock:^(NSString *balance){
+        self.balanceLabel.text = balance;
+    }];
 }
 
 #pragma mark - Action Functions
