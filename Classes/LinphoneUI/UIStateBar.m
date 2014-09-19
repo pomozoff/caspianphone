@@ -28,6 +28,7 @@
 @synthesize callQualityImage;
 @synthesize callSecurityImage;
 @synthesize callSecurityButton;
+@synthesize balanceLabel;
 
 NSTimer *callQualityTimer;
 NSTimer *callSecurityTimer;
@@ -57,6 +58,7 @@ NSTimer *callSecurityTimer;
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [callQualityTimer invalidate];
     [callQualityTimer release];
+    [balanceLabel release];
     [super dealloc];
 }
 

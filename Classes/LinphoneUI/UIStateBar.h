@@ -30,6 +30,7 @@
 @property (nonatomic, retain) IBOutlet UIImageView* callQualityImage;
 @property (nonatomic, retain) IBOutlet UIImageView* callSecurityImage;
 @property (nonatomic, retain) IBOutlet UIButton* callSecurityButton;
+@property (nonatomic, retain) IBOutlet UILabel *balanceLabel;
 
 - (IBAction)doSecurityClick:(id)sender;
 
