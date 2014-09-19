@@ -21,6 +21,12 @@
 #import "LinphoneManager.h"
 #import "PhoneMainView.h"
 
+@interface UIStateBar ()
+
+@property (nonatomic, retain) NSOperationQueue *balanceQueue;
+
+@end
+
 @implementation UIStateBar
 
 @synthesize registrationStateImage;
@@ -29,10 +35,22 @@
 @synthesize callSecurityImage;
 @synthesize callSecurityButton;
 @synthesize balanceLabel;
+@synthesize balanceQueue;
 
 NSTimer *callQualityTimer;
 NSTimer *callSecurityTimer;
 
+
+#pragma mark - Properties
+
+- (NSOperationQueue *)balanceQueue {
+    if (!balanceQueue) {
+        balanceQueue = [[NSOperationQueue alloc] init];
+        balanceQueue.name = @"Balance queue";
+        balanceQueue.maxConcurrentOperationCount = 1;
+    }
+    return balanceQueue;
+}
 
 #pragma mark - Lifecycle Functions
 
@@ -59,6 +77,7 @@ NSTimer *callSecurityTimer;
     [callQualityTimer invalidate];
     [callQualityTimer release];
     [balanceLabel release];
+    [balanceQueue release];
     [super dealloc];
 }
 
