@@ -24,6 +24,7 @@
 @interface UIStateBar ()
 
 @property (nonatomic, retain) NSOperationQueue *balanceQueue;
+@property (nonatomic, retain) NSNumberFormatter *numberFormatter;
 
 @end
 
@@ -36,6 +37,7 @@
 @synthesize callSecurityButton;
 @synthesize balanceLabel;
 @synthesize balanceQueue;
+@synthesize numberFormatter;
 
 static NSTimer *callQualityTimer;
 static NSTimer *callSecurityTimer;
@@ -57,6 +59,15 @@ static NSTimeInterval balanceIntervalCurrent = balanceIntervalMax;
         balanceQueue.maxConcurrentOperationCount = 1;
     }
     return balanceQueue;
+}
+- (NSNumberFormatter *)numberFormatter {
+    if (!numberFormatter) {
+        numberFormatter = [[NSNumberFormatter alloc] init];
+        numberFormatter.numberStyle = NSNumberFormatterCurrencyStyle;
+        numberFormatter.maximumFractionDigits = 2;
+        numberFormatter.currencyCode = @"GBP";
+    }
+    return numberFormatter;
 }
 
 #pragma mark - Lifecycle Functions
@@ -85,6 +96,8 @@ static NSTimeInterval balanceIntervalCurrent = balanceIntervalMax;
     [callQualityTimer release];
     [balanceLabel release];
     [balanceQueue release];
+    [numberFormatter release];
+    
     [super dealloc];
 }
 
@@ -335,6 +348,9 @@ static NSTimeInterval balanceIntervalCurrent = balanceIntervalMax;
                     if (!error) {
                         BOOL isError = [jsonAnswer[@"error"] boolValue];
                         if (!isError) {
+                            NSString *accurateBalance = jsonAnswer[@"balance"];
+                            NSDecimalNumber *digitBalance = [NSDecimalNumber decimalNumberWithString:accurateBalance];
+                            balance = digitBalance != nil ? [self.numberFormatter stringFromNumber:digitBalance] : NSLocalizedString(@"Balance retrieving error", nil);
                         }
                     }
                 }
