@@ -307,3 +307,6 @@
 "Warning" = "Warning";
 "Launching the Wizard will delete any existing proxy config.\nAre you sure to want it?" = "Signing out will delete any existing personal config.\nAre you sure to want it?";
 "Launch Wizard" = "Sign out";
+
+/* Text message when error occured retrieving balance from the server */
+"Balance retrieving error" = "error";

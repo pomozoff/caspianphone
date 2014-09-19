@@ -307,3 +307,6 @@
 "Warning" = "Attention";
 "Launching the Wizard will delete any existing proxy config.\nAre you sure to want it?" = "La déconnexion supprime toute config personnel existant.\nEtes-vous sûr de vouloir?";
 "Launch Wizard" = "Se déconnecter";
+
+/* Text message when error occured retrieving balance from the server */
+"Balance retrieving error" = "erreur";

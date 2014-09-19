@@ -307,3 +307,6 @@
 "Warning" = "Warning";
 "Launching the Wizard will delete any existing proxy config.\nAre you sure to want it?" = "При выходе будут удалены все настройки.\nВы действительно хотите выйти?";
 "Launch Wizard" = "Выход";
+
+/* Text message when error occured retrieving balance from the server */
+"Balance retrieving error" = "ошибка";
