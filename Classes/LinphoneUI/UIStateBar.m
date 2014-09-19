@@ -41,6 +41,8 @@ static NSTimer *callQualityTimer;
 static NSTimer *callSecurityTimer;
 static NSTimer *balanceTimer;
 
+static NSString *caspianBalanceUrl = @"http://onecallcaspian.co.uk/mobile/credit?phone_number=%@&password=%@";
+
 const static NSTimeInterval balanceIntervalMax = 10.0;
 const static NSTimeInterval balanceInterval = 1.0;
 
@@ -300,6 +302,48 @@ static NSTimeInterval balanceIntervalCurrent = balanceIntervalMax;
 }
 
 - (void)pullBalanceCompletionBlock:(void(^)(NSString *))block {
+    if (self.balanceQueue.operationCount == 0) {
+        [self.balanceQueue addOperationWithBlock:^{
+            NSString *username = @"";
+            NSString *password = @"";
+            
+            LinphoneCore *lc = [LinphoneManager getLc];
+            LinphoneProxyConfig *cfg = NULL;
+            linphone_core_get_default_proxy(lc, &cfg);
+            if (cfg) {
+                const char *identity = linphone_proxy_config_get_identity(cfg);
+                LinphoneAddress *addr = linphone_address_new(identity);
+                if (addr) {
+                    username = [NSString stringWithUTF8String:linphone_address_get_username(addr)];
+                    linphone_address_destroy(addr);
+                }
+            }
+            LinphoneAuthInfo *ai;
+            const MSList *elem = linphone_core_get_auth_info_list(lc);
+            if (elem && (ai = (LinphoneAuthInfo *)elem->data)) {
+                password = [NSString stringWithUTF8String:linphone_auth_info_get_passwd(ai)];
+            }
+            
+            NSString *balance = @"-";
+            if (username.length > 0 && password.length > 0) {
+                NSString *urlString = [NSString stringWithFormat:caspianBalanceUrl, username, password];
+                NSURL *aURL = [NSURL URLWithString:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+                NSData *data = [NSData dataWithContentsOfURL:aURL];
+                if (data) {
+                    NSError *error = nil;
+                    NSDictionary *jsonAnswer = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
+                    if (!error) {
+                        BOOL isError = [jsonAnswer[@"error"] boolValue];
+                        if (!isError) {
+                        }
+                    }
+                }
+            }
+            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                block(balance);
+            }];
+        }];
+    }
 }
 
 - (void)updateBalance {
