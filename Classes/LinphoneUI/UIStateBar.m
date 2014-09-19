@@ -37,8 +37,9 @@
 @synthesize balanceLabel;
 @synthesize balanceQueue;
 
-NSTimer *callQualityTimer;
-NSTimer *callSecurityTimer;
+static NSTimer *callQualityTimer;
+static NSTimer *callSecurityTimer;
+static NSTimer *balanceTimer;
 
 
 #pragma mark - Properties
@@ -101,6 +102,13 @@ NSTimer *callSecurityTimer;
                                                       userInfo:nil 
                                                        repeats:YES];
     
+    // Set balanceTimer
+	balanceTimer = [NSTimer scheduledTimerWithTimeInterval:balanceInterval
+                                                    target:self
+                                                  selector:@selector(updateBalance)
+                                                  userInfo:nil
+                                                   repeats:YES];
+    
     // Set observer
     [[NSNotificationCenter defaultCenter] addObserver:self 
                                              selector:@selector(registrationUpdate:) 
@@ -138,6 +146,10 @@ NSTimer *callSecurityTimer;
     if(callSecurityTimer != nil) {
         [callSecurityTimer invalidate];
         callSecurityTimer = nil;
+    }
+    if(balanceTimer != nil) {
+        [balanceTimer invalidate];
+        balanceTimer = nil;
     }
 }
 
@@ -283,6 +295,8 @@ NSTimer *callSecurityTimer;
     }
 }
 
+- (void)updateBalance {
+}
 
 #pragma mark - Action Functions
 
