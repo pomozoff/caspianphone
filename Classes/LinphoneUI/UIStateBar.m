@@ -99,7 +99,7 @@ static NSTimeInterval balanceIntervalCurrent = balanceIntervalMax;
                                                       userInfo:nil 
                                                        repeats:YES];
     
-    // Set callQualityTimer
+    // Set callSecurityTimer
 	callSecurityTimer = [NSTimer scheduledTimerWithTimeInterval:1 
                                                         target:self 
                                                       selector:@selector(callSecurityUpdate) 
