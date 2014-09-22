@@ -680,6 +680,7 @@ static void linphone_iphone_display_status(struct _LinphoneCore * lc, const char
                     data->timer = [NSTimer scheduledTimerWithTimeInterval:trackDuration target:self selector:@selector(localNotifContinue:) userInfo:data->notification repeats:TRUE];
 
                     data->notification.repeatInterval = 0;
+                    data->notification.category = @"incoming_call";
 					data->notification.alertBody =[NSString  stringWithFormat:NSLocalizedString(@"IC_MSG",nil), address];
 					data->notification.alertAction = NSLocalizedString(@"Answer", nil);
 					data->notification.soundName = ringtoneFileName;
@@ -881,7 +882,7 @@ static void linphone_iphone_registration_state(LinphoneCore *lc, LinphoneProxyCo
     if ([[UIDevice currentDevice] respondsToSelector:@selector(isMultitaskingSupported)]
 		&& [UIApplication sharedApplication].applicationState !=  UIApplicationStateActive) {
         
-        const LinphoneAddress* remoteAddress = linphone_chat_message_get_from(msg);
+        const LinphoneAddress* remoteAddress = linphone_chat_message_get_from_address(msg);
         char* c_address = linphone_address_as_string_uri_only(remoteAddress);
         NSString* address = [NSString stringWithUTF8String:c_address];
         NSString* from_address = [address copy];
@@ -904,10 +905,11 @@ static void linphone_iphone_registration_state(LinphoneCore *lc, LinphoneProxyCo
 		UILocalNotification* notif = [[[UILocalNotification alloc] init] autorelease];
 		if (notif) {
             notif.repeatInterval = 0;
+            notif.category       = @"incoming_msg";
             notif.alertBody      = [NSString  stringWithFormat:NSLocalizedString(@"IM_MSG",nil), address];
             notif.alertAction    = NSLocalizedString(@"Show", nil);
             notif.soundName      = @"msg.caf";
-            notif.userInfo       = @{@"from":from_address };
+            notif.userInfo       = @{@"from":from_address};
 
 			
 			[[UIApplication sharedApplication] presentLocalNotificationNow:notif];
