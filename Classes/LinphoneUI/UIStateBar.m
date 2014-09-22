@@ -337,7 +337,6 @@ static NSTimeInterval balanceIntervalCurrent = balanceIntervalMax;
                 password = [NSString stringWithUTF8String:linphone_auth_info_get_passwd(ai)];
             }
             
-            NSString *balance = @"-";
             if (username.length > 0 && password.length > 0) {
                 NSString *urlString = [NSString stringWithFormat:caspianBalanceUrl, username, password];
                 NSURL *aURL = [NSURL URLWithString:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
@@ -350,14 +349,16 @@ static NSTimeInterval balanceIntervalCurrent = balanceIntervalMax;
                         if (!isError) {
                             NSString *accurateBalance = jsonAnswer[@"balance"];
                             NSDecimalNumber *digitBalance = [NSDecimalNumber decimalNumberWithString:accurateBalance];
-                            balance = digitBalance != nil ? [self.numberFormatter stringFromNumber:digitBalance] : NSLocalizedString(@"Balance retrieving error", nil);
+                            if (digitBalance != nil) {
+                                NSString *balance = [self.numberFormatter stringFromNumber:digitBalance];
+                                [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                                    block(balance);
+                                }];
+                            }
                         }
                     }
                 }
             }
-            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                block(balance);
-            }];
         }];
     }
 }
