@@ -236,6 +236,12 @@
 		261FABF419D0389000CFE4AA /* add-contacts-hover.png in Resources */ = {isa = PBXBuildFile; fileRef = 261FABF319D0389000CFE4AA /* add-contacts-hover.png */; };
 		261FABF619D03A6100CFE4AA /* 0-hover.png in Resources */ = {isa = PBXBuildFile; fileRef = 261FABF519D03A6100CFE4AA /* 0-hover.png */; };
 		261FABF819D03A8F00CFE4AA /* #-hover.png in Resources */ = {isa = PBXBuildFile; fileRef = 261FABF719D03A8F00CFE4AA /* #-hover.png */; };
+		261FABFA19D0591D00CFE4AA /* bgcontact.png in Resources */ = {isa = PBXBuildFile; fileRef = 261FABF919D0591D00CFE4AA /* bgcontact.png */; };
+		261FABFC19D059DE00CFE4AA /* arrowback.png in Resources */ = {isa = PBXBuildFile; fileRef = 261FABFB19D059DE00CFE4AA /* arrowback.png */; };
+		261FABFE19D05A3A00CFE4AA /* buttonwith-arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 261FABFD19D05A3A00CFE4AA /* buttonwith-arrow.png */; };
+		261FAC0019D05A9E00CFE4AA /* Rectangle.png in Resources */ = {isa = PBXBuildFile; fileRef = 261FABFF19D05A9E00CFE4AA /* Rectangle.png */; };
+		261FAC0219D05B2400CFE4AA /* continue.png in Resources */ = {isa = PBXBuildFile; fileRef = 261FAC0119D05B2400CFE4AA /* continue.png */; };
+		261FAC0419D05B2B00CFE4AA /* continue-selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 261FAC0319D05B2B00CFE4AA /* continue-selected.png */; };
 		2622BD6A19C9AFC00048AE69 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F03A9B3318C0CF7000C4D7FE /* XCTest.framework */; };
 		2622BD6B19C9AFC00048AE69 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		2622BD6C19C9AFC00048AE69 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
@@ -1754,6 +1760,12 @@
 		261FABF319D0389000CFE4AA /* add-contacts-hover.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "add-contacts-hover.png"; sourceTree = "<group>"; };
 		261FABF519D03A6100CFE4AA /* 0-hover.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "0-hover.png"; sourceTree = "<group>"; };
 		261FABF719D03A8F00CFE4AA /* #-hover.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "#-hover.png"; sourceTree = "<group>"; };
+		261FABF919D0591D00CFE4AA /* bgcontact.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bgcontact.png; sourceTree = "<group>"; };
+		261FABFB19D059DE00CFE4AA /* arrowback.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrowback.png; sourceTree = "<group>"; };
+		261FABFD19D05A3A00CFE4AA /* buttonwith-arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "buttonwith-arrow.png"; sourceTree = "<group>"; };
+		261FABFF19D05A9E00CFE4AA /* Rectangle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Rectangle.png; sourceTree = "<group>"; };
+		261FAC0119D05B2400CFE4AA /* continue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = continue.png; sourceTree = "<group>"; };
+		261FAC0319D05B2B00CFE4AA /* continue-selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "continue-selected.png"; sourceTree = "<group>"; };
 		2622BD6919C9AFBF0048AE69 /* linphone Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "linphone Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2622BD6F19C9AFC00048AE69 /* linphone Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "linphone Tests-Info.plist"; sourceTree = "<group>"; };
 		2622BD7119C9AFC00048AE69 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -2970,14 +2982,19 @@
 				261FAB8819CC54CB00CFE4AA /* #.png */,
 				261FABF319D0389000CFE4AA /* add-contacts-hover.png */,
 				261FABBC19CC56F700CFE4AA /* add-contacts.png */,
+				261FABFB19D059DE00CFE4AA /* arrowback.png */,
 				26DFD65219BF2F3400D1395A /* background-1.png */,
 				261FABCF19D00F0900CFE4AA /* back-medium_hover.png */,
 				261FABD019D00F0900CFE4AA /* back-medium.png */,
+				261FABF919D0591D00CFE4AA /* bgcontact.png */,
+				261FABFD19D05A3A00CFE4AA /* buttonwith-arrow.png */,
 				261FAB1F19CC50B200CFE4AA /* call_quality_indicator_1.png */,
 				261FAB2019CC50B200CFE4AA /* call_quality_indicator_2.png */,
 				261FAB2119CC50B200CFE4AA /* call_quality_indicator_3.png */,
 				261FABE119D0286E00CFE4AA /* contacts-hover.png */,
 				261FABE219D0286E00CFE4AA /* contacts.png */,
+				261FAC0119D05B2400CFE4AA /* continue.png */,
+				261FAC0319D05B2B00CFE4AA /* continue-selected.png */,
 				261FABC019CC577A00CFE4AA /* delete.png */,
 				261FABF119D0385B00CFE4AA /* delete-hover.png */,
 				261FABD619D0284B00CFE4AA /* dialer.png */,
@@ -3001,6 +3018,7 @@
 				261FABC819D00CEE00CFE4AA /* phone-button_hover.png */,
 				261FABC919D00CEE00CFE4AA /* phone-button.png */,
 				261FABCA19D00CEE00CFE4AA /* phone.png */,
+				261FABFF19D05A9E00CFE4AA /* Rectangle.png */,
 				261FABE919D028C800CFE4AA /* settings-hover.png */,
 				261FABEA19D028C800CFE4AA /* settings.png */,
 				26DFD65D19BF2F3400D1395A /* sign-in-normal.png */,
@@ -4272,6 +4290,7 @@
 				D38187DD15FE348A00C3EDCA /* WizardViewController.xib in Resources */,
 				D350F21C15A43D3400149E54 /* setup_back_default.png in Resources */,
 				D350F21E15A43D3400149E54 /* setup_back_over.png in Resources */,
+				261FAC0019D05A9E00CFE4AA /* Rectangle.png in Resources */,
 				D350F22015A43D3400149E54 /* setup_cancel_default.png in Resources */,
 				D350F22215A43D3400149E54 /* setup_cancel_over.png in Resources */,
 				D350F22415A43D3400149E54 /* field_background.png in Resources */,
@@ -4349,6 +4368,7 @@
 				D3C31A4215BD8DED008ED271 /* micro_off_default_landscape.png in Resources */,
 				D3C31A4415BD8DED008ED271 /* micro_off_disabled_landscape.png in Resources */,
 				D3C31A4615BD8DED008ED271 /* micro_off_over_landscape.png in Resources */,
+				261FABFE19D05A3A00CFE4AA /* buttonwith-arrow.png in Resources */,
 				261FABAD19CC54CB00CFE4AA /* 5-hover.png in Resources */,
 				D3C31A4815BD8DED008ED271 /* micro_on_default_landscape.png in Resources */,
 				D3C31A4A15BD8DED008ED271 /* micro_on_disabled_landscape.png in Resources */,
@@ -4451,6 +4471,7 @@
 				D3A74F1E15C69392001500B9 /* options_selected~ipad.png in Resources */,
 				D3A74F2015C69392001500B9 /* options_transfer_default~ipad.png in Resources */,
 				D3A74F2215C69392001500B9 /* options_transfer_disabled~ipad.png in Resources */,
+				261FABFC19D059DE00CFE4AA /* arrowback.png in Resources */,
 				D3A74F2415C69392001500B9 /* options_transfer_over~ipad.png in Resources */,
 				261FABBE19CC56F700CFE4AA /* add-contacts.png in Resources */,
 				D3A74F2615C69392001500B9 /* pause_off_default~ipad.png in Resources */,
@@ -4515,6 +4536,7 @@
 				D33988D615C6DD1600CAF1E4 /* options_over_landscape~ipad.png in Resources */,
 				D33988D815C6DD1600CAF1E4 /* options_selected_landscape~ipad.png in Resources */,
 				D33988DA15C6DD1600CAF1E4 /* options_transfer_default_landscape~ipad.png in Resources */,
+				261FABFA19D0591D00CFE4AA /* bgcontact.png in Resources */,
 				261FABF819D03A8F00CFE4AA /* #-hover.png in Resources */,
 				D33988DC15C6DD1600CAF1E4 /* options_transfer_disabled_landscape~ipad.png in Resources */,
 				D33988DE15C6DD1600CAF1E4 /* options_transfer_over_landscape~ipad.png in Resources */,
@@ -4602,6 +4624,7 @@
 				D35E91EA160CA0BD0023116B /* field_background.9@2x.png in Resources */,
 				D35E91EE160CA0C70023116B /* button_background_default.9@2x.png in Resources */,
 				261FABA919CC54CB00CFE4AA /* 3d-logo-2-large.png in Resources */,
+				261FAC0219D05B2400CFE4AA /* continue.png in Resources */,
 				D35E91F0160CA0C70023116B /* button_background_over.9@2x.png in Resources */,
 				D35E9209160CAA1F0023116B /* field_background.9.png in Resources */,
 				D35E920D160CABD70023116B /* button_background_default.9.png in Resources */,
@@ -4624,6 +4647,7 @@
 				D3103926162C3C5200C00C18 /* linphone_splashscreen-Landscape@2x.png in Resources */,
 				D3103928162C3C5200C00C18 /* linphone_splashscreen-Portrait.png in Resources */,
 				D310392A162C3C5200C00C18 /* linphone_splashscreen-Portrait@2x.png in Resources */,
+				261FAC0419D05B2B00CFE4AA /* continue-selected.png in Resources */,
 				F0A2759C18157A6000B6D61A /* linphone_icon_120.png in Resources */,
 				D33E1F08164CF35100CFA363 /* callbar_left_padding.png in Resources */,
 				D33E1F0A164CF35100CFA363 /* callbar_right_padding.png in Resources */,
