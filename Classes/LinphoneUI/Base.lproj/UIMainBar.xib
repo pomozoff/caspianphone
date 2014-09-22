@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13C1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <deployment defaultVersion="1536" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UIMainBar">
@@ -36,14 +36,14 @@
                     <accessibility key="accessibilityConfiguration" label="History"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <inset key="titleEdgeInsets" minX="0.0" minY="40" maxX="0.0" maxY="0.0"/>
-                    <state key="normal" title="History" backgroundImage="history_default.png">
+                    <state key="normal" title="History" backgroundImage="history.png">
                         <color key="titleColor" red="0.35686274509999999" green="0.39607843139999999" blue="0.43529411759999997" alpha="1" colorSpace="deviceRGB"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
-                    <state key="selected" backgroundImage="history_selected.png">
+                    <state key="selected" backgroundImage="history-hover.png">
                         <color key="titleColor" red="0.81176471709999998" green="0.29803922770000002" blue="0.16078431900000001" alpha="1" colorSpace="deviceRGB"/>
                     </state>
-                    <state key="highlighted" backgroundImage="history_over.png">
+                    <state key="highlighted" backgroundImage="history-hover.png">
                         <color key="titleColor" red="0.72549019609999998" green="0.76862745099999996" blue="0.79607843140000001" alpha="1" colorSpace="deviceRGB"/>
                     </state>
                     <connections>
@@ -77,14 +77,14 @@
                     <accessibility key="accessibilityConfiguration" label="Contacts"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <inset key="titleEdgeInsets" minX="0.0" minY="40" maxX="0.0" maxY="0.0"/>
-                    <state key="normal" title="Contacts" backgroundImage="contacts_default.png">
+                    <state key="normal" title="Contacts" backgroundImage="contacts.png">
                         <color key="titleColor" red="0.35686274509999999" green="0.39607843139999999" blue="0.43529411759999997" alpha="1" colorSpace="deviceRGB"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
-                    <state key="selected" backgroundImage="contacts_selected.png">
+                    <state key="selected" backgroundImage="contacts-hover.png">
                         <color key="titleColor" red="0.81176471709999998" green="0.29803922770000002" blue="0.16078431900000001" alpha="1" colorSpace="deviceRGB"/>
                     </state>
-                    <state key="highlighted" backgroundImage="contacts_over.png">
+                    <state key="highlighted" backgroundImage="contacts-hover.png">
                         <color key="titleColor" red="0.72549019609999998" green="0.76862745099999996" blue="0.79607843140000001" alpha="1" colorSpace="deviceRGB"/>
                     </state>
                     <connections>
@@ -97,14 +97,14 @@
                     <accessibility key="accessibilityConfiguration" label="Settings"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <inset key="titleEdgeInsets" minX="0.0" minY="40" maxX="0.0" maxY="0.0"/>
-                    <state key="normal" title="Settings" backgroundImage="settings_default.png">
+                    <state key="normal" title="Settings" backgroundImage="settings.png">
                         <color key="titleColor" red="0.35686274509999999" green="0.39607843139999999" blue="0.43529411759999997" alpha="1" colorSpace="deviceRGB"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
-                    <state key="selected" backgroundImage="settings_selected.png">
+                    <state key="selected" backgroundImage="settings-hover.png">
                         <color key="titleColor" red="0.81176471709999998" green="0.29803922770000002" blue="0.16078431900000001" alpha="1" colorSpace="deviceRGB"/>
                     </state>
-                    <state key="highlighted" backgroundImage="settings_over.png">
+                    <state key="highlighted" backgroundImage="settings-hover.png">
                         <color key="titleColor" red="0.72549019609999998" green="0.76862745099999996" blue="0.79607843140000001" alpha="1" colorSpace="deviceRGB"/>
                     </state>
                     <connections>
@@ -116,11 +116,12 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <accessibility key="accessibilityConfiguration" label="Dialer"/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                    <state key="normal" image="dialer_default.png">
+                    <state key="normal" image="dialer.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
-                    <state key="selected" image="dialer_selected.png"/>
-                    <state key="highlighted" image="dialer_over.png"/>
+                    <state key="disabled" image="dialer.png"/>
+                    <state key="selected" image="dialer-hover.png"/>
+                    <state key="highlighted" image="dialer-hover.png"/>
                     <connections>
                         <action selector="onDialerClick:" destination="-1" eventType="touchUpInside" id="24"/>
                     </connections>
@@ -131,14 +132,14 @@
                     <accessibility key="accessibilityConfiguration" label="Chat"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <inset key="titleEdgeInsets" minX="0.0" minY="40" maxX="0.0" maxY="0.0"/>
-                    <state key="normal" title="Chat" backgroundImage="chat_default.png">
+                    <state key="normal" title="Chat" backgroundImage="messages.png">
                         <color key="titleColor" red="0.35686274509999999" green="0.39607843139999999" blue="0.43529411759999997" alpha="1" colorSpace="deviceRGB"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
-                    <state key="selected" backgroundImage="chat_selected.png">
+                    <state key="selected" backgroundImage="messages-hover.png">
                         <color key="titleColor" red="0.81176471709999998" green="0.29803922770000002" blue="0.16078431900000001" alpha="1" colorSpace="deviceRGB"/>
                     </state>
-                    <state key="highlighted" backgroundImage="chat_over.png">
+                    <state key="highlighted" backgroundImage="messages-hover.png">
                         <color key="titleColor" red="0.72549019609999998" green="0.76862745099999996" blue="0.79607843140000001" alpha="1" colorSpace="deviceRGB"/>
                     </state>
                     <connections>
@@ -168,24 +169,27 @@
                 </view>
             </subviews>
             <color key="backgroundColor" red="0.0" green="1" blue="0.19194547549999999" alpha="0.0" colorSpace="calibratedRGB"/>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="166" y="164.5"/>
         </view>
     </objects>
     <resources>
-        <image name="chat_default.png" width="128" height="154"/>
-        <image name="chat_over.png" width="128" height="154"/>
-        <image name="chat_selected.png" width="128" height="154"/>
-        <image name="contacts_default.png" width="128" height="154"/>
-        <image name="contacts_over.png" width="128" height="154"/>
-        <image name="contacts_selected.png" width="128" height="154"/>
-        <image name="dialer_default.png" width="128" height="154"/>
-        <image name="dialer_over.png" width="128" height="154"/>
-        <image name="dialer_selected.png" width="128" height="154"/>
-        <image name="history_default.png" width="128" height="154"/>
+        <image name="contacts-hover.png" width="128" height="154"/>
+        <image name="contacts.png" width="128" height="154"/>
+        <image name="dialer-hover.png" width="128" height="154"/>
+        <image name="dialer.png" width="128" height="154"/>
+        <image name="history-hover.png" width="128" height="154"/>
+        <image name="history.png" width="128" height="154"/>
         <image name="history_notification.png" width="43" height="43"/>
-        <image name="history_over.png" width="128" height="154"/>
-        <image name="history_selected.png" width="128" height="154"/>
-        <image name="settings_default.png" width="128" height="154"/>
-        <image name="settings_over.png" width="128" height="154"/>
-        <image name="settings_selected.png" width="128" height="154"/>
+        <image name="messages-hover.png" width="128" height="154"/>
+        <image name="messages.png" width="128" height="154"/>
+        <image name="settings-hover.png" width="128" height="154"/>
+        <image name="settings.png" width="128" height="154"/>
     </resources>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
 </document>
