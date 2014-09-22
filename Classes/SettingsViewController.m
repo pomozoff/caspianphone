@@ -722,8 +722,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     [hiddenKeys addObject:@"transport_preference"];
     [hiddenKeys addObject:@"advanced_account_preference"];
     [hiddenKeys addObject:@"enable_video_preference"];
-    // Call
-    [hiddenKeys addObject:@"substitute_+_by_00_preference"];
+    [hiddenKeys addObject:@"call_menu"];
     // Advanced
     [hiddenKeys addObject:@"debugenable_preference"];
     [hiddenKeys addObject:@"animations_preference"];
