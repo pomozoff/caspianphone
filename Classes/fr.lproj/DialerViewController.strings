@@ -3,7 +3,7 @@
 "4.accessibilityLabel" = "Entrez une addresse";
 
 /* Class = "IBUITextField"; placeholder = "Entrez une addresse SIP ou un numéro de téléphone..."; ObjectID = "4"; */
-"4.placeholder" = "Entrez une addresse SIP ou un numéro de téléphone...";
+"4.placeholder" = "Entrez un numéro de téléphone";
 
 /* Class = "IBUIButton"; accessibilityLabel = "3"; ObjectID = "29"; */
 "29.accessibilityLabel" = "3";
