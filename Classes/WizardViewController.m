@@ -818,6 +818,10 @@ static UICompositeViewDescription *compositeDescription = nil;
     }
 }
 
+- (IBAction)onSignUpClick:(id)sender {
+    [self changeView:choiceView back:FALSE animation:TRUE];
+}
+
 - (IBAction)onRegisterClick:(id)sender {
     UITextField* username_tf = [WizardViewController findTextField:ViewElement_Username  view:contentView];
     NSString *username = username_tf.text;
@@ -889,6 +893,14 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (IBAction)onViewTap:(id)sender {
     [LinphoneUtils findAndResignFirstResponder:currentView];
+}
+
+- (IBAction)onBackButtonClicked:(id)sender {
+    WizardViewController *controller = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[WizardViewController compositeViewDescription]], WizardViewController);
+    
+    if(controller != nil) {
+        [controller reset];
+    }
 }
 
 #pragma mark - UIAlertViewDelegate
