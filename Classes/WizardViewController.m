@@ -789,7 +789,7 @@ static UICompositeViewDescription *compositeDescription = nil;
         [errorView release];
     } else {
         [self.waitView setHidden:false];
-        [self addProxyConfig:[self cleanUsername:username] password:password domain:caspianDomain];
+        [self addProxyConfig:[[LinphoneManager instance] cleanUsername:username] password:password domain:caspianDomain];
     }
 }
 
@@ -1136,30 +1136,6 @@ static UICompositeViewDescription *compositeDescription = nil;
         }
     }
     return YES;
-}
-
-
-#pragma mark - Private
-
-- (NSString *)removePrefix:(NSString *)prefix fromString:(NSString *)string {
-    if ([string hasPrefix:prefix]) {
-        return [string stringByReplacingOccurrencesOfString:prefix withString:@"" options:0 range:NSMakeRange(0, prefix.length)];
-    }
-    return string;
-}
-
-- (NSString *)cleanUsername:(NSString *)username {
-    NSArray *badPrefixes = @[@"+", @"00"];
-    
-    NSString *cleanUsername = username;
-    NSString *previousUsername = @"";
-    do {
-        previousUsername = cleanUsername;
-        for (NSString *prefix in badPrefixes) {
-            cleanUsername = [self removePrefix:prefix fromString:cleanUsername];
-        }
-    } while (![cleanUsername isEqual:previousUsername]);
-    return cleanUsername;
 }
 
 @end
