@@ -67,7 +67,7 @@
 #pragma mark -
 
 - (void)touchUp:(id) sender {
-    NSString *address = [addressField text];
+    NSString *address = [[LinphoneManager instance] cleanUsername:[addressField text]];
     NSString *displayName = nil;
 
     if( [address length] == 0){

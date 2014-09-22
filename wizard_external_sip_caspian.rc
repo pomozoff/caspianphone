@@ -8,7 +8,7 @@
 		<entry name="reg_expires" overwrite="true">604800</entry>
 		<entry name="reg_sendregister" overwrite="true">1</entry>
 		<entry name="publish" overwrite="true">0</entry>
-		<entry name="dial_escape_plus" overwrite="true">0</entry>
+		<entry name="dial_escape_plus" overwrite="true">1</entry>
 	</section>
 
 	<section name="wizard">
