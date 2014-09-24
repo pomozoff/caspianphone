@@ -40,6 +40,14 @@ typedef enum _ViewElement {
 static NSString *caspianDomain = @"212.159.80.157";
 static NSString *caspianUsernameKey = @"uk.co.onecallcaspian.phone.username";
 static NSString *caspianPasswordKey = @"uk.co.onecallcaspian.phone.password";
+static NSString *caspianCountryListUrl = @"http://onecallcaspian.co.uk/mobile/country";
+
+@interface WizardViewController ()
+
+@property (nonatomic, retain) NSDictionary *countryAndCode;
+@property (nonatomic, retain) NSOperationQueue *internetQueue;
+
+@end
 
 @implementation WizardViewController
 
@@ -71,6 +79,15 @@ static NSString *caspianPasswordKey = @"uk.co.onecallcaspian.phone.password";
 
 @synthesize rememberMeSwitch;
 
+#pragma mark - Properties
+
+- (NSOperationQueue *)internetQueue {
+    if (!_internetQueue) {
+        _internetQueue = [[NSOperationQueue alloc] init];
+        _internetQueue.name = @"Internet queue";
+    }
+    return _internetQueue;
+}
 
 #pragma mark - Lifecycle Functions
 
@@ -83,6 +100,8 @@ static NSString *caspianPasswordKey = @"uk.co.onecallcaspian.phone.password";
         self->historyViews = [[NSMutableArray alloc] init];
         self->currentView = nil;
         self->viewTapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onViewTap:)];
+        
+        [self pullCountries];
     }
     return self;
 }
@@ -122,6 +141,9 @@ static NSString *caspianPasswordKey = @"uk.co.onecallcaspian.phone.password";
     [provisionedDomain release];
     [rememberMeSwitch release];
     [_countryTableView release];
+    [_countryAndCode release];
+    [_internetQueue release];
+    
     [super dealloc];
 }
 
@@ -1149,6 +1171,41 @@ static UICompositeViewDescription *compositeDescription = nil;
         }
     }
     return YES;
+}
+
+#pragma mark - Private
+
+- (void)pullCountries {
+    [self.internetQueue addOperationWithBlock:^{
+        NSMutableDictionary *countriesWithCodes = [[NSMutableDictionary alloc] init];
+        NSURL *aURL = [NSURL URLWithString:[caspianCountryListUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+        NSData *data = [NSData dataWithContentsOfURL:aURL];
+        NSString *errorString = @"";
+        if (data) {
+            NSError *error = nil;
+            NSArray *jsonAnswer = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
+            if (!error) {
+                [jsonAnswer enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                    NSArray *countryAndCode = obj;
+                    if (countryAndCode.count == 2) {
+                        NSString *countryName = countryAndCode.firstObject;
+                        NSString *countryCode = countryAndCode.lastObject;
+                        
+                        countriesWithCodes[countryCode] = countryName;
+                    }
+                }];
+            } else {
+                errorString = NSLocalizedString(@"Invalid country list", nil);
+            }
+        } else {
+            errorString = NSLocalizedString(@"Error retrieving country list", nil);
+        }
+        
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+            self.countryAndCode = [NSDictionary dictionaryWithDictionary:countriesWithCodes];
+            [countriesWithCodes release];
+        }];
+    }];
 }
 
 @end
