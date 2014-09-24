@@ -310,3 +310,9 @@
 
 /* Text message when error occured retrieving balance from the server */
 "Error retrieving balance" = "erreur";
+
+/* Error text message on registration form */
+"Error retrieving country list" = "Erreur de récupération liste de pays";
+
+/* Error text message on registration form */
+"Invalid country list" = "Liste de pays incorrect";
