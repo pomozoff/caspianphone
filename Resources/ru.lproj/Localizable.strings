@@ -309,4 +309,4 @@
 "Launch Wizard" = "Выход";
 
 /* Text message when error occured retrieving balance from the server */
-"Balance retrieving error" = "ошибка";
+"Error retrieving balance" = "ошибка";
