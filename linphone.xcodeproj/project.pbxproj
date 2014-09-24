@@ -186,6 +186,8 @@
 		22E0A824111C44E100B04932 /* ConsoleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22E0A81F111C44E100B04932 /* ConsoleViewController.m */; };
 		22F2508E107141E100AC9B3F /* DialerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22F2508C107141E100AC9B3F /* DialerViewController.m */; };
 		22F254811073D99800AC9B3F /* ringback.wav in Resources */ = {isa = PBXBuildFile; fileRef = 22F254801073D99800AC9B3F /* ringback.wav */; };
+		260AC9B519D13D86002C8CA9 /* chat.png in Resources */ = {isa = PBXBuildFile; fileRef = 260AC9B319D13D86002C8CA9 /* chat.png */; };
+		260AC9B619D13D86002C8CA9 /* sms.png in Resources */ = {isa = PBXBuildFile; fileRef = 260AC9B419D13D86002C8CA9 /* sms.png */; };
 		261FAB2219CC50B200CFE4AA /* call_quality_indicator_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 261FAB1F19CC50B200CFE4AA /* call_quality_indicator_1.png */; };
 		261FAB2319CC50B200CFE4AA /* call_quality_indicator_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 261FAB2019CC50B200CFE4AA /* call_quality_indicator_2.png */; };
 		261FAB2419CC50B200CFE4AA /* call_quality_indicator_3.png in Resources */ = {isa = PBXBuildFile; fileRef = 261FAB2119CC50B200CFE4AA /* call_quality_indicator_3.png */; };
@@ -1710,6 +1712,8 @@
 		22F2508B107141E100AC9B3F /* DialerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialerViewController.h; sourceTree = "<group>"; };
 		22F2508C107141E100AC9B3F /* DialerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = DialerViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		22F254801073D99800AC9B3F /* ringback.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = ringback.wav; path = Resources/ringback.wav; sourceTree = "<group>"; };
+		260AC9B319D13D86002C8CA9 /* chat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chat.png; sourceTree = "<group>"; };
+		260AC9B419D13D86002C8CA9 /* sms.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sms.png; sourceTree = "<group>"; };
 		261FAB1F19CC50B200CFE4AA /* call_quality_indicator_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = call_quality_indicator_1.png; sourceTree = "<group>"; };
 		261FAB2019CC50B200CFE4AA /* call_quality_indicator_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = call_quality_indicator_2.png; sourceTree = "<group>"; };
 		261FAB2119CC50B200CFE4AA /* call_quality_indicator_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = call_quality_indicator_3.png; sourceTree = "<group>"; };
@@ -2991,6 +2995,7 @@
 				261FAB1F19CC50B200CFE4AA /* call_quality_indicator_1.png */,
 				261FAB2019CC50B200CFE4AA /* call_quality_indicator_2.png */,
 				261FAB2119CC50B200CFE4AA /* call_quality_indicator_3.png */,
+				260AC9B319D13D86002C8CA9 /* chat.png */,
 				261FABE119D0286E00CFE4AA /* contacts-hover.png */,
 				261FABE219D0286E00CFE4AA /* contacts.png */,
 				261FAC0119D05B2400CFE4AA /* continue.png */,
@@ -3023,6 +3028,7 @@
 				261FABEA19D028C800CFE4AA /* settings.png */,
 				26DFD65D19BF2F3400D1395A /* sign-in-normal.png */,
 				26DFD65E19BF2F3400D1395A /* sign-up-normal.png */,
+				260AC9B419D13D86002C8CA9 /* sms.png */,
 				261FABB719CC562F00CFE4AA /* star-hover.png */,
 				261FABB819CC562F00CFE4AA /* star.png */,
 			);
@@ -4137,6 +4143,7 @@
 				D3F83F561582223B00336684 /* numpad_four_over.png in Resources */,
 				D3F83F581582223B00336684 /* numpad_five_default.png in Resources */,
 				D3F83F5A1582223B00336684 /* numpad_five_over.png in Resources */,
+				260AC9B519D13D86002C8CA9 /* chat.png in Resources */,
 				26DFD66119BF2F3400D1395A /* logo-small.png in Resources */,
 				D3F83F5C1582223B00336684 /* numpad_six_default.png in Resources */,
 				D3F83F5E1582223B00336684 /* numpad_six_over.png in Resources */,
@@ -4573,6 +4580,7 @@
 				2234C8EB15EE2F7F00E18E83 /* chat_message_not_delivered.png in Resources */,
 				2234C8EE15EE744200E18E83 /* chat_message_inprogress.png in Resources */,
 				F04892FF180C3296002FED35 /* ImageOptim.sh in Resources */,
+				260AC9B619D13D86002C8CA9 /* sms.png in Resources */,
 				26DFD66D19BF2F9000D1395A /* linphone_splashscreen-568h@2x.png in Resources */,
 				D37EE10D16035793003608A6 /* ImageViewController.xib in Resources */,
 				D381881115FE3F0B00C3EDCA /* UICallCell.xib in Resources */,
