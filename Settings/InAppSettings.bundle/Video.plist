@@ -70,7 +70,7 @@
 		</dict>
 		<dict>
 			<key>DefaultValue</key>
-			<false/>
+			<true/>
 			<key>Key</key>
 			<string>mp4v-es_preference</string>
 			<key>Title</key>
