@@ -10,6 +10,7 @@
                 <outlet property="caspianAccountView" destination="aGM-fR-vWr" id="BoY-gk-sDK"/>
                 <outlet property="choiceView" destination="33" id="40"/>
                 <outlet property="connectAccountView" destination="52" id="71"/>
+                <outlet property="countryTableView" destination="aOT-1n-28f" id="YDW-Jv-sqV"/>
                 <outlet property="createAccountView" destination="44" id="70"/>
                 <outlet property="externalAccountView" destination="56" id="72"/>
                 <outlet property="provisionedAccountView" destination="xVK-hL-6pe" id="jZM-mc-m1Q"/>

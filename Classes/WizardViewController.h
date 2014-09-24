@@ -65,6 +65,7 @@
 @property (nonatomic, retain) IBOutlet UITapGestureRecognizer *viewTapGestureRecognizer;
 
 @property (retain, nonatomic) IBOutlet UISwitch *rememberMeSwitch;
+@property (retain, nonatomic) IBOutlet UITableView *countryTableView;
 
 - (void)reset;
 - (void)fillDefaultValues;

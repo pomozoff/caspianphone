@@ -121,6 +121,7 @@ static NSString *caspianPasswordKey = @"uk.co.onecallcaspian.phone.password";
     [provisionedPassword release];
     [provisionedDomain release];
     [rememberMeSwitch release];
+    [_countryTableView release];
     [super dealloc];
 }
 
