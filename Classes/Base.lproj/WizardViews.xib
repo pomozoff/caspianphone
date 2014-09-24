@@ -106,7 +106,7 @@
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                 </button>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="  Number without the country code" adjustsFontSizeToFit="NO" minimumFontSize="17" background="Rectangle.png" id="4PV-ab-MvO">
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="  Phone Number" adjustsFontSizeToFit="NO" minimumFontSize="17" background="Rectangle.png" id="4PV-ab-MvO" userLabel="Phone Number">
                     <rect key="frame" x="0.0" y="142" width="320" height="40"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
@@ -115,7 +115,7 @@
                         <outlet property="delegate" destination="-1" id="TYH-ah-Uv9"/>
                     </connections>
                 </textField>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="  Enter First Name" adjustsFontSizeToFit="NO" minimumFontSize="17" background="Rectangle.png" id="Ubi-Sf-uTh">
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder=" First Name" adjustsFontSizeToFit="NO" minimumFontSize="17" background="Rectangle.png" id="Ubi-Sf-uTh" userLabel="First Name">
                     <rect key="frame" x="0.0" y="177" width="320" height="40"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <nil key="textColor"/>
@@ -125,7 +125,7 @@
                         <outlet property="delegate" destination="-1" id="bGG-MS-BOO"/>
                     </connections>
                 </textField>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="  Enter Last Name" adjustsFontSizeToFit="NO" minimumFontSize="17" background="Rectangle.png" id="mqJ-ZT-EO8">
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder=" Last Name" adjustsFontSizeToFit="NO" minimumFontSize="17" background="Rectangle.png" id="mqJ-ZT-EO8" userLabel="Last Name">
                     <rect key="frame" x="0.0" y="216" width="320" height="40"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <nil key="textColor"/>
