@@ -85,6 +85,7 @@ static NSString *caspianCountryListUrl = @"http://onecallcaspian.co.uk/mobile/co
     if (!_internetQueue) {
         _internetQueue = [[NSOperationQueue alloc] init];
         _internetQueue.name = @"Internet queue";
+        _internetQueue.maxConcurrentOperationCount = 1;
     }
     return _internetQueue;
 }
@@ -1202,25 +1203,27 @@ static UICompositeViewDescription *compositeDescription = nil;
 #pragma mark - Private
 
 - (void)pullCountries {
-    [self.internetQueue addOperationWithBlock:^{
-        NSURL *aURL = [NSURL URLWithString:[caspianCountryListUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-        NSData *data = [NSData dataWithContentsOfURL:aURL];
-        NSString *errorString = @"";
-        if (data) {
-            NSError *error = nil;
-            NSArray *jsonAnswer = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
-            if (!error) {
-                [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                    self.countryAndCode = jsonAnswer;
-                    [self.countryTableView reloadData];
-                }];
+    if (self.internetQueue.operationCount == 0) {
+        [self.internetQueue addOperationWithBlock:^{
+            NSURL *aURL = [NSURL URLWithString:[caspianCountryListUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+            NSData *data = [NSData dataWithContentsOfURL:aURL];
+            NSString *errorString = @"";
+            if (data) {
+                NSError *error = nil;
+                NSArray *jsonAnswer = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
+                if (!error) {
+                    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                        self.countryAndCode = jsonAnswer;
+                        [self.countryTableView reloadData];
+                    }];
+                } else {
+                    errorString = NSLocalizedString(@"Invalid country list", nil);
+                }
             } else {
-                errorString = NSLocalizedString(@"Invalid country list", nil);
+                errorString = NSLocalizedString(@"Error retrieving country list", nil);
             }
-        } else {
-            errorString = NSLocalizedString(@"Error retrieving country list", nil);
-        }
-    }];
+        }];
+    }
 }
 - (NSString *)countryNameAtIndex:(NSInteger)index {
     NSString *countryName = @"---";
