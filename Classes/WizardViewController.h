@@ -68,6 +68,7 @@
 
 @property (retain, nonatomic) IBOutlet UISwitch *rememberMeSwitch;
 @property (retain, nonatomic) IBOutlet UITableView *countryTableView;
+@property (retain, nonatomic) IBOutlet UITextField *phoneNumber;
 
 - (void)reset;
 - (void)fillDefaultValues;
