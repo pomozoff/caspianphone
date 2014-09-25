@@ -44,7 +44,7 @@ static NSString *caspianCountryListUrl = @"http://onecallcaspian.co.uk/mobile/co
 
 @interface WizardViewController ()
 
-@property (nonatomic, retain) NSDictionary *countryAndCode;
+@property (nonatomic, retain) NSArray *countryAndCode;
 @property (nonatomic, retain) NSOperationQueue *internetQueue;
 
 @end
@@ -100,8 +100,6 @@ static NSString *caspianCountryListUrl = @"http://onecallcaspian.co.uk/mobile/co
         self->historyViews = [[NSMutableArray alloc] init];
         self->currentView = nil;
         self->viewTapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onViewTap:)];
-        
-        //[self pullCountries];
     }
     return self;
 }
@@ -212,6 +210,8 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self pullCountries];
     
     [viewTapGestureRecognizer setCancelsTouchesInView:FALSE];
     [viewTapGestureRecognizer setDelegate:self];
@@ -457,7 +457,9 @@ static UICompositeViewDescription *compositeDescription = nil;
     }
     */
     
-    [self fillCredentials];
+    if (view == caspianAccountView) {
+        [self fillCredentials];
+    }
     
     // Animation
     if(animation && [[LinphoneManager instance] lpConfigBoolForKey:@"animations_preference"] == true) {
@@ -926,6 +928,10 @@ static UICompositeViewDescription *compositeDescription = nil;
     }
 }
 
+- (IBAction)onSelectCountryButtonClicked:(id)sender {
+    self.countryTableView.hidden = !self.countryTableView.hidden;
+}
+
 #pragma mark - UIAlertViewDelegate
 
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
@@ -1173,11 +1179,30 @@ static UICompositeViewDescription *compositeDescription = nil;
     return YES;
 }
 
+#pragma mark - Table view data source
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.countryAndCode.count;
+}
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSString *cellIdentifier = @"Country Cell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    if (!cell) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
+    }
+    
+    cell.textLabel.text = [self countryNameAtIndex:indexPath.row];
+    
+    return cell;
+}
+
+#pragma mark - Table view delegate
+
+
 #pragma mark - Private
 
 - (void)pullCountries {
     [self.internetQueue addOperationWithBlock:^{
-        NSMutableDictionary *countriesWithCodes = [[NSMutableDictionary alloc] init];
         NSURL *aURL = [NSURL URLWithString:[caspianCountryListUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
         NSData *data = [NSData dataWithContentsOfURL:aURL];
         NSString *errorString = @"";
@@ -1185,6 +1210,10 @@ static UICompositeViewDescription *compositeDescription = nil;
             NSError *error = nil;
             NSArray *jsonAnswer = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
             if (!error) {
+                [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                    self.countryAndCode = jsonAnswer;
+                }];
+                /*
                 [jsonAnswer enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
                     NSArray *countryAndCode = obj;
                     if (countryAndCode.count == 2) {
@@ -1194,18 +1223,23 @@ static UICompositeViewDescription *compositeDescription = nil;
                         countriesWithCodes[countryCode] = countryName;
                     }
                 }];
+                */
             } else {
                 errorString = NSLocalizedString(@"Invalid country list", nil);
             }
         } else {
             errorString = NSLocalizedString(@"Error retrieving country list", nil);
         }
-        
-        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-            self.countryAndCode = [NSDictionary dictionaryWithDictionary:countriesWithCodes];
-            [countriesWithCodes release];
-        }];
     }];
+}
+- (NSString *)countryNameAtIndex:(NSInteger)index {
+    NSString *countryName = @"---";
+    NSArray *countryPair = [self.countryAndCode objectAtIndex:index];
+    if (countryPair.count == 2) {
+        countryName = countryPair.firstObject;
+        //NSString *countryCode = countryPair.lastObject;
+    }
+    return countryName;
 }
 
 @end

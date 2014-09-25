@@ -26,7 +26,9 @@
     UICompositeViewDelegate,
     XMLRPCConnectionDelegate,
     UIGestureRecognizerDelegate,
-    UIAlertViewDelegate>
+    UIAlertViewDelegate,
+    UITableViewDelegate,
+    UITableViewDataSource>
 {
     @private
     UITextField *activeTextField;

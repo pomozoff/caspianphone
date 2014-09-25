@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
-        <deployment defaultVersion="1536" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
     </dependencies>
     <objects>
@@ -93,19 +92,22 @@
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="  Select Country" adjustsFontSizeToFit="NO" minimumFontSize="17" background="buttonwith-arrow.png" id="k1G-aF-7Q7">
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="  Select Country" adjustsFontSizeToFit="NO" minimumFontSize="17" background="buttonwith-arrow.png" id="k1G-aF-7Q7" userLabel="Select Country Text Field">
                     <rect key="frame" x="0.0" y="103" width="320" height="40"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <nil key="textColor"/>
                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ux1-st-OdK" userLabel="Select country button">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ux1-st-OdK" userLabel="Select Country Button">
                     <rect key="frame" x="0.0" y="103" width="320" height="40"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <state key="normal">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="onSelectCountryButtonClicked:" destination="-1" eventType="touchUpInside" id="n5r-cB-MVe"/>
+                    </connections>
                 </button>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="  Phone Number" adjustsFontSizeToFit="NO" minimumFontSize="17" background="Rectangle.png" id="4PV-ab-MvO" userLabel="Phone Number">
                     <rect key="frame" x="0.0" y="142" width="320" height="40"/>
@@ -116,7 +118,7 @@
                         <outlet property="delegate" destination="-1" id="TYH-ah-Uv9"/>
                     </connections>
                 </textField>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder=" First Name" adjustsFontSizeToFit="NO" minimumFontSize="17" background="Rectangle.png" id="Ubi-Sf-uTh" userLabel="First Name">
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="  First Name" adjustsFontSizeToFit="NO" minimumFontSize="17" background="Rectangle.png" id="Ubi-Sf-uTh" userLabel="First Name">
                     <rect key="frame" x="0.0" y="177" width="320" height="40"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <nil key="textColor"/>
@@ -126,7 +128,7 @@
                         <outlet property="delegate" destination="-1" id="bGG-MS-BOO"/>
                     </connections>
                 </textField>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder=" Last Name" adjustsFontSizeToFit="NO" minimumFontSize="17" background="Rectangle.png" id="mqJ-ZT-EO8" userLabel="Last Name">
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="  Last Name" adjustsFontSizeToFit="NO" minimumFontSize="17" background="Rectangle.png" id="mqJ-ZT-EO8" userLabel="Last Name">
                     <rect key="frame" x="0.0" y="216" width="320" height="40"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <nil key="textColor"/>
