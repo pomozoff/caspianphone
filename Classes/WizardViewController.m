@@ -931,6 +931,9 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (IBAction)onSelectCountryButtonClicked:(id)sender {
     self.countryTableView.hidden = !self.countryTableView.hidden;
+    if (!self.countryTableView.hidden && self.countryAndCode.count == 0) {
+        [self pullCountries];
+    }
 }
 
 #pragma mark - UIAlertViewDelegate
