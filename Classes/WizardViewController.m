@@ -1212,6 +1212,7 @@ static UICompositeViewDescription *compositeDescription = nil;
             if (!error) {
                 [[NSOperationQueue mainQueue] addOperationWithBlock:^{
                     self.countryAndCode = jsonAnswer;
+                    [self.countryTableView reloadData];
                 }];
                 /*
                 [jsonAnswer enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
