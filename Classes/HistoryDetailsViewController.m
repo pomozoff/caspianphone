@@ -287,8 +287,9 @@ static UICompositeViewDescription *compositeDescription = nil;
     // contact name
     [plainAddressLabel setText:@""];
     if (addr != NULL) {
-        if ([[LinphoneManager instance] lpConfigBoolForKey:@"contact_display_username_only"]) {
+        //if ([[LinphoneManager instance] lpConfigBoolForKey:@"contact_display_username_only"]) {
 			[plainAddressLabel setText:[NSString stringWithUTF8String:linphone_address_get_username(addr)?linphone_address_get_username(addr):""]];
+        /*
 		} else {
 			char* lAddress = linphone_address_as_string_uri_only(addr);
 			if(lAddress != NULL) {
@@ -296,6 +297,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 				ms_free(lAddress);
 			}
 		}
+        */
     }
 
     if (addr != NULL) {
