@@ -2185,5 +2185,4 @@ static void audioRouteChangeListenerCallback (
     return cleanUsername;
 }
 
-
 @end
