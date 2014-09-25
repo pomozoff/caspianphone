@@ -45,7 +45,7 @@ static NSString *caspianCountryListUrl = @"http://onecallcaspian.co.uk/mobile/co
 @interface WizardViewController ()
 
 @property (nonatomic, retain) NSArray *countryAndCode;
-@property (nonatomic, retain) NSOperationQueue *internetQueue;
+@property (nonatomic, retain) NSOperationQueue *serialCountryListPullQueue;
 
 @end
 
@@ -81,13 +81,13 @@ static NSString *caspianCountryListUrl = @"http://onecallcaspian.co.uk/mobile/co
 
 #pragma mark - Properties
 
-- (NSOperationQueue *)internetQueue {
-    if (!_internetQueue) {
-        _internetQueue = [[NSOperationQueue alloc] init];
-        _internetQueue.name = @"Internet queue";
-        _internetQueue.maxConcurrentOperationCount = 1;
+- (NSOperationQueue *)serialCountryListPullQueue {
+    if (!_serialCountryListPullQueue) {
+        _serialCountryListPullQueue = [[NSOperationQueue alloc] init];
+        _serialCountryListPullQueue.name = @"Internet queue";
+        _serialCountryListPullQueue.maxConcurrentOperationCount = 1;
     }
-    return _internetQueue;
+    return _serialCountryListPullQueue;
 }
 
 #pragma mark - Lifecycle Functions
@@ -141,7 +141,7 @@ static NSString *caspianCountryListUrl = @"http://onecallcaspian.co.uk/mobile/co
     [rememberMeSwitch release];
     [_countryTableView release];
     [_countryAndCode release];
-    [_internetQueue release];
+    [_serialCountryListPullQueue release];
     
     [super dealloc];
 }
@@ -1206,8 +1206,8 @@ static UICompositeViewDescription *compositeDescription = nil;
 #pragma mark - Private
 
 - (void)pullCountries {
-    if (self.internetQueue.operationCount == 0) {
-        [self.internetQueue addOperationWithBlock:^{
+    if (self.serialCountryListPullQueue.operationCount == 0) {
+        [self.serialCountryListPullQueue addOperationWithBlock:^{
             NSURL *aURL = [NSURL URLWithString:[caspianCountryListUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
             NSData *data = [NSData dataWithContentsOfURL:aURL];
             NSString *errorString = @"";
