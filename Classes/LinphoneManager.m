@@ -2166,7 +2166,7 @@ static void audioRouteChangeListenerCallback (
 
 - (NSString *)removePrefix:(NSString *)prefix fromString:(NSString *)string {
     if ([string hasPrefix:prefix]) {
-        return [string stringByReplacingOccurrencesOfString:prefix withString:@"" options:0 range:NSMakeRange(0, prefix.length)];
+        return [string substringFromIndex:prefix.length];
     }
     return string;
 }
