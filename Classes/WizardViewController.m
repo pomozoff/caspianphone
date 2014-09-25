@@ -1203,6 +1203,13 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 #pragma mark - Table view delegate
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSString *countryCode = [self countryCodeAtIndex:indexPath.row];
+    NSString *cleanCountryCode = [[LinphoneManager instance] removePrefix:@"-" fromString:countryCode];
+    NSString *fullCountryCode = [@"+" stringByAppendingString:cleanCountryCode];
+    self.phoneNumber.text = fullCountryCode;
+    self.countryTableView.hidden = YES;
+}
 
 #pragma mark - Private
 
@@ -1236,6 +1243,14 @@ static UICompositeViewDescription *compositeDescription = nil;
         countryName = countryPair.firstObject;
     }
     return countryName;
+}
+- (NSString *)countryCodeAtIndex:(NSInteger)index {
+    NSString *countryCode = @"";
+    NSArray *countryPair = [self.countryAndCode objectAtIndex:index];
+    if (countryPair.count == 2) {
+        countryCode = countryPair.lastObject;
+    }
+    return countryCode;
 }
 
 @end
