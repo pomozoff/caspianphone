@@ -101,7 +101,7 @@ static NSString *caspianCountryListUrl = @"http://onecallcaspian.co.uk/mobile/co
         self->currentView = nil;
         self->viewTapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onViewTap:)];
         
-        [self pullCountries];
+        //[self pullCountries];
     }
     return self;
 }
