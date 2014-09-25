@@ -25,6 +25,9 @@
 
 @property (nonatomic, retain) NSOperationQueue *balanceQueue;
 @property (nonatomic, retain) NSNumberFormatter *numberFormatter;
+@property (nonatomic, readonly) NSString *username;
+@property (nonatomic, readonly) NSString *password;
+@property (nonatomic, retain) NSURL *balanceUrl;
 
 @end
 
@@ -38,6 +41,8 @@
 @synthesize balanceLabel;
 @synthesize balanceQueue;
 @synthesize numberFormatter;
+@synthesize username = _username;
+@synthesize password = _password;
 
 static NSTimer *callQualityTimer;
 static NSTimer *callSecurityTimer;
@@ -69,6 +74,40 @@ static NSTimeInterval balanceIntervalCurrent = balanceIntervalMax;
     }
     return numberFormatter;
 }
+- (NSString *)username {
+    if (!_username) {
+        LinphoneCore *lc = [LinphoneManager getLc];
+        LinphoneProxyConfig *cfg = NULL;
+        linphone_core_get_default_proxy(lc, &cfg);
+        if (cfg) {
+            const char *identity = linphone_proxy_config_get_identity(cfg);
+            LinphoneAddress *addr = linphone_address_new(identity);
+            if (addr) {
+                _username = [[NSString stringWithUTF8String:linphone_address_get_username(addr)] retain];
+                linphone_address_destroy(addr);
+            }
+        }
+    }
+    return _username;
+}
+- (NSString *)password {
+    if (!_password) {
+        LinphoneAuthInfo *ai;
+        LinphoneCore *lc = [LinphoneManager getLc];
+        const MSList *elem = linphone_core_get_auth_info_list(lc);
+        if (elem && (ai = (LinphoneAuthInfo *)elem->data)) {
+            _password = [[NSString stringWithUTF8String:linphone_auth_info_get_passwd(ai)] retain];
+        }
+    }
+    return _password;
+}
+- (NSURL *)balanceUrl {
+    if (!_balanceUrl) {
+        NSString *urlString = [NSString stringWithFormat:caspianBalanceUrl, self.username, self.password];
+        _balanceUrl = [[NSURL URLWithString:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]] retain];
+    }
+    return _balanceUrl;
+}
 
 #pragma mark - Lifecycle Functions
 
@@ -98,6 +137,9 @@ static NSTimeInterval balanceIntervalCurrent = balanceIntervalMax;
     [balanceLabel release];
     [balanceQueue release];
     [numberFormatter release];
+    [_username release];
+    [_password release];
+    [_balanceUrl release];
 	[super dealloc];
 }
 
@@ -356,30 +398,8 @@ static NSTimeInterval balanceIntervalCurrent = balanceIntervalMax;
 - (void)pullBalanceCompletionBlock:(void(^)(NSString *))block {
     if (self.balanceQueue.operationCount == 0) {
         [self.balanceQueue addOperationWithBlock:^{
-            NSString *username = @"";
-            NSString *password = @"";
-            
-            LinphoneCore *lc = [LinphoneManager getLc];
-            LinphoneProxyConfig *cfg = NULL;
-            linphone_core_get_default_proxy(lc, &cfg);
-            if (cfg) {
-                const char *identity = linphone_proxy_config_get_identity(cfg);
-                LinphoneAddress *addr = linphone_address_new(identity);
-                if (addr) {
-                    username = [NSString stringWithUTF8String:linphone_address_get_username(addr)];
-                    linphone_address_destroy(addr);
-                }
-            }
-            LinphoneAuthInfo *ai;
-            const MSList *elem = linphone_core_get_auth_info_list(lc);
-            if (elem && (ai = (LinphoneAuthInfo *)elem->data)) {
-                password = [NSString stringWithUTF8String:linphone_auth_info_get_passwd(ai)];
-            }
-            
-            if (username.length > 0 && password.length > 0) {
-                NSString *urlString = [NSString stringWithFormat:caspianBalanceUrl, username, password];
-                NSURL *aURL = [NSURL URLWithString:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-                NSData *data = [NSData dataWithContentsOfURL:aURL];
+            if (self.balanceUrl) {
+                NSData *data = [NSData dataWithContentsOfURL:self.balanceUrl];
                 if (data) {
                     NSError *error = nil;
                     NSDictionary *jsonAnswer = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
