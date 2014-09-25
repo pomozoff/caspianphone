@@ -1214,17 +1214,6 @@ static UICompositeViewDescription *compositeDescription = nil;
                     self.countryAndCode = jsonAnswer;
                     [self.countryTableView reloadData];
                 }];
-                /*
-                [jsonAnswer enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-                    NSArray *countryAndCode = obj;
-                    if (countryAndCode.count == 2) {
-                        NSString *countryName = countryAndCode.firstObject;
-                        NSString *countryCode = countryAndCode.lastObject;
-                        
-                        countriesWithCodes[countryCode] = countryName;
-                    }
-                }];
-                */
             } else {
                 errorString = NSLocalizedString(@"Invalid country list", nil);
             }
@@ -1238,7 +1227,6 @@ static UICompositeViewDescription *compositeDescription = nil;
     NSArray *countryPair = [self.countryAndCode objectAtIndex:index];
     if (countryPair.count == 2) {
         countryName = countryPair.firstObject;
-        //NSString *countryCode = countryPair.lastObject;
     }
     return countryName;
 }
