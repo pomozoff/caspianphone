@@ -249,6 +249,7 @@
 		2622BD6C19C9AFC00048AE69 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		2622BD7219C9AFC00048AE69 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2622BD7019C9AFC00048AE69 /* InfoPlist.strings */; };
 		2622BD7419C9AFC00048AE69 /* linphone_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2622BD7319C9AFC00048AE69 /* linphone_Tests.m */; };
+		269948B719D9720C0017650E /* COCTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 269948B619D9720C0017650E /* COCTextField.m */; };
 		26A74D8B19C1D458002A3DA7 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26A74D8A19C1D458002A3DA7 /* Crashlytics.framework */; };
 		26DFD65F19BF2F3400D1395A /* background-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 26DFD65219BF2F3400D1395A /* background-1.png */; };
 		26DFD66019BF2F3400D1395A /* logo-large.png in Resources */ = {isa = PBXBuildFile; fileRef = 26DFD65319BF2F3400D1395A /* logo-large.png */; };
@@ -1779,6 +1780,8 @@
 		2622BD7119C9AFC00048AE69 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		2622BD7319C9AFC00048AE69 /* linphone_Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = linphone_Tests.m; sourceTree = "<group>"; };
 		2622BD7519C9AFC00048AE69 /* linphone Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "linphone Tests-Prefix.pch"; sourceTree = "<group>"; };
+		269948B519D9720C0017650E /* COCTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = COCTextField.h; sourceTree = "<group>"; };
+		269948B619D9720C0017650E /* COCTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = COCTextField.m; sourceTree = "<group>"; };
 		26A74D8A19C1D458002A3DA7 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		26DFD65219BF2F3400D1395A /* background-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background-1.png"; sourceTree = "<group>"; };
 		26DFD65319BF2F3400D1395A /* logo-large.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo-large.png"; sourceTree = "<group>"; };
@@ -2841,6 +2844,8 @@
 				D38187E015FE348A00C3EDCA /* WizardViewController.xib */,
 				D3D5126E160B3AD400946DF8 /* WizardViewController~ipad.xib */,
 				D3D5126A160B3A8E00946DF8 /* WizardViews.xib */,
+				269948B519D9720C0017650E /* COCTextField.h */,
+				269948B619D9720C0017650E /* COCTextField.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -5411,6 +5416,7 @@
 				D378906515AC373B00BD776C /* ContactDetailsLabelViewController.m in Sources */,
 				D3E8F68615ADE05B0065A226 /* UIContactDetailsFooter.m in Sources */,
 				C90FAA7915AF54E6002091CB /* HistoryDetailsViewController.m in Sources */,
+				269948B719D9720C0017650E /* COCTextField.m in Sources */,
 				F066515517F9A02E0064280C /* UITransparentTVCell.m in Sources */,
 				D3F9A9EE15AF277E0045320F /* UACellBackgroundView.m in Sources */,
 				D35860D615B549B500513429 /* Utils.m in Sources */,
