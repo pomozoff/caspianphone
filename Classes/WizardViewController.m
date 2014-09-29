@@ -160,6 +160,7 @@ static NSString *caspianCreateAccountUrl = @"http://onecallcaspian.co.uk/mobile/
     
     [_registrationNextStep release];
     [_continueButton release];
+    [_validationWay release];
     [super dealloc];
 }
 
@@ -1281,7 +1282,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     self.registrationNextStep.text = NSLocalizedString(caspianEnterPhoneNumber, nil);
     
     [self checkNextStep];
-
+    
     [self.countryName resignFirstResponder];
 }
 - (NSString *)countryNameAtIndex:(NSInteger)index {

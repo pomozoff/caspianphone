@@ -70,8 +70,9 @@
 
 @property (nonatomic, retain) IBOutlet UISwitch *rememberMeSwitch;
 @property (nonatomic, retain) IBOutlet UIPickerView *countryPickerView;
-@property (retain, nonatomic) IBOutlet UIToolbar *countryPickerAccessoryView;
-@property (retain, nonatomic) IBOutlet UILabel *registrationNextStep;
+@property (nonatomic, retain) IBOutlet UIToolbar *countryPickerAccessoryView;
+@property (nonatomic, retain) IBOutlet UILabel *registrationNextStep;
+@property (nonatomic, retain) IBOutlet UISegmentedControl *validationWay;
 
 @property (nonatomic, retain) IBOutlet UITextField *countryCode;
 @property (nonatomic, retain) IBOutlet COCTextField *countryName;
