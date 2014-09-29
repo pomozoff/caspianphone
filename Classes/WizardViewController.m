@@ -40,11 +40,19 @@ typedef enum _ViewElement {
 static NSString *caspianDomain = @"212.159.80.157";
 static NSString *caspianUsernameKey = @"uk.co.onecallcaspian.phone.username";
 static NSString *caspianPasswordKey = @"uk.co.onecallcaspian.phone.password";
+static NSString *caspianPhoneTemplate = @"+79261112345";
+
+static NSString *caspianSelectCountry = @"Select Country";
+static NSString *caspianEnterPhoneNumber = @"Enter Phone Number";
+static NSString *caspianEnterName = @"Enter First and Last Names";
+
 static NSString *caspianCountryListUrl = @"http://onecallcaspian.co.uk/mobile/country";
+static NSString *caspianCreateAccountUrl = @"http://onecallcaspian.co.uk/mobile/create?phone_code=%@&phone_number=%@&firstname=%@&lastname=%@";
 
 @interface WizardViewController ()
 
 @property (nonatomic, retain) NSArray *countryAndCode;
+@property (nonatomic, copy) NSString *selectedCountryCode;
 @property (nonatomic, retain) NSOperationQueue *serialCountryListPullQueue;
 
 @end
@@ -139,11 +147,19 @@ static NSString *caspianCountryListUrl = @"http://onecallcaspian.co.uk/mobile/co
     [provisionedPassword release];
     [provisionedDomain release];
     [rememberMeSwitch release];
-    [_countryTableView release];
+    [_countryPickerView release];
+    [_countryPickerAccessoryView release];
     [_phoneNumber release];
     [_countryAndCode release];
     [_serialCountryListPullQueue release];
     
+    [_firstName release];
+    [_lastName release];
+    [_countryName release];
+    [_countryCode release];
+    
+    [_registrationNextStep release];
+    [_continueButton release];
     [super dealloc];
 }
 
@@ -190,6 +206,8 @@ static UICompositeViewDescription *compositeDescription = nil;
                                              selector:@selector(keyboardWillHide:)
                                                  name:UIKeyboardWillHideNotification
                                                object:nil];
+    
+    [self checkNextStep];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -229,6 +247,9 @@ static UICompositeViewDescription *compositeDescription = nil;
         [LinphoneUtils adjustFontSize:validateAccountView mult:2.22f];
         [LinphoneUtils adjustFontSize:provisionedAccountView mult:2.22f];
     }
+    
+    self.countryName.inputView = self.countryPickerView;
+    self.countryName.inputAccessoryView = self.countryPickerAccessoryView;
 }
 
 
@@ -689,6 +710,12 @@ static UICompositeViewDescription *compositeDescription = nil;
     activeTextField = textField;
 }
 
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    if (textField == self.phoneNumber) {
+        [self checkNextStep];
+    }
+}
+
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
     // only validate the username when creating a new account
@@ -930,11 +957,17 @@ static UICompositeViewDescription *compositeDescription = nil;
     }
 }
 
-- (IBAction)onSelectCountryButtonClicked:(id)sender {
-    self.countryTableView.hidden = !self.countryTableView.hidden;
-    if (!self.countryTableView.hidden && self.countryAndCode.count == 0) {
-        [self pullCountries];
-    }
+- (IBAction)onCancelCountryPickerView:(id)sender {
+    [self.countryName resignFirstResponder];
+}
+
+- (IBAction)onDoneCountryPickerView:(id)sender {
+    [self didSelectCountryAtRow:[self.countryPickerView selectedRowInComponent:0]];
+    [self.countryName resignFirstResponder];
+}
+
+- (IBAction)onContinueClick:(id)sender {
+    [self createAccountForPhoneNumber:self.phoneNumber.text firstName:self.firstName.text lastName:self.lastName.text];
 }
 
 #pragma mark - UIAlertViewDelegate
@@ -1184,31 +1217,22 @@ static UICompositeViewDescription *compositeDescription = nil;
     return YES;
 }
 
-#pragma mark - Table view data source
+#pragma mark - Picker view data source
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
+    return 1;
+}
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
     return self.countryAndCode.count;
 }
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSString *cellIdentifier = @"Country Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
-    }
-    
-    cell.textLabel.text = [self countryNameAtIndex:indexPath.row];
-    
-    return cell;
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
+    return [self countryNameAtIndex:row];
 }
 
-#pragma mark - Table view delegate
+#pragma mark - Picker view delegate
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSString *countryCode = [self countryCodeAtIndex:indexPath.row];
-    NSString *cleanCountryCode = [[LinphoneManager instance] removePrefix:@"-" fromString:countryCode];
-    NSString *fullCountryCode = [@"+" stringByAppendingString:cleanCountryCode];
-    self.phoneNumber.text = fullCountryCode;
-    self.countryTableView.hidden = YES;
+-(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
+    [self didSelectCountryAtRow:row];
 }
 
 #pragma mark - Private
@@ -1225,19 +1249,43 @@ static UICompositeViewDescription *compositeDescription = nil;
                 if (!error) {
                     [[NSOperationQueue mainQueue] addOperationWithBlock:^{
                         self.countryAndCode = jsonAnswer;
-                        [self.countryTableView reloadData];
                     }];
                 } else {
                     errorString = NSLocalizedString(@"Invalid country list", nil);
                 }
             } else {
-                errorString = NSLocalizedString(@"Error retrieving country list", nil);
+                errorString = NSLocalizedString(@"Internet connection error", nil);
+            }
+            if (errorString.length != 0) {
+                [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error retrieving country list", nil)
+                                                                    message:errorString
+                                                                   delegate:nil
+                                                          cancelButtonTitle:@"OK"
+                                                          otherButtonTitles:nil];
+                    [alert show];
+                    [alert release];
+                }];
             }
         }];
     }
 }
+- (void)didSelectCountryAtRow:(NSInteger)row {
+    NSString *dirtyCountryCode = [self countryCodeAtIndex:row];
+    self.selectedCountryCode = [[LinphoneManager instance] removePrefix:@"-" fromString:dirtyCountryCode];
+    NSString *fullCountryCode = [@"+" stringByAppendingString:self.selectedCountryCode];
+    
+    self.countryCode.text = dirtyCountryCode.length > 0 ? fullCountryCode : @"";
+    self.countryName.text = [self countryNameAtIndex:row];
+    
+    self.registrationNextStep.text = NSLocalizedString(caspianEnterPhoneNumber, nil);
+    
+    [self checkNextStep];
+
+    [self.countryName resignFirstResponder];
+}
 - (NSString *)countryNameAtIndex:(NSInteger)index {
-    NSString *countryName = @"---";
+    NSString *countryName = @"";
     NSArray *countryPair = [self.countryAndCode objectAtIndex:index];
     if (countryPair.count == 2) {
         countryName = countryPair.firstObject;
@@ -1251,6 +1299,51 @@ static UICompositeViewDescription *compositeDescription = nil;
         countryCode = countryPair.lastObject;
     }
     return countryCode;
+}
+- (BOOL)phoneNumberIsValid:(NSString *)phoneNumber {
+    return phoneNumber.length == caspianPhoneTemplate.length;
+}
+- (void)checkNextStep {
+    BOOL isPhoneNumberValid = NO;
+    if (self.countryCode.text.length > 0) {
+        NSString *fullPhoneNumber = [self.countryCode.text stringByAppendingString:self.phoneNumber.text];
+        isPhoneNumberValid = [self phoneNumberIsValid:fullPhoneNumber];
+        self.registrationNextStep.text = isPhoneNumberValid ? NSLocalizedString(caspianEnterName, nil) : NSLocalizedString(caspianEnterPhoneNumber, nil);
+    } else {
+        self.registrationNextStep.text = caspianSelectCountry;
+    }
+    self.continueButton.enabled = isPhoneNumberValid;
+}
+- (NSString *)cleanPhoneNumber:(NSString *)phoneNumber countryCode:(NSString *)countryCode {
+    NSString *cleanPhoneNumber = [countryCode stringByAppendingString:phoneNumber];
+    NSString *fullPhoneNumber = [@"+" stringByAppendingString:cleanPhoneNumber];
+    if (![self phoneNumberIsValid:fullPhoneNumber]) {
+        cleanPhoneNumber = nil;
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Wrong phone number", nil)
+                                                        message:NSLocalizedString(@"Invalid phone number length", nil)
+                                                       delegate:nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
+        [alert release];
+    }
+    return cleanPhoneNumber;
+}
+- (void)createAccountForPhoneNumber:(NSString *)phoneNumber firstName:(NSString *)firstName lastName:(NSString *)lastName {
+    if (self.selectedCountryCode.length == 0) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Undefined country", nil)
+                                                        message:NSLocalizedString(@"Please, select country first", nil)
+                                                       delegate:nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
+        [alert release];
+    } else {
+        NSString *cleanPhoneNumber = [self cleanPhoneNumber:phoneNumber countryCode:self.selectedCountryCode];
+        if (cleanPhoneNumber.length > 0) {
+            [self changeView:validateAccountView back:NO animation:YES];
+        }
+    }
 }
 
 @end
