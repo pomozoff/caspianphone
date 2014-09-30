@@ -145,6 +145,8 @@ typedef struct _LinphoneManagerSounds {
 - (void)acceptCallForCallId:(NSString*)callid;
 - (void)cancelLocalNotifTimerForCallId:(NSString*)callid;
 
+- (void)dataFromUrlString:(NSString *)urlString completionBlock:(void(^)(id result))completionBlock errorBlock:(void(^)(NSError *error))errorBlock;
+- (void)dataFromUrl:(NSURL *)url completionBlock:(void(^)(id result))completionBlock errorBlock:(void(^)(NSError *error))errorBlock;
 - (NSString *)removePrefix:(NSString *)prefix fromString:(NSString *)string;
 - (NSString *)cleanUsername:(NSString *)username;
 

@@ -64,6 +64,8 @@ NSString *const kLinphoneConfiguringStateUpdate = @"LinphoneConfiguringStateUpda
 NSString *const kLinphoneGlobalStateUpdate = @"LinphoneGlobalStateUpdate";
 NSString *const kLinphoneNotifyReceived = @"LinphoneNotifyReceived";
 
+static NSString *caspianErrorDomain = @"uk.co.onecallcaspian.phone";
+static NSInteger caspianErrorCode = 480;
 
 const int kLinphoneAudioVbrCodecDefaultBitrate=36; /*you can override this from linphonerc or linphonerc-factory*/
 
@@ -2161,8 +2163,35 @@ static void audioRouteChangeListenerCallback (
 	}
 }
 
+#pragma mark - Public
 
-#pragma mark - Private
+- (void)dataFromUrlString:(NSString *)urlString completionBlock:(void(^)(id result))completionBlock errorBlock:(void(^)(NSError *error))errorBlock {
+    NSURL *url = [NSURL URLWithString:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    [self dataFromUrl:url completionBlock:completionBlock errorBlock:errorBlock];
+}
+
+- (void)dataFromUrl:(NSURL *)url completionBlock:(void(^)(id result))completionBlock errorBlock:(void(^)(NSError *error))errorBlock {
+    NSError *error;
+    NSData *data = [NSData dataWithContentsOfURL:url options:NSDataReadingUncached error:&error];
+    
+    if (!error) {
+        NSDictionary *jsonAnswer = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
+        if (!error && completionBlock) {
+            BOOL isError = [jsonAnswer[@"error"] boolValue];
+            if (isError) {
+                NSMutableDictionary *details = [NSMutableDictionary dictionary];
+                NSString *message = NSLocalizedString(jsonAnswer[@"message"], nil);
+                [details setValue:message forKey:NSLocalizedDescriptionKey];
+                error = [[[NSError errorWithDomain:caspianErrorDomain code:caspianErrorCode userInfo:details] retain] autorelease];
+            } else {
+                completionBlock(jsonAnswer);
+            }
+        }
+    }
+    if (error && errorBlock) {
+        errorBlock(error);
+    }
+}
 
 - (NSString *)removePrefix:(NSString *)prefix fromString:(NSString *)string {
     if ([string hasPrefix:prefix]) {
