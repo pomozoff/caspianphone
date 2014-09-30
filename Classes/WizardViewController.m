@@ -73,7 +73,7 @@ static NSString *caspianCountryObjectFieldSms  = @"Sms";
 @synthesize connectAccountView;
 @synthesize externalAccountView;
 @synthesize caspianAccountView;
-@synthesize validateAccountView;
+@synthesize activateAccountView;
 @synthesize provisionedAccountView;
 @synthesize waitView;
 
@@ -130,7 +130,7 @@ static NSString *caspianCountryObjectFieldSms  = @"Sms";
     [connectAccountView release];
     [externalAccountView release];
     [caspianAccountView release];
-    [validateAccountView release];
+    [activateAccountView release];
     
     [waitView release];
     
@@ -251,7 +251,7 @@ static UICompositeViewDescription *compositeDescription = nil;
         [LinphoneUtils adjustFontSize:connectAccountView mult:2.22f];
         [LinphoneUtils adjustFontSize:externalAccountView mult:2.22f];
         [LinphoneUtils adjustFontSize:caspianAccountView mult:2.22f];
-        [LinphoneUtils adjustFontSize:validateAccountView mult:2.22f];
+        [LinphoneUtils adjustFontSize:activateAccountView mult:2.22f];
         [LinphoneUtils adjustFontSize:provisionedAccountView mult:2.22f];
     }
     
@@ -327,7 +327,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     [WizardViewController cleanTextField:connectAccountView];
     [WizardViewController cleanTextField:externalAccountView];
     [WizardViewController cleanTextField:caspianAccountView];
-    [WizardViewController cleanTextField:validateAccountView];
+    [WizardViewController cleanTextField:activateAccountView];
     [WizardViewController cleanTextField:provisionedAccountView];
 }
 
@@ -1139,7 +1139,7 @@ static UICompositeViewDescription *compositeDescription = nil;
             if([response object] == [NSNumber numberWithInt:0]) {
                 NSString *username = [WizardViewController findTextField:ViewElement_Username view:contentView].text;
                 NSString *password = [WizardViewController findTextField:ViewElement_Password view:contentView].text;
-                [self changeView:validateAccountView back:FALSE animation:TRUE];
+                [self changeView:activateAccountView back:FALSE animation:TRUE];
                 [WizardViewController findTextField:ViewElement_Username view:contentView].text = username;
                 [WizardViewController findTextField:ViewElement_Password view:contentView].text = password;
             } else {

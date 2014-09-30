@@ -7,6 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WizardViewController">
             <connections>
+                <outlet property="activateAccountView" destination="101" id="Dsl-aw-Z1K"/>
                 <outlet property="activateBy" destination="IqE-i2-ujj" id="t6V-jv-HFl"/>
                 <outlet property="caspianAccountView" destination="aGM-fR-vWr" id="BoY-gk-sDK"/>
                 <outlet property="choiceView" destination="33" id="40"/>
@@ -27,7 +28,6 @@
                 <outlet property="provisionedUsername" destination="MyR-eX-QTa" id="gmr-FI-hpH"/>
                 <outlet property="registrationNextStep" destination="4Ay-Kl-yKQ" id="Eii-gD-NOt"/>
                 <outlet property="rememberMeSwitch" destination="g6g-04-SLD" id="wDp-Cn-cI9"/>
-                <outlet property="validateAccountView" destination="101" id="112"/>
                 <outlet property="welcomeView" destination="21" id="28"/>
             </connections>
         </placeholder>
