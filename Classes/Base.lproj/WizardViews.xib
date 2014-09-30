@@ -190,6 +190,7 @@
                         <segment title="SMS" enabled="NO"/>
                         <segment title="Call" enabled="NO"/>
                     </segments>
+                    <color key="tintColor" red="0.40000000000000002" green="0.65098039220000004" blue="0.78823529410000004" alpha="1" colorSpace="calibratedRGB"/>
                 </segmentedControl>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
