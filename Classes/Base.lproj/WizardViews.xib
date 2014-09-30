@@ -183,12 +183,12 @@
                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="IqE-i2-ujj">
+                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" id="IqE-i2-ujj">
                     <rect key="frame" x="99" y="310" width="123" height="29"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <segments>
-                        <segment title="SMS"/>
-                        <segment title="Call"/>
+                        <segment title="SMS" enabled="NO"/>
+                        <segment title="Call" enabled="NO"/>
                     </segments>
                 </segmentedControl>
             </subviews>
