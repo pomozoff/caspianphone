@@ -1273,34 +1273,16 @@ static UICompositeViewDescription *compositeDescription = nil;
 - (void)pullCountries {
     if (self.serialCountryListPullQueue.operationCount == 0) {
         [self.serialCountryListPullQueue addOperationWithBlock:^{
-            NSURL *aURL = [NSURL URLWithString:[caspianCountryListUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-            NSData *data = [NSData dataWithContentsOfURL:aURL];
-            NSString *errorString = @"";
-            if (data) {
-                NSError *error = nil;
-                NSDictionary *jsonAnswer = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
-                if (!error) {
-                    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                        self.countryAndCode = jsonAnswer[caspianCountriesListTopKey];
-                        [self.countryPickerView reloadAllComponents];
-                    }];
-                } else {
-                    errorString = NSLocalizedString(@"Invalid country list", nil);
-                }
-            } else {
-                errorString = NSLocalizedString(@"Internet connection error", nil);
-            }
-            if (errorString.length != 0) {
+            [[LinphoneManager instance] dataFromUrlString:caspianCountryListUrl completionBlock:^(NSDictionary *countries) {
                 [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error retrieving country list", nil)
-                                                                    message:errorString
-                                                                   delegate:nil
-                                                          cancelButtonTitle:@"OK"
-                                                          otherButtonTitles:nil];
-                    [alert show];
-                    [alert release];
+                    self.countryAndCode = countries[caspianCountriesListTopKey];
+                    [self.countryPickerView reloadAllComponents];
                 }];
-            }
+            } errorBlock:^(NSError *error) {
+                [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                    [self alertErrorMessage:error.localizedDescription withTitle:NSLocalizedString(@"Error retrieving country list", nil)];
+                }];
+            }];
         }];
     }
 }

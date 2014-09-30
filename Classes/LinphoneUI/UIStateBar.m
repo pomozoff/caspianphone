@@ -397,27 +397,18 @@ static NSTimeInterval balanceIntervalCurrent = balanceIntervalMax;
 
 - (void)pullBalanceCompletionBlock:(void(^)(NSString *))block {
     if (self.balanceQueue.operationCount == 0) {
+        __block UIStateBar *weakSelf = self;
         [self.balanceQueue addOperationWithBlock:^{
-            if (self.balanceUrl) {
-                NSData *data = [NSData dataWithContentsOfURL:self.balanceUrl];
-                if (data) {
-                    NSError *error = nil;
-                    NSDictionary *jsonAnswer = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
-                    if (!error) {
-                        BOOL isError = [jsonAnswer[@"error"] boolValue];
-                        if (!isError) {
-                            NSString *accurateBalance = jsonAnswer[@"balance"];
-                            NSDecimalNumber *digitBalance = [NSDecimalNumber decimalNumberWithString:accurateBalance];
-                            if (digitBalance != nil) {
-                                NSString *balance = [self.numberFormatter stringFromNumber:digitBalance];
-                                [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                                    block(balance);
-                                }];
-                            }
-                        }
-                    }
+            [[LinphoneManager instance] dataFromUrl:weakSelf.balanceUrl completionBlock:^(NSDictionary *jsonAnswer) {
+                NSString *accurateBalance = jsonAnswer[@"balance"];
+                NSDecimalNumber *digitBalance = [NSDecimalNumber decimalNumberWithString:accurateBalance];
+                if (digitBalance != nil) {
+                    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                        NSString *balance = [weakSelf.numberFormatter stringFromNumber:digitBalance];
+                        block(balance);
+                    }];
                 }
-            }
+            } errorBlock:nil];
         }];
     }
 }
