@@ -1260,6 +1260,16 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 #pragma mark - Private
 
+- (void)alertErrorMessage:(NSString *)message withTitle:(NSString *)title {
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
+                                                    message:message
+                                                   delegate:nil
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles:nil];
+    [alert show];
+    [alert release];
+}
+
 - (void)pullCountries {
     if (self.serialCountryListPullQueue.operationCount == 0) {
         [self.serialCountryListPullQueue addOperationWithBlock:^{
