@@ -715,6 +715,9 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
     activeTextField = textField;
+    if (textField == self.countryName && self.countryAndCode.count == 0) {
+        [self pullCountries];
+    }
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
