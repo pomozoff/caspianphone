@@ -1290,8 +1290,8 @@ static UICompositeViewDescription *compositeDescription = nil;
     self.countryCode.text = self.selectedCountryCode.length > 0 ? fullCountryCode : @"";
     self.countryName.text = country[caspianCountryObjectFieldName];
     
-    [self activationAvailableForCountry:country];
     [self checkNextStep];
+    [self activationAvailableForCountry:country];
     
     [self.countryName resignFirstResponder];
 }
@@ -1310,7 +1310,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     } else {
         self.registrationNextStep.text = caspianSelectCountry;
     }
-    self.continueButton.enabled = self.continueButton.enabled && isPhoneNumberValid;
+    self.continueButton.enabled = isPhoneNumberValid;
 }
 - (void)activationAvailableForCountry:(NSDictionary *)country {
     BOOL isSmsAvailable = [country[caspianCountryObjectFieldSms] boolValue];
