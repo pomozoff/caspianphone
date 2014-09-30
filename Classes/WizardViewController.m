@@ -1368,7 +1368,23 @@ static UICompositeViewDescription *compositeDescription = nil;
     } else {
         NSString *cleanPhoneNumber = [self cleanPhoneNumber:phoneNumber countryCode:self.selectedCountryCode];
         if (cleanPhoneNumber.length > 0) {
-            [self changeView:validateAccountView back:NO animation:YES];
+            [self.internetQueue addOperationWithBlock:^{
+                NSString *createAccountUrl = [NSString stringWithFormat:caspianCreateAccountUrl
+                                              , self.countryCode.text
+                                              , self.phoneNumber.text
+                                              , self.firstName.text
+                                              , self.lastName.text
+                                              ];
+                [[LinphoneManager instance] dataFromUrlString:createAccountUrl completionBlock:^(NSDictionary *jsonAnswer) {
+                    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                        [self changeView:activateAccountView back:NO animation:YES];
+                    }];
+                } errorBlock:^(NSError *error) {
+                    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                        [self alertErrorMessage:error.localizedDescription withTitle:NSLocalizedString(@"Error creating account", nil)];
+                    }];
+                }];
+            }];
         }
     }
 }
