@@ -46,8 +46,14 @@ static NSString *caspianSelectCountry = @"Select Country";
 static NSString *caspianEnterPhoneNumber = @"Enter Phone Number";
 static NSString *caspianEnterName = @"Enter First and Last Names";
 
-static NSString *caspianCountryListUrl = @"http://onecallcaspian.co.uk/mobile/country";
+static NSString *caspianCountryListUrl = @"http://onecallcaspian.co.uk/mobile/country2";
 static NSString *caspianCreateAccountUrl = @"http://onecallcaspian.co.uk/mobile/create?phone_code=%@&phone_number=%@&firstname=%@&lastname=%@";
+
+static NSString *caspianCountriesListTopKey = @"Countries";
+static NSString *caspianCountryObjectFieldCode = @"Code";
+static NSString *caspianCountryObjectFieldName = @"Name";
+static NSString *caspianCountryObjectFieldCall = @"Call";
+static NSString *caspianCountryObjectFieldSms  = @"Sms";
 
 @interface WizardViewController ()
 
@@ -1227,7 +1233,8 @@ static UICompositeViewDescription *compositeDescription = nil;
     return self.countryAndCode.count;
 }
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
-    return [self countryNameAtIndex:row];
+    NSDictionary *country = [self countryAtIndex:row];
+    return country[caspianCountryObjectFieldName];
 }
 
 #pragma mark - Picker view delegate
@@ -1246,10 +1253,10 @@ static UICompositeViewDescription *compositeDescription = nil;
             NSString *errorString = @"";
             if (data) {
                 NSError *error = nil;
-                NSArray *jsonAnswer = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
+                NSDictionary *jsonAnswer = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
                 if (!error) {
                     [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                        self.countryAndCode = jsonAnswer;
+                        self.countryAndCode = jsonAnswer[caspianCountriesListTopKey];
                     }];
                 } else {
                     errorString = NSLocalizedString(@"Invalid country list", nil);
@@ -1272,34 +1279,20 @@ static UICompositeViewDescription *compositeDescription = nil;
     }
 }
 - (void)didSelectCountryAtRow:(NSInteger)row {
-    NSString *dirtyCountryCode = [self countryCodeAtIndex:row];
-    self.selectedCountryCode = [[LinphoneManager instance] removePrefix:@"-" fromString:dirtyCountryCode];
-    NSString *fullCountryCode = [@"+" stringByAppendingString:self.selectedCountryCode];
+    NSDictionary *country = [self countryAtIndex:row];
+
+    self.selectedCountryCode = country[caspianCountryObjectFieldCode];
+    NSString *fullCountryCode = [@"+" stringByAppendingString:self.selectedCountryCode != nil ? self.selectedCountryCode : @""];
     
-    self.countryCode.text = dirtyCountryCode.length > 0 ? fullCountryCode : @"";
-    self.countryName.text = [self countryNameAtIndex:row];
-    
-    self.registrationNextStep.text = NSLocalizedString(caspianEnterPhoneNumber, nil);
+    self.countryCode.text = self.selectedCountryCode.length > 0 ? fullCountryCode : @"";
+    self.countryName.text = country[caspianCountryObjectFieldName];
     
     [self checkNextStep];
     
     [self.countryName resignFirstResponder];
 }
-- (NSString *)countryNameAtIndex:(NSInteger)index {
-    NSString *countryName = @"";
-    NSArray *countryPair = [self.countryAndCode objectAtIndex:index];
-    if (countryPair.count == 2) {
-        countryName = countryPair.firstObject;
-    }
-    return countryName;
-}
-- (NSString *)countryCodeAtIndex:(NSInteger)index {
-    NSString *countryCode = @"";
-    NSArray *countryPair = [self.countryAndCode objectAtIndex:index];
-    if (countryPair.count == 2) {
-        countryCode = countryPair.lastObject;
-    }
-    return countryCode;
+- (NSDictionary *)countryAtIndex:(NSInteger)index {
+    return [self.countryAndCode objectAtIndex:index];
 }
 - (BOOL)phoneNumberIsValid:(NSString *)phoneNumber {
     return phoneNumber.length == caspianPhoneTemplate.length;
@@ -1313,7 +1306,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     } else {
         self.registrationNextStep.text = caspianSelectCountry;
     }
-    self.continueButton.enabled = isPhoneNumberValid;
+    self.continueButton.enabled = self.continueButton.enabled && isPhoneNumberValid;
 }
 - (NSString *)cleanPhoneNumber:(NSString *)phoneNumber countryCode:(NSString *)countryCode {
     NSString *cleanPhoneNumber = [countryCode stringByAppendingString:phoneNumber];
