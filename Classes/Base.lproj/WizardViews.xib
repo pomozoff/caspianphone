@@ -507,11 +507,11 @@
             <point key="canvasLocation" x="832" y="-296"/>
         </view>
         <view contentMode="scaleToFill" id="101" userLabel="validateAccountView">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bgcontact.png" id="Q59-qs-LjM">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="481"/>
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="large-blue-button.png" id="sr5-Ae-hnJ">
