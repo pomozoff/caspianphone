@@ -248,7 +248,7 @@
 		2622BD6B19C9AFC00048AE69 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		2622BD6C19C9AFC00048AE69 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		2622BD7219C9AFC00048AE69 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2622BD7019C9AFC00048AE69 /* InfoPlist.strings */; };
-		2622BD7419C9AFC00048AE69 /* linphone_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2622BD7319C9AFC00048AE69 /* linphone_Tests.m */; };
+		2622BD7419C9AFC00048AE69 /* cleanUsername_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2622BD7319C9AFC00048AE69 /* cleanUsername_Tests.m */; };
 		269948B719D9720C0017650E /* COCTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 269948B619D9720C0017650E /* COCTextField.m */; };
 		26A74D8B19C1D458002A3DA7 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26A74D8A19C1D458002A3DA7 /* Crashlytics.framework */; };
 		26DFD65F19BF2F3400D1395A /* background-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 26DFD65219BF2F3400D1395A /* background-1.png */; };
@@ -1778,7 +1778,7 @@
 		2622BD6919C9AFBF0048AE69 /* linphone Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "linphone Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2622BD6F19C9AFC00048AE69 /* linphone Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "linphone Tests-Info.plist"; sourceTree = "<group>"; };
 		2622BD7119C9AFC00048AE69 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		2622BD7319C9AFC00048AE69 /* linphone_Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = linphone_Tests.m; sourceTree = "<group>"; };
+		2622BD7319C9AFC00048AE69 /* cleanUsername_Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = cleanUsername_Tests.m; sourceTree = "<group>"; };
 		2622BD7519C9AFC00048AE69 /* linphone Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "linphone Tests-Prefix.pch"; sourceTree = "<group>"; };
 		269948B519D9720C0017650E /* COCTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = COCTextField.h; sourceTree = "<group>"; };
 		269948B619D9720C0017650E /* COCTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = COCTextField.m; sourceTree = "<group>"; };
@@ -2958,7 +2958,7 @@
 		2622BD6D19C9AFC00048AE69 /* linphone Tests */ = {
 			isa = PBXGroup;
 			children = (
-				2622BD7319C9AFC00048AE69 /* linphone_Tests.m */,
+				2622BD7319C9AFC00048AE69 /* cleanUsername_Tests.m */,
 				2622BD6E19C9AFC00048AE69 /* Supporting Files */,
 			);
 			path = "linphone Tests";
@@ -5560,7 +5560,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2622BD7419C9AFC00048AE69 /* linphone_Tests.m in Sources */,
+				2622BD7419C9AFC00048AE69 /* cleanUsername_Tests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

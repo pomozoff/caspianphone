@@ -10,13 +10,13 @@
 
 #import "LinphoneManager.h"
 
-@interface linphone_Tests : XCTestCase
+@interface cleanUsername_Tests : XCTestCase
 
-@property (nonatomic, strong, readonly) NSString *cleanPhoneNumber;
+@property (nonatomic, copy, readonly) NSString *cleanPhoneNumber;
 
 @end
 
-@implementation linphone_Tests
+@implementation cleanUsername_Tests
 
 - (void)setUp
 {
