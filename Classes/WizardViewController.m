@@ -213,7 +213,7 @@ static UICompositeViewDescription *compositeDescription = nil;
                                              selector:@selector(configuringUpdate:)
                                                  name:kLinphoneConfiguringStateUpdate
                                                object:nil];
-
+/*
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWillShow:)
                                                  name:UIKeyboardWillShowNotification
@@ -222,7 +222,7 @@ static UICompositeViewDescription *compositeDescription = nil;
                                              selector:@selector(keyboardWillHide:)
                                                  name:UIKeyboardWillHideNotification
                                                object:nil];
-    
+*/
     [self checkNextStep];
 }
 
@@ -234,14 +234,14 @@ static UICompositeViewDescription *compositeDescription = nil;
     [[NSNotificationCenter defaultCenter] removeObserver:self
                                                     name:kLinphoneConfiguringStateUpdate
                                                   object:nil];
-
+/*
     [[NSNotificationCenter defaultCenter] removeObserver:self
                                                  name:UIKeyboardWillShowNotification
                                                object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self
                                                  name:UIKeyboardWillHideNotification
                                                object:nil];
-
+*/
 }
 
 - (void)viewDidLoad {
