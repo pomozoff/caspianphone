@@ -2205,14 +2205,16 @@ static void audioRouteChangeListenerCallback (
 }
 
 - (NSString *)cleanUsername:(NSString *)username {
-    NSArray *badPrefixes = @[@"+", @"00"];
+    NSArray *badPrefixes = @[@"+", @"0"];
     
     NSString *cleanUsername = username;
     NSString *previousUsername = @"";
     do {
         previousUsername = cleanUsername;
         for (NSString *prefix in badPrefixes) {
-            cleanUsername = [self removePrefix:prefix fromString:cleanUsername];
+            while ([cleanUsername hasPrefix:prefix]) {
+                cleanUsername = [self removePrefix:prefix fromString:cleanUsername];
+            }
         }
     } while (![cleanUsername isEqual:previousUsername]);
     return cleanUsername;
