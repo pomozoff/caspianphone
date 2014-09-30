@@ -1290,6 +1290,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     self.countryCode.text = self.selectedCountryCode.length > 0 ? fullCountryCode : @"";
     self.countryName.text = country[caspianCountryObjectFieldName];
     
+    [self activationAvailableForCountry:country];
     [self checkNextStep];
     
     [self.countryName resignFirstResponder];
@@ -1310,6 +1311,23 @@ static UICompositeViewDescription *compositeDescription = nil;
         self.registrationNextStep.text = caspianSelectCountry;
     }
     self.continueButton.enabled = self.continueButton.enabled && isPhoneNumberValid;
+}
+- (void)activationAvailableForCountry:(NSDictionary *)country {
+    BOOL isSmsAvailable = [country[caspianCountryObjectFieldSms] boolValue];
+    BOOL isCallAvailable = [country[caspianCountryObjectFieldCall] boolValue];
+
+    [self.activateBy setEnabled:isSmsAvailable forSegmentAtIndex:0];
+    [self.activateBy setEnabled:isCallAvailable forSegmentAtIndex:1];
+    
+    if (isSmsAvailable) {
+        [self.activateBy setSelectedSegmentIndex:0];
+    } else if (isCallAvailable) {
+        [self.activateBy setSelectedSegmentIndex:1];
+    } else {
+        [self.activateBy setSelectedSegmentIndex:UISegmentedControlNoSegment];
+    }
+    
+    self.continueButton.enabled = self.continueButton.enabled && (isCallAvailable || isSmsAvailable);
 }
 - (NSString *)cleanPhoneNumber:(NSString *)phoneNumber countryCode:(NSString *)countryCode {
     NSString *cleanPhoneNumber = [countryCode stringByAppendingString:phoneNumber];
