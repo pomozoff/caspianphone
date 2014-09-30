@@ -1281,6 +1281,7 @@ static UICompositeViewDescription *compositeDescription = nil;
         }];
     }
 }
+
 - (void)didSelectCountryAtRow:(NSInteger)row {
     NSDictionary *country = [self countryAtIndex:row];
 
@@ -1295,12 +1296,15 @@ static UICompositeViewDescription *compositeDescription = nil;
     
     [self.countryName resignFirstResponder];
 }
+
 - (NSDictionary *)countryAtIndex:(NSInteger)index {
     return [self.countryAndCode objectAtIndex:index];
 }
+
 - (BOOL)phoneNumberIsValid:(NSString *)phoneNumber {
     return phoneNumber.length == caspianPhoneTemplate.length;
 }
+
 - (void)checkNextStep {
     BOOL isPhoneNumberValid = NO;
     if (self.countryCode.text.length > 0) {
@@ -1312,6 +1316,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     }
     self.continueButton.enabled = isPhoneNumberValid;
 }
+
 - (void)activationAvailableForCountry:(NSDictionary *)country {
     BOOL isSmsAvailable = [country[caspianCountryObjectFieldSms] boolValue];
     BOOL isCallAvailable = [country[caspianCountryObjectFieldCall] boolValue];
@@ -1329,6 +1334,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     
     self.continueButton.enabled = self.continueButton.enabled && (isCallAvailable || isSmsAvailable);
 }
+
 - (NSString *)cleanPhoneNumber:(NSString *)phoneNumber countryCode:(NSString *)countryCode {
     NSString *cleanPhoneNumber = [countryCode stringByAppendingString:phoneNumber];
     NSString *fullPhoneNumber = [@"+" stringByAppendingString:cleanPhoneNumber];
@@ -1344,6 +1350,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     }
     return cleanPhoneNumber;
 }
+
 - (void)createAccountForPhoneNumber:(NSString *)phoneNumber firstName:(NSString *)firstName lastName:(NSString *)lastName {
     if (self.selectedCountryCode.length == 0) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Undefined country", nil)
