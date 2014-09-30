@@ -40,14 +40,13 @@ typedef enum _ViewElement {
 static NSString *caspianDomain = @"212.159.80.157";
 static NSString *caspianUsernameKey = @"uk.co.onecallcaspian.phone.username";
 static NSString *caspianPasswordKey = @"uk.co.onecallcaspian.phone.password";
-static NSString *caspianPhoneTemplate = @"+79261112345";
 
 static NSString *caspianSelectCountry = @"Select Country";
 static NSString *caspianEnterPhoneNumber = @"Enter Phone Number";
 static NSString *caspianEnterName = @"Enter First and Last Names";
 
 static NSString *caspianCountryListUrl = @"http://onecallcaspian.co.uk/mobile/country2";
-static NSString *caspianCreateAccountUrl = @"http://onecallcaspian.co.uk/mobile/create?phone_code=%@&phone_number=%@&firstname=%@&lastname=%@";
+static NSString *caspianCreateAccountUrl = @"http://onecallcaspian.co.uk/mobile/create?phone_code=%@&phone_number=%@&firstname=%@&lastname=%@&activation_way=%@";
 
 static NSString *caspianCountriesListTopKey = @"Countries";
 static NSString *caspianCountryObjectFieldCode = @"Code";
@@ -1272,15 +1271,16 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (void)pullCountries {
     if (self.serialCountryListPullQueue.operationCount == 0) {
+        __block WizardViewController *weakSelf = self;
         [self.serialCountryListPullQueue addOperationWithBlock:^{
             [[LinphoneManager instance] dataFromUrlString:caspianCountryListUrl completionBlock:^(NSDictionary *countries) {
                 [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                    self.countryAndCode = countries[caspianCountriesListTopKey];
-                    [self.countryPickerView reloadAllComponents];
+                    weakSelf.countryAndCode = countries[caspianCountriesListTopKey];
+                    [weakSelf.countryPickerView reloadAllComponents];
                 }];
             } errorBlock:^(NSError *error) {
                 [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                    [self alertErrorMessage:error.localizedDescription withTitle:NSLocalizedString(@"Error retrieving country list", nil)];
+                    [weakSelf alertErrorMessage:error.localizedDescription withTitle:NSLocalizedString(@"Error retrieving country list", nil)];
                 }];
             }];
         }];
@@ -1306,15 +1306,10 @@ static UICompositeViewDescription *compositeDescription = nil;
     return [self.countryAndCode objectAtIndex:index];
 }
 
-- (BOOL)phoneNumberIsValid:(NSString *)phoneNumber {
-    return phoneNumber.length == caspianPhoneTemplate.length;
-}
-
 - (void)checkNextStep {
     BOOL isPhoneNumberValid = NO;
     if (self.countryCode.text.length > 0) {
-        NSString *fullPhoneNumber = [self.countryCode.text stringByAppendingString:self.phoneNumber.text];
-        isPhoneNumberValid = [self phoneNumberIsValid:fullPhoneNumber];
+        isPhoneNumberValid = self.phoneNumber.text.length > 0;
         self.registrationNextStep.text = isPhoneNumberValid ? NSLocalizedString(caspianEnterName, nil) : NSLocalizedString(caspianEnterPhoneNumber, nil);
     } else {
         self.registrationNextStep.text = caspianSelectCountry;
@@ -1340,52 +1335,34 @@ static UICompositeViewDescription *compositeDescription = nil;
     self.continueButton.enabled = self.continueButton.enabled && (isCallAvailable || isSmsAvailable);
 }
 
-- (NSString *)cleanPhoneNumber:(NSString *)phoneNumber countryCode:(NSString *)countryCode {
-    NSString *cleanPhoneNumber = [countryCode stringByAppendingString:phoneNumber];
-    NSString *fullPhoneNumber = [@"+" stringByAppendingString:cleanPhoneNumber];
-    if (![self phoneNumberIsValid:fullPhoneNumber]) {
-        cleanPhoneNumber = nil;
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Wrong phone number", nil)
-                                                        message:NSLocalizedString(@"Invalid phone number length", nil)
-                                                       delegate:nil
-                                              cancelButtonTitle:@"OK"
-                                              otherButtonTitles:nil];
-        [alert show];
-        [alert release];
-    }
-    return cleanPhoneNumber;
-}
-
 - (void)createAccountForPhoneNumber:(NSString *)phoneNumber firstName:(NSString *)firstName lastName:(NSString *)lastName {
     if (self.selectedCountryCode.length == 0) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Undefined country", nil)
-                                                        message:NSLocalizedString(@"Please, select country first", nil)
-                                                       delegate:nil
-                                              cancelButtonTitle:@"OK"
-                                              otherButtonTitles:nil];
-        [alert show];
-        [alert release];
+        [self alertErrorMessage:NSLocalizedString(@"Please, select country first", nil)
+                      withTitle:NSLocalizedString(@"Undefined country", nil)];
     } else {
-        NSString *cleanPhoneNumber = [self cleanPhoneNumber:phoneNumber countryCode:self.selectedCountryCode];
-        if (cleanPhoneNumber.length > 0) {
-            [self.internetQueue addOperationWithBlock:^{
-                NSString *createAccountUrl = [NSString stringWithFormat:caspianCreateAccountUrl
-                                              , self.countryCode.text
-                                              , self.phoneNumber.text
-                                              , self.firstName.text
-                                              , self.lastName.text
-                                              ];
-                [[LinphoneManager instance] dataFromUrlString:createAccountUrl completionBlock:^(NSDictionary *jsonAnswer) {
-                    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                        [self changeView:activateAccountView back:NO animation:YES];
-                    }];
-                } errorBlock:^(NSError *error) {
-                    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                        [self alertErrorMessage:error.localizedDescription withTitle:NSLocalizedString(@"Error creating account", nil)];
-                    }];
+        [waitView setHidden:NO];
+        NSString *cleanedPhoneNumber = [[LinphoneManager instance] cleanUsername:phoneNumber];
+        NSString *createAccountUrl = [NSString stringWithFormat:caspianCreateAccountUrl
+                                      , [[LinphoneManager instance] removePrefix:@"+" fromString:self.countryCode.text]
+                                      , cleanedPhoneNumber
+                                      , self.firstName.text
+                                      , self.lastName.text
+                                      , self.activateBy.selectedSegmentIndex == 0 ? @"sms" : @"call"
+                                      ];
+        __block WizardViewController *weakSelf = self;
+        [self.internetQueue addOperationWithBlock:^{
+            [[LinphoneManager instance] dataFromUrlString:createAccountUrl completionBlock:^(NSDictionary *jsonAnswer) {
+                [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                    [waitView setHidden:YES];
+                    [weakSelf changeView:activateAccountView back:NO animation:YES];
+                }];
+            } errorBlock:^(NSError *error) {
+                [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                    [waitView setHidden:YES];
+                    [weakSelf alertErrorMessage:error.localizedDescription withTitle:NSLocalizedString(@"Error creating account", nil)];
                 }];
             }];
-        }
+        }];
     }
 }
 
