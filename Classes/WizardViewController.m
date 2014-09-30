@@ -99,7 +99,7 @@ static NSString *caspianCountryObjectFieldSms  = @"Sms";
 - (NSOperationQueue *)serialCountryListPullQueue {
     if (!_serialCountryListPullQueue) {
         _serialCountryListPullQueue = [[NSOperationQueue alloc] init];
-        _serialCountryListPullQueue.name = @"Internet queue";
+        _serialCountryListPullQueue.name = @"Serial Country List Pull Queue";
         _serialCountryListPullQueue.maxConcurrentOperationCount = 1;
     }
     return _serialCountryListPullQueue;
