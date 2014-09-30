@@ -76,11 +76,11 @@
             <point key="canvasLocation" x="407" y="675"/>
         </pickerView>
         <view contentMode="scaleToFill" id="33" userLabel="choiceView">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bgcontact.png" id="uzj-vO-hGP">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="481"/>
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="large-blue-button.png" id="8US-8V-35U">
@@ -544,7 +544,7 @@
             <point key="canvasLocation" x="832" y="208"/>
         </view>
         <view autoresizesSubviews="NO" contentMode="scaleToFill" id="aGM-fR-vWr" userLabel="caspianAccountView">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <textField opaque="NO" clipsSubviews="YES" tag="100" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Phone number" adjustsFontSizeToFit="NO" minimumFontSize="18" background="field_background.png" clearButtonMode="always" id="IzP-N4-4hO" userLabel="usernameField" customClass="UILinphoneTextField">
