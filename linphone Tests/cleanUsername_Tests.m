@@ -65,13 +65,13 @@
 - (void)testSingleZero
 {
     NSString *result = [[LinphoneManager instance] cleanUsername:[@"0" stringByAppendingString:self.cleanPhoneNumber]];
-    XCTAssertNotEqualObjects(result, self.cleanPhoneNumber, @"");
+    XCTAssertEqualObjects(result, self.cleanPhoneNumber, @"");
 }
 
 - (void)testThreeZeros
 {
     NSString *result = [[LinphoneManager instance] cleanUsername:[@"000" stringByAppendingString:self.cleanPhoneNumber]];
-    XCTAssertNotEqualObjects(result, self.cleanPhoneNumber, @"");
+    XCTAssertEqualObjects(result, self.cleanPhoneNumber, @"");
 }
 
 - (void)testSinglePlusAndTwoZeros
@@ -95,6 +95,18 @@
 - (void)testTwoZerosAndTwoPluses
 {
     NSString *result = [[LinphoneManager instance] cleanUsername:[@"00++" stringByAppendingString:self.cleanPhoneNumber]];
+    XCTAssertEqualObjects(result, self.cleanPhoneNumber, @"");
+}
+
+- (void)testComplicatedCase
+{
+    NSString *result = [[LinphoneManager instance] cleanUsername:[@"+0+0" stringByAppendingString:self.cleanPhoneNumber]];
+    XCTAssertEqualObjects(result, self.cleanPhoneNumber, @"");
+}
+
+- (void)testMoreComplicatedCase
+{
+    NSString *result = [[LinphoneManager instance] cleanUsername:[@"000+0+00+++0000+0++++" stringByAppendingString:self.cleanPhoneNumber]];
     XCTAssertEqualObjects(result, self.cleanPhoneNumber, @"");
 }
 
