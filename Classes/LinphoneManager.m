@@ -2171,8 +2171,12 @@ static void audioRouteChangeListenerCallback (
 }
 
 - (void)dataFromUrl:(NSURL *)url completionBlock:(void(^)(id result))completionBlock errorBlock:(void(^)(NSError *error))errorBlock {
-    NSData *data = [NSData dataWithContentsOfURL:url options:NSDataReadingUncached error:&error];
     NSError *error = nil;
+
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
+    request.HTTPMethod = @"POST";
+    NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:&error];
+    [request release];
     
     if (!error) {
         NSDictionary *jsonAnswer = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
