@@ -2186,14 +2186,14 @@ static void audioRouteChangeListenerCallback (
                 NSMutableDictionary *details = [NSMutableDictionary dictionary];
                 NSString *message = NSLocalizedString(jsonAnswer[@"message"], nil);
                 [details setValue:message forKey:NSLocalizedDescriptionKey];
-                error = [[[NSError errorWithDomain:caspianErrorDomain code:caspianErrorCode userInfo:details] retain] autorelease];
+                error = [NSError errorWithDomain:caspianErrorDomain code:caspianErrorCode userInfo:details];
             } else {
                 completionBlock(jsonAnswer);
             }
         }
     }
     if (error && errorBlock) {
-        errorBlock(error);
+        errorBlock([[error retain] autorelease]);
     }
 }
 
