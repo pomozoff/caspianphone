@@ -60,6 +60,7 @@ static NSString *caspianCountryObjectFieldSms  = @"Sms";
 @property (nonatomic, retain) NSArray *countryAndCode;
 @property (nonatomic, copy) NSString *selectedCountryCode;
 @property (nonatomic, retain) NSOperationQueue *serialCountryListPullQueue;
+@property (nonatomic, retain) NSOperationQueue *internetQueue;
 
 @end
 
@@ -102,6 +103,13 @@ static NSString *caspianCountryObjectFieldSms  = @"Sms";
         _serialCountryListPullQueue.maxConcurrentOperationCount = 1;
     }
     return _serialCountryListPullQueue;
+}
+- (NSOperationQueue *)internetQueue {
+    if (!_internetQueue) {
+        _internetQueue = [[NSOperationQueue alloc] init];
+        _internetQueue.name = @"Internet Queue";
+    }
+    return _internetQueue;
 }
 
 #pragma mark - Lifecycle Functions
@@ -158,6 +166,7 @@ static NSString *caspianCountryObjectFieldSms  = @"Sms";
     [_phoneNumber release];
     [_countryAndCode release];
     [_serialCountryListPullQueue release];
+    [_internetQueue release];
     
     [_firstName release];
     [_lastName release];
