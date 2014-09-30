@@ -723,8 +723,11 @@ static UICompositeViewDescription *compositeDescription = nil;
     }
 }
 
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
-{
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    if (textField == self.countryName) {
+        return NO;
+    }
+    
     // only validate the username when creating a new account
     if( (textField.tag == ViewElement_Username) && (currentView == createAccountView) ){
         NSRegularExpression *regex = [NSRegularExpression

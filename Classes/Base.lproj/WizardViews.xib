@@ -119,6 +119,9 @@
                     <nil key="textColor"/>
                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                     <textInputTraits key="textInputTraits"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="0K1-hc-YDS"/>
+                    </connections>
                 </textField>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Code" textAlignment="center" adjustsFontSizeToFit="NO" minimumFontSize="18" background="Rectangle.png" id="7O8-ON-sNh" userLabel="Country Code">
                     <rect key="frame" x="0.0" y="130" width="89" height="41"/>
