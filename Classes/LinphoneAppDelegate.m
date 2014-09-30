@@ -177,7 +177,9 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
+#ifndef DEBUG
     [Crashlytics startWithAPIKey:@"33dd028ded3a518de0afb500f5a3839a2af9f021"];
+#endif
     
     UIApplication* app= [UIApplication sharedApplication];
     
