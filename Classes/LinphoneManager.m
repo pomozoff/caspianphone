@@ -2204,7 +2204,7 @@ static void audioRouteChangeListenerCallback (
     return string;
 }
 
-- (NSString *)cleanUsername:(NSString *)username {
+- (NSString *)cleanPhoneNumber:(NSString *)username {
     NSArray *badPrefixes = @[@"+", @"0"];
     
     NSString *cleanUsername = username;

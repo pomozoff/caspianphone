@@ -864,7 +864,7 @@ static UICompositeViewDescription *compositeDescription = nil;
         [errorView release];
     } else {
         [self.waitView setHidden:false];
-        [self addProxyConfig:[[LinphoneManager instance] cleanUsername:username] password:password domain:caspianDomain];
+        [self addProxyConfig:[[LinphoneManager instance] cleanPhoneNumber:username] password:password domain:caspianDomain];
     }
 }
 
@@ -1341,7 +1341,7 @@ static UICompositeViewDescription *compositeDescription = nil;
                       withTitle:NSLocalizedString(@"Undefined country", nil)];
     } else {
         [waitView setHidden:NO];
-        NSString *cleanedPhoneNumber = [[LinphoneManager instance] cleanUsername:phoneNumber];
+        NSString *cleanedPhoneNumber = [[LinphoneManager instance] cleanPhoneNumber:phoneNumber];
         NSString *createAccountUrl = [NSString stringWithFormat:caspianCreateAccountUrl
                                       , [[LinphoneManager instance] removePrefix:@"+" fromString:self.countryCode.text]
                                       , cleanedPhoneNumber

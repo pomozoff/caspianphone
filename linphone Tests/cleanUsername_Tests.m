@@ -34,79 +34,79 @@
 
 - (void)testSinglePlus
 {
-    NSString *result = [[LinphoneManager instance] cleanUsername:[@"+" stringByAppendingString:self.cleanPhoneNumber]];
+    NSString *result = [[LinphoneManager instance] cleanPhoneNumber:[@"+" stringByAppendingString:self.cleanPhoneNumber]];
     XCTAssertEqualObjects(result, self.cleanPhoneNumber, @"");
 }
 
 - (void)testTwoPluses
 {
-    NSString *result = [[LinphoneManager instance] cleanUsername:[@"++" stringByAppendingString:self.cleanPhoneNumber]];
+    NSString *result = [[LinphoneManager instance] cleanPhoneNumber:[@"++" stringByAppendingString:self.cleanPhoneNumber]];
     XCTAssertEqualObjects(result, self.cleanPhoneNumber, @"");
 }
 
 - (void)testManyPluses
 {
-    NSString *result = [[LinphoneManager instance] cleanUsername:[@"+++++" stringByAppendingString:self.cleanPhoneNumber]];
+    NSString *result = [[LinphoneManager instance] cleanPhoneNumber:[@"+++++" stringByAppendingString:self.cleanPhoneNumber]];
     XCTAssertEqualObjects(result, self.cleanPhoneNumber, @"");
 }
 
 - (void)testTwoZeros
 {
-    NSString *result = [[LinphoneManager instance] cleanUsername:[@"00" stringByAppendingString:self.cleanPhoneNumber]];
+    NSString *result = [[LinphoneManager instance] cleanPhoneNumber:[@"00" stringByAppendingString:self.cleanPhoneNumber]];
     XCTAssertEqualObjects(result, self.cleanPhoneNumber, @"");
 }
 
 - (void)testFourZeros
 {
-    NSString *result = [[LinphoneManager instance] cleanUsername:[@"0000" stringByAppendingString:self.cleanPhoneNumber]];
+    NSString *result = [[LinphoneManager instance] cleanPhoneNumber:[@"0000" stringByAppendingString:self.cleanPhoneNumber]];
     XCTAssertEqualObjects(result, self.cleanPhoneNumber, @"");
 }
 
 - (void)testSingleZero
 {
-    NSString *result = [[LinphoneManager instance] cleanUsername:[@"0" stringByAppendingString:self.cleanPhoneNumber]];
+    NSString *result = [[LinphoneManager instance] cleanPhoneNumber:[@"0" stringByAppendingString:self.cleanPhoneNumber]];
     XCTAssertEqualObjects(result, self.cleanPhoneNumber, @"");
 }
 
 - (void)testThreeZeros
 {
-    NSString *result = [[LinphoneManager instance] cleanUsername:[@"000" stringByAppendingString:self.cleanPhoneNumber]];
+    NSString *result = [[LinphoneManager instance] cleanPhoneNumber:[@"000" stringByAppendingString:self.cleanPhoneNumber]];
     XCTAssertEqualObjects(result, self.cleanPhoneNumber, @"");
 }
 
 - (void)testSinglePlusAndTwoZeros
 {
-    NSString *result = [[LinphoneManager instance] cleanUsername:[@"+00" stringByAppendingString:self.cleanPhoneNumber]];
+    NSString *result = [[LinphoneManager instance] cleanPhoneNumber:[@"+00" stringByAppendingString:self.cleanPhoneNumber]];
     XCTAssertEqualObjects(result, self.cleanPhoneNumber, @"");
 }
 
 - (void)testTwoZerosAndSinglePlus
 {
-    NSString *result = [[LinphoneManager instance] cleanUsername:[@"00+" stringByAppendingString:self.cleanPhoneNumber]];
+    NSString *result = [[LinphoneManager instance] cleanPhoneNumber:[@"00+" stringByAppendingString:self.cleanPhoneNumber]];
     XCTAssertEqualObjects(result, self.cleanPhoneNumber, @"");
 }
 
 - (void)testTwoPlusesAndTwoZeros
 {
-    NSString *result = [[LinphoneManager instance] cleanUsername:[@"++00" stringByAppendingString:self.cleanPhoneNumber]];
+    NSString *result = [[LinphoneManager instance] cleanPhoneNumber:[@"++00" stringByAppendingString:self.cleanPhoneNumber]];
     XCTAssertEqualObjects(result, self.cleanPhoneNumber, @"");
 }
 
 - (void)testTwoZerosAndTwoPluses
 {
-    NSString *result = [[LinphoneManager instance] cleanUsername:[@"00++" stringByAppendingString:self.cleanPhoneNumber]];
+    NSString *result = [[LinphoneManager instance] cleanPhoneNumber:[@"00++" stringByAppendingString:self.cleanPhoneNumber]];
     XCTAssertEqualObjects(result, self.cleanPhoneNumber, @"");
 }
 
 - (void)testComplicatedCase
 {
-    NSString *result = [[LinphoneManager instance] cleanUsername:[@"+0+0" stringByAppendingString:self.cleanPhoneNumber]];
+    NSString *result = [[LinphoneManager instance] cleanPhoneNumber:[@"+0+0" stringByAppendingString:self.cleanPhoneNumber]];
     XCTAssertEqualObjects(result, self.cleanPhoneNumber, @"");
 }
 
 - (void)testMoreComplicatedCase
 {
-    NSString *result = [[LinphoneManager instance] cleanUsername:[@"000+0+00+++0000+0++++" stringByAppendingString:self.cleanPhoneNumber]];
+    NSString *result = [[LinphoneManager instance] cleanPhoneNumber:[@"000+0+00+++0000+0++++" stringByAppendingString:self.cleanPhoneNumber]];
     XCTAssertEqualObjects(result, self.cleanPhoneNumber, @"");
 }
 
