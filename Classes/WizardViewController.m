@@ -160,7 +160,7 @@ static NSString *caspianCreateAccountUrl = @"http://onecallcaspian.co.uk/mobile/
     
     [_registrationNextStep release];
     [_continueButton release];
-    [_validationWay release];
+    [_activateBy release];
     [super dealloc];
 }
 
