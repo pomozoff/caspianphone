@@ -1263,6 +1263,7 @@ static UICompositeViewDescription *compositeDescription = nil;
                 if (!error) {
                     [[NSOperationQueue mainQueue] addOperationWithBlock:^{
                         self.countryAndCode = jsonAnswer[caspianCountriesListTopKey];
+                        [self.countryPickerView reloadAllComponents];
                     }];
                 } else {
                     errorString = NSLocalizedString(@"Invalid country list", nil);
