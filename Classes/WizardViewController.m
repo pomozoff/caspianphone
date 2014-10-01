@@ -996,7 +996,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     [self.view endEditing:YES];
 }
 
-- (IBAction)onContinueCreatingAccountClick:(id)sender {
+- (IBAction)onContinueCreatingAccountTap:(id)sender {
     [self createAccountForPhoneNumber:self.phoneNumber.text firstName:self.firstName.text lastName:self.lastName.text];
 }
 

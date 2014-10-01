@@ -175,7 +175,7 @@
                     <state key="selected" image="continue-selected.png"/>
                     <state key="highlighted" image="continue-selected.png"/>
                     <connections>
-                        <action selector="onContinueCreatingAccountClick:" destination="-1" eventType="touchUpInside" id="s5O-wh-kGJ"/>
+                        <action selector="onContinueCreatingAccountTap:" destination="-1" eventType="touchUpInside" id="SnS-U9-qdh"/>
                     </connections>
                 </button>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Get activation code by" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ptu-jj-BOj">
