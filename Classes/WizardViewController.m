@@ -1000,6 +1000,9 @@ static UICompositeViewDescription *compositeDescription = nil;
     [self createAccountForPhoneNumber:self.phoneNumber.text firstName:self.firstName.text lastName:self.lastName.text];
 }
 
+- (IBAction)onCountinueActivatingTap:(id)sender {
+}
+
 #pragma mark - UIAlertViewDelegate
 
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
