@@ -82,6 +82,8 @@
 @property (nonatomic, retain) IBOutlet COCTextField *lastName;
 @property (nonatomic, retain) IBOutlet UIButton *continueButton;
 
+@property (retain, nonatomic) IBOutlet COCTextField *activationCode;
+
 - (void)reset;
 - (void)fillDefaultValues;
 

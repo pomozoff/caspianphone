@@ -9,6 +9,7 @@
             <connections>
                 <outlet property="activateAccountView" destination="101" id="Dsl-aw-Z1K"/>
                 <outlet property="activateBy" destination="IqE-i2-ujj" id="t6V-jv-HFl"/>
+                <outlet property="activationCode" destination="WRl-8r-d3C" id="Qhb-7q-jGU"/>
                 <outlet property="caspianAccountView" destination="aGM-fR-vWr" id="BoY-gk-sDK"/>
                 <outlet property="choiceView" destination="33" id="40"/>
                 <outlet property="connectAccountView" destination="52" id="71"/>

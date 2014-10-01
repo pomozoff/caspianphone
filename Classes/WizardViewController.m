@@ -176,6 +176,7 @@ static NSString *caspianCountryObjectFieldSms  = @"Sms";
     [_continueButton release];
     [_activateBy release];
     [_numKeypadToolbar release];
+    [_activationCode release];
     [super dealloc];
 }
 
@@ -268,6 +269,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     self.countryName.inputAccessoryView = self.countryPickerAccessoryView;
     
     self.phoneNumber.inputAccessoryView = self.numKeypadToolbar;
+    self.activationCode.inputAccessoryView = self.numKeypadToolbar;
 }
 
 
