@@ -661,7 +661,7 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="-13" y="208"/>
         </view>
-        <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="30B-mp-hrW">
+        <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="30B-mp-hrW" userLabel="Country Picker Toolbar">
             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
             <items>
