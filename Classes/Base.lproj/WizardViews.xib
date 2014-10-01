@@ -20,6 +20,7 @@
                 <outlet property="externalAccountView" destination="56" id="72"/>
                 <outlet property="firstName" destination="Ubi-Sf-uTh" id="Nrh-MI-Tnz"/>
                 <outlet property="lastName" destination="mqJ-ZT-EO8" id="02t-JM-Okp"/>
+                <outlet property="numKeypadToolbar" destination="h8o-F2-ZnK" id="DKa-uL-x4p"/>
                 <outlet property="phoneNumber" destination="4PV-ab-MvO" id="Qem-gK-kOX"/>
                 <outlet property="provisionedAccountView" destination="xVK-hL-6pe" id="jZM-mc-m1Q"/>
                 <outlet property="provisionedDomain" destination="wRB-Sh-K8J" id="Ieb-x8-yL4"/>
@@ -514,6 +515,30 @@
                     <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 </imageView>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Code" adjustsFontSizeToFit="NO" minimumFontSize="18" background="Rectangle.png" id="WRl-8r-d3C" userLabel="First Name" customClass="COCTextField">
+                    <rect key="frame" x="0.0" y="90" width="320" height="41"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                    <nil key="textColor"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                    <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="done"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="ogu-6j-jIZ"/>
+                    </connections>
+                </textField>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="b9d-wg-zj5" userLabel="Continue button">
+                    <rect key="frame" x="38" y="388" width="245" height="50"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="35"/>
+                    <state key="normal" image="continue.png">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <state key="selected" image="continue-selected.png"/>
+                    <state key="highlighted" image="continue-selected.png"/>
+                    <connections>
+                        <action selector="onContinueCreatingAccountClick:" destination="-1" eventType="touchUpInside" id="PZy-90-r8B"/>
+                    </connections>
+                </button>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="large-blue-button.png" id="sr5-Ae-hnJ">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
@@ -645,6 +670,19 @@
                 </barButtonItem>
             </items>
             <point key="canvasLocation" x="406" y="522"/>
+        </toolbar>
+        <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="h8o-F2-ZnK" userLabel="Done Num Keyboard Toolbar">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+            <items>
+                <barButtonItem style="plain" systemItem="flexibleSpace" id="wdi-9i-HTU"/>
+                <barButtonItem systemItem="done" id="HPX-lZ-Htp">
+                    <connections>
+                        <action selector="onDoneNumKeypad:" destination="-1" id="vAm-V2-cVI"/>
+                    </connections>
+                </barButtonItem>
+            </items>
+            <point key="canvasLocation" x="832" y="522"/>
         </toolbar>
     </objects>
     <resources>

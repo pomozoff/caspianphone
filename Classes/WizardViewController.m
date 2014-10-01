@@ -175,6 +175,7 @@ static NSString *caspianCountryObjectFieldSms  = @"Sms";
     [_registrationNextStep release];
     [_continueButton release];
     [_activateBy release];
+    [_numKeypadToolbar release];
     [super dealloc];
 }
 
@@ -265,6 +266,8 @@ static UICompositeViewDescription *compositeDescription = nil;
     
     self.countryName.inputView = self.countryPickerView;
     self.countryName.inputAccessoryView = self.countryPickerAccessoryView;
+    
+    self.phoneNumber.inputAccessoryView = self.numKeypadToolbar;
 }
 
 
@@ -988,6 +991,10 @@ static UICompositeViewDescription *compositeDescription = nil;
 }
 
 - (IBAction)onContinueClick:(id)sender {
+- (IBAction)onDoneNumKeypad:(id)sender {
+    [self.view endEditing:YES];
+}
+
     [self createAccountForPhoneNumber:self.phoneNumber.text firstName:self.firstName.text lastName:self.lastName.text];
 }
 

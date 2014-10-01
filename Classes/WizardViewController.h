@@ -71,6 +71,7 @@
 @property (nonatomic, retain) IBOutlet UISwitch *rememberMeSwitch;
 @property (nonatomic, retain) IBOutlet UIPickerView *countryPickerView;
 @property (nonatomic, retain) IBOutlet UIToolbar *countryPickerAccessoryView;
+@property (retain, nonatomic) IBOutlet UIToolbar *numKeypadToolbar;
 @property (nonatomic, retain) IBOutlet UILabel *registrationNextStep;
 @property (nonatomic, retain) IBOutlet UISegmentedControl *activateBy;
 
