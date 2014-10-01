@@ -990,11 +990,11 @@ static UICompositeViewDescription *compositeDescription = nil;
     [self.countryName resignFirstResponder];
 }
 
-- (IBAction)onContinueClick:(id)sender {
 - (IBAction)onDoneNumKeypad:(id)sender {
     [self.view endEditing:YES];
 }
 
+- (IBAction)onContinueCreatingAccountClick:(id)sender {
     [self createAccountForPhoneNumber:self.phoneNumber.text firstName:self.firstName.text lastName:self.lastName.text];
 }
 
