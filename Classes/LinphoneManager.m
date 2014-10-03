@@ -682,7 +682,9 @@ static void linphone_iphone_display_status(struct _LinphoneCore * lc, const char
                     NSTimeInterval trackDuration = [self durationOfMediaFileNamed:ringtoneFileName];
                     data->timer = [NSTimer scheduledTimerWithTimeInterval:trackDuration target:self selector:@selector(localNotifContinue:) userInfo:data->notification repeats:TRUE];
 					data->notification.repeatInterval = 0;
-					data->notification.category = @"incoming_call";
+                    if( [[UIDevice currentDevice].systemVersion floatValue] >= 8){
+                        data->notification.category = @"incoming_call";
+                    }
 					data->notification.alertBody =[NSString  stringWithFormat:NSLocalizedString(@"IC_MSG",nil), address];
 					data->notification.alertAction = NSLocalizedString(@"Answer", nil);
 					data->notification.soundName = ringtoneFileName;
@@ -907,7 +909,9 @@ static void linphone_iphone_registration_state(LinphoneCore *lc, LinphoneProxyCo
 		UILocalNotification* notif = [[[UILocalNotification alloc] init] autorelease];
 		if (notif) {
 			notif.repeatInterval = 0;
-			notif.category       = @"incoming_msg";
+            if( [[UIDevice currentDevice].systemVersion floatValue] >= 8){
+                notif.category       = @"incoming_msg";
+            }
 			notif.alertBody      = [NSString  stringWithFormat:NSLocalizedString(@"IM_MSG",nil), address];
 			notif.alertAction    = NSLocalizedString(@"Show", nil);
 			notif.soundName      = @"msg.caf";
@@ -1332,7 +1336,7 @@ static BOOL libStarted = FALSE;
 	[self createLinphoneCore];
 	linphone_core_migrate_to_multi_transport(theLinphoneCore);
 
-	//init audio session
+	// init audio session (just getting the instance will init)
 	AVAudioSession *audioSession = [AVAudioSession sharedInstance];
 	BOOL bAudioInputAvailable= audioSession.inputAvailable;
 	NSError* err;
@@ -1388,6 +1392,32 @@ static BOOL libStarted = FALSE;
 
 	connectivity=none;
 
+    ms_init(); // Need to initialize mediastreamer2 before loading the plugins
+
+    libmsilbc_init();
+#if defined (HAVE_SILK)
+    libmssilk_init();
+#endif
+#ifdef HAVE_AMR
+    libmsamr_init(); //load amr plugin if present from the liblinphone sdk
+#endif
+#ifdef HAVE_X264
+    libmsx264_init(); //load x264 plugin if present from the liblinphone sdk
+#endif
+#ifdef HAVE_OPENH264
+    libmsopenh264_init(); //load openh264 plugin if present from the liblinphone sdk
+#endif
+
+#if HAVE_G729
+    libmsbcg729_init(); // load g729 plugin
+#endif
+
+    /*to make sure we don't loose debug trace*/
+    if ([self  lpConfigBoolForKey:@"debugenable_preference"]) {
+        linphone_core_enable_logs_with_cb((OrtpLogFunc)linphone_iphone_log_handler);
+        ortp_set_log_level_mask(ORTP_DEBUG|ORTP_MESSAGE|ORTP_WARNING|ORTP_ERROR|ORTP_FATAL);
+    }
+
 
 	theLinphoneCore = linphone_core_new_with_config (&linphonec_vtable
 										 ,configDb
@@ -1404,7 +1434,7 @@ static BOOL libStarted = FALSE;
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(globalStateChangedNotificationHandler:) name:kLinphoneGlobalStateUpdate object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(configuringStateChangedNotificationHandler:) name:kLinphoneConfiguringStateUpdate object:nil];
 
-	/*call iterate once immediately in order to initiate background connections with sip server, if any */
+	/*call iterate once immediately in order to initiate background connections with sip server or remote provisioning grab, if any */
 	linphone_core_iterate(theLinphoneCore);
 	// start scheduler
 	mIterateTimer = [NSTimer scheduledTimerWithTimeInterval:0.02
@@ -1900,16 +1930,11 @@ static void audioRouteChangeListenerCallback (
 #else
 #define APPMODE_SUFFIX @"prod"
 #endif
-		NSString *params;
-		if( [[[UIDevice currentDevice] systemVersion] doubleValue] >= 7 ){ /// use silent push for ios7 devices
-			params = [NSString stringWithFormat:@"app-id=%@.%@;pn-type=apple;pn-tok=%@;pn-msg-str=IC_SIL;pn-call-str=IC_SIL;pn-call-snd=empty;pn-msg-snd=msg.caf", [[NSBundle mainBundle] bundleIdentifier],APPMODE_SUFFIX,tokenString];
-		} else {
-			params = [NSString stringWithFormat:@"app-id=%@.%@;pn-type=apple;pn-tok=%@;pn-msg-str=IM_MSG;pn-call-str=IC_MSG;pn-call-snd=ring.caf;pn-msg-snd=msg.caf", [[NSBundle mainBundle] bundleIdentifier],APPMODE_SUFFIX,tokenString];
-		}
+        NSString *params = [NSString stringWithFormat:@"app-id=%@.%@;pn-type=apple;pn-tok=%@;pn-msg-str=IM_MSG;pn-call-str=IC_MSG;pn-call-snd=ring.caf;pn-msg-snd=msg.caf", [[NSBundle mainBundle] bundleIdentifier],APPMODE_SUFFIX,tokenString];
 
-		linphone_proxy_config_set_contact_uri_parameters(proxyCfg, [params UTF8String]);
-		linphone_proxy_config_set_contact_parameters(proxyCfg, NULL);
-	}
+        linphone_proxy_config_set_contact_uri_parameters(proxyCfg, [params UTF8String]);
+        linphone_proxy_config_set_contact_parameters(proxyCfg, NULL);
+    }
 }
 
 
