@@ -38,8 +38,9 @@ typedef enum _ViewElement {
 } ViewElement;
 
 static NSString *caspianDomain = @"212.159.80.157";
-static NSString *caspianUsernameKey = @"uk.co.onecallcaspian.phone.username";
+static NSString *caspianPhoneNumber = @"uk.co.onecallcaspian.phone.username";
 static NSString *caspianPasswordKey = @"uk.co.onecallcaspian.phone.password";
+static NSString *caspianActivationCodeKey = @"uk.co.onecallcaspian.phone.activationCode";
 
 static NSString *caspianSelectCountry = @"Select Country";
 static NSString *caspianEnterPhoneNumber = @"Enter Phone Number";
@@ -58,6 +59,8 @@ static NSString *caspianCountryObjectFieldSms  = @"Sms";
 
 @property (nonatomic, retain) NSArray *countryAndCode;
 @property (nonatomic, copy) NSString *selectedCountryCode;
+@property (nonatomic, copy) NSString *activationCode;
+@property (nonatomic, copy) NSString *password;
 @property (nonatomic, retain) NSOperationQueue *serialCountryListPullQueue;
 @property (nonatomic, retain) NSOperationQueue *internetQueue;
 
@@ -86,12 +89,12 @@ static NSString *caspianCountryObjectFieldSms  = @"Sms";
 @synthesize remoteProvisioningButton;
 
 @synthesize provisionedDomain, provisionedPassword, provisionedUsername;
-
 @synthesize choiceViewLogoImageView;
-
 @synthesize viewTapGestureRecognizer;
-
 @synthesize rememberMeRegisterSwitch;
+
+@synthesize activationCode = _activationCode;
+@synthesize password = _password;
 
 #pragma mark - Properties
 
@@ -109,6 +112,42 @@ static NSString *caspianCountryObjectFieldSms  = @"Sms";
         _internetQueue.name = @"Internet Queue";
     }
     return _internetQueue;
+}
+
+- (void)setActivationCode:(NSString *)activationCode {
+    if (![_activationCode isEqualToString:activationCode]) {
+        [_activationCode release];
+        _activationCode = [activationCode copy];
+        
+        NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+        [userDefaults setValue:activationCode forKey:caspianActivationCodeKey];
+        [userDefaults synchronize];
+    }
+}
+- (NSString *)activationCode {
+    if (!_activationCode) {
+        NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+        _activationCode = [userDefaults objectForKey:caspianActivationCodeKey];
+    }
+    return _activationCode;
+}
+
+- (void)setPassword:(NSString *)password {
+    if (![_password isEqualToString:password]) {
+        [_password release];
+        _password = [password copy];
+        
+        NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+        [userDefaults setValue:password forKey:caspianPasswordKey];
+        [userDefaults synchronize];
+    }
+}
+- (NSString *)password {
+    if (!_password) {
+        NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+        _password = [userDefaults objectForKey:caspianPasswordKey];
+    }
+    return _password;
 }
 
 #pragma mark - Lifecycle Functions
@@ -166,6 +205,10 @@ static NSString *caspianCountryObjectFieldSms  = @"Sms";
     [_countryAndCode release];
     [_serialCountryListPullQueue release];
     [_internetQueue release];
+    
+    [_selectedCountryCode release];
+    [_activationCode release];
+    [_password release];
     
     [_firstNameSignUpField release];
     [_lastNameSignUpField release];
@@ -411,20 +454,20 @@ static UICompositeViewDescription *compositeDescription = nil;
 }
 
 - (void)saveCredentials {
-    NSString *username = @"";
+    NSString *phoneNumber = @"";
     NSString *password = @"";
     
     if (rememberMeRegisterSwitch.isOn) {
         UITextField *usernameTextField = [WizardViewController findTextField:ViewElement_Username view:caspianAccountView];
         UITextField *passwordTextField = [WizardViewController findTextField:ViewElement_Password view:caspianAccountView];
         
-        username = usernameTextField.text;
+        phoneNumber = usernameTextField.text;
         password = passwordTextField.text;
     }
     
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     
-    [userDefaults setObject:username forKey:caspianUsernameKey];
+    [userDefaults setObject:phoneNumber forKey:caspianPhoneNumber];
     [userDefaults setObject:password forKey:caspianPasswordKey];
     
     [userDefaults synchronize];
@@ -436,7 +479,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     
-    usernameTextField.text = [userDefaults objectForKey:caspianUsernameKey];
+    usernameTextField.text = [userDefaults objectForKey:caspianPhoneNumber];
     passwordTextField.text = [userDefaults objectForKey:caspianPasswordKey];
 }
 
@@ -1004,6 +1047,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 }
 
 - (IBAction)onCountinueActivatingTap:(id)sender {
+    [self activateAccountWithCode:self.activationCodeActivateField.text];
 }
 
 #pragma mark - UIAlertViewDelegate
@@ -1302,6 +1346,13 @@ static UICompositeViewDescription *compositeDescription = nil;
     }
 }
 
+- (BOOL)isStatusSuccess:(NSDictionary *)jsonAnswer {
+    NSString *status = jsonAnswer[@"status"];
+    return [status isEqualToString:@"success"];
+}
+
+#pragma mark - Sign Up
+
 - (void)didSelectCountryAtRow:(NSInteger)row {
     NSDictionary *country = [self countryAtIndex:row];
 
@@ -1352,7 +1403,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (void)createAccountForPhoneNumber:(NSString *)phoneNumber firstName:(NSString *)firstName lastName:(NSString *)lastName {
     if (self.selectedCountryCode.length == 0) {
-        [self alertErrorMessage:NSLocalizedString(@"Please, select country first", nil)
+        [self alertErrorMessage:NSLocalizedString(@"Please select country first", nil)
                       withTitle:NSLocalizedString(@"Undefined country", nil)];
     } else {
         [waitView setHidden:NO];
@@ -1369,7 +1420,18 @@ static UICompositeViewDescription *compositeDescription = nil;
             [[LinphoneManager instance] dataFromUrlString:createAccountUrl completionBlock:^(NSDictionary *jsonAnswer) {
                 [[NSOperationQueue mainQueue] addOperationWithBlock:^{
                     [waitView setHidden:YES];
-                    [weakSelf changeView:activateAccountView back:NO animation:YES];
+                    
+                    if ([self isStatusSuccess:jsonAnswer]) {
+                        self.activationCode = jsonAnswer[@"activation_code"];
+                        self.password = jsonAnswer[@"password"];
+                        [weakSelf changeView:activateAccountView back:NO animation:YES];
+                    } else {
+                        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                            [waitView setHidden:YES];
+                            [weakSelf alertErrorMessage:NSLocalizedString(@"Fail", nil)
+                                              withTitle:NSLocalizedString(@"Error creating account", nil)];
+                        }];
+                    }
                 }];
             } errorBlock:^(NSError *error) {
                 [[NSOperationQueue mainQueue] addOperationWithBlock:^{
@@ -1378,6 +1440,23 @@ static UICompositeViewDescription *compositeDescription = nil;
                 }];
             }];
         }];
+    }
+}
+
+#pragma mark - Activation
+
+- (void)activateAccountWithCode:(NSString *)code {
+    if (self.activationCodeActivateField.text.length == 0) {
+        [self alertErrorMessage:NSLocalizedString(@"Please enter activation code first", nil)
+                      withTitle:NSLocalizedString(@"No activation code", nil)];
+    } else if (self.activationCodeActivateField.text.length <= 2) {
+        [self alertErrorMessage:NSLocalizedString(@"Please enter more than two characters", nil)
+                      withTitle:NSLocalizedString(@"Too short activation code", nil)];
+    } else if ([self.activationCodeActivateField.text isEqualToString:self.activationCode]) {
+        [self changeView:createAccountView back:NO animation:YES];
+    } else {
+        [self alertErrorMessage:NSLocalizedString(@"Please enter correct activation code", nil)
+                      withTitle:NSLocalizedString(@"Wrong activation code", nil)];
     }
 }
 
