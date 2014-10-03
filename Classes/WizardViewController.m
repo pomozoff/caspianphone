@@ -270,6 +270,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     self.countryNameSignUpField.inputView = self.countryPickerView;
     self.countryNameSignUpField.inputAccessoryView = self.countryPickerDoneToolbar;
     
+    self.phoneNumberRegisterField.inputAccessoryView = self.numKeypadDoneToolbar;
     self.phoneNumberSignUpField.inputAccessoryView = self.numKeypadDoneToolbar;
     self.activationCodeActivateField.inputAccessoryView = self.numKeypadDoneToolbar;
 }
