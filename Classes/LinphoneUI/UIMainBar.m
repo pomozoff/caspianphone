@@ -111,7 +111,7 @@ static NSString * const kDisappearAnimation = @"disappear";
     {
         UIButton *historyButtonLandscape = (UIButton*) [landscapeView viewWithTag:[historyButton tag]];
         // Set selected+over background: IB lack !
-        [historyButton setBackgroundImage:[UIImage imageNamed:@"history_selected.png"]
+        [historyButton setBackgroundImage:[UIImage imageNamed:@"history-hover.png"]
                                  forState:(UIControlStateHighlighted | UIControlStateSelected)];
 
         // Set selected+over background: IB lack !
@@ -125,7 +125,7 @@ static NSString * const kDisappearAnimation = @"disappear";
     {
         UIButton *contactsButtonLandscape = (UIButton*) [landscapeView viewWithTag:[contactsButton tag]];
         // Set selected+over background: IB lack !
-        [contactsButton setBackgroundImage:[UIImage imageNamed:@"contacts_selected.png"]
+        [contactsButton setBackgroundImage:[UIImage imageNamed:@"contacts-hover.png"]
                                   forState:(UIControlStateHighlighted | UIControlStateSelected)];
 
         // Set selected+over background: IB lack !
@@ -138,7 +138,7 @@ static NSString * const kDisappearAnimation = @"disappear";
     {
         UIButton *dialerButtonLandscape = (UIButton*) [landscapeView viewWithTag:[dialerButton tag]];
         // Set selected+over background: IB lack !
-        [dialerButton setBackgroundImage:[UIImage imageNamed:@"dialer_selected.png"]
+        [dialerButton setBackgroundImage:[UIImage imageNamed:@"dialer-hover.png"]
                                 forState:(UIControlStateHighlighted | UIControlStateSelected)];
 
         // Set selected+over background: IB lack !
@@ -151,7 +151,7 @@ static NSString * const kDisappearAnimation = @"disappear";
     {
         UIButton *settingsButtonLandscape = (UIButton*) [landscapeView viewWithTag:[settingsButton tag]];
         // Set selected+over background: IB lack !
-        [settingsButton setBackgroundImage:[UIImage imageNamed:@"settings_selected.png"]
+        [settingsButton setBackgroundImage:[UIImage imageNamed:@"settings-hover.png"]
                                   forState:(UIControlStateHighlighted | UIControlStateSelected)];
 
         // Set selected+over background: IB lack !
@@ -165,7 +165,7 @@ static NSString * const kDisappearAnimation = @"disappear";
     {
         UIButton *chatButtonLandscape = (UIButton*) [landscapeView viewWithTag:[chatButton tag]];
         // Set selected+over background: IB lack !
-        [chatButton setBackgroundImage:[UIImage imageNamed:@"chat_selected.png"]
+        [chatButton setBackgroundImage:[UIImage imageNamed:@"messages-hover.png"]
                               forState:(UIControlStateHighlighted | UIControlStateSelected)];
 
         // Set selected+over background: IB lack !
