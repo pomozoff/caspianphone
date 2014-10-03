@@ -68,21 +68,24 @@
 
 @property (nonatomic, retain) IBOutlet UITapGestureRecognizer *viewTapGestureRecognizer;
 
-@property (nonatomic, retain) IBOutlet UISwitch *rememberMeSwitch;
+@property (nonatomic, retain) IBOutlet UISwitch *rememberMeRegisterSwitch;
+@property (retain, nonatomic) IBOutlet UITextField *passwordRegisterField;
+@property (retain, nonatomic) IBOutlet UITextField *phoneNumberRegisterField;
+
 @property (nonatomic, retain) IBOutlet UIPickerView *countryPickerView;
-@property (nonatomic, retain) IBOutlet UIToolbar *countryPickerAccessoryView;
-@property (retain, nonatomic) IBOutlet UIToolbar *numKeypadToolbar;
-@property (nonatomic, retain) IBOutlet UILabel *registrationNextStep;
-@property (nonatomic, retain) IBOutlet UISegmentedControl *activateBy;
+@property (nonatomic, retain) IBOutlet UIToolbar *countryPickerDoneToolbar;
+@property (retain, nonatomic) IBOutlet UIToolbar *numKeypadDoneToolbar;
 
-@property (nonatomic, retain) IBOutlet UITextField *countryCode;
-@property (nonatomic, retain) IBOutlet COCTextField *countryName;
-@property (nonatomic, retain) IBOutlet COCTextField *phoneNumber;
-@property (nonatomic, retain) IBOutlet COCTextField *firstName;
-@property (nonatomic, retain) IBOutlet COCTextField *lastName;
-@property (nonatomic, retain) IBOutlet UIButton *continueButton;
+@property (nonatomic, retain) IBOutlet UILabel *registrationNextStepSignUpLabel;
+@property (nonatomic, retain) IBOutlet UITextField *countryCodeSignUpField;
+@property (nonatomic, retain) IBOutlet COCTextField *countryNameSignUpField;
+@property (nonatomic, retain) IBOutlet COCTextField *phoneNumberSignUpField;
+@property (nonatomic, retain) IBOutlet COCTextField *firstNameSignUpField;
+@property (nonatomic, retain) IBOutlet COCTextField *lastNameSignUpField;
+@property (nonatomic, retain) IBOutlet UISegmentedControl *activateBySignUpSegmented;
+@property (nonatomic, retain) IBOutlet UIButton *continueSignUpField;
 
-@property (retain, nonatomic) IBOutlet COCTextField *activationCode;
+@property (retain, nonatomic) IBOutlet COCTextField *activationCodeActivateField;
 
 - (void)reset;
 - (void)fillDefaultValues;

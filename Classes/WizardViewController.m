@@ -91,7 +91,7 @@ static NSString *caspianCountryObjectFieldSms  = @"Sms";
 
 @synthesize viewTapGestureRecognizer;
 
-@synthesize rememberMeSwitch;
+@synthesize rememberMeRegisterSwitch;
 
 #pragma mark - Properties
 
@@ -159,24 +159,26 @@ static NSString *caspianCountryObjectFieldSms  = @"Sms";
     [provisionedUsername release];
     [provisionedPassword release];
     [provisionedDomain release];
-    [rememberMeSwitch release];
+    [rememberMeRegisterSwitch release];
     [_countryPickerView release];
-    [_countryPickerAccessoryView release];
-    [_phoneNumber release];
+    [_countryPickerDoneToolbar release];
+    [_phoneNumberSignUpField release];
     [_countryAndCode release];
     [_serialCountryListPullQueue release];
     [_internetQueue release];
     
-    [_firstName release];
-    [_lastName release];
-    [_countryName release];
-    [_countryCode release];
+    [_firstNameSignUpField release];
+    [_lastNameSignUpField release];
+    [_countryNameSignUpField release];
+    [_countryCodeSignUpField release];
     
-    [_registrationNextStep release];
-    [_continueButton release];
-    [_activateBy release];
-    [_numKeypadToolbar release];
-    [_activationCode release];
+    [_registrationNextStepSignUpLabel release];
+    [_continueSignUpField release];
+    [_activateBySignUpSegmented release];
+    [_numKeypadDoneToolbar release];
+    [_activationCodeActivateField release];
+    [_phoneNumberRegisterField release];
+    [_passwordRegisterField release];
     [super dealloc];
 }
 
@@ -265,11 +267,11 @@ static UICompositeViewDescription *compositeDescription = nil;
         [LinphoneUtils adjustFontSize:provisionedAccountView mult:2.22f];
     }
     
-    self.countryName.inputView = self.countryPickerView;
-    self.countryName.inputAccessoryView = self.countryPickerAccessoryView;
+    self.countryNameSignUpField.inputView = self.countryPickerView;
+    self.countryNameSignUpField.inputAccessoryView = self.countryPickerDoneToolbar;
     
-    self.phoneNumber.inputAccessoryView = self.numKeypadToolbar;
-    self.activationCode.inputAccessoryView = self.numKeypadToolbar;
+    self.phoneNumberSignUpField.inputAccessoryView = self.numKeypadDoneToolbar;
+    self.activationCodeActivateField.inputAccessoryView = self.numKeypadDoneToolbar;
 }
 
 
@@ -411,7 +413,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     NSString *username = @"";
     NSString *password = @"";
     
-    if (rememberMeSwitch.isOn) {
+    if (rememberMeRegisterSwitch.isOn) {
         UITextField *usernameTextField = [WizardViewController findTextField:ViewElement_Username view:caspianAccountView];
         UITextField *passwordTextField = [WizardViewController findTextField:ViewElement_Password view:caspianAccountView];
         
@@ -728,19 +730,19 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
     activeTextField = textField;
-    if (textField == self.countryName && self.countryAndCode.count == 0) {
+    if (textField == self.countryNameSignUpField && self.countryAndCode.count == 0) {
         [self pullCountries];
     }
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
-    if (textField == self.phoneNumber) {
+    if (textField == self.phoneNumberSignUpField) {
         [self checkNextStep];
     }
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
-    if (textField == self.countryName) {
+    if (textField == self.countryNameSignUpField) {
         return NO;
     }
     
@@ -984,12 +986,12 @@ static UICompositeViewDescription *compositeDescription = nil;
 }
 
 - (IBAction)onCancelCountryPickerView:(id)sender {
-    [self.countryName resignFirstResponder];
+    [self.countryNameSignUpField resignFirstResponder];
 }
 
 - (IBAction)onDoneCountryPickerView:(id)sender {
     [self didSelectCountryAtRow:[self.countryPickerView selectedRowInComponent:0]];
-    [self.countryName resignFirstResponder];
+    [self.countryNameSignUpField resignFirstResponder];
 }
 
 - (IBAction)onDoneNumKeypad:(id)sender {
@@ -997,7 +999,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 }
 
 - (IBAction)onContinueCreatingAccountTap:(id)sender {
-    [self createAccountForPhoneNumber:self.phoneNumber.text firstName:self.firstName.text lastName:self.lastName.text];
+    [self createAccountForPhoneNumber:self.phoneNumberSignUpField.text firstName:self.firstNameSignUpField.text lastName:self.lastNameSignUpField.text];
 }
 
 - (IBAction)onCountinueActivatingTap:(id)sender {
@@ -1305,13 +1307,13 @@ static UICompositeViewDescription *compositeDescription = nil;
     self.selectedCountryCode = country[caspianCountryObjectFieldCode];
     NSString *fullCountryCode = [@"+" stringByAppendingString:self.selectedCountryCode != nil ? self.selectedCountryCode : @""];
     
-    self.countryCode.text = self.selectedCountryCode.length > 0 ? fullCountryCode : @"";
-    self.countryName.text = country[caspianCountryObjectFieldName];
+    self.countryCodeSignUpField.text = self.selectedCountryCode.length > 0 ? fullCountryCode : @"";
+    self.countryNameSignUpField.text = country[caspianCountryObjectFieldName];
     
     [self checkNextStep];
     [self activationAvailableForCountry:country];
     
-    [self.countryName resignFirstResponder];
+    [self.countryNameSignUpField resignFirstResponder];
 }
 
 - (NSDictionary *)countryAtIndex:(NSInteger)index {
@@ -1320,31 +1322,31 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (void)checkNextStep {
     BOOL isPhoneNumberValid = NO;
-    if (self.countryCode.text.length > 0) {
-        isPhoneNumberValid = self.phoneNumber.text.length > 0;
-        self.registrationNextStep.text = isPhoneNumberValid ? NSLocalizedString(caspianEnterName, nil) : NSLocalizedString(caspianEnterPhoneNumber, nil);
+    if (self.countryCodeSignUpField.text.length > 0) {
+        isPhoneNumberValid = self.phoneNumberSignUpField.text.length > 0;
+        self.registrationNextStepSignUpLabel.text = isPhoneNumberValid ? NSLocalizedString(caspianEnterName, nil) : NSLocalizedString(caspianEnterPhoneNumber, nil);
     } else {
-        self.registrationNextStep.text = caspianSelectCountry;
+        self.registrationNextStepSignUpLabel.text = caspianSelectCountry;
     }
-    self.continueButton.enabled = isPhoneNumberValid;
+    self.continueSignUpField.enabled = isPhoneNumberValid;
 }
 
 - (void)activationAvailableForCountry:(NSDictionary *)country {
     BOOL isSmsAvailable = [country[caspianCountryObjectFieldSms] boolValue];
     BOOL isCallAvailable = [country[caspianCountryObjectFieldCall] boolValue];
 
-    [self.activateBy setEnabled:isSmsAvailable forSegmentAtIndex:0];
-    [self.activateBy setEnabled:isCallAvailable forSegmentAtIndex:1];
+    [self.activateBySignUpSegmented setEnabled:isSmsAvailable forSegmentAtIndex:0];
+    [self.activateBySignUpSegmented setEnabled:isCallAvailable forSegmentAtIndex:1];
     
     if (isSmsAvailable) {
-        [self.activateBy setSelectedSegmentIndex:0];
+        [self.activateBySignUpSegmented setSelectedSegmentIndex:0];
     } else if (isCallAvailable) {
-        [self.activateBy setSelectedSegmentIndex:1];
+        [self.activateBySignUpSegmented setSelectedSegmentIndex:1];
     } else {
-        [self.activateBy setSelectedSegmentIndex:UISegmentedControlNoSegment];
+        [self.activateBySignUpSegmented setSelectedSegmentIndex:UISegmentedControlNoSegment];
     }
     
-    self.continueButton.enabled = self.continueButton.enabled && (isCallAvailable || isSmsAvailable);
+    self.continueSignUpField.enabled = self.continueSignUpField.enabled && (isCallAvailable || isSmsAvailable);
 }
 
 - (void)createAccountForPhoneNumber:(NSString *)phoneNumber firstName:(NSString *)firstName lastName:(NSString *)lastName {
@@ -1355,11 +1357,11 @@ static UICompositeViewDescription *compositeDescription = nil;
         [waitView setHidden:NO];
         NSString *cleanedPhoneNumber = [[LinphoneManager instance] cleanPhoneNumber:phoneNumber];
         NSString *createAccountUrl = [NSString stringWithFormat:caspianCreateAccountUrl
-                                      , [[LinphoneManager instance] removePrefix:@"+" fromString:self.countryCode.text]
+                                      , [[LinphoneManager instance] removePrefix:@"+" fromString:self.countryCodeSignUpField.text]
                                       , cleanedPhoneNumber
-                                      , self.firstName.text
-                                      , self.lastName.text
-                                      , self.activateBy.selectedSegmentIndex == 0 ? @"sms" : @"call"
+                                      , self.firstNameSignUpField.text
+                                      , self.lastNameSignUpField.text
+                                      , self.activateBySignUpSegmented.selectedSegmentIndex == 0 ? @"sms" : @"call"
                                       ];
         __block WizardViewController *weakSelf = self;
         [self.internetQueue addOperationWithBlock:^{
