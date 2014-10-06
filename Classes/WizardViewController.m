@@ -119,6 +119,8 @@ static NSString *caspianCountryObjectFieldSms  = @"Sms";
         [_activationCode release];
         _activationCode = [activationCode copy];
         
+        NSLog(@"Activation code is: %@", activationCode);
+        
         NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
         [userDefaults setValue:activationCode forKey:caspianActivationCodeKey];
         [userDefaults synchronize];
