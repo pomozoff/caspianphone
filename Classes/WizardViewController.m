@@ -1424,8 +1424,11 @@ static UICompositeViewDescription *compositeDescription = nil;
                     [waitView setHidden:YES];
                     
                     if ([self isStatusSuccess:jsonAnswer]) {
-                        self.activationCode = jsonAnswer[@"activation_code"];
-                        self.password = jsonAnswer[@"password"];
+                        id activationCode = jsonAnswer[@"activation_code"];
+                        id password = jsonAnswer[@"password"];
+                        
+                        self.activationCode = [NSString stringWithFormat:@"%@", activationCode];
+                        self.password = [NSString stringWithFormat:@"%@", password];
                         [weakSelf changeView:activateAccountView back:NO animation:YES];
                     } else {
                         [[NSOperationQueue mainQueue] addOperationWithBlock:^{
