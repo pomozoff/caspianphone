@@ -69,12 +69,12 @@
 @property (nonatomic, retain) IBOutlet UITapGestureRecognizer *viewTapGestureRecognizer;
 
 @property (nonatomic, retain) IBOutlet UISwitch *rememberMeRegisterSwitch;
-@property (retain, nonatomic) IBOutlet UITextField *passwordRegisterField;
-@property (retain, nonatomic) IBOutlet UITextField *phoneNumberRegisterField;
+@property (nonatomic, retain) IBOutlet UITextField *passwordRegisterField;
+@property (nonatomic, retain) IBOutlet UITextField *phoneNumberRegisterField;
 
 @property (nonatomic, retain) IBOutlet UIPickerView *countryPickerView;
 @property (nonatomic, retain) IBOutlet UIToolbar *countryPickerDoneToolbar;
-@property (retain, nonatomic) IBOutlet UIToolbar *numKeypadDoneToolbar;
+@property (nonatomic, retain) IBOutlet UIToolbar *numKeypadDoneToolbar;
 
 @property (nonatomic, retain) IBOutlet UILabel *registrationNextStepSignUpLabel;
 @property (nonatomic, retain) IBOutlet UITextField *countryCodeSignUpField;
@@ -85,7 +85,7 @@
 @property (nonatomic, retain) IBOutlet UISegmentedControl *activateBySignUpSegmented;
 @property (nonatomic, retain) IBOutlet UIButton *continueSignUpField;
 
-@property (retain, nonatomic) IBOutlet COCTextField *activationCodeActivateField;
+@property (nonatomic, retain) IBOutlet COCTextField *activationCodeActivateField;
 
 - (void)reset;
 - (void)fillDefaultValues;
