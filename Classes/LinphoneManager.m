@@ -38,6 +38,8 @@
 
 #define LINPHONE_LOGS_MAX_ENTRY 5000
 
+NSInteger caspianErrorCode = 480;
+
 static void audioRouteChangeListenerCallback (
 											  void                   *inUserData,                                 // 1
 											  AudioSessionPropertyID inPropertyID,                                // 2
@@ -65,7 +67,6 @@ NSString *const kLinphoneGlobalStateUpdate = @"LinphoneGlobalStateUpdate";
 NSString *const kLinphoneNotifyReceived = @"LinphoneNotifyReceived";
 
 static NSString *caspianErrorDomain = @"uk.co.onecallcaspian.phone";
-static NSInteger caspianErrorCode = 480;
 
 const int kLinphoneAudioVbrCodecDefaultBitrate=36; /*you can override this from linphonerc or linphonerc-factory*/
 

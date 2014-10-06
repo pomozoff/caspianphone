@@ -55,6 +55,8 @@ static NSString *caspianCountryObjectFieldName = @"Name";
 static NSString *caspianCountryObjectFieldCall = @"Call";
 static NSString *caspianCountryObjectFieldSms  = @"Sms";
 
+extern NSInteger caspianErrorCode;
+
 @interface WizardViewController ()
 
 @property (nonatomic, retain) UIView *dummyView;
@@ -1450,7 +1452,21 @@ static UICompositeViewDescription *compositeDescription = nil;
             } errorBlock:^(NSError *error) {
                 [[NSOperationQueue mainQueue] addOperationWithBlock:^{
                     [waitView setHidden:YES];
-                    [weakSelf alertErrorMessage:error.localizedDescription withTitle:NSLocalizedString(@"Error creating account", nil)];
+                    NSString *errorTitle = @"";
+                    NSString *errorMessage = @"";
+
+                    BOOL isSmsActivationEnabled = self.activateBySignUpSegmented.selectedSegmentIndex == 0;
+                    if (isSmsActivationEnabled && error.code == caspianErrorCode) {
+                        errorTitle = NSLocalizedString(@"Activation by sms failed", nil);
+                        errorMessage = NSLocalizedString(@"Try to activate your account by call", nil);
+                        
+                        self.activateBySignUpSegmented.selectedSegmentIndex = 1;
+                    } else {
+                        errorTitle = NSLocalizedString(@"Error creating account", nil);
+                        errorMessage = error.localizedDescription;
+                    }
+                    
+                    [weakSelf alertErrorMessage:errorMessage withTitle:errorTitle];
                 }];
             }];
         }];
