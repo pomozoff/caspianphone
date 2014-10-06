@@ -475,13 +475,13 @@ static UICompositeViewDescription *compositeDescription = nil;
 }
 
 - (void)fillCredentials {
-    UITextField *usernameTextField = [WizardViewController findTextField:ViewElement_Username view:caspianAccountView];
-    UITextField *passwordTextField = [WizardViewController findTextField:ViewElement_Password view:caspianAccountView];
-    
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     
-    usernameTextField.text = [userDefaults objectForKey:caspianPhoneNumber];
-    passwordTextField.text = [userDefaults objectForKey:caspianPasswordKey];
+    NSString *phoneNumber = [userDefaults objectForKey:caspianPhoneNumber];
+    NSString *password = [userDefaults objectForKey:caspianPasswordKey];
+
+    self.phoneNumberRegisterField.text = phoneNumber;
+    self.passwordRegisterField.text = password;
 }
 
 - (void)changeView:(UIView *)view back:(BOOL)back animation:(BOOL)animation {
