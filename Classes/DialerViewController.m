@@ -344,9 +344,19 @@ static UICompositeViewDescription *compositeDescription = nil;
     [ContactSelection setSipFilter:nil];
     [ContactSelection setNameOrEmailFilter:nil];
     [ContactSelection enableEmailFilter:FALSE];
+    /*
     ContactsViewController *controller = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[ContactsViewController compositeViewDescription] push:TRUE], ContactsViewController);
     if(controller != nil) {
 
+    }
+    */
+    ContactDetailsViewController *controller = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[ContactDetailsViewController compositeViewDescription] push:TRUE], ContactDetailsViewController);
+    if(controller != nil) {
+        if(addressField.text.length == 0) {
+            [controller newContact];
+        } else {
+            [controller newContact:addressField.text];
+        }
     }
 }
 
