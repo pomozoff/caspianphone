@@ -91,6 +91,7 @@
 @property (retain, nonatomic) IBOutlet COCTextField *passwordFinishField;
 
 - (void)reset;
+- (void)resetToDefaults;
 - (void)fillDefaultValues;
 
 - (IBAction)onStartClick:(id)sender;

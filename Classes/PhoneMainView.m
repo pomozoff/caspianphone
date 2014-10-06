@@ -448,6 +448,13 @@ static RootViewManager* rootViewManagerInstance = nil;
     [self updateApplicationBadgeNumber]; // Update Badge at startup
 }
 
+- (void)resetToDefaults {
+    WizardViewController *controller = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[WizardViewController compositeViewDescription]], WizardViewController);
+    if(controller != nil) {
+        [controller resetToDefaults];
+    }
+}
+
 - (void)updateApplicationBadgeNumber {
     int count = 0;
     count += linphone_core_get_missed_calls_count([LinphoneManager getLc]);

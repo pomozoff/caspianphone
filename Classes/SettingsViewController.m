@@ -766,6 +766,8 @@ static UICompositeViewDescription *compositeDescription = nil;
         [[UIDevice currentDevice] _setBatteryState:UIDeviceBatteryStateUnplugged];
         [[UIDevice currentDevice] _setBatteryLevel:0.01f];
         [[NSNotificationCenter defaultCenter] postNotificationName:UIDeviceBatteryLevelDidChangeNotification object:self];
+    } else  if([key isEqual:@"reset_button"]) {
+        [[PhoneMainView instance] resetToDefaults];
     }
 #endif
     if([key isEqual:@"console_button"]) {

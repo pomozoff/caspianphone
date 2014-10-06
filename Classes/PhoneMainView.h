@@ -82,6 +82,7 @@
 - (void)fullScreen:(BOOL)enabled;
 - (void)updateStatusBar:(UICompositeViewDescription*)to_view;
 - (void)startUp;
+- (void)resetToDefaults;
 - (void)displayIncomingCall:(LinphoneCall*) call;
 - (void)setVolumeHidden:(BOOL)hidden;
 

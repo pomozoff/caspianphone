@@ -258,6 +258,14 @@
 		</dict>
 		<dict>
 			<key>Key</key>
+			<string>reset_button</string>
+			<key>Title</key>
+			<string>Reset</string>
+			<key>Type</key>
+			<string>IASKButtonSpecifier</string>
+		</dict>
+		<dict>
+			<key>Key</key>
 			<string>release_button</string>
 			<key>Title</key>
 			<string>Release</string>
