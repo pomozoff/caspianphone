@@ -308,8 +308,10 @@ struct codec_name_pref_table codec_pref_table[]={
 		[LinphoneLogger logc:LinphoneLoggerError format:"cannot un register route change handler [%ld]", lStatus];
 	}
 
+    /*
 	[[NSNotificationCenter defaultCenter] removeObserver:self forKeyPath:kLinphoneGlobalStateUpdate];
 	[[NSNotificationCenter defaultCenter] removeObserver:self forKeyPath:kLinphoneConfiguringStateUpdate];
+    */
 
 
 	[photoLibrary release];
@@ -1450,7 +1452,12 @@ static BOOL libStarted = FALSE;
 	//just in case
 	[self removeCTCallCenterCb];
 
-	[[NSNotificationCenter defaultCenter] removeObserver:self];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    /*
+    [[NSNotificationCenter defaultCenter] removeObserver:self forKeyPath:kLinphoneConfiguringStateUpdate];
+    [[NSNotificationCenter defaultCenter] removeObserver:self forKeyPath:kLinphoneGlobalStateUpdate];
+	[[NSNotificationCenter defaultCenter] removeObserver:self forKeyPath:AVAudioSessionInterruptionNotification];
+    */
 
 	if (theLinphoneCore != nil) { //just in case application terminate before linphone core initialization
 		[LinphoneLogger logc:LinphoneLoggerLog format:"Destroy linphonecore"];
