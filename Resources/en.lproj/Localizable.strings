@@ -143,7 +143,7 @@
 "Incoming call" = "Incoming call";
 
 /* No comment provided by engineer. */
-"Invalid SIP address" = "Invalid SIP address";
+"Invalid SIP address" = "Invalid phone number";
 
 /* No comment provided by engineer. */
 "Last name" = "Last name";
@@ -242,10 +242,10 @@
 "Show" = "Show";
 
 /* No comment provided by engineer. */
-"SIP address" = "SIP address";
+"SIP address" = "Phone number";
 
 /* No comment provided by engineer. */
-"SIP addresses" = "SIP addresses";
+"SIP addresses" = "Phone numbers";
 
 /* No comment provided by engineer. */
 "SIP server unreachable" = "SIP server unreachable";
