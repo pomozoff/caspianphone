@@ -898,11 +898,11 @@ static void linphone_iphone_registration_state(LinphoneCore *lc, LinphoneProxyCo
 		if(contact) {
 			address = [FastAddressBook getContactDisplayName:contact];
 		} else {
-			if ([[LinphoneManager instance] lpConfigBoolForKey:@"show_contacts_emails_preference"] == true) {
+			//if ([[LinphoneManager instance] lpConfigBoolForKey:@"show_contacts_emails_preference"] == true) {
 				LinphoneAddress *linphoneAddress = linphone_address_new([address cStringUsingEncoding:[NSString defaultCStringEncoding]]);
 				address = linphoneAddress == NULL ? address : [NSString stringWithUTF8String:linphone_address_get_username(linphoneAddress)];
 				linphone_address_destroy(linphoneAddress);
-			}
+			//}
 		}
 		if(address == nil) {
 			address = @"Unknown";
