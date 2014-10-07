@@ -50,6 +50,14 @@
 	[self reloadData];
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    CGRect currentFrame = self.view.frame;
+    if (currentFrame.origin.y < 0) {
+        self.view.frame = CGRectMake(currentFrame.origin.x, 80, currentFrame.size.width, currentFrame.size.height);
+    }
+}
+
 #pragma mark -
 
 - (void)clearMessageList {
