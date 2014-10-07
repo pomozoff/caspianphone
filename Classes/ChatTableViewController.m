@@ -123,6 +123,7 @@ static int sorted_history_comparison(LinphoneChatRoom *to_insert, LinphoneChatRo
     }
 }
 
+/*
 - (UITableViewCellEditingStyle)tableView:(UITableView *)aTableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
     // Detemine if it's in editing mode
     if (self.editing) {
@@ -130,6 +131,7 @@ static int sorted_history_comparison(LinphoneChatRoom *to_insert, LinphoneChatRo
     }
     return UITableViewCellEditingStyleNone;
 }
+*/
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath  {
     if(editingStyle == UITableViewCellEditingStyleDelete) {
@@ -144,6 +146,10 @@ static int sorted_history_comparison(LinphoneChatRoom *to_insert, LinphoneChatRo
         [tableView endUpdates];
         [[NSNotificationCenter defaultCenter] postNotificationName:kLinphoneTextReceived object:self];
     }
+}
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
 }
 
 @end
