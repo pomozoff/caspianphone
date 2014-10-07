@@ -52,8 +52,8 @@ static void sync_address_book (ABAddressBookRef addressBook, CFDictionaryRef inf
 
 - (ABRecordRef)getContact:(NSString*)address {
     @synchronized (addressBookMap){
-        return (ABRecordRef)[addressBookMap objectForKey:address];   
-    } 
+        return (ABRecordRef)[addressBookMap objectForKey:[FastAddressBook takePhoneNumberFromAddress:address]];
+    }
 }
 
 + (BOOL)isSipURI:(NSString*)address {
@@ -103,7 +103,29 @@ static void sync_address_book (ABAddressBookRef addressBook, CFDictionaryRef inf
                                         withString:@"" 
                                            options:0
                                              range:NSMakeRange(0, [lNormalizedAddress length])];
+    [lNormalizedAddress replaceOccurrencesOfString:@"+"
+                                        withString:@""
+                                           options:0
+                                             range:NSMakeRange(0, [lNormalizedAddress length])];
+    [lNormalizedAddress replaceOccurrencesOfString:@"00"
+                                        withString:@""
+                                           options:0
+                                             range:NSMakeRange(0, 2)];
     return [FastAddressBook appendCountryCodeIfPossible:lNormalizedAddress];
+}
+
++ (NSString *)takePhoneNumberFromAddress:(NSString*)address {
+    NSMutableString* lNormalizedAddress = [NSMutableString stringWithString:address];
+    [lNormalizedAddress replaceOccurrencesOfString:@"sip:"
+                                        withString:@""
+                                           options:0
+                                             range:NSMakeRange(0, [lNormalizedAddress length])];
+    [lNormalizedAddress replaceOccurrencesOfString:@"sips:"
+                                        withString:@""
+                                           options:0
+                                             range:NSMakeRange(0, [lNormalizedAddress length])];
+    NSRange range = [lNormalizedAddress rangeOfString:@"@"];
+    return range.location != NSNotFound ? [lNormalizedAddress substringToIndex:range.location] : lNormalizedAddress;
 }
 
 + (BOOL)isAuthorized {
