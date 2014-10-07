@@ -195,7 +195,7 @@ static void sync_address_book (ABAddressBookRef addressBook, CFDictionaryRef inf
     [tableController setContact:contact];
     if ([[LinphoneManager instance] lpConfigBoolForKey:@"show_contacts_emails_preference"] == true) {
         LinphoneAddress *linphoneAddress = linphone_address_new([address cStringUsingEncoding:[NSString defaultCStringEncoding]]);
-        NSString *username = [NSString stringWithUTF8String:linphone_address_get_username(linphoneAddress)];
+        NSString *username = linphoneAddress == NULL ? address : [NSString stringWithUTF8String:linphone_address_get_username(linphoneAddress)];
         if ([username rangeOfString:@"@"].length > 0) {
             [tableController addEmailField:username];
         } else {

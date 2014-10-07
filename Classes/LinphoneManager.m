@@ -900,7 +900,7 @@ static void linphone_iphone_registration_state(LinphoneCore *lc, LinphoneProxyCo
 		} else {
 			if ([[LinphoneManager instance] lpConfigBoolForKey:@"show_contacts_emails_preference"] == true) {
 				LinphoneAddress *linphoneAddress = linphone_address_new([address cStringUsingEncoding:[NSString defaultCStringEncoding]]);
-				address = [NSString stringWithUTF8String:linphone_address_get_username(linphoneAddress)];
+				address = linphoneAddress == NULL ? address : [NSString stringWithUTF8String:linphone_address_get_username(linphoneAddress)];
 				linphone_address_destroy(linphoneAddress);
 			}
 		}
