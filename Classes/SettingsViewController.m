@@ -743,6 +743,8 @@ static UICompositeViewDescription *compositeDescription = nil;
     [hiddenKeys addObject:@"amr_preference"];
     [hiddenKeys addObject:@"ilbc_preference"];
     [hiddenKeys addObject:@"aaceld_44k_preference"];
+    // Video
+    [hiddenKeys addObject:@"vp8_preference"];
     
     return hiddenKeys;
 }
