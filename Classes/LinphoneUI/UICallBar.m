@@ -155,15 +155,15 @@
     {
         UIButton *speakerButtonLandscape = (UIButton*) [landscapeView viewWithTag:[speakerButton tag]];
         // Set selected+disabled background: IB lack !
-        [speakerButton setBackgroundImage:[UIImage imageNamed:@"speaker_on_disabled.png"]
+        [speakerButton setBackgroundImage:[UIImage imageNamed:@"speaker-on-button.png"]
                                  forState:(UIControlStateDisabled | UIControlStateSelected)];
-        [speakerButtonLandscape setBackgroundImage:[UIImage imageNamed:@"speaker_on_disabled_landscape.png"]
+        [speakerButtonLandscape setBackgroundImage:[UIImage imageNamed:@"speaker-on-button.png"]
                                           forState:(UIControlStateDisabled | UIControlStateSelected)];
         
         // Set selected+over background: IB lack !
-        [speakerButton setBackgroundImage:[UIImage imageNamed:@"speaker_on_over.png"]
+        [speakerButton setBackgroundImage:[UIImage imageNamed:@"speaker-on-button.png"]
                                  forState:(UIControlStateHighlighted | UIControlStateSelected)];
-        [speakerButtonLandscape setBackgroundImage:[UIImage imageNamed:@"sspeaker_on_over_landscape.png"]
+        [speakerButtonLandscape setBackgroundImage:[UIImage imageNamed:@"speaker-on-button.png"]
                                           forState:(UIControlStateHighlighted | UIControlStateSelected)];
         
         [LinphoneUtils buttonFixStates:speakerButton];
@@ -185,15 +185,15 @@
     {
         UIButton *microButtonLandscape = (UIButton*) [landscapeView viewWithTag:[microButton tag]];
         // Set selected+disabled background: IB lack !
-        [microButton setBackgroundImage:[UIImage imageNamed:@"micro_on_disabled.png"]
+        [microButton setBackgroundImage:[UIImage imageNamed:@"micro-on-button.png"]
                                forState:(UIControlStateDisabled | UIControlStateSelected)];
-        [microButtonLandscape setBackgroundImage:[UIImage imageNamed:@"micro_on_disabled_landscape.png"]
+        [microButtonLandscape setBackgroundImage:[UIImage imageNamed:@"micro-on-button.png"]
                                         forState:(UIControlStateDisabled | UIControlStateSelected)];
         
         // Set selected+over background: IB lack !
-        [microButton setBackgroundImage:[UIImage imageNamed:@"micro_on_over.png"]
+        [microButton setBackgroundImage:[UIImage imageNamed:@"micro-on-button.png"]
                                forState:(UIControlStateHighlighted | UIControlStateSelected)];
-        [microButtonLandscape setBackgroundImage:[UIImage imageNamed:@"micro_on_over_landscape.png"]
+        [microButtonLandscape setBackgroundImage:[UIImage imageNamed:@"micro-on-button.png"]
                                         forState:(UIControlStateHighlighted | UIControlStateSelected)];
         
         [LinphoneUtils buttonFixStates:microButton];
@@ -213,6 +213,7 @@
     }
     
     {
+        /*
         UIButton *pauseButtonLandscape = (UIButton*) [landscapeView viewWithTag:[pauseButton tag]];
         // Set selected+over background: IB lack !
         [pauseButton setBackgroundImage:[UIImage imageNamed:@"pause_on_over.png"]
@@ -222,6 +223,7 @@
         
         [LinphoneUtils buttonFixStates:pauseButton];
         [LinphoneUtils buttonFixStates:pauseButtonLandscape];
+        */
     }
     
     {
