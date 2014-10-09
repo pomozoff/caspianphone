@@ -316,11 +316,12 @@ static UICompositeViewDescription *compositeDescription = nil;
     
     self.countryNameSignUpField.inputView = self.countryPickerView;
     self.countryNameSignUpField.inputAccessoryView = self.countryPickerDoneToolbar;
+    self.phoneNumberSignUpField.inputAccessoryView = self.phoneNumberNextToolbar;
+    
     self.countryNameForgotPasswordField.inputView = self.countryPickerView;
     self.countryNameForgotPasswordField.inputAccessoryView = self.countryPickerDoneToolbar;
     
     self.phoneNumberRegisterField.inputAccessoryView = self.numKeypadDoneToolbar;
-    self.phoneNumberSignUpField.inputAccessoryView = self.phoneNumberNextToolbar;
     self.activationCodeActivateField.inputAccessoryView = self.numKeypadDoneToolbar;
     self.passwordFinishField.inputView = self.dummyView;
     self.phoneNumberForgotPasswordField.inputAccessoryView = self.numKeypadDoneToolbar;
@@ -1060,7 +1061,11 @@ static UICompositeViewDescription *compositeDescription = nil;
 }
 
 - (IBAction)onContinueCreatingAccountTap:(id)sender {
-    [self createAccountForPhoneNumber:self.phoneNumberSignUpField.text firstName:self.firstNameSignUpField.text lastName:self.lastNameSignUpField.text];
+    [self createAccountForPhoneNumber:self.phoneNumberSignUpField.text
+                          countryCode:self.countryCodeSignUpField.text
+                            firstName:self.firstNameSignUpField.text
+                             lastName:self.lastNameSignUpField.text
+                        activateBySms:self.activateBySignUpSegmented.selectedSegmentIndex == 0];
 }
 
 - (IBAction)onCountinueActivatingTap:(id)sender {
@@ -1394,6 +1399,11 @@ static UICompositeViewDescription *compositeDescription = nil;
     }
     return code.length > 0;
 }
+
+- (void)switchToActivationByCall {
+    self.activateBySignUpSegmented.selectedSegmentIndex = 1;
+}
+
 #pragma mark - Sign Up
 
 - (void)didSelectCountryAtRow:(NSInteger)row {
@@ -1448,19 +1458,20 @@ static UICompositeViewDescription *compositeDescription = nil;
     self.continueSignUpField.enabled = self.continueSignUpField.enabled && (isCallAvailable || isSmsAvailable);
 }
 
-- (void)createAccountForPhoneNumber:(NSString *)phoneNumber firstName:(NSString *)firstName lastName:(NSString *)lastName {
-    if (self.selectedCountryCode.length == 0) {
-        [self alertErrorMessage:NSLocalizedString(@"Please select country first", nil)
-                      withTitle:NSLocalizedString(@"Undefined country", nil)];
-    } else {
+- (void)createAccountForPhoneNumber:(NSString *)phoneNumber
+                        countryCode:(NSString *)countryCode
+                          firstName:(NSString *)firstName
+                           lastName:(NSString *)lastName
+                      activateBySms:(BOOL)activateBySms {
+    if ([self checkCountryCode:countryCode]) {
         [waitView setHidden:NO];
         NSString *cleanedPhoneNumber = [[LinphoneManager instance] cleanPhoneNumber:phoneNumber];
         NSString *createAccountUrl = [NSString stringWithFormat:caspianCreateAccountUrl
-                                      , [[LinphoneManager instance] removePrefix:@"+" fromString:self.countryCodeSignUpField.text]
+                                      , [[LinphoneManager instance] removePrefix:@"+" fromString:countryCode]
                                       , cleanedPhoneNumber
-                                      , self.firstNameSignUpField.text
-                                      , self.lastNameSignUpField.text
-                                      , self.activateBySignUpSegmented.selectedSegmentIndex == 0 ? @"sms" : @"call"
+                                      , firstName
+                                      , lastName
+                                      , activateBySms ? @"sms" : @"call"
                                       ];
         __block WizardViewController *weakSelf = self;
         [self.internetQueue addOperationWithBlock:^{
@@ -1468,9 +1479,9 @@ static UICompositeViewDescription *compositeDescription = nil;
                 [[NSOperationQueue mainQueue] addOperationWithBlock:^{
                     [waitView setHidden:YES];
                     
-                    if ([self isStatusSuccess:jsonAnswer]) {
+                    if ([weakSelf isStatusSuccess:jsonAnswer]) {
                         id activationCode = jsonAnswer[@"activation_code"];
-                        self.activationCode = [NSString stringWithFormat:@"%@", activationCode];
+                        weakSelf.activationCode = [NSString stringWithFormat:@"%@", activationCode];
                         
                         [weakSelf changeView:activateAccountView back:NO animation:YES];
                     } else {
@@ -1485,12 +1496,11 @@ static UICompositeViewDescription *compositeDescription = nil;
                     NSString *errorTitle = @"";
                     NSString *errorMessage = @"";
 
-                    BOOL isSmsActivationEnabled = self.activateBySignUpSegmented.selectedSegmentIndex == 0;
-                    if (isSmsActivationEnabled && error.code == caspianErrorCode) {
+                    if (activateBySms && error.code == caspianErrorCode) {
                         errorTitle = NSLocalizedString(@"Activation by sms failed", nil);
                         errorMessage = NSLocalizedString(@"Try to activate your account by call", nil);
                         
-                        self.activateBySignUpSegmented.selectedSegmentIndex = 1;
+                        [weakSelf switchToActivationByCall];
                     } else {
                         errorTitle = NSLocalizedString(@"Error creating account", nil);
                         errorMessage = error.localizedDescription;
@@ -1505,47 +1515,40 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 #pragma mark - Activation
 
-- (void)activateAccountWithCode:(NSString *)code {
-    if (self.activationCodeActivateField.text.length == 0) {
+- (void)activateAccountWithCode:(NSString *)userInputActivationCode {
+    if (userInputActivationCode.length == 0) {
         [self alertErrorMessage:NSLocalizedString(@"Please enter activation code first", nil)
                       withTitle:NSLocalizedString(@"No activation code", nil)];
-    } else if (self.activationCodeActivateField.text.length <= 2) {
+    } else if (userInputActivationCode.length <= 2) {
         [self alertErrorMessage:NSLocalizedString(@"Please enter more than two characters", nil)
                       withTitle:NSLocalizedString(@"Too short activation code", nil)];
-    } else if ([self.activationCodeActivateField.text isEqualToString:self.activationCode]) {
+    } else if ([userInputActivationCode isEqualToString:self.activationCode]) {
         [waitView setHidden:NO];
-        NSString *confirmCodeUrl = [NSString stringWithFormat:caspianConfirmActivationCodeUrl
-                                      , self.activationCodeActivateField.text
-                                      ];
+        NSString *confirmCodeUrl = [NSString stringWithFormat:caspianConfirmActivationCodeUrl, userInputActivationCode];
         __block WizardViewController *weakSelf = self;
         [self.internetQueue addOperationWithBlock:^{
             [[LinphoneManager instance] dataFromUrlString:confirmCodeUrl completionBlock:^(NSDictionary *jsonAnswer) {
                 [[NSOperationQueue mainQueue] addOperationWithBlock:^{
                     [waitView setHidden:YES];
                     
-                    if ([self isStatusSuccess:jsonAnswer]) {
+                    if ([weakSelf isStatusSuccess:jsonAnswer]) {
                         id password = jsonAnswer[@"password"];
-                        self.password = [NSString stringWithFormat:@"%@", password];
+                        weakSelf.password = [NSString stringWithFormat:@"%@", password];
 
                         id phoneNumber = jsonAnswer[@"phone_number"];
-                        self.phoneNumber = [NSString stringWithFormat:@"%@", phoneNumber];
+                        weakSelf.phoneNumber = [NSString stringWithFormat:@"%@", phoneNumber];
 
                         [weakSelf changeView:passwordReceivedView back:NO animation:YES];
                     } else {
-                        NSString *errorTitle = NSLocalizedString(@"Error creating account", nil);
-                        NSString *errorMessage = NSLocalizedString(@"Fail", nil);
-
-                        [weakSelf alertErrorMessage:errorMessage withTitle:errorTitle];
+                        [weakSelf alertErrorMessage:NSLocalizedString(@"Fail", nil)
+                                          withTitle:NSLocalizedString(@"Error activating account", nil)];
                     }
                 }];
             } errorBlock:^(NSError *error) {
                 [[NSOperationQueue mainQueue] addOperationWithBlock:^{
                     [waitView setHidden:YES];
-
-                    NSString *errorTitle = NSLocalizedString(@"Error creating account", nil);
-                    NSString *errorMessage = error.localizedDescription;
-                    
-                    [weakSelf alertErrorMessage:errorMessage withTitle:errorTitle];
+                    [weakSelf alertErrorMessage:error.localizedDescription
+                                      withTitle:NSLocalizedString(@"Error activating account", nil)];
                 }];
             }];
         }];
