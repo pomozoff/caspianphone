@@ -257,6 +257,8 @@
 		2636608C19E6A38900D72171 /* play.png in Resources */ = {isa = PBXBuildFile; fileRef = 2636608A19E6A38900D72171 /* play.png */; };
 		2636608F19E6A45700D72171 /* dialer-button_hover.png in Resources */ = {isa = PBXBuildFile; fileRef = 2636608D19E6A45700D72171 /* dialer-button_hover.png */; };
 		2636609019E6A45700D72171 /* dialer-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 2636608E19E6A45700D72171 /* dialer-button.png */; };
+		2636609319E6B0BD00D72171 /* submit.png in Resources */ = {isa = PBXBuildFile; fileRef = 2636609119E6B0BD00D72171 /* submit.png */; };
+		2636609419E6B0BD00D72171 /* submit@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2636609219E6B0BD00D72171 /* submit@2x.png */; };
 		2659D6EF19E66A3600D70395 /* NSMutableArray+SWUtilityButtons.m in Sources */ = {isa = PBXBuildFile; fileRef = 2659D6E419E66A3600D70395 /* NSMutableArray+SWUtilityButtons.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		2659D6F019E66A3600D70395 /* SWCellScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2659D6E619E66A3600D70395 /* SWCellScrollView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		2659D6F119E66A3600D70395 /* SWLongPressGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2659D6E819E66A3600D70395 /* SWLongPressGestureRecognizer.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -1804,6 +1806,8 @@
 		2636608A19E6A38900D72171 /* play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play.png; sourceTree = "<group>"; };
 		2636608D19E6A45700D72171 /* dialer-button_hover.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dialer-button_hover.png"; sourceTree = "<group>"; };
 		2636608E19E6A45700D72171 /* dialer-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dialer-button.png"; sourceTree = "<group>"; };
+		2636609119E6B0BD00D72171 /* submit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = submit.png; sourceTree = "<group>"; };
+		2636609219E6B0BD00D72171 /* submit@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "submit@2x.png"; sourceTree = "<group>"; };
 		2659D6E319E66A3600D70395 /* NSMutableArray+SWUtilityButtons.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+SWUtilityButtons.h"; sourceTree = "<group>"; };
 		2659D6E419E66A3600D70395 /* NSMutableArray+SWUtilityButtons.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+SWUtilityButtons.m"; sourceTree = "<group>"; };
 		2659D6E519E66A3600D70395 /* SWCellScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWCellScrollView.h; sourceTree = "<group>"; };
@@ -3114,6 +3118,8 @@
 				2636608219E6807200D72171 /* speaker-on-button.png */,
 				261FABB719CC562F00CFE4AA /* star-hover.png */,
 				261FABB819CC562F00CFE4AA /* star.png */,
+				2636609119E6B0BD00D72171 /* submit.png */,
+				2636609219E6B0BD00D72171 /* submit@2x.png */,
 			);
 			name = "images caspian";
 			path = "Resources/images caspian";
@@ -4238,6 +4244,7 @@
 				D3F83F641582223B00336684 /* numpad_eight_default.png in Resources */,
 				261FABDD19D0284B00CFE4AA /* dialer.png in Resources */,
 				D3F83F661582223B00336684 /* numpad_eight_over.png in Resources */,
+				2636609419E6B0BD00D72171 /* submit@2x.png in Resources */,
 				26DFD66719BF2F3400D1395A /* onecall_icon_120.png in Resources */,
 				D3F83F681582223B00336684 /* numpad_nine_default.png in Resources */,
 				D3F83F6A1582223B00336684 /* numpad_nine_over.png in Resources */,
@@ -4579,6 +4586,7 @@
 				D3A74F2C15C69392001500B9 /* pause_on_over~ipad.png in Resources */,
 				D3A74F2E15C69392001500B9 /* settings_default_landscape~ipad.png in Resources */,
 				D3A74F3015C69392001500B9 /* settings_default~ipad.png in Resources */,
+				2636609319E6B0BD00D72171 /* submit.png in Resources */,
 				D3A74F3215C69392001500B9 /* settings_over_landscape~ipad.png in Resources */,
 				261FABA619CC54CB00CFE4AA /* 2.png in Resources */,
 				261FABB119CC54CB00CFE4AA /* 7-hover.png in Resources */,

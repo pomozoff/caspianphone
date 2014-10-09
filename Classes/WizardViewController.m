@@ -49,6 +49,7 @@ static NSString *caspianEnterName = @"Enter First and Last Names";
 static NSString *caspianCountryListUrl = @"http://onecallcaspian.co.uk/mobile/country2";
 static NSString *caspianCreateAccountUrl = @"http://onecallcaspian.co.uk/mobile/create?phone_code=%@&phone_number=%@&firstname=%@&lastname=%@&activation_way=%@";
 static NSString *caspianConfirmActivationCodeUrl = @"http://onecallcaspian.co.uk/mobile/confirm?code=%@";
+static NSString *caspianForgotPasswordUrl = @"http://onecallcaspian.co.uk/mobile/forgotPassword?phone_code=%@&phone_number=%@";
 
 static NSString *caspianCountriesListTopKey = @"Countries";
 static NSString *caspianCountryObjectFieldCode = @"Code";
@@ -221,6 +222,10 @@ extern NSInteger caspianErrorCode;
     [_passwordFinishField release];
     [_phoneNumberNextToolbar release];
     
+    [_countryCodeForgotPasswordField release];
+    [_countryNameForgotPasswordField release];
+    [_phoneNumberForgotPasswordField release];
+    
     [_dummyView release];
     
     [super dealloc];
@@ -311,11 +316,14 @@ static UICompositeViewDescription *compositeDescription = nil;
     
     self.countryNameSignUpField.inputView = self.countryPickerView;
     self.countryNameSignUpField.inputAccessoryView = self.countryPickerDoneToolbar;
+    self.countryNameForgotPasswordField.inputView = self.countryPickerView;
+    self.countryNameForgotPasswordField.inputAccessoryView = self.countryPickerDoneToolbar;
     
     self.phoneNumberRegisterField.inputAccessoryView = self.numKeypadDoneToolbar;
     self.phoneNumberSignUpField.inputAccessoryView = self.phoneNumberNextToolbar;
     self.activationCodeActivateField.inputAccessoryView = self.numKeypadDoneToolbar;
     self.passwordFinishField.inputView = self.dummyView;
+    self.phoneNumberForgotPasswordField.inputAccessoryView = self.numKeypadDoneToolbar;
 }
 
 
@@ -1067,6 +1075,12 @@ static UICompositeViewDescription *compositeDescription = nil;
 }
 
 - (IBAction)onForgotPasswordTap:(id)sender {
+    [self changeView:forgotPasswordView back:NO animation:YES];
+}
+
+- (IBAction)onSubmitForgotPasswordTap:(id)sender {
+    [self recoverPasswordForPhoneNumber:self.phoneNumberForgotPasswordField.text
+                         andCountryCode:self.countryCodeForgotPasswordField.text];
 }
 
 #pragma mark - UIAlertViewDelegate
@@ -1335,6 +1349,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 -(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
     [self didSelectCountryAtRow:row];
     [self.phoneNumberSignUpField becomeFirstResponder];
+    [self.phoneNumberForgotPasswordField becomeFirstResponder];
 }
 
 #pragma mark - Private
@@ -1372,6 +1387,13 @@ static UICompositeViewDescription *compositeDescription = nil;
     return [status isEqualToString:@"success"];
 }
 
+- (BOOL)checkCountryCode:(NSString *)code {
+    if (code.length == 0) {
+        [self alertErrorMessage:NSLocalizedString(@"Please select country first", nil)
+                      withTitle:NSLocalizedString(@"Undefined country", nil)];
+    }
+    return code.length > 0;
+}
 #pragma mark - Sign Up
 
 - (void)didSelectCountryAtRow:(NSInteger)row {
@@ -1383,10 +1405,14 @@ static UICompositeViewDescription *compositeDescription = nil;
     self.countryCodeSignUpField.text = self.selectedCountryCode.length > 0 ? fullCountryCode : @"";
     self.countryNameSignUpField.text = country[caspianCountryObjectFieldName];
     
+    self.countryCodeForgotPasswordField.text = self.countryCodeSignUpField.text;
+    self.countryNameForgotPasswordField.text = self.countryNameSignUpField.text;
+    
     [self checkNextStep];
     [self activationAvailableForCountry:country];
     
     [self.countryNameSignUpField resignFirstResponder];
+    [self.countryNameForgotPasswordField resignFirstResponder];
 }
 
 - (NSDictionary *)countryAtIndex:(NSInteger)index {
@@ -1526,6 +1552,44 @@ static UICompositeViewDescription *compositeDescription = nil;
     } else {
         [self alertErrorMessage:NSLocalizedString(@"Please enter correct activation code", nil)
                       withTitle:NSLocalizedString(@"Wrong activation code", nil)];
+    }
+}
+
+#pragma mark - Forgot Password
+
+- (void)recoverPasswordForPhoneNumber:(NSString *)phoneNumber andCountryCode:(NSString *)countryCode {
+    if ([self checkCountryCode:countryCode]) {
+        [waitView setHidden:NO];
+        NSString *cleanedPhoneNumber = [[LinphoneManager instance] cleanPhoneNumber:phoneNumber];
+        NSString *forgotPasswordUrl = [NSString stringWithFormat:caspianForgotPasswordUrl
+                                      , [[LinphoneManager instance] removePrefix:@"+" fromString:countryCode]
+                                      , cleanedPhoneNumber
+                                       ];
+        __block WizardViewController *weakSelf = self;
+        [self.internetQueue addOperationWithBlock:^{
+            [[LinphoneManager instance] dataFromUrlString:forgotPasswordUrl completionBlock:^(NSDictionary *jsonAnswer) {
+                [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                    [waitView setHidden:YES];
+                    
+                    if ([weakSelf isStatusSuccess:jsonAnswer]) {
+                        [weakSelf alertErrorMessage:NSLocalizedString(@"Password has been sent to your phone number by sms", nil)
+                                          withTitle:NSLocalizedString(@"Successful", nil)];
+
+                        weakSelf.password = @"";
+                        [weakSelf changeView:signInView back:YES animation:YES];
+                    } else {
+                        [weakSelf alertErrorMessage:NSLocalizedString(@"Phone number not found", nil)
+                                          withTitle:NSLocalizedString(@"Error recovering password", nil)];
+                    }
+                }];
+            } errorBlock:^(NSError *error) {
+                [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                    [waitView setHidden:YES];
+                    [weakSelf alertErrorMessage:error.localizedDescription
+                                      withTitle:NSLocalizedString(@"Error recovering password", nil)];
+                }];
+            }];
+        }];
     }
 }
 

@@ -90,6 +90,11 @@
 
 @property (retain, nonatomic) IBOutlet COCTextField *passwordFinishField;
 
+@property (nonatomic, retain) IBOutlet UITextField *countryCodeForgotPasswordField;
+@property (nonatomic, retain) IBOutlet COCTextField *countryNameForgotPasswordField;
+@property (nonatomic, retain) IBOutlet COCTextField *phoneNumberForgotPasswordField;
+
+
 - (void)reset;
 - (void)resetToDefaults;
 - (void)fillDefaultValues;

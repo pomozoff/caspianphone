@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
-        <deployment defaultVersion="1536" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
     </dependencies>
     <objects>
@@ -12,7 +11,9 @@
                 <outlet property="activationCodeActivateField" destination="WRl-8r-d3C" id="zSo-as-RcW"/>
                 <outlet property="connectAccountView" destination="52" id="71"/>
                 <outlet property="continueSignUpField" destination="H8Y-aP-oNG" id="72v-i8-V9X"/>
+                <outlet property="countryCodeForgotPasswordField" destination="FiX-Ng-zLc" id="fS2-OY-xBb"/>
                 <outlet property="countryCodeSignUpField" destination="7O8-ON-sNh" id="eV1-f4-lix"/>
+                <outlet property="countryNameForgotPasswordField" destination="Pia-aI-MSv" id="tfY-lE-MAZ"/>
                 <outlet property="countryNameSignUpField" destination="k1G-aF-7Q7" id="aPa-Ox-dat"/>
                 <outlet property="countryPickerDoneToolbar" destination="30B-mp-hrW" id="tnV-eX-7QE"/>
                 <outlet property="countryPickerView" destination="9QR-C9-FbJ" id="sCV-Dg-r4q"/>
@@ -23,6 +24,7 @@
                 <outlet property="passwordFinishField" destination="241-LL-aD2" id="NfS-DN-zMk"/>
                 <outlet property="passwordReceivedView" destination="44" id="rHa-TL-MeI"/>
                 <outlet property="passwordRegisterField" destination="ub0-wY-1DO" id="OeQ-gW-vS1"/>
+                <outlet property="phoneNumberForgotPasswordField" destination="TvR-GL-Q5p" id="G8t-gF-i5e"/>
                 <outlet property="phoneNumberNextToolbar" destination="soq-SC-fBu" id="rdC-CM-KmM"/>
                 <outlet property="phoneNumberRegisterField" destination="IzP-N4-4hO" id="qVg-7I-dz7"/>
                 <outlet property="phoneNumberSignUpField" destination="4PV-ab-MvO" id="cfi-Fc-It8"/>
@@ -351,12 +353,91 @@
             <point key="canvasLocation" x="-13" y="-296"/>
         </view>
         <view contentMode="scaleToFill" id="56" userLabel="forgotPasswordView">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="394"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bgcontact.png" id="zL0-bP-kJx">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="546"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="large-blue-button.png" id="Z9y-50-vvf">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                    <inset key="insetFor6xAndEarlier" minX="0.0" minY="20" maxX="0.0" maxY="-20"/>
+                </imageView>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Forgot Password" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="HRz-bA-TKV" userLabel="Forgot Password Label">
+                    <rect key="frame" x="50" y="0.0" width="220" height="50"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="nAK-fU-KV7" userLabel="Back button">
+                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" image="arrowback.png">
+                        <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="onBackClick:" destination="-1" eventType="touchUpInside" id="8w9-ob-RpV"/>
+                    </connections>
+                </button>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter phone number" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="6fr-8n-i9D" userLabel="Enter phone number label">
+                    <rect key="frame" x="0.0" y="50" width="320" height="41"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Country" adjustsFontSizeToFit="NO" minimumFontSize="18" background="Rectangle.png" id="Pia-aI-MSv" userLabel="Country" customClass="COCTextField">
+                    <rect key="frame" x="0.0" y="90" width="320" height="41"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                    <nil key="textColor"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                    <textInputTraits key="textInputTraits"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="ZBt-cd-cBe"/>
+                    </connections>
+                </textField>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Code" textAlignment="center" adjustsFontSizeToFit="NO" minimumFontSize="18" background="Rectangle.png" id="FiX-Ng-zLc" userLabel="Country Code">
+                    <rect key="frame" x="0.0" y="130" width="89" height="41"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                    <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="phonePad" returnKeyType="done"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="hJP-J8-9L5"/>
+                    </connections>
+                </textField>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Phone Number" adjustsFontSizeToFit="NO" minimumFontSize="18" background="Rectangle.png" id="TvR-GL-Q5p" userLabel="Phone Number" customClass="COCTextField">
+                    <rect key="frame" x="90" y="130" width="230" height="41"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                    <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numberPad" returnKeyType="done"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="To3-rJ-Gp9"/>
+                    </connections>
+                </textField>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="Z5T-SE-f6Z" userLabel="Submit button">
+                    <rect key="frame" x="35" y="390" width="250" height="50"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="35"/>
+                    <state key="normal" image="submit.png">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <state key="selected" image="continue-selected.png"/>
+                    <state key="highlighted" image="continue-selected.png"/>
+                    <connections>
+                        <action selector="onSubmitForgotPasswordTap:" destination="-1" eventType="touchUpInside" id="Fau-R3-qJf"/>
+                    </connections>
+                </button>
+            </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="-13" y="731"/>
+            <point key="canvasLocation" x="-13" y="770"/>
         </view>
         <view contentMode="scaleToFill" id="xVK-hL-6pe" userLabel="provisionedAccountView">
             <rect key="frame" x="0.0" y="0.0" width="320" height="394"/>
@@ -453,7 +534,7 @@
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <inset key="insetFor6xAndEarlier" minX="0.0" minY="20" maxX="0.0" maxY="-20"/>
                 </imageView>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Activate" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="LYx-Kr-8gh">
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Activate" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="LYx-Kr-8gh" userLabel="Activate Label">
                     <rect key="frame" x="50" y="0.0" width="220" height="50"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="25"/>
@@ -650,6 +731,7 @@
         <image name="setup_welcome_logo.png" width="179" height="161"/>
         <image name="sign-in-normal.png" width="365" height="47"/>
         <image name="sign-up-normal.png" width="365" height="47"/>
+        <image name="submit.png" width="272" height="54"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
