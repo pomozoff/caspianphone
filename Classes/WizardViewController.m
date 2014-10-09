@@ -48,6 +48,7 @@ static NSString *caspianEnterName = @"Enter First and Last Names";
 
 static NSString *caspianCountryListUrl = @"http://onecallcaspian.co.uk/mobile/country2";
 static NSString *caspianCreateAccountUrl = @"http://onecallcaspian.co.uk/mobile/create?phone_code=%@&phone_number=%@&firstname=%@&lastname=%@&activation_way=%@";
+static NSString *caspianConfirmActivationCodeUrl = @"http://onecallcaspian.co.uk/mobile/confirm?code=%@";
 
 static NSString *caspianCountriesListTopKey = @"Countries";
 static NSString *caspianCountryObjectFieldCode = @"Code";
@@ -1424,10 +1425,10 @@ static UICompositeViewDescription *compositeDescription = nil;
                       withTitle:NSLocalizedString(@"Undefined country", nil)];
     } else {
         [waitView setHidden:NO];
-        self.phoneNumber = [[LinphoneManager instance] cleanPhoneNumber:phoneNumber];
+        NSString *cleanedPhoneNumber = [[LinphoneManager instance] cleanPhoneNumber:phoneNumber];
         NSString *createAccountUrl = [NSString stringWithFormat:caspianCreateAccountUrl
                                       , [[LinphoneManager instance] removePrefix:@"+" fromString:self.countryCodeSignUpField.text]
-                                      , self.phoneNumber
+                                      , cleanedPhoneNumber
                                       , self.firstNameSignUpField.text
                                       , self.lastNameSignUpField.text
                                       , self.activateBySignUpSegmented.selectedSegmentIndex == 0 ? @"sms" : @"call"
@@ -1440,22 +1441,18 @@ static UICompositeViewDescription *compositeDescription = nil;
                     
                     if ([self isStatusSuccess:jsonAnswer]) {
                         id activationCode = jsonAnswer[@"activation_code"];
-                        id password = jsonAnswer[@"password"];
-                        
                         self.activationCode = [NSString stringWithFormat:@"%@", activationCode];
-                        self.password = [NSString stringWithFormat:@"%@", password];
+                        
                         [weakSelf changeView:activateAccountView back:NO animation:YES];
                     } else {
-                        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                            [waitView setHidden:YES];
-                            [weakSelf alertErrorMessage:NSLocalizedString(@"Fail", nil)
-                                              withTitle:NSLocalizedString(@"Error creating account", nil)];
-                        }];
+                        [weakSelf alertErrorMessage:NSLocalizedString(@"Fail", nil)
+                                          withTitle:NSLocalizedString(@"Error creating account", nil)];
                     }
                 }];
             } errorBlock:^(NSError *error) {
                 [[NSOperationQueue mainQueue] addOperationWithBlock:^{
                     [waitView setHidden:YES];
+
                     NSString *errorTitle = @"";
                     NSString *errorMessage = @"";
 
@@ -1487,7 +1484,42 @@ static UICompositeViewDescription *compositeDescription = nil;
         [self alertErrorMessage:NSLocalizedString(@"Please enter more than two characters", nil)
                       withTitle:NSLocalizedString(@"Too short activation code", nil)];
     } else if ([self.activationCodeActivateField.text isEqualToString:self.activationCode]) {
-        [self changeView:createAccountView back:NO animation:YES];
+        [waitView setHidden:NO];
+        NSString *confirmCodeUrl = [NSString stringWithFormat:caspianConfirmActivationCodeUrl
+                                      , self.activationCodeActivateField.text
+                                      ];
+        __block WizardViewController *weakSelf = self;
+        [self.internetQueue addOperationWithBlock:^{
+            [[LinphoneManager instance] dataFromUrlString:confirmCodeUrl completionBlock:^(NSDictionary *jsonAnswer) {
+                [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                    [waitView setHidden:YES];
+                    
+                    if ([self isStatusSuccess:jsonAnswer]) {
+                        id password = jsonAnswer[@"password"];
+                        self.password = [NSString stringWithFormat:@"%@", password];
+
+                        id phoneNumber = jsonAnswer[@"phone_number"];
+                        self.phoneNumber = [NSString stringWithFormat:@"%@", phoneNumber];
+
+                        [weakSelf changeView:createAccountView back:NO animation:YES];
+                    } else {
+                        NSString *errorTitle = NSLocalizedString(@"Error creating account", nil);
+                        NSString *errorMessage = NSLocalizedString(@"Fail", nil);
+
+                        [weakSelf alertErrorMessage:errorMessage withTitle:errorTitle];
+                    }
+                }];
+            } errorBlock:^(NSError *error) {
+                [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                    [waitView setHidden:YES];
+
+                    NSString *errorTitle = NSLocalizedString(@"Error creating account", nil);
+                    NSString *errorMessage = error.localizedDescription;
+                    
+                    [weakSelf alertErrorMessage:errorMessage withTitle:errorTitle];
+                }];
+            }];
+        }];
     } else {
         [self alertErrorMessage:NSLocalizedString(@"Please enter correct activation code", nil)
                       withTitle:NSLocalizedString(@"Wrong activation code", nil)];
