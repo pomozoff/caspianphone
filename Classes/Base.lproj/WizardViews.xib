@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
+        <deployment defaultVersion="1536" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
     </dependencies>
     <objects>
@@ -9,20 +10,18 @@
                 <outlet property="activateAccountView" destination="101" id="Dsl-aw-Z1K"/>
                 <outlet property="activateBySignUpSegmented" destination="IqE-i2-ujj" id="79d-P5-DCa"/>
                 <outlet property="activationCodeActivateField" destination="WRl-8r-d3C" id="zSo-as-RcW"/>
-                <outlet property="caspianAccountView" destination="aGM-fR-vWr" id="BoY-gk-sDK"/>
-                <outlet property="choiceView" destination="33" id="40"/>
                 <outlet property="connectAccountView" destination="52" id="71"/>
                 <outlet property="continueSignUpField" destination="H8Y-aP-oNG" id="72v-i8-V9X"/>
                 <outlet property="countryCodeSignUpField" destination="7O8-ON-sNh" id="eV1-f4-lix"/>
                 <outlet property="countryNameSignUpField" destination="k1G-aF-7Q7" id="aPa-Ox-dat"/>
                 <outlet property="countryPickerDoneToolbar" destination="30B-mp-hrW" id="tnV-eX-7QE"/>
                 <outlet property="countryPickerView" destination="9QR-C9-FbJ" id="sCV-Dg-r4q"/>
-                <outlet property="createAccountView" destination="44" id="70"/>
-                <outlet property="externalAccountView" destination="56" id="72"/>
                 <outlet property="firstNameSignUpField" destination="Ubi-Sf-uTh" id="aZE-in-Gwa"/>
+                <outlet property="forgotPasswordView" destination="56" id="p8y-aO-gLF"/>
                 <outlet property="lastNameSignUpField" destination="mqJ-ZT-EO8" id="R5R-NO-51y"/>
                 <outlet property="numKeypadDoneToolbar" destination="h8o-F2-ZnK" id="Gu6-Yw-ljB"/>
                 <outlet property="passwordFinishField" destination="241-LL-aD2" id="NfS-DN-zMk"/>
+                <outlet property="passwordReceivedView" destination="44" id="rHa-TL-MeI"/>
                 <outlet property="passwordRegisterField" destination="ub0-wY-1DO" id="OeQ-gW-vS1"/>
                 <outlet property="phoneNumberNextToolbar" destination="soq-SC-fBu" id="rdC-CM-KmM"/>
                 <outlet property="phoneNumberRegisterField" destination="IzP-N4-4hO" id="qVg-7I-dz7"/>
@@ -33,6 +32,8 @@
                 <outlet property="provisionedUsername" destination="MyR-eX-QTa" id="gmr-FI-hpH"/>
                 <outlet property="registrationNextStepSignUpLabel" destination="4Ay-Kl-yKQ" id="ZIq-Fp-wFl"/>
                 <outlet property="rememberMeRegisterSwitch" destination="g6g-04-SLD" id="laM-VU-dvV"/>
+                <outlet property="signInView" destination="aGM-fR-vWr" id="FZn-tQ-8k5"/>
+                <outlet property="signUpView" destination="33" id="yiK-7V-lcc"/>
                 <outlet property="welcomeView" destination="21" id="28"/>
             </connections>
         </placeholder>
@@ -80,7 +81,7 @@
             </connections>
             <point key="canvasLocation" x="406" y="859"/>
         </pickerView>
-        <view contentMode="scaleToFill" id="33" userLabel="choiceView">
+        <view contentMode="scaleToFill" id="33" userLabel="signUpView">
             <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
@@ -204,7 +205,7 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="406" y="208"/>
         </view>
-        <view contentMode="scaleToFill" id="44" userLabel="createAccountView">
+        <view contentMode="scaleToFill" id="44" userLabel="passwordReceivedView">
             <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
@@ -349,78 +350,13 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="-13" y="-296"/>
         </view>
-        <view contentMode="scaleToFill" id="56" userLabel="externalAccountView">
+        <view contentMode="scaleToFill" id="56" userLabel="forgotPasswordView">
             <rect key="frame" x="0.0" y="0.0" width="320" height="394"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-            <subviews>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Account setup assistant" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="123" userLabel="title">
-                    <rect key="frame" x="31" y="34" width="258" height="40"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                    <accessibility key="accessibilityConfiguration" label="Account setup assistant"/>
-                    <fontDescription key="fontDescription" type="italicSystem" pointSize="20"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                    <nil key="highlightedColor"/>
-                    <color key="shadowColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                    <size key="shadowOffset" width="-1" height="-1"/>
-                </label>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="200" contentMode="left" text="Enter your username and password with your SIP domain." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsFontSizeToFit="NO" id="58" userLabel="label">
-                    <rect key="frame" x="40" y="82" width="240" height="44"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <textField opaque="NO" clipsSubviews="YES" tag="100" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Username" adjustsFontSizeToFit="NO" minimumFontSize="10" background="field_background.png" id="59" userLabel="usernameField" customClass="UILinphoneTextField">
-                    <rect key="frame" x="33" y="140" width="255" height="31"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                    <accessibility key="accessibilityConfiguration" label="Username"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits" autocorrectionType="no"/>
-                    <connections>
-                        <outlet property="delegate" destination="-1" id="86"/>
-                    </connections>
-                </textField>
-                <textField opaque="NO" clipsSubviews="YES" tag="101" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" adjustsFontSizeToFit="NO" minimumFontSize="10" background="field_background.png" id="60" userLabel="passwordField" customClass="UILinphoneTextField">
-                    <rect key="frame" x="33" y="185" width="255" height="31"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                    <accessibility key="accessibilityConfiguration" label="Password"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits" autocorrectionType="no" secureTextEntry="YES"/>
-                    <connections>
-                        <outlet property="delegate" destination="-1" id="87"/>
-                    </connections>
-                </textField>
-                <textField opaque="NO" clipsSubviews="YES" tag="104" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Domain" adjustsFontSizeToFit="NO" minimumFontSize="10" background="field_background.png" id="61" userLabel="domainField" customClass="UILinphoneTextField">
-                    <rect key="frame" x="33" y="230" width="255" height="31"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                    <accessibility key="accessibilityConfiguration" label="Domain"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits" autocorrectionType="no"/>
-                    <connections>
-                        <outlet property="delegate" destination="-1" id="88"/>
-                    </connections>
-                </textField>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="62" userLabel="signInButton" customClass="UILinphoneButton">
-                    <rect key="frame" x="34" y="330" width="255" height="50"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES"/>
-                    <accessibility key="accessibilityConfiguration" label="Sign in"/>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
-                    <state key="normal" title="Sign in" backgroundImage="button_background_default.png">
-                        <color key="titleColor" red="0.35686274509999999" green="0.39607843139999999" blue="0.43529411759999997" alpha="1" colorSpace="deviceRGB"/>
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <state key="highlighted" backgroundImage="button_background_over.png">
-                        <color key="titleColor" red="0.72549019609999998" green="0.76862745099999996" blue="0.79607843140000001" alpha="1" colorSpace="deviceRGB"/>
-                    </state>
-                    <connections>
-                        <action selector="onSignInExternalClick:" destination="-1" eventType="touchUpInside" id="115"/>
-                    </connections>
-                </button>
-            </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="1276" y="-296"/>
+            <point key="canvasLocation" x="-13" y="731"/>
         </view>
         <view contentMode="scaleToFill" id="xVK-hL-6pe" userLabel="provisionedAccountView">
             <rect key="frame" x="0.0" y="0.0" width="320" height="394"/>
@@ -492,7 +428,7 @@
                     </connections>
                 </button>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="These parameters were retrieved from a remote provisioning profile." textAlignment="center" lineBreakMode="wordWrap" numberOfLines="7" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="RHE-hi-dfB" userLabel="remoteParamsLabel">
-                    <rect key="frame" x="34" y="269.00000292254413" width="254" height="53"/>
+                    <rect key="frame" x="34" y="269.0000019583353" width="254" height="53"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -572,7 +508,7 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="832" y="208"/>
         </view>
-        <view autoresizesSubviews="NO" contentMode="scaleToFill" id="aGM-fR-vWr" userLabel="caspianAccountView">
+        <view autoresizesSubviews="NO" contentMode="scaleToFill" id="aGM-fR-vWr" userLabel="signInView">
             <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
@@ -638,6 +574,9 @@
                         <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="titleShadowColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
+                    <connections>
+                        <action selector="onForgotPasswordTap:" destination="-1" eventType="touchUpInside" id="3Hw-S9-RiL"/>
+                    </connections>
                 </button>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Remember me" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="C7s-ms-KhP">
                     <rect key="frame" x="34" y="306" width="190" height="31"/>

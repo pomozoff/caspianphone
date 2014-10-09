@@ -42,11 +42,11 @@
 @property (nonatomic, retain) IBOutlet UIScrollView *contentView;
 
 @property (nonatomic, retain) IBOutlet UIView *welcomeView;
-@property (nonatomic, retain) IBOutlet UIView *choiceView;
-@property (nonatomic, retain) IBOutlet UIView *createAccountView;
+@property (nonatomic, retain) IBOutlet UIView *signUpView;
+@property (nonatomic, retain) IBOutlet UIView *passwordReceivedView;
 @property (nonatomic, retain) IBOutlet UIView *connectAccountView;
-@property (nonatomic, retain) IBOutlet UIView *externalAccountView;
-@property (nonatomic, retain) IBOutlet UIView *caspianAccountView;
+@property (nonatomic, retain) IBOutlet UIView *forgotPasswordView;
+@property (nonatomic, retain) IBOutlet UIView *signInView;
 @property (nonatomic, retain) IBOutlet UIView *activateAccountView;
 @property (nonatomic, retain) IBOutlet UIView *provisionedAccountView;
 

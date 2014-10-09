@@ -77,11 +77,11 @@ extern NSInteger caspianErrorCode;
 @synthesize contentView;
 
 @synthesize welcomeView;
-@synthesize choiceView;
-@synthesize createAccountView;
+@synthesize signUpView;
+@synthesize passwordReceivedView;
 @synthesize connectAccountView;
-@synthesize externalAccountView;
-@synthesize caspianAccountView;
+@synthesize forgotPasswordView;
+@synthesize signInView;
 @synthesize activateAccountView;
 @synthesize provisionedAccountView;
 @synthesize waitView;
@@ -167,11 +167,11 @@ extern NSInteger caspianErrorCode;
     [contentView release];
     
     [welcomeView release];
-    [choiceView release];
-    [createAccountView release];
+    [signUpView release];
+    [passwordReceivedView release];
     [connectAccountView release];
-    [externalAccountView release];
-    [caspianAccountView release];
+    [forgotPasswordView release];
+    [signInView release];
     [activateAccountView release];
     
     [waitView release];
@@ -300,11 +300,11 @@ static UICompositeViewDescription *compositeDescription = nil;
     
     if([LinphoneManager runningOnIpad]) {
         [LinphoneUtils adjustFontSize:welcomeView mult:2.22f];
-        [LinphoneUtils adjustFontSize:choiceView mult:2.22f];
-        [LinphoneUtils adjustFontSize:createAccountView mult:2.22f];
+        [LinphoneUtils adjustFontSize:signUpView mult:2.22f];
+        [LinphoneUtils adjustFontSize:passwordReceivedView mult:2.22f];
         [LinphoneUtils adjustFontSize:connectAccountView mult:2.22f];
-        [LinphoneUtils adjustFontSize:externalAccountView mult:2.22f];
-        [LinphoneUtils adjustFontSize:caspianAccountView mult:2.22f];
+        [LinphoneUtils adjustFontSize:forgotPasswordView mult:2.22f];
+        [LinphoneUtils adjustFontSize:signInView mult:2.22f];
         [LinphoneUtils adjustFontSize:activateAccountView mult:2.22f];
         [LinphoneUtils adjustFontSize:provisionedAccountView mult:2.22f];
     }
@@ -381,11 +381,11 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (void)resetTextFields {
     [WizardViewController cleanTextField:welcomeView];
-    [WizardViewController cleanTextField:choiceView];
-    [WizardViewController cleanTextField:createAccountView];
+    [WizardViewController cleanTextField:signUpView];
+    [WizardViewController cleanTextField:passwordReceivedView];
     [WizardViewController cleanTextField:connectAccountView];
-    [WizardViewController cleanTextField:externalAccountView];
-    [WizardViewController cleanTextField:caspianAccountView];
+    [WizardViewController cleanTextField:forgotPasswordView];
+    [WizardViewController cleanTextField:signInView];
     [WizardViewController cleanTextField:activateAccountView];
     [WizardViewController cleanTextField:provisionedAccountView];
 }
@@ -419,7 +419,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     [waitView setHidden:TRUE];
     
     [self resetToDefaults];
-    [self changeView:caspianAccountView back:FALSE animation:TRUE];
+    [self changeView:signInView back:FALSE animation:TRUE];
 }
 
 - (void)resetToDefaults {
@@ -539,15 +539,15 @@ static UICompositeViewDescription *compositeDescription = nil;
     }
     */
     
-    [[LinphoneManager instance] lpConfigSetBool:(view != caspianAccountView || back) forKey:@"animations_preference"];
-    if (view == caspianAccountView && !back) {
+    [[LinphoneManager instance] lpConfigSetBool:(view != signInView || back) forKey:@"animations_preference"];
+    if (view == signInView && !back) {
         [self fillCredentials];
-    } else if (view == choiceView) {
+    } else if (view == signUpView) {
         [self.countryNameSignUpField becomeFirstResponder];
     } else if (view == activateAccountView) {
         self.activationCodeActivateField.text = @"";
         [self.activationCodeActivateField becomeFirstResponder];
-    } else if (view == createAccountView) {
+    } else if (view == passwordReceivedView) {
         self.passwordFinishField.text = self.password;
     }
     
@@ -800,7 +800,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     }
     
     // only validate the username when creating a new account
-    if( (textField.tag == ViewElement_Username) && (currentView == createAccountView) ){
+    if( (textField.tag == ViewElement_Username) && (currentView == passwordReceivedView) ){
         NSRegularExpression *regex = [NSRegularExpression
                                       regularExpressionWithPattern:@"^[a-z0-9-_\\.]*$"
                                       options:NSRegularExpressionCaseInsensitive
@@ -843,7 +843,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 #pragma mark - Action Functions
 
 - (IBAction)onStartClick:(id)sender {
-    [self changeView:choiceView back:FALSE animation:TRUE];
+    [self changeView:signUpView back:FALSE animation:TRUE];
 }
 
 - (IBAction)onBackClick:(id)sender {
@@ -859,7 +859,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 }
 
 - (IBAction)onCreateAccountClick:(id)sender {
-    nextView = createAccountView;
+    nextView = passwordReceivedView;
     [self loadWizardConfig:@"wizard_linphone_create.rc"];
 }
 
@@ -869,7 +869,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 }
 
 - (IBAction)onExternalAccountClick:(id)sender {
-    nextView = externalAccountView;
+    nextView = forgotPasswordView;
     [self loadWizardConfig:@"wizard_external_sip.rc"];
 }
 
@@ -954,7 +954,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 }
 
 - (IBAction)onSignUpClick:(id)sender {
-    [self changeView:choiceView back:FALSE animation:TRUE];
+    [self changeView:signUpView back:FALSE animation:TRUE];
 }
 
 - (IBAction)onRegisterClick:(id)sender {
@@ -1063,7 +1063,10 @@ static UICompositeViewDescription *compositeDescription = nil;
     self.phoneNumberRegisterField.text = self.phoneNumber;
     self.passwordRegisterField.text = self.password;
     
-    [self changeView:caspianAccountView back:YES animation:YES];
+    [self changeView:signInView back:YES animation:YES];
+}
+
+- (IBAction)onForgotPasswordTap:(id)sender {
 }
 
 #pragma mark - UIAlertViewDelegate
@@ -1501,7 +1504,7 @@ static UICompositeViewDescription *compositeDescription = nil;
                         id phoneNumber = jsonAnswer[@"phone_number"];
                         self.phoneNumber = [NSString stringWithFormat:@"%@", phoneNumber];
 
-                        [weakSelf changeView:createAccountView back:NO animation:YES];
+                        [weakSelf changeView:passwordReceivedView back:NO animation:YES];
                     } else {
                         NSString *errorTitle = NSLocalizedString(@"Error creating account", nil);
                         NSString *errorMessage = NSLocalizedString(@"Fail", nil);
