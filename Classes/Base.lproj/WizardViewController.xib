@@ -91,6 +91,7 @@
                         <activityIndicatorView opaque="NO" tag="7" contentMode="scaleToFill" animating="YES" style="whiteLarge" id="90" userLabel="activityIndicatorView">
                             <rect key="frame" x="142" y="211" width="37" height="37"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                            <color key="color" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         </activityIndicatorView>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="0.5" colorSpace="calibratedWhite"/>
