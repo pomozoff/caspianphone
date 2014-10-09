@@ -73,6 +73,10 @@
     return self;
 }
 
+- (CGFloat)statusBarAlfa {
+    return [content isEqualToString:@"ChatViewController"] ? 0.0f : 1.0f;
+}
+
 - (void)dealloc {
     [name release];
     [content release];

@@ -546,7 +546,7 @@ static RootViewManager* rootViewManagerInstance = nil;
         // light bg: black text on white bg
         [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
         [UIView animateWithDuration:0.3f
-                         animations:^{ statusBarBG.backgroundColor = [UIColor colorWithWhite:0.935 alpha:1]; }];
+                         animations:^{ statusBarBG.backgroundColor = [UIColor colorWithWhite:0.935f alpha:to_view.statusBarAlfa]; }];
 
     }
 #endif

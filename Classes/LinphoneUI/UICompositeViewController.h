@@ -37,6 +37,8 @@
 @property (assign) BOOL portraitMode;
 @property (assign) BOOL darkBackground;
 
+@property (nonatomic, assign, readonly) CGFloat statusBarAlfa;
+
 - (id)copy;
 - (BOOL)equal:(UICompositeViewDescription*) description;
 - (id)init:(NSString *)name content:(NSString *)content stateBar:(NSString*)stateBar 
