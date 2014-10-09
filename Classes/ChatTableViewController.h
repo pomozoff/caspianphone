@@ -20,7 +20,10 @@
 #import <UIKit/UIKit.h>
 #include "linphone/linphonecore.h"
 
-@interface ChatTableViewController : UITableViewController {
+#import "SWTableViewCell.h"
+
+
+@interface ChatTableViewController : UITableViewController <SWTableViewCellDelegate> {
 }
 
 - (void)loadData;

@@ -19,6 +19,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UITransparentTVCell : UITableViewCell
+#import "SWTableViewCell.h"
+
+@interface UITransparentTVCell : SWTableViewCell
 
 @end

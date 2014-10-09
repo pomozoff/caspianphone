@@ -345,7 +345,7 @@ static RootViewManager* rootViewManagerInstance = nil;
         return;
     }
     
-	switch (state) {					
+	switch (state) {
 		case LinphoneCallIncomingReceived: 
         {
 			[self displayIncomingCall:call];

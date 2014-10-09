@@ -96,7 +96,8 @@ static int sorted_history_comparison(LinphoneChatRoom *to_insert, LinphoneChatRo
     UIChatCell *cell = [tableView dequeueReusableCellWithIdentifier:kCellId];
     if (cell == nil) {
         cell = [[[UIChatCell alloc] initWithIdentifier:kCellId] autorelease];
-        
+        cell.rightUtilityButtons = [self rightButtons];
+        cell.delegate = self;
         
         // Background View
         UACellBackgroundView *selectedBackgroundView = [[[UACellBackgroundView alloc] initWithFrame:CGRectZero] autorelease];
@@ -123,7 +124,6 @@ static int sorted_history_comparison(LinphoneChatRoom *to_insert, LinphoneChatRo
     }
 }
 
-/*
 - (UITableViewCellEditingStyle)tableView:(UITableView *)aTableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
     // Detemine if it's in editing mode
     if (self.editing) {
@@ -131,9 +131,9 @@ static int sorted_history_comparison(LinphoneChatRoom *to_insert, LinphoneChatRo
     }
     return UITableViewCellEditingStyleNone;
 }
-*/
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath  {
+    /*
     if(editingStyle == UITableViewCellEditingStyleDelete) {
         [tableView beginUpdates];
 
@@ -146,10 +146,63 @@ static int sorted_history_comparison(LinphoneChatRoom *to_insert, LinphoneChatRo
         [tableView endUpdates];
         [[NSNotificationCenter defaultCenter] postNotificationName:kLinphoneTextReceived object:self];
     }
+    */
 }
 
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    return YES;
+#pragma mark - SWTableViewCellDelegate
+
+- (void)swipeableTableViewCell:(SWTableViewCell *)cell didTriggerRightUtilityButtonWithIndex:(NSInteger)index {
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+    switch (index) {
+        case 0: {
+            // Call button was pressed
+            LinphoneChatRoom *chatRoom = (LinphoneChatRoom*)ms_list_nth_data(data, indexPath.row);
+            const LinphoneAddress *linphoneAddress = linphone_chat_room_get_peer_address(chatRoom);
+            const char *username = linphone_address_get_username(linphoneAddress);
+            NSString *dirtyAddress = [NSString stringWithUTF8String:username];
+            NSString *address = [[LinphoneManager instance] cleanPhoneNumber:dirtyAddress];
+            NSString *displayName = nil;
+            ABRecordRef contact = [[[LinphoneManager instance] fastAddressBook] getContact:address];
+            if(contact) {
+                displayName = [FastAddressBook getContactDisplayName:contact];
+            }
+            [[LinphoneManager instance] call:address displayName:displayName transfer:FALSE];
+
+            break;
+        }
+        case 1: {
+            // Delete button was pressed
+            [self.tableView beginUpdates];
+            
+            LinphoneChatRoom *chatRoom = (LinphoneChatRoom*)ms_list_nth_data(data, [indexPath row]);
+            linphone_chat_room_delete_history(chatRoom);
+            linphone_chat_room_destroy(chatRoom);
+            data = linphone_core_get_chat_rooms([LinphoneManager getLc]);
+            
+            [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            [self.tableView endUpdates];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:kLinphoneTextReceived object:self];
+
+            break;
+        }
+        default:
+            break;
+    }
+}
+
+#pragma mark - Private
+
+- (NSArray *)rightButtons
+{
+    UIColor *callColor = [UIColor colorWithRed:0.78f green:0.78f blue:0.8f alpha:1.0];
+    UIColor *deleteColor = [UIColor colorWithRed:1.0f green:0.231f blue:0.188 alpha:1.0f];
+    
+    NSMutableArray *rightUtilityButtons = [NSMutableArray new];
+    [rightUtilityButtons sw_addUtilityButtonWithColor:callColor title:@"Call"];
+    [rightUtilityButtons sw_addUtilityButtonWithColor:deleteColor title:@"Delete"];
+    
+    return rightUtilityButtons;
 }
 
 @end
