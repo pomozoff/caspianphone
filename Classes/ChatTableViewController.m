@@ -191,6 +191,10 @@ static int sorted_history_comparison(LinphoneChatRoom *to_insert, LinphoneChatRo
     }
 }
 
+- (BOOL)swipeableTableViewCellShouldHideUtilityButtonsOnSwipe:(SWTableViewCell *)cell {
+    return YES;
+}
+
 #pragma mark - Private
 
 - (NSArray *)rightButtons
