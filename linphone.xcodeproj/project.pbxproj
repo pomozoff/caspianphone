@@ -188,6 +188,10 @@
 		22F254811073D99800AC9B3F /* ringback.wav in Resources */ = {isa = PBXBuildFile; fileRef = 22F254801073D99800AC9B3F /* ringback.wav */; };
 		260AC9B519D13D86002C8CA9 /* chat.png in Resources */ = {isa = PBXBuildFile; fileRef = 260AC9B319D13D86002C8CA9 /* chat.png */; };
 		260AC9B619D13D86002C8CA9 /* sms.png in Resources */ = {isa = PBXBuildFile; fileRef = 260AC9B419D13D86002C8CA9 /* sms.png */; };
+		261B6E9419E81B860035917B /* video-off-hover.png in Resources */ = {isa = PBXBuildFile; fileRef = 261B6E9019E81B860035917B /* video-off-hover.png */; };
+		261B6E9519E81B860035917B /* video-off.png in Resources */ = {isa = PBXBuildFile; fileRef = 261B6E9119E81B860035917B /* video-off.png */; };
+		261B6E9619E81B860035917B /* video-on-hover.png in Resources */ = {isa = PBXBuildFile; fileRef = 261B6E9219E81B860035917B /* video-on-hover.png */; };
+		261B6E9719E81B860035917B /* video-on.png in Resources */ = {isa = PBXBuildFile; fileRef = 261B6E9319E81B860035917B /* video-on.png */; };
 		261FAB2219CC50B200CFE4AA /* call_quality_indicator_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 261FAB1F19CC50B200CFE4AA /* call_quality_indicator_1.png */; };
 		261FAB2319CC50B200CFE4AA /* call_quality_indicator_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 261FAB2019CC50B200CFE4AA /* call_quality_indicator_2.png */; };
 		261FAB2419CC50B200CFE4AA /* call_quality_indicator_3.png in Resources */ = {isa = PBXBuildFile; fileRef = 261FAB2119CC50B200CFE4AA /* call_quality_indicator_3.png */; };
@@ -1737,6 +1741,10 @@
 		22F254801073D99800AC9B3F /* ringback.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = ringback.wav; path = Resources/ringback.wav; sourceTree = "<group>"; };
 		260AC9B319D13D86002C8CA9 /* chat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chat.png; sourceTree = "<group>"; };
 		260AC9B419D13D86002C8CA9 /* sms.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sms.png; sourceTree = "<group>"; };
+		261B6E9019E81B860035917B /* video-off-hover.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "video-off-hover.png"; sourceTree = "<group>"; };
+		261B6E9119E81B860035917B /* video-off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "video-off.png"; sourceTree = "<group>"; };
+		261B6E9219E81B860035917B /* video-on-hover.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "video-on-hover.png"; sourceTree = "<group>"; };
+		261B6E9319E81B860035917B /* video-on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "video-on.png"; sourceTree = "<group>"; };
 		261FAB1F19CC50B200CFE4AA /* call_quality_indicator_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = call_quality_indicator_1.png; sourceTree = "<group>"; };
 		261FAB2019CC50B200CFE4AA /* call_quality_indicator_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = call_quality_indicator_2.png; sourceTree = "<group>"; };
 		261FAB2119CC50B200CFE4AA /* call_quality_indicator_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = call_quality_indicator_3.png; sourceTree = "<group>"; };
@@ -3120,6 +3128,10 @@
 				261FABB819CC562F00CFE4AA /* star.png */,
 				2636609119E6B0BD00D72171 /* submit.png */,
 				2636609219E6B0BD00D72171 /* submit@2x.png */,
+				261B6E9019E81B860035917B /* video-off-hover.png */,
+				261B6E9119E81B860035917B /* video-off.png */,
+				261B6E9219E81B860035917B /* video-on-hover.png */,
+				261B6E9319E81B860035917B /* video-on.png */,
 			);
 			name = "images caspian";
 			path = "Resources/images caspian";
@@ -4253,6 +4265,7 @@
 				D3F83F6E1582223B00336684 /* numpad_sharp_over.png in Resources */,
 				261FAB2219CC50B200CFE4AA /* call_quality_indicator_1.png in Resources */,
 				D3F83F721582223B00336684 /* numpad_star_default.png in Resources */,
+				261B6E9519E81B860035917B /* video-off.png in Resources */,
 				D3F83F781582253100336684 /* accept_default.png in Resources */,
 				D3F83F7A1582253100336684 /* accept_over.png in Resources */,
 				D3F83F7C1582253100336684 /* decline_default.png in Resources */,
@@ -4425,6 +4438,7 @@
 				D3D14E7C15A711700074A527 /* avatar_shadow_small.png in Resources */,
 				D38187B915FE342200C3EDCA /* ContactDetailsViewController.xib in Resources */,
 				D3128FEF15AABE4E00A2147A /* contact_back_default.png in Resources */,
+				261B6E9719E81B860035917B /* video-on.png in Resources */,
 				D3128FF115AABE4E00A2147A /* contact_back_over.png in Resources */,
 				D3128FF315AABE4E00A2147A /* contact_edit_default.png in Resources */,
 				D3128FF515AABE4E00A2147A /* contact_edit_over.png in Resources */,
@@ -4441,6 +4455,7 @@
 				C9C8254315AE204D00D493FA /* options_add_disabled.png in Resources */,
 				C9C8254515AE204D00D493FA /* options_transfer_disabled.png in Resources */,
 				C9C8254715AE204D00D493FA /* transfer_call_default.png in Resources */,
+				261B6E9619E81B860035917B /* video-on-hover.png in Resources */,
 				C9C8254915AE204D00D493FA /* transfer_call_over.png in Resources */,
 				C9C8254C15AE207B00D493FA /* options_selected.png in Resources */,
 				C9C8254F15AE256100D493FA /* transfer_call_disabled.png in Resources */,
@@ -4680,6 +4695,7 @@
 				57F005CA15EE2D9200914747 /* linphonerc-factory~ipad in Resources */,
 				F0B89C2A18DC973E0050B60E /* wizard_linphone_create.rc in Resources */,
 				2234C8E915EE2F7F00E18E83 /* chat_message_delivered.png in Resources */,
+				261B6E9419E81B860035917B /* video-off-hover.png in Resources */,
 				2234C8EB15EE2F7F00E18E83 /* chat_message_not_delivered.png in Resources */,
 				2234C8EE15EE744200E18E83 /* chat_message_inprogress.png in Resources */,
 				F04892FF180C3296002FED35 /* ImageOptim.sh in Resources */,
