@@ -219,7 +219,7 @@
 		[self processRemoteNotification:remoteNotif];
 	}
     if (bgStartId!=UIBackgroundTaskInvalid) [[UIApplication sharedApplication] endBackgroundTask:bgStartId];
-    [[PhoneMainView instance] updateStatusBar:nil];
+    //[[PhoneMainView instance] updateStatusBar:nil];
 
     return YES;
 }

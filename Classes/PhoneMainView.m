@@ -544,9 +544,9 @@ static RootViewManager* rootViewManagerInstance = nil;
 
     } else  {
         // light bg: black text on white bg
-        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+        [[UIApplication sharedApplication] setStatusBarStyle:to_view.statusBarStyle];
         [UIView animateWithDuration:0.3f
-                         animations:^{ statusBarBG.backgroundColor = [UIColor colorWithWhite:0.935f alpha:to_view.statusBarAlfa]; }];
+                         animations:^{ statusBarBG.backgroundColor = to_view.statusBarColor; }];
 
     }
 #endif

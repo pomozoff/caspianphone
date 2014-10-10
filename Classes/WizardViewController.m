@@ -247,7 +247,10 @@ static UICompositeViewDescription *compositeDescription = nil;
                                                              fullscreen:false
                                                           landscapeMode:[LinphoneManager runningOnIpad]
                                                            portraitMode:true];
-        compositeDescription.darkBackground = true;
+        compositeDescription.darkBackground = NO;
+        compositeDescription.statusBarMargin = 0;
+        compositeDescription.statusBarColor = [UIColor colorWithWhite:0.935f alpha:0.0f];
+        compositeDescription.statusBarStyle = UIStatusBarStyleLightContent;
     }
     return compositeDescription;
 }
@@ -425,7 +428,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     }
     */
     
-    [waitView setHidden:TRUE];
+    waitView.hidden = YES;
     
     [self resetToDefaults];
     [self changeView:signInView back:FALSE animation:TRUE];
@@ -549,8 +552,10 @@ static UICompositeViewDescription *compositeDescription = nil;
     */
     
     [[LinphoneManager instance] lpConfigSetBool:(view != signInView || back) forKey:@"animations_preference"];
-    if (view == signInView && !back) {
-        [self fillCredentials];
+    if (view == signInView) {
+        if (!back) {
+            [self fillCredentials];
+        }
     } else if (view == signUpView) {
         [self.countryNameSignUpField becomeFirstResponder];
     } else if (view == activateAccountView) {
@@ -584,8 +589,8 @@ static UICompositeViewDescription *compositeDescription = nil;
     // Set current view
     currentView = view;
     [contentView insertSubview:view atIndex:0];
-    [view setFrame:[contentView bounds]];
-    [contentView setContentSize:[view bounds].size];
+    view.frame = contentView.bounds;
+    contentView.contentSize = view.bounds.size;
 }
 
 - (void)clearProxyConfig {
@@ -835,6 +840,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     }
     return YES;
 }
+
 - (void)hideError:(NSTimer*)timer {
     UILabel* error_label =[WizardViewController findLabel:ViewElement_Username_Error view:contentView];
     if( error_label ) {
@@ -857,7 +863,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (IBAction)onBackClick:(id)sender {
     if ([historyViews count] > 0) {
-        UIView * view = [historyViews lastObject];
+        UIView * view = [[[historyViews lastObject] retain] autorelease];
         [historyViews removeLastObject];
         [self changeView:view back:TRUE animation:TRUE];
     }
@@ -1464,7 +1470,7 @@ static UICompositeViewDescription *compositeDescription = nil;
                            lastName:(NSString *)lastName
                       activateBySms:(BOOL)activateBySms {
     if ([self checkCountryCode:countryCode]) {
-        [waitView setHidden:NO];
+        waitView.hidden = NO;
         NSString *cleanedPhoneNumber = [[LinphoneManager instance] cleanPhoneNumber:phoneNumber];
         NSString *createAccountUrl = [NSString stringWithFormat:caspianCreateAccountUrl
                                       , [[LinphoneManager instance] removePrefix:@"+" fromString:countryCode]
@@ -1477,7 +1483,7 @@ static UICompositeViewDescription *compositeDescription = nil;
         [self.internetQueue addOperationWithBlock:^{
             [[LinphoneManager instance] dataFromUrlString:createAccountUrl completionBlock:^(NSDictionary *jsonAnswer) {
                 [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                    [waitView setHidden:YES];
+                    waitView.hidden = YES;
                     
                     if ([weakSelf isStatusSuccess:jsonAnswer]) {
                         id activationCode = jsonAnswer[@"activation_code"];
@@ -1491,7 +1497,7 @@ static UICompositeViewDescription *compositeDescription = nil;
                 }];
             } errorBlock:^(NSError *error) {
                 [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                    [waitView setHidden:YES];
+                    waitView.hidden = YES;
 
                     NSString *errorTitle = @"";
                     NSString *errorMessage = @"";
@@ -1523,13 +1529,13 @@ static UICompositeViewDescription *compositeDescription = nil;
         [self alertErrorMessage:NSLocalizedString(@"Please enter more than two characters", nil)
                       withTitle:NSLocalizedString(@"Too short activation code", nil)];
     } else if ([userInputActivationCode isEqualToString:self.activationCode]) {
-        [waitView setHidden:NO];
+        waitView.hidden = NO;
         NSString *confirmCodeUrl = [NSString stringWithFormat:caspianConfirmActivationCodeUrl, userInputActivationCode];
         __block WizardViewController *weakSelf = self;
         [self.internetQueue addOperationWithBlock:^{
             [[LinphoneManager instance] dataFromUrlString:confirmCodeUrl completionBlock:^(NSDictionary *jsonAnswer) {
                 [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                    [waitView setHidden:YES];
+                    waitView.hidden = YES;
                     
                     if ([weakSelf isStatusSuccess:jsonAnswer]) {
                         id password = jsonAnswer[@"password"];
@@ -1546,7 +1552,7 @@ static UICompositeViewDescription *compositeDescription = nil;
                 }];
             } errorBlock:^(NSError *error) {
                 [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                    [waitView setHidden:YES];
+                    waitView.hidden = YES;
                     [weakSelf alertErrorMessage:error.localizedDescription
                                       withTitle:NSLocalizedString(@"Error activating account", nil)];
                 }];
@@ -1562,7 +1568,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (void)recoverPasswordForPhoneNumber:(NSString *)phoneNumber andCountryCode:(NSString *)countryCode {
     if ([self checkCountryCode:countryCode]) {
-        [waitView setHidden:NO];
+        waitView.hidden = NO;
         NSString *cleanedPhoneNumber = [[LinphoneManager instance] cleanPhoneNumber:phoneNumber];
         NSString *forgotPasswordUrl = [NSString stringWithFormat:caspianForgotPasswordUrl
                                       , [[LinphoneManager instance] removePrefix:@"+" fromString:countryCode]
@@ -1572,7 +1578,7 @@ static UICompositeViewDescription *compositeDescription = nil;
         [self.internetQueue addOperationWithBlock:^{
             [[LinphoneManager instance] dataFromUrlString:forgotPasswordUrl completionBlock:^(NSDictionary *jsonAnswer) {
                 [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                    [waitView setHidden:YES];
+                    waitView.hidden = YES;
                     
                     if ([weakSelf isStatusSuccess:jsonAnswer]) {
                         [weakSelf alertErrorMessage:NSLocalizedString(@"Password has been sent to your phone number by sms", nil)
@@ -1587,7 +1593,7 @@ static UICompositeViewDescription *compositeDescription = nil;
                 }];
             } errorBlock:^(NSError *error) {
                 [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                    [waitView setHidden:YES];
+                    waitView.hidden = YES;
                     [weakSelf alertErrorMessage:error.localizedDescription
                                       withTitle:NSLocalizedString(@"Error recovering password", nil)];
                 }];

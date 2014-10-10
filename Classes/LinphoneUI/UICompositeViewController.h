@@ -37,7 +37,9 @@
 @property (assign) BOOL portraitMode;
 @property (assign) BOOL darkBackground;
 
-@property (nonatomic, assign, readonly) CGFloat statusBarAlfa;
+@property (nonatomic, retain) UIColor *statusBarColor;
+@property (nonatomic, assign) UIStatusBarStyle statusBarStyle;
+@property (nonatomic, assign) int statusBarMargin;
 
 - (id)copy;
 - (BOOL)equal:(UICompositeViewDescription*) description;

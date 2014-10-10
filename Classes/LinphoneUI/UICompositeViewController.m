@@ -21,6 +21,8 @@
 
 #import "LinphoneAppDelegate.h"
 
+#define IPHONE_STATUSBAR_HEIGHT 20
+
 @implementation UICompositeViewDescription
 
 @synthesize name;
@@ -45,6 +47,10 @@
     copy.landscapeMode = self.landscapeMode;
     copy.portraitMode = self.portraitMode;
     copy.darkBackground = self.darkBackground;
+    copy.statusBarColor = self.statusBarColor;
+    copy.statusBarMargin = self.statusBarMargin;
+    copy.statusBarStyle = self.statusBarStyle;
+
     return copy;
 }
 
@@ -69,12 +75,11 @@
     self.landscapeMode = alandscapeMode;
     self.portraitMode = aportraitMode;
     self.darkBackground = false;
+    self.statusBarColor = [UIColor colorWithWhite:0.935f alpha:1.0f];
+    self.statusBarMargin = IPHONE_STATUSBAR_HEIGHT;
+    self.statusBarStyle = UIStatusBarStyleDefault;
     
     return self;
-}
-
-- (CGFloat)statusBarAlfa {
-    return [content isEqualToString:@"ChatViewController"] ? 0.0f : 1.0f;
 }
 
 - (void)dealloc {
@@ -456,8 +461,6 @@
     return UIInterfaceOrientationPortrait;
 }
 
-#define IPHONE_STATUSBAR_HEIGHT 20
-
 - (void)update: (UICompositeViewDescription*) description tabBar:(NSNumber*)tabBar  stateBar:(NSNumber*)stateBar fullscreen:(NSNumber*)fullscreen {
     
     UIViewController *oldContentViewController = self.contentViewController;
@@ -580,7 +583,7 @@
     
     // Resize StateBar
     CGRect stateBarFrame = stateBarView.frame;
-    int origin = IPHONE_STATUSBAR_HEIGHT;
+    int origin = currentViewDescription.statusBarMargin;
     if(currentViewDescription.fullscreen)
         origin = 0;
     
