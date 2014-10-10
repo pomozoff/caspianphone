@@ -25,8 +25,8 @@
 
 @property (nonatomic, retain) NSOperationQueue *balanceQueue;
 @property (nonatomic, retain) NSNumberFormatter *numberFormatter;
-@property (nonatomic, readonly) NSString *username;
-@property (nonatomic, readonly) NSString *password;
+@property (nonatomic, copy) NSString *username;
+@property (nonatomic, copy) NSString *password;
 @property (nonatomic, retain) NSURL *balanceUrl;
 
 @end
@@ -148,6 +148,8 @@ static NSTimeInterval balanceIntervalCurrent = balanceIntervalMax;
 
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
+    
+    [self cleanBalance];
 
 	// Set callQualityTimer
 	callQualityTimer = [NSTimer scheduledTimerWithTimeInterval:1
@@ -223,6 +225,8 @@ static NSTimeInterval balanceIntervalCurrent = balanceIntervalMax;
         [balanceTimer invalidate];
         balanceTimer = nil;
     }
+    
+    [self cleanBalance];
 }
 
 
@@ -491,6 +495,15 @@ static NSTimeInterval balanceIntervalCurrent = balanceIntervalMax;
 	view.frame = [[attributes objectForKey:@"frame"] CGRectValue];
 	view.bounds = [[attributes objectForKey:@"bounds"] CGRectValue];
 	view.autoresizingMask = [[attributes objectForKey:@"autoresizingMask"] integerValue];
+}
+
+#pragma mark - Privtae
+
+- (void)cleanBalance {
+    self.balanceUrl = nil;
+    self.username = nil;
+    self.password = nil;
+    self.balanceLabel.text = @"...";
 }
 
 @end
