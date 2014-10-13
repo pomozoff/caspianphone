@@ -188,7 +188,7 @@ static void sync_address_book (ABAddressBookRef addressBook, CFDictionaryRef inf
                         NSString* lNormalizedKey = [FastAddressBook normalizePhoneNumber:(NSString*)lValue];
                         NSString* lNormalizedSipKey = [FastAddressBook normalizeSipURI:lNormalizedKey];
                         if (lNormalizedSipKey != NULL) lNormalizedKey = lNormalizedSipKey;
-                        [addressBookMap setObject:lPerson forKey:lNormalizedKey];
+                        [addressBookMap setObject:lPerson forKey:[FastAddressBook takePhoneNumberFromAddress:lNormalizedKey]];
                         CFRelease(lValue);
                         if (lLabel) CFRelease(lLabel);
                         if (lLocalizedLabel) CFRelease(lLocalizedLabel);
@@ -215,7 +215,7 @@ static void sync_address_book (ABAddressBookRef addressBook, CFDictionaryRef inf
                             CFStringRef lValue = CFDictionaryGetValue(lDict, kABPersonInstantMessageUsernameKey);
                             NSString* lNormalizedKey = [FastAddressBook normalizeSipURI:(NSString*)lValue];
                             if(lNormalizedKey != NULL) {
-                                [addressBookMap setObject:lPerson forKey:lNormalizedKey];
+                                [addressBookMap setObject:lPerson forKey:[FastAddressBook takePhoneNumberFromAddress:lNormalizedKey]];
                             } else {
                                 [addressBookMap setObject:lPerson forKey:(NSString*)lValue];
                             }
