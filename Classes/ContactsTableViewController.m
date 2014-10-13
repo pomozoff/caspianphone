@@ -174,9 +174,11 @@ static int ms_strcmpfuz(const char * fuzzy_word, const char * sentence) {
 
 						// Put in correct subDic
 						NSString *firstChar = [[name substringToIndex:1] uppercaseString];
+                        /*
 						if([firstChar characterAtIndex:0] < 'A' || [firstChar characterAtIndex:0] > 'Z') {
 							firstChar = @"#";
 						}
+                        */
 						OrderedDictionary *subDic =[addressBookMap objectForKey: firstChar];
 						if(subDic == nil) {
 							subDic = [[[OrderedDictionary alloc] init] autorelease];
