@@ -202,7 +202,7 @@
                     </connections>
                 </button>
             </subviews>
-            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="0.52156865600000002" green="0.76862752440000004" blue="0.91372555489999996" alpha="1" colorSpace="deviceRGB"/>
             <gestureRecognizers/>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -285,7 +285,7 @@
                     </connections>
                 </button>
             </subviews>
-            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="0.52156865600000002" green="0.76862752440000004" blue="0.91372555489999996" alpha="1" colorSpace="deviceRGB"/>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="1276" y="208"/>
@@ -435,7 +435,7 @@
                     </connections>
                 </button>
             </subviews>
-            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="0.52156865600000002" green="0.76862752440000004" blue="0.91372555489999996" alpha="1" colorSpace="deviceRGB"/>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="-13" y="770"/>
@@ -585,7 +585,7 @@
                     </connections>
                 </button>
             </subviews>
-            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="0.52156865600000002" green="0.76862752440000004" blue="0.91372555489999996" alpha="1" colorSpace="deviceRGB"/>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="832" y="208"/>
