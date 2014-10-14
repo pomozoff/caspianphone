@@ -336,10 +336,6 @@
                                 <outlet property="waitView" destination="59" id="60"/>
                             </connections>
                         </button>
-                        <activityIndicatorView hidden="YES" opaque="NO" tag="20" contentMode="scaleToFill" hidesWhenStopped="YES" style="whiteLarge" id="59" userLabel="videoWaitView">
-                            <rect key="frame" x="20" y="20" width="37" height="37"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        </activityIndicatorView>
                         <button opaque="NO" tag="21" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="11" userLabel="microButton" customClass="UIMicroButton">
                             <rect key="frame" x="105" y="0.0" width="111" height="67"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -360,7 +356,7 @@
                                 <color key="titleColor" red="0.81176470590000005" green="0.29803921570000003" blue="0.16078431369999999" alpha="1" colorSpace="deviceRGB"/>
                             </state>
                         </button>
-                        <button hidden="YES" opaque="NO" tag="29" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="164" userLabel="routesButton" customClass="UIToggleButton">
+                        <button hidden="YES" opaque="NO" tag="29" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="164" userLabel="routesButton" customClass="UIToggleButton">
                             <rect key="frame" x="160" y="0.0" width="80" height="67"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <accessibility key="accessibilityConfiguration" label="Route"/>
@@ -383,7 +379,7 @@
                                 <action selector="onRoutesClick:" destination="-1" eventType="touchUpInside" id="211"/>
                             </connections>
                         </button>
-                        <button hidden="YES" opaque="NO" tag="23" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="10" userLabel="optionsButton" customClass="UIToggleButton">
+                        <button hidden="YES" opaque="NO" tag="23" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="10" userLabel="optionsButton" customClass="UIToggleButton">
                             <rect key="frame" x="240" y="0.0" width="80" height="67"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <accessibility key="accessibilityConfiguration" label="Options"/>
@@ -417,7 +413,7 @@
                             <state key="selected" image="play.png"/>
                             <state key="highlighted" image="pause-button.png"/>
                         </button>
-                        <button hidden="YES" opaque="NO" tag="25" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="21" userLabel="conferenceButton">
+                        <button hidden="YES" opaque="NO" tag="25" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="21" userLabel="conferenceButton">
                             <rect key="frame" x="0.0" y="67" width="105" height="68"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
                             <accessibility key="accessibilityConfiguration" label="Start conference"/>
@@ -474,6 +470,11 @@
                                 <color key="titleColor" red="0.81176470590000005" green="0.29803921570000003" blue="0.16078431369999999" alpha="1" colorSpace="deviceRGB"/>
                             </state>
                         </button>
+                        <activityIndicatorView hidden="YES" opaque="NO" tag="20" contentMode="scaleToFill" hidesWhenStopped="YES" style="whiteLarge" id="59" userLabel="videoWaitView">
+                            <rect key="frame" x="34" y="18" width="37" height="37"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        </activityIndicatorView>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
