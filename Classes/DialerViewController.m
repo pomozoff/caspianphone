@@ -397,4 +397,8 @@ static UICompositeViewDescription *compositeDescription = nil;
     }
 }
 
+- (IBAction)onChatTap:(id)sender {
+    [[PhoneMainView instance] changeCurrentView:[ChatViewController compositeViewDescription]];
+}
+
 @end

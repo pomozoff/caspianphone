@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
-        <deployment defaultVersion="1536" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
     </dependencies>
     <objects>
@@ -257,6 +256,31 @@
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         </imageView>
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="183" userLabel="backButton">
+                            <rect key="frame" x="0.0" y="0.0" width="105" height="64"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <accessibility key="accessibilityConfiguration" label="Back"/>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                            <state key="normal" image="back-medium.png">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <state key="disabled" image="back-medium_hover.png"/>
+                            <state key="highlighted" image="back_over.png"/>
+                            <connections>
+                                <action selector="onBackClick:" destination="-1" eventType="touchUpInside" id="233"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="Dsp-hP-Iu2" userLabel="smsButton">
+                            <rect key="frame" x="0.0" y="0.0" width="105" height="64"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <accessibility key="accessibilityConfiguration" label="Back"/>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                            <state key="normal" image="sms.png">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <state key="disabled" image="sms-hover.png"/>
+                            <state key="highlighted" image="sms-hover.png"/>
+                        </button>
                         <button hidden="YES" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="184" userLabel="addCallButton" customClass="UICallButton">
                             <rect key="frame" x="105" y="0.0" width="111" height="64"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -299,18 +323,18 @@
                                 <outlet property="addressField" destination="4" id="235"/>
                             </connections>
                         </button>
-                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="183" userLabel="backButton">
-                            <rect key="frame" x="0.0" y="0.0" width="105" height="64"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="Thb-Pf-iHr" userLabel="chatButton">
+                            <rect key="frame" x="215" y="0.0" width="105" height="64"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <accessibility key="accessibilityConfiguration" label="Back"/>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                            <state key="normal" image="back-medium.png">
+                            <state key="normal" image="chat.png">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
-                            <state key="disabled" image="back-medium_hover.png"/>
-                            <state key="highlighted" image="back_over.png"/>
+                            <state key="disabled" image="chat-hover.png"/>
+                            <state key="highlighted" image="chat-hover.png"/>
                             <connections>
-                                <action selector="onBackClick:" destination="-1" eventType="touchUpInside" id="233"/>
+                                <action selector="onChatTap:" destination="-1" eventType="touchUpInside" id="NwK-0W-0SH"/>
                             </connections>
                         </button>
                     </subviews>
@@ -354,11 +378,15 @@
         <image name="back-medium.png" width="215" height="102"/>
         <image name="back-medium_hover.png" width="215" height="102"/>
         <image name="back_over.png" width="213" height="138"/>
+        <image name="chat-hover.png" width="216" height="131"/>
+        <image name="chat.png" width="216" height="131"/>
         <image name="delete-hover.png" width="131" height="131"/>
         <image name="delete.png" width="131" height="131"/>
         <image name="large-blue-button.png" width="640" height="284"/>
         <image name="phone-button.png" width="218" height="128"/>
         <image name="phone.png" width="218" height="131"/>
+        <image name="sms-hover.png" width="216" height="131"/>
+        <image name="sms.png" width="216" height="131"/>
         <image name="star-hover.png" width="24" height="23"/>
         <image name="star.png" width="24" height="23"/>
         <image name="transfer_call_default.png" width="214" height="138"/>

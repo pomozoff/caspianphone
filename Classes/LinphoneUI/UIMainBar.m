@@ -162,10 +162,11 @@ static NSString * const kDisappearAnimation = @"disappear";
         [LinphoneUtils buttonFixStatesForTabs:settingsButtonLandscape];
     }
 
+    /*
     {
         UIButton *chatButtonLandscape = (UIButton*) [landscapeView viewWithTag:[chatButton tag]];
         // Set selected+over background: IB lack !
-        [chatButton setBackgroundImage:[UIImage imageNamed:@"messages-hover.png"]
+        [chatButton setBackgroundImage:[UIImage imageNamed:@"shop-hover.png"]
                               forState:(UIControlStateHighlighted | UIControlStateSelected)];
 
         // Set selected+over background: IB lack !
@@ -175,6 +176,7 @@ static NSString * const kDisappearAnimation = @"disappear";
         [LinphoneUtils buttonFixStatesForTabs:chatButton];
         [LinphoneUtils buttonFixStatesForTabs:chatButtonLandscape];
     }
+    */
 
     [super viewDidLoad]; // Have to be after due to TPMultiLayoutViewController
 }
@@ -383,11 +385,13 @@ static NSString * const kDisappearAnimation = @"disappear";
     } else {
         settingsButton.selected = FALSE;
     }
+    /*
     if([view equal:[ChatViewController compositeViewDescription]]) {
         chatButton.selected = TRUE;
     } else {
         chatButton.selected = FALSE;
     }
+    */
 }
 
 
