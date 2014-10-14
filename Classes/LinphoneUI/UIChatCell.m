@@ -45,6 +45,9 @@
             [self.contentView addSubview:[arrayOfViews objectAtIndex:0]];
         }
         [chatContentLabel setAdjustsFontSizeToFitWidth:TRUE]; // Auto shrink: IB lack!
+
+        avatarImage.layer.cornerRadius = avatarImage.frame.size.height / 2;
+        avatarImage.clipsToBounds = YES;
     }
     return self;
 }

@@ -40,6 +40,8 @@
         if ([arrayOfViews count] >= 1) {
             [self.contentView addSubview:[arrayOfViews objectAtIndex:0] ];
         }
+        avatarImage.layer.cornerRadius = avatarImage.frame.size.height / 2;
+        avatarImage.clipsToBounds = YES;
     }
     return self;
 }
