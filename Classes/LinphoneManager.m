@@ -2240,6 +2240,9 @@ static void audioRouteChangeListenerCallback (
 }
 
 - (NSString *)cleanPhoneNumber:(NSString *)phoneNumber {
+    if (phoneNumber.length < 1) {
+        return phoneNumber;
+    }
     NSString *normalizedPhoneNumber = [FastAddressBook normalizePhoneNumber:phoneNumber];
     
     NSArray *badPrefixes = @[@"+", @"0"];

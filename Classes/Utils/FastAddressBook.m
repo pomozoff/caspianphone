@@ -90,7 +90,10 @@ static void sync_address_book (ABAddressBookRef addressBook, CFDictionaryRef inf
     return normalizedSipAddress;
 }
 
-+ (NSString*)normalizePhoneNumber:(NSString*)address {
++ (NSString *)normalizePhoneNumber:(NSString *)address {
+    if (address.length < 1) {
+        return address;
+    }
     NSMutableString* lNormalizedAddress = [NSMutableString stringWithString:address];
     [lNormalizedAddress replaceOccurrencesOfString:@" "
                                         withString:@""
@@ -120,6 +123,9 @@ static void sync_address_book (ABAddressBookRef addressBook, CFDictionaryRef inf
 }
 
 + (NSString *)takePhoneNumberFromAddress:(NSString*)address {
+    if (address.length < 1) {
+        return address;
+    }
     NSMutableString* lNormalizedAddress = [NSMutableString stringWithString:address];
     [lNormalizedAddress replaceOccurrencesOfString:@"sip:"
                                         withString:@""
@@ -134,6 +140,9 @@ static void sync_address_book (ABAddressBookRef addressBook, CFDictionaryRef inf
 }
 
 + (NSString *)caspianSipAddressForPhoneNumber:(NSString *)phoneNumber {
+    if (phoneNumber.length < 1) {
+        return phoneNumber;
+    }
     NSString *caspianDomain = [[LinphoneManager instance] caspianDomain];
     return [NSString stringWithFormat:@"sip:%@@%@", phoneNumber, caspianDomain];
 }
