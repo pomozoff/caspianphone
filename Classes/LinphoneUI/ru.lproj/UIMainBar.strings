@@ -1,9 +1,9 @@
 
 /* Class = "IBUIButton"; accessibilityLabel = "Чат"; ObjectID = "5"; */
-"5.accessibilityLabel" = "Чат";
+"5.accessibilityLabel" = "Магазин";
 
 /* Class = "IBUIButton"; normalTitle = "Чат"; ObjectID = "5"; */
-"5.normalTitle" = "Чат";
+"5.normalTitle" = "Магазин";
 
 /* Class = "IBUIButton"; accessibilityLabel = "История"; ObjectID = "6"; */
 "6.accessibilityLabel" = "История";
