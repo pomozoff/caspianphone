@@ -148,20 +148,24 @@ static int ms_strcmpfuz(const char * fuzzy_word, const char * sentence) {
     NSArray *phoneNumbers = (NSArray *)ABMultiValueCopyArrayOfAllValues(phoneNumberProperty);
     CFRelease(phoneNumberProperty);
 
-    NSString *caspianSupport = [FastAddressBook caspianSupportPhoneNumber];
-    NSUInteger indexOfSupportNumber = [phoneNumbers indexOfObjectPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
-        NSString *phoneNumber = obj;
-        NSString *normalizedPhoneNumber = [FastAddressBook normalizePhoneNumber:phoneNumber];
-        BOOL isFound = [normalizedPhoneNumber isEqualToString:caspianSupport];
-        if (isFound) {
-            *stop = YES;
-        }
-        return isFound;
-    }];
-    
+    BOOL isFound = NO;
+    if (phoneNumbers.count > 0) {
+        NSString *caspianSupport = [FastAddressBook caspianSupportPhoneNumber];
+        NSUInteger indexOfSupportNumber = [phoneNumbers indexOfObjectPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
+            NSString *phoneNumber = obj;
+            NSString *normalizedPhoneNumber = [FastAddressBook normalizePhoneNumber:phoneNumber];
+            BOOL isFound = [normalizedPhoneNumber isEqualToString:caspianSupport];
+            if (isFound) {
+                *stop = YES;
+            }
+            return isFound;
+        }];
+        isFound = indexOfSupportNumber != NSNotFound;
+    }
+
     [phoneNumbers release];
     
-    return indexOfSupportNumber != NSNotFound;
+    return isFound;
 }
 
 - (void)addContactWithName:(NSString *)name contactObject:(id)lPerson toAddressBookMap:(OrderedDictionary *)orderedAddressBookMap {
