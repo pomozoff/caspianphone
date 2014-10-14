@@ -21,6 +21,8 @@
 #import "UIChatCell.h"
 
 #import "linphone/linphonecore.h"
+#import "mediastreamer2/mscommon.h"
+
 #import "PhoneMainView.h"
 #import "UACellBackgroundView.h"
 #import "UILinphone.h"
@@ -69,10 +71,22 @@ static int sorted_history_comparison(LinphoneChatRoom *to_insert, LinphoneChatRo
     MSList* unsorted = linphone_core_get_chat_rooms([LinphoneManager getLc]);
     MSList* iter     = unsorted;
 
+    LinphoneChatRoom *chatRoom = NULL;
     while (iter) {
-        sorted = ms_list_insert_sorted(sorted, iter->data, (MSCompareFunc)sorted_history_comparison);
+        if (![FastAddressBook isChatRoomSupport:iter->data]) {
+            sorted = ms_list_insert_sorted(sorted, iter->data, (MSCompareFunc)sorted_history_comparison);
+        } else {
+            chatRoom = iter->data;
+        }
         iter = iter->next;
     }
+    if (chatRoom == NULL) {
+        const char* addressSupport = [[FastAddressBook caspianSupportPhoneNumber] UTF8String];
+        LinphoneCore *lc = [LinphoneManager getLc];
+        chatRoom = linphone_core_create_chat_room(lc, addressSupport);
+    }
+    sorted = ms_list_prepend(sorted, chatRoom);
+    
     return sorted;
 }
 
@@ -156,11 +170,7 @@ static int sorted_history_comparison(LinphoneChatRoom *to_insert, LinphoneChatRo
     switch (index) {
         case 0: {
             // Call button was pressed
-            LinphoneChatRoom *chatRoom = (LinphoneChatRoom*)ms_list_nth_data(data, indexPath.row);
-            const LinphoneAddress *linphoneAddress = linphone_chat_room_get_peer_address(chatRoom);
-            const char *username = linphone_address_get_username(linphoneAddress);
-            NSString *dirtyAddress = [NSString stringWithUTF8String:username];
-            NSString *address = [[LinphoneManager instance] cleanPhoneNumber:dirtyAddress];
+            NSString *address = [self phoneNumberForCellAtRow:indexPath.row];
             NSString *displayName = nil;
             ABRecordRef contact = [[[LinphoneManager instance] fastAddressBook] getContact:address];
             if(contact) {
@@ -195,10 +205,15 @@ static int sorted_history_comparison(LinphoneChatRoom *to_insert, LinphoneChatRo
     return YES;
 }
 
+- (BOOL)swipeableTableViewCell:(SWTableViewCell *)cell canSwipeToState:(SWCellState)state {
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+    NSString *address = [self phoneNumberForCellAtRow:indexPath.row];
+    return ![address isEqualToString:[FastAddressBook caspianSupportPhoneNumber]];
+}
+
 #pragma mark - Private
 
-- (NSArray *)rightButtons
-{
+- (NSArray *)rightButtons {
     UIColor *callColor = [UIColor colorWithRed:0.78f green:0.78f blue:0.8f alpha:1.0];
     UIColor *deleteColor = [UIColor colorWithRed:1.0f green:0.231f blue:0.188 alpha:1.0f];
     
@@ -207,6 +222,16 @@ static int sorted_history_comparison(LinphoneChatRoom *to_insert, LinphoneChatRo
     [rightUtilityButtons sw_addUtilityButtonWithColor:deleteColor title:@"Delete"];
     
     return rightUtilityButtons;
+}
+
+- (NSString *)phoneNumberForCellAtRow:(NSInteger)row {
+    LinphoneChatRoom *chatRoom = (LinphoneChatRoom*)ms_list_nth_data(data, row);
+    const LinphoneAddress *linphoneAddress = linphone_chat_room_get_peer_address(chatRoom);
+    const char *username = linphone_address_get_username(linphoneAddress);
+    NSString *dirtyAddress = [NSString stringWithUTF8String:username];
+    NSString *address = [[LinphoneManager instance] cleanPhoneNumber:dirtyAddress];
+    
+    return address;
 }
 
 @end

@@ -738,7 +738,8 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
         [self.tableView beginUpdates];
     }
     if(editing) {
-        // add phony entries so that the user can add new data
+        /*
+        // add phone entries so that the user can add new data
         for (int section = 0; section < [self numberOfSectionsInTableView:[self tableView]]; ++section) {
             if(contactSections[section] == ContactSections_Number ||
                contactSections[section] == ContactSections_Sip ||
@@ -746,6 +747,7 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
                 [self addEntry:self.tableView section:section animated:animated];
             }
         }
+        */
     } else {
         for (int section = 0; section < [self numberOfSectionsInTableView:[self tableView]]; ++section) {
             // remove phony entries that were not filled by the user

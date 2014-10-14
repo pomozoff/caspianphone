@@ -137,6 +137,16 @@ static void sync_address_book (ABAddressBookRef addressBook, CFDictionaryRef inf
     return !ABAddressBookGetAuthorizationStatus || ABAddressBookGetAuthorizationStatus() ==  kABAuthorizationStatusAuthorized;
 }
 
++ (NSString *)caspianSupportPhoneNumber {
+    return @"443303500153";
+}
+
++ (BOOL)isChatRoomSupport:(LinphoneChatRoom *)chatRoom {
+    const LinphoneAddress *peerAddress = linphone_chat_room_get_peer_address(chatRoom);
+    const char* phoneNumber = linphone_address_get_username(peerAddress);
+    return [[NSString stringWithUTF8String:phoneNumber] isEqualToString:[self caspianSupportPhoneNumber]];
+}
+
 - (FastAddressBook*)init {
     if ((self = [super init]) != nil) {
         addressBookMap  = [[NSMutableDictionary alloc] init];

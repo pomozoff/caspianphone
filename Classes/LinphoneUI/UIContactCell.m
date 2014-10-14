@@ -93,7 +93,7 @@
     else
         [lastNameLabel setText: @""];
     
-    if(lLocalizedFirstName == nil && lLocalizedLastName == nil) {
+    if([(__bridge NSString *)lLocalizedFirstName length] < 1 && [(__bridge NSString *)lLocalizedLastName length] < 1) {
         [firstNameLabel setText: (NSString *)lLocalizedOrganization];
     }
     
