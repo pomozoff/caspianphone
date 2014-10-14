@@ -36,6 +36,8 @@
 #include "linphone/lpconfig.h"
 #include "mediastreamer2/mscommon.h"
 
+static NSString *caspianDomainIp = @"212.159.80.157";
+
 #define LINPHONE_LOGS_MAX_ENTRY 5000
 
 NSInteger caspianErrorCode = 480;
@@ -2237,20 +2239,26 @@ static void audioRouteChangeListenerCallback (
     return string;
 }
 
-- (NSString *)cleanPhoneNumber:(NSString *)username {
+- (NSString *)cleanPhoneNumber:(NSString *)phoneNumber {
+    NSString *normalizedPhoneNumber = [FastAddressBook normalizePhoneNumber:phoneNumber];
+    
     NSArray *badPrefixes = @[@"+", @"0"];
     
-    NSString *cleanUsername = username;
-    NSString *previousUsername = @"";
+    NSString *cleanPhoneNumber = normalizedPhoneNumber;
+    NSString *previousPhoneNumber = @"";
     do {
-        previousUsername = cleanUsername;
+        previousPhoneNumber = cleanPhoneNumber;
         for (NSString *prefix in badPrefixes) {
-            while ([cleanUsername hasPrefix:prefix]) {
-                cleanUsername = [self removePrefix:prefix fromString:cleanUsername];
+            while ([cleanPhoneNumber hasPrefix:prefix]) {
+                cleanPhoneNumber = [self removePrefix:prefix fromString:cleanPhoneNumber];
             }
         }
-    } while (![cleanUsername isEqual:previousUsername]);
-    return cleanUsername;
+    } while (![cleanPhoneNumber isEqual:previousPhoneNumber]);
+    return cleanPhoneNumber;
+}
+
+- (NSString *)caspianDomain {
+    return caspianDomainIp;
 }
 
 @end

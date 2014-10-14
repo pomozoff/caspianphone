@@ -37,7 +37,6 @@ typedef enum _ViewElement {
     ViewElement_Username_Error      = 404
 } ViewElement;
 
-static NSString *caspianDomain = @"212.159.80.157";
 static NSString *caspianPhoneNumber = @"uk.co.onecallcaspian.phone.username";
 static NSString *caspianPasswordKey = @"uk.co.onecallcaspian.phone.password";
 static NSString *caspianActivationCodeKey = @"uk.co.onecallcaspian.phone.activationCode";
@@ -939,6 +938,7 @@ static UICompositeViewDescription *compositeDescription = nil;
         [errorView release];
     } else {
         [self.waitView setHidden:false];
+        NSString *caspianDomain = [[LinphoneManager instance] caspianDomain];
         [self addProxyConfig:[[LinphoneManager instance] cleanPhoneNumber:username] password:password domain:caspianDomain];
     }
 }

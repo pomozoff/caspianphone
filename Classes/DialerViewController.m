@@ -335,7 +335,8 @@ static UICompositeViewDescription *compositeDescription = nil;
 }
 
 - (void)call:(NSString*)address displayName:(NSString *)displayName {
-    [[LinphoneManager instance] call:[[LinphoneManager instance] cleanPhoneNumber:address] displayName:displayName transfer:transferMode];
+    NSString *cleanPhoneNumber = [[LinphoneManager instance] cleanPhoneNumber:address];
+    [[LinphoneManager instance] call:cleanPhoneNumber displayName:displayName transfer:transferMode];
 }
 
 

@@ -133,6 +133,11 @@ static void sync_address_book (ABAddressBookRef addressBook, CFDictionaryRef inf
     return range.location != NSNotFound ? [lNormalizedAddress substringToIndex:range.location] : lNormalizedAddress;
 }
 
++ (NSString *)caspianSipAddressForPhoneNumber:(NSString *)phoneNumber {
+    NSString *caspianDomain = [[LinphoneManager instance] caspianDomain];
+    return [NSString stringWithFormat:@"sip:%@@%@", phoneNumber, caspianDomain];
+}
+
 + (BOOL)isAuthorized {
     return !ABAddressBookGetAuthorizationStatus || ABAddressBookGetAuthorizationStatus() ==  kABAuthorizationStatusAuthorized;
 }

@@ -311,6 +311,19 @@ static void message_status(LinphoneChatMessage* msg,LinphoneChatMessageState sta
 	[thiz.tableController updateChatEntry:msg];
 }
 
+/*
+ // It needs a private api to change peer
+- (void)fixChatRoomPeer:(LinphoneChatRoom *)chatRoom {
+    NSString *peer = [NSString stringWithUTF8String:chatRoom->peer];
+    NSString *caspianDomain = [[LinphoneManager instance] caspianDomain];
+    if ([peer rangeOfString:[NSString stringWithFormat:@"@%@", caspianDomain]].location == NSNotFound) {
+        NSString *phoneNumber = [FastAddressBook takePhoneNumberFromAddress:peer];
+        NSString *caspianSipAddress = [FastAddressBook caspianSipAddressForPhoneNumber:phoneNumber];
+        chatRoom->peer = [caspianSipAddress UTF8String];
+    }
+}
+*/
+
 - (BOOL)sendMessage:(NSString *)message withExterlBodyUrl:(NSURL*)externalUrl withInternalURL:(NSURL*)internalUrl {
     if(![LinphoneManager isLcReady]) {
         [LinphoneLogger logc:LinphoneLoggerWarning format:"Cannot send message: Linphone core not ready"];
@@ -320,6 +333,8 @@ static void message_status(LinphoneChatMessage* msg,LinphoneChatMessageState sta
         [LinphoneLogger logc:LinphoneLoggerWarning format:"Cannot send message: No chatroom"];
         return FALSE;
     }
+    
+    //[self fixChatRoomPeer:chatRoom];
 
     LinphoneChatMessage* msg = linphone_chat_room_create_message(chatRoom, [message UTF8String]);
     if(externalUrl) {
