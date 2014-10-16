@@ -83,7 +83,11 @@ static NSTimeInterval balanceIntervalCurrent = balanceIntervalMax;
             const char *identity = linphone_proxy_config_get_identity(cfg);
             LinphoneAddress *addr = linphone_address_new(identity);
             if (addr) {
-                _username = [[NSString stringWithUTF8String:linphone_address_get_username(addr)] retain];
+                NSString *currentUusername = [NSString stringWithUTF8String:linphone_address_get_username(addr)];
+                if (_username != currentUusername) {
+                    _username = [currentUusername retain];
+                    self.balanceLabel.text = @"...";
+                }
                 linphone_address_destroy(addr);
             }
         }
@@ -197,6 +201,9 @@ static NSTimeInterval balanceIntervalCurrent = balanceIntervalMax;
 	if([LinphoneManager isLcReady])
 		linphone_core_get_default_proxy([LinphoneManager getLc], &config);
 	[self proxyConfigUpdate: config];
+    
+    balanceIntervalCurrent = balanceIntervalMax;
+    [self updateBalance];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -425,7 +432,7 @@ static NSTimeInterval balanceIntervalCurrent = balanceIntervalMax;
     }
 
     if (!isOnCall) {
-        if (balanceIntervalCurrent > balanceIntervalMax) {
+        if (balanceIntervalCurrent >= balanceIntervalMax) {
             balanceIntervalCurrent = 0.0;
         } else {
             balanceIntervalCurrent++;
@@ -503,7 +510,6 @@ static NSTimeInterval balanceIntervalCurrent = balanceIntervalMax;
     self.balanceUrl = nil;
     self.username = nil;
     self.password = nil;
-    self.balanceLabel.text = @"...";
 }
 
 @end
