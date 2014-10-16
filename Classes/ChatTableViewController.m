@@ -110,7 +110,8 @@ static int sorted_history_comparison(LinphoneChatRoom *to_insert, LinphoneChatRo
     UIChatCell *cell = [tableView dequeueReusableCellWithIdentifier:kCellId];
     if (cell == nil) {
         cell = [[[UIChatCell alloc] initWithIdentifier:kCellId] autorelease];
-        cell.rightUtilityButtons = [self rightButtons];
+        cell.rightUtilityButtons = [self isRowWithOneCallCaspianSupport:indexPath.row] ? [self rightButtonsCall] : [self rightButtonsAll];
+        [cell.rightUtilityButtons autorelease];
         cell.delegate = self;
         
         // Background View
@@ -204,21 +205,29 @@ static int sorted_history_comparison(LinphoneChatRoom *to_insert, LinphoneChatRo
 - (BOOL)swipeableTableViewCellShouldHideUtilityButtonsOnSwipe:(SWTableViewCell *)cell {
     return YES;
 }
-
+/*
 - (BOOL)swipeableTableViewCell:(SWTableViewCell *)cell canSwipeToState:(SWCellState)state {
     NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
     NSString *address = [self phoneNumberForCellAtRow:indexPath.row];
     return ![address isEqualToString:[FastAddressBook caspianSupportPhoneNumber]];
 }
+*/
 
 #pragma mark - Private
 
-- (NSArray *)rightButtons {
+- (NSMutableArray *)rightButtonsCall {
     UIColor *callColor = [UIColor colorWithRed:0.78f green:0.78f blue:0.8f alpha:1.0];
+    
+    NSMutableArray *rightUtilityButtons = [[NSMutableArray alloc] init];
+    [rightUtilityButtons sw_addUtilityButtonWithColor:callColor title:@"Call"];
+    
+    return rightUtilityButtons;
+}
+
+- (NSMutableArray *)rightButtonsAll {
     UIColor *deleteColor = [UIColor colorWithRed:1.0f green:0.231f blue:0.188 alpha:1.0f];
     
-    NSMutableArray *rightUtilityButtons = [NSMutableArray new];
-    [rightUtilityButtons sw_addUtilityButtonWithColor:callColor title:@"Call"];
+    NSMutableArray *rightUtilityButtons = [self rightButtonsCall];
     [rightUtilityButtons sw_addUtilityButtonWithColor:deleteColor title:@"Delete"];
     
     return rightUtilityButtons;
@@ -232,6 +241,11 @@ static int sorted_history_comparison(LinphoneChatRoom *to_insert, LinphoneChatRo
     NSString *address = [[LinphoneManager instance] cleanPhoneNumber:dirtyAddress];
     
     return address;
+}
+
+- (BOOL)isRowWithOneCallCaspianSupport:(NSUInteger)row {
+    NSString *address = [self phoneNumberForCellAtRow:row];
+    return [address isEqualToString:[FastAddressBook caspianSupportPhoneNumber]];
 }
 
 @end
