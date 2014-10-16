@@ -94,6 +94,13 @@ hiddenKeys = _hiddenKeys;
 	}
 }
 
+- (NSInteger)removeEmptyGroupFromDataSource:(NSMutableArray *)dataSource {
+    if ([[dataSource lastObject] count] == 1) {
+        [dataSource removeLastObject];
+        return -1;
+    }
+    return 0;
+}
 
 - (void)_reinterpretBundle:(NSDictionary*)settingsBundle {
 	NSArray *preferenceSpecifiers	= [settingsBundle objectForKey:kIASKPreferenceSpecifiers];
@@ -105,18 +112,14 @@ hiddenKeys = _hiddenKeys;
 			continue;
 		}
 		if ([(NSString*)[specifier objectForKey:kIASKType] isEqualToString:kIASKPSGroupSpecifier]) {
-            if ([dataSource lastObject] && [[dataSource lastObject] count] == 1) {
-                [dataSource removeLastObject];
-                sectionCount--;
-            }
+            //sectionCount += [self removeEmptyGroupFromDataSource:dataSource];
 			NSMutableArray *newArray = [[NSMutableArray alloc] init];
 			
 			[newArray addObject:specifier];
 			[dataSource addObject:newArray];
 			[newArray release];
 			sectionCount++;
-		}
-		else {
+		} else {
 			if (sectionCount == -1) {
 				NSMutableArray *newArray = [[NSMutableArray alloc] init];
 				[dataSource addObject:newArray];
@@ -128,6 +131,7 @@ hiddenKeys = _hiddenKeys;
 			[(NSMutableArray*)[dataSource objectAtIndex:sectionCount] addObject:newSpecifier];
 			[newSpecifier release];
 		}
+        //sectionCount += [self removeEmptyGroupFromDataSource:dataSource];
 	}
 	[self setDataSource:dataSource];
 }

@@ -229,6 +229,8 @@
 		<dict>
 			<key>File</key>
 			<string>Advanced</string>
+			<key>Key</key>
+			<string>advanced_menu</string>
 			<key>Title</key>
 			<string>Advanced</string>
 			<key>Type</key>
@@ -253,14 +255,6 @@
 			<string>quit_button</string>
 			<key>Title</key>
 			<string>Quit</string>
-			<key>Type</key>
-			<string>IASKButtonSpecifier</string>
-		</dict>
-		<dict>
-			<key>Key</key>
-			<string>reset_button</string>
-			<key>Title</key>
-			<string>Reset</string>
 			<key>Type</key>
 			<string>IASKButtonSpecifier</string>
 		</dict>

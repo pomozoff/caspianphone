@@ -716,6 +716,7 @@ static UICompositeViewDescription *compositeDescription = nil;
         [hiddenKeys addObject:@"avpf_preference"];
     }
 
+#ifdef DEBUG
     // *** Caspian hidden keys ***
     // Root
     [hiddenKeys addObject:@"domain_preference"];
@@ -723,16 +724,21 @@ static UICompositeViewDescription *compositeDescription = nil;
     [hiddenKeys addObject:@"advanced_account_preference"];
     [hiddenKeys addObject:@"enable_video_preference"];
     [hiddenKeys addObject:@"call_menu"];
+    [hiddenKeys addObject:@"network_menu"];
+    [hiddenKeys addObject:@"release_button"];
     // Advanced
+    [hiddenKeys addObject:@"debug_group"];
     [hiddenKeys addObject:@"debugenable_preference"];
     [hiddenKeys addObject:@"animations_preference"];
     [hiddenKeys addObject:@"rotation_preference"];
     [hiddenKeys addObject:@"backgroundmode_preference"];
     [hiddenKeys addObject:@"autoanswer_notif_preference"];
     [hiddenKeys addObject:@"expire_preference"];
+    [hiddenKeys addObject:@"primary_group"];
     [hiddenKeys addObject:@"primary_displayname_preference"];
     [hiddenKeys addObject:@"primary_username_preference"];
     [hiddenKeys addObject:@"expire_preference"];
+    [hiddenKeys addObject:@"sharing_group"];
     [hiddenKeys addObject:@"sharing_server_preference"];
     // Audio
     [hiddenKeys addObject:@"speex_16k_preference"];
@@ -742,9 +748,9 @@ static UICompositeViewDescription *compositeDescription = nil;
     [hiddenKeys addObject:@"aaceld_44k_preference"];
     [hiddenKeys addObject:@"amr_preference"];
     [hiddenKeys addObject:@"ilbc_preference"];
-    [hiddenKeys addObject:@"aaceld_44k_preference"];
     // Video
     [hiddenKeys addObject:@"vp8_preference"];
+#endif
     
     return hiddenKeys;
 }
@@ -769,7 +775,9 @@ static UICompositeViewDescription *compositeDescription = nil;
         [[UIDevice currentDevice] _setBatteryLevel:0.01f];
         [[NSNotificationCenter defaultCenter] postNotificationName:UIDeviceBatteryLevelDidChangeNotification object:self];
     } else  if([key isEqual:@"reset_button"]) {
-        [[PhoneMainView instance] resetToDefaults];
+        //[[PhoneMainView instance] resetToDefaults];
+        [[LinphoneManager instance] resetSettingsToDefault:[LinphoneManager getLc]];
+        [settingsStore transformLinphoneCoreToKeys];
     }
 #endif
     if([key isEqual:@"console_button"]) {

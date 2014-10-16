@@ -126,36 +126,46 @@ struct codec_name_pref_table{
 	const char *name;
 	int rate;
 	NSString *prefname;
+    BOOL isUsed;
 };
 
-struct codec_name_pref_table codec_pref_table[]={
-	{ "speex", 8000, @"speex_8k_preference" },
-	{ "speex", 16000, @"speex_16k_preference" },
-	{ "silk", 24000, @"silk_24k_preference" },
-	{ "silk", 16000, @"silk_16k_preference" },
-	{ "amr", 8000, @"amr_preference" },
-	{ "gsm", 8000, @"gsm_preference" },
-	{ "ilbc", 8000, @"ilbc_preference"},
-	{ "pcmu", 8000, @"pcmu_preference"},
-	{ "pcma", 8000, @"pcma_preference"},
-	{ "g722", 8000, @"g722_preference"},
-	{ "g729", 8000, @"g729_preference"},
-	{ "mp4v-es", 90000, @"mp4v-es_preference"},
-	{ "h264", 90000, @"h264_preference"},
-	{ "vp8", 90000, @"vp8_preference"},
-	{ "mpeg4-generic", 44100, @"aaceld_44k_preference"},
-	{ "mpeg4-generic", 22050, @"aaceld_22k_preference"},
-	{ "opus", 48000, @"opus_preference"},
-	{ NULL,0,Nil }
+struct codec_name_pref_table codec_pref_table[] = {
+	{ "speex",          8000, @"speex_8k_preference",    NO },
+	{ "speex",         16000, @"speex_16k_preference",   NO },
+	{ "silk",          24000, @"silk_24k_preference",   YES },
+	{ "silk",          16000, @"silk_16k_preference",   YES },
+	{ "amr",            8000, @"amr_preference",         NO },
+	{ "gsm",            8000, @"gsm_preference",        YES },
+	{ "ilbc",           8000, @"ilbc_preference",        NO },
+	{ "pcmu",           8000, @"pcmu_preference",       YES },
+	{ "pcma",           8000, @"pcma_preference",       YES },
+	{ "g722",           8000, @"g722_preference",       YES },
+	{ "g729",           8000, @"g729_preference",       YES },
+	{ "mp4v-es",       90000, @"mp4v-es_preference",    YES },
+	{ "h264",          90000, @"h264_preference",       YES },
+	{ "vp8",           90000, @"vp8_preference",         NO },
+	{ "mpeg4-generic", 44100, @"aaceld_44k_preference",  NO },
+	{ "mpeg4-generic", 22050, @"aaceld_22k_preference",  NO },
+	{ "opus",          48000, @"opus_preference",        NO },
+	{ NULL,                0, Nil,                       NO }
 };
 
-+ (NSString *)getPreferenceForCodec: (const char*) name withRate: (int) rate{
-	int i;
-	for(i=0;codec_pref_table[i].name!=NULL;++i){
-		if (strcasecmp(codec_pref_table[i].name,name)==0 && codec_pref_table[i].rate==rate)
-			return codec_pref_table[i].prefname;
-	}
-	return Nil;
++ (int)indexCodecByName:(const char*)name withRate:(int)rate {
+    for(int i = 0; codec_pref_table[i].name != NULL; ++i) {
+        if (strcasecmp(codec_pref_table[i].name, name) == 0 && codec_pref_table[i].rate == rate)
+            return i;
+    }
+    return -1;
+}
+
++ (NSString *)getPreferenceForCodec:(const char*)name withRate:(int)rate {
+    int index = [self indexCodecByName:name withRate:rate];
+    return index < 0 ? nil : codec_pref_table[index].prefname;
+}
+
++ (BOOL)isSupportedCodec:(const char*)name withRate:(int)rate {
+    int index = [self indexCodecByName:name withRate:rate];
+    return index < 0 ? NO : codec_pref_table[index].isUsed;
 }
 
 + (NSSet *)unsupportedCodecs {
@@ -1156,26 +1166,6 @@ static LinphoneCoreVTable linphonec_vtable = {
 	}
 }
 
-- (void)enableCaspianCodecs {
-    NSString *keyName = @"name";
-    NSString *keyRate = @"rate";
-
-    NSArray *caspianCodecs = @[ @{keyName : @"silk", keyRate : @16000}
-                              , @{keyName : @"silk", keyRate : @24000}
-                              , @{keyName : @"g722", keyRate :  @8000}
-                              , @{keyName : @"g729", keyRate :  @8000}
-                              , @{keyName : @"gsm",  keyRate :  @8000}
-                              , @{keyName : @"pcmu", keyRate :  @8000}
-                              , @{keyName : @"pcma", keyRate :  @8000}
-                                ];
-    for (NSDictionary *codec in caspianCodecs) {
-        PayloadType *pt = linphone_core_find_payload_type(theLinphoneCore, [codec[keyName] UTF8String], [codec[keyRate] intValue], -1);
-        if (pt) {
-            linphone_core_enable_payload_type(theLinphoneCore, pt, TRUE);
-        }
-    }
-}
-
 /** Should be called once per linphone_core_new() */
 - (void)finishCoreConfiguration {
 
@@ -1282,7 +1272,7 @@ static LinphoneCoreVTable linphonec_vtable = {
 		}
     }
 
-    [self enableCaspianCodecs];
+    //[self enableCaspianCodecs];
 	
     [LinphoneLogger logc:LinphoneLoggerWarning format:"Linphone [%s]  started on [%s]", linphone_core_get_version(), [[UIDevice currentDevice].model cStringUsingEncoding:[NSString defaultCStringEncoding]]];
 
@@ -1298,6 +1288,31 @@ static LinphoneCoreVTable linphonec_vtable = {
 
 
 static BOOL libStarted = FALSE;
+
+- (void)processCodecs:(const MSList *)elem linphoneCore:(LinphoneCore *)lc {
+    bool_t value;
+    for (; elem != NULL; elem = elem->next) {
+        PayloadType *pt = (PayloadType *)elem->data;
+        BOOL isUsed = [LinphoneManager isSupportedCodec:pt->mime_type withRate:pt->clock_rate];
+        linphone_core_enable_payload_type(lc, pt, isUsed);
+        value = linphone_core_payload_type_enabled(lc, pt);
+    }
+}
+
+- (void)prepareAllCodecs:(LinphoneCore *)lc {
+    [self processCodecs:linphone_core_get_audio_codecs(lc) linphoneCore:lc];
+    [self processCodecs:linphone_core_get_video_codecs(lc) linphoneCore:lc];
+}
+
+- (void)resetSettingsToDefault:(LinphoneCore *)lc {
+    linphone_core_enable_video(lc, YES, YES);
+    linphone_core_set_media_encryption(lc, LinphoneMediaEncryptionSRTP);
+
+    LpConfig *config = linphone_core_get_config(lc);
+    lp_config_set_int(config, LINPHONERC_APPLICATION_KEY, "edge_opt_preference", YES);
+    
+    [self prepareAllCodecs:theLinphoneCore];
+}
 
 - (void)startLibLinphone {
 
@@ -1428,6 +1443,8 @@ static BOOL libStarted = FALSE;
 										 ,configDb
 										 ,self /* user_data */);
 
+    [self resetSettingsToDefault:theLinphoneCore];
+    
 	/* set the CA file no matter what, since the remote provisioning could be hitting an HTTPS server */
 	const char* lRootCa = [[LinphoneManager bundleFile:@"rootca.pem"] cStringUsingEncoding:[NSString defaultCStringEncoding]];
 	linphone_core_set_root_ca(theLinphoneCore, lRootCa);
