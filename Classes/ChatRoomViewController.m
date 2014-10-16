@@ -308,7 +308,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     
     // Avatar
     if(image == nil) {
-        image = [UIImage imageNamed:@"avatar_unknown_small.png"];
+        image = [UIImage imageNamed:@"profile-picture-small.png"];
     }
     [avatarImage setImage:image];
     

@@ -476,7 +476,7 @@ static void sync_address_book (ABAddressBookRef addressBook, CFDictionaryRef inf
 		image = data;
 	}
 	if(image == nil) {
-		image = [UIImage imageNamed:@"avatar_unknown_small.png"];
+		image = [UIImage imageNamed:@"profile-picture-small.png"];
 	}
 	[[cell avatarImage] setImage:image];
 

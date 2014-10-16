@@ -285,6 +285,10 @@
 		2659D6F219E66A3600D70395 /* SWTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2659D6EA19E66A3600D70395 /* SWTableViewCell.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		2659D6F319E66A3600D70395 /* SWUtilityButtonTapGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2659D6EC19E66A3600D70395 /* SWUtilityButtonTapGestureRecognizer.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		2659D6F419E66A3600D70395 /* SWUtilityButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2659D6EE19E66A3600D70395 /* SWUtilityButtonView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		26988A8E19EFDD730002DC08 /* Plus.png in Resources */ = {isa = PBXBuildFile; fileRef = 26988A8C19EFDD730002DC08 /* Plus.png */; };
+		26988A8F19EFDD730002DC08 /* Plus@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 26988A8D19EFDD730002DC08 /* Plus@2x.png */; };
+		26988A9219EFF4EE0002DC08 /* edit-large.png in Resources */ = {isa = PBXBuildFile; fileRef = 26988A9019EFF4EE0002DC08 /* edit-large.png */; };
+		26988A9319EFF4EE0002DC08 /* edit-small.png in Resources */ = {isa = PBXBuildFile; fileRef = 26988A9119EFF4EE0002DC08 /* edit-small.png */; };
 		269948B719D9720C0017650E /* COCTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 269948B619D9720C0017650E /* COCTextField.m */; };
 		26A74D8B19C1D458002A3DA7 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26A74D8A19C1D458002A3DA7 /* Crashlytics.framework */; };
 		26DFD65F19BF2F3400D1395A /* background-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 26DFD65219BF2F3400D1395A /* background-1.png */; };
@@ -1856,6 +1860,10 @@
 		2659D6EC19E66A3600D70395 /* SWUtilityButtonTapGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWUtilityButtonTapGestureRecognizer.m; sourceTree = "<group>"; };
 		2659D6ED19E66A3600D70395 /* SWUtilityButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWUtilityButtonView.h; sourceTree = "<group>"; };
 		2659D6EE19E66A3600D70395 /* SWUtilityButtonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWUtilityButtonView.m; sourceTree = "<group>"; };
+		26988A8C19EFDD730002DC08 /* Plus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Plus.png; sourceTree = "<group>"; };
+		26988A8D19EFDD730002DC08 /* Plus@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Plus@2x.png"; sourceTree = "<group>"; };
+		26988A9019EFF4EE0002DC08 /* edit-large.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "edit-large.png"; sourceTree = "<group>"; };
+		26988A9119EFF4EE0002DC08 /* edit-small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "edit-small.png"; sourceTree = "<group>"; };
 		269948B519D9720C0017650E /* COCTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = COCTextField.h; sourceTree = "<group>"; };
 		269948B619D9720C0017650E /* COCTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = COCTextField.m; sourceTree = "<group>"; };
 		26A74D8A19C1D458002A3DA7 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
@@ -1901,7 +1909,7 @@
 		70E542F413E147EB002BA2C0 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		8D1107310486CEB800E47090 /* linphone-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "linphone-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 		C90FAA7615AF54E6002091CB /* HistoryDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryDetailsViewController.h; sourceTree = "<group>"; };
-		C90FAA7715AF54E6002091CB /* HistoryDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryDetailsViewController.m; sourceTree = "<group>"; };
+		C90FAA7715AF54E6002091CB /* HistoryDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = HistoryDetailsViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		C9B3A6FD15B485DB006F52EE /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Utils.h; path = Utils/Utils.h; sourceTree = "<group>"; };
 		C9C8253F15AE204D00D493FA /* options_add_disabled.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = options_add_disabled.png; path = Resources/options_add_disabled.png; sourceTree = "<group>"; };
 		C9C8254015AE204D00D493FA /* options_transfer_disabled.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = options_transfer_disabled.png; path = Resources/options_transfer_disabled.png; sourceTree = "<group>"; };
@@ -2420,7 +2428,7 @@
 		D3ED40171602172200BF332B /* HPTextViewInternal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HPTextViewInternal.h; sourceTree = "<group>"; };
 		D3ED40181602172200BF332B /* HPTextViewInternal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HPTextViewInternal.m; sourceTree = "<group>"; };
 		D3F26BEE15986B71005F9CAB /* IncomingCallViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IncomingCallViewController.h; sourceTree = "<group>"; };
-		D3F26BEF15986B71005F9CAB /* IncomingCallViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IncomingCallViewController.m; sourceTree = "<group>"; };
+		D3F26BEF15986B71005F9CAB /* IncomingCallViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = IncomingCallViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		D3F26BF515986DAD005F9CAB /* history_ok_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = history_ok_default.png; path = Resources/history_ok_default.png; sourceTree = "<group>"; };
 		D3F26BF615986DAD005F9CAB /* history_ok_over.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = history_ok_over.png; path = Resources/history_ok_over.png; sourceTree = "<group>"; };
 		D3F26BFB15987083005F9CAB /* header_incoming.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = header_incoming.png; path = Resources/header_incoming.png; sourceTree = "<group>"; };
@@ -2455,7 +2463,7 @@
 		D3F5F985160B1A0800D3DA1A /* setup_back_default~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "setup_back_default~ipad.png"; path = "Resources/setup_back_default~ipad.png"; sourceTree = "<group>"; };
 		D3F5F986160B1A0900D3DA1A /* setup_back_disabled_landscape~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "setup_back_disabled_landscape~ipad.png"; path = "Resources/setup_back_disabled_landscape~ipad.png"; sourceTree = "<group>"; };
 		D3F795D315A582800077328B /* ChatRoomViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatRoomViewController.h; sourceTree = "<group>"; };
-		D3F795D415A582800077328B /* ChatRoomViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatRoomViewController.m; sourceTree = "<group>"; };
+		D3F795D415A582800077328B /* ChatRoomViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ChatRoomViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		D3F795DB15A5831C0077328B /* chat_back_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = chat_back_default.png; path = Resources/chat_back_default.png; sourceTree = "<group>"; };
 		D3F795DC15A5831C0077328B /* chat_back_over.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = chat_back_over.png; path = Resources/chat_back_over.png; sourceTree = "<group>"; };
 		D3F7997F15BD32370018C273 /* TPMultiLayoutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TPMultiLayoutViewController.h; path = Utils/TPMultiLayoutViewController/TPMultiLayoutViewController.h; sourceTree = "<group>"; };
@@ -3122,6 +3130,8 @@
 				261FABEF19D02C9A00CFE4AA /* dialer-hover.png */,
 				2636608D19E6A45700D72171 /* dialer-button_hover.png */,
 				2636608E19E6A45700D72171 /* dialer-button.png */,
+				26988A9019EFF4EE0002DC08 /* edit-large.png */,
+				26988A9119EFF4EE0002DC08 /* edit-small.png */,
 				261FABD819D0284B00CFE4AA /* history.png */,
 				261FABED19D02B3D00CFE4AA /* history-hover.png */,
 				261FABC519CC58E300CFE4AA /* large-blue-button.png */,
@@ -3141,6 +3151,8 @@
 				26DFD65C19BF2F3400D1395A /* onecall_logo.png */,
 				2636608919E6A38900D72171 /* pause-button.png */,
 				2636608A19E6A38900D72171 /* play.png */,
+				26988A8C19EFDD730002DC08 /* Plus.png */,
+				26988A8D19EFDD730002DC08 /* Plus@2x.png */,
 				261FABC719D00CEE00CFE4AA /* phone_hover.png */,
 				261FABC819D00CEE00CFE4AA /* phone-button_hover.png */,
 				261FABC919D00CEE00CFE4AA /* phone-button.png */,
@@ -4312,7 +4324,6 @@
 				D3F83F7C1582253100336684 /* decline_default.png in Resources */,
 				D3F83F7E1582253100336684 /* decline_over.png in Resources */,
 				261FABA719CC54CB00CFE4AA /* 3-hover.png in Resources */,
-				D3F83F9215824D3600336684 /* LinphoneApp.xib in Resources */,
 				D3ED3E411585FB4A006C0DE4 /* background.png in Resources */,
 				2636608719E6821600D72171 /* micro-off-button.png in Resources */,
 				D3ED3E451585FB8C006C0DE4 /* dialer_address_background.png in Resources */,
@@ -4462,6 +4473,7 @@
 				D35406F715A47E9E007E7E81 /* button_background_default.png in Resources */,
 				D35406F915A47E9E007E7E81 /* button_background_over.png in Resources */,
 				26DFD67119BF2FC100D1395A /* linphone_splashscreen@2x.png in Resources */,
+				26988A9219EFF4EE0002DC08 /* edit-large.png in Resources */,
 				D38187AD15FE340100C3EDCA /* ChatRoomViewController.xib in Resources */,
 				D3F795DD15A5831C0077328B /* chat_back_default.png in Resources */,
 				D3F795DF15A5831C0077328B /* chat_back_over.png in Resources */,
@@ -4545,6 +4557,7 @@
 				D3C31A5615BD8DED008ED271 /* options_disabled_landscape.png in Resources */,
 				D3C31A5815BD8DED008ED271 /* options_over_landscape.png in Resources */,
 				D3C31A5A15BD8DED008ED271 /* options_selected_landscape.png in Resources */,
+				26988A8E19EFDD730002DC08 /* Plus.png in Resources */,
 				D3C31A5C15BD8DED008ED271 /* options_transfer_default_landscape.png in Resources */,
 				D3C31A5E15BD8DED008ED271 /* options_transfer_disabled_landscape.png in Resources */,
 				D3C31A6015BD8DED008ED271 /* options_transfer_over_landscape.png in Resources */,
@@ -4630,6 +4643,7 @@
 				D3A74F0C15C69392001500B9 /* micro_on_default~ipad.png in Resources */,
 				26DFD66F19BF2FB100D1395A /* linphone_splashscreen.png in Resources */,
 				D3A74F0E15C69392001500B9 /* micro_on_disabled~ipad.png in Resources */,
+				26988A8F19EFDD730002DC08 /* Plus@2x.png in Resources */,
 				26DFD67919BF34A400D1395A /* wizard_external_sip_caspian.rc in Resources */,
 				D3A74F1015C69392001500B9 /* micro_on_over~ipad.png in Resources */,
 				D3A74F1215C69392001500B9 /* options_add_default~ipad.png in Resources */,
@@ -4825,6 +4839,7 @@
 				261FABB019CC54CB00CFE4AA /* 6.png in Resources */,
 				D3103924162C3C5100C00C18 /* linphone_splashscreen-Landscape.png in Resources */,
 				D3103926162C3C5200C00C18 /* linphone_splashscreen-Landscape@2x.png in Resources */,
+				26988A9319EFF4EE0002DC08 /* edit-small.png in Resources */,
 				D3103928162C3C5200C00C18 /* linphone_splashscreen-Portrait.png in Resources */,
 				D310392A162C3C5200C00C18 /* linphone_splashscreen-Portrait@2x.png in Resources */,
 				261FAC0419D05B2B00CFE4AA /* continue-selected.png in Resources */,

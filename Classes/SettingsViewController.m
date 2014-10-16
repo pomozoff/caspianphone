@@ -245,9 +245,19 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
-    UIBarButtonItem *buttonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"About", nil) style:UIBarButtonItemStyleBordered target:self action:@selector(onAboutClick:)];
+    NSDictionary *attributes = @{ UITextAttributeTextColor : [UIColor whiteColor],
+                                  UITextAttributeFont : [UIFont systemFontOfSize:18.0f] };
+
+    UIBarButtonItem *buttonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"About", nil)
+                                                                   style:UIBarButtonItemStyleBordered
+                                                                  target:self
+                                                                  action:@selector(onAboutClick:)];
+
+    [buttonItem setTitleTextAttributes:attributes forState:UIControlStateNormal];
     self.navigationItem.rightBarButtonItem = buttonItem;
     [buttonItem release];
+    
+    self.navigationController.navigationBar.titleTextAttributes = attributes;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -291,7 +301,7 @@
 #pragma mark - Lifecycle Functions
 
 - (void)initUINavigationBarEx {
-    [self setTintColor:[LINPHONE_MAIN_COLOR adjustHue:5.0f/180.0f saturation:0.0f brightness:0.0f alpha:0.0f]];
+    [self setTintColor:[UIColor whiteColor]];
 }
 
 - (id)init {
@@ -319,8 +329,14 @@
 }
 
 - (void)drawRect:(CGRect)rect {
-    UIImage *img = [UIImage imageNamed:@"toolsbar_background.png"];
+    UIImage *img = [UIImage imageNamed:@"large-blue-button.png"];
     [img drawInRect:rect];
+}
+
+- (CGSize)sizeThatFits:(CGSize)size {
+    // Change navigation bar height. The height must be even, otherwise there will be a white line above the navigation bar.
+    CGSize newSize = CGSizeMake(self.frame.size.width, 70.0f);
+    return newSize;
 }
 
 @end
@@ -357,10 +373,10 @@
     [viewController viewWillAppear:animated]; // Force view
     UILabel *labelTitleView = [[UILabel alloc] init];
     labelTitleView.backgroundColor = [UIColor clearColor];
-    labelTitleView.textColor = [UIColor colorWithRed:0x41/255.0f green:0x48/255.0f blue:0x4f/255.0f alpha:1.0];
-    labelTitleView.shadowColor = [UIColor colorWithWhite:1.0 alpha:0.5];
+    labelTitleView.textColor = [UIColor whiteColor];
+    //labelTitleView.shadowColor = [UIColor colorWithWhite:1.0 alpha:0.5];
     labelTitleView.font = [UIFont boldSystemFontOfSize:20];
-    labelTitleView.shadowOffset = CGSizeMake(0,1);
+    //labelTitleView.shadowOffset = CGSizeMake(0,1);
     labelTitleView.textAlignment = NSTextAlignmentCenter;
     labelTitleView.text = viewController.title;
     [labelTitleView sizeToFit];
@@ -444,6 +460,10 @@ static UICompositeViewDescription *compositeDescription = nil;
                                                              fullscreen:false
                                                           landscapeMode:[LinphoneManager runningOnIpad]
                                                            portraitMode:true];
+        compositeDescription.darkBackground = NO;
+        compositeDescription.statusBarMargin = -20.0f;
+        compositeDescription.statusBarColor = [UIColor colorWithWhite:0.935f alpha:0.0f];
+        compositeDescription.statusBarStyle = UIStatusBarStyleLightContent;
     }
     return compositeDescription;
 }
@@ -466,6 +486,11 @@ static UICompositeViewDescription *compositeDescription = nil;
     navigationController.view.frame = self.view.frame;
     [navigationController pushViewController:settingsController animated:FALSE];
     [self.view addSubview: navigationController.view];
+
+    /*
+    CGRect currentFrame = navigationController.navigationBar.frame;
+    navigationController.navigationBar.frame = CGRectMake(currentFrame.origin.x, currentFrame.origin.y - 20.0f, currentFrame.size.width, 70.0f);
+    */
 }
 
 - (void)viewWillDisappear:(BOOL)animated {

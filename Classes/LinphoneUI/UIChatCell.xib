@@ -19,7 +19,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="avatar_unknown_small.png" id="19" userLabel="avatarImage">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="profile-picture-small.png" id="19" userLabel="avatarImage">
                     <rect key="frame" x="10" y="8" width="44" height="44"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
@@ -77,10 +77,10 @@
         </view>
     </objects>
     <resources>
-        <image name="avatar_unknown_small.png" width="131" height="131"/>
         <image name="bubble.png" width="47" height="40"/>
         <image name="list_delete_default.png" width="45" height="45"/>
         <image name="list_delete_over.png" width="45" height="45"/>
+        <image name="profile-picture-small.png" width="5" height="88"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

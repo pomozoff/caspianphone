@@ -35,7 +35,7 @@
         self->minimize = minimized;
         self->view = UICallCellOtherView_Avatar;
         self->call = acall;
-        image = [[UIImage imageNamed:@"avatar_unknown.png"] retain];
+        image = [[UIImage imageNamed:@"profile-picture-large.png"] retain];
         address = [@"Unknown" retain];
         [self update];
     }
@@ -166,7 +166,10 @@
         [self->avatarView setHidden:TRUE];
         [self->audioStatsView setHidden:TRUE];
         [self->videoStatsView setHidden:TRUE];
-        
+
+        avatarImage.layer.cornerRadius = avatarImage.frame.size.height / 2;
+        avatarImage.clipsToBounds = YES;
+
         [UICallCell adaptSize:audioCodecHeaderLabel field:audioCodecLabel];
         [UICallCell adaptSize:audioDownloadBandwidthHeaderLabel field:audioDownloadBandwidthLabel];
         [UICallCell adaptSize:audioUploadBandwidthHeaderLabel field:audioUploadBandwidthLabel];

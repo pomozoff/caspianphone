@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13C1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <deployment defaultVersion="1536" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="IncomingCallViewController">
@@ -54,7 +54,7 @@
                             <rect key="frame" x="224" y="96" width="320" height="262"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </imageView>
-                        <imageView userInteractionEnabled="NO" tag="7" contentMode="scaleToFill" image="avatar_unknown.png" id="19" userLabel="avatarImage">
+                        <imageView userInteractionEnabled="NO" tag="7" contentMode="scaleToFill" image="profile-picture-large.png" id="19" userLabel="avatarImage">
                             <rect key="frame" x="304" y="113" width="160" height="170"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <accessibility key="accessibilityConfiguration" label="Contact's avatar">
@@ -105,6 +105,8 @@
                 </view>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
         </view>
         <view contentMode="scaleToFill" id="61" userLabel="Landscape View">
             <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
@@ -145,7 +147,7 @@
                             <rect key="frame" x="352" y="96" width="320" height="262"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </imageView>
-                        <imageView userInteractionEnabled="NO" tag="7" contentMode="scaleToFill" image="avatar_unknown.png" id="71" userLabel="avatarImage">
+                        <imageView userInteractionEnabled="NO" tag="7" contentMode="scaleToFill" image="profile-picture-large.png" id="71" userLabel="avatarImage">
                             <rect key="frame" x="432" y="113" width="160" height="170"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <accessibility key="accessibilityConfiguration" label="Contact's avatar">
@@ -196,6 +198,8 @@
                 </view>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
         </view>
     </objects>
     <resources>
@@ -204,12 +208,17 @@
         <image name="accept_over.png" width="320" height="154"/>
         <image name="accept_over_landscape.png" width="1024" height="171"/>
         <image name="avatar_shadow.png" width="640" height="523"/>
-        <image name="avatar_unknown.png" width="320" height="339"/>
         <image name="cell_call_first.png" width="640" height="125"/>
         <image name="decline_default.png" width="320" height="154"/>
         <image name="decline_default_landscape.png" width="1024" height="171"/>
         <image name="decline_over.png" width="320" height="154"/>
         <image name="decline_over_landscape.png" width="1024" height="171"/>
         <image name="header_incoming.png" width="640" height="135"/>
+        <image name="profile-picture-large.png" width="5" height="88"/>
     </resources>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
 </document>

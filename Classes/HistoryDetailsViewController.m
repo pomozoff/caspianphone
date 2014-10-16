@@ -22,6 +22,13 @@
 #import "FastAddressBook.h"
 #import "Utils.h"
 
+@interface HistoryDetailsViewController ()
+
+@property (retain, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (retain, nonatomic) IBOutlet UIView *contentView;
+
+@end
+
 @implementation HistoryDetailsViewController
 
 @synthesize callLogId;
@@ -72,7 +79,9 @@
     [callButton release];
     [messageButton release];
     [addContactButton release];
-
+    [_scrollView release];
+    [_contentView release];
+    
     [super dealloc];
 }
 
@@ -92,6 +101,10 @@ static UICompositeViewDescription *compositeDescription = nil;
                                                              fullscreen:false
                                                           landscapeMode:[LinphoneManager runningOnIpad]
                                                            portraitMode:true];
+        compositeDescription.darkBackground = NO;
+        compositeDescription.statusBarMargin = 0.0f;
+        compositeDescription.statusBarColor = [UIColor colorWithWhite:0.935f alpha:0.0f];
+        compositeDescription.statusBarStyle = UIStatusBarStyleLightContent;
     }
     return compositeDescription;
 }
@@ -109,12 +122,19 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    /*
     [HistoryDetailsViewController adaptSize:dateHeaderLabel field:dateLabel];
     [HistoryDetailsViewController adaptSize:durationHeaderLabel field:durationLabel];
     [HistoryDetailsViewController adaptSize:typeHeaderLabel field:typeLabel];
     [HistoryDetailsViewController adaptSize:plainAddressHeaderLabel field:plainAddressLabel];
+    */
     [callButton.titleLabel setAdjustsFontSizeToFitWidth:TRUE]; // Auto shrink: IB lack!
     [messageButton.titleLabel setAdjustsFontSizeToFitWidth:TRUE]; // Auto shrink: IB lack!
+    
+    self.scrollView.contentSize = self.contentView.frame.size;
+    
+    avatarImage.layer.cornerRadius = avatarImage.frame.size.height / 2;
+    avatarImage.clipsToBounds = YES;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -236,7 +256,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 
     // Set Image
     if(image == nil) {
-        image = [UIImage imageNamed:@"avatar_unknown.png"];
+        image = [UIImage imageNamed:@"profile-picture-large.png"];
     }
     [avatarImage setImage:image];
 

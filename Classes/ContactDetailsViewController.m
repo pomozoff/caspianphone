@@ -227,6 +227,7 @@ static void sync_address_book (ABAddressBookRef addressBook, CFDictionaryRef inf
 - (void)viewDidLoad{
     [super viewDidLoad];
     
+    /*
     // Set selected+over background: IB lack !
     [editButton setBackgroundImage:[UIImage imageNamed:@"contact_ok_over.png"]
                 forState:(UIControlStateHighlighted | UIControlStateSelected)];
@@ -234,6 +235,7 @@ static void sync_address_book (ABAddressBookRef addressBook, CFDictionaryRef inf
     // Set selected+disabled background: IB lack !
     [editButton setBackgroundImage:[UIImage imageNamed:@"contact_ok_disabled.png"]
                 forState:(UIControlStateDisabled | UIControlStateSelected)];
+    */
     
     [LinphoneUtils buttonFixStates:editButton];
 
@@ -291,6 +293,10 @@ static UICompositeViewDescription *compositeDescription = nil;
                                                              fullscreen:false
                                                           landscapeMode:[LinphoneManager runningOnIpad]
                                                            portraitMode:true];
+        compositeDescription.darkBackground = NO;
+        compositeDescription.statusBarMargin = 0.0f;
+        compositeDescription.statusBarColor = [UIColor colorWithWhite:0.935f alpha:0.0f];
+        compositeDescription.statusBarStyle = UIStatusBarStyleLightContent;
     }
     return compositeDescription;
 }
