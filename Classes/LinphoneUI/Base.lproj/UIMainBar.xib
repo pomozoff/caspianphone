@@ -41,7 +41,7 @@
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <state key="selected" backgroundImage="history-hover.png">
-                        <color key="titleColor" red="0.81176471709999998" green="0.29803922770000002" blue="0.16078431900000001" alpha="1" colorSpace="deviceRGB"/>
+                        <color key="titleColor" red="0.35326856109999999" green="0.65043422920000005" blue="0.99017458550000004" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                     <state key="highlighted" backgroundImage="history-hover.png">
                         <color key="titleColor" red="0.72549019609999998" green="0.76862745099999996" blue="0.79607843140000001" alpha="1" colorSpace="deviceRGB"/>
@@ -82,7 +82,7 @@
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <state key="selected" backgroundImage="contacts-hover.png">
-                        <color key="titleColor" red="0.81176471709999998" green="0.29803922770000002" blue="0.16078431900000001" alpha="1" colorSpace="deviceRGB"/>
+                        <color key="titleColor" red="0.33333333333333331" green="0.58823529411764708" blue="0.73333333333333328" alpha="1" colorSpace="deviceRGB"/>
                     </state>
                     <state key="highlighted" backgroundImage="contacts-hover.png">
                         <color key="titleColor" red="0.72549019609999998" green="0.76862745099999996" blue="0.79607843140000001" alpha="1" colorSpace="deviceRGB"/>
@@ -102,7 +102,7 @@
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <state key="selected" backgroundImage="settings-hover.png">
-                        <color key="titleColor" red="0.81176471709999998" green="0.29803922770000002" blue="0.16078431900000001" alpha="1" colorSpace="deviceRGB"/>
+                        <color key="titleColor" red="0.33333333329999998" green="0.58823529409999997" blue="0.73333333329999995" alpha="1" colorSpace="deviceRGB"/>
                     </state>
                     <state key="highlighted" backgroundImage="settings-hover.png">
                         <color key="titleColor" red="0.72549019609999998" green="0.76862745099999996" blue="0.79607843140000001" alpha="1" colorSpace="deviceRGB"/>
@@ -120,7 +120,9 @@
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <state key="disabled" image="dialer.png"/>
-                    <state key="selected" image="dialer-hover.png"/>
+                    <state key="selected" image="dialer-hover.png">
+                        <color key="titleColor" red="0.33333333329999998" green="0.58823529409999997" blue="0.73333333329999995" alpha="1" colorSpace="deviceRGB"/>
+                    </state>
                     <state key="highlighted" image="dialer-hover.png"/>
                     <connections>
                         <action selector="onDialerClick:" destination="-1" eventType="touchUpInside" id="24"/>
@@ -137,7 +139,7 @@
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <state key="selected" backgroundImage="shop-hover.png">
-                        <color key="titleColor" red="0.81176471709999998" green="0.29803922770000002" blue="0.16078431900000001" alpha="1" colorSpace="deviceRGB"/>
+                        <color key="titleColor" red="0.33333333329999998" green="0.58823529409999997" blue="0.73333333329999995" alpha="1" colorSpace="deviceRGB"/>
                     </state>
                     <state key="highlighted" backgroundImage="shop-hover.png">
                         <color key="titleColor" red="0.72549019609999998" green="0.76862745099999996" blue="0.79607843140000001" alpha="1" colorSpace="deviceRGB"/>
