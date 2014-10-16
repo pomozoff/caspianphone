@@ -21,6 +21,8 @@
 
 #import "LinphoneAppDelegate.h"
 
+#import "UIMainBar.h"
+
 #define IPHONE_STATUSBAR_HEIGHT 20
 
 @implementation UICompositeViewDescription
@@ -357,6 +359,13 @@
     }
 }
 
+- (void)correctDisplayView:(UICompositeViewDescription *)view {
+    if ([self.tabBarViewController isKindOfClass:[UIMainBar class]]) {
+        UIMainBar *mainBar = (UIMainBar *)self.tabBarViewController;
+        [mainBar updateView:view];
+    }
+}
+
 - (UIInterfaceOrientation)currentOrientation {
     return currentOrientation;
 }
@@ -652,6 +661,8 @@
             [UICompositeViewController addSubView: self.stateBarViewController view:stateBarView];
         }
     }
+    
+    [self correctDisplayView:description];
     
     // Dealloc old view description
     if(oldViewDescription != nil) {

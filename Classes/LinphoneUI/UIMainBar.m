@@ -21,6 +21,12 @@
 #import "PhoneMainView.h"
 #import "CAAnimation+Blocks.h"
 
+@interface UIMainBar ()
+
+@property (nonatomic, retain) UICompositeViewDescription *currentView;
+
+@end
+
 @implementation UIMainBar
 
 
@@ -56,6 +62,7 @@ static NSString * const kDisappearAnimation = @"disappear";
     [historyNotificationLabel release];
     [chatNotificationView release];
     [chatNotificationLabel release];
+    [_currentView release];
 
     [super dealloc];
 }
@@ -263,7 +270,7 @@ static NSString * const kDisappearAnimation = @"disappear";
 - (void)updateUnreadMessage:(BOOL)appear{
     int unreadMessage = [LinphoneManager unreadMessageCount];
     if (unreadMessage > 0) {
-        if([chatNotificationView isHidden]) {
+        if([chatNotificationView isHidden] && [self.currentView equal:[DialerViewController compositeViewDescription]]) {
             [chatNotificationView setHidden:FALSE];
             if([[LinphoneManager instance] lpConfigBoolForKey:@"animations_preference"] == true) {
                 if(appear) {
@@ -363,7 +370,9 @@ static NSString * const kDisappearAnimation = @"disappear";
     [target.layer removeAnimationForKey:animationID];
 }
 
-- (void)updateView:(UICompositeViewDescription*) view {
+- (void)updateView:(UICompositeViewDescription *)view {
+    self.currentView = view;
+    
     // Update buttons
     if([view equal:[HistoryViewController compositeViewDescription]]) {
         historyButton.selected = TRUE;
@@ -377,6 +386,7 @@ static NSString * const kDisappearAnimation = @"disappear";
     }
     if([view equal:[DialerViewController compositeViewDescription]]) {
         dialerButton.selected = TRUE;
+        [self updateUnreadMessage:YES];
     } else {
         dialerButton.selected = FALSE;
     }
@@ -392,12 +402,16 @@ static NSString * const kDisappearAnimation = @"disappear";
         chatButton.selected = FALSE;
     }
     */
+    
+    int unreadMessage = [LinphoneManager unreadMessageCount];
+    self.chatNotificationView.hidden = ![self.currentView equal:[DialerViewController compositeViewDescription]] || unreadMessage < 1;
 }
 
 
 #pragma mark - Action Functions
 
 - (IBAction)onHistoryClick:(id)event {
+    chatNotificationView.hidden = YES;
     [[PhoneMainView instance] changeCurrentView:[HistoryViewController compositeViewDescription]];
 }
 
@@ -407,18 +421,23 @@ static NSString * const kDisappearAnimation = @"disappear";
     [ContactSelection setSipFilter:nil];
     [ContactSelection enableEmailFilter:FALSE];
     [ContactSelection setNameOrEmailFilter:nil];
+
+    chatNotificationView.hidden = YES;
     [[PhoneMainView instance] changeCurrentView:[ContactsViewController compositeViewDescription]];
 }
 
 - (IBAction)onDialerClick:(id)event {
+    chatNotificationView.hidden = NO;
     [[PhoneMainView instance] changeCurrentView:[DialerViewController compositeViewDescription]];
 }
 
 - (IBAction)onSettingsClick:(id)event {
+    chatNotificationView.hidden = YES;
     [[PhoneMainView instance] changeCurrentView:[SettingsViewController compositeViewDescription]];
 }
 
 - (IBAction)onChatClick:(id)event {
+    chatNotificationView.hidden = YES;
     [[PhoneMainView instance] changeCurrentView:[ChatViewController compositeViewDescription]];
 }
 

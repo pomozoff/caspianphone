@@ -19,6 +19,7 @@
 
 #import <UIKit/UIKit.h>
 #import "TPMultiLayoutViewController.h"
+#import "UICompositeViewController.h"
 
 @interface UIMainBar : TPMultiLayoutViewController {
 }
@@ -38,5 +39,7 @@
 -(IBAction) onDialerClick: (id) event;
 -(IBAction) onSettingsClick: (id) event;
 -(IBAction) onChatClick: (id) event;
+
+- (void)updateView:(UICompositeViewDescription *)view;
 
 @end

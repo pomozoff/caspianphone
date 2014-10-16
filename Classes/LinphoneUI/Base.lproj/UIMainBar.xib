@@ -146,7 +146,7 @@
                     </state>
                 </button>
                 <view hidden="YES" autoresizesSubviews="NO" userInteractionEnabled="NO" contentMode="scaleToFill" id="37" userLabel="chatNotificationView">
-                    <rect key="frame" x="197" y="1" width="21" height="21"/>
+                    <rect key="frame" x="220" y="-60" width="21" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="history_notification.png" id="39" userLabel="chatNotificationImage">
