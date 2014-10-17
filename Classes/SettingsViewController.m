@@ -741,7 +741,7 @@ static UICompositeViewDescription *compositeDescription = nil;
         [hiddenKeys addObject:@"avpf_preference"];
     }
 
-#ifdef DEBUG
+#ifndef DEBUG
     // *** Caspian hidden keys ***
     // Root
     [hiddenKeys addObject:@"domain_preference"];
