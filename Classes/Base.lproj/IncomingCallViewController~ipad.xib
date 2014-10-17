@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <deployment defaultVersion="1536" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
@@ -50,10 +50,6 @@
                             <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <imageView userInteractionEnabled="NO" tag="6" contentMode="scaleToFill" image="avatar_shadow.png" id="18" userLabel="avatarShadowImage">
-                            <rect key="frame" x="224" y="96" width="320" height="262"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        </imageView>
                         <imageView userInteractionEnabled="NO" tag="7" contentMode="scaleToFill" image="profile-picture-large.png" id="19" userLabel="avatarImage">
                             <rect key="frame" x="304" y="113" width="160" height="170"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -143,10 +139,6 @@
                             <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <imageView userInteractionEnabled="NO" tag="6" contentMode="scaleToFill" image="avatar_shadow.png" id="70" userLabel="avatarShadowImage">
-                            <rect key="frame" x="352" y="96" width="320" height="262"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        </imageView>
                         <imageView userInteractionEnabled="NO" tag="7" contentMode="scaleToFill" image="profile-picture-large.png" id="71" userLabel="avatarImage">
                             <rect key="frame" x="432" y="113" width="160" height="170"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -207,14 +199,13 @@
         <image name="accept_default_landscape.png" width="1024" height="171"/>
         <image name="accept_over.png" width="320" height="154"/>
         <image name="accept_over_landscape.png" width="1024" height="171"/>
-        <image name="avatar_shadow.png" width="640" height="523"/>
         <image name="cell_call_first.png" width="640" height="125"/>
         <image name="decline_default.png" width="320" height="154"/>
         <image name="decline_default_landscape.png" width="1024" height="171"/>
         <image name="decline_over.png" width="320" height="154"/>
         <image name="decline_over_landscape.png" width="1024" height="171"/>
         <image name="header_incoming.png" width="640" height="135"/>
-        <image name="profile-picture-large.png" width="5" height="88"/>
+        <image name="profile-picture-large.png" width="251" height="259"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
