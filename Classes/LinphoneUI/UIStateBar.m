@@ -135,9 +135,17 @@ static NSTimeInterval balanceIntervalCurrent = balanceIntervalMax;
 	[callSecurityImage release];
 	[callSecurityButton release];
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
-	[callQualityTimer invalidate];
-	[callQualityTimer release];
-	[_voicemailCount release];
+
+    [callQualityTimer release];
+    callQualityTimer = nil;
+    
+    [callSecurityTimer release];
+    callSecurityTimer = nil;
+    
+    [balanceTimer release];
+    balanceTimer = nil;
+	
+    [_voicemailCount release];
     [balanceLabel release];
     [balanceQueue release];
     [numberFormatter release];
@@ -162,7 +170,7 @@ static NSTimeInterval balanceIntervalCurrent = balanceIntervalMax;
 													  userInfo:nil
 													   repeats:YES];
 
-	// Set callQualityTimer
+	// Set callSecurityTimer
 	callSecurityTimer = [NSTimer scheduledTimerWithTimeInterval:1
 														target:self
 													  selector:@selector(callSecurityUpdate)
@@ -222,14 +230,17 @@ static NSTimeInterval balanceIntervalCurrent = balanceIntervalMax;
 						object:nil];
 	if(callQualityTimer != nil) {
 		[callQualityTimer invalidate];
+        [callQualityTimer release];
 		callQualityTimer = nil;
 	}
 	if(callSecurityTimer != nil) {
 		[callSecurityTimer invalidate];
+        [callSecurityTimer release];
 		callSecurityTimer = nil;
 	}
     if(balanceTimer != nil) {
         [balanceTimer invalidate];
+        [balanceTimer release];
         balanceTimer = nil;
     }
     
