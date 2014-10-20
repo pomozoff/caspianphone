@@ -83,17 +83,18 @@ static RootViewManager* rootViewManagerInstance = nil;
                           duration:0.3
                            options:UIViewAnimationOptionTransitionFlipFromLeft|UIViewAnimationOptionAllowAnimatedContent
                         animations:^{
-                            delegate.window.rootViewController = newMainView;
-                            // when going to landscape-enabled view, we have to get the current portrait frame and orientation,
-                            // because it could still have landscape-based size
-                            if( nextViewOrientation != previousOrientation && newMainView == self.rotatingViewController ){
-                                newMainView.view.frame = previousMainView.view.frame;
-                                [newMainView.mainViewController.view setFrame:previousMainView.mainViewController.view.frame];
-                                [newMainView willRotateToInterfaceOrientation:previousOrientation duration:0.3];
-                                [newMainView willAnimateRotationToInterfaceOrientation:previousOrientation duration:0.3];
-                                [newMainView didRotateFromInterfaceOrientation:nextViewOrientation];
+                            if (delegate.window.rootViewController != newMainView) {
+                                delegate.window.rootViewController = newMainView;
+                                // when going to landscape-enabled view, we have to get the current portrait frame and orientation,
+                                // because it could still have landscape-based size
+                                if( nextViewOrientation != previousOrientation && newMainView == self.rotatingViewController ){
+                                    newMainView.view.frame = previousMainView.view.frame;
+                                    [newMainView.mainViewController.view setFrame:previousMainView.mainViewController.view.frame];
+                                    [newMainView willRotateToInterfaceOrientation:previousOrientation duration:0.3];
+                                    [newMainView willAnimateRotationToInterfaceOrientation:previousOrientation duration:0.3];
+                                    [newMainView didRotateFromInterfaceOrientation:nextViewOrientation];
+                                }
                             }
-
                         }
                         completion:^(BOOL finished) {
                         }];
