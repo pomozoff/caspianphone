@@ -1473,8 +1473,8 @@ static BOOL libStarted = FALSE;
 
     [self prepareAllCodecs:theLinphoneCore];                                                    // Enable all default codecs
 
-    linphone_core_set_log_collection_path([[LinphoneManager cacheDirectory] UTF8String]);
-	linphone_core_enable_log_collection([self lpConfigBoolForKey:@"enable_log_collect"]);
+    //linphone_core_set_log_collection_path([[LinphoneManager cacheDirectory] UTF8String]);
+	//linphone_core_enable_log_collection([self lpConfigBoolForKey:@"enable_log_collect"]);
 
     /* set the CA file no matter what, since the remote provisioning could be hitting an HTTPS server */
 	const char* lRootCa = [[LinphoneManager bundleFile:@"rootca.pem"] cStringUsingEncoding:[NSString defaultCStringEncoding]];
