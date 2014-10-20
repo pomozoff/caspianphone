@@ -219,6 +219,8 @@ static void sync_address_book (ABAddressBookRef addressBook, CFDictionaryRef inf
     [self resetData];
     contact = ABAddressBookGetPersonWithRecordID(addressBook, ABRecordGetRecordID(acontact));
     [tableController setContact:contact];
+    
+    self.editButton.enabled = ![FastAddressBook isCaspianSupportRecord:contact];
 }
 
 
