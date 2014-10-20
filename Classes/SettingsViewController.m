@@ -665,6 +665,10 @@ static UICompositeViewDescription *compositeDescription = nil;
     [hiddenKeys addObject:@"clear_cache_button"];
     [hiddenKeys addObject:@"battery_alert_button"];
 #endif
+
+	if (! [[LinphoneManager instance] lpConfigBoolForKey:@"enable_log_collect"]) {
+		[hiddenKeys addObject:@"send_logs_button"];
+	}
     
     [hiddenKeys addObject:@"playback_gain_preference"];
     [hiddenKeys addObject:@"microphone_gain_preference"];
@@ -820,7 +824,32 @@ static UICompositeViewDescription *compositeDescription = nil;
         [self alertView:nil clickedButtonAtIndex:1];
     } else if([key isEqual:@"about_button"]) {
         [[PhoneMainView instance] changeCurrentView:[AboutViewController compositeViewDescription] push:TRUE];
-    }
+	} else if ([key isEqual:@"send_logs_button"]) {
+		char * filepath = linphone_core_compress_log_collection([LinphoneManager getLc]);
+		if (filepath == NULL) {
+			[LinphoneLogger log:LinphoneLoggerError format:@"Cannot sent logs: file is NULL"];
+			return;
+		}
+
+		NSString *filename = [[NSString stringWithUTF8String:filepath] componentsSeparatedByString:@"/"].lastObject;
+		NSString *mimeType;
+		if ([filename hasSuffix:@".jpg"]) {
+			mimeType = @"image/jpeg";
+		} else if ([filename hasSuffix:@".png"]) {
+			mimeType = @"image/png";
+		} else if ([filename hasSuffix:@".pdf"]) {
+			mimeType = @"application/pdf";
+		} else if ([filename hasSuffix:@".txt"]) {
+			mimeType = @"text/plain";
+		} else if ([filename hasSuffix:@".gz"]) {
+			mimeType = @"application/gzip";
+		} else {
+			[LinphoneLogger log:LinphoneLoggerError format:@"Unknown extension type: %@, cancelling email", filename];
+			return;
+		}
+		[self emailAttachment:[NSData dataWithContentsOfFile:[NSString stringWithUTF8String:filepath]] mimeType:mimeType name:filename];
+		ms_free(filepath);
+	}
 }
 
 #pragma mark - UIAlertView delegate
@@ -834,5 +863,54 @@ static UICompositeViewDescription *compositeDescription = nil;
     }
 }
 
+#pragma mark - Mail composer for send log
+- (void)emailAttachment: (NSData*)attachment mimeType:(NSString*)type name:(NSString*)attachmentName
+{
+	if (attachmentName == nil || type == nil || attachmentName == nil) {
+		[LinphoneLogger log:LinphoneLoggerError format:@"Trying to email attachment but mandatory field is missing"];
+		return;
+	}
+
+#if TARGET_IPHONE_SIMULATOR
+	UIAlertView* error = [[UIAlertView alloc]	initWithTitle:NSLocalizedString(@"Cannot send email",nil)
+													message:NSLocalizedString(@"Simulator cannot send emails. To test this feature, please use a real device.",nil)
+												   delegate:nil
+										  cancelButtonTitle:NSLocalizedString(@"Continue",nil)
+										  otherButtonTitles:nil];
+	[error show];
+	[error release];
+#else
+	if ([MFMailComposeViewController canSendMail] == YES) {
+		MFMailComposeViewController *picker = [[MFMailComposeViewController alloc] init];
+		picker.mailComposeDelegate = self;
+
+		[picker setSubject:NSLocalizedString(@"Linphone Logs",nil)];
+		[picker setToRecipients:[NSArray arrayWithObjects:@"linphone-iphone@belledonne-communications.com", nil]];
+		[picker setMessageBody:NSLocalizedString(@"Linphone logs", nil) isHTML:NO];
+		[picker addAttachmentData:attachment mimeType:type fileName:attachmentName];
+
+		[self presentViewController:picker animated:true completion:nil];
+		[picker release];
+	} else {
+		UIAlertView* error = [[UIAlertView alloc]	initWithTitle:NSLocalizedString(@"Cannot send email",nil)
+														message:NSLocalizedString(@"Your device is not configured to send emails. Please configure mail application prior to send logs.",nil)
+													   delegate:nil
+											  cancelButtonTitle:NSLocalizedString(@"Continue",nil)
+											  otherButtonTitles:nil];
+		[error show];
+		[error release];
+	}
+#endif
+}
+
+- (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error
+{
+	if (error != nil) {
+		[LinphoneLogger log:LinphoneLoggerWarning format:@"Error while sending mail: %@", error];
+	} else {
+		[LinphoneLogger log:LinphoneLoggerLog format:@"Mail completed with status: %d", result];
+	}
+	[self dismissViewControllerAnimated:true completion:nil];
+}
 
 @end
