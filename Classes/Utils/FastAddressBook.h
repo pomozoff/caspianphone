@@ -40,5 +40,6 @@
 + (NSString*)normalizeSipURI:(NSString*)address;
 + (NSString *)caspianSupportPhoneNumber;
 + (BOOL)isChatRoomSupport:(LinphoneChatRoom *)chatRoom;
++ (BOOL)isCaspianSupportRecord:(ABRecordRef)person;
 
 @end

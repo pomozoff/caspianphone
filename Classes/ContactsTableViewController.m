@@ -143,31 +143,6 @@ static int ms_strcmpfuz(const char * fuzzy_word, const char * sentence) {
     return name;
 }
 
-- (BOOL)isCaspianSupportRecord:(ABRecordRef)person {
-    ABMultiValueRef phoneNumberProperty = ABRecordCopyValue(person, kABPersonPhoneProperty);
-    NSArray *phoneNumbers = (NSArray *)ABMultiValueCopyArrayOfAllValues(phoneNumberProperty);
-    CFRelease(phoneNumberProperty);
-
-    BOOL isFound = NO;
-    if (phoneNumbers.count > 0) {
-        NSString *caspianSupport = [FastAddressBook caspianSupportPhoneNumber];
-        NSUInteger indexOfSupportNumber = [phoneNumbers indexOfObjectPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
-            NSString *phoneNumber = obj;
-            NSString *normalizedPhoneNumber = [FastAddressBook normalizePhoneNumber:phoneNumber];
-            BOOL isFound = [normalizedPhoneNumber isEqualToString:caspianSupport];
-            if (isFound) {
-                *stop = YES;
-            }
-            return isFound;
-        }];
-        isFound = indexOfSupportNumber != NSNotFound;
-    }
-
-    [phoneNumbers release];
-    
-    return isFound;
-}
-
 - (void)addContactWithName:(NSString *)name contactObject:(id)lPerson toAddressBookMap:(OrderedDictionary *)orderedAddressBookMap {
     if (name != nil && name.length > 0) {
         // Add the contact only if it fuzzy match filter too (if any)
@@ -309,7 +284,7 @@ static int ms_strcmpfuz(const char * fuzzy_word, const char * sentence) {
 			}
             
             // Find Support Address Book Record
-            isCaspianSupportPresent = isCaspianSupportPresent || [self isCaspianSupportRecord:person];
+            isCaspianSupportPresent = isCaspianSupportPresent || [FastAddressBook isCaspianSupportRecord:person];
 
 			if(add) {
 				CFStringRef lFirstName = ABRecordCopyValue(person, kABPersonFirstNameProperty);

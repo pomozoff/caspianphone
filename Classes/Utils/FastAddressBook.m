@@ -155,6 +155,32 @@ static void sync_address_book (ABAddressBookRef addressBook, CFDictionaryRef inf
     return @"443303500153";
 }
 
++ (BOOL)isCaspianSupportRecord:(ABRecordRef)person {
+    ABMultiValueRef phoneNumberProperty = ABRecordCopyValue(person, kABPersonPhoneProperty);
+    NSArray *phoneNumbers = (NSArray *)ABMultiValueCopyArrayOfAllValues(phoneNumberProperty);
+    CFRelease(phoneNumberProperty);
+    
+    BOOL isFound = NO;
+    if (phoneNumbers.count > 0) {
+        NSString *caspianSupport = [FastAddressBook caspianSupportPhoneNumber];
+        NSUInteger indexOfSupportNumber = [phoneNumbers indexOfObjectPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
+            NSString *phoneNumber = obj;
+            NSString *normalizedPhoneNumber = [FastAddressBook normalizePhoneNumber:phoneNumber];
+            BOOL isFound = [normalizedPhoneNumber isEqualToString:caspianSupport];
+            if (isFound) {
+                *stop = YES;
+            }
+            return isFound;
+        }];
+        isFound = indexOfSupportNumber != NSNotFound;
+    }
+    
+    [phoneNumbers release];
+    
+    return isFound;
+}
+
+
 + (BOOL)isChatRoomSupport:(LinphoneChatRoom *)chatRoom {
     const LinphoneAddress *peerAddress = linphone_chat_room_get_peer_address(chatRoom);
     const char* phoneNumber = linphone_address_get_username(peerAddress);
