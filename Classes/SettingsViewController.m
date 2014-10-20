@@ -798,12 +798,13 @@ static UICompositeViewDescription *compositeDescription = nil;
         [[UIDevice currentDevice] _setBatteryState:UIDeviceBatteryStateUnplugged];
         [[UIDevice currentDevice] _setBatteryLevel:0.01f];
         [[NSNotificationCenter defaultCenter] postNotificationName:UIDeviceBatteryLevelDidChangeNotification object:self];
-    } else  if([key isEqual:@"reset_button"]) {
+    } else
+#endif
+    if ([key isEqual:@"reset_button"]) {
         //[[PhoneMainView instance] resetToDefaults];
         [[LinphoneManager instance] resetSettingsToDefault:[LinphoneManager getLc]];
         [settingsStore transformLinphoneCoreToKeys];
     }
-#endif
     if([key isEqual:@"console_button"]) {
         [[PhoneMainView instance] changeCurrentView:[ConsoleViewController compositeViewDescription] push:TRUE];
     } else if([key isEqual:@"wizard_button"]) {
