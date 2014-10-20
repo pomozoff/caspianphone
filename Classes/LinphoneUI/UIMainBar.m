@@ -21,12 +21,6 @@
 #import "PhoneMainView.h"
 #import "CAAnimation+Blocks.h"
 
-@interface UIMainBar ()
-
-@property (nonatomic, retain) UICompositeViewDescription *currentView;
-
-@end
-
 @implementation UIMainBar
 
 
@@ -62,7 +56,6 @@ static NSString * const kDisappearAnimation = @"disappear";
     [historyNotificationLabel release];
     [chatNotificationView release];
     [chatNotificationLabel release];
-    [_currentView release];
 
     [super dealloc];
 }
@@ -277,7 +270,7 @@ static NSString * const kDisappearAnimation = @"disappear";
 - (void)updateUnreadMessage:(BOOL)appear{
     int unreadMessage = [LinphoneManager unreadMessageCount];
     if (unreadMessage > 0) {
-        if([chatNotificationView isHidden] && [self.currentView equal:[DialerViewController compositeViewDescription]]) {
+        if([chatNotificationView isHidden] && [PhoneMainView.instance.currentView equal:[DialerViewController compositeViewDescription]]) {
             [chatNotificationView setHidden:FALSE];
             if([[LinphoneManager instance] lpConfigBoolForKey:@"animations_preference"] == true) {
                 if(appear) {
@@ -378,8 +371,6 @@ static NSString * const kDisappearAnimation = @"disappear";
 }
 
 - (void)updateView:(UICompositeViewDescription *)view {
-    self.currentView = view;
-    
     // Update buttons
     if([view equal:[HistoryViewController compositeViewDescription]]) {
         historyButton.selected = TRUE;
@@ -411,7 +402,7 @@ static NSString * const kDisappearAnimation = @"disappear";
     */
     
     int unreadMessage = [LinphoneManager unreadMessageCount];
-    self.chatNotificationView.hidden = ![self.currentView equal:[DialerViewController compositeViewDescription]] || unreadMessage < 1;
+    self.chatNotificationView.hidden = ![PhoneMainView.instance.currentView equal:[DialerViewController compositeViewDescription]] || unreadMessage < 1;
 }
 
 
