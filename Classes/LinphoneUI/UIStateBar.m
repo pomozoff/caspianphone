@@ -29,6 +29,10 @@
 @property (nonatomic, copy) NSString *password;
 @property (nonatomic, retain) NSURL *balanceUrl;
 
+@property (nonatomic, retain) NSTimer *callQualityTimer;
+@property (nonatomic, retain) NSTimer *callSecurityTimer;
+@property (nonatomic, retain) NSTimer *balanceTimer;
+
 @end
 
 @implementation UIStateBar
@@ -43,10 +47,6 @@
 @synthesize numberFormatter;
 @synthesize username = _username;
 @synthesize password = _password;
-
-static NSTimer *callQualityTimer;
-static NSTimer *callSecurityTimer;
-static NSTimer *balanceTimer;
 
 static NSString *caspianBalanceUrl = @"http://onecallcaspian.co.uk/mobile/credit?phone_number=%@&password=%@";
 
@@ -136,15 +136,10 @@ static NSTimeInterval balanceIntervalCurrent = balanceIntervalMax;
 	[callSecurityButton release];
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 
-    [callQualityTimer release];
-    callQualityTimer = nil;
+    self.callQualityTimer = nil;
+    self.callSecurityTimer = nil;
+    self.balanceTimer = nil;
     
-    [callSecurityTimer release];
-    callSecurityTimer = nil;
-    
-    [balanceTimer release];
-    balanceTimer = nil;
-	
     [_voicemailCount release];
     [balanceLabel release];
     [balanceQueue release];
@@ -164,26 +159,26 @@ static NSTimeInterval balanceIntervalCurrent = balanceIntervalMax;
     [self cleanBalance];
 
 	// Set callQualityTimer
-	callQualityTimer = [NSTimer scheduledTimerWithTimeInterval:1
-														target:self
-													  selector:@selector(callQualityUpdate)
-													  userInfo:nil
-													   repeats:YES];
+    self.callQualityTimer = [NSTimer scheduledTimerWithTimeInterval:1
+                                                             target:self
+                                                           selector:@selector(callQualityUpdate)
+                                                           userInfo:nil
+                                                            repeats:YES];
 
 	// Set callSecurityTimer
-	callSecurityTimer = [NSTimer scheduledTimerWithTimeInterval:1
-														target:self
-													  selector:@selector(callSecurityUpdate)
-													  userInfo:nil
-													   repeats:YES];
+    self.callSecurityTimer = [NSTimer scheduledTimerWithTimeInterval:1
+                                                              target:self
+                                                            selector:@selector(callSecurityUpdate)
+                                                            userInfo:nil
+                                                             repeats:YES];
 
 
     // Set balanceTimer
-    balanceTimer = [NSTimer scheduledTimerWithTimeInterval:balanceInterval
-                                                    target:self
-                                                  selector:@selector(updateBalance)
-                                                  userInfo:nil
-                                                   repeats:YES];
+    self.balanceTimer = [NSTimer scheduledTimerWithTimeInterval:balanceInterval
+                                                         target:self
+                                                       selector:@selector(updateBalance)
+                                                       userInfo:nil
+                                                        repeats:YES];
 	// Set observer
 	[[NSNotificationCenter defaultCenter]	addObserver:self
 						selector:@selector(registrationUpdate:)
@@ -228,20 +223,17 @@ static NSTimeInterval balanceIntervalCurrent = balanceIntervalMax;
 	[[NSNotificationCenter defaultCenter]	removeObserver:self
 						name:kLinphoneNotifyReceived
 						object:nil];
-	if(callQualityTimer != nil) {
-		[callQualityTimer invalidate];
-        [callQualityTimer release];
-		callQualityTimer = nil;
+	if(self.callQualityTimer != nil) {
+		[self.callQualityTimer invalidate];
+		self.callQualityTimer = nil;
 	}
-	if(callSecurityTimer != nil) {
-		[callSecurityTimer invalidate];
-        [callSecurityTimer release];
-		callSecurityTimer = nil;
+	if(self.callSecurityTimer != nil) {
+		[self.callSecurityTimer invalidate];
+		self.callSecurityTimer = nil;
 	}
-    if(balanceTimer != nil) {
-        [balanceTimer invalidate];
-        [balanceTimer release];
-        balanceTimer = nil;
+    if(self.balanceTimer != nil) {
+        [self.balanceTimer invalidate];
+        self.balanceTimer = nil;
     }
     
     [self cleanBalance];
