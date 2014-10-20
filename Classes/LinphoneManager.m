@@ -1898,15 +1898,17 @@ static void audioRouteChangeListenerCallback (
 	LinphoneCall* call=NULL;
 
 	if ([address length] == 0) return; //just return
-	if ([address hasPrefix:@"sip:"] || [address hasPrefix:@"sips:"]) {
-		LinphoneAddress* linphoneAddress = linphone_address_new([address cStringUsingEncoding:[NSString defaultCStringEncoding]]);
+    
+    NSString *readyAddress = [FastAddressBook isSipURI:address] ? address : [FastAddressBook normalizeSipURI:address];
+	if ([readyAddress hasPrefix:@"sip:"] || [readyAddress hasPrefix:@"sips:"]) {
+		LinphoneAddress* linphoneAddress = linphone_address_new([readyAddress cStringUsingEncoding:[NSString defaultCStringEncoding]]);
 		if(displayName!=nil) {
 			linphone_address_set_display_name(linphoneAddress,[displayName cStringUsingEncoding:[NSString defaultCStringEncoding]]);
 		}
 		if ([[LinphoneManager instance] lpConfigBoolForKey:@"override_domain_with_default_one"])
 			linphone_address_set_domain(linphoneAddress, [[[LinphoneManager instance] lpConfigStringForKey:@"domain" forSection:@"wizard"] cStringUsingEncoding:[NSString defaultCStringEncoding]]);
 		if(transfer) {
-			linphone_core_transfer_call(theLinphoneCore, linphone_core_get_current_call(theLinphoneCore), [address cStringUsingEncoding:[NSString defaultCStringEncoding]]);
+			linphone_core_transfer_call(theLinphoneCore, linphone_core_get_current_call(theLinphoneCore), [readyAddress cStringUsingEncoding:[NSString defaultCStringEncoding]]);
 		} else {
 			call=linphone_core_invite_address_with_params(theLinphoneCore, linphoneAddress, lcallParams);
 		}
@@ -1922,7 +1924,7 @@ static void audioRouteChangeListenerCallback (
 	} else {
 		char normalizedUserName[256];
 		LinphoneAddress* linphoneAddress = linphone_address_new(linphone_core_get_identity(theLinphoneCore));
-		linphone_proxy_config_normalize_number(proxyCfg,[address cStringUsingEncoding:[NSString defaultCStringEncoding]],normalizedUserName,sizeof(normalizedUserName));
+		linphone_proxy_config_normalize_number(proxyCfg,[readyAddress cStringUsingEncoding:[NSString defaultCStringEncoding]],normalizedUserName,sizeof(normalizedUserName));
 		linphone_address_set_username(linphoneAddress, normalizedUserName);
 		if(displayName!=nil) {
 			linphone_address_set_display_name(linphoneAddress, [displayName cStringUsingEncoding:[NSString defaultCStringEncoding]]);
