@@ -398,7 +398,12 @@ static UICompositeViewDescription *compositeDescription = nil;
 }
 
 - (IBAction)onChatTap:(id)sender {
-    [[PhoneMainView instance] changeCurrentView:[ChatViewController compositeViewDescription]];
+    ChatViewController *controller = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[ChatViewController compositeViewDescription]
+                                                                                         push:TRUE], ChatViewController);
+    if (addressField.text.length != 0) {
+        controller.addressField.text = addressField.text;
+        [controller onAddClick:nil];
+    }
 }
 
 @end
