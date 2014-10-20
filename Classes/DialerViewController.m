@@ -371,7 +371,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     */
     ContactDetailsViewController *controller = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[ContactDetailsViewController compositeViewDescription] push:TRUE], ContactDetailsViewController);
     if(controller != nil) {
-        if(addressField.text.length == 0) {
+        if (addressField.text.length == 0) {
             [controller newContact];
         } else {
             [controller newContact:addressField.text];
