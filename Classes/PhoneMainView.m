@@ -265,6 +265,7 @@ static RootViewManager* rootViewManagerInstance = nil;
     }
 }
 
+/*
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
     [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
     [mainViewController willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
@@ -280,6 +281,7 @@ static RootViewManager* rootViewManagerInstance = nil;
     [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
     [mainViewController didRotateFromInterfaceOrientation:fromInterfaceOrientation];
 }
+*/
 
 - (UIInterfaceOrientation)interfaceOrientation {
     return [mainViewController currentOrientation];
