@@ -185,6 +185,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 		self.tableView.dataSource = self.tableController;
 		self.tableView.delegate   = self.tableController;
+        self.tableView.backgroundColor = [UIColor clearColor];
 
 		self.tableView.autoresizingMask = UIViewAutoresizingFlexibleHeight |
 										   UIViewAutoresizingFlexibleWidth |
