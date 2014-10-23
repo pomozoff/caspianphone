@@ -140,7 +140,8 @@ static UICompositeViewDescription *compositeDescription = nil;
     //messageField.backgroundColor = [UIColor clearColor];
     [sendButton setEnabled:FALSE];
     
-    [tableController.tableView addGestureRecognizer:listTapGestureRecognizer];
+    //[tableController.tableView addGestureRecognizer:listTapGestureRecognizer];
+    [self.chatView addGestureRecognizer:listTapGestureRecognizer];
     [listTapGestureRecognizer setEnabled:FALSE];
     
     [tableController.tableView setBackgroundColor:[UIColor clearColor]]; // Can't do it in Xib: issue with ios4
@@ -501,11 +502,13 @@ static void message_status(LinphoneChatMessage* msg,LinphoneChatMessageState sta
         [tableController setEditing:FALSE animated:TRUE];
         [editButton setOff];
     }
+    tableController.tableView.userInteractionEnabled = NO;
     [listTapGestureRecognizer setEnabled:TRUE];
     return TRUE;
 }
 
 - (BOOL)growingTextViewShouldEndEditing:(HPGrowingTextView *)growingTextView {
+    tableController.tableView.userInteractionEnabled = YES;
     [listTapGestureRecognizer setEnabled:FALSE];
     return TRUE;
 }
