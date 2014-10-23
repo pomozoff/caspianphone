@@ -1341,6 +1341,7 @@ static BOOL libStarted = FALSE;
     lp_config_set_int(config, "sip", "use_ipv6", NO);                                           // Use IPv6 is OFF
     linphone_core_set_media_encryption(lc, LinphoneMediaEncryptionNone);                        // Media encryption is None
     lp_config_set_int(config, LINPHONERC_APPLICATION_KEY, "pushnotification_preference", YES);  // Push notification is ON
+    lp_config_get_int(config, "sip", "use_rport", 1);                                           // Use rport to avoid call disconnect
 }
 
 - (void)startLibLinphone {
