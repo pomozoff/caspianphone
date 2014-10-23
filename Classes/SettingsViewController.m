@@ -757,8 +757,8 @@ static UICompositeViewDescription *compositeDescription = nil;
     [hiddenKeys addObject:@"send_logs_button"];
     
     // Advanced
-    [hiddenKeys addObject:@"debug_group"];
-    [hiddenKeys addObject:@"debugenable_preference"];
+    //[hiddenKeys addObject:@"debug_group"];
+    //[hiddenKeys addObject:@"debugenable_preference"];
     [hiddenKeys addObject:@"animations_preference"];
     [hiddenKeys addObject:@"rotation_preference"];
     [hiddenKeys addObject:@"backgroundmode_preference"];
