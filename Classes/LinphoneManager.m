@@ -1343,6 +1343,9 @@ static BOOL libStarted = FALSE;
     lp_config_set_int(config, LINPHONERC_APPLICATION_KEY, "pushnotification_preference", YES);  // Push notification is ON
     lp_config_get_int(config, "sip", "use_rport", 1);                                           // Use rport to avoid call disconnect
     lp_config_set_int(config, "sip", "use_rport", 1);                                            // Use rport to avoid call disconnect
+    
+    // Advanced
+    lp_config_set_string(config, LINPHONERC_APPLICATION_KEY, "rotation_preference", "portrait"); // Rotation set to Portrait mode
 }
 
 - (void)startLibLinphone {
