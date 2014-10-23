@@ -676,13 +676,11 @@ static void linphone_iphone_display_status(struct _LinphoneCore * lc, const char
 				[LinphoneLogger logc:LinphoneLoggerLog format:"Mobile call ongoing... rejecting call from [%s]",tmp];
 				ms_free(tmp);
 			}
-			linphone_core_decline_call(theLinphoneCore, call,LinphoneReasonBusy);
+			linphone_core_decline_call(theLinphoneCore, call, LinphoneReasonBusy);
 			[lCTCallCenter release];
 			return;
 		}
 		[lCTCallCenter release];
-
-		if(	[UIApplication sharedApplication].applicationState == UIApplicationStateBackground) {
 
 			LinphoneCallLog* callLog=linphone_call_get_call_log(call);
 			NSString* callId=[NSString stringWithUTF8String:linphone_call_log_get_call_id(callLog)];
@@ -2001,7 +1999,6 @@ static void audioRouteChangeListenerCallback (
     }
 }
 
-
 #pragma mark - Misc Functions
 
 + (NSString*)bundleFile:(NSString*)file {
@@ -2086,7 +2083,7 @@ static void audioRouteChangeListenerCallback (
 	}
 }
 
-+(id)getMessageAppDataForKey:(NSString*)key inMessage:(LinphoneChatMessage*)msg {
++ (id)getMessageAppDataForKey:(NSString*)key inMessage:(LinphoneChatMessage*)msg {
 
 	if(msg == nil ) return nil;
 
@@ -2099,7 +2096,7 @@ static void audioRouteChangeListenerCallback (
 	return value;
 }
 
-+(void)setValueInMessageAppData:(id)value forKey:(NSString*)key inMessage:(LinphoneChatMessage*)msg {
++ (void)setValueInMessageAppData:(id)value forKey:(NSString*)key inMessage:(LinphoneChatMessage*)msg {
 
 	NSMutableDictionary* appDataDict = [NSMutableDictionary dictionary];
 	const char* appData = linphone_chat_message_get_appdata(msg);
@@ -2128,6 +2125,7 @@ static void audioRouteChangeListenerCallback (
 - (NSString*)lpConfigStringForKey:(NSString*)key {
 	return [self lpConfigStringForKey:key forSection:[NSString stringWithUTF8String:LINPHONERC_APPLICATION_KEY]];
 }
+
 - (NSString*)lpConfigStringForKey:(NSString*)key withDefault:(NSString*)defaultValue {
 	NSString* value = [self lpConfigStringForKey:key];
 	return value?value:defaultValue;
@@ -2175,8 +2173,8 @@ static void audioRouteChangeListenerCallback (
 - (BOOL)lpConfigBoolForKey:(NSString*)key forSection:(NSString *)section {
 	return [self lpConfigIntForKey:key forSection:section] == 1;
 }
-- (void)silentPushFailed:(NSTimer*)timer
-{
+
+- (void)silentPushFailed:(NSTimer*)timer {
 	if( silentPushCompletion ){
 		[LinphoneLogger log:LinphoneLoggerLog format:@"silentPush failed, silentPushCompletion block: %p", silentPushCompletion ];
 		silentPushCompletion(UIBackgroundFetchResultNoData);
@@ -2185,9 +2183,9 @@ static void audioRouteChangeListenerCallback (
 }
 
 
-#pragma GSM management
+#pragma mark - GSM management
 
--(void) removeCTCallCenterCb {
+- (void)removeCTCallCenterCb {
 	if (mCallCenter != nil) {
 		[LinphoneLogger log:LinphoneLoggerLog format:@"Removing CT call center listener [%p]",mCallCenter];
 		mCallCenter.callEventHandler=NULL;
@@ -2210,7 +2208,7 @@ static void audioRouteChangeListenerCallback (
 
 }
 
-- (void)handleGSMCallInteration: (id) cCenter {
+- (void)handleGSMCallInteration:(id)cCenter {
 	CTCallCenter* ct = (CTCallCenter*) cCenter;
 	/* pause current call, if any */
 	LinphoneCall* call = linphone_core_get_current_call(theLinphoneCore);
@@ -2227,7 +2225,7 @@ static void audioRouteChangeListenerCallback (
 	} //else nop, keep call in paused state
 }
 
--(NSString*) contactFilter {
+- (NSString *)contactFilter {
 	NSString* filter=@"*";
 	if ( [self lpConfigBoolForKey:@"contact_filter_on_default_domain"]) {
 		LinphoneProxyConfig* proxy_cfg;
