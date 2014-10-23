@@ -20,11 +20,24 @@
 
 #import "ConsoleViewController.h"
 
+@interface ConsoleViewController ()
+
+@property (nonatomic, retain) MFMailComposeViewController *mailController;
+
+@end
+
 @implementation ConsoleViewController
 
 @synthesize logsView;
 
+#pragma mark - Properties
 
+- (MFMailComposeViewController *)mailController {
+    if (!_mailController) {
+        _mailController = [[MFMailComposeViewController alloc] init];
+    }
+    return _mailController;
+}
 
 #pragma mark - Lifecycle Functions
 
@@ -37,6 +50,7 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     
     [logsView release];
+    self.mailController = nil;
     
     [super dealloc];
 }
@@ -84,7 +98,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     [logsView setDelegate:self];
     
     UIScrollView *scrollView = [ConsoleViewController defaultScrollView:logsView];
-    UIEdgeInsets inset = {0, 0, 10, 0};
+    UIEdgeInsets inset = {0, 0, 0, 0};
     [scrollView setContentInset:inset];
     [scrollView setScrollIndicatorInsets:inset];
     
@@ -148,6 +162,23 @@ static UICompositeViewDescription *compositeDescription = nil;
         [js appendString:@"window.scrollTo(0, document.body.scrollHeight);"];
     }
     [logsView stringByEvaluatingJavaScriptFromString:js];
+}
+
+#pragma mark - Actions
+
+- (IBAction)onEmailTap:(id)sender {
+    self.mailController.mailComposeDelegate = self;
+    [self.mailController setSubject:@"Linphone logs"];
+    [self.mailController setMessageBody:[self.logsView stringByEvaluatingJavaScriptFromString:@"document.body.innerHTML"] isHTML:YES];
+    [self presentViewController:self.mailController animated:YES completion:nil];
+}
+
+#pragma mark - MFMailComposeViewControllerDelegate
+
+- (void)mailComposeController:(MFMailComposeViewController *)controller
+          didFinishWithResult:(MFMailComposeResult)result
+                        error:(NSError *)error {
+    [self.mailController dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

@@ -20,7 +20,7 @@
 #import <UIKit/UIKit.h>
 #import "UICompositeViewController.h"
 
-@interface ConsoleViewController : UIViewController<UICompositeViewDelegate, UIWebViewDelegate> {
+@interface ConsoleViewController : UIViewController<UICompositeViewDelegate, UIWebViewDelegate, MFMailComposeViewControllerDelegate> {
 }
 
 @property (nonatomic, retain) IBOutlet UIWebView* logsView;
