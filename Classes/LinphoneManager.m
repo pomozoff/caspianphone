@@ -1306,42 +1306,41 @@ static BOOL libStarted = FALSE;
     LpConfig *config = linphone_core_get_config(lc);
 
     // Audio and Video codecs
-    [self prepareAllCodecs:theLinphoneCore];                                                    // Enable all default codecs
+    [self prepareAllCodecs:theLinphoneCore];                                                     // Enable all default codecs
 
     // Audio options
-    linphone_core_enable_adaptive_rate_control(lc, YES);                                        // Adaptive rate control is ON
+    linphone_core_enable_adaptive_rate_control(lc, YES);                                         // Adaptive rate control is ON
     linphone_core_set_adaptive_rate_algorithm(lc, "Simple");
 
-    lp_config_set_int(config, "audio", "codec_bitrate_limit", 128);                             // Codec bitrate limit is 128kbps
-    lp_config_set_int(config, LINPHONERC_APPLICATION_KEY, "voiceproc_preference", YES);         // Enable voice processing is ON
-    lp_config_set_int(config, "sound", "eq_active", YES);                                       // Enable bass boost is ON
+    lp_config_set_int(config, "audio", "codec_bitrate_limit", 128);                              // Codec bitrate limit is 128kbps
+    lp_config_set_int(config, LINPHONERC_APPLICATION_KEY, "voiceproc_preference", YES);          // Enable voice processing is ON
+    lp_config_set_int(config, "sound", "eq_active", YES);                                        // Enable bass boost is ON
     
     // Video options
-    linphone_core_enable_video(lc, YES, YES);                                                   // Enable video is ON
+    linphone_core_enable_video(lc, YES, YES);                                                    // Enable video is ON
     LinphoneVideoPolicy policy;
-    policy.automatically_accept = NO;                                                           // Automatically accept is OFF
-    policy.automatically_initiate = NO;                                                         // Automatically start is OFF
+    policy.automatically_accept = NO;                                                            // Automatically accept is OFF
+    policy.automatically_initiate = NO;                                                          // Automatically start is OFF
     linphone_core_set_video_policy(lc, &policy);
-    linphone_core_enable_self_view(lc, YES);                                                    // Show self view is ON
-    lp_config_set_int(config, LINPHONERC_APPLICATION_KEY, "preview_preference", YES);           // I don't know wtf is it, but let it be enabled!
+    linphone_core_enable_self_view(lc, YES);                                                     // Show self view is ON
+    lp_config_set_int(config, LINPHONERC_APPLICATION_KEY, "preview_preference", YES);            // I don't know wtf is it, but let it be enabled!
     MSVideoSize vsize;
     MS_VIDEO_SIZE_ASSIGN(vsize, VGA);
-    linphone_core_set_preferred_video_size(lc, vsize);                                          // Preferred size is VGA (640x480)
+    linphone_core_set_preferred_video_size(lc, vsize);                                           // Preferred size is VGA (640x480)
     int bw = 512;
-    linphone_core_set_upload_bandwidth(lc, bw);                                                 // Set bandwidth for VGA
-    linphone_core_set_download_bandwidth(lc, bw);                                               // Set bandwidth for VGA
+    linphone_core_set_upload_bandwidth(lc, bw);                                                  // Set bandwidth for VGA
+    linphone_core_set_download_bandwidth(lc, bw);                                                // Set bandwidth for VGA
     
     // Network
-    lp_config_set_int(config, LINPHONERC_APPLICATION_KEY, "edge_opt_preference", YES);          // EDGE optimizations is ON
-    linphone_core_set_stun_server(lc, "212.159.80.154");                                        // STUN server
-    linphone_core_set_firewall_policy(lc, LinphonePolicyUseIce);                                // ICE is ON
-    lp_config_set_int(config, LINPHONERC_APPLICATION_KEY, "random_port_preference", YES);       // Random port is ON
-    linphone_core_set_audio_port_range(lc, 7076, 7076);                                         // Audio port is 7076
-    linphone_core_set_video_port_range(lc, 9078, 9078);                                         // Video port is 9078
-    lp_config_set_int(config, "sip", "use_ipv6", NO);                                           // Use IPv6 is OFF
-    linphone_core_set_media_encryption(lc, LinphoneMediaEncryptionNone);                        // Media encryption is None
-    lp_config_set_int(config, LINPHONERC_APPLICATION_KEY, "pushnotification_preference", YES);  // Push notification is ON
-    lp_config_get_int(config, "sip", "use_rport", 1);                                           // Use rport to avoid call disconnect
+    lp_config_set_int(config, LINPHONERC_APPLICATION_KEY, "edge_opt_preference", YES);           // EDGE optimizations is ON
+    linphone_core_set_stun_server(lc, "212.159.80.154");                                         // STUN server
+    linphone_core_set_firewall_policy(lc, LinphonePolicyUseIce);                                 // ICE is ON
+    lp_config_set_int(config, LINPHONERC_APPLICATION_KEY, "random_port_preference", YES);        // Random port is ON
+    linphone_core_set_audio_port_range(lc, 7076, 7076);                                          // Audio port is 7076
+    linphone_core_set_video_port_range(lc, 9078, 9078);                                          // Video port is 9078
+    lp_config_set_int(config, "sip", "use_ipv6", NO);                                            // Use IPv6 is OFF
+    linphone_core_set_media_encryption(lc, LinphoneMediaEncryptionNone);                         // Media encryption is None
+    lp_config_set_int(config, LINPHONERC_APPLICATION_KEY, "pushnotification_preference", YES);   // Push notification is ON
     lp_config_set_int(config, "sip", "use_rport", 1);                                            // Use rport to avoid call disconnect
     
     // Advanced
