@@ -52,6 +52,7 @@
     [linkTapGestureRecognizer release];
     [linkLabel release];
     [licensesView release];
+    [_scrollView release];
     
     [super dealloc];
 }
@@ -68,9 +69,7 @@
 	
     [linkLabel addGestureRecognizer:linkTapGestureRecognizer];
     
-    UIScrollView *scrollView = (UIScrollView *)self.view;
-    [scrollView addSubview:contentView];
-    [scrollView setContentSize:[contentView bounds].size];
+    [self.scrollView setContentSize:contentView.bounds.size];
     
 	[linphoneLabel setText:[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"]];
 	
@@ -82,7 +81,8 @@
     if([LinphoneManager runningOnIpad]) {
         [LinphoneUtils adjustFontSize:self.view mult:2.22f];
     }
-    
+
+    /*
     [AboutViewController removeBackground:licensesView];
     
     // Create a request to the resource
@@ -91,6 +91,7 @@
     [licensesView setDelegate:self];
     [licensesView loadRequest:request];
     [[AboutViewController defaultScrollView:licensesView] setScrollEnabled:FALSE];
+    */
 }
 
 
@@ -130,6 +131,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 }
 
 + (UIScrollView *)defaultScrollView:(UIWebView *)webView {
+    /*
     UIScrollView *scrollView = nil;
     
     if ([[UIDevice currentDevice].systemVersion doubleValue] >= 5.0) {
@@ -142,6 +144,8 @@ static UICompositeViewDescription *compositeDescription = nil;
         }
     }
     return scrollView;
+    */
+    return nil;
 }
 
 
@@ -155,6 +159,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 #pragma mark - UIWebViewDelegate Functions
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
+    /*
     CGSize size = [webView sizeThatFits:CGSizeMake(self.view.bounds.size.width, 10000.0f)];
     float diff = size.height - webView.bounds.size.height;
     
@@ -168,6 +173,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     CGRect licensesViewFrame = [licensesView frame];
     licensesViewFrame.size.height += diff;
     [licensesView setFrame:licensesViewFrame];
+    */
 }
 
 - (BOOL)webView:(UIWebView *)inWeb shouldStartLoadWithRequest:(NSURLRequest *)inRequest navigationType:(UIWebViewNavigationType)inType {

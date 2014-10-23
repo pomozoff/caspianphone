@@ -33,6 +33,8 @@
 @property (nonatomic, retain) IBOutlet UILabel *licenseLabel;
 @property (nonatomic, retain) IBOutlet UIWebView *licensesView;
 @property (nonatomic, retain) IBOutlet UITapGestureRecognizer *linkTapGestureRecognizer;
+@property (nonatomic, retain) IBOutlet UIScrollView *scrollView;
+
 
 - (IBAction)onLinkTap:(id)sender;
 
