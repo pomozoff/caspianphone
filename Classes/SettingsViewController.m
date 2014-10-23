@@ -810,6 +810,7 @@ static UICompositeViewDescription *compositeDescription = nil;
         //[[PhoneMainView instance] resetToDefaults];
         [[LinphoneManager instance] resetSettingsToDefault:[LinphoneManager getLc]];
         [settingsStore transformLinphoneCoreToKeys];
+        [[PhoneMainView instance] changeCurrentView:[DialerViewController compositeViewDescription] push:TRUE];
     }
     if([key isEqual:@"console_button"]) {
         [[PhoneMainView instance] changeCurrentView:[ConsoleViewController compositeViewDescription] push:TRUE];
