@@ -685,7 +685,9 @@ static void linphone_iphone_display_status(struct _LinphoneCore * lc, const char
         const MSList *callsList = linphone_core_get_calls(theLinphoneCore);
         if (callsList != NULL && callsList->next != NULL) {
             linphone_core_decline_call(theLinphoneCore, call, LinphoneReasonBusy);
-        } else if ([UIApplication sharedApplication].applicationState == UIApplicationStateBackground) {
+        }
+        
+        if ([UIApplication sharedApplication].applicationState == UIApplicationStateBackground) {
 			LinphoneCallLog* callLog=linphone_call_get_call_log(call);
 			NSString* callId=[NSString stringWithUTF8String:linphone_call_log_get_call_id(callLog)];
 
