@@ -247,7 +247,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 }
 
--(void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning {
     [TUNinePatchCache flushCache]; // will remove any images cache (freeing any cached but unused images)
 }
 
