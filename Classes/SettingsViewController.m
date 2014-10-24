@@ -665,11 +665,11 @@ static UICompositeViewDescription *compositeDescription = nil;
     [hiddenKeys addObject:@"clear_cache_button"];
     [hiddenKeys addObject:@"battery_alert_button"];
 #endif
-
+/*
 	if (! [[LinphoneManager instance] lpConfigBoolForKey:@"enable_log_collect"]) {
 		[hiddenKeys addObject:@"send_logs_button"];
 	}
-    
+*/
     [hiddenKeys addObject:@"playback_gain_preference"];
     [hiddenKeys addObject:@"microphone_gain_preference"];
     
@@ -754,7 +754,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     [hiddenKeys addObject:@"enable_video_preference"];
     [hiddenKeys addObject:@"call_menu"];
     [hiddenKeys addObject:@"release_button"];
-    [hiddenKeys addObject:@"send_logs_button"];
+    //[hiddenKeys addObject:@"send_logs_button"];
     
     // Advanced
     //[hiddenKeys addObject:@"debug_group"];

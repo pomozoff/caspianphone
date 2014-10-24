@@ -1475,8 +1475,9 @@ static BOOL libStarted = FALSE;
     }
 
 	/*must be done before creating linphone core to get its traces too*/
-	//linphone_core_set_log_collection_path([[LinphoneManager cacheDirectory] UTF8String]);
+	linphone_core_set_log_collection_path([[LinphoneManager cacheDirectory] UTF8String]);
 	//linphone_core_enable_log_collection([self lpConfigBoolForKey:@"enable_log_collect"]);
+    linphone_core_enable_log_collection(YES);
 
 	theLinphoneCore = linphone_core_new_with_config (&linphonec_vtable
 										 ,configDb
