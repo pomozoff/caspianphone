@@ -746,6 +746,7 @@ static UICompositeViewDescription *compositeDescription = nil;
             NSString *password = isRememberCredentials ? self.passwordRegisterField.text : @"";
             
             [self savePhoneNumber:phoneNumber andPassword:password];
+            [[LinphoneManager instance] resetSettingsToDefault:[LinphoneManager getLc]];
 
             [waitView setHidden:true];
             [[PhoneMainView instance] changeCurrentView:[DialerViewController compositeViewDescription]];
