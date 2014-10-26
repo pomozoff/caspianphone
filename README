@@ -124,7 +124,7 @@ DEBUGING THE SDK
 
 Sometime it can be usefull to step into liblinphone SDK funtions. To allow xcode to enable breakpoint whithin liblinphone, SDK must be built with debug symbols.
 To add debug symbol to liblinphone SDK, add make option "enable_debug=yes".
-	$ make make all enable_gpl_third_parties=no enable_debug=yes
+	$ make all enable_gpl_third_parties=no enable_debug=yes
 
 
 DEBUGING MEDIASTREMMER2
