@@ -45,10 +45,10 @@ static NSString *caspianSelectCountry = @"Select Country";
 static NSString *caspianEnterPhoneNumber = @"Enter Phone Number";
 static NSString *caspianEnterName = @"Enter First and Last Names";
 
-static NSString *caspianCountryListUrl = @"http://onecallcaspian.co.uk/mobile/country2";
-static NSString *caspianCreateAccountUrl = @"http://onecallcaspian.co.uk/mobile/create?phone_code=%@&phone_number=%@&firstname=%@&lastname=%@&activation_way=%@";
-static NSString *caspianConfirmActivationCodeUrl = @"http://onecallcaspian.co.uk/mobile/confirm?code=%@";
-static NSString *caspianForgotPasswordUrl = @"http://onecallcaspian.co.uk/mobile/forgotPassword?phone_code=%@&phone_number=%@";
+static NSString *caspianCountryListUrl = @"http://www.onecallcaspian.co.uk/mobile/country2";
+static NSString *caspianCreateAccountUrl = @"http://www.onecallcaspian.co.uk/mobile/create?phone_code=%@&phone_number=%@&firstname=%@&lastname=%@&activation_way=%@";
+static NSString *caspianConfirmActivationCodeUrl = @"http://www.onecallcaspian.co.uk/mobile/confirm?code=%@";
+static NSString *caspianForgotPasswordUrl = @"http://www.onecallcaspian.co.uk/mobile/forgotPassword?phone_code=%@&phone_number=%@";
 
 static NSString *caspianCountriesListTopKey = @"Countries";
 static NSString *caspianCountryObjectFieldCode = @"Code";

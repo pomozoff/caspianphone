@@ -48,7 +48,7 @@
 @synthesize username = _username;
 @synthesize password = _password;
 
-static NSString *caspianBalanceUrl = @"http://onecallcaspian.co.uk/mobile/credit?phone_number=%@&password=%@";
+static NSString *caspianBalanceUrl = @"http://www.onecallcaspian.co.uk/mobile/credit?phone_number=%@&password=%@";
 
 const static NSTimeInterval balanceIntervalMax = 10.0;
 const static NSTimeInterval balanceInterval = 1.0;
