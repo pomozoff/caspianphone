@@ -12,12 +12,50 @@ Make sure that /opt/local/bin (macport tools) arrives first in your PATH env var
 
 Once xcode and macports are installed, open a terminal and install the required build-time tools with:
 
-	$ sudo port install coreutils automake autoconf libtool intltool wget pkgconfig cmake gmake yasm nasm grep doxygen ImageMagick optipng antlr3
+#	$ sudo port install coreutils automake autoconf libtool intltool wget pkgconfig cmake gmake yasm nasm grep doxygen ImageMagick optipng antlr3
+	$ sudo port install \
+		coreutils +universal \
+		automake +universal \
+		autoconf +universal \
+		libtool +universal \
+		intltool +universal \
+		wget +universal \
+		pkgconfig +universal \
+		cmake \
+		gmake +universal \
+		yasm +universal \
+		nasm +universal \
+		grep +universal \
+		doxygen +universal \
+		ImageMagick +universal \
+		optipng +universal \
+		antlr3 +universal
+
+
+Ugrade:
+	
+	$ sudo port upgrade --enforce-variants \
+		coreutils +universal \
+		automake +universal \
+		autoconf +universal \
+		libtool +universal \
+		intltool +universal \
+		wget +universal \
+		pkgconfig +universal \
+		cmake +universal \
+		gmake +universal \
+		yasm +universal \
+		nasm +universal \
+		grep +universal \
+		doxygen +universal \
+		ImageMagick +universal \
+		optipng +universal \
+		antlr3 +universal
 
 
 Install gas-preprosessor.pl version above Jully 2013  (http://github.com/yuvi/gas-preprocessor/ ) to be copied into /opt/local/bin :
 
-	$ wget --no-check-certificate https://raw.github.com/yuvi/gas-preprocessor/master/gas-preprocessor.pl
+	$ wget --no-check-certificate https://raw.github.com/libav/gas-preprocessor/master/gas-preprocessor.pl
 	$ sudo mv gas-preprocessor.pl /opt/local/bin/.
 	$ sudo chmod +x /opt/local/bin/gas-preprocessor.pl
 
