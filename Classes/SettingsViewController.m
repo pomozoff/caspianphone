@@ -828,7 +828,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     } else if([key isEqual:@"about_button"]) {
         [[PhoneMainView instance] changeCurrentView:[AboutViewController compositeViewDescription] push:TRUE];
 	} else if ([key isEqual:@"send_logs_button"]) {
-        char * filepath = NULL; //linphone_core_compress_log_collection([LinphoneManager getLc]);
+        char * filepath = linphone_core_compress_log_collection([LinphoneManager getLc]);
 		if (filepath == NULL) {
 			[LinphoneLogger log:LinphoneLoggerError format:@"Cannot sent logs: file is NULL"];
 			return;
@@ -888,7 +888,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 		picker.mailComposeDelegate = self;
 
 		[picker setSubject:NSLocalizedString(@"Linphone Logs",nil)];
-		[picker setToRecipients:[NSArray arrayWithObjects:@"linphone-iphone@belledonne-communications.com", nil]];
+		[picker setToRecipients:[NSArray arrayWithObjects:@"", nil]];
 		[picker setMessageBody:NSLocalizedString(@"Linphone logs", nil) isHTML:NO];
 		[picker addAttachmentData:attachment mimeType:type fileName:attachmentName];
 
