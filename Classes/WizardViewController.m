@@ -39,6 +39,7 @@ typedef enum _ViewElement {
 
 static NSString *caspianPhoneNumber = @"uk.co.onecallcaspian.phone.username";
 static NSString *caspianPasswordKey = @"uk.co.onecallcaspian.phone.password";
+static NSString *caspianDomain      = @"uk.co.onecallcaspian.phone.domain";
 static NSString *caspianActivationCodeKey = @"uk.co.onecallcaspian.phone.activationCode";
 
 static NSString *caspianSelectCountry = @"Select Country";
@@ -219,6 +220,7 @@ extern NSInteger caspianErrorCode;
     [_phoneNumberRegisterField release];
     [_passwordRegisterField release];
     [_passwordFinishField release];
+    [_domainRegisterField release];
     [_phoneNumberNextToolbar release];
     
     [_countryCodeForgotPasswordField release];
@@ -406,20 +408,20 @@ static UICompositeViewDescription *compositeDescription = nil;
     [[LinphoneManager instance] lpConfigSetBool:FALSE forKey:@"pushnotification_preference"];
     
     LinphoneCore *lc = [LinphoneManager getLc];
-    LCSipTransports transportValue={5060,5060,-1,-1};
+    LCSipTransports transportValue = {5060, 5060, -1, -1};
 
     if (linphone_core_set_sip_transports(lc, &transportValue)) {
         [LinphoneLogger logc:LinphoneLoggerError format:"cannot set transport"];
     }
     
     [[LinphoneManager instance] lpConfigSetString:@"" forKey:@"sharing_server_preference"];
-    [[LinphoneManager instance] lpConfigSetBool:FALSE forKey:@"ice_preference"];
+    [[LinphoneManager instance] lpConfigSetBool:YES   forKey:@"ice_preference"];
     [[LinphoneManager instance] lpConfigSetString:@"" forKey:@"stun_preference"];
     linphone_core_set_stun_server(lc, NULL);
     linphone_core_set_firewall_policy(lc, LinphonePolicyNoFirewall);
-    [self resetTextFields];
 
     /*
+    [self resetTextFields];
     if ([[LinphoneManager instance] lpConfigBoolForKey:@"hide_wizard_welcome_view_preference"] == true) {
         [self changeView:choiceView back:FALSE animation:FALSE];
     } else {
@@ -468,11 +470,12 @@ static UICompositeViewDescription *compositeDescription = nil;
     [historyViews removeAllObjects];
 }
 
-- (void)savePhoneNumber:(NSString *)phoneNumber andPassword:(NSString *)password {
+- (void)savePhoneNumber:(NSString *)phoneNumber andPassword:(NSString *)password andDomain:(NSString *)domain {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     
     [userDefaults setObject:phoneNumber forKey:caspianPhoneNumber];
-    [userDefaults setObject:password forKey:caspianPasswordKey];
+    [userDefaults setObject:password    forKey:caspianPasswordKey];
+    [userDefaults setObject:domain      forKey:caspianDomain];
     
     [userDefaults synchronize];
 }
@@ -481,10 +484,12 @@ static UICompositeViewDescription *compositeDescription = nil;
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     
     NSString *phoneNumber = [userDefaults objectForKey:caspianPhoneNumber];
-    NSString *password = [userDefaults objectForKey:caspianPasswordKey];
+    NSString *password    = [userDefaults objectForKey:caspianPasswordKey];
+    NSString *domain      = [userDefaults objectForKey:caspianDomain];
 
     self.phoneNumberRegisterField.text = phoneNumber;
     self.passwordRegisterField.text = password;
+    self.domainRegisterField.text = domain.length != 0 ? domain : [[LinphoneManager instance] caspianDomainIp];
 }
 
 - (void)changeView:(UIView *)view back:(BOOL)back animation:(BOOL)animation {
@@ -610,6 +615,9 @@ static UICompositeViewDescription *compositeDescription = nil;
     LinphoneCore* lc = [LinphoneManager getLc];
 	LinphoneProxyConfig* proxyCfg = linphone_core_create_proxy_config(lc);
 
+    NSString *uriSuffix = [NSString stringWithFormat:@"%@:5060;transport=tcp", domain];
+    linphone_proxy_config_set_server_addr(proxyCfg, [uriSuffix cStringUsingEncoding:[NSString defaultCStringEncoding]]);
+    
     char normalizedUserName[256];
     linphone_proxy_config_normalize_number(proxyCfg, [username cStringUsingEncoding:[NSString defaultCStringEncoding]], normalizedUserName, sizeof(normalizedUserName));
 
@@ -743,9 +751,10 @@ static UICompositeViewDescription *compositeDescription = nil;
         case LinphoneRegistrationOk: {
             BOOL isRememberCredentials = self.rememberMeRegisterSwitch.isOn;
             NSString *phoneNumber = isRememberCredentials ? self.phoneNumberRegisterField.text : @"";
-            NSString *password = isRememberCredentials ? self.passwordRegisterField.text : @"";
+            NSString *password    = isRememberCredentials ? self.passwordRegisterField.text : @"";
+            NSString *domain      = isRememberCredentials ? self.domainRegisterField.text : @"";
             
-            [self savePhoneNumber:phoneNumber andPassword:password];
+            [self savePhoneNumber:phoneNumber andPassword:password andDomain:domain];
             [[LinphoneManager instance] resetSettingsToDefault:[LinphoneManager getLc]];
 
             [waitView setHidden:true];
@@ -912,13 +921,12 @@ static UICompositeViewDescription *compositeDescription = nil;
 }
 
 - (IBAction)onSignInExternalClick:(id)sender {
-    NSString *username = [WizardViewController findTextField:ViewElement_Username  view:contentView].text;
-    NSString *password = [WizardViewController findTextField:ViewElement_Password  view:contentView].text;
-    //NSString *domain = [WizardViewController findTextField:ViewElement_Domain  view:contentView].text;
-    
+    NSString *phone    = self.phoneNumberRegisterField.text;
+    NSString *password = self.passwordRegisterField.text;
+    NSString *domain   = self.domainRegisterField.text;
     
     NSMutableString *errors = [NSMutableString string];
-    if ([username length] == 0) {
+    if ([phone length] == 0) {
         
         [errors appendString:[NSString stringWithFormat:NSLocalizedString(@"Please enter a username.\n", nil)]];
     }
@@ -939,8 +947,7 @@ static UICompositeViewDescription *compositeDescription = nil;
         [errorView release];
     } else {
         [self.waitView setHidden:false];
-        NSString *caspianDomain = [[LinphoneManager instance] caspianDomain];
-        [self addProxyConfig:[[LinphoneManager instance] cleanPhoneNumber:username] password:password domain:caspianDomain];
+        [self addProxyConfig:[[LinphoneManager instance] cleanPhoneNumber:phone] password:password domain:domain];
     }
 }
 

@@ -71,7 +71,8 @@
 @property (nonatomic, retain) IBOutlet UISwitch *rememberMeRegisterSwitch;
 @property (nonatomic, retain) IBOutlet UITextField *passwordRegisterField;
 @property (nonatomic, retain) IBOutlet UITextField *phoneNumberRegisterField;
-@property (retain, nonatomic) IBOutlet UIToolbar *phoneNumberNextToolbar;
+@property (nonatomic, retain) IBOutlet UITextField *domainRegisterField;
+@property (nonatomic, retain) IBOutlet UIToolbar *phoneNumberNextToolbar;
 
 @property (nonatomic, retain) IBOutlet UIPickerView *countryPickerView;
 @property (nonatomic, retain) IBOutlet UIToolbar *countryPickerDoneToolbar;
@@ -88,7 +89,7 @@
 
 @property (nonatomic, retain) IBOutlet COCTextField *activationCodeActivateField;
 
-@property (retain, nonatomic) IBOutlet COCTextField *passwordFinishField;
+@property (nonatomic, retain) IBOutlet COCTextField *passwordFinishField;
 
 @property (nonatomic, retain) IBOutlet UITextField *countryCodeForgotPasswordField;
 @property (nonatomic, retain) IBOutlet COCTextField *countryNameForgotPasswordField;
