@@ -36,7 +36,6 @@
 + (NSString*)appendCountryCodeIfPossible:(NSString*)number;
 + (NSString*)normalizePhoneNumber:(NSString*)number;
 + (NSString *)takePhoneNumberFromAddress:(NSString*)address;
-+ (NSString *)caspianSipAddressForPhoneNumber:(NSString *)phoneNumber;
 + (NSString*)normalizeSipURI:(NSString*)address;
 + (NSString *)caspianSupportPhoneNumber;
 + (BOOL)isChatRoomSupport:(LinphoneChatRoom *)chatRoom;

@@ -323,18 +323,6 @@ static void message_status(LinphoneChatMessage* msg,LinphoneChatMessageState sta
 	[thiz.tableController updateChatEntry:msg];
 }
 
-/*
- // It needs a private api to change peer
-- (void)fixChatRoomPeer:(LinphoneChatRoom *)chatRoom {
-    NSString *peer = [NSString stringWithUTF8String:chatRoom->peer];
-    NSString *caspianDomain = [[LinphoneManager instance] caspianDomain];
-    if ([peer rangeOfString:[NSString stringWithFormat:@"@%@", caspianDomain]].location == NSNotFound) {
-        NSString *phoneNumber = [FastAddressBook takePhoneNumberFromAddress:peer];
-        NSString *caspianSipAddress = [FastAddressBook caspianSipAddressForPhoneNumber:phoneNumber];
-        chatRoom->peer = [caspianSipAddress UTF8String];
-    }
-}
-*/
 
 - (BOOL)sendMessage:(NSString *)message withExterlBodyUrl:(NSURL*)externalUrl withInternalURL:(NSURL*)internalUrl {
     if(![LinphoneManager isLcReady]) {
