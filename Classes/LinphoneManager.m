@@ -36,7 +36,7 @@
 #include "linphone/lpconfig.h"
 #include "mediastreamer2/mscommon.h"
 
-static NSString *caspianDomainIp = @"212.159.80.157";
+static NSString *caspianDomainIpLocal = @"212.159.80.157";
 
 #define LINPHONE_LOGS_MAX_ENTRY 5000
 
@@ -2328,8 +2328,8 @@ static void audioRouteChangeListenerCallback (
     return cleanPhoneNumber;
 }
 
-- (NSString *)caspianDomain {
-    return caspianDomainIp;
+- (NSString *)caspianDomainIp {
+    return caspianDomainIpLocal;
 }
 
 @end

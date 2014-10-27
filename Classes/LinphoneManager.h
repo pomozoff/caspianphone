@@ -150,7 +150,7 @@ typedef struct _LinphoneManagerSounds {
 
 - (NSString *)removePrefix:(NSString *)prefix fromString:(NSString *)string;
 - (NSString *)cleanPhoneNumber:(NSString *)username;
-- (NSString *)caspianDomain;
+- (NSString *)caspianDomainIp;
 
 + (void)kickOffNetworkConnection;
 - (void)setupNetworkReachabilityCallback;
