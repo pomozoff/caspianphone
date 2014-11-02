@@ -24,13 +24,12 @@ libxml2_dir?=externals/libxml2
 libxml2_configure_options= --enable-static --disable-shared
 libxml2_configure_options+= --disable-rebuild-docs --enable-rebuild-docs=no --with-iconv=no --with-python=no --with-zlib=no
 
-#$(BUILDER_SRC_DIR)/$(libxml2_dir)/patched.stamp:
-#	cd $(BUILDER_SRC_DIR)/$(libxml2_dir) \
-#	&& git apply $(BUILDER_SRC_DIR)/build/builders.d/libxml2.patch \
-#	&& touch $@
+$(BUILDER_SRC_DIR)/$(libxml2_dir)/patched.stamp:
+	cd $(BUILDER_SRC_DIR)/$(libxml2_dir) \
+	&& git apply $(BUILDER_SRC_DIR)/build/builders.d/libxml2.patch \
+	&& touch $@
 
-$(BUILDER_SRC_DIR)/$(libxml2_dir)/configure: 
-#	$(BUILDER_SRC_DIR)/$(libxml2_dir)/patched.stamp
+$(BUILDER_SRC_DIR)/$(libxml2_dir)/configure: $(BUILDER_SRC_DIR)/$(libxml2_dir)/patched.stamp
 	@echo -e "\033[01;32m Running autogen for libxml2 in $(BUILDER_SRC_DIR)/$(libxml2_dir) \033[0m"
 	cd $(BUILDER_SRC_DIR)/$(libxml2_dir) \
 	&& PKG_CONFIG_PATH=$(prefix)/lib/pkgconfig CONFIG_SITE=$(BUILDER_SRC_DIR)/build/$(config_site) NOCONFIGURE=1 \
@@ -56,8 +55,8 @@ veryclean-libxml2:
 	-cd $(BUILDER_BUILD_DIR)/$(libxml2_dir) && make distclean 
 	rm -f $(BUILDER_SRC_DIR)/$(libxml2_dir)/configure
 	cd $(BUILDER_SRC_DIR)/$(libxml2_dir) \
-	&& git checkout configure.in
-#	&& rm -f patched.stamp 
+	&& git checkout configure.in \
+	&& rm -f patched.stamp 
 
 clean-makefile-libxml2: 
 	-cd $(BUILDER_BUILD_DIR)/$(libxml2_dir) && rm -f Makefile
