@@ -291,10 +291,6 @@
 #pragma mark - 
 
 - (void)callUpdate:(LinphoneCall*)call state:(LinphoneCallState)state {  
-    if(![LinphoneManager isLcReady]) {
-        [LinphoneLogger logc:LinphoneLoggerWarning format:"Cannot update call bar: Linphone core not ready"];
-        return;
-    }
     LinphoneCore* lc = [LinphoneManager getLc]; 
 
     [speakerButton update];
@@ -341,10 +337,10 @@
     }
     
     switch(state) {
-        LinphoneCallEnd:
-        LinphoneCallError:
-        LinphoneCallIncoming:
-        LinphoneCallOutgoing:
+        case LinphoneCallEnd:
+        case LinphoneCallError:
+        case LinphoneCallIncoming:
+        case LinphoneCallOutgoing:
             [self hidePad:TRUE];
             [self hideOptions:TRUE];
             [self hideRoutes:TRUE];

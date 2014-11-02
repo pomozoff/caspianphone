@@ -36,21 +36,16 @@
 }
 
 - (BOOL) voiceMailEnabled {
-	if(![LinphoneManager isLcReady]) {
-		[LinphoneLogger log:LinphoneLoggerWarning format:@"Cannot call voice mail: Linphone core not ready"];
-		return FALSE;
-	}
-
 	NSString * voiceMailUri = [[LinphoneManager instance] lpConfigStringForKey:@"voice_mail_uri" withDefault:NULL];
 
 	return (voiceMailUri != NULL);
 }
 
 - (void)refreshUI {
-	NSMutableString *name = [[NSMutableString alloc] initWithString:@"numpad_one_"];
+	NSString *name = @"numpad_one_";
 
 	if ([self voiceMailEnabled]) {
-		[name appendString:@"voicemail_"];
+		name = [name stringByAppendingString:@"voicemail_"];
 	}
 
 	[self setImage:[UIImage imageNamed:[name stringByAppendingString:@"default.png"]] forState: UIControlStateNormal];

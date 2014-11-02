@@ -144,8 +144,11 @@ struct codec_name_pref_table codec_pref_table[] = {
 	{ "mp4v-es",       90000, @"mp4v-es_preference",    YES },
 	{ "h264",          90000, @"h264_preference",       YES },
 	{ "vp8",           90000, @"vp8_preference",         NO },
-	{ "mpeg4-generic", 44100, @"aaceld_44k_preference",  NO },
+    { "mpeg4-generic", 16000, @"aaceld_16k_preference",  NO },
 	{ "mpeg4-generic", 22050, @"aaceld_22k_preference",  NO },
+    { "mpeg4-generic", 32000, @"aaceld_32k_preference",  NO },
+	{ "mpeg4-generic", 44100, @"aaceld_44k_preference",  NO },
+    { "mpeg4-generic", 48000, @"aaceld_48k_preference",  NO },
 	{ "opus",          48000, @"opus_preference",        NO },
 	{ NULL,                0, Nil,                       NO }
 };
@@ -477,7 +480,7 @@ exit_dbmigration:
 							   @"start_at_boot_preference"  :@YES};
 	BOOL shouldSync        = FALSE;
 
-	Linphone_log(@"%d user prefs", [defaults_keys count]);
+	Linphone_log(@"%lu user prefs", (unsigned long)[defaults_keys count]);
 
 	for( NSString* userpref in values ){
 		if( [defaults_keys containsObject:userpref] ){
@@ -983,6 +986,10 @@ static void linphone_iphone_is_composing_received(LinphoneCore *lc, LinphoneChat
 
 #pragma mark - Network Functions
 
+- (SCNetworkReachabilityRef) getProxyReachability {
+	return proxyReachability;
+}
+
 + (void)kickOffNetworkConnection {
 	/*start a new thread to avoid blocking the main ui in case of peer host failure*/
 	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -1017,6 +1024,14 @@ static void showNetworkFlags(SCNetworkReachabilityFlags flags){
 		[LinphoneLogger logc:LinphoneLoggerLog format:"kSCNetworkReachabilityFlagsIsWWAN"];
 }
 
+static void networkReachabilityNotification(CFNotificationCenterRef center, void *observer, CFStringRef name, const void *object, CFDictionaryRef userInfo) {
+	LinphoneManager *mgr = [LinphoneManager instance];
+	SCNetworkReachabilityFlags flags;
+	if (SCNetworkReachabilityGetFlags([mgr getProxyReachability], &flags)) {
+		networkReachabilityCallBack([mgr getProxyReachability],flags,nil);
+	}
+}
+
 void networkReachabilityCallBack(SCNetworkReachabilityRef target, SCNetworkReachabilityFlags flags, void* nilCtx){
 	showNetworkFlags(flags);
 	LinphoneManager* lLinphoneMgr = [LinphoneManager instance];
@@ -1046,7 +1061,7 @@ void networkReachabilityCallBack(SCNetworkReachabilityRef target, SCNetworkReach
 				&& (lLinphoneMgr.connectivity == newConnectivity || lLinphoneMgr.connectivity == none)) {
 				linphone_proxy_config_expires(proxy, 0);
 			} else if (proxy){
-				int defaultExpire = [[LinphoneManager instance] lpConfigIntForKey:@"default_expires"];
+				NSInteger defaultExpire = [[LinphoneManager instance] lpConfigIntForKey:@"default_expires"];
 				if (defaultExpire>=0)
 					linphone_proxy_config_expires(proxy, defaultExpire);
 				//else keep default value from linphonecore
@@ -1097,6 +1112,15 @@ void networkReachabilityCallBack(SCNetworkReachabilityRef target, SCNetworkReach
 		proxyReachability = nil;
 	}
 
+	// This notification is used to detect SSID change (switch of Wifi network). The ReachabilityCallback is
+	// not triggered when switching between 2 private Wifi... 
+	CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
+									NULL,
+									networkReachabilityNotification,
+									CFSTR("com.apple.system.config.network_change"),
+									NULL,
+									CFNotificationSuspensionBehaviorDeliverImmediately);
+
 	proxyReachability = SCNetworkReachabilityCreateWithAddress(kCFAllocatorDefault, (const struct sockaddr*)&zeroAddress);
 
 	if (!SCNetworkReachabilitySetCallback(proxyReachability, (SCNetworkReachabilityCallBack)networkReachabilityCallBack, ctx)){
@@ -1107,6 +1131,7 @@ void networkReachabilityCallBack(SCNetworkReachabilityRef target, SCNetworkReach
 		[LinphoneLogger logc:LinphoneLoggerError format:"Cannot register schedule reachability cb: %s", SCErrorString(SCError())];
 		return;
 	}
+	
 	// this check is to know network connectivity right now without waiting for a change. Don'nt remove it unless you have good reason. Jehan
 	SCNetworkReachabilityFlags flags;
 	if (SCNetworkReachabilityGetFlags(proxyReachability, &flags)) {
@@ -1176,8 +1201,8 @@ static LinphoneCoreVTable linphonec_vtable = {
 	NSString *chatDBFileName      = [LinphoneManager documentFile:kLinphoneInternalChatDBFilename];
 	const char* lRootCa           = [[LinphoneManager bundleFile:@"rootca.pem"] cStringUsingEncoding:[NSString defaultCStringEncoding]];
 
-	linphone_core_set_user_agent(theLinphoneCore,"LinphoneIPhone",
-								 [[[NSBundle mainBundle] objectForInfoDictionaryKey:(NSString*)kCFBundleVersionKey] UTF8String]);
+	linphone_core_set_user_agent(theLinphoneCore,"LinphoneIPhone", linphone_core_get_version());
+
 	[_contactSipField release];
 	_contactSipField = [[self lpConfigStringForKey:@"contact_im_type_value" withDefault:@"SIP"] retain];
 
@@ -1554,45 +1579,39 @@ static int comp_call_id(const LinphoneCall* call , const char *callid) {
 }
 
 - (void)cancelLocalNotifTimerForCallId:(NSString*)callid {
-	//first, make sure this callid is not already involved in a call
-	if ([LinphoneManager isLcReady]) {
-		MSList* calls = (MSList*)linphone_core_get_calls(theLinphoneCore);
-		MSList* call = ms_list_find_custom(calls, (MSCompareFunc)comp_call_id, [callid UTF8String]);
-		if (call != NULL) {
-			LinphoneCallAppData* data = linphone_call_get_user_pointer((LinphoneCall*)call->data);
-			if ( data->timer )
-				[data->timer invalidate];
-			data->timer = nil;
-			return;
-		}
-	}
+    //first, make sure this callid is not already involved in a call
+    MSList* calls = (MSList*)linphone_core_get_calls(theLinphoneCore);
+    MSList* call = ms_list_find_custom(calls, (MSCompareFunc)comp_call_id, [callid UTF8String]);
+    if (call != NULL) {
+        LinphoneCallAppData* data = linphone_call_get_user_pointer((LinphoneCall*)call->data);
+        if ( data->timer )
+            [data->timer invalidate];
+        data->timer = nil;
+        return;
+    }
 }
 
 - (void)acceptCallForCallId:(NSString*)callid {
-	//first, make sure this callid is not already involved in a call
-	if ([LinphoneManager isLcReady]) {
-		MSList* calls = (MSList*)linphone_core_get_calls(theLinphoneCore);
-		MSList* call = ms_list_find_custom(calls, (MSCompareFunc)comp_call_id, [callid UTF8String]);
-		if (call != NULL) {
-			[self acceptCall:(LinphoneCall*)call->data];
-			return;
-		};
-	}
+    //first, make sure this callid is not already involved in a call
+    MSList* calls = (MSList*)linphone_core_get_calls(theLinphoneCore);
+    MSList* call = ms_list_find_custom(calls, (MSCompareFunc)comp_call_id, [callid UTF8String]);
+    if (call != NULL) {
+        [self acceptCall:(LinphoneCall*)call->data];
+        return;
+    };
 }
 
 - (void)enableAutoAnswerForCallId:(NSString*) callid {
-	//first, make sure this callid is not already involved in a call
-	if ([LinphoneManager isLcReady]) {
-		MSList* calls = (MSList*)linphone_core_get_calls(theLinphoneCore);
-		if (ms_list_find_custom(calls, (MSCompareFunc)comp_call_id, [callid UTF8String])) {
-			[LinphoneLogger log:LinphoneLoggerWarning format:@"Call id [%@] already handled",callid];
-			return;
-		};
-	}
-	if ([pendindCallIdFromRemoteNotif count] > 10 /*max number of pending notif*/)
-		[pendindCallIdFromRemoteNotif removeObjectAtIndex:0];
-	[pendindCallIdFromRemoteNotif addObject:callid];
+    //first, make sure this callid is not already involved in a call
+    MSList* calls = (MSList*)linphone_core_get_calls(theLinphoneCore);
+    if (ms_list_find_custom(calls, (MSCompareFunc)comp_call_id, [callid UTF8String])) {
+        [LinphoneLogger log:LinphoneLoggerWarning format:@"Call id [%@] already handled",callid];
+        return;
+    };
+    if ([pendindCallIdFromRemoteNotif count] > 10 /*max number of pending notif*/)
+        [pendindCallIdFromRemoteNotif removeObjectAtIndex:0];
 
+    [pendindCallIdFromRemoteNotif addObject:callid];
 }
 
 - (BOOL)shouldAutoAcceptCallForCallId:(NSString*) callId {
@@ -1694,7 +1713,6 @@ static int comp_call_state_paused  (const LinphoneCall* call, const void* param)
 			linphone_core_set_network_reachable(theLinphoneCore, FALSE);
 			return YES;
 		}
-		[self destroyLibLinphone];
 		return NO;
 
 	} else
@@ -1964,18 +1982,16 @@ static void audioRouteChangeListenerCallback (
 		pushNotificationToken = nil;
 	}
 
-	if(apushNotificationToken != nil) {
-		pushNotificationToken = [apushNotificationToken retain];
-	}
-	if([LinphoneManager isLcReady]) {
-		LinphoneProxyConfig *cfg=nil;
-		linphone_core_get_default_proxy(theLinphoneCore, &cfg);
-		if (cfg) {
-			linphone_proxy_config_edit(cfg);
-			[self addPushTokenToProxyConfig: cfg];
-			linphone_proxy_config_done(cfg);
-		}
-	}
+    if(apushNotificationToken != nil) {
+        pushNotificationToken = [apushNotificationToken retain];
+    }
+    LinphoneProxyConfig *cfg=nil;
+    linphone_core_get_default_proxy(theLinphoneCore, &cfg);
+    if (cfg) {
+        linphone_proxy_config_edit(cfg);
+        [self addPushTokenToProxyConfig: cfg];
+        linphone_proxy_config_done(cfg);
+    }
 }
 
 - (void)addPushTokenToProxyConfig:(LinphoneProxyConfig*)proxyCfg{
@@ -2022,22 +2038,21 @@ static void audioRouteChangeListenerCallback (
 	if (! [[NSFileManager defaultManager] fileExistsAtPath:cachePath isDirectory:&isDir] && isDir == NO) {
 		[[NSFileManager defaultManager] createDirectoryAtPath:cachePath withIntermediateDirectories:NO attributes:nil error:&error];
 	}
-	return cachePath;
+    return cachePath;
 }
 
 + (int)unreadMessageCount {
     int count = 0;
-    if( [LinphoneManager isLcReady] ){
-        MSList* rooms = linphone_core_get_chat_rooms([LinphoneManager getLc]);
-        MSList* item = rooms;
-        while (item) {
-            LinphoneChatRoom* room = (LinphoneChatRoom*)item->data;
-            if( room ){
-                count += linphone_chat_room_get_unread_messages_count(room);
-            }
-            item = item->next;
+    MSList* rooms = linphone_core_get_chat_rooms([LinphoneManager getLc]);
+    MSList* item = rooms;
+    while (item) {
+        LinphoneChatRoom* room = (LinphoneChatRoom*)item->data;
+        if( room ){
+            count += linphone_chat_room_get_unread_messages_count(room);
         }
+        item = item->next;
     }
+
     return count;
 }
 
@@ -2110,7 +2125,8 @@ static void audioRouteChangeListenerCallback (
 
 	NSData* data = [NSJSONSerialization dataWithJSONObject:appDataDict options:0 error:nil];
 	NSString* appdataJSON = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-	linphone_chat_message_set_appdata(msg, [appdataJSON UTF8String] );
+	linphone_chat_message_set_appdata(msg, [appdataJSON UTF8String]);
+	[appdataJSON release];
 }
 
 #pragma mark - LPConfig Functions
@@ -2148,7 +2164,7 @@ static void audioRouteChangeListenerCallback (
 
 - (void)lpConfigSetInt:(NSInteger)value forKey:(NSString*)key forSection:(NSString *)section {
 	if (!key) return;
-	lp_config_set_int(configDb, [section UTF8String], [key UTF8String], value );
+	lp_config_set_int(configDb, [section UTF8String], [key UTF8String], (int)value );
 }
 
 - (NSInteger)lpConfigIntForKey:(NSString*)key {

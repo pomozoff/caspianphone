@@ -143,7 +143,7 @@
 "Incoming call" = "Appel entrant";
 
 /* No comment provided by engineer. */
-"Invalid SIP address" = "Numéro de téléphone incorrect";
+"Invalid SIP address" = "Adresse SIP invalide";
 
 /* No comment provided by engineer. */
 "Last name" = "Nom";
@@ -179,7 +179,7 @@
 "Not activated" = "Pas activée";
 
 /* No comment provided by engineer. */
-"Not registered" = "Hors ligne";
+"Not registered" = "Non enregistré";
 
 /* No comment provided by engineer. */
 "Ok" = "Ok";
@@ -212,16 +212,16 @@
 "Please terminate GSM call" = "Veuillez terminer l'appel GSM";
 
 /* No comment provided by engineer. */
-"Registered" = "Actif";
+"Registered" = "Enregistré";
 
 /* No comment provided by engineer. */
-"Registration failed" = "Manqué";
+"Registration failed" = "Enregistrement échoué";
 
 /* No comment provided by engineer. */
 "Registration failure" = "Échec de l'enregistrement";
 
 /* No comment provided by engineer. */
-"Registration in progress" = "S'il vous plaît, attendez";
+"Registration in progress" = "Enregistrement en cours";
 
 /* ICE has established a connection through a relay */
 "Relay connection" = "Connexion relayée";
@@ -242,10 +242,10 @@
 "Show" = "Afficher";
 
 /* No comment provided by engineer. */
-"SIP address" = "Numéro de téléphone";
+"SIP address" = "Adresse SIP";
 
 /* No comment provided by engineer. */
-"SIP addresses" = "Les numéros de téléphone";
+"SIP addresses" = "Adresses SIP";
 
 /* No comment provided by engineer. */
 "SIP server unreachable" = "Le serveur SIP est injoignable";
@@ -299,20 +299,16 @@
 "© 2010-2012 Belledonne Communications " = "© 2010-2012 Belledonne Communications ";
 
 /* Placeholder for the address in DialerView */
-"Enter an address" = "Numéro de téléphone";
+"Enter an address" = "Numéro ou adresse";
 "%@ is composing..." = "%@ rédige un message...";
 "Resend" = "Renvoyer";
 
 /* Alert view for Wizard in Settings */
 "Warning" = "Attention";
-"Launching the Wizard will delete any existing proxy config.\nAre you sure to want it?" = "La déconnexion supprime toute config personnel existant.\nEtes-vous sûr de vouloir?";
-"Launch Wizard" = "Se déconnecter";
+"Launching the Wizard will delete any existing proxy config.\nAre you sure to want it?" = "Lancer l'Assistant va effacer vos réglages. Êtes-vous sûr de vouloir cela?";
+"Launch Wizard" = "Lancer l'assistant";
 
-/* Text message when error occured retrieving balance from the server */
-"Error retrieving balance" = "erreur";
 
-/* Error text message on registration form */
-"Error retrieving country list" = "Erreur de récupération liste de pays";
-
-/* Error text message on registration form */
-"Invalid country list" = "Liste de pays incorrect";
+/* Accessibility */
+"Firstname" = "Prénom";
+"Lastname" = "Nom";

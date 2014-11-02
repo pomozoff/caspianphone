@@ -74,6 +74,10 @@
 
 #pragma mark - 
 
+- (NSString *)accessibilityValue {
+    return [NSString stringWithFormat:@"%@ - %@ (%d)", addressLabel.text, chatContentLabel.text, [unreadMessageLabel.text integerValue]];
+}
+
 - (LinphoneChatMessage*)getLastIncomingMessage {
     LinphoneChatMessage* last_message = nil;
     MSList* last_message_list = linphone_chat_room_get_history(chatRoom, 20);
@@ -125,7 +129,7 @@
         displayName = [NSString stringWithUTF8String:linphone_address_get_username(linphoneAddress)];
     }
     [addressLabel setText:displayName];
-    
+
     // Avatar
     if(image == nil) {
         image = [UIImage imageNamed:@"profile-picture-small.png"];

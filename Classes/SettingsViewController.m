@@ -393,7 +393,7 @@
     if ([[UIDevice currentDevice].systemVersion doubleValue] < 5.0) {
         [self.topViewController viewWillDisappear:animated];
         UIViewController *nextView = nil;
-        int count = [self.viewControllers count];
+        NSInteger count = [self.viewControllers count];
         if(count > 1) {
             nextView = [self.viewControllers objectAtIndex:count - 2];
         }
@@ -617,30 +617,29 @@ static UICompositeViewDescription *compositeDescription = nil;
         return [[[IASKSpecifier alloc] initWithSpecifier:dict] autorelease];
     }
 #else
-    if([LinphoneManager isLcReady]) {
-        if ([[specifier key] isEqualToString:@"media_encryption_preference"]) {
-            NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:[specifier specifierDict]];
-            if(!linphone_core_media_encryption_supported([LinphoneManager getLc], LinphoneMediaEncryptionZRTP)) {
-                NSMutableArray *titles = [NSMutableArray arrayWithArray:[dict objectForKey:@"Titles"]];
-                [titles removeObject:@"ZRTP"];
-                [dict setObject:titles forKey:@"Titles"];
-                NSMutableArray *values = [NSMutableArray arrayWithArray:[dict objectForKey:@"Values"]];
-                [values removeObject:@"ZRTP"];
-                [dict setObject:values forKey:@"Values"];
-            }
-            if(!linphone_core_media_encryption_supported([LinphoneManager getLc], LinphoneMediaEncryptionSRTP)) {
-                NSMutableArray *titles = [NSMutableArray arrayWithArray:[dict objectForKey:@"Titles"]];
-                [titles removeObject:@"SRTP"];
-                [dict setObject:titles forKey:@"Titles"];
-                NSMutableArray *values = [NSMutableArray arrayWithArray:[dict objectForKey:@"Values"]];
-                [values removeObject:@"SRTP"];
-                [dict setObject:values forKey:@"Values"];
-            }
-            return [[[IASKSpecifier alloc] initWithSpecifier:dict] autorelease];
+    if ([[specifier key] isEqualToString:@"media_encryption_preference"]) {
+        NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:[specifier specifierDict]];
+        if(!linphone_core_media_encryption_supported([LinphoneManager getLc], LinphoneMediaEncryptionZRTP)) {
+            NSMutableArray *titles = [NSMutableArray arrayWithArray:[dict objectForKey:@"Titles"]];
+            [titles removeObject:@"ZRTP"];
+            [dict setObject:titles forKey:@"Titles"];
+            NSMutableArray *values = [NSMutableArray arrayWithArray:[dict objectForKey:@"Values"]];
+            [values removeObject:@"ZRTP"];
+            [dict setObject:values forKey:@"Values"];
         }
+        if(!linphone_core_media_encryption_supported([LinphoneManager getLc], LinphoneMediaEncryptionSRTP)) {
+            NSMutableArray *titles = [NSMutableArray arrayWithArray:[dict objectForKey:@"Titles"]];
+            [titles removeObject:@"SRTP"];
+            [dict setObject:titles forKey:@"Titles"];
+            NSMutableArray *values = [NSMutableArray arrayWithArray:[dict objectForKey:@"Values"]];
+            [values removeObject:@"SRTP"];
+            [dict setObject:values forKey:@"Values"];
+        }
+        return [[[IASKSpecifier alloc] initWithSpecifier:dict] autorelease];
     }
+
 #endif //HAVE_SSL
-    
+
 
     // Add "build from source" if MPEG4 or H264 disabled
     if ([[specifier key] isEqualToString:@"h264_preference"] && ![LinphoneManager isCodecSupported:"h264"]) {
@@ -654,9 +653,6 @@ static UICompositeViewDescription *compositeDescription = nil;
 }
 
 - (NSSet*)findHiddenKeys {
-    if(![LinphoneManager isLcReady]) {
-        [LinphoneLogger log:LinphoneLoggerWarning format:@"Can't filter settings: Linphone core not ready"];
-    }
     LinphoneManager* lm = [LinphoneManager instance];
     NSMutableSet *hiddenKeys = [NSMutableSet set];
     
@@ -774,8 +770,11 @@ static UICompositeViewDescription *compositeDescription = nil;
     [hiddenKeys addObject:@"speex_16k_preference"];
     [hiddenKeys addObject:@"speex_8k_preference"];
     [hiddenKeys addObject:@"opus_preference"];
+    [hiddenKeys addObject:@"aaceld_16k_preference"];
     [hiddenKeys addObject:@"aaceld_22k_preference"];
+    [hiddenKeys addObject:@"aaceld_32k_preference"];
     [hiddenKeys addObject:@"aaceld_44k_preference"];
+    [hiddenKeys addObject:@"aaceld_48k_preference"];
     [hiddenKeys addObject:@"amr_preference"];
     [hiddenKeys addObject:@"ilbc_preference"];
     // Video

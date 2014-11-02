@@ -83,7 +83,6 @@
 		2200C2DC174BBB24002E9A70 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 226EF06B15FA256B005865C7 /* MobileCoreServices.framework */; };
 		22058C71116E305000B08DDD /* linphone_icon_57.png in Resources */ = {isa = PBXBuildFile; fileRef = 22058C70116E305000B08DDD /* linphone_icon_57.png */; };
 		220784DF19509EF3001C3BDF /* libmsopenh264.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1560821E18EEF26100765332 /* libmsopenh264.a */; };
-		220784E019509EF3001C3BDF /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 		220FAD3210765B400068D98F /* libgsm.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 220FAD2910765B400068D98F /* libgsm.a */; };
 		220FAD3810765B400068D98F /* libspeex.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 220FAD2F10765B400068D98F /* libspeex.a */; };
 		220FAD3910765B400068D98F /* libspeexdsp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 220FAD3010765B400068D98F /* libspeexdsp.a */; };
@@ -802,7 +801,6 @@
 		D34BD73615C13DF40070C209 /* UIChatCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3EA5413159853C90037DC6B /* UIChatCell.xib */; };
 		D34BD73715C13DF40070C209 /* UIChatRoomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3A8BB7315A6C81A00F96BE5 /* UIChatRoomCell.xib */; };
 		D34BD73815C13DF40070C209 /* UICompositeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D31B4B20159876C0002E6C72 /* UICompositeViewController.xib */; };
-		D34BD73A15C13DF40070C209 /* UIContactCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3A55FBE15877E69003FD403 /* UIContactCell.xib */; };
 		D34BD73D15C13DF40070C209 /* UIHistoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D31AC4AF158A29C600C2638B /* UIHistoryCell.xib */; };
 		D34BD73F15C13DF40070C209 /* UIStateBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = D35498201587716B000081D8 /* UIStateBar.xib */; };
 		D34BD74015C13E110070C209 /* InAppSettings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D34F6F9D1594D3FB0095705B /* InAppSettings.bundle */; };
@@ -926,10 +924,10 @@
 		D3807FC415C28940005BE9BC /* DCRoundSwitchOutlineLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = D3807FBC15C28940005BE9BC /* DCRoundSwitchOutlineLayer.m */; };
 		D3807FC515C28940005BE9BC /* DCRoundSwitchToggleLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = D3807FBE15C28940005BE9BC /* DCRoundSwitchToggleLayer.m */; };
 		D3807FC615C28940005BE9BC /* DCRoundSwitchToggleLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = D3807FBE15C28940005BE9BC /* DCRoundSwitchToggleLayer.m */; };
-		D3807FE815C2894A005BE9BC /* IASKAppSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3807FCA15C2894A005BE9BC /* IASKAppSettingsViewController.m */; };
-		D3807FE915C2894A005BE9BC /* IASKAppSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3807FCA15C2894A005BE9BC /* IASKAppSettingsViewController.m */; };
-		D3807FEA15C2894A005BE9BC /* IASKAppSettingsWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3807FCC15C2894A005BE9BC /* IASKAppSettingsWebViewController.m */; };
-		D3807FEB15C2894A005BE9BC /* IASKAppSettingsWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3807FCC15C2894A005BE9BC /* IASKAppSettingsWebViewController.m */; };
+		D3807FE815C2894A005BE9BC /* IASKAppSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3807FCA15C2894A005BE9BC /* IASKAppSettingsViewController.m */; settings = {COMPILER_FLAGS = "-Wno-deprecated-declarations"; }; };
+		D3807FE915C2894A005BE9BC /* IASKAppSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3807FCA15C2894A005BE9BC /* IASKAppSettingsViewController.m */; settings = {COMPILER_FLAGS = "-Wno-deprecated-declarations"; }; };
+		D3807FEA15C2894A005BE9BC /* IASKAppSettingsWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3807FCC15C2894A005BE9BC /* IASKAppSettingsWebViewController.m */; settings = {COMPILER_FLAGS = "-Wno-deprecated-declarations"; }; };
+		D3807FEB15C2894A005BE9BC /* IASKAppSettingsWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3807FCC15C2894A005BE9BC /* IASKAppSettingsWebViewController.m */; settings = {COMPILER_FLAGS = "-Wno-deprecated-declarations"; }; };
 		D3807FEC15C2894A005BE9BC /* IASKSpecifierValuesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3807FCE15C2894A005BE9BC /* IASKSpecifierValuesViewController.m */; };
 		D3807FED15C2894A005BE9BC /* IASKSpecifierValuesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3807FCE15C2894A005BE9BC /* IASKSpecifierValuesViewController.m */; };
 		D3807FEE15C2894A005BE9BC /* IASKSettingsReader.m in Sources */ = {isa = PBXBuildFile; fileRef = D3807FD215C2894A005BE9BC /* IASKSettingsReader.m */; };
@@ -940,12 +938,12 @@
 		D3807FF315C2894A005BE9BC /* IASKSettingsStoreFile.m in Sources */ = {isa = PBXBuildFile; fileRef = D3807FD615C2894A005BE9BC /* IASKSettingsStoreFile.m */; };
 		D3807FF415C2894A005BE9BC /* IASKSettingsStoreUserDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = D3807FD815C2894A005BE9BC /* IASKSettingsStoreUserDefaults.m */; };
 		D3807FF515C2894A005BE9BC /* IASKSettingsStoreUserDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = D3807FD815C2894A005BE9BC /* IASKSettingsStoreUserDefaults.m */; };
-		D3807FF615C2894A005BE9BC /* IASKSpecifier.m in Sources */ = {isa = PBXBuildFile; fileRef = D3807FDA15C2894A005BE9BC /* IASKSpecifier.m */; };
-		D3807FF715C2894A005BE9BC /* IASKSpecifier.m in Sources */ = {isa = PBXBuildFile; fileRef = D3807FDA15C2894A005BE9BC /* IASKSpecifier.m */; };
+		D3807FF615C2894A005BE9BC /* IASKSpecifier.m in Sources */ = {isa = PBXBuildFile; fileRef = D3807FDA15C2894A005BE9BC /* IASKSpecifier.m */; settings = {COMPILER_FLAGS = "-Wno-deprecated-declarations"; }; };
+		D3807FF715C2894A005BE9BC /* IASKSpecifier.m in Sources */ = {isa = PBXBuildFile; fileRef = D3807FDA15C2894A005BE9BC /* IASKSpecifier.m */; settings = {COMPILER_FLAGS = "-Wno-deprecated-declarations"; }; };
 		D3807FF815C2894A005BE9BC /* IASKPSSliderSpecifierViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D3807FDD15C2894A005BE9BC /* IASKPSSliderSpecifierViewCell.m */; };
 		D3807FF915C2894A005BE9BC /* IASKPSSliderSpecifierViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D3807FDD15C2894A005BE9BC /* IASKPSSliderSpecifierViewCell.m */; };
-		D3807FFA15C2894A005BE9BC /* IASKPSTextFieldSpecifierViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D3807FDF15C2894A005BE9BC /* IASKPSTextFieldSpecifierViewCell.m */; };
-		D3807FFB15C2894A005BE9BC /* IASKPSTextFieldSpecifierViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D3807FDF15C2894A005BE9BC /* IASKPSTextFieldSpecifierViewCell.m */; };
+		D3807FFA15C2894A005BE9BC /* IASKPSTextFieldSpecifierViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D3807FDF15C2894A005BE9BC /* IASKPSTextFieldSpecifierViewCell.m */; settings = {COMPILER_FLAGS = "-Wno-deprecated-declarations"; }; };
+		D3807FFB15C2894A005BE9BC /* IASKPSTextFieldSpecifierViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D3807FDF15C2894A005BE9BC /* IASKPSTextFieldSpecifierViewCell.m */; settings = {COMPILER_FLAGS = "-Wno-deprecated-declarations"; }; };
 		D3807FFC15C2894A005BE9BC /* IASKPSTitleValueSpecifierViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D3807FE115C2894A005BE9BC /* IASKPSTitleValueSpecifierViewCell.m */; };
 		D3807FFD15C2894A005BE9BC /* IASKPSTitleValueSpecifierViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D3807FE115C2894A005BE9BC /* IASKPSTitleValueSpecifierViewCell.m */; };
 		D3807FFE15C2894A005BE9BC /* IASKSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = D3807FE315C2894A005BE9BC /* IASKSlider.m */; };
@@ -1024,7 +1022,6 @@
 		D3998D0516031937009DD22C /* background_alt.png in Resources */ = {isa = PBXBuildFile; fileRef = D3998D0316031937009DD22C /* background_alt.png */; };
 		D3A55FBC15877E5E003FD403 /* UIContactCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A55FBB15877E5E003FD403 /* UIContactCell.m */; };
 		D3A55FBD15877E5E003FD403 /* UIContactCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A55FBB15877E5E003FD403 /* UIContactCell.m */; };
-		D3A55FBF15877E69003FD403 /* UIContactCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3A55FBE15877E69003FD403 /* UIContactCell.xib */; };
 		D3A74E5915C68162001500B9 /* toolsbar_background.png in Resources */ = {isa = PBXBuildFile; fileRef = D3A74E5815C68162001500B9 /* toolsbar_background.png */; };
 		D3A74E5A15C68162001500B9 /* toolsbar_background.png in Resources */ = {isa = PBXBuildFile; fileRef = D3A74E5815C68162001500B9 /* toolsbar_background.png */; };
 		D3A74EB215C69392001500B9 /* add_call_default~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = D3A74E5E15C69391001500B9 /* add_call_default~ipad.png */; };
@@ -1481,6 +1478,9 @@
 		F0818E7F17FC51D8005A3330 /* linphone_icon_76.png in Resources */ = {isa = PBXBuildFile; fileRef = F0818E7C17FC51D8005A3330 /* linphone_icon_76.png */; };
 		F0818E8017FC51D8005A3330 /* linphone_icon_152.png in Resources */ = {isa = PBXBuildFile; fileRef = F0818E7D17FC51D8005A3330 /* linphone_icon_152.png */; };
 		F0818E8117FC51D8005A3330 /* linphone_icon_152.png in Resources */ = {isa = PBXBuildFile; fileRef = F0818E7D17FC51D8005A3330 /* linphone_icon_152.png */; };
+		F088488A19FF8C41007FFCF3 /* UIContactCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F088488D19FF8C41007FFCF3 /* UIContactCell.xib */; };
+		F088488B19FF8C41007FFCF3 /* UIContactCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F088488D19FF8C41007FFCF3 /* UIContactCell.xib */; };
+		F088489019FFB518007FFCF3 /* libbzrtp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 045B5CB218D72E9A0088350C /* libbzrtp.a */; };
 		F08F118519C09C6B007D70C2 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F03A9B3318C0CF7000C4D7FE /* XCTest.framework */; };
 		F08F118619C09C6B007D70C2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		F08F118719C09C6B007D70C2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
@@ -1723,7 +1723,6 @@
 		2248E90C12F7E4CF00220D9C /* UIDigitButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIDigitButton.h; sourceTree = "<group>"; };
 		2248E90D12F7E4CF00220D9C /* UIDigitButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIDigitButton.m; sourceTree = "<group>"; };
 		22509041196BD902007863F6 /* libopenh264.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libopenh264.a; path = "liblinphone-sdk/apple-darwin/lib/libopenh264.a"; sourceTree = "<group>"; };
-		2258633C11410BAC00C5A737 /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
 		225CB2F911ABB76400628906 /* linphone-banner.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "linphone-banner.png"; path = "liblinphone-sdk/apple-darwin/share/pixmaps/linphone/linphone-banner.png"; sourceTree = "<group>"; };
 		226183AA1472527D0037138E /* libSKP_SILK_SDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSKP_SILK_SDK.a; path = "liblinphone-sdk/apple-darwin/lib/libSKP_SILK_SDK.a"; sourceTree = "<group>"; };
 		226183AB1472527D0037138E /* libsrtp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libsrtp.a; path = "liblinphone-sdk/apple-darwin/lib/libsrtp.a"; sourceTree = "<group>"; };
@@ -1919,6 +1918,7 @@
 		631C4FB019D2A8F2004BFE77 /* UIDigitButtonLongPlus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIDigitButtonLongPlus.m; sourceTree = "<group>"; };
 		631C4FB519D2C3A6004BFE77 /* UIDigitButtonLongVoiceMail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIDigitButtonLongVoiceMail.h; sourceTree = "<group>"; };
 		631C4FB619D2C3A6004BFE77 /* UIDigitButtonLongVoiceMail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIDigitButtonLongVoiceMail.m; sourceTree = "<group>"; };
+		633E388219FFB0F400936D1C /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		70571E1913FABCB000CDD3C2 /* rootca.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = rootca.pem; path = "liblinphone-sdk/apple-darwin/share/linphone/rootca.pem"; sourceTree = "<group>"; };
 		7066FC0B13E830E400EFC6DC /* libvpx.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libvpx.a; path = "liblinphone-sdk/apple-darwin/lib/libvpx.a"; sourceTree = "<group>"; };
 		70E542F213E147E3002BA2C0 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -2221,7 +2221,6 @@
 		D3998D0316031937009DD22C /* background_alt.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = background_alt.png; path = Resources/background_alt.png; sourceTree = "<group>"; };
 		D3A55FBA15877E5E003FD403 /* UIContactCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIContactCell.h; sourceTree = "<group>"; };
 		D3A55FBB15877E5E003FD403 /* UIContactCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIContactCell.m; sourceTree = "<group>"; };
-		D3A55FBE15877E69003FD403 /* UIContactCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UIContactCell.xib; sourceTree = "<group>"; };
 		D3A74E5815C68162001500B9 /* toolsbar_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = toolsbar_background.png; path = Resources/toolsbar_background.png; sourceTree = "<group>"; };
 		D3A74E5E15C69391001500B9 /* add_call_default~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "add_call_default~ipad.png"; path = "Resources/add_call_default~ipad.png"; sourceTree = "<group>"; };
 		D3A74E5F15C69391001500B9 /* add_call_disabled~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "add_call_disabled~ipad.png"; path = "Resources/add_call_disabled~ipad.png"; sourceTree = "<group>"; };
@@ -2550,6 +2549,8 @@
 		F0818E7B17FC5160005A3330 /* linphone_icon_120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = linphone_icon_120.png; path = Resources/linphone_icon_120.png; sourceTree = "<group>"; };
 		F0818E7C17FC51D8005A3330 /* linphone_icon_76.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = linphone_icon_76.png; path = Resources/linphone_icon_76.png; sourceTree = "<group>"; };
 		F0818E7D17FC51D8005A3330 /* linphone_icon_152.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = linphone_icon_152.png; path = Resources/linphone_icon_152.png; sourceTree = "<group>"; };
+		F088488C19FF8C41007FFCF3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/UIContactCell.xib; sourceTree = "<group>"; };
+		F088488F19FF8C44007FFCF3 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/UIContactCell.strings; sourceTree = "<group>"; };
 		F08F118419C09C6A007D70C2 /* LinphoneTester Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "LinphoneTester Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F08F118A19C09C6B007D70C2 /* LinphoneTester Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "LinphoneTester Tests-Info.plist"; sourceTree = "<group>"; };
 		F08F118C19C09C6B007D70C2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -2769,7 +2770,6 @@
 				22D8F174147548E2008C97DB /* libilbc.a in Frameworks */,
 				22D8F16B147548E2008C97DB /* libgsm.a in Frameworks */,
 				220784DF19509EF3001C3BDF /* libmsopenh264.a in Frameworks */,
-				220784E019509EF3001C3BDF /* (null) in Frameworks */,
 				D34BD61815C13D0B0070C209 /* liblinphone.a in Frameworks */,
 				D37EE10B16032DC2003608A6 /* libmediastreamer_base.a in Frameworks */,
 				D37EE10C16032DC2003608A6 /* libmediastreamer_voip.a in Frameworks */,
@@ -2780,6 +2780,7 @@
 				22509043196BD902007863F6 /* libopenh264.a in Frameworks */,
 				22D8F16F147548E2008C97DB /* libspeexdsp.a in Frameworks */,
 				22D8F15B147548E2008C97DB /* libvpx.a in Frameworks */,
+				F088489019FFB518007FFCF3 /* libbzrtp.a in Frameworks */,
 				223CA7E816D9256E00EF1BEC /* libantlr3c.a in Frameworks */,
 				F04F1E9D1806A41800D080F2 /* libpolarssl.a in Frameworks */,
 				15017E71177357C500784ACB /* libxml2.a in Frameworks */,
@@ -2993,7 +2994,7 @@
 				D38187F315FE354000C3EDCA /* UIConferenceHeader.xib */,
 				D3A55FBA15877E5E003FD403 /* UIContactCell.h */,
 				D3A55FBB15877E5E003FD403 /* UIContactCell.m */,
-				D3A55FBE15877E69003FD403 /* UIContactCell.xib */,
+				F088488D19FF8C41007FFCF3 /* UIContactCell.xib */,
 				D3E8F68315ADE0570065A226 /* UIContactDetailsFooter.h */,
 				D3E8F68415ADE0580065A226 /* UIContactDetailsFooter.m */,
 				D38187F715FE354700C3EDCA /* UIContactDetailsFooter.xib */,
@@ -3214,6 +3215,7 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				633E388219FFB0F400936D1C /* README.md */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				2659D6E219E66A3600D70395 /* SWTableViewCell */,
 				2622BD6D19C9AFC00048AE69 /* linphone Tests */,
@@ -3224,7 +3226,6 @@
 				F08F118819C09C6B007D70C2 /* LinphoneTester Tests */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
-				2258633C11410BAC00C5A737 /* README */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				D398D3031594B0FB00FD553C /* Settings */,
 			);
@@ -4181,7 +4182,7 @@
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0600;
+				LastUpgradeCheck = 0610;
 				TargetAttributes = {
 					1D6058900D05DD3D006BFB54 = {
 						DevelopmentTeam = Y24464MUL3;
@@ -4386,7 +4387,7 @@
 				D354981C15876FE7000081D8 /* list_details_over.png in Resources */,
 				D35498231587716B000081D8 /* UIStateBar.xib in Resources */,
 				261FABE319D0286E00CFE4AA /* contacts-hover.png in Resources */,
-				D3A55FBF15877E69003FD403 /* UIContactCell.xib in Resources */,
+				F088488A19FF8C41007FFCF3 /* UIContactCell.xib in Resources */,
 				D38187E115FE349700C3EDCA /* UICallBar.xib in Resources */,
 				D31C9C90158A1C1000756B45 /* call_status_incoming.png in Resources */,
 				D31C9C92158A1C1000756B45 /* call_status_missed.png in Resources */,
@@ -4924,7 +4925,7 @@
 				D34BD73715C13DF40070C209 /* UIChatRoomCell.xib in Resources */,
 				D34BD73815C13DF40070C209 /* UICompositeViewController.xib in Resources */,
 				D38187F115FE354000C3EDCA /* UIConferenceHeader.xib in Resources */,
-				D34BD73A15C13DF40070C209 /* UIContactCell.xib in Resources */,
+				F088488B19FF8C41007FFCF3 /* UIContactCell.xib in Resources */,
 				D38187F515FE354700C3EDCA /* UIContactDetailsFooter.xib in Resources */,
 				D381881615FE3F7F00C3EDCA /* UIContactDetailsHeader.xib in Resources */,
 				D34BD73D15C13DF40070C209 /* UIHistoryCell.xib in Resources */,
@@ -6098,6 +6099,15 @@
 			name = "IncomingCallViewController~ipad.xib";
 			sourceTree = "<group>";
 		};
+		F088488D19FF8C41007FFCF3 /* UIContactCell.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F088488C19FF8C41007FFCF3 /* Base */,
+				F088488F19FF8C44007FFCF3 /* fr */,
+			);
+			name = UIContactCell.xib;
+			sourceTree = "<group>";
+		};
 		F08F118B19C09C6B007D70C2 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -6199,12 +6209,12 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: jehan monnier";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_THUMB_SUPPORT = NO;
-				GCC_VERSION = "";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
-				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_FUNCTION = NO;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
@@ -6221,6 +6231,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = armv7;
 				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -6274,6 +6285,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = armv7;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COMPRESS_PNG_FILES = NO;
@@ -6313,6 +6325,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = armv7;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COMPRESS_PNG_FILES = NO;
@@ -6352,6 +6365,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = armv7;
 				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -6392,6 +6406,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = armv7;
 				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -6441,12 +6456,12 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_THUMB_SUPPORT = NO;
-				GCC_VERSION = "";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
-				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_FUNCTION = NO;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
@@ -6463,6 +6478,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = armv7;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COMPRESS_PNG_FILES = NO;
@@ -6524,12 +6540,12 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: jehan monnier";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_THUMB_SUPPORT = NO;
-				GCC_VERSION = "";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
-				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_FUNCTION = NO;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
@@ -6546,6 +6562,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = armv7;
 				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -6777,12 +6794,12 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer: jehan monnier (E8MYPN2NXL)";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_THUMB_SUPPORT = NO;
-				GCC_VERSION = "";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
-				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_FUNCTION = NO;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;

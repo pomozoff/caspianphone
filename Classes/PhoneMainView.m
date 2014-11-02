@@ -321,7 +321,7 @@ static RootViewManager* rootViewManagerInstance = nil;
 }
 
 - (void)onGlobalStateChanged:(NSNotification*)notif {
-    LinphoneGlobalState state = [[[notif userInfo] valueForKey:@"state"] integerValue];
+    LinphoneGlobalState state = (LinphoneGlobalState)[[[notif userInfo] valueForKey:@"state"] integerValue];
     static BOOL already_shown = FALSE;
     if( state == LinphoneGlobalOn && !already_shown && [LinphoneManager instance].wasRemoteProvisioned ){
         LinphoneProxyConfig* conf = NULL;
@@ -720,7 +720,6 @@ static RootViewManager* rootViewManagerInstance = nil;
     UIDeviceBatteryState state = [UIDevice currentDevice].batteryState;
     [LinphoneLogger log:LinphoneLoggerLog format:@"Battery state:%d level:%.2f", state, level];
     
-	if (![LinphoneManager isLcReady]) return;
     LinphoneCall* call = linphone_core_get_current_call([LinphoneManager getLc]);
     if (call && linphone_call_params_video_enabled(linphone_call_get_current_params(call))) {
         LinphoneCallAppData* callData = (LinphoneCallAppData*) linphone_call_get_user_pointer(call);
