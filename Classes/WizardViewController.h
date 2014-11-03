@@ -87,6 +87,13 @@
 @property (nonatomic, retain) IBOutlet UISegmentedControl *activateBySignUpSegmented;
 @property (nonatomic, retain) IBOutlet UIButton *continueSignUpField;
 
+@property (nonatomic, retain) IBOutlet UIView *confirmView;
+@property (nonatomic, retain) IBOutlet UIImageView *smsImageConfirmView;
+@property (nonatomic, retain) IBOutlet UIImageView *callImageConfirmView;
+@property (nonatomic, retain) IBOutlet COCTextField *phoneNumberConfirmView;
+@property (nonatomic, retain) IBOutlet UILabel *smsTextConfirmView;
+@property (nonatomic, retain) IBOutlet UILabel *callTextConfirmView;
+
 @property (nonatomic, retain) IBOutlet COCTextField *activationCodeActivateField;
 
 @property (nonatomic, retain) IBOutlet COCTextField *passwordFinishField;

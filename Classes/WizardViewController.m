@@ -229,6 +229,12 @@ extern NSInteger caspianErrorCode;
     
     [_dummyView release];
     
+    [_confirmView release];
+    [_phoneNumberConfirmView release];
+    [_smsTextConfirmView release];
+    [_callTextConfirmView release];
+    [_smsImageConfirmView release];
+    [_callImageConfirmView release];
     [super dealloc];
 }
 
@@ -321,6 +327,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     self.countryNameSignUpField.inputView = self.countryPickerView;
     self.countryNameSignUpField.inputAccessoryView = self.countryPickerDoneToolbar;
     self.phoneNumberSignUpField.inputAccessoryView = self.phoneNumberNextToolbar;
+    self.phoneNumberConfirmView.inputView = self.dummyView;
     
     self.countryNameForgotPasswordField.inputView = self.countryPickerView;
     self.countryNameForgotPasswordField.inputAccessoryView = self.countryPickerDoneToolbar;
@@ -329,6 +336,9 @@ static UICompositeViewDescription *compositeDescription = nil;
     self.activationCodeActivateField.inputAccessoryView = self.numKeypadDoneToolbar;
     self.passwordFinishField.inputView = self.dummyView;
     self.phoneNumberForgotPasswordField.inputAccessoryView = self.numKeypadDoneToolbar;
+    
+    self.confirmView.layer.cornerRadius = 5.0f;
+    self.confirmView.layer.masksToBounds = YES;
 }
 
 
@@ -1075,6 +1085,23 @@ static UICompositeViewDescription *compositeDescription = nil;
 }
 
 - (IBAction)onContinueCreatingAccountTap:(id)sender {
+    BOOL isSmsActivationSelected = self.activateBySignUpSegmented.selectedSegmentIndex == 0;
+
+    self.smsImageConfirmView.hidden = !isSmsActivationSelected;
+    self.callImageConfirmView.hidden = isSmsActivationSelected;
+
+    self.smsTextConfirmView.hidden = !isSmsActivationSelected;
+    self.callTextConfirmView.hidden = isSmsActivationSelected;
+
+    self.confirmView.hidden = NO;
+}
+
+- (IBAction)onCancelConfirmTap:(UIButton *)sender {
+    self.confirmView.hidden = YES;
+}
+
+- (IBAction)onOkConfirmTap:(UIButton *)sender {
+    self.confirmView.hidden = YES;
     [self createAccountForPhoneNumber:self.phoneNumberSignUpField.text
                           countryCode:self.countryCodeSignUpField.text
                             firstName:self.firstNameSignUpField.text
