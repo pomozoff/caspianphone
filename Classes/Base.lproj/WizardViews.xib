@@ -202,6 +202,11 @@
                         <action selector="onContinueCreatingAccountTap:" destination="-1" eventType="touchUpInside" id="SnS-U9-qdh"/>
                     </connections>
                 </button>
+                <view contentMode="scaleToFill" id="Ejh-ZW-TaI">
+                    <rect key="frame" x="20" y="80" width="280" height="380"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
             </subviews>
             <color key="backgroundColor" red="0.52156865600000002" green="0.76862752440000004" blue="0.91372555489999996" alpha="1" colorSpace="deviceRGB"/>
             <gestureRecognizers/>
@@ -511,7 +516,7 @@
                     </connections>
                 </button>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="These parameters were retrieved from a remote provisioning profile." textAlignment="center" lineBreakMode="wordWrap" numberOfLines="7" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="RHE-hi-dfB" userLabel="remoteParamsLabel">
-                    <rect key="frame" x="34" y="269" width="254" height="53"/>
+                    <rect key="frame" x="34" y="269.00000052632026" width="254" height="53"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
