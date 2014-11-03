@@ -1093,15 +1093,15 @@ static UICompositeViewDescription *compositeDescription = nil;
     self.smsTextConfirmView.hidden = !isSmsActivationSelected;
     self.callTextConfirmView.hidden = isSmsActivationSelected;
 
-    self.confirmView.hidden = NO;
+    [self animateConfirmViewHide:NO];
 }
 
 - (IBAction)onCancelConfirmTap:(UIButton *)sender {
-    self.confirmView.hidden = YES;
+    [self animateConfirmViewHide:YES];
 }
 
 - (IBAction)onOkConfirmTap:(UIButton *)sender {
-    self.confirmView.hidden = YES;
+    [self animateConfirmViewHide:YES];
     [self createAccountForPhoneNumber:self.phoneNumberSignUpField.text
                           countryCode:self.countryCodeSignUpField.text
                             firstName:self.firstNameSignUpField.text
@@ -1446,6 +1446,23 @@ static UICompositeViewDescription *compositeDescription = nil;
 }
 
 #pragma mark - Sign Up
+
+- (void)animateConfirmViewHide:(BOOL)hide {
+    if (hide) {
+        [UIView animateWithDuration:0.5f delay:0.0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+            self.confirmView.frame = CGRectMake(20.0f, 800.0f, 280.0f, 380.0f);
+        } completion:^(BOOL finished) {
+            self.confirmView.hidden = hide;
+        }];
+    } else {
+        self.confirmView.frame = CGRectMake(20.0f, 800.0f, 280.0f, 380.0f);
+        self.confirmView.hidden = hide;
+        [UIView animateWithDuration:0.5f delay:0.0 options:UIViewAnimationOptionCurveEaseIn animations:^{
+            self.confirmView.frame = CGRectMake(20.0f, 80.0f, 280.0f, 380.0f);
+        } completion:^(BOOL finished) {
+        }];
+    }
+}
 
 - (void)didSelectCountryAtRow:(NSInteger)row {
     NSDictionary *country = [self countryAtIndex:row];
