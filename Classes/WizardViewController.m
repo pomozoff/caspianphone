@@ -1448,17 +1448,20 @@ static UICompositeViewDescription *compositeDescription = nil;
 #pragma mark - Sign Up
 
 - (void)animateConfirmViewHide:(BOOL)hide {
+    CGRect rootViewRect = self.view.frame;
+    CGRect confirmViewRect = self.confirmView.frame;
+    CGFloat confirmViewY = 80.0f;
     if (hide) {
         [UIView animateWithDuration:0.5f delay:0.0 options:UIViewAnimationOptionCurveEaseOut animations:^{
-            self.confirmView.frame = CGRectMake(20.0f, 800.0f, 280.0f, 380.0f);
+            self.confirmView.frame = CGRectMake(confirmViewRect.origin.x, rootViewRect.size.height, confirmViewRect.size.width, confirmViewRect.size.height);
         } completion:^(BOOL finished) {
             self.confirmView.hidden = hide;
         }];
     } else {
-        self.confirmView.frame = CGRectMake(20.0f, 800.0f, 280.0f, 380.0f);
+        self.confirmView.frame = CGRectMake(confirmViewRect.origin.x, rootViewRect.size.height, confirmViewRect.size.width, confirmViewRect.size.height);
         self.confirmView.hidden = hide;
         [UIView animateWithDuration:0.5f delay:0.0 options:UIViewAnimationOptionCurveEaseIn animations:^{
-            self.confirmView.frame = CGRectMake(20.0f, 80.0f, 280.0f, 380.0f);
+            self.confirmView.frame = CGRectMake(confirmViewRect.origin.x, confirmViewY, confirmViewRect.size.width, confirmViewRect.size.height);
         } completion:^(BOOL finished) {
         }];
     }
