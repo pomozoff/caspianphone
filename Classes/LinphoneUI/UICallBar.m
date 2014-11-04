@@ -227,6 +227,7 @@
     }
     
     {
+        /*
         UIButton *dialerButtonLandscape = (UIButton*) [landscapeView viewWithTag:[dialerButton tag]] ;
         // Set selected+over background: IB lack !
         [dialerButton setBackgroundImage:[UIImage imageNamed:@"dialer_alt_back_over.png"]
@@ -236,6 +237,7 @@
         
         [LinphoneUtils buttonFixStates:dialerButton];
         [LinphoneUtils buttonFixStates:dialerButtonLandscape];
+        */
     }
     
     [super viewDidLoad];
@@ -304,7 +306,7 @@
     if(linphone_core_get_calls_nb(lc) > 1) {
         if(![pauseButton isHidden]) {
             [pauseButton setHidden:true];
-            [conferenceButton setHidden:false];
+            //[conferenceButton setHidden:false];
         }
         bool enabled = true;
         const MSList *list = linphone_core_get_calls(lc);
@@ -325,7 +327,7 @@
     } else {
         if([pauseButton isHidden]) {
             [pauseButton setHidden:false];
-            [conferenceButton setHidden:true];
+            //[conferenceButton setHidden:true];
         }
     }
 

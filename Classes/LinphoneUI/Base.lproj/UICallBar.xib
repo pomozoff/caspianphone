@@ -306,11 +306,11 @@
                     <rect key="frame" x="0.0" y="325" width="320" height="135"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" tag="100" contentMode="scaleToFill" image="callbar_left_padding.png" id="146" userLabel="leftPadding">
+                        <imageView hidden="YES" userInteractionEnabled="NO" tag="100" contentMode="scaleToFill" image="callbar_left_padding.png" id="146" userLabel="leftPadding">
                             <rect key="frame" x="-44" y="-8" width="44" height="90"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </imageView>
-                        <imageView userInteractionEnabled="NO" tag="101" contentMode="scaleToFill" image="callbar_right_padding.png" id="145" userLabel="rightPadding">
+                        <imageView hidden="YES" userInteractionEnabled="NO" tag="101" contentMode="scaleToFill" image="callbar_right_padding.png" id="145" userLabel="rightPadding">
                             <rect key="frame" x="320" y="-8" width="44" height="90"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </imageView>
