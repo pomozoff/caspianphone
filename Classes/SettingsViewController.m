@@ -562,6 +562,7 @@ static UICompositeViewDescription *compositeDescription = nil;
         if (debugEnable) {
             [hiddenKeys removeObject:@"console_button"];
         } else {
+            linphone_core_reset_log_collection([LinphoneManager getLc]);
             [hiddenKeys addObject:@"console_button"];
         }
         [settingsController setHiddenKeys:hiddenKeys animated:TRUE];
