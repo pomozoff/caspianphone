@@ -235,11 +235,12 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    
+    /*
     UIEdgeInsets inset = {0, 0, 10, 0};
     UIScrollView *scrollView = self.tableView;
     [scrollView setContentInset:inset];
     [scrollView setScrollIndicatorInsets:inset];
+    */
 }
 
 - (void)viewDidAppear:(BOOL)animated {
