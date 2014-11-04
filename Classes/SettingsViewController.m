@@ -561,6 +561,7 @@ static UICompositeViewDescription *compositeDescription = nil;
         NSMutableSet *hiddenKeys = [NSMutableSet setWithSet:[settingsController hiddenKeys]];
         BOOL debugEnable = [[notif.userInfo objectForKey:@"debugenable_preference"] boolValue];
         if (debugEnable) {
+            linphone_core_enable_log_collection(YES);
             [hiddenKeys removeObject:@"console_button"];
         } else {
             linphone_core_reset_log_collection([LinphoneManager getLc]);
