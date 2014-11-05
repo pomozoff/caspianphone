@@ -235,12 +235,10 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    /*
-    UIEdgeInsets inset = {0, 0, 10, 0};
+    UIEdgeInsets inset = {0, 0, 100, 0};
     UIScrollView *scrollView = self.tableView;
     [scrollView setContentInset:inset];
     [scrollView setScrollIndicatorInsets:inset];
-    */
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -562,9 +560,13 @@ static UICompositeViewDescription *compositeDescription = nil;
         BOOL debugEnable = [[notif.userInfo objectForKey:@"debugenable_preference"] boolValue];
         if (debugEnable) {
             linphone_core_enable_log_collection(YES);
+            [[LinphoneManager instance] enableLogs];
+            [hiddenKeys removeObject:@"send_logs_button"];
             [hiddenKeys removeObject:@"console_button"];
         } else {
+            linphone_core_enable_log_collection(NO);
             linphone_core_reset_log_collection([LinphoneManager getLc]);
+            [hiddenKeys addObject:@"send_logs_button"];
             [hiddenKeys addObject:@"console_button"];
         }
         [settingsController setHiddenKeys:hiddenKeys animated:TRUE];
@@ -723,6 +725,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     }
 
     if(![lm lpConfigBoolForKey:@"debugenable_preference"]) {
+        [hiddenKeys addObject:@"send_logs_button"];
         [hiddenKeys addObject:@"console_button"];
     }
     

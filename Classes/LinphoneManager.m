@@ -1408,6 +1408,14 @@ static BOOL libStarted = FALSE;
     lp_config_set_int(config, LINPHONERC_APPLICATION_KEY, "animations_preference", NO);
 }
 
+- (void)enableLogs {
+    /*to make sure we don't loose debug trace*/
+    if ([self lpConfigBoolForKey:@"debugenable_preference"]) {
+        linphone_core_enable_logs_with_cb((OrtpLogFunc)linphone_iphone_log_handler);
+        ortp_set_log_level_mask(ORTP_DEBUG|ORTP_MESSAGE|ORTP_WARNING|ORTP_ERROR|ORTP_FATAL);
+    }
+}
+
 - (void)startLibLinphone {
 
 	if ( libStarted ) {
@@ -1419,33 +1427,9 @@ static BOOL libStarted = FALSE;
 
 	connectivity = none;
 	signal(SIGPIPE, SIG_IGN);
-/*
-	ms_init(); // Need to initialize mediastreamer2 before loading the plugins
 
-	libmsilbc_init();
-#if defined (HAVE_SILK)
-	libmssilk_init();
-#endif
-#ifdef HAVE_AMR
-	libmsamr_init(); //load amr plugin if present from the liblinphone sdk
-#endif
-#ifdef HAVE_X264
-	libmsx264_init(); //load x264 plugin if present from the liblinphone sdk
-#endif
-#ifdef HAVE_OPENH264
-	libmsopenh264_init(); //load openh264 plugin if present from the liblinphone sdk
-#endif
-
-#if HAVE_G729
-	libmsbcg729_init(); // load g729 plugin
-#endif
-*/
-	/*to make sure we don't loose debug trace*/
-	if ([self  lpConfigBoolForKey:@"debugenable_preference"]) {
-		linphone_core_enable_logs_with_cb((OrtpLogFunc)linphone_iphone_log_handler);
-		ortp_set_log_level_mask(ORTP_DEBUG|ORTP_MESSAGE|ORTP_WARNING|ORTP_ERROR|ORTP_FATAL);
-	}
-
+    [self enableLogs];
+    
 	// create linphone core
 	[self createLinphoneCore];
 	linphone_core_migrate_to_multi_transport(theLinphoneCore);
@@ -1524,12 +1508,6 @@ static BOOL libStarted = FALSE;
 #if HAVE_G729
     libmsbcg729_init(); // load g729 plugin
 #endif
-
-    /*to make sure we don't loose debug trace*/
-    if ([self  lpConfigBoolForKey:@"debugenable_preference"]) {
-        linphone_core_enable_logs_with_cb((OrtpLogFunc)linphone_iphone_log_handler);
-        ortp_set_log_level_mask(ORTP_DEBUG|ORTP_MESSAGE|ORTP_WARNING|ORTP_ERROR|ORTP_FATAL);
-    }
 
 	/*must be done before creating linphone core to get its traces too*/
 	linphone_core_set_log_collection_path([[LinphoneManager cacheDirectory] UTF8String]);
