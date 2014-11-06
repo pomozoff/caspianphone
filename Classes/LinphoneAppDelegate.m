@@ -219,7 +219,9 @@
     [self.window makeKeyAndVisible];
     [RootViewManager setupWithPortrait:(PhoneMainView*)self.window.rootViewController];
     [[PhoneMainView instance] startUp];
-    [[PhoneMainView instance] updateStatusBar:nil];
+
+    // Unneeded code that show wrong status bar for Wizard view
+    //[[PhoneMainView instance] updateStatusBar:nil];
 
 	NSDictionary *remoteNotif =[launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
     if (remoteNotif){
