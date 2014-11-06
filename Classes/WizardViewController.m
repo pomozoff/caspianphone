@@ -82,6 +82,7 @@ extern NSInteger caspianErrorCode;
 @synthesize passwordReceivedView;
 @synthesize connectAccountView;
 @synthesize forgotPasswordView;
+@synthesize askPhoneNumberView;
 @synthesize signInView;
 @synthesize activateAccountView;
 @synthesize provisionedAccountView;
@@ -172,6 +173,7 @@ extern NSInteger caspianErrorCode;
     [passwordReceivedView release];
     [connectAccountView release];
     [forgotPasswordView release];
+    [askPhoneNumberView release];
     [signInView release];
     [activateAccountView release];
     
@@ -235,6 +237,8 @@ extern NSInteger caspianErrorCode;
     [_callTextConfirmView release];
     [_smsImageConfirmView release];
     [_callImageConfirmView release];
+    [_phoneNumberAskPhoneNumberField release];
+    
     [super dealloc];
 }
 
@@ -319,6 +323,7 @@ static UICompositeViewDescription *compositeDescription = nil;
         [LinphoneUtils adjustFontSize:passwordReceivedView mult:2.22f];
         [LinphoneUtils adjustFontSize:connectAccountView mult:2.22f];
         [LinphoneUtils adjustFontSize:forgotPasswordView mult:2.22f];
+        [LinphoneUtils adjustFontSize:askPhoneNumberView mult:2.22f];
         [LinphoneUtils adjustFontSize:signInView mult:2.22f];
         [LinphoneUtils adjustFontSize:activateAccountView mult:2.22f];
         [LinphoneUtils adjustFontSize:provisionedAccountView mult:2.22f];
@@ -336,7 +341,9 @@ static UICompositeViewDescription *compositeDescription = nil;
     self.activationCodeActivateField.inputAccessoryView = self.numKeypadDoneToolbar;
     self.passwordFinishField.inputView = self.dummyView;
     self.phoneNumberForgotPasswordField.inputAccessoryView = self.numKeypadDoneToolbar;
-    
+
+    self.phoneNumberAskPhoneNumberField.inputView = self.dummyView;
+
     self.confirmView.layer.cornerRadius = 5.0f;
     self.confirmView.layer.masksToBounds = YES;
 }
@@ -408,6 +415,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     [WizardViewController cleanTextField:passwordReceivedView];
     [WizardViewController cleanTextField:connectAccountView];
     [WizardViewController cleanTextField:forgotPasswordView];
+    [WizardViewController cleanTextField:askPhoneNumberView];
     [WizardViewController cleanTextField:signInView];
     [WizardViewController cleanTextField:activateAccountView];
     [WizardViewController cleanTextField:provisionedAccountView];
@@ -502,6 +510,19 @@ static UICompositeViewDescription *compositeDescription = nil;
     self.domainRegisterField.text = domain.length != 0 ? domain : [[LinphoneManager instance] caspianDomainIp];
 }
 
+- (NSDictionary *)countryByPhoneNumber:(NSString *)phoneNUmber {
+    NSDictionary *country = nil;
+    NSString *countryCode = @"";
+    for (NSDictionary *currentCountry in self.countryAndCode) {
+        NSString *code = currentCountry[caspianCountryObjectFieldCode];
+        if ([phoneNUmber hasPrefix:code] && code.length > countryCode.length) {
+            countryCode = code;
+            country = currentCountry;
+        }
+    }
+    return country;
+}
+
 - (void)changeView:(UIView *)view back:(BOOL)back animation:(BOOL)animation {
 
     /*
@@ -577,6 +598,23 @@ static UICompositeViewDescription *compositeDescription = nil;
         [self.activationCodeActivateField becomeFirstResponder];
     } else if (view == passwordReceivedView) {
         self.passwordFinishField.text = self.password;
+    } else if (view == askPhoneNumberView) {
+        NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+        NSString *phoneNumber = [userDefaults objectForKey:caspianPhoneNumber];
+
+        self.phoneNumberAskPhoneNumberField.text = phoneNumber;
+    } else if (view == forgotPasswordView) {
+        if (self.rememberMeRegisterSwitch.isEnabled) {
+            NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+            NSString *phoneNumber = [userDefaults objectForKey:caspianPhoneNumber];
+            
+            NSDictionary *country = [self countryByPhoneNumber:phoneNumber];
+            self.countryNameForgotPasswordField.text = country[caspianCountryObjectFieldName];
+            
+            NSString *countryCode = country[caspianCountryObjectFieldCode];
+            self.countryCodeForgotPasswordField.text = countryCode;
+            self.phoneNumberForgotPasswordField.text = [phoneNumber stringByReplacingOccurrencesOfString:countryCode withString:@""];
+        }
     }
     
     // Animation
@@ -1121,12 +1159,24 @@ static UICompositeViewDescription *compositeDescription = nil;
 }
 
 - (IBAction)onForgotPasswordTap:(id)sender {
-    [self changeView:forgotPasswordView back:NO animation:YES];
+    [self changeView:askPhoneNumberView back:NO animation:YES];
 }
 
 - (IBAction)onSubmitForgotPasswordTap:(id)sender {
     [self recoverPasswordForPhoneNumber:self.phoneNumberForgotPasswordField.text
                          andCountryCode:self.countryCodeForgotPasswordField.text];
+}
+
+- (IBAction)onNoAskPasswordTap:(UIButton *)sender {
+    [self changeView:forgotPasswordView back:NO animation:YES];
+}
+
+- (IBAction)onYesAskPasswordTap:(UIButton *)sender {
+    NSDictionary *country = [self countryByPhoneNumber:self.phoneNumberAskPhoneNumberField.text];
+    NSString *countryCode = country[caspianCountryObjectFieldCode];
+    NSString *phoneNumber = [self.phoneNumberAskPhoneNumberField.text stringByReplacingOccurrencesOfString:countryCode withString:@""];
+
+    [self recoverPasswordForPhoneNumber:phoneNumber andCountryCode:countryCode];
 }
 
 #pragma mark - UIAlertViewDelegate
