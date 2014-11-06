@@ -37,7 +37,7 @@ typedef enum _ViewElement {
     ViewElement_Username_Error      = 404
 } ViewElement;
 
-static NSString *caspianPhoneNumber = @"uk.co.onecallcaspian.phone.username";
+static NSString *caspianPhoneNumber = @"uk.co.onecallcaspian.phone.phoneNumber";
 static NSString *caspianPasswordKey = @"uk.co.onecallcaspian.phone.password";
 static NSString *caspianDomain      = @"uk.co.onecallcaspian.phone.domain";
 static NSString *caspianActivationCodeKey = @"uk.co.onecallcaspian.phone.activationCode";
