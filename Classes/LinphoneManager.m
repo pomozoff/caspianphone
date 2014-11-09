@@ -876,9 +876,14 @@ static void linphone_iphone_configuring_status_changed(LinphoneCore *lc, Linphon
 
 #pragma mark - Registration State Functions
 
-- (void)onRegister:(LinphoneCore *)lc cfg:(LinphoneProxyConfig*) cfg state:(LinphoneRegistrationState) state message:(const char*) message {
+- (void)onRegister:(LinphoneCore *)lc cfg:(LinphoneProxyConfig *)cfg state:(LinphoneRegistrationState)state message:(const char *)message {
 	[LinphoneLogger logc:LinphoneLoggerLog format:"NEW REGISTRATION STATE: '%s' (message: '%s')", linphone_registration_state_to_string(state), message];
 
+    if (LinphoneRegistrationOk == state) {
+        NSString *chatDBFileName = [self chatDBFileName];
+        linphone_core_set_chat_database_path(theLinphoneCore, [chatDBFileName cStringUsingEncoding:[NSString defaultCStringEncoding]]);
+    }
+    
 	// Post event
 	NSDictionary* dict = [NSDictionary dictionaryWithObjectsAndKeys:
 						  [NSNumber numberWithInt:state], @"state",
@@ -1241,9 +1246,10 @@ static LinphoneCoreVTable linphonec_vtable = {
 }
 
 - (NSString *)chatDBFileName {
-    NSString *chatDBFileName = [LinphoneManager documentFile:kLinphoneInternalChatDBFilename];
     NSString *phoneNumber = [self currentPhoneNumber];
-    return phoneNumber != nil ? [NSString stringWithFormat:@"%@-%@", phoneNumber, chatDBFileName] : chatDBFileName;
+    NSString *fileName = phoneNumber != nil ? [NSString stringWithFormat:@"%@-%@", phoneNumber, kLinphoneInternalChatDBFilename] : kLinphoneInternalChatDBFilename;
+    NSString *chatDBFileName = [LinphoneManager documentFile:fileName];
+    return chatDBFileName;
 }
 
 /** Should be called once per linphone_core_new() */
@@ -1251,7 +1257,7 @@ static LinphoneCoreVTable linphonec_vtable = {
 
 	//get default config from bundle
 	NSString *zrtpSecretsFileName = [LinphoneManager documentFile:@"zrtp_secrets"];
-	NSString *chatDBFileName      = [self chatDBFileName];
+	//NSString *chatDBFileName      = [self chatDBFileName];
 	const char* lRootCa           = [[LinphoneManager bundleFile:@"rootca.pem"] cStringUsingEncoding:[NSString defaultCStringEncoding]];
 
 	linphone_core_set_user_agent(theLinphoneCore, [[[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"] stringByAppendingString:@"Iphone"] UTF8String], LINPHONE_IOS_VERSION);
@@ -1272,14 +1278,17 @@ static LinphoneCoreVTable linphonec_vtable = {
 	linphone_core_set_play_file(theLinphoneCore, lPlay);
 
 	linphone_core_set_zrtp_secrets_file(theLinphoneCore, [zrtpSecretsFileName cStringUsingEncoding:[NSString defaultCStringEncoding]]);
-	linphone_core_set_chat_database_path(theLinphoneCore, [chatDBFileName cStringUsingEncoding:[NSString defaultCStringEncoding]]);
+	//linphone_core_set_chat_database_path(theLinphoneCore, [chatDBFileName cStringUsingEncoding:[NSString defaultCStringEncoding]]);
 
 	// we need to proceed to the migration *after* the chat database was opened, so that we know it is in consistent state
-	BOOL migrated = [self migrateChatDBIfNeeded:theLinphoneCore];
+	//BOOL migrated =
+    [self migrateChatDBIfNeeded:theLinphoneCore];
+    /*
 	if( migrated ){
 		// if a migration was performed, we should reinitialize the chat database
 		linphone_core_set_chat_database_path(theLinphoneCore, [chatDBFileName cStringUsingEncoding:[NSString defaultCStringEncoding]]);
 	}
+    */
 
 	/* AVPF migration */
 	if( [self lpConfigBoolForKey:@"avpf_migration_done" forSection:@"app"] == FALSE ){
