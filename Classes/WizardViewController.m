@@ -615,7 +615,11 @@ static UICompositeViewDescription *compositeDescription = nil;
             
             NSString *countryCode = country[caspianCountryObjectFieldCode];
             self.countryCodeForgotPasswordField.text = countryCode;
-            self.phoneNumberForgotPasswordField.text = [phoneNumber stringByReplacingOccurrencesOfString:countryCode withString:@""];
+            if (countryCode) {
+                self.phoneNumberForgotPasswordField.text = [phoneNumber stringByReplacingOccurrencesOfString:countryCode withString:@""];
+            } else {
+                [self alertErrorMessageEmptyCountry];
+            }
         }
     }
     
@@ -1176,9 +1180,12 @@ static UICompositeViewDescription *compositeDescription = nil;
 - (IBAction)onYesAskPasswordTap:(UIButton *)sender {
     NSDictionary *country = [self countryByPhoneNumber:self.phoneNumberAskPhoneNumberField.text];
     NSString *countryCode = country[caspianCountryObjectFieldCode];
-    NSString *phoneNumber = [self.phoneNumberAskPhoneNumberField.text stringByReplacingOccurrencesOfString:countryCode withString:@""];
-
-    [self recoverPasswordForPhoneNumber:phoneNumber andCountryCode:countryCode];
+    if (countryCode) {
+        NSString *phoneNumber = [self.phoneNumberAskPhoneNumberField.text stringByReplacingOccurrencesOfString:countryCode withString:@""];
+        [self recoverPasswordForPhoneNumber:phoneNumber andCountryCode:countryCode];
+    } else {
+        [self alertErrorMessageEmptyCountry];
+    }
 }
 
 #pragma mark - UIAlertViewDelegate
@@ -1451,6 +1458,10 @@ static UICompositeViewDescription *compositeDescription = nil;
 }
 
 #pragma mark - Private
+
+- (void)alertErrorMessageEmptyCountry {
+    [self alertErrorMessage:NSLocalizedString(@"Can't determine a country code, please enter correct phone number or press NO and select a country from list", nil) withTitle:NSLocalizedString(@"Wrong phone number", nil)];
+}
 
 - (void)alertErrorMessage:(NSString *)message withTitle:(NSString *)title {
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title

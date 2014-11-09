@@ -754,7 +754,7 @@
                     <rect key="frame" x="63" y="26" width="196" height="119"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                 </imageView>
-                <textField opaque="NO" clipsSubviews="YES" tag="100" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Phone number" adjustsFontSizeToFit="NO" minimumFontSize="18" background="field_background.png" clearButtonMode="always" id="IzP-N4-4hO" userLabel="phoneNumberField">
+                <textField opaque="NO" clipsSubviews="YES" tag="100" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Phone number" adjustsFontSizeToFit="NO" minimumFontSize="18" background="field_background.png" clearButtonMode="whileEditing" id="IzP-N4-4hO" userLabel="phoneNumberField">
                     <rect key="frame" x="33" y="153" width="255" height="30"/>
                     <autoresizingMask key="autoresizingMask" heightSizable="YES" flexibleMaxY="YES"/>
                     <accessibility key="accessibilityConfiguration" label="Username"/>
@@ -764,7 +764,7 @@
                         <outlet property="delegate" destination="-1" id="zAp-XI-qAS"/>
                     </connections>
                 </textField>
-                <textField opaque="NO" clipsSubviews="YES" tag="101" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" adjustsFontSizeToFit="NO" minimumFontSize="18" background="field_background.png" clearButtonMode="always" id="ub0-wY-1DO" userLabel="passwordField">
+                <textField opaque="NO" clipsSubviews="YES" tag="101" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" adjustsFontSizeToFit="NO" minimumFontSize="18" background="field_background.png" clearButtonMode="whileEditing" id="ub0-wY-1DO" userLabel="passwordField">
                     <rect key="frame" x="33" y="190" width="255" height="30"/>
                     <autoresizingMask key="autoresizingMask" heightSizable="YES" flexibleMaxY="YES"/>
                     <accessibility key="accessibilityConfiguration" label="Password"/>
@@ -828,7 +828,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="onTintColor" red="0.40000000000000002" green="0.65098039215686276" blue="0.78823529411764703" alpha="1" colorSpace="calibratedRGB"/>
                 </switch>
-                <textField opaque="NO" clipsSubviews="YES" tag="100" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Domain" adjustsFontSizeToFit="NO" minimumFontSize="18" background="field_background.png" clearButtonMode="always" id="gEd-ol-qpf" userLabel="domainField">
+                <textField opaque="NO" clipsSubviews="YES" tag="100" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Domain" adjustsFontSizeToFit="NO" minimumFontSize="18" background="field_background.png" clearButtonMode="whileEditing" id="gEd-ol-qpf" userLabel="domainField">
                     <rect key="frame" x="32" y="228" width="255" height="30"/>
                     <autoresizingMask key="autoresizingMask" heightSizable="YES" flexibleMaxY="YES"/>
                     <accessibility key="accessibilityConfiguration" label="Username"/>
