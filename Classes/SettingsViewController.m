@@ -869,6 +869,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     if(controller != nil) {
         [controller reset];
     }
+    [[LinphoneManager instance] resetLinphoneCore];
 }
 
 #pragma mark - Mail composer for send log
