@@ -447,6 +447,8 @@ static UICompositeViewDescription *compositeDescription = nil;
     }
     */
     
+    [self resetToDefaults];
+    
     waitView.hidden = YES;
     
     [self resetToDefaults];
