@@ -291,8 +291,9 @@ struct codec_name_pref_table codec_pref_table[] = {
 		photoLibrary = [[ALAssetsLibrary alloc] init];
 
 		NSString* factoryConfig = [LinphoneManager bundleFile:[LinphoneManager runningOnIpad]?@"linphonerc-factory~ipad":@"linphonerc-factory"];
-		NSString *confiFileName = [LinphoneManager documentFile:@".linphonerc"];
-		configDb=lp_config_new_with_factory([confiFileName cStringUsingEncoding:[NSString defaultCStringEncoding]] , [factoryConfig cStringUsingEncoding:[NSString defaultCStringEncoding]]);
+        NSString *confiFileName = [LinphoneManager documentFile:@".linphonerc"];
+		configDb = lp_config_new_with_factory([confiFileName cStringUsingEncoding:[NSString defaultCStringEncoding]],
+                                              [factoryConfig cStringUsingEncoding:[NSString defaultCStringEncoding]]);
 
 		[self migrateFromUserPrefs];
 
@@ -348,7 +349,7 @@ static int check_should_migrate_images(void* data ,int argc,char** argv,char** c
 	char *errMsg;
 	NSError* error;
 	NSString *oldDbPath = [LinphoneManager documentFile:kLinphoneOldChatDBFilename];
-	NSString *newDbPath = [LinphoneManager documentFile:kLinphoneInternalChatDBFilename];
+	NSString *newDbPath = [self chatDBFileName];
 	BOOL shouldMigrate  = [[NSFileManager defaultManager] fileExistsAtPath:oldDbPath];
 	BOOL shouldMigrateImages = FALSE;
 	LinphoneProxyConfig* default_proxy;
@@ -1224,12 +1225,33 @@ static LinphoneCoreVTable linphonec_vtable = {
 	}
 }
 
+- (NSString *)currentPhoneNumber {
+    LinphoneProxyConfig *proxy_config = NULL;
+    linphone_core_get_default_proxy(theLinphoneCore, &proxy_config);
+    if (proxy_config != NULL) {
+        const char *identity = linphone_proxy_config_get_identity(proxy_config);
+        if (identity) {
+            LinphoneAddress *address = linphone_address_new( identity );
+            if (address) {
+                return [NSString stringWithUTF8String:linphone_address_get_username(address)];
+            }
+        }
+    }
+    return nil;
+}
+
+- (NSString *)chatDBFileName {
+    NSString *chatDBFileName = [LinphoneManager documentFile:kLinphoneInternalChatDBFilename];
+    NSString *phoneNumber = [self currentPhoneNumber];
+    return phoneNumber != nil ? [NSString stringWithFormat:@"%@-%@", phoneNumber, chatDBFileName] : chatDBFileName;
+}
+
 /** Should be called once per linphone_core_new() */
 - (void)finishCoreConfiguration {
 
 	//get default config from bundle
 	NSString *zrtpSecretsFileName = [LinphoneManager documentFile:@"zrtp_secrets"];
-	NSString *chatDBFileName      = [LinphoneManager documentFile:kLinphoneInternalChatDBFilename];
+	NSString *chatDBFileName      = [self chatDBFileName];
 	const char* lRootCa           = [[LinphoneManager bundleFile:@"rootca.pem"] cStringUsingEncoding:[NSString defaultCStringEncoding]];
 
 	linphone_core_set_user_agent(theLinphoneCore, [[[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"] stringByAppendingString:@"Iphone"] UTF8String], LINPHONE_IOS_VERSION);
