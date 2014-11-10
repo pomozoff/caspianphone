@@ -91,8 +91,8 @@ static UICompositeViewDescription *compositeDescription = nil;
     }
     [deleteButton setHidden:TRUE];
     [editButton setOff];
-    [self changeView: History_All];
-    
+	[self changeView: History_All];
+
     // Reset missed call
     linphone_core_reset_missed_calls_count([LinphoneManager getLc]);
     // Fake event
@@ -101,6 +101,8 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+
+	editButton.hidden = ([[tableView dataSource] tableView:tableView numberOfRowsInSection:0] == 0);
     if ([[UIDevice currentDevice].systemVersion doubleValue] < 5.0) {
         [tableController viewDidAppear:animated];
     }
@@ -163,6 +165,8 @@ static UICompositeViewDescription *compositeDescription = nil;
     } else {
         missedButton.selected = FALSE;
     }
+
+	editButton.hidden = ([[tableView dataSource] tableView:tableView numberOfRowsInSection:0] == 0);
 }
 
 
@@ -184,6 +188,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 - (IBAction)onDeleteClick:(id) event {
 	linphone_core_clear_call_logs([LinphoneManager getLc]);
 	[tableController loadData];
+	editButton.hidden = ([[tableView dataSource] tableView:tableView numberOfRowsInSection:0] == 0);
     if([editButton isSelected]) {
         [editButton toggle];
         [self onEditClick:nil];
