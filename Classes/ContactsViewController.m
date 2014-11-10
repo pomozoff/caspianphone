@@ -304,7 +304,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 	ContactDetailsViewController *controller = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[ContactDetailsViewController compositeViewDescription] push:TRUE], ContactDetailsViewController);
 	if(controller != nil) {
 		if([ContactSelection getAddAddress] == nil) {
-			[controller newContact];
+            [controller newContact:@""];
 		} else {
 			[controller newContact:[ContactSelection getAddAddress]];
 		}
