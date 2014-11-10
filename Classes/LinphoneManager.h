@@ -187,7 +187,6 @@ typedef struct _LinphoneManagerSounds {
 - (void)silentPushFailed:(NSTimer*)timer;
 - (void)resetSettingsToDefault:(LinphoneCore *)lc;
 
-- (void)enableLogs;
 - (void)cleanCallHistory;
 
 @property (readonly) FastAddressBook* fastAddressBook;

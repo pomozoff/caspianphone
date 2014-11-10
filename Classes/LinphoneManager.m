@@ -1439,14 +1439,6 @@ static BOOL libStarted = FALSE;
     lp_config_set_int(config, LINPHONERC_APPLICATION_KEY, "animations_preference", NO);
 }
 
-- (void)enableLogs {
-    /*to make sure we don't loose debug trace*/
-    if ([self lpConfigBoolForKey:@"debugenable_preference"]) {
-        linphone_core_enable_logs_with_cb((OrtpLogFunc)linphone_iphone_log_handler);
-        ortp_set_log_level_mask(ORTP_DEBUG|ORTP_MESSAGE|ORTP_WARNING|ORTP_ERROR|ORTP_FATAL);
-    }
-}
-
 - (void)cleanCallHistory {
     linphone_core_clear_call_logs(theLinphoneCore);
 }
@@ -1463,7 +1455,11 @@ static BOOL libStarted = FALSE;
 	connectivity = none;
 	signal(SIGPIPE, SIG_IGN);
 
-    [self enableLogs];
+    /*to make sure we don't loose debug trace*/
+    if ([self lpConfigBoolForKey:@"debugenable_preference"]) {
+        linphone_core_enable_logs_with_cb((OrtpLogFunc)linphone_iphone_log_handler);
+        ortp_set_log_level_mask(ORTP_DEBUG|ORTP_MESSAGE|ORTP_WARNING|ORTP_ERROR|ORTP_FATAL);
+    }
     
 	// create linphone core
 	[self createLinphoneCore];
@@ -1553,6 +1549,8 @@ static BOOL libStarted = FALSE;
 										 ,configDb
 										 ,self /* user_data */);
 
+    linphone_core_reset_log_collection(theLinphoneCore);
+    
     [self prepareAllCodecs:theLinphoneCore];                                                    // Enable all default codecs
 
     /* set the CA file no matter what, since the remote provisioning could be hitting an HTTPS server */
