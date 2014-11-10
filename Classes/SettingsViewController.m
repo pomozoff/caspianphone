@@ -485,20 +485,16 @@ static UICompositeViewDescription *compositeDescription = nil;
     navigationController.view.frame = self.view.frame;
     [navigationController pushViewController:settingsController animated:FALSE];
     [self.view addSubview: navigationController.view];
-
-    /*
-    CGRect currentFrame = navigationController.navigationBar.frame;
-    navigationController.navigationBar.frame = CGRectMake(currentFrame.origin.x, currentFrame.origin.y - 20.0f, currentFrame.size.width, 70.0f);
-    */
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [settingsController dismiss:self];
+
     // Set observer
-    [[NSNotificationCenter defaultCenter] removeObserver:self 
-                                                 name:kIASKAppSettingChanged 
-                                               object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:kIASKAppSettingChanged
+                                                  object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -515,6 +511,15 @@ static UICompositeViewDescription *compositeDescription = nil;
                                                object:nil];
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    // Fix bug after emailing debug logs
+    CGRect currentFrame = self.view.frame;
+    if (currentFrame.origin.y > 0) {
+        self.view.frame = CGRectMake(currentFrame.origin.x, 0.0f, currentFrame.size.width, currentFrame.size.height);
+    }
+}
 
 #pragma mark - Event Functions
 
