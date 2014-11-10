@@ -128,7 +128,8 @@
     if(displayName == nil) {
         displayName = [NSString stringWithUTF8String:linphone_address_get_username(linphoneAddress)];
     }
-    [addressLabel setText:displayName];
+    //[addressLabel setText:displayName];
+    [addressLabel setText:normalizedSipAddress];
 
     // Avatar
     if(image == nil) {
