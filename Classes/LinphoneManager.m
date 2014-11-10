@@ -1447,6 +1447,10 @@ static BOOL libStarted = FALSE;
     }
 }
 
+- (void)cleanCallHistory {
+    linphone_core_clear_call_logs(theLinphoneCore);
+}
+
 - (void)startLibLinphone {
 
 	if ( libStarted ) {

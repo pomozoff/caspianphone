@@ -188,6 +188,7 @@ typedef struct _LinphoneManagerSounds {
 - (void)resetSettingsToDefault:(LinphoneCore *)lc;
 
 - (void)enableLogs;
+- (void)cleanCallHistory;
 
 @property (readonly) FastAddressBook* fastAddressBook;
 @property Connectivity connectivity;

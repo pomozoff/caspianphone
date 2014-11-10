@@ -1000,6 +1000,7 @@ static UICompositeViewDescription *compositeDescription = nil;
         [errorView show];
         [errorView release];
     } else {
+        [self checkIsSameUserSigningIn:phone];
         [self.waitView setHidden:false];
         [self addProxyConfig:[[LinphoneManager instance] cleanPhoneNumber:phone] password:password domain:domain];
     }
@@ -1506,6 +1507,15 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (void)switchToActivationByCall {
     self.activateBySignUpSegmented.selectedSegmentIndex = 1;
+}
+
+- (void)checkIsSameUserSigningIn:(NSString *)phoneNumber {
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    
+    NSString *lastPhoneNumber = [userDefaults objectForKey:caspianPhoneNumber];
+    if (![phoneNumber isEqualToString:lastPhoneNumber]) {
+        [[LinphoneManager instance] cleanCallHistory];
+    }
 }
 
 #pragma mark - Sign Up
