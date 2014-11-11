@@ -115,10 +115,14 @@ static void sync_address_book (ABAddressBookRef addressBook, CFDictionaryRef inf
                                         withString:@""
                                            options:0
                                              range:NSMakeRange(0, [lNormalizedAddress length])];
-    [lNormalizedAddress replaceOccurrencesOfString:@"00"
-                                        withString:@""
-                                           options:0
-                                             range:NSMakeRange(0, 2)];
+    
+    if (lNormalizedAddress.length > 1) {
+        [lNormalizedAddress replaceOccurrencesOfString:@"00"
+                                            withString:@""
+                                               options:0
+                                                 range:NSMakeRange(0, 2)];
+    }
+    
     return [FastAddressBook appendCountryCodeIfPossible:lNormalizedAddress];
 }
 
