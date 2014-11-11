@@ -44,7 +44,7 @@
 "TLS" = "TLS";
 
 /* None */
-"None" = "Aucun";
+"None" = "None";
 
 /* SRTP */
 "SRTP" = "SRTP";
