@@ -758,7 +758,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     [hiddenKeys addObject:@"call_menu"];
     [hiddenKeys addObject:@"release_button"];
     //[hiddenKeys addObject:@"send_logs_button"];
-    
+
     // Advanced
     //[hiddenKeys addObject:@"debug_group"];
     //[hiddenKeys addObject:@"debugenable_preference"];
@@ -786,6 +786,8 @@ static UICompositeViewDescription *compositeDescription = nil;
     [hiddenKeys addObject:@"ilbc_preference"];
     // Video
     [hiddenKeys addObject:@"vp8_preference"];
+    // Network
+    [hiddenKeys addObject:@"stun_preference"];
 #endif
     
     return hiddenKeys;
