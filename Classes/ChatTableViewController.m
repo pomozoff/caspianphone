@@ -184,13 +184,19 @@ static int sorted_history_comparison(LinphoneChatRoom *to_insert, LinphoneChatRo
         }
         case 1: {
             NSArray *deleteObjects = [NSArray arrayWithObject:indexPath];
+            [LinphoneLogger logc:LinphoneLoggerLog format:"ChatTableViewController: needs to delete %i object(s)", deleteObjects.count];
             if (deleteObjects) {
                 // Delete button was pressed
                 [self.tableView beginUpdates];
 
-                LinphoneChatRoom *chatRoom = (LinphoneChatRoom*)ms_list_nth_data(data, [indexPath row]);
-                linphone_chat_room_delete_history(chatRoom);
-                linphone_chat_room_destroy(chatRoom);
+                for (NSIndexPath *ip in deleteObjects) {
+                    LinphoneChatRoom *chatRoom = (LinphoneChatRoom*)ms_list_nth_data(data, ip.row);
+
+                    [LinphoneLogger logc:LinphoneLoggerLog format:"ChatTableViewController: delete object for row %i", ip.row];
+                    
+                    linphone_chat_room_delete_history(chatRoom);
+                    linphone_chat_room_destroy(chatRoom);
+                }
                 data = linphone_core_get_chat_rooms([LinphoneManager getLc]);
                 
                 [self.tableView deleteRowsAtIndexPaths:deleteObjects withRowAnimation:UITableViewRowAnimationFade];

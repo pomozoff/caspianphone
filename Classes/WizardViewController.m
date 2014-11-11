@@ -1130,15 +1130,20 @@ static UICompositeViewDescription *compositeDescription = nil;
 }
 
 - (IBAction)onContinueCreatingAccountTap:(id)sender {
-    BOOL isSmsActivationSelected = self.activateBySignUpSegmented.selectedSegmentIndex == 0;
-
-    self.smsImageConfirmView.hidden = !isSmsActivationSelected;
-    self.callImageConfirmView.hidden = isSmsActivationSelected;
-
-    self.smsTextConfirmView.hidden = !isSmsActivationSelected;
-    self.callTextConfirmView.hidden = isSmsActivationSelected;
-
-    [self animateConfirmViewHide:NO];
+    NSString *phoneNumber = [self correctPhoneNumber:self.phoneNumberSignUpField.text andCountryCode:self.countryCodeSignUpField.text];
+    if (phoneNumber) {
+        self.phoneNumberConfirmView.text = phoneNumber;
+        
+        BOOL isSmsActivationSelected = self.activateBySignUpSegmented.selectedSegmentIndex == 0;
+        
+        self.smsImageConfirmView.hidden = !isSmsActivationSelected;
+        self.callImageConfirmView.hidden = isSmsActivationSelected;
+        
+        self.smsTextConfirmView.hidden = !isSmsActivationSelected;
+        self.callTextConfirmView.hidden = isSmsActivationSelected;
+        
+        [self animateConfirmViewHide:NO];
+    }
 }
 
 - (IBAction)onCancelConfirmTap:(UIButton *)sender {
@@ -1590,6 +1595,15 @@ static UICompositeViewDescription *compositeDescription = nil;
     }
     
     self.continueSignUpField.enabled = self.continueSignUpField.enabled && (isCallAvailable || isSmsAvailable);
+}
+
+- (NSString *)correctPhoneNumber:(NSString *)phoneNumber andCountryCode:(NSString *)countryCode {
+    NSString *fullPhoneNumber = nil;
+    if ([self checkCountryCode:countryCode]) {
+        NSString *cleanedPhoneNumber = [[LinphoneManager instance] cleanPhoneNumber:phoneNumber];
+        fullPhoneNumber = [countryCode stringByAppendingString:cleanedPhoneNumber];
+    }
+    return fullPhoneNumber;
 }
 
 - (void)createAccountForPhoneNumber:(NSString *)phoneNumber

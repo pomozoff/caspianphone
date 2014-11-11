@@ -298,6 +298,8 @@
 		26A74D8B19C1D458002A3DA7 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26A74D8A19C1D458002A3DA7 /* Crashlytics.framework */; };
 		26C939FD1A120A4F001D9E32 /* no-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 26C939FB1A120A4F001D9E32 /* no-button.png */; };
 		26C939FE1A120A4F001D9E32 /* yes-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 26C939FC1A120A4F001D9E32 /* yes-button.png */; };
+		26C93A001A123513001D9E32 /* cancel-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 26C939FF1A123513001D9E32 /* cancel-button.png */; };
+		26C93A021A123537001D9E32 /* ok-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 26C93A011A123537001D9E32 /* ok-button.png */; };
 		26DFD65F19BF2F3400D1395A /* background-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 26DFD65219BF2F3400D1395A /* background-1.png */; };
 		26DFD66019BF2F3400D1395A /* logo-large.png in Resources */ = {isa = PBXBuildFile; fileRef = 26DFD65319BF2F3400D1395A /* logo-large.png */; };
 		26DFD66119BF2F3400D1395A /* logo-small.png in Resources */ = {isa = PBXBuildFile; fileRef = 26DFD65419BF2F3400D1395A /* logo-small.png */; };
@@ -1886,6 +1888,8 @@
 		26A74D8A19C1D458002A3DA7 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		26C939FB1A120A4F001D9E32 /* no-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "no-button.png"; sourceTree = "<group>"; };
 		26C939FC1A120A4F001D9E32 /* yes-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "yes-button.png"; sourceTree = "<group>"; };
+		26C939FF1A123513001D9E32 /* cancel-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cancel-button.png"; sourceTree = "<group>"; };
+		26C93A011A123537001D9E32 /* ok-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ok-button.png"; sourceTree = "<group>"; };
 		26DFD65219BF2F3400D1395A /* background-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background-1.png"; sourceTree = "<group>"; };
 		26DFD65319BF2F3400D1395A /* logo-large.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo-large.png"; sourceTree = "<group>"; };
 		26DFD65419BF2F3400D1395A /* logo-small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo-small.png"; sourceTree = "<group>"; };
@@ -3137,6 +3141,7 @@
 				261FAB1F19CC50B200CFE4AA /* call_quality_indicator_1.png */,
 				261FAB2019CC50B200CFE4AA /* call_quality_indicator_2.png */,
 				261FAB2119CC50B200CFE4AA /* call_quality_indicator_3.png */,
+				26C939FF1A123513001D9E32 /* cancel-button.png */,
 				260AC9B319D13D86002C8CA9 /* chat.png */,
 				261B6EA419ED5C5F0035917B /* chat-hover.png */,
 				261B6EA619ED5CA60035917B /* chat-black-hover.png */,
@@ -3163,6 +3168,7 @@
 				2636608519E6821600D72171 /* micro-off-button.png */,
 				2636608619E6821600D72171 /* micro-on-button.png */,
 				26C939FB1A120A4F001D9E32 /* no-button.png */,
+				26C93A011A123537001D9E32 /* ok-button.png */,
 				26DFD65519BF2F3400D1395A /* onecall_icon_57.png */,
 				26DFD65619BF2F3400D1395A /* onecall_icon_57@2x.png */,
 				26DFD65719BF2F3400D1395A /* onecall_icon_72.png */,
@@ -4436,6 +4442,7 @@
 				D32942A41594C94300556A1C /* SettingsViewController.xib in Resources */,
 				D34F6F9E1594D3FB0095705B /* InAppSettings.bundle in Resources */,
 				D3EA5403159852080037DC6B /* chat_edit_default.png in Resources */,
+				26C93A001A123513001D9E32 /* cancel-button.png in Resources */,
 				D3EA5405159852080037DC6B /* chat_edit_over.png in Resources */,
 				D3EA5407159852080037DC6B /* chat_add_default.png in Resources */,
 				D3EA5409159852080037DC6B /* chat_add_over.png in Resources */,
@@ -4782,6 +4789,7 @@
 				D33988F815C6DD1600CAF1E4 /* video_off_default_landscape~ipad.png in Resources */,
 				D33988FA15C6DD1600CAF1E4 /* video_off_disabled_landscape~ipad.png in Resources */,
 				D33988FC15C6DD1600CAF1E4 /* video_off_over_landscape~ipad.png in Resources */,
+				26C93A021A123537001D9E32 /* ok-button.png in Resources */,
 				D33988FE15C6DD1600CAF1E4 /* video_on_default_landscape~ipad.png in Resources */,
 				D339890015C6DD1600CAF1E4 /* video_on_disabled_landscape~ipad.png in Resources */,
 				D339890215C6DD1600CAF1E4 /* video_on_over_landscape~ipad.png in Resources */,
