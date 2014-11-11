@@ -757,7 +757,6 @@ static UICompositeViewDescription *compositeDescription = nil;
     [hiddenKeys addObject:@"enable_video_preference"];
     [hiddenKeys addObject:@"call_menu"];
     [hiddenKeys addObject:@"release_button"];
-    //[hiddenKeys addObject:@"send_logs_button"];
 
     // Advanced
     //[hiddenKeys addObject:@"debug_group"];
