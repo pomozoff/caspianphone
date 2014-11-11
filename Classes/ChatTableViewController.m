@@ -152,13 +152,14 @@ static int sorted_history_comparison(LinphoneChatRoom *to_insert, LinphoneChatRo
     if(editingStyle == UITableViewCellEditingStyleDelete) {
         [tableView beginUpdates];
 
-        LinphoneChatRoom *chatRoom = (LinphoneChatRoom*)ms_list_nth_data(data, (int)[indexPath row]);
+        LinphoneChatRoom *chatRoom = (LinphoneChatRoom *)ms_list_nth_data(data, (int)[indexPath row]);
         linphone_chat_room_delete_history(chatRoom);
         linphone_chat_room_destroy(chatRoom);
         data = linphone_core_get_chat_rooms([LinphoneManager getLc]);
 
         [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
         [tableView endUpdates];
+
         [[NSNotificationCenter defaultCenter] postNotificationName:kLinphoneTextReceived object:self];
     }
     */
@@ -182,19 +183,21 @@ static int sorted_history_comparison(LinphoneChatRoom *to_insert, LinphoneChatRo
             break;
         }
         case 1: {
-            // Delete button was pressed
-            [self.tableView beginUpdates];
-            
-            LinphoneChatRoom *chatRoom = (LinphoneChatRoom*)ms_list_nth_data(data, [indexPath row]);
-            linphone_chat_room_delete_history(chatRoom);
-            linphone_chat_room_destroy(chatRoom);
-            data = linphone_core_get_chat_rooms([LinphoneManager getLc]);
-            
-            [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-            [self.tableView endUpdates];
-            
-            [[NSNotificationCenter defaultCenter] postNotificationName:kLinphoneTextReceived object:self];
+            NSArray *deleteObjects = [NSArray arrayWithObject:indexPath];
+            if (deleteObjects) {
+                // Delete button was pressed
+                [self.tableView beginUpdates];
 
+                LinphoneChatRoom *chatRoom = (LinphoneChatRoom*)ms_list_nth_data(data, [indexPath row]);
+                linphone_chat_room_delete_history(chatRoom);
+                linphone_chat_room_destroy(chatRoom);
+                data = linphone_core_get_chat_rooms([LinphoneManager getLc]);
+                
+                [self.tableView deleteRowsAtIndexPaths:deleteObjects withRowAnimation:UITableViewRowAnimationFade];
+                [self.tableView endUpdates];
+
+                [[NSNotificationCenter defaultCenter] postNotificationName:kLinphoneTextReceived object:self];
+            }
             break;
         }
         default:
