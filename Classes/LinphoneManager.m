@@ -1437,7 +1437,7 @@ static BOOL libStarted = FALSE;
     // Advanced
     lp_config_set_int(config, LINPHONERC_APPLICATION_KEY, "debugenable_preference", NO);         // Debug is OFF
     lp_config_set_string(config, LINPHONERC_APPLICATION_KEY, "rotation_preference", "portrait"); // Rotation set to Portrait mode
-    lp_config_set_int(config, LINPHONERC_APPLICATION_KEY, "animations_preference", NO);
+    lp_config_set_int(config, LINPHONERC_APPLICATION_KEY, "animations_preference", NO);          // Animations is OFF
 }
 
 - (void)cleanCallHistory {
