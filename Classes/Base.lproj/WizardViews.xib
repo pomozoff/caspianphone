@@ -565,10 +565,11 @@
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="88M-k9-T8g" userLabel="Continue button">
                     <rect key="frame" x="35" y="390" width="250" height="50"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" pointSize="35"/>
-                    <state key="normal" title="YES">
+                    <state key="normal" title="YES" image="yes-button.png">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
                     <state key="selected" image="continue-selected.png"/>
                     <state key="highlighted" image="continue-selected.png"/>
@@ -579,10 +580,11 @@
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="13P-7U-rdo" userLabel="Different button">
                     <rect key="frame" x="35" y="320" width="250" height="50"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" pointSize="35"/>
-                    <state key="normal" title="NO">
+                    <state key="normal" image="no-button.png">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
                     <state key="selected" image="continue-selected.png"/>
                     <state key="highlighted" image="continue-selected.png"/>
@@ -666,7 +668,7 @@
                     </connections>
                 </button>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="These parameters were retrieved from a remote provisioning profile." textAlignment="center" lineBreakMode="wordWrap" numberOfLines="7" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="RHE-hi-dfB" userLabel="remoteParamsLabel">
-                    <rect key="frame" x="34" y="269" width="254" height="53"/>
+                    <rect key="frame" x="34" y="269.00000052632026" width="254" height="53"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -895,10 +897,12 @@
         <image name="field_background.png" width="542" height="88"/>
         <image name="large-blue-button.png" width="640" height="284"/>
         <image name="logo-small.png" width="392" height="237"/>
+        <image name="no-button.png" width="272" height="54"/>
         <image name="setup_welcome_logo.png" width="179" height="161"/>
         <image name="sign-in-normal.png" width="365" height="47"/>
         <image name="sign-up-normal.png" width="365" height="47"/>
         <image name="submit.png" width="272" height="54"/>
+        <image name="yes-button.png" width="272" height="54"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

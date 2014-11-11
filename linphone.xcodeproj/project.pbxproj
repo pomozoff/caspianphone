@@ -296,6 +296,8 @@
 		26988A9319EFF4EE0002DC08 /* edit-small.png in Resources */ = {isa = PBXBuildFile; fileRef = 26988A9119EFF4EE0002DC08 /* edit-small.png */; };
 		269948B719D9720C0017650E /* COCTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 269948B619D9720C0017650E /* COCTextField.m */; };
 		26A74D8B19C1D458002A3DA7 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26A74D8A19C1D458002A3DA7 /* Crashlytics.framework */; };
+		26C939FD1A120A4F001D9E32 /* no-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 26C939FB1A120A4F001D9E32 /* no-button.png */; };
+		26C939FE1A120A4F001D9E32 /* yes-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 26C939FC1A120A4F001D9E32 /* yes-button.png */; };
 		26DFD65F19BF2F3400D1395A /* background-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 26DFD65219BF2F3400D1395A /* background-1.png */; };
 		26DFD66019BF2F3400D1395A /* logo-large.png in Resources */ = {isa = PBXBuildFile; fileRef = 26DFD65319BF2F3400D1395A /* logo-large.png */; };
 		26DFD66119BF2F3400D1395A /* logo-small.png in Resources */ = {isa = PBXBuildFile; fileRef = 26DFD65419BF2F3400D1395A /* logo-small.png */; };
@@ -1882,6 +1884,8 @@
 		269948B519D9720C0017650E /* COCTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = COCTextField.h; sourceTree = "<group>"; };
 		269948B619D9720C0017650E /* COCTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = COCTextField.m; sourceTree = "<group>"; };
 		26A74D8A19C1D458002A3DA7 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
+		26C939FB1A120A4F001D9E32 /* no-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "no-button.png"; sourceTree = "<group>"; };
+		26C939FC1A120A4F001D9E32 /* yes-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "yes-button.png"; sourceTree = "<group>"; };
 		26DFD65219BF2F3400D1395A /* background-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background-1.png"; sourceTree = "<group>"; };
 		26DFD65319BF2F3400D1395A /* logo-large.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo-large.png"; sourceTree = "<group>"; };
 		26DFD65419BF2F3400D1395A /* logo-small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo-small.png"; sourceTree = "<group>"; };
@@ -3158,6 +3162,7 @@
 				261FABE619D028AA00CFE4AA /* messages.png */,
 				2636608519E6821600D72171 /* micro-off-button.png */,
 				2636608619E6821600D72171 /* micro-on-button.png */,
+				26C939FB1A120A4F001D9E32 /* no-button.png */,
 				26DFD65519BF2F3400D1395A /* onecall_icon_57.png */,
 				26DFD65619BF2F3400D1395A /* onecall_icon_57@2x.png */,
 				26DFD65719BF2F3400D1395A /* onecall_icon_72.png */,
@@ -3203,6 +3208,7 @@
 				2636609119E6B0BD00D72171 /* submit.png */,
 				2636609219E6B0BD00D72171 /* submit@2x.png */,
 				261B6E9C19EBEED00035917B /* support-contact-avatar.png */,
+				26C939FC1A120A4F001D9E32 /* yes-button.png */,
 				261B6E9019E81B860035917B /* video-off-hover.png */,
 				261B6E9119E81B860035917B /* video-off.png */,
 				261B6E9219E81B860035917B /* video-on-hover.png */,
@@ -4333,6 +4339,7 @@
 				D3F83F5E1582223B00336684 /* numpad_six_over.png in Resources */,
 				D3F83F601582223B00336684 /* numpad_seven_default.png in Resources */,
 				D3F83F621582223B00336684 /* numpad_seven_over.png in Resources */,
+				26C939FD1A120A4F001D9E32 /* no-button.png in Resources */,
 				D3F83F641582223B00336684 /* numpad_eight_default.png in Resources */,
 				261FABDD19D0284B00CFE4AA /* dialer.png in Resources */,
 				D3F83F661582223B00336684 /* numpad_eight_over.png in Resources */,
@@ -4352,6 +4359,7 @@
 				D3F83F7E1582253100336684 /* decline_over.png in Resources */,
 				261FABA719CC54CB00CFE4AA /* 3-hover.png in Resources */,
 				D3ED3E411585FB4A006C0DE4 /* background.png in Resources */,
+				26C939FE1A120A4F001D9E32 /* yes-button.png in Resources */,
 				2636608719E6821600D72171 /* micro-off-button.png in Resources */,
 				D3ED3E451585FB8C006C0DE4 /* dialer_address_background.png in Resources */,
 				D3ED3E521585FFFD006C0DE4 /* statebar_background.png in Resources */,
