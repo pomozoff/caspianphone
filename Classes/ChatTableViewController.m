@@ -169,6 +169,11 @@ static int sorted_history_comparison(LinphoneChatRoom *to_insert, LinphoneChatRo
 
 - (void)swipeableTableViewCell:(SWTableViewCell *)cell didTriggerRightUtilityButtonWithIndex:(NSInteger)index {
     NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+    if (!indexPath) {
+        NSString *textLabel = ((UIChatCell *)cell).addressLabel.text;
+        [LinphoneLogger logc:LinphoneLoggerLog format:"ChatTableViewController: indexpath not found for cell - %s", [textLabel UTF8String]];
+        return;
+    }
     switch (index) {
         case 0: {
             // Call button was pressed
@@ -183,27 +188,29 @@ static int sorted_history_comparison(LinphoneChatRoom *to_insert, LinphoneChatRo
             break;
         }
         case 1: {
-            NSArray *deleteObjects = [NSArray arrayWithObject:indexPath];
-            [LinphoneLogger logc:LinphoneLoggerLog format:"ChatTableViewController: needs to delete %i object(s)", deleteObjects.count];
-            if (deleteObjects) {
-                // Delete button was pressed
-                [self.tableView beginUpdates];
+            // Delete button was pressed
+            [LinphoneLogger logc:LinphoneLoggerLog format:"ChatTableViewController: delete object for row %i", indexPath.row];
 
-                for (NSIndexPath *ip in deleteObjects) {
-                    LinphoneChatRoom *chatRoom = (LinphoneChatRoom*)ms_list_nth_data(data, ip.row);
+            [self.tableView beginUpdates];
+            
+            NSInteger rowsCountBeforeUpdate = ms_list_size(data);
+            
+            LinphoneChatRoom *chatRoom = (LinphoneChatRoom*)ms_list_nth_data(data, indexPath.row);
+            linphone_chat_room_delete_history(chatRoom);
+            linphone_chat_room_destroy(chatRoom);
+            data = linphone_core_get_chat_rooms([LinphoneManager getLc]);
 
-                    [LinphoneLogger logc:LinphoneLoggerLog format:"ChatTableViewController: delete object for row %i", ip.row];
-                    
-                    linphone_chat_room_delete_history(chatRoom);
-                    linphone_chat_room_destroy(chatRoom);
-                }
-                data = linphone_core_get_chat_rooms([LinphoneManager getLc]);
-                
-                [self.tableView deleteRowsAtIndexPaths:deleteObjects withRowAnimation:UITableViewRowAnimationFade];
-                [self.tableView endUpdates];
-
-                [[NSNotificationCenter defaultCenter] postNotificationName:kLinphoneTextReceived object:self];
+            NSInteger rowsCountAfterUpdate = ms_list_size(data);
+            
+            if (rowsCountBeforeUpdate - rowsCountAfterUpdate == 1) {
+                [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            } else {
+                [LinphoneLogger logc:LinphoneLoggerLog format:"ChatTableViewController: can't delete chat room with index %i", indexPath.row];
             }
+            
+            [self.tableView endUpdates];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:kLinphoneTextReceived object:self];
             break;
         }
         default:
