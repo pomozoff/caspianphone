@@ -41,6 +41,7 @@
 
 #define LINPHONE_LOGS_MAX_ENTRY 5000
 
+static NSString *caspianSharingServerUri = @"https://www.linphone.org:444/upload.php";
 static NSString *caspianDomainIpLocal = @"212.159.80.157";
 NSInteger caspianErrorCode = 480;
 
@@ -1438,6 +1439,8 @@ static BOOL libStarted = FALSE;
     lp_config_set_int(config, LINPHONERC_APPLICATION_KEY, "debugenable_preference", NO);         // Debug is OFF
     lp_config_set_string(config, LINPHONERC_APPLICATION_KEY, "rotation_preference", "portrait"); // Rotation set to Portrait mode
     lp_config_set_int(config, LINPHONERC_APPLICATION_KEY, "animations_preference", NO);          // Animations is OFF
+    lp_config_set_string(config, LINPHONERC_APPLICATION_KEY, "sharing_server_preference",
+                         [caspianSharingServerUri UTF8String]);                                  // Sharing server
 }
 
 - (void)cleanCallHistory {
