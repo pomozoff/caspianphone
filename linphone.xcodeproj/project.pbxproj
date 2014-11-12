@@ -300,6 +300,7 @@
 		26C939FE1A120A4F001D9E32 /* yes-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 26C939FC1A120A4F001D9E32 /* yes-button.png */; };
 		26C93A001A123513001D9E32 /* cancel-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 26C939FF1A123513001D9E32 /* cancel-button.png */; };
 		26C93A021A123537001D9E32 /* ok-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 26C93A011A123537001D9E32 /* ok-button.png */; };
+		26C93A041A135A0B001D9E32 /* blue-button-background.png in Resources */ = {isa = PBXBuildFile; fileRef = 26C93A031A135A0B001D9E32 /* blue-button-background.png */; };
 		26DFD65F19BF2F3400D1395A /* background-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 26DFD65219BF2F3400D1395A /* background-1.png */; };
 		26DFD66019BF2F3400D1395A /* logo-large.png in Resources */ = {isa = PBXBuildFile; fileRef = 26DFD65319BF2F3400D1395A /* logo-large.png */; };
 		26DFD66119BF2F3400D1395A /* logo-small.png in Resources */ = {isa = PBXBuildFile; fileRef = 26DFD65419BF2F3400D1395A /* logo-small.png */; };
@@ -1890,6 +1891,7 @@
 		26C939FC1A120A4F001D9E32 /* yes-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "yes-button.png"; sourceTree = "<group>"; };
 		26C939FF1A123513001D9E32 /* cancel-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cancel-button.png"; sourceTree = "<group>"; };
 		26C93A011A123537001D9E32 /* ok-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ok-button.png"; sourceTree = "<group>"; };
+		26C93A031A135A0B001D9E32 /* blue-button-background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "blue-button-background.png"; sourceTree = "<group>"; };
 		26DFD65219BF2F3400D1395A /* background-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background-1.png"; sourceTree = "<group>"; };
 		26DFD65319BF2F3400D1395A /* logo-large.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo-large.png"; sourceTree = "<group>"; };
 		26DFD65419BF2F3400D1395A /* logo-small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo-small.png"; sourceTree = "<group>"; };
@@ -3137,6 +3139,7 @@
 				261FABD019D00F0900CFE4AA /* back-medium.png */,
 				261FABF919D0591D00CFE4AA /* bgcontact.png */,
 				261B6E9A19EBB8C90035917B /* bgsett2.png */,
+				26C93A031A135A0B001D9E32 /* blue-button-background.png */,
 				261FABFD19D05A3A00CFE4AA /* buttonwith-arrow.png */,
 				261FAB1F19CC50B200CFE4AA /* call_quality_indicator_1.png */,
 				261FAB2019CC50B200CFE4AA /* call_quality_indicator_2.png */,
@@ -4430,6 +4433,7 @@
 				D36C43F3158F61EA0048BA40 /* call_state_pause_over.png in Resources */,
 				261FABB519CC54CB00CFE4AA /* 9-hover.png in Resources */,
 				261B6EAD19ED5CB20035917B /* sms-black.png in Resources */,
+				26C93A041A135A0B001D9E32 /* blue-button-background.png in Resources */,
 				D36C43F5158F61EA0048BA40 /* call_state_play_default.png in Resources */,
 				D36C43F7158F61EA0048BA40 /* call_state_play_over.png in Resources */,
 				D35E757815931E5D0066B1C1 /* switch_camera_default.png in Resources */,
