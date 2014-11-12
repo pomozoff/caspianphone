@@ -1890,6 +1890,7 @@
 		26C939FC1A120A4F001D9E32 /* yes-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "yes-button.png"; sourceTree = "<group>"; };
 		26C939FF1A123513001D9E32 /* cancel-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cancel-button.png"; sourceTree = "<group>"; };
 		26C93A011A123537001D9E32 /* ok-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ok-button.png"; sourceTree = "<group>"; };
+		26C93A071A136C5F001D9E32 /* linphone.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = linphone.entitlements; sourceTree = "<group>"; };
 		26DFD65219BF2F3400D1395A /* background-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background-1.png"; sourceTree = "<group>"; };
 		26DFD65319BF2F3400D1395A /* logo-large.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo-large.png"; sourceTree = "<group>"; };
 		26DFD65419BF2F3400D1395A /* logo-small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo-small.png"; sourceTree = "<group>"; };
@@ -3260,6 +3261,7 @@
 				F0B89C2318DC90850050B60E /* images */,
 				D3C714B2159DB84400705B8E /* hold.wav */,
 				D37E3ECF1619DCC50087659A /* licenses.html */,
+				26C93A071A136C5F001D9E32 /* linphone.entitlements */,
 				8D1107310486CEB800E47090 /* linphone-Info.plist */,
 				57F005C315EE2CCF00914747 /* linphonerc */,
 				57F005C615EE2D9200914747 /* linphonerc-factory */,
