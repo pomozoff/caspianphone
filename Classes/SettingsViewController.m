@@ -773,8 +773,8 @@ static UICompositeViewDescription *compositeDescription = nil;
     [hiddenKeys addObject:@"sharing_group"];
     [hiddenKeys addObject:@"sharing_server_preference"];
     // Audio
-    [hiddenKeys addObject:@"speex_16k_preference"];
     [hiddenKeys addObject:@"speex_8k_preference"];
+    [hiddenKeys addObject:@"speex_16k_preference"];
     [hiddenKeys addObject:@"opus_preference"];
     [hiddenKeys addObject:@"aaceld_16k_preference"];
     [hiddenKeys addObject:@"aaceld_22k_preference"];
