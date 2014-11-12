@@ -300,7 +300,6 @@
 		26C939FE1A120A4F001D9E32 /* yes-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 26C939FC1A120A4F001D9E32 /* yes-button.png */; };
 		26C93A001A123513001D9E32 /* cancel-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 26C939FF1A123513001D9E32 /* cancel-button.png */; };
 		26C93A021A123537001D9E32 /* ok-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 26C93A011A123537001D9E32 /* ok-button.png */; };
-		26C93A041A135A0B001D9E32 /* blue-button-background.png in Resources */ = {isa = PBXBuildFile; fileRef = 26C93A031A135A0B001D9E32 /* blue-button-background.png */; };
 		26DFD65F19BF2F3400D1395A /* background-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 26DFD65219BF2F3400D1395A /* background-1.png */; };
 		26DFD66019BF2F3400D1395A /* logo-large.png in Resources */ = {isa = PBXBuildFile; fileRef = 26DFD65319BF2F3400D1395A /* logo-large.png */; };
 		26DFD66119BF2F3400D1395A /* logo-small.png in Resources */ = {isa = PBXBuildFile; fileRef = 26DFD65419BF2F3400D1395A /* logo-small.png */; };
@@ -1891,7 +1890,7 @@
 		26C939FC1A120A4F001D9E32 /* yes-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "yes-button.png"; sourceTree = "<group>"; };
 		26C939FF1A123513001D9E32 /* cancel-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cancel-button.png"; sourceTree = "<group>"; };
 		26C93A011A123537001D9E32 /* ok-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ok-button.png"; sourceTree = "<group>"; };
-		26C93A031A135A0B001D9E32 /* blue-button-background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "blue-button-background.png"; sourceTree = "<group>"; };
+		26C93A071A136C5F001D9E32 /* linphone.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = linphone.entitlements; sourceTree = "<group>"; };
 		26DFD65219BF2F3400D1395A /* background-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background-1.png"; sourceTree = "<group>"; };
 		26DFD65319BF2F3400D1395A /* logo-large.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo-large.png"; sourceTree = "<group>"; };
 		26DFD65419BF2F3400D1395A /* logo-small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo-small.png"; sourceTree = "<group>"; };
@@ -3139,7 +3138,6 @@
 				261FABD019D00F0900CFE4AA /* back-medium.png */,
 				261FABF919D0591D00CFE4AA /* bgcontact.png */,
 				261B6E9A19EBB8C90035917B /* bgsett2.png */,
-				26C93A031A135A0B001D9E32 /* blue-button-background.png */,
 				261FABFD19D05A3A00CFE4AA /* buttonwith-arrow.png */,
 				261FAB1F19CC50B200CFE4AA /* call_quality_indicator_1.png */,
 				261FAB2019CC50B200CFE4AA /* call_quality_indicator_2.png */,
@@ -3263,6 +3261,7 @@
 				F0B89C2318DC90850050B60E /* images */,
 				D3C714B2159DB84400705B8E /* hold.wav */,
 				D37E3ECF1619DCC50087659A /* licenses.html */,
+				26C93A071A136C5F001D9E32 /* linphone.entitlements */,
 				8D1107310486CEB800E47090 /* linphone-Info.plist */,
 				57F005C315EE2CCF00914747 /* linphonerc */,
 				57F005C615EE2D9200914747 /* linphonerc-factory */,
@@ -4201,7 +4200,15 @@
 				LastUpgradeCheck = 0610;
 				TargetAttributes = {
 					1D6058900D05DD3D006BFB54 = {
-						DevelopmentTeam = Y24464MUL3;
+						DevelopmentTeam = G4P9S2V6QP;
+						SystemCapabilities = {
+							com.apple.DataProtection = {
+								enabled = 1;
+							};
+							com.apple.SafariKeychain = {
+								enabled = 0;
+							};
+						};
 					};
 					22D8F11D147548E2008C97DB = {
 						DevelopmentTeam = Z2V957B3D6;
@@ -4433,7 +4440,6 @@
 				D36C43F3158F61EA0048BA40 /* call_state_pause_over.png in Resources */,
 				261FABB519CC54CB00CFE4AA /* 9-hover.png in Resources */,
 				261B6EAD19ED5CB20035917B /* sms-black.png in Resources */,
-				26C93A041A135A0B001D9E32 /* blue-button-background.png in Resources */,
 				D36C43F5158F61EA0048BA40 /* call_state_play_default.png in Resources */,
 				D36C43F7158F61EA0048BA40 /* call_state_play_over.png in Resources */,
 				D35E757815931E5D0066B1C1 /* switch_camera_default.png in Resources */,
@@ -6271,7 +6277,6 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				APPLY_RULES_IN_COPY_FILES = YES;
-				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COMPRESS_PNG_FILES = YES;
@@ -6600,7 +6605,6 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				APPLY_RULES_IN_COPY_FILES = YES;
-				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COMPRESS_PNG_FILES = YES;

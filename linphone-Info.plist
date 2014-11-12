@@ -50,7 +50,7 @@
 		</dict>
 	</dict>
 	<key>CFBundleIdentifier</key>
-	<string>uk.co.onecallcaspian.phone</string>
+	<string>com.onecall.onecallcaspain</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleLocalizations</key>
@@ -104,7 +104,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>2.2.3.25</string>
+	<string>2.2.3.26</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>UIApplicationExitsOnSuspend</key>
