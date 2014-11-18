@@ -1417,8 +1417,8 @@ static BOOL libStarted = FALSE;
     linphone_core_enable_self_view(lc, YES);                                                     // Show self view is ON
     lp_config_set_int(config, LINPHONERC_APPLICATION_KEY, "preview_preference", YES);            // I don't know wtf is it, but let it be enabled!
     MSVideoSize vsize;
-    MS_VIDEO_SIZE_ASSIGN(vsize, VGA);
-    linphone_core_set_preferred_video_size(lc, vsize);                                           // Preferred size is VGA (640x480)
+    MS_VIDEO_SIZE_ASSIGN(vsize, QVGA);
+    linphone_core_set_preferred_video_size(lc, vsize);                                           // Preferred size is QVGA (321x240)
     int bw = 512;
     linphone_core_set_upload_bandwidth(lc, bw);                                                  // Set bandwidth for VGA
     linphone_core_set_download_bandwidth(lc, bw);                                                // Set bandwidth for VGA
