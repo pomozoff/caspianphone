@@ -2,9 +2,9 @@
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="8.00">
 	<data>
 		<int key="IBDocument.SystemTarget">1536</int>
-		<string key="IBDocument.SystemVersion">14A389</string>
+		<string key="IBDocument.SystemVersion">14B25</string>
 		<string key="IBDocument.InterfaceBuilderVersion">6250</string>
-		<string key="IBDocument.AppKitVersion">1343.14</string>
+		<string key="IBDocument.AppKitVersion">1343.16</string>
 		<string key="IBDocument.HIToolboxVersion">755.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -83,10 +83,6 @@
 			</object>
 			<object class="IBUINavigationController" id="983459891">
 				<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics"/>
-				<object class="IBUISimulatedNavigationBarMetrics" key="IBUISimulatedTopBarMetrics">
-					<bool key="IBUITranslucent">NO</bool>
-					<bool key="IBUIPrompted">NO</bool>
-				</object>
 				<reference key="IBUISimulatedOrientationMetrics" ref="888280179"/>
 				<reference key="IBUISimulatedDestinationMetrics" ref="18024580"/>
 				<bool key="IBUIDefinesPresentationContext">YES</bool>
@@ -95,14 +91,12 @@
 				<object class="IBUINavigationBar" key="IBUINavigationBar" id="890495851">
 					<nil key="NSNextResponder"/>
 					<int key="NSvFlags">256</int>
-					<string key="NSFrameSize">{0, 0}</string>
+					<string key="NSFrame">{{0, -44}, {0, 44}}</string>
 					<string key="NSReuseIdentifierKey">_NS:15</string>
 					<bool key="IBUIOpaque">NO</bool>
 					<bool key="IBUIClipsSubviews">YES</bool>
 					<bool key="IBUIMultipleTouchEnabled">YES</bool>
 					<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-					<int key="IBUIBarStyle">1</int>
-					<bool key="IBUITranslucent">NO</bool>
 				</object>
 				<array class="NSMutableArray" key="IBUIViewControllers"/>
 			</object>

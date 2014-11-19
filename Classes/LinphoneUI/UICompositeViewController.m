@@ -67,6 +67,7 @@
                              fullscreen:(BOOL) afullscreen
                           landscapeMode:(BOOL) alandscapeMode
                            portraitMode:(BOOL) aportraitMode{
+    
     self.name = aname;
     self.content = acontent;
     self.stateBar = astateBar;
@@ -217,6 +218,10 @@
                                              selector:@selector(orientationDidChange:)
                                                  name:UIDeviceOrientationDidChangeNotification
                                                object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(applicationDidChangeStatusBarFrame:)
+                                                 name:UIApplicationDidChangeStatusBarFrameNotification
+                                               object:nil];
     [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
 }
 
@@ -238,6 +243,9 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self
                                                  name:UIDeviceOrientationDidChangeNotification
                                                object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:UIApplicationDidChangeStatusBarFrameNotification
+                                                  object:nil];
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
@@ -514,6 +522,7 @@
         self.contentViewController = newContentViewController;
         self.tabBarViewController = newTabBarViewController;
         
+        /*
         // Update rotation
         UIInterfaceOrientation correctOrientation = [self getCorrectInterfaceOrientation:(UIDeviceOrientation)[UIApplication sharedApplication].statusBarOrientation];
         if(currentOrientation != correctOrientation) {
@@ -542,7 +551,8 @@
                 [self.stateBarViewController willAnimateRotationToInterfaceOrientation:correctOrientation duration:0];
                 [self.stateBarViewController didRotateFromInterfaceOrientation:oldOrientation];
             }
-       }
+        }
+        */
     } else {
        oldViewDescription = (currentViewDescription != nil)? [currentViewDescription copy]: nil;
     }
@@ -605,7 +615,7 @@
     // Resize TabBar
     CGRect tabFrame = tabBarView.frame;
     if(self.tabBarViewController != nil && currentViewDescription.tabBarEnabled) {
-        tabFrame.origin.y = viewFrame.size.height;
+        tabFrame.origin.y = viewFrame.size.height - viewFrame.origin.y;
         tabFrame.origin.x = viewFrame.size.width;
         tabFrame.size.height = self.tabBarViewController.view.frame.size.height;
         //tabFrame.size.width = self.tabBarViewController.view.frame.size.width;
@@ -627,6 +637,8 @@
         tabFrame.origin.y = viewFrame.size.height;
     }
     
+    contentFrame.size.height += viewFrame.origin.y * 2;
+    
     if(currentViewDescription.fullscreen) {
         contentFrame.origin.y = origin;
         contentFrame.size.height = viewFrame.size.height - contentFrame.origin.y;
@@ -643,6 +655,8 @@
     frame = [self.stateBarViewController.view frame];
     frame.size.width = [stateBarView bounds].size.width;
     [self.stateBarViewController.view setFrame:frame];
+    
+    
     
     // Commit animation
     if(tabBar != nil || stateBar != nil || fullscreen != nil) {
@@ -691,6 +705,22 @@
 
 - (BOOL)currentViewSupportsLandscape {
     return currentViewDescription ? currentViewDescription.landscapeMode : FALSE;
+}
+
+#pragma mark - Private
+
+- (void)applicationDidChangeStatusBarFrame:(NSNotification *)notification {
+    __block CGRect frame = self.view.frame;
+    if (frame.origin.y > 0) {
+        [UIView animateWithDuration:0.1f animations:^{
+            CGRect tabFrame = tabBarView.frame;
+            tabFrame.origin.y += frame.origin.y;
+            tabBarView.frame = tabFrame;
+            
+            frame.origin.y = 0;
+            self.view.frame = frame;
+        }];
+    }
 }
 
 @end
