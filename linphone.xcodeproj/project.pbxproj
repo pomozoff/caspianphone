@@ -2441,7 +2441,6 @@
 			isa = PBXGroup;
 			children = (
 				26B94B891A1E2FC100417DF9 /* images caspian */,
-				F0B89C2318DC90850050B60E /* images */,
 				D3C714B2159DB84400705B8E /* hold.wav */,
 				F0B89C2318DC90850050B60E /* images */,
 				D37E3ECF1619DCC50087659A /* licenses.html */,
@@ -3524,8 +3523,6 @@
 				D354981C15876FE7000081D8 /* list_details_over.png in Resources */,
 				26B94C4A1A1E2FC100417DF9 /* phone-button_hover.png in Resources */,
 				639CEAFD1A1DF4D9004DE38F /* UIStateBar.xib in Resources */,
-				F088488A19FF8C41007FFCF3 /* UIContactCell.xib in Resources */,
-				D38187E115FE349700C3EDCA /* UICallBar.xib in Resources */,
 				D31C9C90158A1C1000756B45 /* call_status_incoming.png in Resources */,
 				D31C9C92158A1C1000756B45 /* call_status_missed.png in Resources */,
 				D31C9C94158A1C1000756B45 /* call_status_outgoing.png in Resources */,
@@ -3554,7 +3551,6 @@
 				26B94C5D1A1E2FC100417DF9 /* settings.png in Resources */,
 				D35E758D15934F360066B1C1 /* call_disabled.png in Resources */,
 				26B94C3D1A1E2FC100417DF9 /* micro-on-button.png in Resources */,
-				D38187B115FE340500C3EDCA /* ChatViewController.xib in Resources */,
 				636316D41A1DEC650009B839 /* SettingsViewController.xib in Resources */,
 				D34F6F9E1594D3FB0095705B /* InAppSettings.bundle in Resources */,
 				26B94C651A1E2FC100417DF9 /* sms.png in Resources */,
