@@ -6,6 +6,11 @@ libvpx_configure_options=\
 	--enable-realtime-only --enable-spatial-resampling \
 	--enable-vp8 --enable-multithread --disable-vp9 
 
+
+ifeq ($(enable_debug),yes)
+	libvpx_configure_options += --enable-debug
+endif
+
 take_binary=
 
 # force take binary, it seems libvpx was fixed since http://git.chromium.org/gitweb/?p=webm/libvpx.git;a=commit;h=33df6d1fc1d268b4901b74b4141f83594266f041
@@ -19,6 +24,9 @@ else ifneq (,$(findstring armv7s,$(host)))
 else ifneq (,$(findstring armv7,$(host)))
 	libvpx_configure_options+= --target=armv7-darwin-gcc
 	take_binary = armv7
+else ifneq (,$(findstring aarch64,$(host)))
+	libvpx_configure_options+= --target=arm64-darwin-gcc
+	take_binary = arm64
 else
 	libvpx_configure_options+= --target=x86-darwin10-gcc
 	take_binary = i386
@@ -30,23 +38,20 @@ endif
 
 
 
-all_p=armv6-darwin-gcc    #neon Cortex-A8
 all_p+=armv7-darwin-gcc    #neon Cortex-A8
-all_p+=armv7s-darwin-gcc   #neon Cortex-A8
 
 ifeq ($(force_non_binary_libvpx),1)
 take_binary=
 libvpx_configure_options+= --extra-cflags="-fno-strict-aliasing"
 endif
 
-#$(BUILDER_SRC_DIR)/$(libvpx_dir)/patched.stamp:
-#	cd $(BUILDER_SRC_DIR)/$(libvpx_dir) \
-#	&& git apply $(BUILDER_SRC_DIR)/build/builders.d/libvpx.patch \
-#	&& touch $@
+$(BUILDER_SRC_DIR)/$(libvpx_dir)/patched.stamp:
+	cd $(BUILDER_SRC_DIR)/$(libvpx_dir) \
+	&& git apply $(BUILDER_SRC_DIR)/build/builders.d/libvpx.patch \
+	&& touch $@
 
 
-$(BUILDER_BUILD_DIR)/$(libvpx_dir)/config.mk: 
-	#$(BUILDER_SRC_DIR)/$(libvpx_dir)/patched.stamp
+$(BUILDER_BUILD_DIR)/$(libvpx_dir)/config.mk:
 	mkdir -p $(BUILDER_BUILD_DIR)/$(libvpx_dir)
 	cd $(BUILDER_BUILD_DIR)/$(libvpx_dir)/ \
 	&&  host_alias=${host} . $(BUILDER_SRC_DIR)/build/$(config_site) \
@@ -71,8 +76,7 @@ clean-libvpx:
 veryclean-libvpx:
 	-cd $(BUILDER_BUILD_DIR)/$(libvpx_dir) && make distclean
 	cd $(BUILDER_SRC_DIR)/$(libvpx_dir) \
-	&& git clean -f && git reset --hard 
-	#&& rm -f patched.stamp
+	&& git clean -f && git reset --hard && rm -f patched.stamp
 	rm -rf $(BUILDER_BUILD_DIR)/$(libvpx_dir)
 
 clean-makefile-libvpx:

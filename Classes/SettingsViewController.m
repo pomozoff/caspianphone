@@ -819,18 +819,7 @@ static UICompositeViewDescription *compositeDescription = nil;
         [settingsStore transformLinphoneCoreToKeys];
         [[PhoneMainView instance] changeCurrentView:[DialerViewController compositeViewDescription] push:TRUE];
     }
-    if([key isEqual:@"console_button"]) {
-        [[PhoneMainView instance] changeCurrentView:[ConsoleViewController compositeViewDescription] push:TRUE];
-    } else if([key isEqual:@"wizard_button"]) {
-        /*
-        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Warning",nil)
-                                                        message:NSLocalizedString(@"Launching the Wizard will delete any existing proxy config.\nAre you sure to want it?",nil)
-                                                       delegate:self
-                                              cancelButtonTitle:NSLocalizedString(@"Cancel",nil)
-                                              otherButtonTitles:NSLocalizedString(@"Launch Wizard",nil), nil];
-        [alert show];
-        [alert release];
-        */
+    if([key isEqual:@"wizard_button"]) {
         [self alertView:nil clickedButtonAtIndex:1];
     } else if([key isEqual:@"about_button"]) {
         [[PhoneMainView instance] changeCurrentView:[AboutViewController compositeViewDescription] push:TRUE];

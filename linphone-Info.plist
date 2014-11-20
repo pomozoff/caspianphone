@@ -115,6 +115,8 @@
 		<string>remote-notification</string>
 		<string>voip</string>
 	</array>
+	<key>UILaunchImageFile</key>
+	<string>linphone_splashscreen</string>
 	<key>UILaunchImageFile~ipad</key>
 	<string>linphone_splashscreen</string>
 	<key>UILaunchImageFile~iphone</key>
@@ -129,7 +131,7 @@
 	<key>UIRequiresPersistentWiFi</key>
 	<true/>
 	<key>UIStatusBarStyle</key>
-	<string>UIStatusBarStyleBlackOpaque</string>
+	<string>UIStatusBarStyleDefault</string>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
