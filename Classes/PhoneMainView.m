@@ -188,13 +188,12 @@ static RootViewManager* rootViewManagerInstance = nil;
                                              selector:@selector(onGlobalStateChanged:)
                                                  name:kLinphoneGlobalStateUpdate
                                                object:nil];
+    [[UIDevice currentDevice] setBatteryMonitoringEnabled:YES];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(batteryLevelChanged:) 
                                                  name:UIDeviceBatteryLevelDidChangeNotification
                                                object:nil];
-	[[UIDevice currentDevice] setBatteryMonitoringEnabled:YES];
-    
-    batteryTimer = [NSTimer scheduledTimerWithTimeInterval:10.0f target:self selector:@selector(batteryLevelChanged:) userInfo:nil repeats:TRUE];
+
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -222,7 +221,6 @@ static RootViewManager* rootViewManagerInstance = nil;
                                                object:nil];
 	[[UIDevice currentDevice] setBatteryMonitoringEnabled:NO];
     
-    [batteryTimer invalidate];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -472,21 +470,25 @@ static RootViewManager* rootViewManagerInstance = nil;
 }
 
 + (CATransition*)getBackwardTransition {
+    BOOL RTL = [LinphoneManager langageDirectionIsRTL];
+    NSString* transition = RTL? kCATransitionFromRight : kCATransitionFromLeft;
     CATransition* trans = [CATransition animation];
     [trans setType:kCATransitionPush];
     [trans setDuration:0.35];
     [trans setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
-    [trans setSubtype:kCATransitionFromLeft];
+    [trans setSubtype:transition];
     
     return trans;
 }
 
 + (CATransition*)getForwardTransition {
+    BOOL RTL = [LinphoneManager langageDirectionIsRTL];
+    NSString* transition = RTL? kCATransitionFromLeft : kCATransitionFromRight;
     CATransition* trans = [CATransition animation];
     [trans setType:kCATransitionPush];
     [trans setDuration:0.35];
     [trans setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
-    [trans setSubtype:kCATransitionFromRight];
+    [trans setSubtype:transition];
     
     return trans;
 }
@@ -517,7 +519,7 @@ static RootViewManager* rootViewManagerInstance = nil;
             left = true;
         }
     } 
-    
+
     if(left) {
         return [PhoneMainView getBackwardTransition];
     } else {
@@ -685,8 +687,7 @@ static RootViewManager* rootViewManagerInstance = nil;
 - (void)playMessageSound {
     if ([UIApplication sharedApplication].applicationState != UIApplicationStateBackground) {
         if(![self removeInhibitedEvent:kLinphoneTextReceived]) {
-            AudioServicesPlaySystemSound([LinphoneManager instance].sounds.message);
-            AudioServicesPlaySystemSound([LinphoneManager instance].sounds.vibrate);
+            [[LinphoneManager instance] playMessageSound];
         }
     }
 }

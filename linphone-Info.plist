@@ -87,19 +87,7 @@
 			<string>org.linphone.phone</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>linphone-config-http</string>
-			</array>
-		</dict>
-		<dict>
-			<key>CFBundleTypeRole</key>
-			<string>Viewer</string>
-			<key>CFBundleURLIconFile</key>
-			<string>linphone_icon_72@2x</string>
-			<key>CFBundleURLName</key>
-			<string>org.linphone.phone</string>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>linphone-config-https</string>
+				<string>linphone-config</string>
 			</array>
 		</dict>
 	</array>
@@ -121,6 +109,8 @@
 	<string>linphone_splashscreen</string>
 	<key>UILaunchImageFile~iphone</key>
 	<string>linphone_splashscreen</string>
+	<key>UILaunchStoryboardName</key>
+	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
 	<string>MainStoryboard</string>
 	<key>UIRequiredDeviceCapabilities</key>

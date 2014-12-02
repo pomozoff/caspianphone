@@ -98,8 +98,6 @@ struct NetworkReachabilityContext {
 @end
 
 typedef struct _LinphoneManagerSounds {
-    SystemSoundID call;
-    SystemSoundID message;
     SystemSoundID vibrate;
 } LinphoneManagerSounds;
 
@@ -132,6 +130,7 @@ typedef struct _LinphoneManagerSounds {
 + (NSString *)getUserAgent;
 + (int)unreadMessageCount;
 
+- (void)playMessageSound;
 - (void)resetLinphoneCore;
 - (void)startLibLinphone;
 - (void)destroyLibLinphone;
@@ -151,6 +150,7 @@ typedef struct _LinphoneManagerSounds {
 - (NSString *)cleanPhoneNumber:(NSString *)username;
 - (NSString *)caspianDomainIp;
 
++ (BOOL)langageDirectionIsRTL;
 + (void)kickOffNetworkConnection;
 - (void)setupNetworkReachabilityCallback;
 
@@ -194,7 +194,7 @@ typedef struct _LinphoneManagerSounds {
 @property (readonly) NetworkType network;
 @property (readonly) const char*  frontCamId;
 @property (readonly) const char*  backCamId;
-@property (assign) NSString* SSID;
+@property (retain, nonatomic) NSString* SSID;
 @property (readonly) sqlite3* database;
 @property (nonatomic, retain) NSData *pushNotificationToken;
 @property (readonly) LinphoneManagerSounds sounds;

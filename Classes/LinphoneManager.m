@@ -39,6 +39,8 @@
 
 #import "LinphoneIOSVersion.h"
 
+#import <AVFoundation/AVAudioPlayer.h>
+
 #define LINPHONE_LOGS_MAX_ENTRY 5000
 
 static NSString *caspianSharingServerUri = @"https://www.linphone.org:444/upload.php";
@@ -105,6 +107,12 @@ NSString *const kLinphoneInternalChatDBFilename = @"linphone_chats.db";
 	[super dealloc];
 }
 @end
+
+
+@interface LinphoneManager ()
+@property (retain, nonatomic) AVAudioPlayer* messagePlayer;
+@end
+
 @implementation LinphoneManager
 
 @synthesize connectivity;
@@ -253,6 +261,15 @@ struct codec_name_pref_table codec_pref_table[] = {
 }
 #endif
 
++ (BOOL)langageDirectionIsRTL {
+    static NSLocaleLanguageDirection dir = NSLocaleLanguageDirectionLeftToRight;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        dir = [NSLocale characterDirectionForLanguage:[[NSLocale currentLocale] objectForKey:NSLocaleLanguageCode]];
+    });
+    return dir == NSLocaleLanguageDirectionRightToLeft;
+}
+
 #pragma mark - Lifecycle Functions
 
 - (id)init {
@@ -263,26 +280,13 @@ struct codec_name_pref_table codec_pref_table[] = {
 			[LinphoneLogger logc:LinphoneLoggerError format:"cannot register route change handler [%ld]",lStatus];
 		}
 
-		// Sounds
-		{
-			NSString *path = [[NSBundle mainBundle] pathForResource:@"ring" ofType:@"wav"];
-			sounds.call = 0;
-			OSStatus status = AudioServicesCreateSystemSoundID((CFURLRef)[NSURL fileURLWithPath:path], &sounds.call);
-			if(status != 0){
-				[LinphoneLogger log:LinphoneLoggerWarning format:@"Can't set \"call\" system sound"];
-			}
-		}
-		{
-			NSString *path = [[NSBundle mainBundle] pathForResource:@"msg" ofType:@"wav"];
-			sounds.message = 0;
-			OSStatus status = AudioServicesCreateSystemSoundID((CFURLRef)[NSURL fileURLWithPath:path], &sounds.message);
-			if(status != 0){
-				[LinphoneLogger log:LinphoneLoggerWarning format:@"Can't set \"message\" system sound"];
-			}
-		}
-		sounds.vibrate = kSystemSoundID_Vibrate;
 
-		logs = [[NSMutableArray alloc] init];
+        NSString *path = [[NSBundle mainBundle] pathForResource:@"msg" ofType:@"wav"];
+        self.messagePlayer = [[[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL URLWithString:path] error:nil] autorelease];
+
+        sounds.vibrate = kSystemSoundID_Vibrate;
+        
+        logs = [[NSMutableArray alloc] init];
 		database = NULL;
 		speakerEnabled = FALSE;
 		bluetoothEnabled = FALSE;
@@ -311,13 +315,6 @@ struct codec_name_pref_table codec_pref_table[] = {
 }
 
 - (void)dealloc {
-	if(sounds.call) {
-		AudioServicesDisposeSystemSoundID(sounds.call);
-	}
-	if(sounds.message) {
-		AudioServicesDisposeSystemSoundID(sounds.message);
-	}
-
 	[fastAddressBook release];
 	[logs release];
 
@@ -1004,15 +1001,58 @@ static void linphone_iphone_is_composing_received(LinphoneCore *lc, LinphoneChat
 }
 
 + (void)kickOffNetworkConnection {
-	/*start a new thread to avoid blocking the main ui in case of peer host failure*/
+    static BOOL in_progress = FALSE;
+    if( in_progress ){
+        Linphone_warn(@"Connection kickoff already in progress");
+        return;
+    }
+    in_progress = TRUE;
+	/* start a new thread to avoid blocking the main ui in case of peer host failure */
 	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        static int sleep_us = 10000;
+        static int timeout_s = 5;
+        BOOL timeout_reached = FALSE;
+        int loop = 0;
 		CFWriteStreamRef writeStream;
 		CFStreamCreatePairWithSocketToHost(NULL, (CFStringRef)@"192.168.0.200"/*"linphone.org"*/, 15000, nil, &writeStream);
-		CFWriteStreamOpen (writeStream);
+		BOOL res = CFWriteStreamOpen (writeStream);
 		const char* buff="hello";
-		CFWriteStreamWrite (writeStream,(const UInt8*)buff,strlen(buff));
+        time_t start = time(NULL);
+        time_t loop_time;
+
+        if( res == FALSE ){
+            Linphone_log(@"Could not open write stream, backing off");
+            CFRelease(writeStream);
+            in_progress = FALSE;
+            return;
+        }
+
+        // check stream status and handle timeout
+        CFStreamStatus status = CFWriteStreamGetStatus(writeStream);
+        while (status != kCFStreamStatusOpen && status != kCFStreamStatusError ) {
+            usleep(sleep_us);
+            status = CFWriteStreamGetStatus(writeStream);
+            loop_time = time(NULL);
+            if( loop_time - start >= timeout_s){
+                timeout_reached = TRUE;
+                break;
+            }
+            loop++;
+        }
+
+
+        if (status == kCFStreamStatusOpen ) {
+            CFWriteStreamWrite (writeStream,(const UInt8*)buff,strlen(buff));
+        } else if( !timeout_reached ){
+            CFErrorRef error = CFWriteStreamCopyError(writeStream);
+            Linphone_dbg(@"CFStreamError: %@", error);
+            CFRelease(error);
+        } else if( timeout_reached ){
+            Linphone_log(@"CFStream timeout reached");
+        }
 		CFWriteStreamClose (writeStream);
 		CFRelease(writeStream);
+        in_progress = FALSE;
 	});
 }
 
@@ -1061,7 +1101,7 @@ static void networkReachabilityNotification(CFNotificationCenterRef center, void
 	NSString *newSSID = [LinphoneManager getCurrentWifiSSID];
 	if ([newSSID compare:mgr.SSID] == NSOrderedSame) return;
 
-	mgr.SSID = [newSSID retain];
+	mgr.SSID = newSSID;
 
 	if (SCNetworkReachabilityGetFlags([mgr getProxyReachability], &flags)) {
 		networkReachabilityCallBack([mgr getProxyReachability],flags,nil);
@@ -1680,6 +1720,14 @@ static int comp_call_id(const LinphoneCall* call , const char *callid) {
 	linphone_core_stop_dtmf_stream(theLinphoneCore);
 
 	return YES;
+}
+
+- (void)playMessageSound {
+    BOOL success = [self.messagePlayer play];
+    if( !success ){
+        Linphone_err(@"Could not play the message sound");
+    }
+    AudioServicesPlaySystemSound([LinphoneManager instance].sounds.vibrate);
 }
 
 static int comp_call_state_paused  (const LinphoneCall* call, const void* param) {

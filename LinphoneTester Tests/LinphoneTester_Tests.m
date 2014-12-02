@@ -12,15 +12,11 @@
 #import "NSObject+DTRuntime.h"
 
 @interface LinphoneTester_Tests : XCTestCase
-
+@property (retain, nonatomic) NSString* bundlePath;
+@property (retain, nonatomic) NSString* documentPath;
 @end
 
-@implementation LinphoneTester_Tests {
-	NSString* bundlePath;
-	NSString* documentPath;
-}
-
-
+@implementation LinphoneTester_Tests
 static void linphone_log_function(OrtpLogLevel lev, const char *fmt, va_list args) {
     NSString* log = [[NSString alloc] initWithFormat:[NSString stringWithUTF8String:fmt] arguments:args];
     NSLog(@"%@",log);
@@ -35,30 +31,36 @@ void LSLog(NSString* fmt, ...){
 }
 
 
-
-
-- (id)init {
-	self = [super init];
-	if( self ){
-		bundlePath = [[NSBundle mainBundle] bundlePath];
-		NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-		documentPath = [paths objectAtIndex:0];
-		LSLog(@"Bundle path: %@", bundlePath);
-		LSLog(@"Document path: %@", documentPath);
-
-		liblinphone_tester_set_fileprefix([bundlePath UTF8String]);
-		liblinphone_tester_set_writable_dir_prefix( ms_strdup([documentPath UTF8String]) );
-	}
-	return self;
-}
-
 + (NSArray*)skippedSuites {
 	NSArray* skipped_suites = @[@"Flexisip"];
 	return skipped_suites;
 }
 
+
++ (NSString*)safeifyTestString:(NSString*)testString{
+    NSCharacterSet *charactersToRemove = [[NSCharacterSet alphanumericCharacterSet] invertedSet];
+    return [[testString componentsSeparatedByCharactersInSet:charactersToRemove] componentsJoinedByString:@"_"];
+}
+
+
+
 + (void)initialize {
+
+    static char * bundle = NULL;
+    static char * documents = NULL;
     liblinphone_tester_init();
+
+    NSString* bundlePath = [[NSBundle mainBundle] bundlePath];
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString* documentPath = [paths objectAtIndex:0];
+    bundle = ms_strdup([bundlePath UTF8String]);
+    documents = ms_strdup([documentPath UTF8String]);
+
+    LSLog(@"Bundle path: %@", bundlePath);
+    LSLog(@"Document path: %@", documentPath);
+
+    liblinphone_tester_set_fileprefix(bundle);
+    liblinphone_tester_set_writable_dir_prefix(documents);
 
     int count = liblinphone_tester_nb_test_suites();
 
@@ -72,10 +74,9 @@ void LSLog(NSString* fmt, ...){
 			NSString* sTest  = [NSString stringWithUTF8String:test];
 
 			if( [[LinphoneTester_Tests skippedSuites] containsObject:sSuite] ) continue;
-
-			// prepend test_ so that it gets found by introspection
-            NSString* safesTest    = [sTest stringByReplacingOccurrencesOfString:@" " withString:@"_"];
-            NSString* safesSuite   = [sSuite stringByReplacingOccurrencesOfString:@" " withString:@"_"];
+            // prepend test_ so that it gets found by introspection
+            NSString* safesTest    = [self safeifyTestString:sTest];
+            NSString* safesSuite   = [self safeifyTestString:sSuite];
             NSString *selectorName = [NSString stringWithFormat:@"test_%@__%@", safesSuite, safesTest];
 			[LinphoneTester_Tests addInstanceMethodWithSelectorName:selectorName block:^(LinphoneTester_Tests* myself) {
 				[myself testForSuite:sSuite andTest:sTest];
@@ -88,12 +89,10 @@ void LSLog(NSString* fmt, ...){
 - (void)setUp
 {
     [super setUp];
-    // Put setup code here. This method is called before the invocation of each test method in the class.
 }
 
 - (void)tearDown
 {
-    // Put teardown code here. This method is called after the invocation of each test method in the class.
     [super tearDown];
 }
 

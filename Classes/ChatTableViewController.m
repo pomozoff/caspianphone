@@ -52,10 +52,8 @@
 #pragma mark - 
 
 static int sorted_history_comparison(LinphoneChatRoom *to_insert, LinphoneChatRoom *elem){
-    MSList*                   new_history  = linphone_chat_room_get_history(to_insert, 1);
-    LinphoneChatMessage* last_new_message  = new_history? new_history->data : NULL;
-    MSList*                  elem_history  = linphone_chat_room_get_history(elem, 1);
-    LinphoneChatMessage* last_elem_message = elem_history?elem_history->data:NULL;
+    LinphoneChatMessage* last_new_message  = linphone_chat_room_get_user_data(to_insert);
+    LinphoneChatMessage* last_elem_message = linphone_chat_room_get_user_data(elem);
 
     if( last_new_message && last_elem_message ){
         time_t new = linphone_chat_message_get_time(last_new_message);
@@ -73,11 +71,18 @@ static int sorted_history_comparison(LinphoneChatRoom *to_insert, LinphoneChatRo
 
     LinphoneChatRoom *chatRoom = NULL;
     while (iter) {
-        if (![FastAddressBook isChatRoomSupport:iter->data]) {
-            sorted = ms_list_insert_sorted(sorted, iter->data, (MSCompareFunc)sorted_history_comparison);
-        } else {
-            chatRoom = iter->data;
+        // store last message in user data
+        MSList*               history = linphone_chat_room_get_history(iter->data, 1);
+        LinphoneChatMessage* last_msg = history? history->data : NULL;
+        if( last_msg ){
+            linphone_chat_room_set_user_data(iter->data, linphone_chat_message_ref(last_msg));
         }
+        ms_list_free_with_data(history, (void (*)(void *))linphone_chat_message_unref);
+
+        sorted = ms_list_insert_sorted(sorted,
+                                       linphone_chat_room_ref(iter->data),
+                                       (MSCompareFunc)sorted_history_comparison);
+
         iter = iter->next;
     }
     if (chatRoom == NULL) {
@@ -90,7 +95,19 @@ static int sorted_history_comparison(LinphoneChatRoom *to_insert, LinphoneChatRo
     return sorted;
 }
 
+static void chatTable_free_chatrooms(void *data){
+    LinphoneChatMessage* lastMsg = linphone_chat_room_get_user_data(data);
+    if( lastMsg ){
+        linphone_chat_message_unref(linphone_chat_room_get_user_data(data));
+        linphone_chat_room_set_user_data(data, NULL);
+    }
+    linphone_chat_room_unref(data);
+}
+
 - (void)loadData {
+    if( data != NULL ){
+        ms_list_free_with_data(data, chatTable_free_chatrooms);
+    }
     data = [self sortChatRooms];
     [[self tableView] reloadData];
 }
@@ -154,13 +171,13 @@ static int sorted_history_comparison(LinphoneChatRoom *to_insert, LinphoneChatRo
 
         LinphoneChatRoom *chatRoom = (LinphoneChatRoom *)ms_list_nth_data(data, (int)[indexPath row]);
         linphone_chat_room_delete_history(chatRoom);
-        linphone_chat_room_destroy(chatRoom);
-        data = linphone_core_get_chat_rooms([LinphoneManager getLc]);
+        linphone_chat_room_unref(chatRoom);
+
+        // will force a call to [self loadData]
+        [[NSNotificationCenter defaultCenter] postNotificationName:kLinphoneTextReceived object:self];
 
         [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
         [tableView endUpdates];
-
-        [[NSNotificationCenter defaultCenter] postNotificationName:kLinphoneTextReceived object:self];
     }
     */
 }
