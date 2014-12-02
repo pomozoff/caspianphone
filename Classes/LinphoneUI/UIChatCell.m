@@ -75,7 +75,7 @@
 #pragma mark - 
 
 - (NSString *)accessibilityValue {
-    return [NSString stringWithFormat:@"%@ - %@ (%d)", addressLabel.text, chatContentLabel.text, [unreadMessageLabel.text integerValue]];
+    return [NSString stringWithFormat:@"%@ - %@ (%ld)", addressLabel.text, chatContentLabel.text, (long)[unreadMessageLabel.text integerValue]];
 }
 
 - (LinphoneChatMessage*)getLastIncomingMessage {

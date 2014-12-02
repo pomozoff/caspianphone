@@ -702,16 +702,19 @@ static void linphone_iphone_display_status(struct _LinphoneCore * lc, const char
 				// Create a new local notification
 				data->notification = [[UILocalNotification alloc] init];
 				if (data->notification) {
-                    NSString *ringtoneFileName = @"shortring.caf";
-                    NSTimeInterval trackDuration = [self durationOfMediaFileNamed:ringtoneFileName];
-                    data->timer = [NSTimer scheduledTimerWithTimeInterval:trackDuration target:self selector:@selector(localNotifContinue:) userInfo:data->notification repeats:TRUE];
-					data->notification.repeatInterval = 0;
+                    // iOS8 doesn't need the timer trick for the local notification.
                     if( [[UIDevice currentDevice].systemVersion floatValue] >= 8){
+                        data->notification.soundName = @"ring.caf";
                         data->notification.category = @"incoming_call";
+                    } else {
+                        data->notification.soundName = @"shortring.caf";
+                        data->timer = [NSTimer scheduledTimerWithTimeInterval:4.0 target:self selector:@selector(localNotifContinue:) userInfo:data->notification repeats:TRUE];
                     }
+
+					data->notification.repeatInterval = 0;
+
 					data->notification.alertBody =[NSString  stringWithFormat:NSLocalizedString(@"IC_MSG",nil), address];
 					data->notification.alertAction = NSLocalizedString(@"Answer", nil);
-					data->notification.soundName = ringtoneFileName;
 					data->notification.userInfo = @{@"callId": callId, @"timer":[NSNumber numberWithInt:1] };
 					data->notification.applicationIconBadgeNumber = 1;
 
@@ -724,7 +727,9 @@ static void linphone_iphone_display_status(struct _LinphoneCore * lc, const char
 							incallBgTask=0;
 						}];
 
-						[[NSRunLoop currentRunLoop] addTimer:data->timer forMode:NSRunLoopCommonModes];
+                        if( data->timer ){
+                            [[NSRunLoop currentRunLoop] addTimer:data->timer forMode:NSRunLoopCommonModes];
+                        }
 					}
 
 				}
@@ -1094,7 +1099,7 @@ void networkReachabilityCallBack(SCNetworkReachabilityRef target, SCNetworkReach
 			} else if (proxy){
 				NSInteger defaultExpire = [[LinphoneManager instance] lpConfigIntForKey:@"default_expires"];
 				if (defaultExpire>=0)
-					linphone_proxy_config_expires(proxy, defaultExpire);
+					linphone_proxy_config_expires(proxy, (int)defaultExpire);
 				//else keep default value from linphonecore
 			}
 
