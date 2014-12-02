@@ -1,0 +1,138 @@
+
+/* Class = "IBUIButton"; accessibilityLabel = "الرجوع"; ObjectID = "6"; */
+"6.accessibilityLabel" = "الرجوع";
+
+/* Class = "IBUIButton"; accessibilityLabel = "وضع السماعة"; ObjectID = "7"; */
+"7.accessibilityLabel" = "وضع السماعة";
+
+/* Class = "IBUIButton"; accessibilityLabel = "توقيف مؤقت"; ObjectID = "8"; */
+"8.accessibilityLabel" = "توقيف مؤقت";
+
+/* Class = "IBUIButton"; accessibilityLabel = "مكبر الصوت"; ObjectID = "9"; */
+"9.accessibilityLabel" = "مكبر الصوت";
+
+/* Class = "IBUIButton"; normalTitle = "مكبر الصوت"; ObjectID = "9"; */
+"9.normalTitle" = "مكبر الصوت";
+
+/* Class = "IBUIButton"; accessibilityLabel = "الخيارات"; ObjectID = "10"; */
+"10.accessibilityLabel" = "الخيارات";
+
+/* Class = "IBUIButton"; normalTitle = "الخيارات"; ObjectID = "10"; */
+"10.normalTitle" = "الخيارات";
+
+/* Class = "IBUIButton"; accessibilityLabel = "الميكروفون"; ObjectID = "11"; */
+"11.accessibilityLabel" = "الميكروفون";
+
+/* Class = "IBUIButton"; normalTitle = "الميكروفون"; ObjectID = "11"; */
+"11.normalTitle" = "الميكروفون";
+
+/* Class = "IBUIButton"; accessibilityLabel = "الفيديو"; ObjectID = "12"; */
+"12.accessibilityLabel" = "الفيديو";
+
+/* Class = "IBUIButton"; normalTitle = "الفيديو"; ObjectID = "12"; */
+"12.normalTitle" = "الفيديو";
+
+/* Class = "IBUIButton"; accessibilityLabel = "بدء الاجتماع"; ObjectID = "21"; */
+"21.accessibilityLabel" = "بدء الاجتماع";
+
+/* Class = "IBUIButton"; accessibilityLabel = "*"; ObjectID = "62"; */
+"62.accessibilityLabel" = "*";
+
+/* Class = "IBUIButton"; accessibilityLabel = "6"; ObjectID = "63"; */
+"63.accessibilityLabel" = "6";
+
+/* Class = "IBUIButton"; accessibilityLabel = "0"; ObjectID = "64"; */
+"64.accessibilityLabel" = "0";
+
+/* Class = "IBUIButton"; accessibilityLabel = "#"; ObjectID = "65"; */
+"65.accessibilityLabel" = "#";
+
+/* Class = "IBUIButton"; accessibilityLabel = "9"; ObjectID = "66"; */
+"66.accessibilityLabel" = "9";
+
+/* Class = "IBUIButton"; accessibilityLabel = "8"; ObjectID = "67"; */
+"67.accessibilityLabel" = "8";
+
+/* Class = "IBUIButton"; accessibilityLabel = "7"; ObjectID = "68"; */
+"68.accessibilityLabel" = "7";
+
+/* Class = "IBUIButton"; accessibilityLabel = "4"; ObjectID = "69"; */
+"69.accessibilityLabel" = "4";
+
+/* Class = "IBUIButton"; accessibilityLabel = "5"; ObjectID = "70"; */
+"70.accessibilityLabel" = "5";
+
+/* Class = "IBUIButton"; accessibilityLabel = "3"; ObjectID = "71"; */
+"71.accessibilityLabel" = "3";
+
+/* Class = "IBUIButton"; accessibilityLabel = "2"; ObjectID = "72"; */
+"72.accessibilityLabel" = "2";
+
+/* Class = "IBUIButton"; accessibilityLabel = "1"; ObjectID = "73"; */
+"73.accessibilityLabel" = "1";
+
+/* Class = "IBUIButton"; accessibilityLabel = "إضافة مكالمة"; ObjectID = "88"; */
+"88.accessibilityLabel" = "إضافة مكالمة";
+
+/* Class = "IBUIButton"; normalTitle = "إضافة مكالمة"; ObjectID = "88"; */
+"88.normalTitle" = "إضافة مكالمة";
+
+/* Class = "IBUIButton"; accessibilityLabel = "تحويل المكالمة"; ObjectID = "90"; */
+"90.accessibilityLabel" = "تحويل المكالمة";
+
+/* Class = "IBUIButton"; normalTitle = "تحويل"; ObjectID = "90"; */
+"90.normalTitle" = "تحويل";
+
+/* Class = "IBUIButton"; normalTitle = "الخيارات"; ObjectID = "110"; */
+"110.normalTitle" = "الخيارات";
+
+/* Class = "IBUIButton"; normalTitle = "مكبر الصوت"; ObjectID = "111"; */
+"111.normalTitle" = "مكبر الصوت";
+
+/* Class = "IBUIButton"; normalTitle = "الميكروفون"; ObjectID = "112"; */
+"112.normalTitle" = "الميكروفون";
+
+/* Class = "IBUIButton"; normalTitle = "الفيديو"; ObjectID = "113"; */
+"113.normalTitle" = "الفيديو";
+
+/* Class = "IBUIButton"; normalTitle = "إضافة مكالمة"; ObjectID = "127"; */
+"127.normalTitle" = "إضافة مكالمة";
+
+/* Class = "IBUIButton"; normalTitle = "تحويل"; ObjectID = "128"; */
+"128.normalTitle" = "تحويل";
+
+/* Class = "IBUIButton"; accessibilityLabel = "الطريق"; ObjectID = "164"; */
+"164.accessibilityLabel" = "الطريق";
+
+/* Class = "IBUIButton"; normalTitle = "الطريق"; ObjectID = "164"; */
+"164.normalTitle" = "الطريق";
+
+/* Class = "IBUIButton"; accessibilityLabel = "مكبر الصوت"; ObjectID = "168"; */
+"168.accessibilityLabel" = "مكبر الصوت";
+
+/* Class = "IBUIButton"; normalTitle = "مكبر الصوت"; ObjectID = "168"; */
+"168.normalTitle" = "مكبر الصوت";
+
+/* Class = "IBUIButton"; accessibilityLabel = "السماعة"; ObjectID = "169"; */
+"169.accessibilityLabel" = "السماعة";
+
+/* Class = "IBUIButton"; normalTitle = "السماعة"; ObjectID = "169"; */
+"169.normalTitle" = "السماعة";
+
+/* Class = "IBUIButton"; accessibilityLabel = "بلوتوث"; ObjectID = "174"; */
+"174.accessibilityLabel" = "بلوتوث";
+
+/* Class = "IBUIButton"; normalTitle = "بلوتوث"; ObjectID = "174"; */
+"174.normalTitle" = "بلوتوث";
+
+/* Class = "IBUIButton"; normalTitle = "الطريق"; ObjectID = "183"; */
+"183.normalTitle" = "الطريق";
+
+/* Class = "IBUIButton"; normalTitle = "مكبر الصوت"; ObjectID = "187"; */
+"187.normalTitle" = "مكبر الصوت";
+
+/* Class = "IBUIButton"; normalTitle = "السماعة"; ObjectID = "188"; */
+"188.normalTitle" = "السماعة";
+
+/* Class = "IBUIButton"; normalTitle = "بلوتوث"; ObjectID = "193"; */
+"193.normalTitle" = "بلوتوث";

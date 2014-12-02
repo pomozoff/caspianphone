@@ -1,0 +1,21 @@
+
+/* Class = "IBUIButton"; accessibilityLabel = "تحرير"; ObjectID = "9"; */
+"9.accessibilityLabel" = "تحرير";
+
+/* Class = "IBUIButton"; normalTitle = "تحرير"; ObjectID = "9"; */
+"9.normalTitle" = "Éditer";
+
+/* Class = "IBUIButton"; selectedTitle = "موافق"; ObjectID = "9"; */
+"9.selectedTitle" = "موافق";
+
+/* Class = "IBUIButton"; accessibilityLabel = "محادثة جديدة"; ObjectID = "10"; */
+"10.accessibilityLabel" = "محادثة جديدة";
+
+/* Class = "IBUIButton"; normalTitle = "محادثة جديدة"; ObjectID = "10"; */
+"10.normalTitle" = "محادثة جديدة";
+
+/* Class = "IBUITextField"; accessibilityLabel = "ادخل عنوانا"; ObjectID = "25"; */
+"25.accessibilityLabel" = "ادخل عنوانا";
+
+/* Class = "IBUITextField"; placeholder = "لــ :"; ObjectID = "25"; */
+"25.placeholder" = "لــ :";

@@ -1,0 +1,21 @@
+
+/* Class = "IBUIButton"; accessibilityLabel = "رفض"; ObjectID = "6"; */
+"6.accessibilityLabel" = "رفض";
+
+/* Class = "IBUIButton"; accessibilityLabel = "السماح"; ObjectID = "7"; */
+"7.accessibilityLabel" = "السماح";
+
+/* Class = "IBUILabel"; accessibilityLabel = "إسم جهة الاتصال"; ObjectID = "9"; */
+"9.accessibilityLabel" = "إسم جهة الاتصال";
+
+/* Class = "IBUILabel"; text = "0102030405"; ObjectID = "9"; */
+"9.text" = "0102030405";
+
+/* Class = "IBUIImageView"; accessibilityLabel = "صورة جهة الاتصال"; ObjectID = "19"; */
+"19.accessibilityLabel" = "صورة جهة الاتصال";
+
+/* Class = "IBUILabel"; accessibilityLabel = "المكالمة الواردة"; ObjectID = "31"; */
+"31.accessibilityLabel" = "المكالمة الواردة";
+
+/* Class = "IBUILabel"; text = "المكالمة الواردة"; ObjectID = "31"; */
+"31.text" = "المكالمة الواردة";

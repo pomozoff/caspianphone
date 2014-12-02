@@ -1,0 +1,27 @@
+
+/* Class = "IBUIButton"; accessibilityLabel = "عرض جميع جهات الاتصال"; ObjectID = "4"; */
+"4.accessibilityLabel" = "عرض جميع جهات الاتصال";
+
+/* Class = "IBUIButton"; normalTitle = "الكل"; ObjectID = "4"; */
+"4.normalTitle" = "الكل";
+
+/* Class = "IBUIButton"; accessibilityLabel = "عرض جهات اتصال لاينفون فقط"; ObjectID = "5"; */
+"5.accessibilityLabel" = "عرض جهات اتصال لاينفون فقط";
+
+/* Class = "IBUIButton"; normalTitle = "الفائتة"; ObjectID = "5"; */
+"5.normalTitle" = "الفائتة";
+
+/* Class = "IBUIButton"; accessibilityLabel = "تحرير"; ObjectID = "6"; */
+"6.accessibilityLabel" = "تحرير";
+
+/* Class = "IBUIButton"; normalTitle = "تحرير"; ObjectID = "6"; */
+"6.normalTitle" = "تحرير";
+
+/* Class = "IBUIButton"; selectedTitle = "موافق"; ObjectID = "6"; */
+"6.selectedTitle" = "موافق";
+
+/* Class = "IBUIButton"; accessibilityLabel = "حذف الكل"; ObjectID = "35"; */
+"35.accessibilityLabel" = "حذف الكل";
+
+/* Class = "IBUIButton"; normalTitle = "حذف الكل"; ObjectID = "35"; */
+"35.normalTitle" = "حذف الكل";

@@ -1,0 +1,18 @@
+
+/* Class = "IBUITextField"; accessibilityLabel = "إسم المستخدم"; ObjectID = "6"; */
+"6.accessibilityLabel" = "إسم المستخدم";
+
+/* Class = "IBUITextField"; placeholder = "إسم المستخدم"; ObjectID = "6"; */
+"6.placeholder" = "إسم المستخدم";
+
+/* Class = "IBUITextField"; accessibilityLabel = "كلمة السر"; ObjectID = "8"; */
+"8.accessibilityLabel" = "كلمة السر";
+
+/* Class = "IBUITextField"; placeholder = "كلمة السر"; ObjectID = "8"; */
+"8.placeholder" = "كلمة السر";
+
+/* Class = "IBUIButton"; accessibilityLabel = "التسجيل"; ObjectID = "64"; */
+"64.accessibilityLabel" = "التسجيل";
+
+/* Class = "IBUIButton"; normalTitle = "التسجيل"; ObjectID = "64"; */
+"64.normalTitle" = "التسجيل";

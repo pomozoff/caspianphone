@@ -1,0 +1,39 @@
+
+/* Class = "IBUIButton"; accessibilityLabel = "الرجوع"; ObjectID = "9"; */
+"9.accessibilityLabel" = "الرجوع";
+
+/* Class = "IBUIButton"; normalTitle = "الرجوع"; ObjectID = "9"; */
+"9.normalTitle" = "الرجوع";
+
+/* Class = "IBUIButton"; accessibilityLabel = "تحرير"; ObjectID = "10"; */
+"10.accessibilityLabel" = "تحرير";
+
+/* Class = "IBUIButton"; normalTitle = "تحرير"; ObjectID = "10"; */
+"10.normalTitle" = "تحرير";
+
+/* Class = "IBUIButton"; selectedTitle = "موافق"; ObjectID = "10"; */
+"10.selectedTitle" = "موافق";
+
+/* Class = "IBUIButton"; accessibilityLabel = "إرسال"; ObjectID = "15"; */
+"15.accessibilityLabel" = "إرسال";
+
+/* Class = "IBUIButton"; normalTitle = "إرسال"; ObjectID = "15"; */
+"15.normalTitle" = "إرسال";
+
+/* Class = "IBUILabel"; accessibilityLabel = "إسم جهة الاتصال"; ObjectID = "40"; */
+"40.accessibilityLabel" = "إسم جهة الاتصال";
+
+/* Class = "IBUILabel"; text = "جهة الاتصال 1"; ObjectID = "40"; */
+"40.text" = "جهة الاتصال 1";
+
+/* Class = "IBUIImageView"; accessibilityLabel = "صورة جهة الاتصال"; ObjectID = "41"; */
+"41.accessibilityLabel" = "صورة جهة الاتصال";
+
+/* Class = "IBUIButton"; accessibilityLabel = "إرسال الصورة"; ObjectID = "73"; */
+"73.accessibilityLabel" = "إرسال الصورة";
+
+/* Class = "IBUIProgressView"; accessibilityLabel = "يجري التنزيل أو الرفع"; ObjectID = "74"; */
+"74.accessibilityLabel" = "يجري التنزيل أو الرفع";
+
+/* Class = "IBUIButton"; accessibilityLabel = "إلغاء"; ObjectID = "75"; */
+"75.accessibilityLabel" = "إلغاء";

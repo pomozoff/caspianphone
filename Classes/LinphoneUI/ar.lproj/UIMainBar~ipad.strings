@@ -1,0 +1,57 @@
+
+/* Class = "IBUIButton"; accessibilityLabel = "لوحة المفاتيح"; ObjectID = "5"; */
+"5.accessibilityLabel" = "لوحة المفاتيح";
+
+/* Class = "IBUIButton"; accessibilityLabel = "محادثة"; ObjectID = "7"; */
+"7.accessibilityLabel" = "محادثة";
+
+/* Class = "IBUIButton"; normalTitle = "محادثة"; ObjectID = "7"; */
+"7.normalTitle" = "محادثة";
+
+/* Class = "IBUIButton"; accessibilityLabel = "التاريخ"; ObjectID = "8"; */
+"8.accessibilityLabel" = "التاريخ";
+
+/* Class = "IBUIButton"; normalTitle = "التاريخ"; ObjectID = "8"; */
+"8.normalTitle" = "التاريخ";
+
+/* Class = "IBUIButton"; accessibilityLabel = "جهات الاتصال"; ObjectID = "9"; */
+"9.accessibilityLabel" = "جهات الاتصال";
+
+/* Class = "IBUIButton"; normalTitle = "جهات الاتصال"; ObjectID = "9"; */
+"9.normalTitle" = "جهات الاتصال";
+
+/* Class = "IBUIButton"; accessibilityLabel = "الخيارات"; ObjectID = "10"; */
+"10.accessibilityLabel" = "الخيارات";
+
+/* Class = "IBUIButton"; normalTitle = "الخيارات"; ObjectID = "10"; */
+"10.normalTitle" = "الخيارات";
+
+/* Class = "IBUILabel"; accessibilityLabel = "اتصال (أو اتصالات) فائتة"; ObjectID = "11"; */
+"11.accessibilityLabel" = "اتصال (أو اتصالات) فائتة";
+
+/* Class = "IBUILabel"; text = "99"; ObjectID = "11"; */
+"11.text" = "99";
+
+/* Class = "IBUILabel"; accessibilityLabel = "رسالة (أو رسائل) فائتة"; ObjectID = "14"; */
+"14.accessibilityLabel" = "رسالة (أو رسائل) فائتة";
+
+/* Class = "IBUILabel"; text = "99"; ObjectID = "14"; */
+"14.text" = "99";
+
+/* Class = "IBUIButton"; normalTitle = "الخيارات"; ObjectID = "30"; */
+"30.normalTitle" = "الخيارات";
+
+/* Class = "IBUIButton"; normalTitle = "جهات الاتصال"; ObjectID = "31"; */
+"31.normalTitle" = "جهات الاتصال";
+
+/* Class = "IBUIButton"; normalTitle = "التاريخ"; ObjectID = "32"; */
+"32.normalTitle" = "التاريخ";
+
+/* Class = "IBUIButton"; normalTitle = "محادثة"; ObjectID = "33"; */
+"33.normalTitle" = "محادثة";
+
+/* Class = "IBUILabel"; text = "99"; ObjectID = "38"; */
+"38.text" = "99";
+
+/* Class = "IBUILabel"; text = "99"; ObjectID = "39"; */
+"39.text" = "99";

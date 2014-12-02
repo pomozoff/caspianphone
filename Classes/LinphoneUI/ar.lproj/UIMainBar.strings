@@ -1,0 +1,39 @@
+
+/* Class = "IBUIButton"; accessibilityLabel = "محادثة"; ObjectID = "5"; */
+"5.accessibilityLabel" = "محادثة";
+
+/* Class = "IBUIButton"; normalTitle = "محادثة"; ObjectID = "5"; */
+"5.normalTitle" = "محادثة";
+
+/* Class = "IBUIButton"; accessibilityLabel = "التاريخ"; ObjectID = "6"; */
+"6.accessibilityLabel" = "التاريخ";
+
+/* Class = "IBUIButton"; normalTitle = "التاريخ"; ObjectID = "6"; */
+"6.normalTitle" = "التاريخ";
+
+/* Class = "IBUIButton"; accessibilityLabel = "لوحة المفاتيح"; ObjectID = "7"; */
+"7.accessibilityLabel" = "لوحة المفاتيح";
+
+/* Class = "IBUIButton"; accessibilityLabel = "جهات الاتصال"; ObjectID = "8"; */
+"8.accessibilityLabel" = "جهات الاتصال";
+
+/* Class = "IBUIButton"; normalTitle = "جهات الاتصال"; ObjectID = "8"; */
+"8.normalTitle" = "جهات الاتصال";
+
+/* Class = "IBUIButton"; accessibilityLabel = "الخيارات"; ObjectID = "9"; */
+"9.accessibilityLabel" = "الخيارات";
+
+/* Class = "IBUIButton"; normalTitle = "الخيارات"; ObjectID = "9"; */
+"9.normalTitle" = "الخيارات";
+
+/* Class = "IBUILabel"; accessibilityLabel = "اتصال (أو اتصالات) فائتة"; ObjectID = "34"; */
+"34.accessibilityLabel" = "اتصال (أو اتصالات) فائتة";
+
+/* Class = "IBUILabel"; text = "99"; ObjectID = "34"; */
+"34.text" = "99";
+
+/* Class = "IBUILabel"; accessibilityLabel = "رسالة (أو رسائل) فائتة"; ObjectID = "38"; */
+"38.accessibilityLabel" = "رسالة (أو رسائل) فائتة";
+
+/* Class = "IBUILabel"; text = "99"; ObjectID = "38"; */
+"38.text" = "99";

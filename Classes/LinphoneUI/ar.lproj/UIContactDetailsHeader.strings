@@ -1,0 +1,9 @@
+
+/* Class = "IBUILabel"; accessibilityLabel = "إسم جهة الاتصال"; ObjectID = "8"; */
+"8.accessibilityLabel" = "إسم جهة الاتصال";
+
+/* Class = "IBUILabel"; text = "جهة الاتصال 1"; ObjectID = "8"; */
+"8.text" = "جهة الاتصال 1";
+
+/* Class = "IBUIButton"; accessibilityLabel = "صورة جهة الاتصال"; ObjectID = "22"; */
+"22.accessibilityLabel" = "صورة جهة الاتصال";
