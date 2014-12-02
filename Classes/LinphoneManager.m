@@ -1968,10 +1968,23 @@ static void audioRouteChangeListenerCallback (
 	}
 	LinphoneCall* call=NULL;
 
+    BOOL addressIsASCII = [address canBeConvertedToEncoding:[NSString defaultCStringEncoding]];
+
 	if ([address length] == 0) return; //just return
-    
+
     NSString *readyAddress = [FastAddressBook isSipURI:address] ? address : [FastAddressBook normalizeSipURI:address];
-	if ([readyAddress hasPrefix:@"sip:"] || [readyAddress hasPrefix:@"sips:"]) {
+
+    if( !addressIsASCII ){
+        UIAlertView* error = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Invalid SIP address",nil)
+                                                        message:NSLocalizedString(@"The address should only contain ASCII data",nil)
+                                                       delegate:nil
+                                              cancelButtonTitle:NSLocalizedString(@"Continue",nil)
+                                              otherButtonTitles:nil];
+        [error show];
+        [error release];
+
+    } else if ([readyAddress hasPrefix:@"sip:"] || [readyAddress hasPrefix:@"sips:"]) {
+
 		LinphoneAddress* linphoneAddress = linphone_address_new([readyAddress cStringUsingEncoding:[NSString defaultCStringEncoding]]);
 		if(displayName!=nil) {
 			linphone_address_set_display_name(linphoneAddress,[displayName cStringUsingEncoding:[NSString defaultCStringEncoding]]);
@@ -1984,7 +1997,9 @@ static void audioRouteChangeListenerCallback (
 			call=linphone_core_invite_address_with_params(theLinphoneCore, linphoneAddress, lcallParams);
 		}
 		linphone_address_destroy(linphoneAddress);
+
 	} else if (proxyCfg==nil){
+
 		UIAlertView* error = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Invalid SIP address",nil)
 														message:NSLocalizedString(@"Either configure a SIP proxy server from settings prior to place a call or use a valid SIP address (I.E sip:john@example.net)",nil)
 													   delegate:nil
@@ -1992,7 +2007,8 @@ static void audioRouteChangeListenerCallback (
 											  otherButtonTitles:nil];
 		[error show];
 		[error release];
-	} else {
+
+    } else {
 		char normalizedUserName[256];
 		LinphoneAddress* linphoneAddress = linphone_address_new(linphone_core_get_identity(theLinphoneCore));
 		linphone_proxy_config_normalize_number(proxyCfg,[readyAddress cStringUsingEncoding:[NSString defaultCStringEncoding]],normalizedUserName,sizeof(normalizedUserName));
