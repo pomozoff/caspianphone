@@ -300,8 +300,6 @@ struct codec_name_pref_table codec_pref_table[] = {
 		configDb = lp_config_new_with_factory([confiFileName cStringUsingEncoding:[NSString defaultCStringEncoding]],
                                               [factoryConfig cStringUsingEncoding:[NSString defaultCStringEncoding]]);
 
-		[self migrateFromUserPrefs];
-
 		//set default values for first boot
 		if (lp_config_get_string(configDb,LINPHONERC_APPLICATION_KEY,"debugenable_preference",NULL)==NULL){
 #ifdef DEBUG
@@ -310,6 +308,8 @@ struct codec_name_pref_table codec_pref_table[] = {
 			[self lpConfigSetBool:FALSE forKey:@"debugenable_preference"];
 #endif
 		}
+
+		[self migrateFromUserPrefs];
 	}
 	return self;
 }
@@ -1589,10 +1589,14 @@ static BOOL libStarted = FALSE;
     libmsbcg729_init(); // load g729 plugin
 #endif
 
-	/*must be done before creating linphone core to get its traces too*/
+    /*to make sure we don't loose debug trace*/
+    if ([self lpConfigBoolForKey:@"debugenable_preference"]) {
+        linphone_core_enable_logs_with_cb((OrtpLogFunc)linphone_iphone_log_handler);
+        ortp_set_log_level_mask(ORTP_DEBUG|ORTP_MESSAGE|ORTP_WARNING|ORTP_ERROR|ORTP_FATAL);
+		/*must be done before creating linphone core to get its traces too*/
+    }
 	linphone_core_set_log_collection_path([[LinphoneManager cacheDirectory] UTF8String]);
-	//linphone_core_enable_log_collection([self lpConfigBoolForKey:@"enable_log_collect"]);
-    linphone_core_enable_log_collection(YES);
+	linphone_core_enable_log_collection([self lpConfigBoolForKey:@"debugenable_preference"]);
 
 	theLinphoneCore = linphone_core_new_with_config (&linphonec_vtable
 										 ,configDb
@@ -2108,14 +2112,14 @@ static void audioRouteChangeListenerCallback (
     }
     LinphoneProxyConfig *cfg=nil;
     linphone_core_get_default_proxy(theLinphoneCore, &cfg);
-    if (cfg) {
+    if (cfg ) {
         linphone_proxy_config_edit(cfg);
-        [self addPushTokenToProxyConfig: cfg];
+        [self configurePushTokenForProxyConfig: cfg];
         linphone_proxy_config_done(cfg);
     }
 }
 
-- (void)addPushTokenToProxyConfig:(LinphoneProxyConfig*)proxyCfg{
+- (void)configurePushTokenForProxyConfig:(LinphoneProxyConfig*)proxyCfg{
 	NSData *tokenData =  pushNotificationToken;
 	if(tokenData != nil && [self lpConfigBoolForKey:@"pushnotification_preference"]) {
 		const unsigned char *tokenBuffer = [tokenData bytes];
@@ -2135,7 +2139,11 @@ static void audioRouteChangeListenerCallback (
 
         linphone_proxy_config_set_contact_uri_parameters(proxyCfg, [params UTF8String]);
         linphone_proxy_config_set_contact_parameters(proxyCfg, NULL);
-    }
+	} else {
+		// no push token:
+		linphone_proxy_config_set_contact_uri_parameters(proxyCfg, NULL);
+		linphone_proxy_config_set_contact_parameters(proxyCfg, NULL);
+	}
 }
 
 #pragma mark - Misc Functions
@@ -2219,7 +2227,18 @@ static void audioRouteChangeListenerCallback (
     }
 }
 
-+ (id)getMessageAppDataForKey:(NSString*)key inMessage:(LinphoneChatMessage*)msg {
+-(void)setLogsEnabled:(BOOL)enabled {
+	if (enabled) {
+		linphone_core_enable_logs_with_cb((OrtpLogFunc)linphone_iphone_log_handler);
+		ortp_set_log_level_mask(ORTP_DEBUG|ORTP_MESSAGE|ORTP_WARNING|ORTP_ERROR|ORTP_FATAL);
+		linphone_core_enable_log_collection(enabled);
+	} else {
+		linphone_core_enable_log_collection(enabled);
+		linphone_core_disable_logs();
+	}
+}
+
++(id)getMessageAppDataForKey:(NSString*)key inMessage:(LinphoneChatMessage*)msg {
 
 	if(msg == nil ) return nil;
 

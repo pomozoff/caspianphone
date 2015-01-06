@@ -46,6 +46,9 @@
                 <outlet property="signUpView" destination="33" id="yiK-7V-lcc"/>
                 <outlet property="smsImageConfirmView" destination="Esr-4T-w26" id="6ae-OT-na9"/>
                 <outlet property="smsTextConfirmView" destination="5Gm-l5-79k" id="y2a-LV-WXW"/>
+                <outlet property="remoteProvisioningButton" destination="Kbn-dL-C5h" id="PPk-DJ-nEb"/>
+                <outlet property="transportChooser" destination="Nrv-SM-lMf" id="7iR-aG-eQf"/>
+                <outlet property="validateAccountView" destination="101" id="112"/>
                 <outlet property="welcomeView" destination="21" id="28"/>
             </connections>
         </placeholder>
@@ -592,6 +595,16 @@
                         <action selector="onNoAskPasswordTap:" destination="-1" eventType="touchUpInside" id="Mlv-re-H7V"/>
                     </connections>
                 </button>
+                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="Nrv-SM-lMf">
+                    <rect key="frame" x="40" y="273" width="240" height="29"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                    <segments>
+                        <segment title="UDP"/>
+                        <segment title="TCP"/>
+                        <segment title="TLS"/>
+                    </segments>
+                    <color key="tintColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                </segmentedControl>
             </subviews>
             <color key="backgroundColor" red="0.52156865600000002" green="0.76862752440000004" blue="0.91372555489999996" alpha="1" colorSpace="deviceRGB"/>
             <nil key="simulatedStatusBarMetrics"/>
