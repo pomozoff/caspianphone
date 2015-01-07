@@ -521,6 +521,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 		BOOL debugEnabled = [[notif.userInfo objectForKey:@"debugenable_preference"] boolValue];
 		removeFromHiddenKeys = debugEnabled;
         [keys addObject:@"send_logs_button"];
+		[keys addObject:@"reset_logs_button"];
 		[[LinphoneManager instance] setLogsEnabled:debugEnabled];
     } else if( [@"advanced_account_preference" compare:notif.object] == NSOrderedSame) {
 		removeFromHiddenKeys = [[notif.userInfo objectForKey:@"advanced_account_preference"] boolValue];
@@ -620,6 +621,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 /*
 	if (! [[LinphoneManager instance] lpConfigBoolForKey:@"debugenable_preference"]) {
 		[hiddenKeys addObject:@"send_logs_button"];
+		[hiddenKeys addObject:@"reset_logs_button"];
 	}
 */
     [hiddenKeys addObject:@"playback_gain_preference"];
@@ -773,6 +775,8 @@ static UICompositeViewDescription *compositeDescription = nil;
         [self alertView:nil clickedButtonAtIndex:1];
     } else if([key isEqual:@"about_button"]) {
         [[PhoneMainView instance] changeCurrentView:[AboutViewController compositeViewDescription] push:TRUE];
+	} else if ([key isEqualToString:@"reset_logs_button"]) {
+		linphone_core_reset_log_collection();
 	} else if ([key isEqual:@"send_logs_button"]) {
         char * filepath = linphone_core_compress_log_collection([LinphoneManager getLc]);
 		if (filepath == NULL) {

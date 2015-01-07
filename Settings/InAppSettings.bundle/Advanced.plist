@@ -31,6 +31,14 @@
 			<string>IASKButtonSpecifier</string>
 		</dict>
 		<dict>
+			<key>Key</key>
+			<string>reset_logs_button</string>
+			<key>Title</key>
+			<string>Clear Logs</string>
+			<key>Type</key>
+			<string>IASKButtonSpecifier</string>
+		</dict>
+		<dict>
 			<key>Title</key>
 			<string>Options</string>
 			<key>Type</key>
