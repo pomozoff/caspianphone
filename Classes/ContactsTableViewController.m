@@ -34,6 +34,9 @@ static NSString *caspianSupportPhoneLabel = @"One Call Caspian";
 
 static void sync_address_book (ABAddressBookRef addressBook, CFDictionaryRef info, void *context);
 
++ (NSString *)caspianDisplayName {
+    return caspianSupportPhoneLabel;
+}
 
 #pragma mark - Lifecycle Functions
 

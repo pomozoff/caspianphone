@@ -276,9 +276,31 @@ static void chatTable_free_chatrooms(void *data){
     return address;
 }
 
+- (NSString *)displayNameForRow:(NSInteger)row {
+    LinphoneChatRoom *chatRoom = (LinphoneChatRoom*)ms_list_nth_data(data, row);
+    const LinphoneAddress *linphoneAddress = linphone_chat_room_get_peer_address(chatRoom);
+
+    char *tmp = linphone_address_as_string_uri_only(linphoneAddress);
+    NSString *normalizedSipAddress = [NSString stringWithUTF8String:tmp];
+    ms_free(tmp);
+    
+    NSString *displayName = nil;
+    
+    ABRecordRef contact = [[[LinphoneManager instance] fastAddressBook] getContact:normalizedSipAddress];
+    if(contact != nil) {
+        displayName = [FastAddressBook getContactDisplayName:contact];
+    }
+    if(displayName == nil) {
+        displayName = [NSString stringWithUTF8String:linphone_address_get_username(linphoneAddress)];
+    }
+    return displayName;
+}
+
 - (BOOL)isRowWithOneCallCaspianSupport:(NSUInteger)row {
+    NSString *displayName = [self displayNameForRow:row];
     NSString *address = [self phoneNumberForCellAtRow:row];
-    return [address isEqualToString:[FastAddressBook caspianSupportPhoneNumber]];
+    
+    return [address isEqualToString:[FastAddressBook caspianSupportPhoneNumber]] && [displayName isEqualToString:[ContactsTableViewController caspianDisplayName]];
 }
 
 @end
