@@ -814,7 +814,6 @@
 		F070E6381A2622EC00E17AFD /* incall_padding_right.png in Resources */ = {isa = PBXBuildFile; fileRef = F070E6321A2622EC00E17AFD /* incall_padding_right.png */; };
 		F0818E7E17FC51D8005A3330 /* linphone_icon_76.png in Resources */ = {isa = PBXBuildFile; fileRef = F0818E7C17FC51D8005A3330 /* linphone_icon_76.png */; };
 		F0818E8017FC51D8005A3330 /* linphone_icon_152.png in Resources */ = {isa = PBXBuildFile; fileRef = F0818E7D17FC51D8005A3330 /* linphone_icon_152.png */; };
-		F088488A19FF8C41007FFCF3 /* UIContactCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F088488D19FF8C41007FFCF3 /* UIContactCell.xib */; };
 		F08BDC3D1A35E60F006210C9 /* liblinphonetester.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F0BB8C0F193623F200974404 /* liblinphonetester.a */; };
 		F08F118519C09C6B007D70C2 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F03A9B3318C0CF7000C4D7FE /* XCTest.framework */; };
 		F08F118619C09C6B007D70C2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
