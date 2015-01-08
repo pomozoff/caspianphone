@@ -1,6 +1,6 @@
 [sip]
 contact="My iPad" <sip:linphone.iphone@unknown-host>
-keepalive_period=30000
+keepalive_period=300000
 default_proxy=0
 sip_port=-1
 sip_tcp_port=-1
