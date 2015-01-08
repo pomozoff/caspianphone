@@ -1044,7 +1044,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     } else {
         [self checkIsSameUserSigningIn:phone];
         [self.waitView setHidden:false];
-        [self addProxyConfig:[[LinphoneManager instance] cleanPhoneNumber:phone] password:password domain:domain];
+        [self addProxyConfig:[[LinphoneManager instance] cleanPhoneNumber:phone] password:password domain:domain withTransport:@"tcp"];
     }
 }
 
