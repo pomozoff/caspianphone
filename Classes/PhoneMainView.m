@@ -158,6 +158,10 @@ static RootViewManager* rootViewManagerInstance = nil;
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    // set frame size to correct calculate resizing of content
+    CGSize screenSize = [[UIScreen mainScreen] bounds].size;
+    self.view.frame = CGRectMake(0, 0, screenSize.width, screenSize.height);
+    
     volumeView = [[MPVolumeView alloc] initWithFrame: CGRectMake(-100,-100,16,16)];
     volumeView.showsRouteButton = false;
     volumeView.userInteractionEnabled = false;
