@@ -585,8 +585,8 @@
 		UIImage* image = [(UIImageView*)view image];
 		if( image ){
 			[attributes setObject:image forKey:@"image"];
-    */
 		}
+     */
     }
     [attributes setObject:[NSNumber numberWithInteger:view.autoresizingMask] forKey:@"autoresizingMask"];
 

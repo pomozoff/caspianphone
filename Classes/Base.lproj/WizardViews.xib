@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WizardViewController">
@@ -46,9 +46,7 @@
                 <outlet property="signUpView" destination="33" id="yiK-7V-lcc"/>
                 <outlet property="smsImageConfirmView" destination="Esr-4T-w26" id="6ae-OT-na9"/>
                 <outlet property="smsTextConfirmView" destination="5Gm-l5-79k" id="y2a-LV-WXW"/>
-                <outlet property="remoteProvisioningButton" destination="Kbn-dL-C5h" id="PPk-DJ-nEb"/>
                 <outlet property="transportChooser" destination="Nrv-SM-lMf" id="7iR-aG-eQf"/>
-                <outlet property="validateAccountView" destination="101" id="112"/>
                 <outlet property="welcomeView" destination="21" id="28"/>
             </connections>
         </placeholder>
@@ -905,14 +903,14 @@
         <image name="bgcontact.png" width="320" height="480"/>
         <image name="button_background_default.png" width="550" height="101"/>
         <image name="button_background_over.png" width="550" height="101"/>
-        <image name="cancel-button.png" width="110" height="54"/>
+        <image name="cancel-button.png" width="110" height="50"/>
         <image name="continue-selected.png" width="272" height="54"/>
         <image name="continue.png" width="272" height="54"/>
         <image name="field_background.png" width="542" height="88"/>
         <image name="large-blue-button.png" width="640" height="284"/>
         <image name="logo-small.png" width="392" height="237"/>
         <image name="no-button.png" width="272" height="54"/>
-        <image name="ok-button.png" width="110" height="54"/>
+        <image name="ok-button.png" width="110" height="50"/>
         <image name="setup_welcome_logo.png" width="179" height="161"/>
         <image name="sign-in-normal.png" width="365" height="47"/>
         <image name="sign-up-normal.png" width="365" height="47"/>
