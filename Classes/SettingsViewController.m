@@ -616,13 +616,11 @@ static UICompositeViewDescription *compositeDescription = nil;
     [hiddenKeys addObject:@"release_button"];
     [hiddenKeys addObject:@"clear_cache_button"];
     [hiddenKeys addObject:@"battery_alert_button"];
+    if (! [[LinphoneManager instance] lpConfigBoolForKey:@"debugenable_preference"]) {
+        [hiddenKeys addObject:@"send_logs_button"];
+        [hiddenKeys addObject:@"reset_logs_button"];
+    }
 #endif
-/*
-	if (! [[LinphoneManager instance] lpConfigBoolForKey:@"debugenable_preference"]) {
-		[hiddenKeys addObject:@"send_logs_button"];
-		[hiddenKeys addObject:@"reset_logs_button"];
-	}
-*/
     [hiddenKeys addObject:@"playback_gain_preference"];
     [hiddenKeys addObject:@"microphone_gain_preference"];
     
@@ -699,7 +697,7 @@ static UICompositeViewDescription *compositeDescription = nil;
         [hiddenKeys addObject:@"avpf_preference"];
     }
 
-//#ifndef DEBUG
+#ifndef DEBUG
     // *** Caspian hidden keys ***
     // Root
     [hiddenKeys addObject:@"domain_preference"];
@@ -738,7 +736,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     [hiddenKeys addObject:@"vp8_preference"];
     // Network
     [hiddenKeys addObject:@"stun_preference"];
-//#endif
+#endif
     
     return hiddenKeys;
 }
