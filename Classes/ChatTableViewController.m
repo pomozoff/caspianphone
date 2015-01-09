@@ -210,24 +210,15 @@ static void chatTable_free_chatrooms(void *data){
 
             [self.tableView beginUpdates];
             
-            NSInteger rowsCountBeforeUpdate = ms_list_size(data);
-            
             LinphoneChatRoom *chatRoom = (LinphoneChatRoom*)ms_list_nth_data(data, indexPath.row);
             linphone_chat_room_delete_history(chatRoom);
-            linphone_chat_room_destroy(chatRoom);
-            data = linphone_core_get_chat_rooms([LinphoneManager getLc]);
+            linphone_chat_room_unref(chatRoom);
 
-            NSInteger rowsCountAfterUpdate = ms_list_size(data);
-            
-            if (rowsCountBeforeUpdate - rowsCountAfterUpdate == 1) {
-                [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-            } else {
-                [LinphoneLogger logc:LinphoneLoggerLog format:"ChatTableViewController: can't delete chat room with index %i", indexPath.row];
-            }
-            
+            [[NSNotificationCenter defaultCenter] postNotificationName:kLinphoneTextReceived object:self];
+            [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+
             [self.tableView endUpdates];
             
-            [[NSNotificationCenter defaultCenter] postNotificationName:kLinphoneTextReceived object:self];
             break;
         }
         default:
