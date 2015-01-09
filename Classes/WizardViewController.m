@@ -866,6 +866,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
     activeTextField = textField;
     if (textField == self.countryNameSignUpField && self.countryAndCode.count == 0) {
+        waitView.hidden = NO;
         [self pullCountries];
     }
 }
@@ -1510,6 +1511,7 @@ static UICompositeViewDescription *compositeDescription = nil;
         [self.serialCountryListPullQueue addOperationWithBlock:^{
             [[LinphoneManager instance] dataFromUrlString:caspianCountryListUrl completionBlock:^(NSDictionary *countries) {
                 [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                    waitView.hidden = YES;
                     weakSelf.countryAndCode = countries[caspianCountriesListTopKey];
                     [weakSelf.countryPickerView reloadAllComponents];
                 }];
