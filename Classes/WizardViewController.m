@@ -1485,8 +1485,6 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 -(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
     [self didSelectCountryAtRow:row];
-    [self.phoneNumberSignUpField becomeFirstResponder];
-    [self.phoneNumberForgotPasswordField becomeFirstResponder];
 }
 
 #pragma mark - Private
@@ -1586,9 +1584,6 @@ static UICompositeViewDescription *compositeDescription = nil;
     
     [self checkNextStep];
     [self activationAvailableForCountry:country];
-    
-    [self.countryNameSignUpField resignFirstResponder];
-    [self.countryNameForgotPasswordField resignFirstResponder];
 }
 
 - (NSDictionary *)countryAtIndex:(NSInteger)index {
