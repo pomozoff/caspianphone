@@ -288,10 +288,10 @@ static void chatTable_free_chatrooms(void *data){
 }
 
 - (BOOL)isRowWithOneCallCaspianSupport:(NSUInteger)row {
-    NSString *displayName = [self displayNameForRow:row];
+    //NSString *displayName = [self displayNameForRow:row];
     NSString *address = [self phoneNumberForCellAtRow:row];
     
-    return [address isEqualToString:[FastAddressBook caspianSupportPhoneNumber]] && [displayName isEqualToString:[ContactsTableViewController caspianDisplayName]];
+    return [address isEqualToString:[FastAddressBook caspianSupportPhoneNumber]];// && [displayName isEqualToString:[ContactsTableViewController caspianDisplayName]];
 }
 
 @end
