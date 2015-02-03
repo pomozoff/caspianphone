@@ -83,17 +83,18 @@ static RootViewManager* rootViewManagerInstance = nil;
                           duration:0.3
                            options:UIViewAnimationOptionTransitionFlipFromLeft|UIViewAnimationOptionAllowAnimatedContent
                         animations:^{
-                            delegate.window.rootViewController = newMainView;
-                            // when going to landscape-enabled view, we have to get the current portrait frame and orientation,
-                            // because it could still have landscape-based size
-                            if( nextViewOrientation != previousOrientation && newMainView == self.rotatingViewController ){
-                                newMainView.view.frame = previousMainView.view.frame;
-                                [newMainView.mainViewController.view setFrame:previousMainView.mainViewController.view.frame];
-                                [newMainView willRotateToInterfaceOrientation:previousOrientation duration:0.3];
-                                [newMainView willAnimateRotationToInterfaceOrientation:previousOrientation duration:0.3];
-                                [newMainView didRotateFromInterfaceOrientation:nextViewOrientation];
+                            if (delegate.window.rootViewController != newMainView) {
+                                delegate.window.rootViewController = newMainView;
+                                // when going to landscape-enabled view, we have to get the current portrait frame and orientation,
+                                // because it could still have landscape-based size
+                                if( nextViewOrientation != previousOrientation && newMainView == self.rotatingViewController ){
+                                    newMainView.view.frame = previousMainView.view.frame;
+                                    [newMainView.mainViewController.view setFrame:previousMainView.mainViewController.view.frame];
+                                    [newMainView willRotateToInterfaceOrientation:previousOrientation duration:0.3];
+                                    [newMainView willAnimateRotationToInterfaceOrientation:previousOrientation duration:0.3];
+                                    [newMainView didRotateFromInterfaceOrientation:nextViewOrientation];
+                                }
                             }
-
                         }
                         completion:^(BOOL finished) {
 						}];
@@ -157,6 +158,10 @@ static RootViewManager* rootViewManagerInstance = nil;
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    // set frame size to correct calculate resizing of content
+    CGSize screenSize = [[UIScreen mainScreen] bounds].size;
+    self.view.frame = CGRectMake(0, 0, screenSize.width, screenSize.height);
+    
     volumeView = [[MPVolumeView alloc] initWithFrame: CGRectMake(-100,-100,16,16)];
     volumeView.showsRouteButton = false;
     volumeView.userInteractionEnabled = false;
@@ -242,6 +247,7 @@ static RootViewManager* rootViewManagerInstance = nil;
     }
 }
 
+/*
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
     [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
     [mainViewController willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
@@ -257,6 +263,7 @@ static RootViewManager* rootViewManagerInstance = nil;
     [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
     [mainViewController didRotateFromInterfaceOrientation:fromInterfaceOrientation];
 }
+*/
 
 - (UIInterfaceOrientation)interfaceOrientation {
     return [mainViewController currentOrientation];
@@ -323,7 +330,7 @@ static RootViewManager* rootViewManagerInstance = nil;
         return;
     }
     
-	switch (state) {					
+	switch (state) {
 		case LinphoneCallIncomingReceived: 
         {
 			[self displayIncomingCall:call];
@@ -431,6 +438,13 @@ static RootViewManager* rootViewManagerInstance = nil;
     }
 }
 
+- (void)resetToDefaults {
+    WizardViewController *controller = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[WizardViewController compositeViewDescription]], WizardViewController);
+    if(controller != nil) {
+        [controller resetToDefaults];
+    }
+}
+
 - (void)updateApplicationBadgeNumber {
     int count = 0;
     count += linphone_core_get_missed_calls_count([LinphoneManager getLc]);
@@ -524,9 +538,9 @@ static RootViewManager* rootViewManagerInstance = nil;
 
     } else  {
         // light bg: black text on white bg
-        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+        [[UIApplication sharedApplication] setStatusBarStyle:to_view.statusBarStyle];
         [UIView animateWithDuration:0.3f
-                         animations:^{ statusBarBG.backgroundColor = [UIColor colorWithWhite:0.935 alpha:1]; }];
+                         animations:^{ statusBarBG.backgroundColor = to_view.statusBarColor; }];
 
     }
 #endif

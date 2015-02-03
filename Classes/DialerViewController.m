@@ -28,6 +28,11 @@
 
 #include "linphone/linphonecore.h"
 
+@interface DialerViewController()
+
+@property (nonatomic, retain) UIView *dummyView;
+
+@end
 
 @implementation DialerViewController
 
@@ -57,6 +62,15 @@
 @synthesize backgroundView;
 @synthesize videoPreview;
 @synthesize videoCameraSwitch;
+
+#pragma mark - Properties
+
+- (UIView *)dummyView {
+    if (!_dummyView) {
+        _dummyView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
+    }
+    return _dummyView;
+}
 
 #pragma mark - Lifecycle Functions
 
@@ -92,10 +106,12 @@
 
     [videoPreview release];
     [videoCameraSwitch release];
+    
+    [_dummyView release];
 
     // Remove all observers
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-
+    
 	[super dealloc];
 }
 
@@ -224,6 +240,8 @@ static UICompositeViewDescription *compositeDescription = nil;
             [videoCameraSwitch setHidden:FALSE];
         }
     }
+    
+    addressField.inputView = self.dummyView;
 }
 
 - (void)viewDidUnload {
@@ -321,7 +339,8 @@ static UICompositeViewDescription *compositeDescription = nil;
 }
 
 - (void)call:(NSString*)address displayName:(NSString *)displayName {
-    [[LinphoneManager instance] call:address displayName:displayName transfer:transferMode];
+    NSString *cleanPhoneNumber = [[LinphoneManager instance] cleanPhoneNumber:address];
+    [[LinphoneManager instance] call:cleanPhoneNumber displayName:displayName transfer:transferMode];
 }
 
 
@@ -348,9 +367,19 @@ static UICompositeViewDescription *compositeDescription = nil;
     [ContactSelection setSipFilter:nil];
     [ContactSelection setNameOrEmailFilter:nil];
     [ContactSelection enableEmailFilter:FALSE];
+    /*
     ContactsViewController *controller = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[ContactsViewController compositeViewDescription] push:TRUE], ContactsViewController);
     if(controller != nil) {
 
+    }
+    */
+    ContactDetailsViewController *controller = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[ContactDetailsViewController compositeViewDescription] push:TRUE], ContactDetailsViewController);
+    if(controller != nil) {
+        if (addressField.text.length == 0) {
+            [controller newContact];
+        } else {
+            [controller newContact:addressField.text];
+        }
     }
 }
 
@@ -369,6 +398,15 @@ static UICompositeViewDescription *compositeDescription = nil;
         [eraseButton setEnabled:FALSE];
         [addCallButton setEnabled:FALSE];
         [transferButton setEnabled:FALSE];
+    }
+}
+
+- (IBAction)onChatTap:(id)sender {
+    ChatViewController *controller = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[ChatViewController compositeViewDescription]
+                                                                                         push:TRUE], ChatViewController);
+    if (addressField.text.length != 0) {
+        controller.addressField.text = addressField.text;
+        [controller onAddClick:nil];
     }
 }
 

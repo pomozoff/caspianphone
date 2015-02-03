@@ -94,6 +94,9 @@
     [normalView setAlpha:1.0f];
     [editView setAlpha:0.0f];
     [tableView setEditing:TRUE animated:false];
+
+    avatarImage.layer.cornerRadius = avatarImage.frame.size.height / 2;
+    avatarImage.clipsToBounds = YES;
 }
 
 
@@ -126,7 +129,7 @@
     {
         UIImage *image = [FastAddressBook getContactImage:contact thumbnail:false];
         if(image == nil) {
-            image = [UIImage imageNamed:@"avatar_unknown_small.png"];
+            image = [UIImage imageNamed:@"profile-picture-small.png"];
         }
         [avatarImage setImage:image];
     }

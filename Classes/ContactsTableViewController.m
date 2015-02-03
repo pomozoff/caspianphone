@@ -25,10 +25,18 @@
 #import "UILinphone.h"
 #import "Utils.h"
 
+static NSString *caspianSupportFirstName = @"";
+static NSString *caspianSupportLastName = @"";
+static NSString *caspianSupportOrganization = @"One Call Caspian";
+static NSString *caspianSupportPhoneLabel = @"One Call Caspian";
+
 @implementation ContactsTableViewController
 
 static void sync_address_book (ABAddressBookRef addressBook, CFDictionaryRef info, void *context);
 
++ (NSString *)caspianDisplayName {
+    return caspianSupportPhoneLabel;
+}
 
 #pragma mark - Lifecycle Functions
 
@@ -126,6 +134,134 @@ static int ms_strcmpfuz(const char * fuzzy_word, const char * sentence) {
 	return (int)(within_sentence != NULL ? 0 : fuzzy_word + strlen(fuzzy_word) - c);
 }
 
+- (NSString *)nameOfContactWithFirstName:(NSString *)lLocalizedFirstName
+                                lastName:(NSString *)lLocalizedLastName
+                            organization:(NSString *)lLocalizedlOrganization {
+    NSString *name = nil;
+    if(lLocalizedFirstName.length > 0 && lLocalizedLastName.length > 0) {
+        name = [NSString stringWithFormat:@"%@ %@", [(NSString *)lLocalizedFirstName retain], [(NSString *)lLocalizedLastName retain]];
+    } else if(lLocalizedLastName.length > 0) {
+        name = [NSString stringWithFormat:@"%@",[(NSString *)lLocalizedLastName retain]];
+    } else if(lLocalizedFirstName.length > 0) {
+        name = [NSString stringWithFormat:@"%@",[(NSString *)lLocalizedFirstName retain]];
+    } else if(lLocalizedlOrganization.length > 0) {
+        name = [NSString stringWithFormat:@"%@",[(NSString *)lLocalizedlOrganization retain]];
+    }
+    return name;
+}
+
+- (void)addContactWithName:(NSString *)name contactObject:(id)lPerson toAddressBookMap:(OrderedDictionary *)orderedAddressBookMap {
+    if (name != nil && name.length > 0) {
+        // Add the contact only if it fuzzy match filter too (if any)
+        if ([ContactSelection getNameOrEmailFilter] == nil ||
+            (ms_strcmpfuz([[[ContactSelection getNameOrEmailFilter] lowercaseString] UTF8String], [[name lowercaseString] UTF8String]) == 0)) {
+            
+            // Put in correct subDic
+            NSString *firstChar = [[name substringToIndex:1] uppercaseString];
+            /*
+             if([firstChar characterAtIndex:0] < 'A' || [firstChar characterAtIndex:0] > 'Z') {
+             firstChar = @"#";
+             }
+             */
+            OrderedDictionary *subDic =[orderedAddressBookMap objectForKey:firstChar];
+            if(subDic == nil) {
+                subDic = [[[OrderedDictionary alloc] init] autorelease];
+                [orderedAddressBookMap insertObject:subDic forKey:firstChar selector:@selector(caseInsensitiveCompare:)];
+            }
+            [subDic insertObject:lPerson forKey:name selector:@selector(caseInsensitiveCompare:)];
+        }
+    }
+}
+
+- (void)fillPerson:(id)lPerson
+     withFirstName:(NSString *)firstName
+          lastName:(NSString *)lastName
+      organization:(NSString *)organization
+       errorsArray:(NSMutableArray *)errorsArray {
+    
+    if (errorsArray.count > 0) {
+        return;
+    }
+
+    CFErrorRef anError = NULL;
+
+    ABRecordSetValue(lPerson, kABPersonFirstNameProperty, (__bridge CFStringRef)firstName, &anError);
+    if (anError != NULL) {
+        [errorsArray addObject:(__bridge NSError *)anError];
+    }
+    
+    ABRecordSetValue(lPerson, kABPersonLastNameProperty, (__bridge CFStringRef)lastName, &anError);
+    if (anError != NULL) {
+        [errorsArray addObject:(__bridge NSError *)anError];
+    }
+    
+    ABRecordSetValue(lPerson, kABPersonOrganizationProperty, (__bridge CFStringRef)organization, &anError);
+    if (anError != NULL) {
+        [errorsArray addObject:(__bridge NSError *)anError];
+    }
+}
+
+- (void)addSupportPhoneNumber:(NSString *)phoneNumber
+                    withLabel:(NSString *)label
+                     toPerson:(id)lPerson
+                  errorsArray:(NSMutableArray *)errorsArray {
+    
+    if (errorsArray.count > 0) {
+        return;
+    }
+    
+    ABMutableMultiValueRef lPhoneNumbers = ABRecordCopyValue(lPerson, kABPersonPhoneProperty);
+    ABMutableMultiValueRef multiPhone;
+    if (lPhoneNumbers != NULL) {
+        multiPhone = ABMultiValueCreateMutableCopy(lPhoneNumbers);
+        CFRelease(lPhoneNumbers);
+    } else {
+        multiPhone = ABMultiValueCreateMutable(kABPersonPhoneProperty);
+    }
+    if (multiPhone != NULL) {
+        ABMultiValueAddValueAndLabel(multiPhone, [FastAddressBook caspianSupportPhoneNumber], (CFStringRef)caspianSupportPhoneLabel, NULL);
+        ABRecordSetValue(lPerson, kABPersonPhoneProperty, multiPhone, nil);
+        
+        if(ABRecordGetRecordID(lPerson) == kABRecordInvalidID) {
+            CFErrorRef anError = NULL;
+            ABAddressBookAddRecord(addressBook, lPerson, &anError);
+            if (anError != NULL) {
+                [errorsArray addObject:(__bridge NSError *)anError];
+            }
+        }
+    }
+}
+
+- (void)addAvatar:(UIImage *)image toPerson:(id)lPerson errorsArray:(NSMutableArray *)errorsArray {
+    if (errorsArray.count > 0) {
+        return;
+    }
+    
+    CFErrorRef anError = NULL;
+
+    NSData *imageData = [NSData dataWithData:UIImagePNGRepresentation(image)];
+    if (!ABPersonSetImageData(lPerson, (CFDataRef)imageData, &anError)) {
+        if (anError != NULL) {
+            [errorsArray addObject:(__bridge NSError *)anError];
+        }
+    }
+}
+
+- (void)saveAddressBook:(ABAddressBookRef)addressBookRef errorsArray:(NSMutableArray *)errorsArray {
+    if (errorsArray.count > 0) {
+        return;
+    }
+
+    CFErrorRef anError = NULL;
+    
+    ABAddressBookSave(addressBookRef, &anError);
+    if (anError != NULL) {
+        [errorsArray addObject:(__bridge NSError *)anError];
+    } else {
+        [[LinphoneManager instance].fastAddressBook reload];
+    }
+}
+
 - (void)loadData {
 	[LinphoneLogger logc:LinphoneLoggerLog format:"Load contact list"];
 	@synchronized (addressBookMap) {
@@ -133,6 +269,7 @@ static int ms_strcmpfuz(const char * fuzzy_word, const char * sentence) {
 		// Reset Address book
 		[addressBookMap removeAllObjects];
 
+        BOOL isCaspianSupportPresent = NO;
 		NSArray *lContacts = (NSArray *)ABAddressBookCopyArrayOfAllPeople(addressBook);
 		for (id lPerson in lContacts) {
 			BOOL add = true;
@@ -152,6 +289,9 @@ static int ms_strcmpfuz(const char * fuzzy_word, const char * sentence) {
 
 				CFRelease(personEmailAddresses);
 			}
+            
+            // Find Support Address Book Record
+            isCaspianSupportPresent = isCaspianSupportPresent || [FastAddressBook isCaspianSupportRecord:person];
 
 			if(add) {
 				CFStringRef lFirstName = ABRecordCopyValue(person, kABPersonFirstNameProperty);
@@ -160,6 +300,8 @@ static int ms_strcmpfuz(const char * fuzzy_word, const char * sentence) {
 				CFStringRef lLocalizedLastName = (lLastName != nil)? ABAddressBookCopyLocalizedLabel(lLastName): nil;
 				CFStringRef lOrganization = ABRecordCopyValue(person, kABPersonOrganizationProperty);
 				CFStringRef lLocalizedlOrganization = (lOrganization != nil)? ABAddressBookCopyLocalizedLabel(lOrganization): nil;
+                
+                /*
 				NSString *name = nil;
 				if(lLocalizedFirstName != nil && lLocalizedLastName != nil) {
 					name=[NSString stringWithFormat:@"%@ %@", [(NSString *)lLocalizedFirstName retain], [(NSString *)lLocalizedLastName retain]];
@@ -170,7 +312,14 @@ static int ms_strcmpfuz(const char * fuzzy_word, const char * sentence) {
 				} else if(lLocalizedlOrganization != nil) {
 					name=[NSString stringWithFormat:@"%@",[(NSString *)lLocalizedlOrganization retain]];
 				}
-
+                */
+                
+                NSString *name = [self nameOfContactWithFirstName:(__bridge NSString *)lLocalizedFirstName
+                                                         lastName:(__bridge NSString *)lLocalizedLastName
+                                                     organization:(__bridge NSString *)lLocalizedlOrganization];
+                [self addContactWithName:name contactObject:lPerson toAddressBookMap:addressBookMap];
+                
+                /*
 				if(name != nil && [name length] > 0) {
 					// Add the contact only if it fuzzy match filter too (if any)
 					if ([ContactSelection getNameOrEmailFilter] == nil ||
@@ -185,7 +334,7 @@ static int ms_strcmpfuz(const char * fuzzy_word, const char * sentence) {
 						if([firstChar characterAtIndex:0] < 'A' || [firstChar characterAtIndex:0] > 'Z') {
 							firstChar = @"#";
 						}
-						OrderedDictionary *subDic =[addressBookMap objectForKey: firstChar];
+						OrderedDictionary *subDic =[addressBookMap objectForKey:firstChar];
 						if(subDic == nil) {
 							subDic = [[[OrderedDictionary alloc] init] autorelease];
 							[addressBookMap insertObject:subDic forKey:firstChar selector:@selector(caseInsensitiveCompare:)];
@@ -193,6 +342,8 @@ static int ms_strcmpfuz(const char * fuzzy_word, const char * sentence) {
 						[subDic insertObject:lPerson forKey:name selector:@selector(caseInsensitiveCompare:)];
 					}
 				}
+                */
+        
 				if(lLocalizedlOrganization != nil)
 					CFRelease(lLocalizedlOrganization);
 				if(lOrganization != nil)
@@ -207,8 +358,47 @@ static int ms_strcmpfuz(const char * fuzzy_word, const char * sentence) {
 					CFRelease(lFirstName);
 			}
 		}
-		if (lContacts)
+        if (lContacts) {
 			CFRelease(lContacts);
+        }
+        if (!isCaspianSupportPresent) {
+            NSMutableArray *errorsArray = [NSMutableArray arrayWithArray:@[]];
+
+            ABRecordRef lPerson = ABPersonCreate();
+            [self fillPerson:lPerson
+               withFirstName:caspianSupportFirstName
+                    lastName:caspianSupportLastName
+                organization:caspianSupportOrganization
+                 errorsArray:errorsArray];
+
+            [self addSupportPhoneNumber:[FastAddressBook caspianSupportPhoneNumber]
+                              withLabel:caspianSupportPhoneLabel
+                               toPerson:lPerson
+                            errorsArray:errorsArray];
+
+            [self addAvatar:[UIImage imageNamed:@"support-contact-avatar.png"] toPerson:lPerson errorsArray:errorsArray];
+            
+            [self saveAddressBook:addressBook errorsArray:errorsArray];
+            
+            if (errorsArray.count > 0) {
+                NSString *errorString = @"";
+                for (NSError *error in errorsArray) {
+                    errorString = [errorString stringByAppendingString:[NSString stringWithFormat:@"%@\n", error.description]];
+                }
+                NSLog(@"Error while creating Caspian Support record: %@", errorString);
+            } else {
+                
+                [avatarMap setObject:[UIImage imageNamed:@"support-contact-avatar.png"]
+                              forKey:[NSNumber numberWithInt:ABRecordGetRecordID(lPerson)]];
+                
+                NSString *name = [self nameOfContactWithFirstName:caspianSupportFirstName
+                                                         lastName:caspianSupportLastName
+                                                     organization:caspianSupportOrganization];
+                [self addContactWithName:name contactObject:lPerson toAddressBookMap:addressBookMap];
+            }
+            
+            CFRelease(lPerson);
+        }
 	}
 	[self.tableView reloadData];
 }
@@ -272,7 +462,7 @@ static void sync_address_book (ABAddressBookRef addressBook, CFDictionaryRef inf
 		image = data;
 	}
 	if(image == nil) {
-		image = [UIImage imageNamed:@"avatar_unknown_small.png"];
+		image = [UIImage imageNamed:@"profile-picture-small.png"];
 	}
 	[[cell avatarImage] setImage:image];
 
@@ -281,7 +471,7 @@ static void sync_address_book (ABAddressBookRef addressBook, CFDictionaryRef inf
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-		return [addressBookMap keyAtIndex: section];
+	return [addressBookMap keyAtIndex: section];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {

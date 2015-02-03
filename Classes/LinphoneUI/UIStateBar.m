@@ -21,6 +21,20 @@
 #import "LinphoneManager.h"
 #import "PhoneMainView.h"
 
+@interface UIStateBar ()
+
+@property (nonatomic, retain) NSOperationQueue *balanceQueue;
+@property (nonatomic, retain) NSNumberFormatter *numberFormatter;
+@property (nonatomic, copy) NSString *username;
+@property (nonatomic, copy) NSString *password;
+@property (nonatomic, retain) NSURL *balanceUrl;
+
+@property (nonatomic, retain) NSTimer *callQualityTimer;
+@property (nonatomic, retain) NSTimer *callSecurityTimer;
+@property (nonatomic, retain) NSTimer *balanceTimer;
+
+@end
+
 @implementation UIStateBar
 
 @synthesize registrationStateImage;
@@ -28,9 +42,77 @@
 @synthesize callQualityImage;
 @synthesize callSecurityImage;
 @synthesize callSecurityButton;
+@synthesize balanceLabel;
+@synthesize balanceQueue;
+@synthesize numberFormatter;
+@synthesize username = _username;
+@synthesize password = _password;
 
-NSTimer *callQualityTimer;
-NSTimer *callSecurityTimer;
+static NSString *caspianBalanceUrl = @"http://www.onecallcaspian.co.uk/mobile/credit?phone_number=%@&password=%@";
+
+const static NSTimeInterval balanceIntervalMax = 10.0;
+const static NSTimeInterval balanceInterval = 1.0;
+
+static NSTimeInterval balanceIntervalCurrent = balanceIntervalMax;
+
+#pragma mark - Properties
+
+- (NSOperationQueue *)balanceQueue {
+    if (!balanceQueue) {
+        balanceQueue = [[NSOperationQueue alloc] init];
+        balanceQueue.name = @"Balance queue";
+        balanceQueue.maxConcurrentOperationCount = 1;
+    }
+    return balanceQueue;
+}
+- (NSNumberFormatter *)numberFormatter {
+    if (!numberFormatter) {
+        numberFormatter = [[NSNumberFormatter alloc] init];
+        numberFormatter.numberStyle = NSNumberFormatterCurrencyStyle;
+        numberFormatter.maximumFractionDigits = 2;
+        numberFormatter.currencyCode = @"GBP";
+    }
+    return numberFormatter;
+}
+- (NSString *)username {
+    if (!_username) {
+        LinphoneCore *lc = [LinphoneManager getLc];
+        LinphoneProxyConfig *cfg = NULL;
+        linphone_core_get_default_proxy(lc, &cfg);
+        if (cfg) {
+            const char *identity = linphone_proxy_config_get_identity(cfg);
+            LinphoneAddress *addr = linphone_address_new(identity);
+            if (addr) {
+                NSString *currentUusername = [NSString stringWithUTF8String:linphone_address_get_username(addr)];
+                if (_username != currentUusername) {
+                    _username = [currentUusername retain];
+                    self.balanceLabel.text = @"...";
+                }
+                linphone_address_destroy(addr);
+            }
+        }
+    }
+    return _username;
+}
+- (NSString *)password {
+    if (!_password) {
+        LinphoneAuthInfo *ai;
+        LinphoneCore *lc = [LinphoneManager getLc];
+        const MSList *elem = linphone_core_get_auth_info_list(lc);
+        if (elem && (ai = (LinphoneAuthInfo *)elem->data)) {
+            _password = [[NSString stringWithUTF8String:linphone_auth_info_get_passwd(ai)] retain];
+        }
+    }
+    return _password;
+}
+- (NSURL *)balanceUrl {
+    if (!_balanceUrl) {
+        NSString *urlString = [NSString stringWithFormat:caspianBalanceUrl, self.username, self.password];
+        _balanceUrl = [[NSURL URLWithString:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]] retain];
+    }
+    return _balanceUrl;
+}
+
 int messagesUnreadCount;
 
 #pragma mark - Lifecycle Functions
@@ -55,9 +137,18 @@ int messagesUnreadCount;
 	[callSecurityImage release];
 	[callSecurityButton release];
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
-	[callQualityTimer invalidate];
-	[callQualityTimer release];
-	[_voicemailCount release];
+
+    self.callQualityTimer = nil;
+    self.callSecurityTimer = nil;
+    self.balanceTimer = nil;
+    
+    [_voicemailCount release];
+    [balanceLabel release];
+    [balanceQueue release];
+    [numberFormatter release];
+    [_username release];
+    [_password release];
+    [_balanceUrl release];
 	[super dealloc];
 }
 
@@ -66,21 +157,30 @@ int messagesUnreadCount;
 
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
+    
+    [self cleanBalance];
 
 	// Set callQualityTimer
-	callQualityTimer = [NSTimer scheduledTimerWithTimeInterval:1
-														target:self
-													  selector:@selector(callQualityUpdate)
-													  userInfo:nil
-													   repeats:YES];
+    self.callQualityTimer = [NSTimer scheduledTimerWithTimeInterval:1
+                                                             target:self
+                                                           selector:@selector(callQualityUpdate)
+                                                           userInfo:nil
+                                                            repeats:YES];
 
-	// Set callQualityTimer
-	callSecurityTimer = [NSTimer scheduledTimerWithTimeInterval:1
-														target:self
-													  selector:@selector(callSecurityUpdate)
-													  userInfo:nil
-													   repeats:YES];
+	// Set callSecurityTimer
+    self.callSecurityTimer = [NSTimer scheduledTimerWithTimeInterval:1
+                                                              target:self
+                                                            selector:@selector(callSecurityUpdate)
+                                                            userInfo:nil
+                                                             repeats:YES];
 
+
+    // Set balanceTimer
+    self.balanceTimer = [NSTimer scheduledTimerWithTimeInterval:balanceInterval
+                                                         target:self
+                                                       selector:@selector(updateBalance)
+                                                       userInfo:nil
+                                                        repeats:YES];
 	// Set observer
 	[[NSNotificationCenter defaultCenter]	addObserver:self
 						selector:@selector(registrationUpdate:)
@@ -112,6 +212,9 @@ int messagesUnreadCount;
     messagesUnreadCount = lp_config_get_int(linphone_core_get_config([LinphoneManager getLc]), "app", "voice_mail_messages_count", 0);
 
     [self proxyConfigUpdate: config];
+    
+    balanceIntervalCurrent = balanceIntervalMax;
+    [self updateBalance];
 	[self updateVoicemail];
 }
 
@@ -133,14 +236,20 @@ int messagesUnreadCount;
 						name:kLinphoneCallUpdate
 						object:nil];
 
-	if(callQualityTimer != nil) {
-		[callQualityTimer invalidate];
-		callQualityTimer = nil;
+	if(self.callQualityTimer != nil) {
+		[self.callQualityTimer invalidate];
+		self.callQualityTimer = nil;
 	}
-	if(callSecurityTimer != nil) {
-		[callSecurityTimer invalidate];
-		callSecurityTimer = nil;
+	if(self.callSecurityTimer != nil) {
+		[self.callSecurityTimer invalidate];
+		self.callSecurityTimer = nil;
 	}
+    if(self.balanceTimer != nil) {
+        [self.balanceTimer invalidate];
+        self.balanceTimer = nil;
+    }
+    
+    [self cleanBalance];
 }
 
 
@@ -319,6 +428,44 @@ int messagesUnreadCount;
 	}
 }
 
+- (void)pullBalanceCompletionBlock:(void(^)(NSString *))block {
+    if (self.balanceQueue.operationCount == 0) {
+        __block UIStateBar *weakSelf = self;
+        [self.balanceQueue addOperationWithBlock:^{
+            [[LinphoneManager instance] dataFromUrl:weakSelf.balanceUrl completionBlock:^(NSDictionary *jsonAnswer) {
+                NSString *accurateBalance = jsonAnswer[@"balance"];
+                NSDecimalNumber *digitBalance = [NSDecimalNumber decimalNumberWithString:accurateBalance];
+                if (digitBalance != nil) {
+                    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                        NSString *balance = [weakSelf.numberFormatter stringFromNumber:digitBalance];
+                        block(balance);
+                    }];
+                }
+            } errorBlock:nil];
+        }];
+    }
+}
+
+- (void)updateBalance {
+    BOOL isOnCall = NO;
+    if([LinphoneManager isLcReady]) {
+        LinphoneCall *call = linphone_core_get_current_call([LinphoneManager getLc]);
+        isOnCall = call != NULL;
+    }
+
+    if (!isOnCall) {
+        if (balanceIntervalCurrent >= balanceIntervalMax) {
+            balanceIntervalCurrent = 0.0;
+        } else {
+            balanceIntervalCurrent++;
+            return;
+        }
+    }
+    
+    [self pullBalanceCompletionBlock:^(NSString *balance){
+        self.balanceLabel.text = balance;
+    }];
+}
 
 #pragma mark - Action Functions
 
@@ -377,6 +524,14 @@ int messagesUnreadCount;
 	view.frame = [[attributes objectForKey:@"frame"] CGRectValue];
 	view.bounds = [[attributes objectForKey:@"bounds"] CGRectValue];
 	view.autoresizingMask = [[attributes objectForKey:@"autoresizingMask"] integerValue];
+}
+
+#pragma mark - Privtae
+
+- (void)cleanBalance {
+    self.balanceUrl = nil;
+    self.username = nil;
+    self.password = nil;
 }
 
 @end

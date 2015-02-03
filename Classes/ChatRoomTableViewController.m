@@ -51,6 +51,14 @@
 	[self reloadData];
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    CGRect currentFrame = self.view.frame;
+    if (currentFrame.origin.y < 0) {
+        self.view.frame = CGRectMake(currentFrame.origin.x, 80, currentFrame.size.width, currentFrame.size.height);
+    }
+}
+
 #pragma mark -
 
 - (void)clearMessageList {
@@ -121,6 +129,12 @@
         return;
     }
 
+    int count = ms_list_size(messageList);
+    /*
+     
+     Bug in linphone_chat_message_is_read() - always returns 15
+     Therefore all this stuff is commented
+     
     int index = -1;
     int count = ms_list_size(messageList);
     // Find first unread & set all entry read
@@ -134,13 +148,14 @@
     if(index == -1) {
         index = count - 1;
     }
-
+    */
     linphone_chat_room_mark_as_read(chatRoom);
 
     // Scroll to unread
     if(index >= 0) {
         [self.tableView.layer removeAllAnimations];
-        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0]
+        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:(count - 1)
+                                                                  inSection:0]
                               atScrollPosition:UITableViewScrollPositionTop
                                       animated:animated];
     }

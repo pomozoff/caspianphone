@@ -113,6 +113,10 @@ static UICompositeViewDescription *compositeDescription = nil;
                                                              fullscreen:false
                                                           landscapeMode:true
                                                            portraitMode:true];
+        compositeDescription.darkBackground = NO;
+        compositeDescription.statusBarMargin = 0.0f;
+        compositeDescription.statusBarColor = [UIColor colorWithWhite:0.935f alpha:0.0f];
+        compositeDescription.statusBarStyle = UIStatusBarStyleLightContent;
     }
     return compositeDescription;
 }
@@ -136,10 +140,11 @@ static UICompositeViewDescription *compositeDescription = nil;
 	messageField.font = [UIFont systemFontOfSize:18.0f];
     messageField.contentInset = UIEdgeInsetsMake(0, -5, -2, -5);
     messageField.internalTextView.scrollIndicatorInsets = UIEdgeInsetsMake(0, 0, 0, 10);
-    messageField.backgroundColor = [UIColor clearColor];
+    //messageField.backgroundColor = [UIColor clearColor];
     [sendButton setEnabled:FALSE];
-
-    [tableController.tableView addGestureRecognizer:listTapGestureRecognizer];
+    
+    //[tableController.tableView addGestureRecognizer:listTapGestureRecognizer];
+    [self.chatView addGestureRecognizer:listTapGestureRecognizer];
     [listTapGestureRecognizer setEnabled:FALSE];
 
     listSwipeGestureRecognizer.direction = UISwipeGestureRecognizerDirectionRight;
@@ -148,6 +153,9 @@ static UICompositeViewDescription *compositeDescription = nil;
 
     [tableController.tableView setBackgroundColor:[UIColor clearColor]]; // Can't do it in Xib: issue with ios4
     [tableController.tableView setBackgroundView:nil];
+    
+    avatarImage.layer.cornerRadius = avatarImage.frame.size.height / 2;
+    avatarImage.clipsToBounds = YES;
 }
 
 
@@ -182,10 +190,12 @@ static UICompositeViewDescription *compositeDescription = nil;
     [editButton setOff];
     [[tableController tableView] reloadData];
 
+    /*
     [messageBackgroundImage setImage:[TUNinePatchCache imageOfSize:[messageBackgroundImage bounds].size
                                                forNinePatchNamed:@"chat_message_background"]];
-
-	BOOL fileSharingEnabled = [[LinphoneManager instance] lpConfigStringForKey:@"sharing_server_preference"] != NULL
+    */
+    
+	BOOL fileSharingEnabled = [[LinphoneManager instance] lpConfigStringForKey:@"sharing_server_preference"] != NULL 
 								&& [[[LinphoneManager instance] lpConfigStringForKey:@"sharing_server_preference"] length]>0;
     [pictureButton setEnabled:fileSharingEnabled];
     [waitView setHidden:TRUE];
@@ -225,8 +235,10 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
     [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
+    /*
     [messageBackgroundImage setImage:[TUNinePatchCache imageOfSize:[messageBackgroundImage bounds].size
                                                  forNinePatchNamed:@"chat_message_background"]];
+    */
     [tableController scrollToBottom:true];
 }
 
@@ -469,11 +481,13 @@ static void message_status(LinphoneChatMessage* msg,LinphoneChatMessageState sta
         [tableController setEditing:FALSE animated:TRUE];
         [editButton setOff];
     }
+    tableController.tableView.userInteractionEnabled = NO;
     [listTapGestureRecognizer setEnabled:TRUE];
     return TRUE;
 }
 
 - (BOOL)growingTextViewShouldEndEditing:(HPGrowingTextView *)growingTextView {
+    tableController.tableView.userInteractionEnabled = YES;
     [listTapGestureRecognizer setEnabled:FALSE];
     return TRUE;
 }
@@ -505,9 +519,11 @@ static void message_status(LinphoneChatMessage* msg,LinphoneChatMessageState sta
         CGRect tableRect = [tableController.view frame];
         tableRect.size.height -= diff;
         [tableController.view setFrame:tableRect];
-
+        
+        /*
         [messageBackgroundImage setImage:[TUNinePatchCache imageOfSize:[messageBackgroundImage bounds].size
                                                      forNinePatchNamed:@"chat_message_background"]];
+        */
         // if we're showing the compose message, update it position
         if ( ![composeLabel isHidden] ) {
             CGRect frame = [composeLabel frame];

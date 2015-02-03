@@ -35,9 +35,9 @@
         self->minimize = minimized;
         self->view = UICallCellOtherView_Avatar;
         self->call = acall;
-        image = [[UIImage imageNamed:@"avatar_unknown.png"] retain];
-        address = [NSLocalizedString(@"Unknown",nil) retain];
-        [self update];
+        image = [[UIImage imageNamed:@"profile-picture-large.png"] retain];
+        address = [@"Unknown" retain];
+		[self update];
     }
     return self;
 }
@@ -72,7 +72,7 @@
             ms_free(lAddress);
         }
         if(useLinphoneAddress) {
-            const char* lDisplayName = linphone_address_get_display_name(addr);
+            const char* lDisplayName = NULL; //linphone_address_get_display_name(addr);
             const char* lUserName = linphone_address_get_username(addr);
             if (lDisplayName)
                 self.address = [NSString stringWithUTF8String:lDisplayName];
@@ -170,6 +170,9 @@
         [self->avatarView setHidden:TRUE];
         [self->audioStatsView setHidden:TRUE];
         [self->videoStatsView setHidden:TRUE];
+
+        avatarImage.layer.cornerRadius = avatarImage.frame.size.height / 2;
+        avatarImage.clipsToBounds = YES;
 
         [UICallCell adaptSize:audioCodecHeaderLabel field:audioCodecLabel];
         [UICallCell adaptSize:audioDownloadBandwidthHeaderLabel field:audioDownloadBandwidthLabel];

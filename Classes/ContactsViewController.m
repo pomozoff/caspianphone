@@ -137,6 +137,10 @@ static UICompositeViewDescription *compositeDescription = nil;
 										fullscreen:false
 										landscapeMode:[LinphoneManager runningOnIpad]
 										portraitMode:true];
+        compositeDescription.darkBackground = NO;
+        compositeDescription.statusBarMargin = 0.0f;
+        compositeDescription.statusBarColor = [UIColor colorWithWhite:0.935f alpha:0.0f];
+        compositeDescription.statusBarStyle = UIStatusBarStyleLightContent;
 	}
 	return compositeDescription;
 }
@@ -190,6 +194,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 		self.tableView.dataSource = self.tableController;
 		self.tableView.delegate   = self.tableController;
+        self.tableView.backgroundColor = [UIColor clearColor];
 
 		self.tableView.autoresizingMask = UIViewAutoresizingFlexibleHeight |
 										   UIViewAutoresizingFlexibleWidth |
@@ -307,7 +312,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 	ContactDetailsViewController *controller = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[ContactDetailsViewController compositeViewDescription] push:TRUE], ContactDetailsViewController);
 	if(controller != nil) {
 		if([ContactSelection getAddAddress] == nil) {
-			[controller newContact];
+            [controller newContact:@""];
 		} else {
 			[controller newContact:[ContactSelection getAddAddress]];
 		}

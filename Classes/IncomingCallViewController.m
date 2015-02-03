@@ -48,6 +48,13 @@
 
 #pragma mark - ViewController Functions
 
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    avatarImage.layer.cornerRadius = avatarImage.frame.size.height / 2;
+    avatarImage.clipsToBounds = YES;
+}
+
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
@@ -115,7 +122,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 - (void)update {
     [self view]; //Force view load
     
-    [avatarImage setImage:[UIImage imageNamed:@"avatar_unknown.png"]];
+    [avatarImage setImage:[UIImage imageNamed:@"profile-picture-large.png"]];
     
     NSString* address = nil;
     const LinphoneAddress* addr = linphone_call_get_remote_address(call);
@@ -142,7 +149,7 @@ static UICompositeViewDescription *compositeDescription = nil;
             ms_free(lAddress);
         }
         if(useLinphoneAddress) {
-            const char* lDisplayName = linphone_address_get_display_name(addr);
+            const char* lDisplayName = NULL; //linphone_address_get_display_name(addr);
             const char* lUserName = linphone_address_get_username(addr);
             if (lDisplayName) 
                 address = [NSString stringWithUTF8String:lDisplayName];

@@ -40,6 +40,8 @@
         if ([arrayOfViews count] >= 1) {
             [self.contentView addSubview:[arrayOfViews objectAtIndex:0] ];
         }
+        avatarImage.layer.cornerRadius = avatarImage.frame.size.height / 2;
+        avatarImage.clipsToBounds = YES;
     }
     return self;
 }
@@ -99,7 +101,7 @@
     else
         [lastNameLabel setText: @""];
     
-    if(lLocalizedFirstName == nil && lLocalizedLastName == nil) {
+    if([(__bridge NSString *)lLocalizedFirstName length] < 1 && [(__bridge NSString *)lLocalizedLastName length] < 1) {
         [firstNameLabel setText: (NSString *)lLocalizedOrganization];
     }
     

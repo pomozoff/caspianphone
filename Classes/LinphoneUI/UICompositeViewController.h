@@ -37,6 +37,10 @@
 @property (assign) BOOL portraitMode;
 @property (assign) BOOL darkBackground;
 
+@property (nonatomic, retain) UIColor *statusBarColor;
+@property (nonatomic, assign) UIStatusBarStyle statusBarStyle;
+@property (nonatomic, assign) int statusBarMargin;
+
 - (id)copy;
 - (BOOL)equal:(UICompositeViewDescription*) description;
 - (id)init:(NSString *)name content:(NSString *)content stateBar:(NSString*)stateBar 

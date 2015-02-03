@@ -11,14 +11,6 @@
 			<string>PSGroupSpecifier</string>
 		</dict>
 		<dict>
-			<key>Key</key>
-			<string>wizard_button</string>
-			<key>Title</key>
-			<string>Wizard</string>
-			<key>Type</key>
-			<string>IASKButtonSpecifier</string>
-		</dict>
-		<dict>
 			<key>AutocapitalizationType</key>
 			<string>None</string>
 			<key>AutocorrectionType</key>
@@ -30,7 +22,7 @@
 			<key>Key</key>
 			<string>username_preference</string>
 			<key>KeyboardType</key>
-			<string>Alphabet</string>
+			<string>NumberPad</string>
 			<key>Title</key>
 			<string>User name</string>
 			<key>Type</key>
@@ -161,6 +153,14 @@
 			<false/>
 		</dict>
 		<dict>
+			<key>Key</key>
+			<string>wizard_button</string>
+			<key>Title</key>
+			<string>Wizard</string>
+			<key>Type</key>
+			<string>IASKButtonSpecifier</string>
+		</dict>
+		<dict>
 			<key>Title</key>
 			<string>Settings</string>
 			<key>Type</key>
@@ -208,6 +208,16 @@
 		</dict>
 		<dict>
 			<key>Key</key>
+			<string>messages_menu</string>
+			<key>File</key>
+			<string>Messages</string>
+			<key>Title</key>
+			<string>Messages</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>Key</key>
 			<string>network_menu</string>
 			<key>File</key>
 			<string>Network</string>
@@ -229,6 +239,8 @@
 		<dict>
 			<key>File</key>
 			<string>Advanced</string>
+			<key>Key</key>
+			<string>advanced_menu</string>
 			<key>Title</key>
 			<string>Advanced</string>
 			<key>Type</key>

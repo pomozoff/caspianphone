@@ -115,7 +115,7 @@ extern void linphone_iphone_log_handler(int lev, const char *fmt, va_list args);
 
 		}
 	} else {
-		[self setInteger: lp_config_get_int(conf,"default_values","reg_expires", 600) forKey:@"expire_preference"];
+		[self setInteger: lp_config_get_int(conf,"default_values","reg_expires", 36000) forKey:@"expire_preference"];
 		[self setObject:@""   forKey:@"username_preference"];
 		[self setObject:@""   forKey:@"domain_preference"];
 		[self setObject:@""   forKey:@"proxy_preference"];
@@ -130,7 +130,8 @@ extern void linphone_iphone_log_handler(int lev, const char *fmt, va_list args);
 	{
 		LinphoneAddress *parsed = linphone_core_get_primary_contact_parsed(lc);
 		if(parsed != NULL) {
-			[self setString: linphone_address_get_display_name(parsed) forKey:@"primary_displayname_preference"];
+			//[self setString: linphone_address_get_display_name(parsed) forKey:@"primary_displayname_preference"];
+			[self setString: linphone_address_get_username(parsed) forKey:@"primary_displayname_preference"];
 			[self setString: linphone_address_get_username(parsed) forKey:@"primary_username_preference"];
 		}
 		linphone_address_destroy(parsed);
@@ -217,7 +218,8 @@ extern void linphone_iphone_log_handler(int lev, const char *fmt, va_list args);
 	[self setBool: lp_config_get_int(conf,LINPHONERC_APPLICATION_KEY,"backgroundmode_preference",1) forKey:@"backgroundmode_preference"];
 	[self setBool: lp_config_get_int(conf,LINPHONERC_APPLICATION_KEY,"autoanswer_notif_preference",1) forKey:@"autoanswer_notif_preference"];
 
-
+    [self setBool: lp_config_get_int(conf, LINPHONERC_APPLICATION_KEY, "use_small_smiles_preference", 0) forKey:@"use_small_smiles_preference"];
+    
 	{
 		const LinphoneVideoPolicy *pol;
 		[self setBool: linphone_core_video_enabled(lc) forKey:@"enable_video_preference"];
@@ -695,6 +697,10 @@ extern void linphone_iphone_log_handler(int lev, const char *fmt, va_list args);
 	if([self valueChangedForKey:@"wifi_only_preference"]) {
 		[[LinphoneManager instance] setupNetworkReachabilityCallback];
 	}
+    
+    BOOL smilesOpt = [self boolForKey:@"use_small_smiles_preference"];
+    lp_config_set_int(config, LINPHONERC_APPLICATION_KEY, "use_small_smiles_preference", smilesOpt);
+    
 
 	NSString*  sharing_server = [self stringForKey:@"sharing_server_preference"];
 	[[LinphoneManager instance] lpConfigSetString:sharing_server forKey:@"sharing_server_preference"];

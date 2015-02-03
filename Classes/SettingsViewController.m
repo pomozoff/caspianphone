@@ -235,8 +235,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    
-    UIEdgeInsets inset = {0, 0, 10, 0};
+    UIEdgeInsets inset = {0, 0, 100, 0};
     UIScrollView *scrollView = self.tableView;
     [scrollView setContentInset:inset];
     [scrollView setScrollIndicatorInsets:inset];
@@ -245,9 +244,19 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
-    UIBarButtonItem *buttonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"About", nil) style:UIBarButtonItemStyleBordered target:self action:@selector(onAboutClick:)];
+    NSDictionary *attributes = @{ UITextAttributeTextColor : [UIColor whiteColor],
+                                  UITextAttributeFont : [UIFont systemFontOfSize:18.0f] };
+
+    UIBarButtonItem *buttonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"About", nil)
+                                                                   style:UIBarButtonItemStyleBordered
+                                                                  target:self
+                                                                  action:@selector(onAboutClick:)];
+
+    [buttonItem setTitleTextAttributes:attributes forState:UIControlStateNormal];
     self.navigationItem.rightBarButtonItem = buttonItem;
     [buttonItem release];
+    
+    self.navigationController.navigationBar.titleTextAttributes = attributes;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -291,7 +300,7 @@
 #pragma mark - Lifecycle Functions
 
 - (void)initUINavigationBarEx {
-    [self setTintColor:[LINPHONE_MAIN_COLOR adjustHue:5.0f/180.0f saturation:0.0f brightness:0.0f alpha:0.0f]];
+    [self setTintColor:[UIColor whiteColor]];
 }
 
 - (id)init {
@@ -319,8 +328,14 @@
 }
 
 - (void)drawRect:(CGRect)rect {
-    UIImage *img = [UIImage imageNamed:@"toolsbar_background.png"];
+    UIImage *img = [UIImage imageNamed:@"large-blue-button.png"];
     [img drawInRect:rect];
+}
+
+- (CGSize)sizeThatFits:(CGSize)size {
+    // Change navigation bar height. The height must be even, otherwise there will be a white line above the navigation bar.
+    CGSize newSize = CGSizeMake(self.frame.size.width, 70.0f);
+    return newSize;
 }
 
 @end
@@ -354,10 +369,10 @@
     [viewController viewWillAppear:animated]; // Force view
     UILabel *labelTitleView = [[UILabel alloc] init];
     labelTitleView.backgroundColor = [UIColor clearColor];
-    labelTitleView.textColor = [UIColor colorWithRed:0x41/255.0f green:0x48/255.0f blue:0x4f/255.0f alpha:1.0];
-    labelTitleView.shadowColor = [UIColor colorWithWhite:1.0 alpha:0.5];
+    labelTitleView.textColor = [UIColor whiteColor];
+    //labelTitleView.shadowColor = [UIColor colorWithWhite:1.0 alpha:0.5];
     labelTitleView.font = [UIFont boldSystemFontOfSize:20];
-    labelTitleView.shadowOffset = CGSizeMake(0,1);
+    //labelTitleView.shadowOffset = CGSizeMake(0,1);
     labelTitleView.textAlignment = NSTextAlignmentCenter;
     labelTitleView.text = viewController.title;
     [labelTitleView sizeToFit];
@@ -419,6 +434,10 @@ static UICompositeViewDescription *compositeDescription = nil;
                                                              fullscreen:false
                                                           landscapeMode:[LinphoneManager runningOnIpad]
                                                            portraitMode:true];
+        compositeDescription.darkBackground = NO;
+        compositeDescription.statusBarMargin = -20.0f;
+        compositeDescription.statusBarColor = [UIColor colorWithWhite:0.935f alpha:0.0f];
+        compositeDescription.statusBarStyle = UIStatusBarStyleLightContent;
     }
     return compositeDescription;
 }
@@ -446,10 +465,11 @@ static UICompositeViewDescription *compositeDescription = nil;
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [settingsController dismiss:self];
+
     // Set observer
-    [[NSNotificationCenter defaultCenter] removeObserver:self 
-                                                 name:kIASKAppSettingChanged 
-                                               object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:kIASKAppSettingChanged
+                                                  object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -466,6 +486,15 @@ static UICompositeViewDescription *compositeDescription = nil;
                                                object:nil];
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    // Fix bug after emailing debug logs
+    CGRect currentFrame = self.view.frame;
+    if (currentFrame.origin.y > 0) {
+        self.view.frame = CGRectMake(currentFrame.origin.x, 0.0f, currentFrame.size.width, currentFrame.size.height);
+    }
+}
 
 #pragma mark - Event Functions
 
@@ -587,13 +616,11 @@ static UICompositeViewDescription *compositeDescription = nil;
     [hiddenKeys addObject:@"release_button"];
     [hiddenKeys addObject:@"clear_cache_button"];
     [hiddenKeys addObject:@"battery_alert_button"];
+    if (! [[LinphoneManager instance] lpConfigBoolForKey:@"debugenable_preference"]) {
+        [hiddenKeys addObject:@"send_logs_button"];
+        [hiddenKeys addObject:@"reset_logs_button"];
+    }
 #endif
-
-	if (! [[LinphoneManager instance] lpConfigBoolForKey:@"debugenable_preference"]) {
-		[hiddenKeys addObject:@"send_logs_button"];
-		[hiddenKeys addObject:@"reset_logs_button"];
-	}
-    
     [hiddenKeys addObject:@"playback_gain_preference"];
     [hiddenKeys addObject:@"microphone_gain_preference"];
     
@@ -648,6 +675,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     }
 
     if(![lm lpConfigBoolForKey:@"debugenable_preference"]) {
+        [hiddenKeys addObject:@"send_logs_button"];
         [hiddenKeys addObject:@"console_button"];
     }
     
@@ -669,6 +697,47 @@ static UICompositeViewDescription *compositeDescription = nil;
         [hiddenKeys addObject:@"avpf_preference"];
     }
 
+#ifndef DEBUG
+    // *** Caspian hidden keys ***
+    // Root
+    [hiddenKeys addObject:@"domain_preference"];
+    [hiddenKeys addObject:@"transport_preference"];
+    [hiddenKeys addObject:@"advanced_account_preference"];
+    [hiddenKeys addObject:@"enable_video_preference"];
+    [hiddenKeys addObject:@"call_menu"];
+    [hiddenKeys addObject:@"release_button"];
+
+    // Advanced
+    //[hiddenKeys addObject:@"debug_group"];
+    //[hiddenKeys addObject:@"debugenable_preference"];
+    [hiddenKeys addObject:@"animations_preference"];
+    [hiddenKeys addObject:@"rotation_preference"];
+    [hiddenKeys addObject:@"backgroundmode_preference"];
+    [hiddenKeys addObject:@"autoanswer_notif_preference"];
+    [hiddenKeys addObject:@"expire_preference"];
+    [hiddenKeys addObject:@"primary_group"];
+    [hiddenKeys addObject:@"primary_displayname_preference"];
+    [hiddenKeys addObject:@"primary_username_preference"];
+    [hiddenKeys addObject:@"expire_preference"];
+    [hiddenKeys addObject:@"sharing_group"];
+    [hiddenKeys addObject:@"sharing_server_preference"];
+    // Audio
+    [hiddenKeys addObject:@"speex_8k_preference"];
+    [hiddenKeys addObject:@"speex_16k_preference"];
+    [hiddenKeys addObject:@"opus_preference"];
+    [hiddenKeys addObject:@"aaceld_16k_preference"];
+    [hiddenKeys addObject:@"aaceld_22k_preference"];
+    [hiddenKeys addObject:@"aaceld_32k_preference"];
+    [hiddenKeys addObject:@"aaceld_44k_preference"];
+    [hiddenKeys addObject:@"aaceld_48k_preference"];
+    [hiddenKeys addObject:@"amr_preference"];
+    [hiddenKeys addObject:@"ilbc_preference"];
+    // Video
+    [hiddenKeys addObject:@"vp8_preference"];
+    // Network
+    [hiddenKeys addObject:@"stun_preference"];
+#endif
+    
     return hiddenKeys;
 }
 
@@ -698,28 +767,22 @@ static UICompositeViewDescription *compositeDescription = nil;
         [[UIDevice currentDevice] _setBatteryState:UIDeviceBatteryStateUnplugged];
         [[UIDevice currentDevice] _setBatteryLevel:0.01f];
         [[NSNotificationCenter defaultCenter] postNotificationName:UIDeviceBatteryLevelDidChangeNotification object:self];
-    }
+    } else
 #endif
+    if ([key isEqual:@"reset_button"]) {
+        //[[PhoneMainView instance] resetToDefaults];
+        [[LinphoneManager instance] resetSettingsToDefault:[LinphoneManager getLc]];
+        [settingsStore transformLinphoneCoreToKeys];
+        [[PhoneMainView instance] changeCurrentView:[DialerViewController compositeViewDescription] push:TRUE];
+    }
     if([key isEqual:@"wizard_button"]) {
-		LinphoneProxyConfig* proxy = NULL;
-		linphone_core_get_default_proxy([LinphoneManager getLc], &proxy);
-		if (proxy == NULL ) {
-			[self goToWizard];
-			return;
-		}
-        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Warning",nil)
-                                                        message:NSLocalizedString(@"Launching the Wizard will delete any existing proxy config.\nAre you sure to want it?",nil)
-                                                       delegate:self
-                                              cancelButtonTitle:NSLocalizedString(@"Cancel",nil)
-                                              otherButtonTitles:NSLocalizedString(@"Launch Wizard",nil), nil];
-        [alert show];
-        [alert release];
+        [self alertView:nil clickedButtonAtIndex:1];
     } else if([key isEqual:@"about_button"]) {
         [[PhoneMainView instance] changeCurrentView:[AboutViewController compositeViewDescription] push:TRUE];
 	} else if ([key isEqualToString:@"reset_logs_button"]) {
 		linphone_core_reset_log_collection();
 	} else if ([key isEqual:@"send_logs_button"]) {
-		char * filepath = linphone_core_compress_log_collection([LinphoneManager getLc]);
+        char * filepath = linphone_core_compress_log_collection([LinphoneManager getLc]);
 		if (filepath == NULL) {
 			[LinphoneLogger log:LinphoneLoggerError format:@"Cannot sent logs: file is NULL"];
 			return;
@@ -749,8 +812,13 @@ static UICompositeViewDescription *compositeDescription = nil;
 #pragma mark - UIAlertView delegate
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    if( buttonIndex != 1 ) return; /* cancel */
-	else                   [self goToWizard];
+    if( buttonIndex != 1 ) return;
+
+    WizardViewController *controller = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[WizardViewController compositeViewDescription]], WizardViewController);
+    if(controller != nil) {
+        [controller reset];
+    }
+    [[LinphoneManager instance] resetLinphoneCore];
 }
 
 #pragma mark - Mail composer for send log
@@ -775,7 +843,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 		picker.mailComposeDelegate = self;
 
 		[picker setSubject:NSLocalizedString(@"Linphone Logs",nil)];
-		[picker setToRecipients:[NSArray arrayWithObjects:@"linphone-iphone@belledonne-communications.com", nil]];
+		[picker setToRecipients:[NSArray arrayWithObjects:@"", nil]];
 		[picker setMessageBody:NSLocalizedString(@"Linphone logs", nil) isHTML:NO];
 		[picker addAttachmentData:attachment mimeType:type fileName:attachmentName];
 

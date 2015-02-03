@@ -29,6 +29,8 @@
 #include "LinphoneManager.h"
 #include "linphone/linphonecore.h"
 
+#import <Crashlytics/Crashlytics.h>
+
 @implementation LinphoneAppDelegate
 
 @synthesize configURL;
@@ -170,6 +172,10 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
+#ifndef DEBUG
+    [Crashlytics startWithAPIKey:@"33dd028ded3a518de0afb500f5a3839a2af9f021"];
+#endif
+    
     UIApplication* app= [UIApplication sharedApplication];
     UIApplicationState state = app.applicationState;
     
@@ -212,9 +218,9 @@
     [self.window makeKeyAndVisible];
     [RootViewManager setupWithPortrait:(PhoneMainView*)self.window.rootViewController];
     [[PhoneMainView instance] startUp];
-    [[PhoneMainView instance] updateStatusBar:nil];
 
-
+    // Unneeded code that show wrong status bar for Wizard view
+    //[[PhoneMainView instance] updateStatusBar:nil];
 
 	NSDictionary *remoteNotif =[launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
     if (remoteNotif){
@@ -258,12 +264,14 @@
 }
 
 - (void)fixRing{
+    /*
     if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7) {
         // iOS7 fix for notification sound not stopping.
         // see http://stackoverflow.com/questions/19124882/stopping-ios-7-remote-notification-sound
         [[UIApplication sharedApplication] setApplicationIconBadgeNumber: 1];
         [[UIApplication sharedApplication] setApplicationIconBadgeNumber: 0];
     }
+    */
 }
 
 - (void)processRemoteNotification:(NSDictionary*)userInfo{

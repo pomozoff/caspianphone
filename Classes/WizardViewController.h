@@ -21,12 +21,16 @@
 #import <XMLRPCConnectionDelegate.h>
 #import "UICompositeViewController.h"
 
+#import "COCTextField.h"
+
 @interface WizardViewController : TPMultiLayoutViewController
 <UITextFieldDelegate,
     UICompositeViewDelegate,
     XMLRPCConnectionDelegate,
     UIGestureRecognizerDelegate,
-    UIAlertViewDelegate>
+    UIAlertViewDelegate,
+    UIPickerViewDataSource,
+    UIPickerViewDelegate>
 {
     @private
     UITextField *activeTextField;
@@ -38,32 +42,72 @@
 @property (nonatomic, retain) IBOutlet UIScrollView *contentView;
 
 @property (nonatomic, retain) IBOutlet UIView *welcomeView;
-@property (nonatomic, retain) IBOutlet UIView *choiceView;
-@property (nonatomic, retain) IBOutlet UIView *createAccountView;
+@property (nonatomic, retain) IBOutlet UIView *signUpView;
+@property (nonatomic, retain) IBOutlet UIView *passwordReceivedView;
 @property (nonatomic, retain) IBOutlet UIView *connectAccountView;
-@property (nonatomic, retain) IBOutlet UIView *externalAccountView;
-@property (nonatomic, retain) IBOutlet UIView *validateAccountView;
-@property (retain, nonatomic) IBOutlet UIView *provisionedAccountView;
+@property (nonatomic, retain) IBOutlet UIView *forgotPasswordView;
+@property (nonatomic, retain) IBOutlet UIView *signInView;
+@property (nonatomic, retain) IBOutlet UIView *activateAccountView;
+@property (nonatomic, retain) IBOutlet UIView *provisionedAccountView;
+@property (nonatomic, retain) IBOutlet UIView *askPhoneNumberView;
 
 @property (nonatomic, retain) IBOutlet UIView *waitView;
 
+@property (nonatomic, retain) IBOutlet UIButton *cancelButton;
 @property (nonatomic, retain) IBOutlet UIButton *backButton;
 @property (nonatomic, retain) IBOutlet UIButton *startButton;
 @property (nonatomic, retain) IBOutlet UIButton *createAccountButton;
 @property (nonatomic, retain) IBOutlet UIButton *connectAccountButton;
 @property (nonatomic, retain) IBOutlet UIButton *externalAccountButton;
-@property (retain, nonatomic) IBOutlet UIButton *remoteProvisioningButton;
+@property (nonatomic, retain) IBOutlet UIButton *remoteProvisioningButton;
 
-@property (retain, nonatomic) IBOutlet UITextField *provisionedUsername;
-@property (retain, nonatomic) IBOutlet UITextField *provisionedPassword;
-@property (retain, nonatomic) IBOutlet UITextField *provisionedDomain;
+@property (nonatomic, retain) IBOutlet UITextField *provisionedUsername;
+@property (nonatomic, retain) IBOutlet UITextField *provisionedPassword;
+@property (nonatomic, retain) IBOutlet UITextField *provisionedDomain;
 
 @property (nonatomic, retain) IBOutlet UIImageView *choiceViewLogoImageView;
 @property (retain, nonatomic) IBOutlet UISegmentedControl *transportChooser;
 
 @property (nonatomic, retain) IBOutlet UITapGestureRecognizer *viewTapGestureRecognizer;
 
+@property (nonatomic, retain) IBOutlet UISwitch *rememberMeRegisterSwitch;
+@property (nonatomic, retain) IBOutlet UITextField *passwordRegisterField;
+@property (nonatomic, retain) IBOutlet UITextField *phoneNumberRegisterField;
+@property (nonatomic, retain) IBOutlet UITextField *domainRegisterField;
+@property (nonatomic, retain) IBOutlet UIToolbar *phoneNumberNextToolbar;
+
+@property (nonatomic, retain) IBOutlet UIPickerView *countryPickerView;
+@property (nonatomic, retain) IBOutlet UIToolbar *countryPickerDoneToolbar;
+@property (nonatomic, retain) IBOutlet UIToolbar *numKeypadDoneToolbar;
+
+@property (nonatomic, retain) IBOutlet UILabel *registrationNextStepSignUpLabel;
+@property (nonatomic, retain) IBOutlet UITextField *countryCodeSignUpField;
+@property (nonatomic, retain) IBOutlet COCTextField *countryNameSignUpField;
+@property (nonatomic, retain) IBOutlet COCTextField *phoneNumberSignUpField;
+@property (nonatomic, retain) IBOutlet COCTextField *firstNameSignUpField;
+@property (nonatomic, retain) IBOutlet COCTextField *lastNameSignUpField;
+@property (nonatomic, retain) IBOutlet UISegmentedControl *activateBySignUpSegmented;
+@property (nonatomic, retain) IBOutlet UIButton *continueSignUpField;
+
+@property (nonatomic, retain) IBOutlet UIView *confirmView;
+@property (nonatomic, retain) IBOutlet UIImageView *smsImageConfirmView;
+@property (nonatomic, retain) IBOutlet UIImageView *callImageConfirmView;
+@property (nonatomic, retain) IBOutlet COCTextField *phoneNumberConfirmView;
+@property (nonatomic, retain) IBOutlet UILabel *smsTextConfirmView;
+@property (nonatomic, retain) IBOutlet UILabel *callTextConfirmView;
+
+@property (nonatomic, retain) IBOutlet COCTextField *activationCodeActivateField;
+
+@property (nonatomic, retain) IBOutlet COCTextField *passwordFinishField;
+
+@property (nonatomic, retain) IBOutlet UITextField *countryCodeForgotPasswordField;
+@property (nonatomic, retain) IBOutlet COCTextField *countryNameForgotPasswordField;
+@property (nonatomic, retain) IBOutlet COCTextField *phoneNumberForgotPasswordField;
+
+@property (retain, nonatomic) IBOutlet COCTextField *phoneNumberAskPhoneNumberField;
+
 - (void)reset;
+- (void)resetToDefaults;
 - (void)fillDefaultValues;
 
 - (IBAction)onStartClick:(id)sender;

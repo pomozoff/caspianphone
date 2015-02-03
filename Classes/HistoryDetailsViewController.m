@@ -22,6 +22,13 @@
 #import "FastAddressBook.h"
 #import "Utils.h"
 
+@interface HistoryDetailsViewController ()
+
+@property (retain, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (retain, nonatomic) IBOutlet UIView *contentView;
+
+@end
+
 @implementation HistoryDetailsViewController
 
 @synthesize callLogId;
@@ -72,7 +79,9 @@
     [callButton release];
     [messageButton release];
     [addContactButton release];
-
+    [_scrollView release];
+    [_contentView release];
+    
     [super dealloc];
 }
 
@@ -92,6 +101,10 @@ static UICompositeViewDescription *compositeDescription = nil;
                                                              fullscreen:false
                                                           landscapeMode:[LinphoneManager runningOnIpad]
                                                            portraitMode:true];
+        compositeDescription.darkBackground = NO;
+        compositeDescription.statusBarMargin = 0.0f;
+        compositeDescription.statusBarColor = [UIColor colorWithWhite:0.935f alpha:0.0f];
+        compositeDescription.statusBarStyle = UIStatusBarStyleLightContent;
     }
     return compositeDescription;
 }
@@ -109,13 +122,20 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    /*
     [HistoryDetailsViewController adaptSize:dateHeaderLabel field:dateLabel];
     [HistoryDetailsViewController adaptSize:durationHeaderLabel field:durationLabel];
     [HistoryDetailsViewController adaptSize:typeHeaderLabel field:typeLabel];
     [HistoryDetailsViewController adaptSize:plainAddressHeaderLabel field:plainAddressLabel];
+    */
 	[addContactButton.titleLabel setAdjustsFontSizeToFitWidth:TRUE]; // Auto shrink: IB lack!
     [callButton.titleLabel setAdjustsFontSizeToFitWidth:TRUE]; // Auto shrink: IB lack!
     [messageButton.titleLabel setAdjustsFontSizeToFitWidth:TRUE]; // Auto shrink: IB lack!
+    
+    self.scrollView.contentSize = self.contentView.frame.size;
+    
+    avatarImage.layer.cornerRadius = avatarImage.frame.size.height / 2;
+    avatarImage.clipsToBounds = YES;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -223,7 +243,7 @@ static UICompositeViewDescription *compositeDescription = nil;
             ms_free(lAddress);
         }
         if(useLinphoneAddress) {
-            const char* lDisplayName = linphone_address_get_display_name(addr);
+            const char* lDisplayName = NULL; //linphone_address_get_display_name(addr);
             const char* lUserName = linphone_address_get_username(addr);
             if (lDisplayName)
                 address = [NSString stringWithUTF8String:lDisplayName];
@@ -234,7 +254,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 
     // Set Image
     if(image == nil) {
-        image = [UIImage imageNamed:@"avatar_unknown.png"];
+        image = [UIImage imageNamed:@"profile-picture-large.png"];
     }
     [avatarImage setImage:image];
 
@@ -285,8 +305,9 @@ static UICompositeViewDescription *compositeDescription = nil;
     // contact name
     [plainAddressLabel setText:@""];
     if (addr != NULL) {
-        if ([[LinphoneManager instance] lpConfigBoolForKey:@"contact_display_username_only"]) {
+        //if ([[LinphoneManager instance] lpConfigBoolForKey:@"contact_display_username_only"]) {
 			[plainAddressLabel setText:[NSString stringWithUTF8String:linphone_address_get_username(addr)?linphone_address_get_username(addr):""]];
+        /*
 		} else {
 			char* lAddress = linphone_address_as_string_uri_only(addr);
 			if(lAddress != NULL) {
@@ -294,6 +315,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 				ms_free(lAddress);
 			}
 		}
+        */
     }
 
     if (addr != NULL) {
@@ -336,8 +358,18 @@ static UICompositeViewDescription *compositeDescription = nil;
             [ContactSelection setSipFilter:nil];
             [ContactSelection enableEmailFilter:FALSE];
             [ContactSelection setNameOrEmailFilter:nil];
+            /*
             ContactsViewController *controller = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[ContactsViewController compositeViewDescription] push:TRUE], ContactsViewController);
             if(controller != nil) {
+            }
+            */
+            ContactDetailsViewController *controller = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[ContactDetailsViewController compositeViewDescription] push:TRUE], ContactDetailsViewController);
+            if(controller != nil) {
+                if(plainAddressLabel.text.length == 0) {
+                    [controller newContact];
+                } else {
+                    [controller newContact:plainAddressLabel.text];
+                }
             }
             ms_free(lAddress);
         }
@@ -356,7 +388,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     if(contact != nil) {
        displayName = [FastAddressBook getContactDisplayName:contact];
     } else {
-        const char* lDisplayName = linphone_address_get_display_name(addr);
+        const char* lDisplayName = NULL; //linphone_address_get_display_name(addr);
         const char* lUserName = linphone_address_get_username(addr);
         if (lDisplayName)
             displayName = [NSString stringWithUTF8String:lDisplayName];
@@ -383,6 +415,18 @@ static UICompositeViewDescription *compositeDescription = nil;
     char* lAddress = linphone_address_as_string_uri_only(addr);
     if(lAddress == NULL)
         return;
+
+    NSString *displayName = nil;
+    if(contact != nil) {
+        displayName = [FastAddressBook getContactDisplayName:contact];
+    } else {
+        const char* lDisplayName = NULL; //linphone_address_get_display_name(addr);
+        const char* lUserName = linphone_address_get_username(addr);
+        if (lDisplayName)
+            displayName = [NSString stringWithUTF8String:lDisplayName];
+        else if(lUserName)
+            displayName = [NSString stringWithUTF8String:lUserName];
+    }
 
     // Go to ChatRoom view
     [[PhoneMainView instance] changeCurrentView:[ChatViewController compositeViewDescription]];

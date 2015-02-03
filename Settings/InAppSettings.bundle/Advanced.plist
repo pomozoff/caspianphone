@@ -7,6 +7,8 @@
 		<dict>
 			<key>Title</key>
 			<string>Debug</string>
+			<key>Key</key>
+			<string>debug_group</string>
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>
 		</dict>
@@ -38,9 +40,17 @@
 		</dict>
 		<dict>
 			<key>Title</key>
-			<string></string>
+			<string>Options</string>
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>
+		</dict>
+		<dict>
+			<key>Key</key>
+			<string>reset_button</string>
+			<key>Title</key>
+			<string>Reset to defaults</string>
+			<key>Type</key>
+			<string>IASKButtonSpecifier</string>
 		</dict>
 		<dict>
 			<key>DefaultValue</key>
@@ -113,6 +123,8 @@
 		<dict>
 			<key>Title</key>
 			<string>Primary account</string>
+			<key>Key</key>
+			<string>primary_group</string>
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>
 		</dict>
@@ -161,8 +173,10 @@
 		<dict>
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>
+			<key>Key</key>
+			<string>sharing_group</string>
 			<key>Title</key>
-			<string></string>
+			<string>Sharing media</string>
 		</dict>
 		<dict>
 			<key>AutocapitalizationType</key>

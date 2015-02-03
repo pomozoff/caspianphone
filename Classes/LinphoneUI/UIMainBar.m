@@ -83,6 +83,13 @@ static NSString * const kDisappearAnimation = @"disappear";
                                                  name:kLinphoneSettingsUpdate
                                                object:nil];
     [self update:FALSE];
+    
+    // Fix linphone bug updating unread messages
+    double delayInSeconds = 1.0;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        [self updateUnreadMessage:YES];
+    });
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -127,7 +134,7 @@ static NSString * const kDisappearAnimation = @"disappear";
     {
         UIButton *historyButtonLandscape = (UIButton*) [landscapeView viewWithTag:[historyButton tag]];
         // Set selected+over background: IB lack !
-        [historyButton setBackgroundImage:[UIImage imageNamed:@"history_selected.png"]
+        [historyButton setBackgroundImage:[UIImage imageNamed:@"history-hover.png"]
                                  forState:(UIControlStateHighlighted | UIControlStateSelected)];
 
         // Set selected+over background: IB lack !
@@ -141,7 +148,7 @@ static NSString * const kDisappearAnimation = @"disappear";
     {
         UIButton *contactsButtonLandscape = (UIButton*) [landscapeView viewWithTag:[contactsButton tag]];
         // Set selected+over background: IB lack !
-        [contactsButton setBackgroundImage:[UIImage imageNamed:@"contacts_selected.png"]
+        [contactsButton setBackgroundImage:[UIImage imageNamed:@"contacts-hover.png"]
                                   forState:(UIControlStateHighlighted | UIControlStateSelected)];
 
         // Set selected+over background: IB lack !
@@ -154,7 +161,7 @@ static NSString * const kDisappearAnimation = @"disappear";
     {
         UIButton *dialerButtonLandscape = (UIButton*) [landscapeView viewWithTag:[dialerButton tag]];
         // Set selected+over background: IB lack !
-        [dialerButton setBackgroundImage:[UIImage imageNamed:@"dialer_selected.png"]
+        [dialerButton setBackgroundImage:[UIImage imageNamed:@"dialer-hover.png"]
                                 forState:(UIControlStateHighlighted | UIControlStateSelected)];
 
         // Set selected+over background: IB lack !
@@ -167,7 +174,7 @@ static NSString * const kDisappearAnimation = @"disappear";
     {
         UIButton *settingsButtonLandscape = (UIButton*) [landscapeView viewWithTag:[settingsButton tag]];
         // Set selected+over background: IB lack !
-        [settingsButton setBackgroundImage:[UIImage imageNamed:@"settings_selected.png"]
+        [settingsButton setBackgroundImage:[UIImage imageNamed:@"settings-hover.png"]
                                   forState:(UIControlStateHighlighted | UIControlStateSelected)];
 
         // Set selected+over background: IB lack !
@@ -178,10 +185,11 @@ static NSString * const kDisappearAnimation = @"disappear";
         [LinphoneUtils buttonFixStatesForTabs:settingsButtonLandscape];
     }
 
+    /*
     {
         UIButton *chatButtonLandscape = (UIButton*) [landscapeView viewWithTag:[chatButton tag]];
         // Set selected+over background: IB lack !
-        [chatButton setBackgroundImage:[UIImage imageNamed:@"chat_selected.png"]
+        [chatButton setBackgroundImage:[UIImage imageNamed:@"shop-hover.png"]
                               forState:(UIControlStateHighlighted | UIControlStateSelected)];
 
         // Set selected+over background: IB lack !
@@ -191,6 +199,7 @@ static NSString * const kDisappearAnimation = @"disappear";
         [LinphoneUtils buttonFixStatesForTabs:chatButton];
         [LinphoneUtils buttonFixStatesForTabs:chatButtonLandscape];
     }
+    */
     if ([LinphoneManager langageDirectionIsRTL]){
         [self flipImageForButton:historyButton];
         [self flipImageForButton:settingsButton];
@@ -198,7 +207,6 @@ static NSString * const kDisappearAnimation = @"disappear";
         [self flipImageForButton:chatButton];
         [self flipImageForButton:contactsButton];
     }
-
 
     [super viewDidLoad]; // Have to be after due to TPMultiLayoutViewController
 }
@@ -225,8 +233,6 @@ static NSString * const kDisappearAnimation = @"disappear";
 }
 
 
-
-
 #pragma mark - Event Functions
 
 - (void)applicationWillEnterForeground:(NSNotification*)notif {
@@ -246,9 +252,12 @@ static NSString * const kDisappearAnimation = @"disappear";
 }
 
 - (void)changeViewEvent:(NSNotification*)notif {
-    //UICompositeViewDescription *view = [notif.userInfo objectForKey: @"view"];
-    //if(view != nil)
-    [self updateView:[[PhoneMainView instance] firstView]];
+    UICompositeViewDescription *view = [notif.userInfo objectForKey: @"view"];
+    if(view != nil) {
+        [self updateView:view];
+    } else {
+        [self updateView:[[PhoneMainView instance] firstView]];
+    }
 }
 
 - (void)settingsUpdate:(NSNotification*)notif {
@@ -283,7 +292,7 @@ static NSString * const kDisappearAnimation = @"disappear";
 - (void)updateUnreadMessage:(BOOL)appear{
     int unreadMessage = [LinphoneManager unreadMessageCount];
     if (unreadMessage > 0) {
-        if([chatNotificationView isHidden]) {
+        if([chatNotificationView isHidden] && [PhoneMainView.instance.currentView equal:[DialerViewController compositeViewDescription]]) {
             [chatNotificationView setHidden:FALSE];
             if([[LinphoneManager instance] lpConfigBoolForKey:@"animations_preference"] == true) {
                 if(appear) {
@@ -383,7 +392,7 @@ static NSString * const kDisappearAnimation = @"disappear";
     [target.layer removeAnimationForKey:animationID];
 }
 
-- (void)updateView:(UICompositeViewDescription*) view {
+- (void)updateView:(UICompositeViewDescription *)view {
     // Update buttons
     if([view equal:[HistoryViewController compositeViewDescription]]) {
         historyButton.selected = TRUE;
@@ -397,6 +406,7 @@ static NSString * const kDisappearAnimation = @"disappear";
     }
     if([view equal:[DialerViewController compositeViewDescription]]) {
         dialerButton.selected = TRUE;
+        [self updateUnreadMessage:YES];
     } else {
         dialerButton.selected = FALSE;
     }
@@ -405,17 +415,23 @@ static NSString * const kDisappearAnimation = @"disappear";
     } else {
         settingsButton.selected = FALSE;
     }
+    /*
     if([view equal:[ChatViewController compositeViewDescription]]) {
         chatButton.selected = TRUE;
     } else {
         chatButton.selected = FALSE;
     }
+    */
+    
+    int unreadMessage = [LinphoneManager unreadMessageCount];
+    self.chatNotificationView.hidden = ![PhoneMainView.instance.currentView equal:[DialerViewController compositeViewDescription]] || unreadMessage < 1;
 }
 
 
 #pragma mark - Action Functions
 
 - (IBAction)onHistoryClick:(id)event {
+    chatNotificationView.hidden = YES;
     [[PhoneMainView instance] changeCurrentView:[HistoryViewController compositeViewDescription]];
 }
 
@@ -425,18 +441,23 @@ static NSString * const kDisappearAnimation = @"disappear";
     [ContactSelection setSipFilter:nil];
     [ContactSelection enableEmailFilter:FALSE];
     [ContactSelection setNameOrEmailFilter:nil];
+
+    chatNotificationView.hidden = YES;
     [[PhoneMainView instance] changeCurrentView:[ContactsViewController compositeViewDescription]];
 }
 
 - (IBAction)onDialerClick:(id)event {
+    chatNotificationView.hidden = NO;
     [[PhoneMainView instance] changeCurrentView:[DialerViewController compositeViewDescription]];
 }
 
 - (IBAction)onSettingsClick:(id)event {
+    chatNotificationView.hidden = YES;
     [[PhoneMainView instance] changeCurrentView:[SettingsViewController compositeViewDescription]];
 }
 
 - (IBAction)onChatClick:(id)event {
+    chatNotificationView.hidden = YES;
     [[PhoneMainView instance] changeCurrentView:[ChatViewController compositeViewDescription]];
 }
 

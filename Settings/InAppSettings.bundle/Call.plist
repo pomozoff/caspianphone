@@ -24,7 +24,7 @@
 		</dict>
 		<dict>
 			<key>DefaultValue</key>
-			<false/>
+			<true/>
 			<key>Key</key>
 			<string>substitute_+_by_00_preference</string>
 			<key>Title</key>

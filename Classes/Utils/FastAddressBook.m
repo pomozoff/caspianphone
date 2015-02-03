@@ -87,7 +87,7 @@ static void sync_address_book (ABAddressBookRef addressBook, CFDictionaryRef inf
 
 - (ABRecordRef)getContact:(NSString*)address {
     @synchronized (addressBookMap){
-        return (ABRecordRef)[addressBookMap objectForKey:address];
+        return (ABRecordRef)[addressBookMap objectForKey:[FastAddressBook takePhoneNumberFromAddress:address]];
     }
 }
 
@@ -127,7 +127,10 @@ static void sync_address_book (ABAddressBookRef addressBook, CFDictionaryRef inf
     return normalizedSipAddress;
 }
 
-+ (NSString*)normalizePhoneNumber:(NSString*)address {
++ (NSString *)normalizePhoneNumber:(NSString *)address {
+    if (address.length < 1) {
+        return address;
+    }
     NSMutableString* lNormalizedAddress = [NSMutableString stringWithString:address];
     [lNormalizedAddress replaceOccurrencesOfString:@" "
                                         withString:@""
@@ -145,11 +148,76 @@ static void sync_address_book (ABAddressBookRef addressBook, CFDictionaryRef inf
                                         withString:@""
                                            options:0
                                              range:NSMakeRange(0, [lNormalizedAddress length])];
+    [lNormalizedAddress replaceOccurrencesOfString:@"+"
+                                        withString:@""
+                                           options:0
+                                             range:NSMakeRange(0, [lNormalizedAddress length])];
+    
+    if (lNormalizedAddress.length > 1) {
+        [lNormalizedAddress replaceOccurrencesOfString:@"00"
+                                            withString:@""
+                                               options:0
+                                                 range:NSMakeRange(0, 2)];
+    }
+    
     return [FastAddressBook appendCountryCodeIfPossible:lNormalizedAddress];
+}
+
++ (NSString *)takePhoneNumberFromAddress:(NSString*)address {
+    if (address.length < 1) {
+        return address;
+    }
+    NSMutableString* lNormalizedAddress = [NSMutableString stringWithString:address];
+    [lNormalizedAddress replaceOccurrencesOfString:@"sip:"
+                                        withString:@""
+                                           options:0
+                                             range:NSMakeRange(0, [lNormalizedAddress length])];
+    [lNormalizedAddress replaceOccurrencesOfString:@"sips:"
+                                        withString:@""
+                                           options:0
+                                             range:NSMakeRange(0, [lNormalizedAddress length])];
+    NSRange range = [lNormalizedAddress rangeOfString:@"@"];
+    return range.location != NSNotFound ? [lNormalizedAddress substringToIndex:range.location] : lNormalizedAddress;
 }
 
 + (BOOL)isAuthorized {
     return !ABAddressBookGetAuthorizationStatus || ABAddressBookGetAuthorizationStatus() ==  kABAuthorizationStatusAuthorized;
+}
+
++ (NSString *)caspianSupportPhoneNumber {
+    return @"443303500153";
+}
+
++ (BOOL)isCaspianSupportRecord:(ABRecordRef)person {
+    ABMultiValueRef phoneNumberProperty = ABRecordCopyValue(person, kABPersonPhoneProperty);
+    NSArray *phoneNumbers = (NSArray *)ABMultiValueCopyArrayOfAllValues(phoneNumberProperty);
+    CFRelease(phoneNumberProperty);
+    
+    BOOL isFound = NO;
+    if (phoneNumbers.count > 0) {
+        NSString *caspianSupport = [FastAddressBook caspianSupportPhoneNumber];
+        NSUInteger indexOfSupportNumber = [phoneNumbers indexOfObjectPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
+            NSString *phoneNumber = obj;
+            NSString *normalizedPhoneNumber = [FastAddressBook normalizePhoneNumber:phoneNumber];
+            BOOL isFound = [normalizedPhoneNumber isEqualToString:caspianSupport];
+            if (isFound) {
+                *stop = YES;
+            }
+            return isFound;
+        }];
+        isFound = indexOfSupportNumber != NSNotFound;
+    }
+    
+    [phoneNumbers release];
+    
+    return isFound;
+}
+
+
++ (BOOL)isChatRoomSupport:(LinphoneChatRoom *)chatRoom {
+    const LinphoneAddress *peerAddress = linphone_chat_room_get_peer_address(chatRoom);
+    const char* phoneNumber = linphone_address_get_username(peerAddress);
+    return [[NSString stringWithUTF8String:phoneNumber] isEqualToString:[self caspianSupportPhoneNumber]];
 }
 
 - (FastAddressBook*)init {
@@ -207,10 +275,11 @@ static void sync_address_book (ABAddressBookRef addressBook, CFDictionaryRef inf
                         NSString* lNormalizedKey = [FastAddressBook normalizePhoneNumber:(NSString*)lValue];
                         NSString* lNormalizedSipKey = [FastAddressBook normalizeSipURI:lNormalizedKey];
                         if (lNormalizedSipKey != NULL) lNormalizedKey = lNormalizedSipKey;
-                        [addressBookMap setObject:lPerson forKey:lNormalizedKey];
+                        [addressBookMap setObject:lPerson forKey:[FastAddressBook takePhoneNumberFromAddress:lNormalizedKey]];
                         CFRelease(lValue);
                         if (lLabel) CFRelease(lLabel);
-                        if (lLocalizedLabel) CFRelease(lLocalizedLabel);                    }
+                        if (lLocalizedLabel) CFRelease(lLocalizedLabel);
+                    }
                     CFRelease(lMap);
                 }
             }
@@ -233,7 +302,7 @@ static void sync_address_book (ABAddressBookRef addressBook, CFDictionaryRef inf
                             CFStringRef lValue = CFDictionaryGetValue(lDict, kABPersonInstantMessageUsernameKey);
                             NSString* lNormalizedKey = [FastAddressBook normalizeSipURI:(NSString*)lValue];
                             if(lNormalizedKey != NULL) {
-                                [addressBookMap setObject:lPerson forKey:lNormalizedKey];
+                                [addressBookMap setObject:lPerson forKey:[FastAddressBook takePhoneNumberFromAddress:lNormalizedKey]];
                             } else {
                                 [addressBookMap setObject:lPerson forKey:(NSString*)lValue];
                             }

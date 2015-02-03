@@ -67,10 +67,8 @@
 #pragma mark -
 
 - (void)touchUp:(id) sender {
-    NSString *address = [addressField text];
     NSString *displayName = nil;
-
-    if( [address length] == 0){
+    if (addressField.text.length == 0) {
         const MSList* logs = linphone_core_get_call_logs([LinphoneManager getLc]);
         while( logs ){
             LinphoneCallLog* log = logs->data;
@@ -103,7 +101,8 @@
         }
     }
 
-    if( [address length] > 0){
+    if (addressField.text.length > 0) {
+        NSString *address = [[LinphoneManager instance] cleanPhoneNumber:addressField.text];
         ABRecordRef contact = [[[LinphoneManager instance] fastAddressBook] getContact:address];
         if(contact) {
             displayName = [FastAddressBook getContactDisplayName:contact];

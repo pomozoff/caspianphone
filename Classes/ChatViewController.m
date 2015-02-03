@@ -100,6 +100,9 @@ static UICompositeViewDescription *compositeDescription = nil;
                                                              fullscreen:false
                                                           landscapeMode:[LinphoneManager runningOnIpad]
                                                            portraitMode:true];
+        compositeDescription.statusBarMargin = 0.0f;
+        compositeDescription.darkBackground = NO;
+        compositeDescription.statusBarColor = [UIColor colorWithWhite:0.935f alpha:0.0f];
     }
     return compositeDescription;
 }

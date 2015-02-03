@@ -45,6 +45,9 @@
             [self.contentView addSubview:[arrayOfViews objectAtIndex:0]];
         }
         [chatContentLabel setAdjustsFontSizeToFitWidth:TRUE]; // Auto shrink: IB lack!
+
+        avatarImage.layer.cornerRadius = avatarImage.frame.size.height / 2;
+        avatarImage.clipsToBounds = YES;
     }
     return self;
 }
@@ -108,7 +111,7 @@
 
     // Avatar
     if(image == nil) {
-        image = [UIImage imageNamed:@"avatar_unknown_small.png"];
+        image = [UIImage imageNamed:@"profile-picture-small.png"];
     }
     [avatarImage setImage:image];
 

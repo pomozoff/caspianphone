@@ -67,11 +67,14 @@
 #pragma mark - Rotation
 
 - (void)applyLayoutForInterfaceOrientation:(UIInterfaceOrientation)newOrientation {
+    /*
     NSDictionary *table = UIInterfaceOrientationIsPortrait(newOrientation) ? portraitAttributes : landscapeAttributes;
     [self applyAttributeTable:table toViewHierarchy:self.view];
     viewIsCurrentlyPortrait = UIInterfaceOrientationIsPortrait(newOrientation);
+    */
 }
 
+/*
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
     [super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
     //if ( (UIInterfaceOrientationIsPortrait(toInterfaceOrientation) && !viewIsCurrentlyPortrait) ||
@@ -79,7 +82,7 @@
         [self applyLayoutForInterfaceOrientation:toInterfaceOrientation];
     //}
 }
-
+*/
 #pragma mark - Helpers
 
 - (NSDictionary*)attributeTableForViewHierarchy:(UIView*)rootView associateWithViewHierarchy:(UIView*)associatedRootView {

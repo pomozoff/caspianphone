@@ -21,6 +21,10 @@
 
 #import "LinphoneAppDelegate.h"
 
+#import "UIMainBar.h"
+
+#define IPHONE_STATUSBAR_HEIGHT 20
+
 @implementation UICompositeViewDescription
 
 @synthesize name;
@@ -45,6 +49,10 @@
     copy.landscapeMode = self.landscapeMode;
     copy.portraitMode = self.portraitMode;
     copy.darkBackground = self.darkBackground;
+    copy.statusBarColor = self.statusBarColor;
+    copy.statusBarMargin = self.statusBarMargin;
+    copy.statusBarStyle = self.statusBarStyle;
+
     return copy;
 }
 
@@ -59,6 +67,7 @@
                              fullscreen:(BOOL) afullscreen
                           landscapeMode:(BOOL) alandscapeMode
                            portraitMode:(BOOL) aportraitMode{
+    
     self.name = aname;
     self.content = acontent;
     self.stateBar = astateBar;
@@ -69,6 +78,9 @@
     self.landscapeMode = alandscapeMode;
     self.portraitMode = aportraitMode;
     self.darkBackground = false;
+    self.statusBarColor = [UIColor colorWithWhite:0.935f alpha:1.0f];
+    self.statusBarMargin = IPHONE_STATUSBAR_HEIGHT;
+    self.statusBarStyle = UIStatusBarStyleDefault;
     
     return self;
 }
@@ -206,6 +218,10 @@
                                              selector:@selector(orientationDidChange:)
                                                  name:UIDeviceOrientationDidChangeNotification
                                                object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(applicationDidChangeStatusBarFrame:)
+                                                 name:UIApplicationDidChangeStatusBarFrameNotification
+                                               object:nil];
     [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
 }
 
@@ -227,6 +243,9 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self
                                                  name:UIDeviceOrientationDidChangeNotification
                                                object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:UIApplicationDidChangeStatusBarFrameNotification
+                                                  object:nil];
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
@@ -346,6 +365,13 @@
     }
 }
 
+- (void)correctDisplayView:(UICompositeViewDescription *)view {
+    if ([self.tabBarViewController isKindOfClass:[UIMainBar class]]) {
+        UIMainBar *mainBar = (UIMainBar *)self.tabBarViewController;
+        [mainBar updateView:view];
+    }
+}
+
 - (UIInterfaceOrientation)currentOrientation {
     return currentOrientation;
 }
@@ -407,8 +433,6 @@
     return UIInterfaceOrientationPortrait;
 }
 
-#define IPHONE_STATUSBAR_HEIGHT 20
-
 - (void)update: (UICompositeViewDescription*) description tabBar:(NSNumber*)tabBar  stateBar:(NSNumber*)stateBar fullscreen:(NSNumber*)fullscreen {
 
     UIViewController *oldContentViewController = self.contentViewController;
@@ -455,6 +479,7 @@
         self.contentViewController = newContentViewController;
         self.tabBarViewController = newTabBarViewController;
         
+        /*
         // Update rotation
         UIInterfaceOrientation correctOrientation = [self getCorrectInterfaceOrientation:(UIDeviceOrientation)[UIApplication sharedApplication].statusBarOrientation];
         if(currentOrientation != correctOrientation) {
@@ -483,7 +508,8 @@
                 [self.stateBarViewController willAnimateRotationToInterfaceOrientation:correctOrientation duration:0];
                 [self.stateBarViewController didRotateFromInterfaceOrientation:oldOrientation];
             }
-       }
+        }
+        */
     } else {
        oldViewDescription = (currentViewDescription != nil)? [currentViewDescription copy]: nil;
     }
@@ -531,7 +557,7 @@
     
     // Resize StateBar
     CGRect stateBarFrame = stateBarView.frame;
-    int origin = IPHONE_STATUSBAR_HEIGHT;
+    int origin = currentViewDescription.statusBarMargin;
     if(currentViewDescription.fullscreen)
         origin = 0;
     
@@ -546,7 +572,7 @@
     // Resize TabBar
     CGRect tabFrame = tabBarView.frame;
     if(self.tabBarViewController != nil && currentViewDescription.tabBarEnabled) {
-        tabFrame.origin.y = viewFrame.size.height;
+        tabFrame.origin.y = viewFrame.size.height - viewFrame.origin.y;
         tabFrame.origin.x = viewFrame.size.width;
         tabFrame.size.height = self.tabBarViewController.view.frame.size.height;
         //tabFrame.size.width = self.tabBarViewController.view.frame.size.width;
@@ -568,6 +594,8 @@
         tabFrame.origin.y = viewFrame.size.height;
     }
     
+    contentFrame.size.height += viewFrame.origin.y * 2;
+    
     if(currentViewDescription.fullscreen) {
         contentFrame.origin.y = origin;
         contentFrame.size.height = viewFrame.size.height - contentFrame.origin.y;
@@ -585,6 +613,8 @@
     frame.size.width = [stateBarView bounds].size.width;
     [self.stateBarViewController.view setFrame:frame];
     
+    
+    
     // Commit animation
     if(tabBar != nil || stateBar != nil || fullscreen != nil) {
         [UIView commitAnimations];
@@ -600,6 +630,8 @@
             [UICompositeViewController addSubView: self.stateBarViewController view:stateBarView];
         }
     }
+    
+    [self correctDisplayView:description];
     
     // Dealloc old view description
     if(oldViewDescription != nil) {
@@ -630,6 +662,22 @@
 
 - (BOOL)currentViewSupportsLandscape {
     return currentViewDescription ? currentViewDescription.landscapeMode : FALSE;
+}
+
+#pragma mark - Private
+
+- (void)applicationDidChangeStatusBarFrame:(NSNotification *)notification {
+    __block CGRect frame = self.view.frame;
+    if (frame.origin.y > 0) {
+        [UIView animateWithDuration:0.1f animations:^{
+            CGRect tabFrame = tabBarView.frame;
+            tabFrame.origin.y += frame.origin.y;
+            tabBarView.frame = tabFrame;
+            
+            frame.origin.y = 0;
+            self.view.frame = frame;
+        }];
+    }
 }
 
 @end

@@ -23,12 +23,15 @@
 #import "OrderedDictionary.h"
 
 @interface ContactsTableViewController : UITableViewController {
+
     @private
     OrderedDictionary* addressBookMap;
     NSMutableDictionary* avatarMap;
     
     ABAddressBookRef addressBook;
 }
+
++ (NSString *)caspianDisplayName;
 
 - (void)loadData;
 

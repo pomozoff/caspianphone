@@ -19,6 +19,7 @@
 
 #import <Foundation/Foundation.h>
 #import <AddressBook/AddressBook.h>
+#import "linphone/linphonecore.h"
 
 @interface FastAddressBook :  NSObject {
     NSMutableDictionary* addressBookMap;  
@@ -35,6 +36,10 @@
 + (BOOL)isAuthorized;
 + (NSString*)appendCountryCodeIfPossible:(NSString*)number;
 + (NSString*)normalizePhoneNumber:(NSString*)number;
++ (NSString *)takePhoneNumberFromAddress:(NSString*)address;
 + (NSString*)normalizeSipURI:(NSString*)address;
++ (NSString *)caspianSupportPhoneNumber;
++ (BOOL)isChatRoomSupport:(LinphoneChatRoom *)chatRoom;
++ (BOOL)isCaspianSupportRecord:(ABRecordRef)person;
 
 @end

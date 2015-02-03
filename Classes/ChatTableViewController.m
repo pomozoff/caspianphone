@@ -21,6 +21,8 @@
 #import "UIChatCell.h"
 
 #import "linphone/linphonecore.h"
+#import "mediastreamer2/mscommon.h"
+
 #import "PhoneMainView.h"
 #import "UACellBackgroundView.h"
 #import "UILinphone.h"
@@ -67,6 +69,7 @@ static int sorted_history_comparison(LinphoneChatRoom *to_insert, LinphoneChatRo
     MSList* unsorted = linphone_core_get_chat_rooms([LinphoneManager getLc]);
     MSList* iter     = unsorted;
 
+    LinphoneChatRoom *chatRoom = NULL;
     while (iter) {
         // store last message in user data
         MSList*               history = linphone_chat_room_get_history(iter->data, 1);
@@ -82,6 +85,13 @@ static int sorted_history_comparison(LinphoneChatRoom *to_insert, LinphoneChatRo
 
         iter = iter->next;
     }
+    if (chatRoom == NULL) {
+        const char* addressSupport = [[FastAddressBook caspianSupportPhoneNumber] UTF8String];
+        LinphoneCore *lc = [LinphoneManager getLc];
+        chatRoom = linphone_core_create_chat_room(lc, addressSupport);
+    }
+    sorted = ms_list_prepend(sorted, chatRoom);
+    
     return sorted;
 }
 
@@ -117,6 +127,9 @@ static void chatTable_free_chatrooms(void *data){
     UIChatCell *cell = [tableView dequeueReusableCellWithIdentifier:kCellId];
     if (cell == nil) {
         cell = [[[UIChatCell alloc] initWithIdentifier:kCellId] autorelease];
+        cell.rightUtilityButtons = [self isRowWithOneCallCaspianSupport:indexPath.row] ? [self rightButtonsCall] : [self rightButtonsAll];
+        [cell.rightUtilityButtons autorelease];
+        cell.delegate = self;
         
         // Background View
         UACellBackgroundView *selectedBackgroundView = [[[UACellBackgroundView alloc] initWithFrame:CGRectZero] autorelease];
@@ -152,10 +165,11 @@ static void chatTable_free_chatrooms(void *data){
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath  {
+    /*
     if(editingStyle == UITableViewCellEditingStyleDelete) {
         [tableView beginUpdates];
 
-        LinphoneChatRoom *chatRoom = (LinphoneChatRoom*)ms_list_nth_data(data, (int)[indexPath row]);
+        LinphoneChatRoom *chatRoom = (LinphoneChatRoom *)ms_list_nth_data(data, (int)[indexPath row]);
         linphone_chat_room_delete_history(chatRoom);
         linphone_chat_room_unref(chatRoom);
 
@@ -165,6 +179,119 @@ static void chatTable_free_chatrooms(void *data){
         [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
         [tableView endUpdates];
     }
+    */
+}
+
+#pragma mark - SWTableViewCellDelegate
+
+- (void)swipeableTableViewCell:(SWTableViewCell *)cell didTriggerRightUtilityButtonWithIndex:(NSInteger)index {
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+    if (!indexPath) {
+        NSString *textLabel = ((UIChatCell *)cell).addressLabel.text;
+        [LinphoneLogger logc:LinphoneLoggerLog format:"ChatTableViewController: indexpath not found for cell - %s", [textLabel UTF8String]];
+        return;
+    }
+    switch (index) {
+        case 0: {
+            // Call button was pressed
+            NSString *address = [self phoneNumberForCellAtRow:indexPath.row];
+            NSString *displayName = nil;
+            ABRecordRef contact = [[[LinphoneManager instance] fastAddressBook] getContact:address];
+            if(contact) {
+                displayName = [FastAddressBook getContactDisplayName:contact];
+            }
+            [[LinphoneManager instance] call:address displayName:displayName transfer:FALSE];
+
+            break;
+        }
+        case 1: {
+            // Delete button was pressed
+            [LinphoneLogger logc:LinphoneLoggerLog format:"ChatTableViewController: delete object for row %i", indexPath.row];
+
+            [self.tableView beginUpdates];
+            
+            LinphoneChatRoom *chatRoom = (LinphoneChatRoom*)ms_list_nth_data(data, indexPath.row);
+            linphone_chat_room_delete_history(chatRoom);
+            linphone_chat_room_unref(chatRoom);
+
+            [[NSNotificationCenter defaultCenter] postNotificationName:kLinphoneTextReceived object:self];
+            [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+
+            [self.tableView endUpdates];
+            
+            break;
+        }
+        default:
+            break;
+    }
+}
+
+- (BOOL)swipeableTableViewCellShouldHideUtilityButtonsOnSwipe:(SWTableViewCell *)cell {
+    return YES;
+}
+/*
+- (BOOL)swipeableTableViewCell:(SWTableViewCell *)cell canSwipeToState:(SWCellState)state {
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+    NSString *address = [self phoneNumberForCellAtRow:indexPath.row];
+    return ![address isEqualToString:[FastAddressBook caspianSupportPhoneNumber]];
+}
+*/
+
+#pragma mark - Private
+
+- (NSMutableArray *)rightButtonsCall {
+    UIColor *callColor = [UIColor colorWithRed:0.78f green:0.78f blue:0.8f alpha:1.0];
+    
+    NSMutableArray *rightUtilityButtons = [[NSMutableArray alloc] init];
+    [rightUtilityButtons sw_addUtilityButtonWithColor:callColor title:@"Call"];
+    
+    return rightUtilityButtons;
+}
+
+- (NSMutableArray *)rightButtonsAll {
+    UIColor *deleteColor = [UIColor colorWithRed:1.0f green:0.231f blue:0.188 alpha:1.0f];
+    
+    NSMutableArray *rightUtilityButtons = [self rightButtonsCall];
+    [rightUtilityButtons sw_addUtilityButtonWithColor:deleteColor title:@"Delete"];
+    
+    return rightUtilityButtons;
+}
+
+- (NSString *)phoneNumberForCellAtRow:(NSInteger)row {
+    LinphoneChatRoom *chatRoom = (LinphoneChatRoom*)ms_list_nth_data(data, row);
+    const LinphoneAddress *linphoneAddress = linphone_chat_room_get_peer_address(chatRoom);
+    const char *username = linphone_address_get_username(linphoneAddress);
+    NSString *dirtyAddress = [NSString stringWithUTF8String:username];
+    NSString *address = [[LinphoneManager instance] cleanPhoneNumber:dirtyAddress];
+    
+    return address;
+}
+
+- (NSString *)displayNameForRow:(NSInteger)row {
+    LinphoneChatRoom *chatRoom = (LinphoneChatRoom*)ms_list_nth_data(data, row);
+    const LinphoneAddress *linphoneAddress = linphone_chat_room_get_peer_address(chatRoom);
+
+    char *tmp = linphone_address_as_string_uri_only(linphoneAddress);
+    NSString *normalizedSipAddress = [NSString stringWithUTF8String:tmp];
+    ms_free(tmp);
+    
+    NSString *displayName = nil;
+    
+    ABRecordRef contact = [[[LinphoneManager instance] fastAddressBook] getContact:normalizedSipAddress];
+    if(contact != nil) {
+        displayName = [FastAddressBook getContactDisplayName:contact];
+    }
+    if(displayName == nil) {
+        displayName = [NSString stringWithUTF8String:linphone_address_get_username(linphoneAddress)];
+    }
+    return displayName;
+}
+
+- (BOOL)isRowWithOneCallCaspianSupport:(NSUInteger)row {
+    NSString *displayName = [self displayNameForRow:row];
+    NSString *address = [self phoneNumberForCellAtRow:row];
+    
+    return [address isEqualToString:[FastAddressBook caspianSupportPhoneNumber]] && [displayName isEqualToString:[ContactsTableViewController caspianDisplayName]];
 }
 
 @end
