@@ -134,7 +134,7 @@
 "Email addresses" = "Email addresses";
 
 /* Enter an address */
-"Enter an address" = "Enter an address";
+"Enter an address" = "Enter a phone number";
 
 /* No comment provided by engineer. */
 "Enter provisioning URL" = "Enter provisioning URL";
@@ -260,7 +260,7 @@
 "Not activated" = "Not activated";
 
 /* No comment provided by engineer. */
-"Not registered" = "Not registered";
+"Not registered" = "Offline";
 
 /* No comment provided by engineer. */
 "Ok" = "Ok";
@@ -296,16 +296,16 @@
 "Provisioning Load error" = "Provisioning Load error";
 
 /* No comment provided by engineer. */
-"Registered" = "Registered";
+"Registered" = "Active";
 
 /* No comment provided by engineer. */
-"Registration failed" = "Registration failed";
+"Registration failed" = "Failed";
 
 /* No comment provided by engineer. */
 "Registration failure" = "Registration failure";
 
 /* No comment provided by engineer. */
-"Registration in progress" = "Registration in progress";
+"Registration in progress" = "Please Wait";
 
 /* ICE has established a connection through a relay */
 "Relay connection" = "Relay connection";
