@@ -320,7 +320,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     
     [viewTapGestureRecognizer setCancelsTouchesInView:FALSE];
     [viewTapGestureRecognizer setDelegate:self];
-    [contentView addGestureRecognizer:viewTapGestureRecognizer];
+    //[contentView addGestureRecognizer:viewTapGestureRecognizer];
     
     if([LinphoneManager runningOnIpad]) {
         [LinphoneUtils adjustFontSize:welcomeView mult:2.22f];
