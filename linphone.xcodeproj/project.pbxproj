@@ -364,10 +364,6 @@
 		D33E1F0A164CF35100CFA363 /* callbar_right_padding.png in Resources */ = {isa = PBXBuildFile; fileRef = D33E1F07164CF35100CFA363 /* callbar_right_padding.png */; };
 		D3432A62158A4446001C6B0B /* led_connected.png in Resources */ = {isa = PBXBuildFile; fileRef = D3432A5C158A4446001C6B0B /* led_connected.png */; };
 		D3432A64158A4446001C6B0B /* led_error.png in Resources */ = {isa = PBXBuildFile; fileRef = D3432A5D158A4446001C6B0B /* led_error.png */; };
-		D3432A66158A4446001C6B0B /* call_quality_indicator_0.png in Resources */ = {isa = PBXBuildFile; fileRef = D3432A5E158A4446001C6B0B /* call_quality_indicator_0.png */; };
-		D3432A68158A4446001C6B0B /* call_quality_indicator_1.png in Resources */ = {isa = PBXBuildFile; fileRef = D3432A5F158A4446001C6B0B /* call_quality_indicator_1.png */; };
-		D3432A6A158A4446001C6B0B /* call_quality_indicator_2.png in Resources */ = {isa = PBXBuildFile; fileRef = D3432A60158A4446001C6B0B /* call_quality_indicator_2.png */; };
-		D3432A6C158A4446001C6B0B /* call_quality_indicator_3.png in Resources */ = {isa = PBXBuildFile; fileRef = D3432A61158A4446001C6B0B /* call_quality_indicator_3.png */; };
 		D3432A71158A45AF001C6B0B /* led_inprogress.png in Resources */ = {isa = PBXBuildFile; fileRef = D3432A6F158A45AF001C6B0B /* led_inprogress.png */; };
 		D3432A73158A45AF001C6B0B /* led_disconnected.png in Resources */ = {isa = PBXBuildFile; fileRef = D3432A70158A45AF001C6B0B /* led_disconnected.png */; };
 		D347347E1580E5F8003C7B8C /* history_default.png in Resources */ = {isa = PBXBuildFile; fileRef = D347347C1580E5F8003C7B8C /* history_default.png */; };
@@ -674,7 +670,6 @@
 		D3D6A39E159B0EEF005F692C /* add_call_default.png in Resources */ = {isa = PBXBuildFile; fileRef = D3D6A39B159B0EEF005F692C /* add_call_default.png */; };
 		D3D6A3A0159B0EEF005F692C /* add_call_disabled.png in Resources */ = {isa = PBXBuildFile; fileRef = D3D6A39C159B0EEF005F692C /* add_call_disabled.png */; };
 		D3D6A3A2159B0EEF005F692C /* add_call_over.png in Resources */ = {isa = PBXBuildFile; fileRef = D3D6A39D159B0EEF005F692C /* add_call_over.png */; };
-		D3D6A3AB159B0EFE005F692C /* security_ko.png in Resources */ = {isa = PBXBuildFile; fileRef = D3D6A3A5159B0EFE005F692C /* security_ko.png */; };
 		D3D6A3AD159B0EFE005F692C /* security_pending.png in Resources */ = {isa = PBXBuildFile; fileRef = D3D6A3A6159B0EFE005F692C /* security_pending.png */; };
 		D3D6A3AF159B0EFE005F692C /* security_ok.png in Resources */ = {isa = PBXBuildFile; fileRef = D3D6A3A7159B0EFE005F692C /* security_ok.png */; };
 		D3D6A3B1159B0EFE005F692C /* options_default.png in Resources */ = {isa = PBXBuildFile; fileRef = D3D6A3A8159B0EFE005F692C /* options_default.png */; };
@@ -3657,12 +3652,8 @@
 				639CEB001A1DF4E4004DE38F /* UIHistoryCell.xib in Resources */,
 				D3432A62158A4446001C6B0B /* led_connected.png in Resources */,
 				D3432A64158A4446001C6B0B /* led_error.png in Resources */,
-				D3432A66158A4446001C6B0B /* call_quality_indicator_0.png in Resources */,
-				D3432A68158A4446001C6B0B /* call_quality_indicator_1.png in Resources */,
 				26E7F37D1A81709F0033D3C0 /* 2.png in Resources */,
 				26E7F38E1A81709F0033D3C0 /* add-contacts-hover.png in Resources */,
-				D3432A6A158A4446001C6B0B /* call_quality_indicator_2.png in Resources */,
-				D3432A6C158A4446001C6B0B /* call_quality_indicator_3.png in Resources */,
 				D3432A71158A45AF001C6B0B /* led_inprogress.png in Resources */,
 				D3432A73158A45AF001C6B0B /* led_disconnected.png in Resources */,
 				26E7F3961A81709F0033D3C0 /* bgsett2.png in Resources */,
@@ -3717,7 +3708,6 @@
 				D3D6A39E159B0EEF005F692C /* add_call_default.png in Resources */,
 				D3D6A3A0159B0EEF005F692C /* add_call_disabled.png in Resources */,
 				D3D6A3A2159B0EEF005F692C /* add_call_over.png in Resources */,
-				D3D6A3AB159B0EFE005F692C /* security_ko.png in Resources */,
 				26E7F39A1A81709F0033D3C0 /* call_quality_indicator_1.png in Resources */,
 				D3D6A3AD159B0EFE005F692C /* security_pending.png in Resources */,
 				D3D6A3AF159B0EFE005F692C /* security_ok.png in Resources */,
@@ -4875,6 +4865,7 @@
 				);
 				INFOPLIST_FILE = "linphone-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				LD_NO_PIE = YES;
 				LIBRARY_SEARCH_PATHS = (
 					"$(BUILT_PRODUCTS_DIR)",
 					"$(SRCROOT)/liblinphone-sdk/apple-darwin/lib",
@@ -4958,6 +4949,7 @@
 				);
 				INFOPLIST_FILE = "linphone-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				LD_NO_PIE = YES;
 				LIBRARY_SEARCH_PATHS = (
 					"$(BUILT_PRODUCTS_DIR)",
 					"$(SRCROOT)/liblinphone-sdk/apple-darwin/lib/mediastreamer/plugins",
@@ -5040,6 +5032,7 @@
 				);
 				INFOPLIST_FILE = "linphone-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				LD_NO_PIE = YES;
 				LIBRARY_SEARCH_PATHS = (
 					"$(BUILT_PRODUCTS_DIR)",
 					"$(SRCROOT)/liblinphone-sdk/apple-darwin/lib/mediastreamer/plugins",
@@ -5123,6 +5116,7 @@
 				);
 				INFOPLIST_FILE = "linphone-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				LD_NO_PIE = YES;
 				LIBRARY_SEARCH_PATHS = (
 					"$(BUILT_PRODUCTS_DIR)",
 					"$(SRCROOT)/liblinphone-sdk/apple-darwin/lib/mediastreamer/plugins",
