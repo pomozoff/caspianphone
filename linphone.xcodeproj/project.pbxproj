@@ -199,13 +199,13 @@
 		26E7F3CF1A81709F0033D3C0 /* profile-picture-medium.png in Resources */ = {isa = PBXBuildFile; fileRef = 26E7F3551A81709F0033D3C0 /* profile-picture-medium.png */; };
 		26E7F3D01A81709F0033D3C0 /* profile-picture-small.png in Resources */ = {isa = PBXBuildFile; fileRef = 26E7F3561A81709F0033D3C0 /* profile-picture-small.png */; };
 		26E7F3D11A81709F0033D3C0 /* Rectangle.png in Resources */ = {isa = PBXBuildFile; fileRef = 26E7F3571A81709F0033D3C0 /* Rectangle.png */; };
-		26E7F3D21A81709F0033D3C0 /* security-ok-dark.png in Resources */ = {isa = PBXBuildFile; fileRef = 26E7F3581A81709F0033D3C0 /* security-ok-dark.png */; };
-		26E7F3D31A81709F0033D3C0 /* security-ok-hover.png in Resources */ = {isa = PBXBuildFile; fileRef = 26E7F3591A81709F0033D3C0 /* security-ok-hover.png */; };
-		26E7F3D41A81709F0033D3C0 /* security-ok.png in Resources */ = {isa = PBXBuildFile; fileRef = 26E7F35A1A81709F0033D3C0 /* security-ok.png */; };
-		26E7F3D51A81709F0033D3C0 /* security-pending-dark.png in Resources */ = {isa = PBXBuildFile; fileRef = 26E7F35B1A81709F0033D3C0 /* security-pending-dark.png */; };
-		26E7F3D61A81709F0033D3C0 /* security-pending-hover.png in Resources */ = {isa = PBXBuildFile; fileRef = 26E7F35C1A81709F0033D3C0 /* security-pending-hover.png */; };
-		26E7F3D71A81709F0033D3C0 /* security-pending.png in Resources */ = {isa = PBXBuildFile; fileRef = 26E7F35D1A81709F0033D3C0 /* security-pending.png */; };
-		26E7F3D81A81709F0033D3C0 /* security_ko.png in Resources */ = {isa = PBXBuildFile; fileRef = 26E7F35E1A81709F0033D3C0 /* security_ko.png */; };
+		26E7F3D21A81709F0033D3C0 /* onecall_security-ok-dark.png in Resources */ = {isa = PBXBuildFile; fileRef = 26E7F3581A81709F0033D3C0 /* onecall_security-ok-dark.png */; };
+		26E7F3D31A81709F0033D3C0 /* onecall_security-ok-hover.png in Resources */ = {isa = PBXBuildFile; fileRef = 26E7F3591A81709F0033D3C0 /* onecall_security-ok-hover.png */; };
+		26E7F3D41A81709F0033D3C0 /* onecall_security-ok.png in Resources */ = {isa = PBXBuildFile; fileRef = 26E7F35A1A81709F0033D3C0 /* onecall_security-ok.png */; };
+		26E7F3D51A81709F0033D3C0 /* onecall_security-pending-dark.png in Resources */ = {isa = PBXBuildFile; fileRef = 26E7F35B1A81709F0033D3C0 /* onecall_security-pending-dark.png */; };
+		26E7F3D61A81709F0033D3C0 /* onecall_security-pending-hover.png in Resources */ = {isa = PBXBuildFile; fileRef = 26E7F35C1A81709F0033D3C0 /* onecall_security-pending-hover.png */; };
+		26E7F3D71A81709F0033D3C0 /* onecall_security-pending.png in Resources */ = {isa = PBXBuildFile; fileRef = 26E7F35D1A81709F0033D3C0 /* onecall_security-pending.png */; };
+		26E7F3D81A81709F0033D3C0 /* onecall_security_ko.png in Resources */ = {isa = PBXBuildFile; fileRef = 26E7F35E1A81709F0033D3C0 /* onecall_security_ko.png */; };
 		26E7F3D91A81709F0033D3C0 /* send-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 26E7F35F1A81709F0033D3C0 /* send-button.png */; };
 		26E7F3DA1A81709F0033D3C0 /* settings-hover.png in Resources */ = {isa = PBXBuildFile; fileRef = 26E7F3601A81709F0033D3C0 /* settings-hover.png */; };
 		26E7F3DB1A81709F0033D3C0 /* settings.png in Resources */ = {isa = PBXBuildFile; fileRef = 26E7F3611A81709F0033D3C0 /* settings.png */; };
@@ -1172,13 +1172,13 @@
 		26E7F3551A81709F0033D3C0 /* profile-picture-medium.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "profile-picture-medium.png"; sourceTree = "<group>"; };
 		26E7F3561A81709F0033D3C0 /* profile-picture-small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "profile-picture-small.png"; sourceTree = "<group>"; };
 		26E7F3571A81709F0033D3C0 /* Rectangle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Rectangle.png; sourceTree = "<group>"; };
-		26E7F3581A81709F0033D3C0 /* security-ok-dark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "security-ok-dark.png"; sourceTree = "<group>"; };
-		26E7F3591A81709F0033D3C0 /* security-ok-hover.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "security-ok-hover.png"; sourceTree = "<group>"; };
-		26E7F35A1A81709F0033D3C0 /* security-ok.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "security-ok.png"; sourceTree = "<group>"; };
-		26E7F35B1A81709F0033D3C0 /* security-pending-dark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "security-pending-dark.png"; sourceTree = "<group>"; };
-		26E7F35C1A81709F0033D3C0 /* security-pending-hover.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "security-pending-hover.png"; sourceTree = "<group>"; };
-		26E7F35D1A81709F0033D3C0 /* security-pending.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "security-pending.png"; sourceTree = "<group>"; };
-		26E7F35E1A81709F0033D3C0 /* security_ko.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = security_ko.png; sourceTree = "<group>"; };
+		26E7F3581A81709F0033D3C0 /* onecall_security-ok-dark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "onecall_security-ok-dark.png"; sourceTree = "<group>"; };
+		26E7F3591A81709F0033D3C0 /* onecall_security-ok-hover.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "onecall_security-ok-hover.png"; sourceTree = "<group>"; };
+		26E7F35A1A81709F0033D3C0 /* onecall_security-ok.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "onecall_security-ok.png"; sourceTree = "<group>"; };
+		26E7F35B1A81709F0033D3C0 /* onecall_security-pending-dark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "onecall_security-pending-dark.png"; sourceTree = "<group>"; };
+		26E7F35C1A81709F0033D3C0 /* onecall_security-pending-hover.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "onecall_security-pending-hover.png"; sourceTree = "<group>"; };
+		26E7F35D1A81709F0033D3C0 /* onecall_security-pending.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "onecall_security-pending.png"; sourceTree = "<group>"; };
+		26E7F35E1A81709F0033D3C0 /* onecall_security_ko.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = onecall_security_ko.png; sourceTree = "<group>"; };
 		26E7F35F1A81709F0033D3C0 /* send-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "send-button.png"; sourceTree = "<group>"; };
 		26E7F3601A81709F0033D3C0 /* settings-hover.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "settings-hover.png"; sourceTree = "<group>"; };
 		26E7F3611A81709F0033D3C0 /* settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settings.png; sourceTree = "<group>"; };
@@ -2474,13 +2474,13 @@
 				26E7F3551A81709F0033D3C0 /* profile-picture-medium.png */,
 				26E7F3561A81709F0033D3C0 /* profile-picture-small.png */,
 				26E7F3571A81709F0033D3C0 /* Rectangle.png */,
-				26E7F3581A81709F0033D3C0 /* security-ok-dark.png */,
-				26E7F3591A81709F0033D3C0 /* security-ok-hover.png */,
-				26E7F35A1A81709F0033D3C0 /* security-ok.png */,
-				26E7F35B1A81709F0033D3C0 /* security-pending-dark.png */,
-				26E7F35C1A81709F0033D3C0 /* security-pending-hover.png */,
-				26E7F35D1A81709F0033D3C0 /* security-pending.png */,
-				26E7F35E1A81709F0033D3C0 /* security_ko.png */,
+				26E7F3581A81709F0033D3C0 /* onecall_security-ok-dark.png */,
+				26E7F3591A81709F0033D3C0 /* onecall_security-ok-hover.png */,
+				26E7F35A1A81709F0033D3C0 /* onecall_security-ok.png */,
+				26E7F35B1A81709F0033D3C0 /* onecall_security-pending-dark.png */,
+				26E7F35C1A81709F0033D3C0 /* onecall_security-pending-hover.png */,
+				26E7F35D1A81709F0033D3C0 /* onecall_security-pending.png */,
+				26E7F35E1A81709F0033D3C0 /* onecall_security_ko.png */,
 				26E7F35F1A81709F0033D3C0 /* send-button.png */,
 				26E7F3601A81709F0033D3C0 /* settings-hover.png */,
 				26E7F3611A81709F0033D3C0 /* settings.png */,
@@ -3551,7 +3551,7 @@
 				D3832801158100E400FA0D23 /* history_over.png in Resources */,
 				26E7F3C11A81709F0033D3C0 /* onecall_icon_72.png in Resources */,
 				D3832802158100E400FA0D23 /* settings_over.png in Resources */,
-				26E7F3D51A81709F0033D3C0 /* security-pending-dark.png in Resources */,
+				26E7F3D51A81709F0033D3C0 /* onecall_security-pending-dark.png in Resources */,
 				D3832803158100E400FA0D23 /* chat_over.png in Resources */,
 				D3F83F0C158205A100336684 /* micro_off_default.png in Resources */,
 				D3F83F0E158205A100336684 /* micro_off_over.png in Resources */,
@@ -3616,7 +3616,7 @@
 				D3ED3E6C15861A53006C0DE4 /* add_contact_disabled.png in Resources */,
 				26E7F3C01A81709F0033D3C0 /* onecall_icon_60@2x.png in Resources */,
 				D3ED3E6E15861A53006C0DE4 /* add_contact_over.png in Resources */,
-				26E7F3D61A81709F0033D3C0 /* security-pending-hover.png in Resources */,
+				26E7F3D61A81709F0033D3C0 /* onecall_security-pending-hover.png in Resources */,
 				D3ED3E7215861ABD006C0DE4 /* call_default.png in Resources */,
 				D3ED3E7415861ABD006C0DE4 /* call_over.png in Resources */,
 				D3ED3E7815861B1B006C0DE4 /* backspace_default.png in Resources */,
@@ -3631,7 +3631,7 @@
 				D38187D115FE346B00C3EDCA /* HistoryViewController.xib in Resources */,
 				D38187BD15FE342800C3EDCA /* ContactsViewController.xib in Resources */,
 				D354980615875534000081D8 /* contacts_all_selected.png in Resources */,
-				26E7F3D81A81709F0033D3C0 /* security_ko.png in Resources */,
+				26E7F3D81A81709F0033D3C0 /* onecall_security_ko.png in Resources */,
 				D354980815875534000081D8 /* contacts_all_default.png in Resources */,
 				D354980A15875534000081D8 /* contacts_linphone_selected.png in Resources */,
 				D354980C15875534000081D8 /* contacts_linphone_default.png in Resources */,
@@ -3745,7 +3745,7 @@
 				D3196D3415A321E3007FEEBA /* options_add_default.png in Resources */,
 				D3196D3615A321E3007FEEBA /* options_add_over.png in Resources */,
 				26E7F3DB1A81709F0033D3C0 /* settings.png in Resources */,
-				26E7F3D41A81709F0033D3C0 /* security-ok.png in Resources */,
+				26E7F3D41A81709F0033D3C0 /* onecall_security-ok.png in Resources */,
 				26E7F3E01A81709F0033D3C0 /* sms-black-hover.png in Resources */,
 				D3196D3815A321E3007FEEBA /* options_transfer_default.png in Resources */,
 				D3196D3A15A321E3007FEEBA /* options_transfer_over.png in Resources */,
@@ -3766,7 +3766,7 @@
 				D38187AD15FE340100C3EDCA /* ChatRoomViewController.xib in Resources */,
 				D3F795DD15A5831C0077328B /* chat_back_default.png in Resources */,
 				D3F795DF15A5831C0077328B /* chat_back_over.png in Resources */,
-				26E7F3D71A81709F0033D3C0 /* security-pending.png in Resources */,
+				26E7F3D71A81709F0033D3C0 /* onecall_security-pending.png in Resources */,
 				26E7F38A1A81709F0033D3C0 /* 8-hover.png in Resources */,
 				D3B9A3E115A58C450096EA4E /* chat_ok_default.png in Resources */,
 				D3B9A3E315A58C450096EA4E /* chat_ok_over.png in Resources */,
@@ -3849,7 +3849,7 @@
 				D3C31A5415BD8DED008ED271 /* options_default_landscape.png in Resources */,
 				D3C31A5615BD8DED008ED271 /* options_disabled_landscape.png in Resources */,
 				D3C31A5815BD8DED008ED271 /* options_over_landscape.png in Resources */,
-				26E7F3D31A81709F0033D3C0 /* security-ok-hover.png in Resources */,
+				26E7F3D31A81709F0033D3C0 /* onecall_security-ok-hover.png in Resources */,
 				26E7F38C1A81709F0033D3C0 /* 9-hover.png in Resources */,
 				D3C31A5A15BD8DED008ED271 /* options_selected_landscape.png in Resources */,
 				D3C31A5C15BD8DED008ED271 /* options_transfer_default_landscape.png in Resources */,
@@ -4131,7 +4131,7 @@
 				D3D52A811614495300DEB00A /* accept_over_landscape~ipad.png in Resources */,
 				D3D52A831614495300DEB00A /* accept_over~ipad.png in Resources */,
 				F070E6361A2622EC00E17AFD /* incall_padding_left.png in Resources */,
-				26E7F3D21A81709F0033D3C0 /* security-ok-dark.png in Resources */,
+				26E7F3D21A81709F0033D3C0 /* onecall_security-ok-dark.png in Resources */,
 				D3D52A851614495300DEB00A /* decline_default_landscape~ipad.png in Resources */,
 				D3D52A871614495300DEB00A /* decline_default~ipad.png in Resources */,
 				D3D52A891614495300DEB00A /* decline_over_landscape~ipad.png in Resources */,

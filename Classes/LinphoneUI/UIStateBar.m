@@ -394,12 +394,12 @@ int messagesUnreadCount;
 
 	if(security) {
 		if(pending) {
-			[callSecurityImage setImage:[UIImage imageNamed:@"security_pending.png"]];
+			[callSecurityImage setImage:[UIImage imageNamed:@"onecall_security_pending.png"]];
 		} else {
-			[callSecurityImage setImage:[UIImage imageNamed:@"security_ok.png"]];
+			[callSecurityImage setImage:[UIImage imageNamed:@"onecall_security_ok.png"]];
 		}
 	} else {
-		[callSecurityImage setImage:[UIImage imageNamed:@"security_ko.png"]];
+		[callSecurityImage setImage:[UIImage imageNamed:@"onecall_security_ko.png"]];
 	}
 	[callSecurityImage setHidden: false];
 }
