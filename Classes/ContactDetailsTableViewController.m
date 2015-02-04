@@ -278,7 +278,7 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
 	} else {
 		lMap = ABMultiValueCreateMutable(kABStringPropertyType);
 	}
-	ABMultiValueIdentifier index;
+	CFIndex index;
 	NSError* error = NULL;
 	
 	CFStringRef keys[] = { kABPersonInstantMessageUsernameKey,  kABPersonInstantMessageServiceKey};
@@ -289,7 +289,9 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
 		ABMultiValueReplaceValueAtIndex(lMap, lDict, index);
 	} else {
         CFStringRef label = (CFStringRef)[labelArray objectAtIndex:0];
-		ABMultiValueAddValueAndLabel(lMap, lDict, label, &index);
+        ABMultiValueIdentifier identifier;
+		ABMultiValueAddValueAndLabel(lMap, lDict, label, &identifier);
+        index = identifier;
 	}
 
 	if (!ABRecordSetValue(contact, kABPersonInstantMessageProperty, lMap, (CFErrorRef*)&error)) {
@@ -297,7 +299,7 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
         CFRelease(lMap);
 	} else {
 		if (entry == nil) {
-			entry = [[[Entry alloc] initWithData:index] autorelease];
+			entry = [[[Entry alloc] initWithData:(ABMultiValueIdentifier)index] autorelease];
 		}
 		CFRelease(lDict);
         CFRelease(lMap);

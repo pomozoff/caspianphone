@@ -210,7 +210,7 @@ static void chatTable_free_chatrooms(void *data){
 
             [self.tableView beginUpdates];
             
-            LinphoneChatRoom *chatRoom = (LinphoneChatRoom*)ms_list_nth_data(data, indexPath.row);
+            LinphoneChatRoom *chatRoom = (LinphoneChatRoom*)ms_list_nth_data(data, (int)indexPath.row);
             linphone_chat_room_delete_history(chatRoom);
             linphone_chat_room_unref(chatRoom);
 
@@ -258,7 +258,7 @@ static void chatTable_free_chatrooms(void *data){
 }
 
 - (NSString *)phoneNumberForCellAtRow:(NSInteger)row {
-    LinphoneChatRoom *chatRoom = (LinphoneChatRoom*)ms_list_nth_data(data, row);
+    LinphoneChatRoom *chatRoom = (LinphoneChatRoom*)ms_list_nth_data(data, (int)row);
     const LinphoneAddress *linphoneAddress = linphone_chat_room_get_peer_address(chatRoom);
     const char *username = linphone_address_get_username(linphoneAddress);
     NSString *dirtyAddress = [NSString stringWithUTF8String:username];
@@ -268,7 +268,7 @@ static void chatTable_free_chatrooms(void *data){
 }
 
 - (NSString *)displayNameForRow:(NSInteger)row {
-    LinphoneChatRoom *chatRoom = (LinphoneChatRoom*)ms_list_nth_data(data, row);
+    LinphoneChatRoom *chatRoom = (LinphoneChatRoom*)ms_list_nth_data(data, (int)row);
     const LinphoneAddress *linphoneAddress = linphone_chat_room_get_peer_address(chatRoom);
 
     char *tmp = linphone_address_as_string_uri_only(linphoneAddress);
