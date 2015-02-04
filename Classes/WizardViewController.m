@@ -1172,6 +1172,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 - (IBAction)onCountryPickerNextTap:(id)sender {
     [self didSelectCountryAtRow:[self.countryPickerView selectedRowInComponent:0]];
     [self.phoneNumberSignUpField becomeFirstResponder];
+    [self.phoneNumberForgotPasswordField becomeFirstResponder];
 }
 
 - (IBAction)onPhoneNumberRegisterNextTap:(id)sender {
