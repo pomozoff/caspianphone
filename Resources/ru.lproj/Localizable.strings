@@ -248,7 +248,7 @@
 "SIP addresses" = "Номера телефонов";
 
 /* No comment provided by engineer. */
-"SIP server unreachable" = "сервер SIP недоступен";
+"SIP server unreachable" = "сервер недоступен";
 
 /* No comment provided by engineer. */
 "Stop video" = "Остановить видео";

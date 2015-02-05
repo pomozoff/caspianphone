@@ -200,7 +200,7 @@
 "Invalid route" = "Invalid route";
 
 /* No comment provided by engineer. */
-"Invalid SIP address" = "Invalid SIP address";
+"Invalid SIP address" = "Invalid phone number";
 
 /* No comment provided by engineer. */
 "Invalid username or domain" = "Invalid username or domain";
@@ -341,10 +341,10 @@
 "Simulator cannot send emails. To test this feature, please use a real device." = "Simulator cannot send emails. To test this feature, please use a real device.";
 
 /* No comment provided by engineer. */
-"SIP address" = "SIP address";
+"SIP address" = "Phone number";
 
 /* No comment provided by engineer. */
-"SIP addresses" = "SIP addresses";
+"SIP addresses" = "Phone numbers";
 
 /* No comment provided by engineer. */
 "Stop video" = "Stop video";
