@@ -126,7 +126,7 @@
                                     </connections>
                                 </button>
                                 <view contentMode="scaleToFill" id="63" userLabel="messageField" customClass="HPGrowingTextView">
-                                    <rect key="frame" x="8" y="6" width="237" height="38"/>
+                                    <rect key="frame" x="20" y="6" width="225" height="38"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </view>
