@@ -150,6 +150,7 @@
 		2634D3651A83D5FD006533C5 /* smilie_64_sun.png in Resources */ = {isa = PBXBuildFile; fileRef = 2634D3331A83D5FD006533C5 /* smilie_64_sun.png */; };
 		2634D3661A83D5FD006533C5 /* smilie_64_surprised.png in Resources */ = {isa = PBXBuildFile; fileRef = 2634D3341A83D5FD006533C5 /* smilie_64_surprised.png */; };
 		2634D3671A83D5FD006533C5 /* smilie_64_whistling.png in Resources */ = {isa = PBXBuildFile; fileRef = 2634D3351A83D5FD006533C5 /* smilie_64_whistling.png */; };
+		2634D36A1A83E52E006533C5 /* COCTextAttachment.m in Sources */ = {isa = PBXBuildFile; fileRef = 2634D3691A83E52E006533C5 /* COCTextAttachment.m */; };
 		26E7F2F31A816E200033D3C0 /* NSMutableArray+SWUtilityButtons.m in Sources */ = {isa = PBXBuildFile; fileRef = 26E7F2E81A816E200033D3C0 /* NSMutableArray+SWUtilityButtons.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		26E7F2F41A816E200033D3C0 /* SWCellScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 26E7F2EA1A816E200033D3C0 /* SWCellScrollView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		26E7F2F51A816E200033D3C0 /* SWLongPressGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 26E7F2EC1A816E200033D3C0 /* SWLongPressGestureRecognizer.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -1167,6 +1168,8 @@
 		2634D3331A83D5FD006533C5 /* smilie_64_sun.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = smilie_64_sun.png; sourceTree = "<group>"; };
 		2634D3341A83D5FD006533C5 /* smilie_64_surprised.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = smilie_64_surprised.png; sourceTree = "<group>"; };
 		2634D3351A83D5FD006533C5 /* smilie_64_whistling.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = smilie_64_whistling.png; sourceTree = "<group>"; };
+		2634D3681A83E52E006533C5 /* COCTextAttachment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = COCTextAttachment.h; sourceTree = "<group>"; };
+		2634D3691A83E52E006533C5 /* COCTextAttachment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = COCTextAttachment.m; sourceTree = "<group>"; };
 		26E7F2E71A816E200033D3C0 /* NSMutableArray+SWUtilityButtons.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+SWUtilityButtons.h"; sourceTree = "<group>"; };
 		26E7F2E81A816E200033D3C0 /* NSMutableArray+SWUtilityButtons.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+SWUtilityButtons.m"; sourceTree = "<group>"; };
 		26E7F2E91A816E200033D3C0 /* SWCellScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWCellScrollView.h; sourceTree = "<group>"; };
@@ -2278,6 +2281,8 @@
 				D35E7594159460560066B1C1 /* ChatViewController.h */,
 				D35E7595159460560066B1C1 /* ChatViewController.m */,
 				D38187B415FE340500C3EDCA /* ChatViewController.xib */,
+				2634D3681A83E52E006533C5 /* COCTextAttachment.h */,
+				2634D3691A83E52E006533C5 /* COCTextAttachment.m */,
 				26E7F3F01A8171170033D3C0 /* COCTextField.h */,
 				26E7F3F11A8171170033D3C0 /* COCTextField.m */,
 				D30BBD1215D3EFEB000F93DD /* ContactDetailsDelegate.h */,
@@ -4572,6 +4577,7 @@
 				D3807FBF15C28940005BE9BC /* DCRoundSwitch.m in Sources */,
 				D3807FC115C28940005BE9BC /* DCRoundSwitchKnobLayer.m in Sources */,
 				D3807FC315C28940005BE9BC /* DCRoundSwitchOutlineLayer.m in Sources */,
+				2634D36A1A83E52E006533C5 /* COCTextAttachment.m in Sources */,
 				D3807FC515C28940005BE9BC /* DCRoundSwitchToggleLayer.m in Sources */,
 				D3807FE815C2894A005BE9BC /* IASKAppSettingsViewController.m in Sources */,
 				D3807FEA15C2894A005BE9BC /* IASKAppSettingsWebViewController.m in Sources */,
