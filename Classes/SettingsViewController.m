@@ -705,6 +705,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     [hiddenKeys addObject:@"advanced_account_preference"];
     [hiddenKeys addObject:@"enable_video_preference"];
     [hiddenKeys addObject:@"call_menu"];
+    [hiddenKeys addObject:@"chat_menu"];
     [hiddenKeys addObject:@"release_button"];
 
     // Advanced
