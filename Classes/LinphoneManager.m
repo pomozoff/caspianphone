@@ -1441,7 +1441,19 @@ static BOOL libStarted = FALSE;
     [self processCodecs:linphone_core_get_video_codecs(lc) linphoneCore:lc];
 }
 
+- (void)setDefaultParameters:(LinphoneCore *)lc {
+    // Audio and Video codecs
+    [self prepareAllCodecs:theLinphoneCore]; // Enable all default codecs
+    
+    LpConfig *config = linphone_core_get_config(lc);
+
+    // Chat
+    lp_config_set_int(config, LINPHONERC_APPLICATION_KEY, "use_images_for_smilies_preference", YES); // Use images for smilies is ON
+}
+
 - (void)resetSettingsToDefault:(LinphoneCore *)lc {
+    [self setDefaultParameters:lc];
+
     LpConfig *config = linphone_core_get_config(lc);
 
     // Audio and Video codecs
@@ -1601,7 +1613,7 @@ static BOOL libStarted = FALSE;
 
     //linphone_core_reset_log_collection(theLinphoneCore);
     
-    [self prepareAllCodecs:theLinphoneCore];                                                    // Enable all default codecs
+    [self setDefaultParameters:theLinphoneCore];
 
     /* set the CA file no matter what, since the remote provisioning could be hitting an HTTPS server */
 	const char* lRootCa = [[LinphoneManager bundleFile:@"rootca.pem"] cStringUsingEncoding:[NSString defaultCStringEncoding]];
