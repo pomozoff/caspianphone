@@ -218,7 +218,7 @@ extern void linphone_iphone_log_handler(int lev, const char *fmt, va_list args);
 	[self setBool: lp_config_get_int(conf,LINPHONERC_APPLICATION_KEY,"backgroundmode_preference",1) forKey:@"backgroundmode_preference"];
 	[self setBool: lp_config_get_int(conf,LINPHONERC_APPLICATION_KEY,"autoanswer_notif_preference",1) forKey:@"autoanswer_notif_preference"];
 
-    [self setBool: lp_config_get_int(conf, LINPHONERC_APPLICATION_KEY, "use_small_smiles_preference", 0) forKey:@"use_small_smiles_preference"];
+    [self setBool: lp_config_get_int(conf, LINPHONERC_APPLICATION_KEY, "use_images_for_smilies_preference", 0) forKey:@"use_images_for_smilies_preference"];
     
 	{
 		const LinphoneVideoPolicy *pol;
@@ -698,8 +698,8 @@ extern void linphone_iphone_log_handler(int lev, const char *fmt, va_list args);
 		[[LinphoneManager instance] setupNetworkReachabilityCallback];
 	}
     
-    BOOL smilesOpt = [self boolForKey:@"use_small_smiles_preference"];
-    lp_config_set_int(config, LINPHONERC_APPLICATION_KEY, "use_small_smiles_preference", smilesOpt);
+    BOOL smilesOpt = [self boolForKey:@"use_images_for_smilies_preference"];
+    lp_config_set_int(config, LINPHONERC_APPLICATION_KEY, "use_images_for_smilies_preference", smilesOpt);
     
 
 	NSString*  sharing_server = [self stringForKey:@"sharing_server_preference"];

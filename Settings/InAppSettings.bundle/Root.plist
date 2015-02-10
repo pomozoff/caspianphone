@@ -208,11 +208,11 @@
 		</dict>
 		<dict>
 			<key>Key</key>
-			<string>messages_menu</string>
+			<string>chat_menu</string>
 			<key>File</key>
-			<string>Messages</string>
+			<string>Chat</string>
 			<key>Title</key>
-			<string>Messages</string>
+			<string>Chat</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
