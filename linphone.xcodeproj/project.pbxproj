@@ -100,6 +100,7 @@
 		22E0A822111C44E100B04932 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22E0A81C111C44E100B04932 /* AboutViewController.m */; };
 		22F2508E107141E100AC9B3F /* DialerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22F2508C107141E100AC9B3F /* DialerViewController.m */; };
 		22F254811073D99800AC9B3F /* ringback.wav in Resources */ = {isa = PBXBuildFile; fileRef = 22F254801073D99800AC9B3F /* ringback.wav */; };
+		261F4BE21A8A7A8F0060F003 /* COCSmiliesManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 261F4BE11A8A7A8F0060F003 /* COCSmiliesManager.m */; };
 		2634D34F1A83D5FD006533C5 /* smilie_64_angel.png in Resources */ = {isa = PBXBuildFile; fileRef = 2634D31D1A83D5FD006533C5 /* smilie_64_angel.png */; };
 		2634D3501A83D5FD006533C5 /* smilie_64_angry.png in Resources */ = {isa = PBXBuildFile; fileRef = 2634D31E1A83D5FD006533C5 /* smilie_64_angry.png */; };
 		2634D3511A83D5FD006533C5 /* smilie_64_ashamed.png in Resources */ = {isa = PBXBuildFile; fileRef = 2634D31F1A83D5FD006533C5 /* smilie_64_ashamed.png */; };
@@ -1093,6 +1094,8 @@
 		22F2508B107141E100AC9B3F /* DialerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialerViewController.h; sourceTree = "<group>"; };
 		22F2508C107141E100AC9B3F /* DialerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = DialerViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		22F254801073D99800AC9B3F /* ringback.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = ringback.wav; path = Resources/ringback.wav; sourceTree = "<group>"; };
+		261F4BE01A8A7A8F0060F003 /* COCSmiliesManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = COCSmiliesManager.h; sourceTree = "<group>"; };
+		261F4BE11A8A7A8F0060F003 /* COCSmiliesManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = COCSmiliesManager.m; sourceTree = "<group>"; };
 		2634D31D1A83D5FD006533C5 /* smilie_64_angel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = smilie_64_angel.png; sourceTree = "<group>"; };
 		2634D31E1A83D5FD006533C5 /* smilie_64_angry.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = smilie_64_angry.png; sourceTree = "<group>"; };
 		2634D31F1A83D5FD006533C5 /* smilie_64_ashamed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = smilie_64_ashamed.png; sourceTree = "<group>"; };
@@ -2231,6 +2234,8 @@
 				D35E7594159460560066B1C1 /* ChatViewController.h */,
 				D35E7595159460560066B1C1 /* ChatViewController.m */,
 				D38187B415FE340500C3EDCA /* ChatViewController.xib */,
+				261F4BE01A8A7A8F0060F003 /* COCSmiliesManager.h */,
+				261F4BE11A8A7A8F0060F003 /* COCSmiliesManager.m */,
 				2634D3681A83E52E006533C5 /* COCTextAttachment.h */,
 				2634D3691A83E52E006533C5 /* COCTextAttachment.m */,
 				26E7F3F01A8171170033D3C0 /* COCTextField.h */,
@@ -4427,6 +4432,7 @@
 				D326483E1588950F00930C67 /* UICallBar.m in Sources */,
 				26E7F2F71A816E200033D3C0 /* SWUtilityButtonTapGestureRecognizer.m in Sources */,
 				D32648441588F6FC00930C67 /* UIToggleButton.m in Sources */,
+				261F4BE21A8A7A8F0060F003 /* COCSmiliesManager.m in Sources */,
 				D36FB2D51589EF7C0036F6F2 /* UIPauseButton.m in Sources */,
 				D31C9C98158A1CDF00756B45 /* UIHistoryCell.m in Sources */,
 				D32409C3158B49A600C8C119 /* UILongTouchButton.m in Sources */,
