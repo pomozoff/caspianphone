@@ -23,7 +23,7 @@
 #import "LinphoneManager.h"
 #import "PhoneMainView.h"
 
-#import "COCTextAttachment.h"
+#import "COCSmiliesManager.h"
 
 #import <AssetsLibrary/ALAsset.h>
 #import <AssetsLibrary/ALAssetRepresentation.h>
@@ -119,43 +119,6 @@ static UIFont *CELL_FONT = nil;
     return decoded;
 }
 
-+ (NSAttributedString *)attributedStringForText:(const char *)text {
-    NSString *nstext = [UIChatRoomCell decodeTextMessage:text];
-    
-    /* We need to use an attributed string here so that data detector don't mess
-     * with the text style. See http://stackoverflow.com/a/20669356 */
-    
-    NSAttributedString *attr_text = [[NSAttributedString alloc]
-                                     initWithString:nstext
-                                     attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:17.0],
-                                                  NSForegroundColorAttributeName:[UIColor darkGrayColor]}];
-    
-    NSUInteger index = 0;
-    while (true) {
-        NSRange findInRange = NSMakeRange(index, nstext.length - index);
-        NSRange foundRange = [nstext rangeOfString:@":)" options:NSLiteralSearch range:findInRange];
-        if (foundRange.location == NSNotFound) {
-            break;
-        }
-        
-        COCTextAttachment *textAttachment = [[COCTextAttachment alloc] init];
-        textAttachment.image = [UIImage imageNamed:@"smilie_64_angel.png"];
-        NSAttributedString *attrStringWithImage = [NSAttributedString attributedStringWithAttachment:textAttachment];
-        
-        NSLog(@"Scale - %f", textAttachment.image.scale);
-        
-        NSMutableAttributedString *attributedString = [attr_text mutableCopy];
-        [attributedString replaceCharactersInRange:foundRange withAttributedString:attrStringWithImage];
-        
-        [attr_text release];
-        attr_text = attributedString;
-        
-        index = foundRange.location;
-        nstext = [attributedString string];
-    }
-    return attr_text;
-}
-
 - (void)update {
     if(chat == nil) {
         [LinphoneLogger logc:LinphoneLoggerWarning format:"Cannot update chat room cell: null chat"];
@@ -203,10 +166,9 @@ static UIFont *CELL_FONT = nil;
         // simple text message
         [messageText setHidden:FALSE];
         if ( text ){
-            NSAttributedString *attr_text = [[UIChatRoomCell attributedStringForText:text] autorelease];
-            /*
             NSString* nstext = [UIChatRoomCell decodeTextMessage:text];
 
+            /*
             // We need to use an attributed string here so that data detector don't mess
             // with the text style. See http://stackoverflow.com/a/20669356
 
@@ -214,23 +176,9 @@ static UIFont *CELL_FONT = nil;
                                              initWithString:nstext
                                              attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:17.0],
                                                           NSForegroundColorAttributeName:[UIColor darkGrayColor]}];
-            
-            NSRange smileRange = [nstext rangeOfString:@":)"];
-            if (smileRange.location != NSNotFound) {
-                COCTextAttachment *textAttachment = [[COCTextAttachment alloc] init];
-                textAttachment.image = [UIImage imageNamed:@"smilie_128_angel.png"];
-                NSAttributedString *attrStringWithImage = [NSAttributedString attributedStringWithAttachment:textAttachment];
-                
-                NSMutableAttributedString *attributedString = [attr_text mutableCopy];
-                [attributedString replaceCharactersInRange:smileRange withAttributedString:attrStringWithImage];
-
-                attr_text = attributedString;
-            }
+            [attr_text release];
             */
-            messageText.attributedText = attr_text;
-            //[attr_text release];
-            NSLog(@"MessageText attr_text is: %@", attr_text);
-
+            messageText.attributedText = [[COCSmiliesManager sharedInstance] attributedStringForText:nstext];
         } else {
             messageText.text = @"";
         }
@@ -305,7 +253,7 @@ static UIFont *CELL_FONT = nil;
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000
 
         if( [[[UIDevice currentDevice] systemVersion] doubleValue] >= 7){
-            NSAttributedString *attr_text = [[UIChatRoomCell attributedStringForText:text] autorelease];
+            NSAttributedString *attr_text = [[COCSmiliesManager sharedInstance] attributedStringForText:messageText];
             messageSize = [attr_text boundingRectWithSize:CGSizeMake(width - CELL_MESSAGE_X_MARGIN, CGFLOAT_MAX)
                                                   options:(NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingTruncatesLastVisibleLine|NSStringDrawingUsesFontLeading)
                                                   context:nil].size;
