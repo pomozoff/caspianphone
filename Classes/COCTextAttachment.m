@@ -28,7 +28,7 @@
 - (CGRect)scaleImageSizeToWidth:(float)width {
     float scalingFactor = 0.5;
     CGSize imageSize = [self.image size];
-    CGRect rect = CGRectMake(0, 0, imageSize.width * scalingFactor, imageSize.height * scalingFactor);
+    CGRect rect = CGRectMake(0, -3, imageSize.width * scalingFactor, imageSize.height * scalingFactor);
     return rect;
 }
 
