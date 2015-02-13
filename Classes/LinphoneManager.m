@@ -2485,4 +2485,14 @@ static void audioRouteChangeListenerCallback (
     return caspianDomainIpLocal;
 }
 
+- (NSString *)sipAddressFromPhoneNumber:(NSString *)phoneNumber {
+    NSString *fullAddress;
+    if ([phoneNumber rangeOfString:@"@"].location == NSNotFound) {
+        fullAddress = [[[NSString stringWithFormat:@"sip:%@@%@", phoneNumber, [[LinphoneManager instance] caspianDomainIp]] retain] autorelease];
+    } else {
+        fullAddress = phoneNumber;
+    }
+    return fullAddress;
+}
+
 @end
