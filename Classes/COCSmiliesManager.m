@@ -59,6 +59,15 @@ static dispatch_once_t once_token = 0;
                     break;
                 }
                 
+                NSString *previousChar = [self previousCharForRange:foundRange insString:nstext];
+                if (![self isCharWhitespace:previousChar]) {
+                    break;
+                }
+                NSString *nextChar = [self nextCharForRange:foundRange insString:nstext];
+                if (![self isCharWhitespace:nextChar]) {
+                    break;
+                }
+                
                 COCTextAttachment *textAttachment = [[COCTextAttachment alloc] init];
                 textAttachment.image = self.smiliesCollection[smile];
                 NSAttributedString *attrStringWithImage = [NSAttributedString attributedStringWithAttachment:textAttachment];
@@ -130,6 +139,26 @@ static dispatch_once_t once_token = 0;
     [self addImage:[UIImage imageNamed:[NSString stringWithFormat:@"smilie_%@_whistling.png", size]] toCollection:smiliesMutableCollectionSmall forSmilies:@[@":whistling:"]];
     
     return [smiliesMutableCollectionSmall autorelease];
+}
+- (NSString *)previousCharForRange:(NSRange)range insString:(NSString *)string {
+    if (range.location == 0) {
+        return nil;
+    }
+    return [string substringWithRange:NSMakeRange(range.location - 1, 1)];
+}
+- (NSString *)nextCharForRange:(NSRange)range insString:(NSString *)string {
+    if (range.location + range.length >= string.length) {
+        return nil;
+    }
+    return [string substringWithRange:NSMakeRange(range.location + range.length, 1)];
+}
+- (BOOL)isCharWhitespace:(NSString *)charStr {
+    if (charStr) {
+        NSArray *wordsArray = [charStr componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+        NSString *noSpaceString = [wordsArray componentsJoinedByString:@""];
+        return noSpaceString.length > 0 ? NO : YES;
+    }
+    return YES;
 }
 
 @end
