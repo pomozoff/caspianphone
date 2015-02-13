@@ -320,8 +320,9 @@
 }
 
 - (LinphoneChatRoom*)findChatRoomForContact:(NSString*)contact {
+    NSString *sipContact = [[LinphoneManager instance] sipAddressFromPhoneNumber:contact];
     MSList* rooms = linphone_core_get_chat_rooms([LinphoneManager getLc]);
-    const char* from = [contact UTF8String];
+    const char* from = [sipContact UTF8String];
     while (rooms) {
         const LinphoneAddress* room_from_address = linphone_chat_room_get_peer_address((LinphoneChatRoom*)rooms->data);
         char* room_from = linphone_address_as_string_uri_only(room_from_address);
