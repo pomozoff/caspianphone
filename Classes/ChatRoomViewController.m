@@ -256,6 +256,10 @@ static UICompositeViewDescription *compositeDescription = nil;
 #pragma mark -
 
 - (void)setChatRoom:(LinphoneChatRoom *)room {
+    if (!room) {
+        return;
+    }
+    
     self->chatRoom = room;
     [messageField setText:@""];
 	[tableController setChatRoom:room];
