@@ -159,7 +159,14 @@ static void sync_address_book (ABAddressBookRef addressBook, CFDictionaryRef inf
 
 - (void) addCurrentContactContactField:(NSString*)address {
 
-	LinphoneAddress *linphoneAddress = linphone_address_new([address cStringUsingEncoding:[NSString defaultCStringEncoding]]);
+    NSString *fullAddress;
+    if ([address rangeOfString:@"@"].location == NSNotFound) {
+        fullAddress = [NSString stringWithFormat:@"sip:%@@%@", address, [[LinphoneManager instance] caspianDomainIp]];
+    } else {
+        fullAddress = address;
+    }
+    
+	LinphoneAddress *linphoneAddress = linphone_address_new([fullAddress cStringUsingEncoding:[NSString defaultCStringEncoding]]);
 	NSString *username = [NSString stringWithUTF8String:linphone_address_get_username(linphoneAddress)];
 
 	if (([username rangeOfString:@"@"].length > 0) &&
