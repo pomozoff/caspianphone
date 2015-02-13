@@ -41,7 +41,16 @@ static dispatch_once_t once_token = 0;
     
     BOOL useImagesForSmilies = [[LinphoneManager instance] lpConfigBoolForKey:@"use_images_for_smilies_preference"];
     if (useImagesForSmilies) {
-        for (NSString *smile in self.smiliesCollection) {
+        NSArray *allSmileies = [self.smiliesCollection allKeys];
+        NSArray *OrderedByLength = [allSmileies sortedArrayUsingComparator:^(NSString *str1, NSString *str2) {
+            if (str1.length > str2.length) {
+                return NSOrderedAscending;
+            } else {
+                return NSOrderedDescending;
+            }
+            return NSOrderedSame;
+        }];
+        for (NSString *smile in OrderedByLength) {
             NSUInteger index = 0;
             while (true) {
                 NSRange findInRange = NSMakeRange(index, nstext.length - index);
