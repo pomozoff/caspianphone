@@ -127,6 +127,8 @@
 		2634D3661A83D5FD006533C5 /* smilie_64_surprised.png in Resources */ = {isa = PBXBuildFile; fileRef = 2634D3341A83D5FD006533C5 /* smilie_64_surprised.png */; };
 		2634D3671A83D5FD006533C5 /* smilie_64_whistling.png in Resources */ = {isa = PBXBuildFile; fileRef = 2634D3351A83D5FD006533C5 /* smilie_64_whistling.png */; };
 		2634D36A1A83E52E006533C5 /* COCTextAttachment.m in Sources */ = {isa = PBXBuildFile; fileRef = 2634D3691A83E52E006533C5 /* COCTextAttachment.m */; };
+		2645CC701A8F9CFB00D993A0 /* smile256.png in Resources */ = {isa = PBXBuildFile; fileRef = 2645CC6E1A8F9CFB00D993A0 /* smile256.png */; };
+		2645CC711A8F9CFB00D993A0 /* smile512.png in Resources */ = {isa = PBXBuildFile; fileRef = 2645CC6F1A8F9CFB00D993A0 /* smile512.png */; };
 		26E7F2F31A816E200033D3C0 /* NSMutableArray+SWUtilityButtons.m in Sources */ = {isa = PBXBuildFile; fileRef = 26E7F2E81A816E200033D3C0 /* NSMutableArray+SWUtilityButtons.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		26E7F2F41A816E200033D3C0 /* SWCellScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 26E7F2EA1A816E200033D3C0 /* SWCellScrollView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		26E7F2F51A816E200033D3C0 /* SWLongPressGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 26E7F2EC1A816E200033D3C0 /* SWLongPressGestureRecognizer.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -1123,6 +1125,8 @@
 		2634D3351A83D5FD006533C5 /* smilie_64_whistling.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = smilie_64_whistling.png; sourceTree = "<group>"; };
 		2634D3681A83E52E006533C5 /* COCTextAttachment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = COCTextAttachment.h; sourceTree = "<group>"; };
 		2634D3691A83E52E006533C5 /* COCTextAttachment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = COCTextAttachment.m; sourceTree = "<group>"; };
+		2645CC6E1A8F9CFB00D993A0 /* smile256.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = smile256.png; sourceTree = "<group>"; };
+		2645CC6F1A8F9CFB00D993A0 /* smile512.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = smile512.png; sourceTree = "<group>"; };
 		26E7F2E71A816E200033D3C0 /* NSMutableArray+SWUtilityButtons.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+SWUtilityButtons.h"; sourceTree = "<group>"; };
 		26E7F2E81A816E200033D3C0 /* NSMutableArray+SWUtilityButtons.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+SWUtilityButtons.m"; sourceTree = "<group>"; };
 		26E7F2E91A816E200033D3C0 /* SWCellScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWCellScrollView.h; sourceTree = "<group>"; };
@@ -2423,6 +2427,8 @@
 		2634D3001A83D5FD006533C5 /* smiles */ = {
 			isa = PBXGroup;
 			children = (
+				2645CC6E1A8F9CFB00D993A0 /* smile256.png */,
+				2645CC6F1A8F9CFB00D993A0 /* smile512.png */,
 				2634D31C1A83D5FD006533C5 /* smilies_64 */,
 			);
 			path = smiles;
@@ -3777,6 +3783,7 @@
 				D36C43E9158F3F7E0048BA40 /* pause_on_default.png in Resources */,
 				F0C1F9121A28781F009402C9 /* corner-right-bottom.png in Resources */,
 				D36C43EB158F3F7E0048BA40 /* pause_on_over.png in Resources */,
+				2645CC711A8F9CFB00D993A0 /* smile512.png in Resources */,
 				D36C43F1158F61EA0048BA40 /* call_state_pause_default.png in Resources */,
 				2634D3641A83D5FD006533C5 /* smilie_64_stopclock.png in Resources */,
 				D36C43F3158F61EA0048BA40 /* call_state_pause_over.png in Resources */,
@@ -4111,6 +4118,7 @@
 				26E7F3A21A81709F0033D3C0 /* contacts-hover.png in Resources */,
 				D3BDB9B915C6B5B1007BEAC1 /* transfer_call_disabled~ipad.png in Resources */,
 				D38187E515FE349D00C3EDCA /* UICallBar~ipad.xib in Resources */,
+				2645CC701A8F9CFB00D993A0 /* smile256.png in Resources */,
 				D3ACB09B15C6D59500E15894 /* dialer_alt_back_default~ipad.png in Resources */,
 				D3ACB09D15C6D59500E15894 /* dialer_alt_back_over~ipad.png in Resources */,
 				26E7F3DE1A81709F0033D3C0 /* sign-in-normal.png in Resources */,
