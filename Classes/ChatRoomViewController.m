@@ -565,6 +565,7 @@ static void message_status(LinphoneChatMessage* msg,LinphoneChatMessageState sta
 - (IBAction)onListTap:(id)sender {
     [messageField resignFirstResponder];
 }
+
 - (IBAction)onListSwipe:(id)sender {
     [self onBackClick:sender];
 }
