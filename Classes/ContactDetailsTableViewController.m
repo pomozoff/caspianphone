@@ -827,12 +827,12 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
         Entry *entry                 = [sectionDict objectAtIndex:editingIndexPath.row];
 
         if( property != kABInvalidPropertyType ){
-            ABMultiValueRef lcMap = ABRecordCopyValue(contact, kABPersonPhoneProperty);
+            ABMultiValueRef lcMap = ABRecordCopyValue(contact, property);
             ABMutableMultiValueRef lMap = ABMultiValueCreateMutableCopy(lcMap);
             CFRelease(lcMap);
             NSInteger index = ABMultiValueGetIndexForIdentifier(lMap, [entry identifier]);
             ABMultiValueReplaceLabelAtIndex(lMap, (CFStringRef)(value), index);
-            ABRecordSetValue(contact, kABPersonPhoneProperty, lMap, nil);
+            ABRecordSetValue(contact, property, lMap, nil);
             CFRelease(lMap);
         }
 
