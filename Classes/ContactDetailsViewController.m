@@ -160,7 +160,11 @@ static void sync_address_book (ABAddressBookRef addressBook, CFDictionaryRef inf
 - (void) addCurrentContactContactField:(NSString*)address {
     NSString *sipAddress = [[LinphoneManager instance] sipAddressFromPhoneNumber:address];
 	LinphoneAddress *linphoneAddress = linphone_address_new([sipAddress cStringUsingEncoding:[NSString defaultCStringEncoding]]);
-	NSString *username = [NSString stringWithUTF8String:linphone_address_get_username(linphoneAddress)];
+    const char *cStringUserName = linphone_address_get_username(linphoneAddress);
+    NSString *username = @"";
+    if (cStringUserName) {
+        username = [NSString stringWithUTF8String:cStringUserName];
+    }
 
 	if (([username rangeOfString:@"@"].length > 0) &&
 		([[LinphoneManager instance] lpConfigBoolForKey:@"show_contacts_emails_preference"] == true)) {
