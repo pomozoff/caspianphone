@@ -624,6 +624,10 @@ static void message_status(LinphoneChatMessage* msg,LinphoneChatMessageState sta
     [sheet showInView:[PhoneMainView instance].view];
 }
 
+- (IBAction)onSmileTap:(id)sender {
+    
+}
+
 - (IBAction)onTransferCancelClick:(id)event {
     if(imageSharing) {
         [imageSharing cancel];
