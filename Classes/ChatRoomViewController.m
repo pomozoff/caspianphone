@@ -156,6 +156,9 @@ static UICompositeViewDescription *compositeDescription = nil;
     
     avatarImage.layer.cornerRadius = avatarImage.frame.size.height / 2;
     avatarImage.clipsToBounds = YES;
+
+    messageField.layer.cornerRadius = 5.0f;
+    messageField.clipsToBounds = YES;
 }
 
 
