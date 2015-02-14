@@ -14,6 +14,7 @@
 @interface COCSmiliesManager ()
 
 @property (nonatomic, retain) NSDictionary *smiliesCollection;
+@property (nonatomic, retain) NSDictionary *smiliesList;
 
 @end
 
@@ -96,6 +97,7 @@ static dispatch_once_t once_token = 0;
 }
 - (void)dealloc {
     self.smiliesCollection = nil;
+    self.smiliesList = nil;
 
     [_sharedInstance release];
     
