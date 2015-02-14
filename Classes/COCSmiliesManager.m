@@ -110,35 +110,35 @@ static dispatch_once_t once_token = 0;
     }
 }
 - (NSDictionary *)smilesOfSize:(NSString *)size {
-    NSMutableDictionary *smiliesMutableCollectionSmall = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary *smiliesMutableCollection = [[NSMutableDictionary alloc] init];
 
-    [self addImage:[UIImage imageNamed:[NSString stringWithFormat:@"smilie_%@_angel.png", size]]     toCollection:smiliesMutableCollectionSmall forSmilies:@[@":angel:", @"O:)", @"O:-)"]];
-    [self addImage:[UIImage imageNamed:[NSString stringWithFormat:@"smilie_%@_angry.png", size]]     toCollection:smiliesMutableCollectionSmall forSmilies:@[@":angry:", @":(", @":-(", @":-[", @":["]];
-    [self addImage:[UIImage imageNamed:[NSString stringWithFormat:@"smilie_%@_ashamed.png", size]]   toCollection:smiliesMutableCollectionSmall forSmilies:@[@":ashamed:", @":/ ", @":-/", @":-|", @":|"]];
-    [self addImage:[UIImage imageNamed:[NSString stringWithFormat:@"smilie_%@_balloons.png", size]]  toCollection:smiliesMutableCollectionSmall forSmilies:@[@":balloons:", @"O~"]];
-    [self addImage:[UIImage imageNamed:[NSString stringWithFormat:@"smilie_%@_blush.png", size]]     toCollection:smiliesMutableCollectionSmall forSmilies:@[@":blush:", @":$)"]];
-    [self addImage:[UIImage imageNamed:[NSString stringWithFormat:@"smilie_%@_burger.png", size]]    toCollection:smiliesMutableCollectionSmall forSmilies:@[@":burger:", @"(||)"]];
-    [self addImage:[UIImage imageNamed:[NSString stringWithFormat:@"smilie_%@_cake.png", size]]      toCollection:smiliesMutableCollectionSmall forSmilies:@[@":cake:", @"<|"]];
-    [self addImage:[UIImage imageNamed:[NSString stringWithFormat:@"smilie_%@_coffee.png", size]]    toCollection:smiliesMutableCollectionSmall forSmilies:@[@":coffee:"]];
-    [self addImage:[UIImage imageNamed:[NSString stringWithFormat:@"smilie_%@_flower.png", size]]    toCollection:smiliesMutableCollectionSmall forSmilies:@[@":flower:", @"@}-;-"]];
-    [self addImage:[UIImage imageNamed:[NSString stringWithFormat:@"smilie_%@_football.png", size]]  toCollection:smiliesMutableCollectionSmall forSmilies:@[@":football:", @"¤"]];
-    [self addImage:[UIImage imageNamed:[NSString stringWithFormat:@"smilie_%@_glasses.png", size]]   toCollection:smiliesMutableCollectionSmall forSmilies:@[@":glasses:", @"(..)"]];
-    [self addImage:[UIImage imageNamed:[NSString stringWithFormat:@"smilie_%@_goofy.png", size]]     toCollection:smiliesMutableCollectionSmall forSmilies:@[@":goofy:", @":o)"]];
-    [self addImage:[UIImage imageNamed:[NSString stringWithFormat:@"smilie_%@_grin.png", size]]      toCollection:smiliesMutableCollectionSmall forSmilies:@[@":grin:", @":D", @":-D", @"XD", @"X-D"]];
-    [self addImage:[UIImage imageNamed:[NSString stringWithFormat:@"smilie_%@_happy.png", size]]     toCollection:smiliesMutableCollectionSmall forSmilies:@[@":happy:", @":)", @":-)"]];
-    [self addImage:[UIImage imageNamed:[NSString stringWithFormat:@"smilie_%@_heart.png", size]]     toCollection:smiliesMutableCollectionSmall forSmilies:@[@":heart:", @"<3"]];
-    [self addImage:[UIImage imageNamed:[NSString stringWithFormat:@"smilie_%@_icetea.png", size]]    toCollection:smiliesMutableCollectionSmall forSmilies:@[@":drink:"]];
-    [self addImage:[UIImage imageNamed:[NSString stringWithFormat:@"smilie_%@_kiss.png", size]]      toCollection:smiliesMutableCollectionSmall forSmilies:@[@":kiss:", @":*", @":-*"]];
-    [self addImage:[UIImage imageNamed:[NSString stringWithFormat:@"smilie_%@_kisses.png", size]]    toCollection:smiliesMutableCollectionSmall forSmilies:@[@":kisses:"]];
-    [self addImage:[UIImage imageNamed:[NSString stringWithFormat:@"smilie_%@_penguin.png", size]]   toCollection:smiliesMutableCollectionSmall forSmilies:@[@":penguin:", @"^o|"]];
-    [self addImage:[UIImage imageNamed:[NSString stringWithFormat:@"smilie_%@_present.png", size]]   toCollection:smiliesMutableCollectionSmall forSmilies:@[@":present:"]];
-    [self addImage:[UIImage imageNamed:[NSString stringWithFormat:@"smilie_%@_sleepy.png", size]]    toCollection:smiliesMutableCollectionSmall forSmilies:@[@":sleepy:", @":O"]];
-    [self addImage:[UIImage imageNamed:[NSString stringWithFormat:@"smilie_%@_stopclock.png", size]] toCollection:smiliesMutableCollectionSmall forSmilies:@[@":stopclock:"]];
-    [self addImage:[UIImage imageNamed:[NSString stringWithFormat:@"smilie_%@_sun.png", size]]       toCollection:smiliesMutableCollectionSmall forSmilies:@[@":sun:"]];
-    [self addImage:[UIImage imageNamed:[NSString stringWithFormat:@"smilie_%@_surprised.png", size]] toCollection:smiliesMutableCollectionSmall forSmilies:@[@":surprised:", @"O_o"]];
-    [self addImage:[UIImage imageNamed:[NSString stringWithFormat:@"smilie_%@_whistling.png", size]] toCollection:smiliesMutableCollectionSmall forSmilies:@[@":whistling:"]];
+    [self addImage:[UIImage imageNamed:[NSString stringWithFormat:@"smilie_%@_angel.png", size]]     toCollection:smiliesMutableCollection forSmilies:@[@":angel:", @"O:)", @"O:-)"]];
+    [self addImage:[UIImage imageNamed:[NSString stringWithFormat:@"smilie_%@_angry.png", size]]     toCollection:smiliesMutableCollection forSmilies:@[@":angry:", @":(", @":-(", @":-[", @":["]];
+    [self addImage:[UIImage imageNamed:[NSString stringWithFormat:@"smilie_%@_ashamed.png", size]]   toCollection:smiliesMutableCollection forSmilies:@[@":ashamed:", @":/ ", @":-/", @":-|", @":|"]];
+    [self addImage:[UIImage imageNamed:[NSString stringWithFormat:@"smilie_%@_balloons.png", size]]  toCollection:smiliesMutableCollection forSmilies:@[@":balloons:", @"O~"]];
+    [self addImage:[UIImage imageNamed:[NSString stringWithFormat:@"smilie_%@_blush.png", size]]     toCollection:smiliesMutableCollection forSmilies:@[@":blush:", @":$)"]];
+    [self addImage:[UIImage imageNamed:[NSString stringWithFormat:@"smilie_%@_burger.png", size]]    toCollection:smiliesMutableCollection forSmilies:@[@":burger:", @"(||)"]];
+    [self addImage:[UIImage imageNamed:[NSString stringWithFormat:@"smilie_%@_cake.png", size]]      toCollection:smiliesMutableCollection forSmilies:@[@":cake:", @"<|"]];
+    [self addImage:[UIImage imageNamed:[NSString stringWithFormat:@"smilie_%@_coffee.png", size]]    toCollection:smiliesMutableCollection forSmilies:@[@":coffee:"]];
+    [self addImage:[UIImage imageNamed:[NSString stringWithFormat:@"smilie_%@_flower.png", size]]    toCollection:smiliesMutableCollection forSmilies:@[@":flower:", @"@}-;-"]];
+    [self addImage:[UIImage imageNamed:[NSString stringWithFormat:@"smilie_%@_football.png", size]]  toCollection:smiliesMutableCollection forSmilies:@[@":football:", @"¤"]];
+    [self addImage:[UIImage imageNamed:[NSString stringWithFormat:@"smilie_%@_glasses.png", size]]   toCollection:smiliesMutableCollection forSmilies:@[@":glasses:", @"(..)"]];
+    [self addImage:[UIImage imageNamed:[NSString stringWithFormat:@"smilie_%@_goofy.png", size]]     toCollection:smiliesMutableCollection forSmilies:@[@":goofy:", @":o)"]];
+    [self addImage:[UIImage imageNamed:[NSString stringWithFormat:@"smilie_%@_grin.png", size]]      toCollection:smiliesMutableCollection forSmilies:@[@":grin:", @":D", @":-D", @"XD", @"X-D"]];
+    [self addImage:[UIImage imageNamed:[NSString stringWithFormat:@"smilie_%@_happy.png", size]]     toCollection:smiliesMutableCollection forSmilies:@[@":happy:", @":)", @":-)"]];
+    [self addImage:[UIImage imageNamed:[NSString stringWithFormat:@"smilie_%@_heart.png", size]]     toCollection:smiliesMutableCollection forSmilies:@[@":heart:", @"<3"]];
+    [self addImage:[UIImage imageNamed:[NSString stringWithFormat:@"smilie_%@_icetea.png", size]]    toCollection:smiliesMutableCollection forSmilies:@[@":drink:"]];
+    [self addImage:[UIImage imageNamed:[NSString stringWithFormat:@"smilie_%@_kiss.png", size]]      toCollection:smiliesMutableCollection forSmilies:@[@":kiss:", @":*", @":-*"]];
+    [self addImage:[UIImage imageNamed:[NSString stringWithFormat:@"smilie_%@_kisses.png", size]]    toCollection:smiliesMutableCollection forSmilies:@[@":kisses:"]];
+    [self addImage:[UIImage imageNamed:[NSString stringWithFormat:@"smilie_%@_penguin.png", size]]   toCollection:smiliesMutableCollection forSmilies:@[@":penguin:", @"^o|"]];
+    [self addImage:[UIImage imageNamed:[NSString stringWithFormat:@"smilie_%@_present.png", size]]   toCollection:smiliesMutableCollection forSmilies:@[@":present:"]];
+    [self addImage:[UIImage imageNamed:[NSString stringWithFormat:@"smilie_%@_sleepy.png", size]]    toCollection:smiliesMutableCollection forSmilies:@[@":sleepy:", @":O"]];
+    [self addImage:[UIImage imageNamed:[NSString stringWithFormat:@"smilie_%@_stopclock.png", size]] toCollection:smiliesMutableCollection forSmilies:@[@":stopclock:"]];
+    [self addImage:[UIImage imageNamed:[NSString stringWithFormat:@"smilie_%@_sun.png", size]]       toCollection:smiliesMutableCollection forSmilies:@[@":sun:"]];
+    [self addImage:[UIImage imageNamed:[NSString stringWithFormat:@"smilie_%@_surprised.png", size]] toCollection:smiliesMutableCollection forSmilies:@[@":surprised:", @"O_o"]];
+    [self addImage:[UIImage imageNamed:[NSString stringWithFormat:@"smilie_%@_whistling.png", size]] toCollection:smiliesMutableCollection forSmilies:@[@":whistling:"]];
     
-    return [smiliesMutableCollectionSmall autorelease];
+    return [smiliesMutableCollection autorelease];
 }
 - (NSString *)previousCharForRange:(NSRange)range insString:(NSString *)string {
     if (range.location == 0) {
