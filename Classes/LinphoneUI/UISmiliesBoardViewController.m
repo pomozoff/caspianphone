@@ -49,6 +49,13 @@ static NSString *reuseIdentifier = @"SmileCell";
  }
  */
 
+- (void)dealloc {
+    [_smiliesList release];
+    [_delegate release];
+    
+    [super dealloc];
+}
+
 #pragma mark <UICollectionViewDataSource>
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
