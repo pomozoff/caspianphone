@@ -27,6 +27,7 @@
 #import "Utils.h"
 
 #import "UISmiliesBoardViewController.h"
+#import "COCSmiliesManager.h"
 
 static const CGFloat smiliesBoardHeight = 200.0f;
 static NSTimeInterval animationDuration = 0.3f;
@@ -66,7 +67,8 @@ static NSTimeInterval animationDuration = 0.3f;
 - (UISmiliesBoardViewController *)smiliesBoard {
     if (!_smiliesBoard) {
         _smiliesBoard = [[UISmiliesBoardViewController alloc] initWithNibName:@"UISmiliesBoardViewController" bundle:nil];
-        _smiliesBoard.view.frame = [self smiliesBoardSizeForStateVisible:NO];
+        _smiliesBoard.collectionView.frame = [self smiliesBoardSizeForStateVisible:NO];
+        [_smiliesBoard.collectionView retain];
         _smiliesBoard.delegate = self;
     }
     return _smiliesBoard;
@@ -74,11 +76,11 @@ static NSTimeInterval animationDuration = 0.3f;
 - (void)setIsSmiliesBoardVisible:(BOOL)isSmiliesBoardVisible {
     if (_isSmiliesBoardVisible) {
         [self resizeViewBackAnimationDuration:animationDuration completionBlock:^(BOOL finished) {
-            [self.smiliesBoard.view removeFromSuperview];
+            [self.smiliesBoard.collectionView removeFromSuperview];
             _isSmiliesBoardVisible = isSmiliesBoardVisible;
         }];
     } else {
-        [self.view addSubview:self.smiliesBoard.view];
+        [self.view addSubview:self.smiliesBoard.collectionView];
         [self liftViewUpToEndFrame:[self smiliesBoardSizeForStateVisible:YES] animationDuration:animationDuration completionBlock:^(BOOL finished) {
             _isSmiliesBoardVisible = isSmiliesBoardVisible;
         }];
@@ -88,6 +90,7 @@ static NSTimeInterval animationDuration = 0.3f;
 #pragma mark - <UISmiliesCollectionDelegate>
 
 - (void)didSelectSmileWithIndex:(NSInteger)index {
+    [self.messageField replaceSelectedRangeWithText:[[COCSmiliesManager sharedInstance] smileCodeWithIndex:index]];
     NSLog(@"Add smile with index %ld", (long)index);
 }
 
@@ -138,6 +141,7 @@ static NSTimeInterval animationDuration = 0.3f;
     [composeLabel release];
     [composeIndicatorView release];
     
+    [_smiliesBoard.collectionView release];
     self.smiliesBoard = nil;
     
     [super dealloc];
@@ -839,7 +843,7 @@ static void message_status(LinphoneChatMessage* msg,LinphoneChatMessageState sta
                          
                          // Additional animation
                          {
-                             self.smiliesBoard.view.frame = [self smiliesBoardSizeForStateVisible:NO];
+                             self.smiliesBoard.collectionView.frame = [self smiliesBoardSizeForStateVisible:NO];
                          }
                          
                          // Resize & Move table view
@@ -902,7 +906,7 @@ static void message_status(LinphoneChatMessage* msg,LinphoneChatMessageState sta
                          
                          // Additional animation
                          {
-                             self.smiliesBoard.view.frame = [self smiliesBoardSizeForStateVisible:YES];
+                             self.smiliesBoard.collectionView.frame = [self smiliesBoardSizeForStateVisible:YES];
                          }
                          
                          // Resize & Move table view

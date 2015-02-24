@@ -333,6 +333,13 @@
 	
 }
 
+- (void)replaceRange:(UITextRange *)range withText:(NSString *)text {
+    [self.internalTextView replaceRange:range withText:text];
+}
+- (void)replaceSelectedRangeWithText:(NSString *)text {
+    [self replaceRange:self.internalTextView.selectedTextRange withText:text];
+}
+
 // Code from apple developer forum - @Steve Krulewitz, @Mark Marszal, @Eric Silverberg
 - (CGFloat)measureHeight
 {

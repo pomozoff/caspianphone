@@ -9,6 +9,8 @@
 #import "UISmiliesBoardViewController.h"
 #import "UISmileCollectionViewCell.h"
 
+#import "COCSmiliesManager.h"
+
 static NSString *reuseIdentifier = @"SmileCell";
 
 @interface UISmiliesBoardViewController ()
@@ -50,7 +52,6 @@ static NSString *reuseIdentifier = @"SmileCell";
  */
 
 - (void)dealloc {
-    [_smiliesList release];
     [_delegate release];
     
     [super dealloc];
@@ -59,18 +60,22 @@ static NSString *reuseIdentifier = @"SmileCell";
 #pragma mark <UICollectionViewDataSource>
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return self.smiliesList.count;
+    return [[COCSmiliesManager sharedInstance] smiliesCount];
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     UISmileCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
     
-    cell.smileImage = self.smiliesList[indexPath.row];
+    cell.smileImage.image = [[COCSmiliesManager sharedInstance] smileWithIndex:indexPath.row];
     
     return cell;
 }
 
 #pragma mark <UICollectionViewDelegate>
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    [self.delegate didSelectSmileWithIndex:indexPath.row];
+}
 
 /*
  // Uncomment this method to specify if the specified item should be highlighted during tracking

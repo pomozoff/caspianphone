@@ -16,7 +16,6 @@
 
 @interface UISmiliesBoardViewController : UICollectionViewController <UICollectionViewDataSource, UICollectionViewDelegate>
 
-@property (nonatomic, retain) NSArray *smiliesList;
 @property (nonatomic, retain) id<UISmiliesCollectionDelegate> delegate;
 
 @end

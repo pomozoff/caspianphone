@@ -119,4 +119,7 @@
 // call to force a height change (e.g. after you change max/min lines)
 - (void)refreshHeight;
 
+- (void)replaceRange:(UITextRange *)range withText:(NSString *)text;
+- (void)replaceSelectedRangeWithText:(NSString *)text;
+
 @end

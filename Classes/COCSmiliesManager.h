@@ -13,5 +13,8 @@
 + (instancetype)sharedInstance;
 
 - (NSAttributedString *)attributedStringForText:(NSString *)nstext;
+- (NSInteger)smiliesCount;
+- (NSString *)smileCodeWithIndex:(NSInteger)index;
+- (UIImage *)smileWithIndex:(NSInteger)index;
 
 @end

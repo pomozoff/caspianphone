@@ -14,7 +14,7 @@
 @interface COCSmiliesManager ()
 
 @property (nonatomic, retain) NSDictionary *smiliesCollection;
-@property (nonatomic, retain) NSDictionary *smiliesList;
+@property (nonatomic, retain) NSArray *smiliesList;
 
 @end
 
@@ -87,6 +87,16 @@ static dispatch_once_t once_token = 0;
     return [attr_text autorelease];
 }
 
+- (NSInteger)smiliesCount {
+    return self.smiliesList.count;
+}
+- (NSString *)smileCodeWithIndex:(NSInteger)index {
+    return self.smiliesList[index];
+}
+- (UIImage *)smileWithIndex:(NSInteger)index {
+    return self.smiliesCollection[[self smileCodeWithIndex:index]];
+}
+
 #pragma mark - Properties
 
 - (void)setSmiliesCollection:(NSDictionary *)smiliesCollection {
@@ -94,8 +104,7 @@ static dispatch_once_t once_token = 0;
         [smiliesCollection retain];
         [_smiliesCollection release];
         _smiliesCollection = smiliesCollection;
-        
-        _smiliesList = [self buildSmiliesList:_smiliesCollection];
+        self.smiliesList = [self smiliesListFromCollection:smiliesCollection];
     }
 }
 
@@ -118,6 +127,19 @@ static dispatch_once_t once_token = 0;
 
 #pragma mark - Private
 
+- (NSArray *)smiliesListFromCollection:(NSDictionary *)smiliesCollection {
+    NSMutableArray *smiliesMutableList = [[NSMutableArray alloc] init];
+    
+    for (NSString *smile in smiliesCollection) {
+        if (smile.length > 2
+            && [[smile substringWithRange:NSMakeRange(0, 1)] isEqualToString:@":"]
+            && [[smile substringWithRange:NSMakeRange(smile.length - 1, 1)] isEqualToString:@":"]
+            ) {
+            [smiliesMutableList addObject:smile];
+        }
+    }
+    return [smiliesMutableList autorelease];
+}
 - (void)addImage:(UIImage *)image toCollection:(NSMutableDictionary *)collection forSmilies:(NSArray *)arrayOfSmilies {
     for (NSString *smile in arrayOfSmilies) {
         collection[smile] = image;
@@ -153,19 +175,6 @@ static dispatch_once_t once_token = 0;
     [self addImage:[UIImage imageNamed:[NSString stringWithFormat:@"smilie_%@_whistling.png", size]] toCollection:smiliesMutableCollection forSmilies:@[@":whistling:"]];
     
     return [smiliesMutableCollection autorelease];
-}
-- (NSDictionary *)buildSmiliesList:(NSDictionary *)smiliesCollection {
-    NSMutableDictionary *smiliesMutableList = [[NSMutableDictionary alloc] init];
-    
-    for (NSString *smile in smiliesCollection) {
-        if (smile.length > 2
-            && [[smile substringWithRange:NSMakeRange(0, 1)] isEqualToString:@":"]
-            && [[smile substringWithRange:NSMakeRange(smile.length - 1, 1)] isEqualToString:@":"]
-            ) {
-            smiliesMutableList[smile] = smiliesCollection[smile];
-        }
-    }
-    return [smiliesMutableList autorelease];
 }
 - (NSString *)previousCharForRange:(NSRange)range insString:(NSString *)string {
     if (range.location == 0) {
