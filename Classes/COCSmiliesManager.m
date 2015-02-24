@@ -60,7 +60,7 @@ static dispatch_once_t once_token = 0;
                     break;
                 }
                 
-                NSString *previousChar = [self previousCharForRange:foundRange insString:nstext];
+                NSString *previousChar = [self previousCharForRange:foundRange inString:nstext];
                 if (![self isCharWhitespace:previousChar]) {
                     break;
                 }
@@ -176,7 +176,7 @@ static dispatch_once_t once_token = 0;
     
     return [smiliesMutableCollection autorelease];
 }
-- (NSString *)previousCharForRange:(NSRange)range insString:(NSString *)string {
+- (NSString *)previousCharForRange:(NSRange)range inString:(NSString *)string {
     if (range.location == 0) {
         return nil;
     }

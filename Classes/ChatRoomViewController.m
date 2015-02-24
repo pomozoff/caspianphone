@@ -90,8 +90,9 @@ static NSTimeInterval animationDuration = 0.3f;
 #pragma mark - <UISmiliesCollectionDelegate>
 
 - (void)didSelectSmileWithIndex:(NSInteger)index {
-    [self.messageField replaceSelectedRangeWithText:[[COCSmiliesManager sharedInstance] smileCodeWithIndex:index]];
-    NSLog(@"Add smile with index %ld", (long)index);
+    NSString *smileWithSpaces = [NSString stringWithFormat:@" %@ ", [[COCSmiliesManager sharedInstance] smileCodeWithIndex:index]];
+    [self.messageField replaceSelectedRangeWithText:smileWithSpaces];
+    self.messageField.text = [self.messageField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
 }
 
 #pragma mark - Lifecycle Functions
