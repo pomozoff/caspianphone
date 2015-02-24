@@ -127,6 +127,10 @@
 		2634D3661A83D5FD006533C5 /* smilie_64_surprised.png in Resources */ = {isa = PBXBuildFile; fileRef = 2634D3341A83D5FD006533C5 /* smilie_64_surprised.png */; };
 		2634D3671A83D5FD006533C5 /* smilie_64_whistling.png in Resources */ = {isa = PBXBuildFile; fileRef = 2634D3351A83D5FD006533C5 /* smilie_64_whistling.png */; };
 		2634D36A1A83E52E006533C5 /* COCTextAttachment.m in Sources */ = {isa = PBXBuildFile; fileRef = 2634D3691A83E52E006533C5 /* COCTextAttachment.m */; };
+		263CE0861A94F6CD002983F9 /* UISmiliesBoardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 263CE0841A94F6CD002983F9 /* UISmiliesBoardViewController.m */; };
+		263CE0871A94F6CD002983F9 /* UISmiliesBoardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 263CE0851A94F6CD002983F9 /* UISmiliesBoardViewController.xib */; };
+		263CE08C1A94FA84002983F9 /* UISmileCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 263CE08B1A94FA84002983F9 /* UISmileCell.xib */; };
+		263CE08F1A94FBAD002983F9 /* UISmileCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 263CE08E1A94FBAD002983F9 /* UISmileCollectionViewCell.m */; };
 		2645CC701A8F9CFB00D993A0 /* smile256.png in Resources */ = {isa = PBXBuildFile; fileRef = 2645CC6E1A8F9CFB00D993A0 /* smile256.png */; };
 		2645CC711A8F9CFB00D993A0 /* smile512.png in Resources */ = {isa = PBXBuildFile; fileRef = 2645CC6F1A8F9CFB00D993A0 /* smile512.png */; };
 		26E7F2F31A816E200033D3C0 /* NSMutableArray+SWUtilityButtons.m in Sources */ = {isa = PBXBuildFile; fileRef = 26E7F2E81A816E200033D3C0 /* NSMutableArray+SWUtilityButtons.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -1125,6 +1129,12 @@
 		2634D3351A83D5FD006533C5 /* smilie_64_whistling.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = smilie_64_whistling.png; sourceTree = "<group>"; };
 		2634D3681A83E52E006533C5 /* COCTextAttachment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = COCTextAttachment.h; sourceTree = "<group>"; };
 		2634D3691A83E52E006533C5 /* COCTextAttachment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = COCTextAttachment.m; sourceTree = "<group>"; };
+		263CE0831A94F6CD002983F9 /* UISmiliesBoardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UISmiliesBoardViewController.h; sourceTree = "<group>"; };
+		263CE0841A94F6CD002983F9 /* UISmiliesBoardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UISmiliesBoardViewController.m; sourceTree = "<group>"; };
+		263CE0851A94F6CD002983F9 /* UISmiliesBoardViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UISmiliesBoardViewController.xib; sourceTree = "<group>"; };
+		263CE08B1A94FA84002983F9 /* UISmileCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UISmileCell.xib; sourceTree = "<group>"; };
+		263CE08D1A94FBAD002983F9 /* UISmileCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UISmileCollectionViewCell.h; sourceTree = "<group>"; };
+		263CE08E1A94FBAD002983F9 /* UISmileCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UISmileCollectionViewCell.m; sourceTree = "<group>"; };
 		2645CC6E1A8F9CFB00D993A0 /* smile256.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = smile256.png; sourceTree = "<group>"; };
 		2645CC6F1A8F9CFB00D993A0 /* smile512.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = smile512.png; sourceTree = "<group>"; };
 		26E7F2E71A816E200033D3C0 /* NSMutableArray+SWUtilityButtons.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+SWUtilityButtons.h"; sourceTree = "<group>"; };
@@ -2420,6 +2430,12 @@
 				D32460E5159D9AAD00BA7F3A /* UITransparentView.m */,
 				340751E5150F38FC00B89C47 /* UIVideoButton.h */,
 				340751E6150F38FD00B89C47 /* UIVideoButton.m */,
+				263CE0831A94F6CD002983F9 /* UISmiliesBoardViewController.h */,
+				263CE0841A94F6CD002983F9 /* UISmiliesBoardViewController.m */,
+				263CE0851A94F6CD002983F9 /* UISmiliesBoardViewController.xib */,
+				263CE08D1A94FBAD002983F9 /* UISmileCollectionViewCell.h */,
+				263CE08E1A94FBAD002983F9 /* UISmileCollectionViewCell.m */,
+				263CE08B1A94FA84002983F9 /* UISmileCell.xib */,
 			);
 			path = LinphoneUI;
 			sourceTree = "<group>";
@@ -3781,6 +3797,7 @@
 				26E7F3951A81709F0033D3C0 /* bgcontact.png in Resources */,
 				D36C43D9158F2F370048BA40 /* dialer_alt_over.png in Resources */,
 				D36C43E9158F3F7E0048BA40 /* pause_on_default.png in Resources */,
+				263CE0871A94F6CD002983F9 /* UISmiliesBoardViewController.xib in Resources */,
 				F0C1F9121A28781F009402C9 /* corner-right-bottom.png in Resources */,
 				D36C43EB158F3F7E0048BA40 /* pause_on_over.png in Resources */,
 				2645CC711A8F9CFB00D993A0 /* smile512.png in Resources */,
@@ -4277,6 +4294,7 @@
 				15AF3C5616F37A3E00FC52EC /* route_bluetooth_off_disabled.png in Resources */,
 				15AF3C5816F37A3E00FC52EC /* route_bluetooth_off_over.png in Resources */,
 				15AF3C5C16F37A3E00FC52EC /* route_bluetooth_on_default.png in Resources */,
+				263CE08C1A94FA84002983F9 /* UISmileCell.xib in Resources */,
 				F0938159188E629800A55DFA /* iTunesArtwork in Resources */,
 				15AF3C6C16F37A4A00FC52EC /* route_phone_off_default.png in Resources */,
 				15AF3C6E16F37A4A00FC52EC /* route_phone_off_disabled.png in Resources */,
@@ -4441,6 +4459,7 @@
 				26E7F2F71A816E200033D3C0 /* SWUtilityButtonTapGestureRecognizer.m in Sources */,
 				D32648441588F6FC00930C67 /* UIToggleButton.m in Sources */,
 				261F4BE21A8A7A8F0060F003 /* COCSmiliesManager.m in Sources */,
+				263CE0861A94F6CD002983F9 /* UISmiliesBoardViewController.m in Sources */,
 				D36FB2D51589EF7C0036F6F2 /* UIPauseButton.m in Sources */,
 				D31C9C98158A1CDF00756B45 /* UIHistoryCell.m in Sources */,
 				D32409C3158B49A600C8C119 /* UILongTouchButton.m in Sources */,
@@ -4471,6 +4490,7 @@
 				D37C639B15AADEF6009D0BAC /* ContactDetailsTableViewController.m in Sources */,
 				636316DE1A1DEF2F0009B839 /* UIButtonShrinkable.m in Sources */,
 				D3C6526715AC1A8F0092A874 /* UIEditableTableViewCell.m in Sources */,
+				263CE08F1A94FBAD002983F9 /* UISmileCollectionViewCell.m in Sources */,
 				D378906515AC373B00BD776C /* ContactDetailsLabelViewController.m in Sources */,
 				D3E8F68615ADE05B0065A226 /* UIContactDetailsFooter.m in Sources */,
 				26E7F3F21A8171170033D3C0 /* COCTextField.m in Sources */,

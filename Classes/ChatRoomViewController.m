@@ -26,6 +26,18 @@
 #import <MobileCoreServices/UTCoreTypes.h>
 #import "Utils.h"
 
+#import "UISmiliesBoardViewController.h"
+
+static const CGFloat smiliesBoardHeight = 200.0f;
+static NSTimeInterval animationDuration = 0.3f;
+
+@interface ChatRoomViewController () <UISmiliesCollectionDelegate>
+
+@property (nonatomic, retain) UISmiliesBoardViewController *smiliesBoard;
+@property (nonatomic, assign) BOOL isSmiliesBoardVisible;
+
+@end
+
 @implementation ChatRoomViewController
 
 @synthesize tableController;
@@ -49,6 +61,36 @@
 @synthesize transferView;
 @synthesize waitView;
 
+#pragma mark - Properties
+
+- (UISmiliesBoardViewController *)smiliesBoard {
+    if (!_smiliesBoard) {
+        _smiliesBoard = [[UISmiliesBoardViewController alloc] initWithNibName:@"UISmiliesBoardViewController" bundle:nil];
+        _smiliesBoard.view.frame = [self smiliesBoardSizeForStateVisible:NO];
+        _smiliesBoard.delegate = self;
+    }
+    return _smiliesBoard;
+}
+- (void)setIsSmiliesBoardVisible:(BOOL)isSmiliesBoardVisible {
+    if (_isSmiliesBoardVisible) {
+        [self resizeViewBackAnimationDuration:animationDuration completionBlock:^(BOOL finished) {
+            [self.smiliesBoard.view removeFromSuperview];
+            _isSmiliesBoardVisible = isSmiliesBoardVisible;
+        }];
+    } else {
+        [self.view addSubview:self.smiliesBoard.view];
+        [self liftViewUpToEndFrame:[self smiliesBoardSizeForStateVisible:YES] animationDuration:animationDuration completionBlock:^(BOOL finished) {
+            _isSmiliesBoardVisible = isSmiliesBoardVisible;
+        }];
+    }
+}
+
+#pragma mark - <UISmiliesCollectionDelegate>
+
+- (void)didSelectSmileWithIndex:(NSInteger)index {
+    NSLog(@"Add smile with index %ld", (long)index);
+}
+
 #pragma mark - Lifecycle Functions
 
 - (id)init {
@@ -64,6 +106,7 @@
                                 [NSNumber numberWithFloat:0.5], NSLocalizedString(@"Average", nil),
                                 [NSNumber numberWithFloat:0.0], NSLocalizedString(@"Minimum", nil), nil];
         self->composingVisible = TRUE;
+        _isSmiliesBoardVisible = NO;
     }
     return self;
 }
@@ -94,6 +137,9 @@
 
     [composeLabel release];
     [composeIndicatorView release];
+    
+    self.smiliesBoard = nil;
+    
     [super dealloc];
 }
 
@@ -625,7 +671,8 @@ static void message_status(LinphoneChatMessage* msg,LinphoneChatMessageState sta
 }
 
 - (IBAction)onSmileTap:(id)sender {
-    
+    [self.messageField resignFirstResponder];
+    self.isSmiliesBoardVisible = !self.isSmiliesBoardVisible;
 }
 
 - (IBAction)onTransferCancelClick:(id)event {
@@ -758,108 +805,134 @@ static void message_status(LinphoneChatMessage* msg,LinphoneChatMessageState sta
 
 - (void)keyboardWillHide:(NSNotification *)notif {
     NSTimeInterval duration = [[[notif userInfo] objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
-    [UIView animateWithDuration:duration
-                          delay:0
-                        options:UIViewAnimationOptionBeginFromCurrentState
-                     animations:^{
-        CGFloat composeIndicatorCompensation = composingVisible ? composeIndicatorView.frame.size.height : 0.0f;
-
-        // Resize chat view
-        {
-            CGRect chatFrame = [[self chatView] frame];
-            chatFrame.size.height = [[self view] frame].size.height - chatFrame.origin.y;
-            [[self chatView] setFrame:chatFrame];
-        }
-
-        // Move header view back into place (was hidden before)
-        {
-            CGRect headerFrame = [headerView frame];
-            headerFrame.origin.y = 0;
-            [headerView setFrame:headerFrame];
-            [headerView setAlpha:1.0];
-        }
-
-        // Resize & Move table view
-        {
-            CGRect tableFrame = [tableController.view frame];
-            tableFrame.origin.y = [headerView frame].origin.y + [headerView frame].size.height;
-            tableFrame.size.height = [messageView frame].origin.y - tableFrame.origin.y - composeIndicatorCompensation;
-            [tableController.view setFrame:tableFrame];
-
-            // Scroll to bottom
-            NSInteger lastSection = [tableController.tableView numberOfSections] - 1;
-            if(lastSection >= 0) {
-                NSInteger lastRow = [tableController.tableView numberOfRowsInSection:lastSection] - 1;
-                if(lastRow >=0) {
-                    [tableController.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:lastRow inSection:lastSection]
-                                                     atScrollPosition:UITableViewScrollPositionBottom
-                                                             animated:FALSE];
-                }
-            }
-        }
-
-    } completion:^(BOOL finished) {}];
+    [self resizeViewBackAnimationDuration:duration completionBlock:nil];
 }
 
 - (void)keyboardWillShow:(NSNotification *)notif {
+    self.isSmiliesBoardVisible = NO;
     NSTimeInterval duration = [[[notif userInfo] objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
-    CGFloat composeIndicatorCompensation = composingVisible ? composeIndicatorView.frame.size.height : 0.0f;
+    CGRect endFrame = [[[notif userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    [self liftViewUpToEndFrame:endFrame animationDuration:duration completionBlock:nil];
+}
 
+- (void)resizeViewBackAnimationDuration:(NSTimeInterval)duration completionBlock:(void(^)(BOOL finished))completion {
     [UIView animateWithDuration:duration
                           delay:0
                         options:UIViewAnimationOptionBeginFromCurrentState
                      animations:^{
+                         CGFloat composeIndicatorCompensation = composingVisible ? composeIndicatorView.frame.size.height : 0.0f;
+                         
+                         // Resize chat view
+                         {
+                             CGRect chatFrame = [[self chatView] frame];
+                             chatFrame.size.height = [[self view] frame].size.height - chatFrame.origin.y;
+                             [[self chatView] setFrame:chatFrame];
+                         }
+                         
+                         // Move header view back into place (was hidden before)
+                         {
+                             CGRect headerFrame = [headerView frame];
+                             headerFrame.origin.y = 0;
+                             [headerView setFrame:headerFrame];
+                             [headerView setAlpha:1.0];
+                         }
+                         
+                         // Additional animation
+                         {
+                             self.smiliesBoard.view.frame = [self smiliesBoardSizeForStateVisible:NO];
+                         }
+                         
+                         // Resize & Move table view
+                         {
+                             CGRect tableFrame = [tableController.view frame];
+                             tableFrame.origin.y = [headerView frame].origin.y + [headerView frame].size.height;
+                             tableFrame.size.height = [messageView frame].origin.y - tableFrame.origin.y - composeIndicatorCompensation;
+                             [tableController.view setFrame:tableFrame];
+                             
+                             // Scroll to bottom
+                             NSInteger lastSection = [tableController.tableView numberOfSections] - 1;
+                             if(lastSection >= 0) {
+                                 NSInteger lastRow = [tableController.tableView numberOfRowsInSection:lastSection] - 1;
+                                 if(lastRow >=0) {
+                                     [tableController.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:lastRow inSection:lastSection]
+                                                                      atScrollPosition:UITableViewScrollPositionBottom
+                                                                              animated:FALSE];
+                                 }
+                             }
+                         }
+                         
+                     } completion:completion];
+}
 
-        CGRect endFrame = [[[notif userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+- (void)liftViewUpToEndFrame:(CGRect)frame animationDuration:(NSTimeInterval)duration completionBlock:(void(^)(BOOL finished))completion {
+    CGFloat composeIndicatorCompensation = composingVisible ? composeIndicatorView.frame.size.height : 0.0f;
+    __block CGRect endFrame = frame;
+    [UIView animateWithDuration:duration
+                          delay:0
+                        options:UIViewAnimationOptionBeginFromCurrentState
+                     animations:^{
+                         
+                         if(([[UIDevice currentDevice].systemVersion floatValue] < 8) &&
+                            UIInterfaceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation)) {
+                             int width = endFrame.size.height;
+                             endFrame.size.height = endFrame.size.width;
+                             endFrame.size.width = width;
+                         }
+                         
+                         // Resize chat view
+                         {
+                             CGRect viewFrame = [[self view] frame];
+                             CGRect rect = [PhoneMainView instance].view.bounds;
+                             CGPoint pos = {viewFrame.size.width, viewFrame.size.height};
+                             CGPoint gPos = [self.view convertPoint:pos toView:[UIApplication sharedApplication].keyWindow.rootViewController.view]; // Bypass IOS bug on landscape mode
+                             float diff = (rect.size.height - gPos.y - endFrame.size.height);
+                             if(diff > 0) diff = 0;
+                             CGRect chatFrame = [[self chatView] frame];
+                             chatFrame.size.height = viewFrame.size.height - chatFrame.origin.y + diff;
+                             [[self chatView] setFrame:chatFrame];
+                         }
+                         
+                         // Move header view
+                         {
+                             CGRect headerFrame = [headerView frame];
+                             headerFrame.origin.y = -headerFrame.size.height;
+                             [headerView setFrame:headerFrame];
+                             [headerView setAlpha:0.0];
+                         }
+                         
+                         // Additional animation
+                         {
+                             self.smiliesBoard.view.frame = [self smiliesBoardSizeForStateVisible:YES];
+                         }
+                         
+                         // Resize & Move table view
+                         {
+                             CGRect tableFrame = [tableController.view frame];
+                             tableFrame.origin.y = [headerView frame].origin.y + [headerView frame].size.height;
+                             tableFrame.size.height = [messageView frame].origin.y - tableFrame.origin.y - composeIndicatorCompensation;
+                             [tableController.view setFrame:tableFrame];
+                         }
+                         
+                         // Scroll
+                         NSInteger lastSection = [tableController.tableView numberOfSections] - 1;
+                         if(lastSection >= 0) {
+                             NSInteger lastRow = [tableController.tableView numberOfRowsInSection:lastSection] - 1;
+                             if(lastRow >=0) {
+                                 [tableController.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:lastRow inSection:lastSection]
+                                                                  atScrollPosition:UITableViewScrollPositionBottom
+                                                                          animated:FALSE];
+                             }
+                         }
+                         
+                     } completion:completion];
+}
 
-    if(([[UIDevice currentDevice].systemVersion floatValue] < 8) &&
-       UIInterfaceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation)) {
-        int width = endFrame.size.height;
-        endFrame.size.height = endFrame.size.width;
-        endFrame.size.width = width;
-    }
+#pragma mark - Private
 
-        // Resize chat view
-        {
-            CGRect viewFrame = [[self view] frame];
-            CGRect rect = [PhoneMainView instance].view.bounds;
-            CGPoint pos = {viewFrame.size.width, viewFrame.size.height};
-            CGPoint gPos = [self.view convertPoint:pos toView:[UIApplication sharedApplication].keyWindow.rootViewController.view]; // Bypass IOS bug on landscape mode
-            float diff = (rect.size.height - gPos.y - endFrame.size.height);
-            if(diff > 0) diff = 0;
-            CGRect chatFrame = [[self chatView] frame];
-            chatFrame.size.height = viewFrame.size.height - chatFrame.origin.y + diff;
-            [[self chatView] setFrame:chatFrame];
-        }
-
-        // Move header view
-        {
-            CGRect headerFrame = [headerView frame];
-            headerFrame.origin.y = -headerFrame.size.height;
-            [headerView setFrame:headerFrame];
-            [headerView setAlpha:0.0];
-        }
-
-        // Resize & Move table view
-        {
-            CGRect tableFrame = [tableController.view frame];
-            tableFrame.origin.y = [headerView frame].origin.y + [headerView frame].size.height;
-            tableFrame.size.height = [messageView frame].origin.y - tableFrame.origin.y - composeIndicatorCompensation;
-            [tableController.view setFrame:tableFrame];
-        }
-
-        // Scroll
-        NSInteger lastSection = [tableController.tableView numberOfSections] - 1;
-        if(lastSection >= 0) {
-            NSInteger lastRow = [tableController.tableView numberOfRowsInSection:lastSection] - 1;
-            if(lastRow >=0) {
-                [tableController.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:lastRow inSection:lastSection]
-                                                 atScrollPosition:UITableViewScrollPositionBottom
-                                                         animated:FALSE];
-            }
-        }
-
-    } completion:^(BOOL finished) {}];
+- (CGRect)smiliesBoardSizeForStateVisible:(BOOL)isVisible {
+    CGRect frame = self.view.frame;
+    CGRect result = isVisible ? CGRectMake(0.0f, frame.size.height - smiliesBoardHeight, frame.size.width, smiliesBoardHeight) : CGRectMake(0.0f, frame.size.height, frame.size.width, 0.0f);
+    return result;
 }
 
 @end
