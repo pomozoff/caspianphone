@@ -74,16 +74,20 @@ static NSTimeInterval animationDuration = 0.3f;
     return _smiliesBoard;
 }
 - (void)setIsSmiliesBoardVisible:(BOOL)isSmiliesBoardVisible {
-    if (_isSmiliesBoardVisible) {
-        [self resizeViewBackAnimationDuration:animationDuration completionBlock:^(BOOL finished) {
-            [self.smiliesBoard.collectionView removeFromSuperview];
-            _isSmiliesBoardVisible = isSmiliesBoardVisible;
-        }];
-    } else {
-        [self.view addSubview:self.smiliesBoard.collectionView];
-        [self liftViewUpToEndFrame:[self smiliesBoardSizeForStateVisible:YES] animationDuration:animationDuration completionBlock:^(BOOL finished) {
-            _isSmiliesBoardVisible = isSmiliesBoardVisible;
-        }];
+    if (isSmiliesBoardVisible != _isSmiliesBoardVisible) {
+        if (_isSmiliesBoardVisible) {
+            [self resizeViewBackAnimationDuration:animationDuration completionBlock:^(BOOL finished) {
+                [self.smiliesBoard.collectionView removeFromSuperview];
+                _isSmiliesBoardVisible = isSmiliesBoardVisible;
+                listTapGestureRecognizer.enabled = isSmiliesBoardVisible;
+            }];
+        } else {
+            [self.view addSubview:self.smiliesBoard.collectionView];
+            [self liftViewUpToEndFrame:[self smiliesBoardSizeForStateVisible:YES] animationDuration:animationDuration completionBlock:^(BOOL finished) {
+                _isSmiliesBoardVisible = isSmiliesBoardVisible;
+                listTapGestureRecognizer.enabled = isSmiliesBoardVisible;
+            }];
+        }
     }
 }
 
@@ -191,7 +195,6 @@ static UICompositeViewDescription *compositeDescription = nil;
 	messageField.font = [UIFont systemFontOfSize:18.0f];
     messageField.contentInset = UIEdgeInsetsMake(0, -5, -2, -5);
     messageField.internalTextView.scrollIndicatorInsets = UIEdgeInsetsMake(0, 0, 0, 10);
-    //messageField.backgroundColor = [UIColor clearColor];
     [sendButton setEnabled:FALSE];
     
     //[tableController.tableView addGestureRecognizer:listTapGestureRecognizer];
@@ -301,7 +304,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 }
 
--(void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     [TUNinePatchCache flushCache]; // will remove any images cache (freeing any cached but unused images)
 }
@@ -615,6 +618,7 @@ static void message_status(LinphoneChatMessage* msg,LinphoneChatMessageState sta
 
 - (IBAction)onListTap:(id)sender {
     [messageField resignFirstResponder];
+    self.isSmiliesBoardVisible = NO;
 }
 
 - (IBAction)onListSwipe:(id)sender {
@@ -804,7 +808,6 @@ static void message_status(LinphoneChatMessage* msg,LinphoneChatMessageState sta
     NSURL *url = [info valueForKey:UIImagePickerControllerReferenceURL];
     [self chooseImageQuality:image url:url];
 }
-
 
 #pragma mark - Keyboard Event Functions
 
