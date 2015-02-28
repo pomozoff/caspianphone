@@ -109,6 +109,7 @@
 - (void)reset;
 - (void)resetToDefaults;
 - (void)fillDefaultValues;
+- (void)resign;
 
 - (IBAction)onStartClick:(id)sender;
 - (IBAction)onBackClick:(id)sender;
@@ -119,7 +120,6 @@
 - (IBAction)onExternalAccountClick:(id)sender;
 - (IBAction)onCheckValidationClick:(id)sender;
 - (IBAction)onRemoteProvisioningClick:(id)sender;
-
 - (IBAction)onSignInClick:(id)sender;
 - (IBAction)onSignInExternalClick:(id)sender;
 - (IBAction)onRegisterClick:(id)sender;

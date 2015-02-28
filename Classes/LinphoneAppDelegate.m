@@ -180,7 +180,7 @@
     UIApplicationState state = app.applicationState;
     
     if( [app respondsToSelector:@selector(registerUserNotificationSettings:)] ){
-        /* iOS8 notifications can be actioned! Awesome: */
+        // iOS8 notifications can be actioned! Awesome:
         UIUserNotificationType notifTypes = UIUserNotificationTypeBadge|UIUserNotificationTypeSound|UIUserNotificationTypeAlert;
        
         NSSet* categories = [NSSet setWithObjects:[self getCallNotificationCategory], [self getMessageNotificationCategory], nil];
@@ -202,7 +202,7 @@
         // we've been woken up directly to background;
         if( !start_at_boot || !background_mode ) {
             // autoboot disabled or no background, and no push: do nothing and wait for a real launch
-			/*output a log with NSLog, because the ortp logging system isn't activated yet at this time*/
+			//output a log with NSLog, because the ortp logging system isn't activated yet at this time
 			NSLog(@"Linphone launch doing nothing because start_at_boot or background_mode are not activated.", NULL);
             return YES;
         }
@@ -231,6 +231,7 @@
 
     return YES;
 }
+
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     Linphone_log(@"%@", NSStringFromSelector(_cmd));
