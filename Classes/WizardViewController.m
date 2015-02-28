@@ -320,7 +320,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     
     [viewTapGestureRecognizer setCancelsTouchesInView:FALSE];
     [viewTapGestureRecognizer setDelegate:self];
-    //[contentView addGestureRecognizer:viewTapGestureRecognizer];
+    // [contentView addGestureRecognizer:viewTapGestureRecognizer];
     
     if([LinphoneManager runningOnIpad]) {
         [LinphoneUtils adjustFontSize:welcomeView mult:2.22f];
@@ -451,7 +451,7 @@ static UICompositeViewDescription *compositeDescription = nil;
         [self changeView:welcomeView back:FALSE animation:FALSE];
     }
     */
-    
+ 
     [self resetToDefaults];
     
     waitView.hidden = YES;
@@ -830,7 +830,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (void)registrationUpdate:(LinphoneRegistrationState)state message:(NSString*)message{
     switch (state) {
-        case LinphoneRegistrationOk: {
+        case LinphoneRegistrationOk: { // state 2
             BOOL isRememberCredentials = self.rememberMeRegisterSwitch.isOn;
             NSString *phoneNumber = isRememberCredentials ? self.phoneNumberRegisterField.text : @"";
             NSString *password    = isRememberCredentials ? self.passwordRegisterField.text : @"";
@@ -843,12 +843,15 @@ static UICompositeViewDescription *compositeDescription = nil;
             [[PhoneMainView instance] changeCurrentView:[DialerViewController compositeViewDescription]];
             break;
         }
-        case LinphoneRegistrationNone:
-        case LinphoneRegistrationCleared:  {
+        case LinphoneRegistrationNone: // state 0
+        case LinphoneRegistrationCleared:  { // state 3
             [waitView setHidden:true];
+            if (LinphoneGlobalShutdown) {
+                [self resign];
+            }
             break;
         }
-        case LinphoneRegistrationFailed: {
+        case LinphoneRegistrationFailed: { // state 4
             [waitView setHidden:true];
             UIAlertView* alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Registration failure", nil)
                                                             message:message
@@ -859,7 +862,7 @@ static UICompositeViewDescription *compositeDescription = nil;
             [alert release];
             break;
         }
-        case LinphoneRegistrationProgress: {
+        case LinphoneRegistrationProgress: { // state 1
             [waitView setHidden:false];
             break;
         }
@@ -1055,11 +1058,11 @@ static UICompositeViewDescription *compositeDescription = nil;
         [errors appendString:[NSString stringWithFormat:NSLocalizedString(@"Please enter a username.\n", nil)]];
     }
     
-    /*
-    if ([domain length] == 0) {
-        [errors appendString:[NSString stringWithFormat:NSLocalizedString(@"Please enter a domain.\n", nil)]];
-    }
-    */
+  //
+  //  if ([domain length] == 0) {
+  //      [errors appendString:[NSString stringWithFormat:NSLocalizedString(@"Please enter a domain.\n", nil)]];
+  //  }
+ 
     
     if([errors length]) {
         UIAlertView* errorView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Check error(s)",nil)
@@ -1792,6 +1795,42 @@ static UICompositeViewDescription *compositeDescription = nil;
             }];
         }];
     }
+}
+
+# pragma mark - Resign
+
+- (void) resign {
+
+    NSString *phone    = self.phoneNumberRegisterField.text;
+    NSString *password = self.passwordRegisterField.text;
+    NSString *domain   = self.domainRegisterField.text;
+    
+    NSMutableString *errors = [NSMutableString string];
+    if ([phone length] == 0) {
+        
+        [errors appendString:[NSString stringWithFormat:NSLocalizedString(@"Please enter a username.\n", nil)]];
+    }
+    
+    //
+    //  if ([domain length] == 0) {
+    //      [errors appendString:[NSString stringWithFormat:NSLocalizedString(@"Please enter a domain.\n", nil)]];
+    //  }
+    
+    
+    if([errors length]) {
+        UIAlertView* errorView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Check error(s)",nil)
+                                                            message:[errors substringWithRange:NSMakeRange(0, [errors length] - 1)]
+                                                           delegate:nil
+                                                  cancelButtonTitle:NSLocalizedString(@"Continue",nil)
+                                                  otherButtonTitles:nil,nil];
+        [errorView show];
+        [errorView release];
+    } else {
+        [self checkIsSameUserSigningIn:phone];
+        [self.waitView setHidden:false];
+        [self addProxyConfig:[[LinphoneManager instance] cleanPhoneNumber:phone] password:password domain:domain withTransport:@"tcp"];
+    }
+
 }
 
 @end
