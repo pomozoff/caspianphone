@@ -846,6 +846,9 @@ static UICompositeViewDescription *compositeDescription = nil;
         case LinphoneRegistrationNone:
         case LinphoneRegistrationCleared:  {
             [waitView setHidden:true];
+            if (LinphoneGlobalShutdown) {
+                [self resign];
+            }
             break;
         }
         case LinphoneRegistrationFailed: {
@@ -1792,6 +1795,22 @@ static UICompositeViewDescription *compositeDescription = nil;
             }];
         }];
     }
+}
+
+# pragma mark - Resign
+
+- (void) resign {
+    
+    NSString *phone    = self.phoneNumberRegisterField.text;
+    NSString *password = self.passwordRegisterField.text;
+    NSString *domain   = self.domainRegisterField.text;
+    
+    
+    [self checkIsSameUserSigningIn:phone];
+    [self.waitView setHidden:false];
+    [self addProxyConfig:[[LinphoneManager instance] cleanPhoneNumber:phone] password:password domain:domain withTransport:@"tcp"];
+
+    
 }
 
 @end
