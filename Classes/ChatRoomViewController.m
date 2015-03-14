@@ -199,7 +199,6 @@ static UICompositeViewDescription *compositeDescription = nil;
     messageField.internalTextView.scrollIndicatorInsets = UIEdgeInsetsMake(0, 0, 0, 10);
     [sendButton setEnabled:FALSE];
     
-    //[tableController.tableView addGestureRecognizer:listTapGestureRecognizer];
     [self.chatView addGestureRecognizer:listTapGestureRecognizer];
     [listTapGestureRecognizer setEnabled:FALSE];
 
