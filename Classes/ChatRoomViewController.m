@@ -80,12 +80,14 @@ static NSTimeInterval animationDuration = 0.3f;
                 [self.smiliesBoard.collectionView removeFromSuperview];
                 _isSmiliesBoardVisible = isSmiliesBoardVisible;
                 listTapGestureRecognizer.enabled = isSmiliesBoardVisible;
+                tableController.tableView.userInteractionEnabled = !isSmiliesBoardVisible;
             }];
         } else {
             [self.view addSubview:self.smiliesBoard.collectionView];
             [self liftViewUpToEndFrame:[self smiliesBoardSizeForStateVisible:YES] animationDuration:animationDuration completionBlock:^(BOOL finished) {
                 _isSmiliesBoardVisible = isSmiliesBoardVisible;
                 listTapGestureRecognizer.enabled = isSmiliesBoardVisible;
+                tableController.tableView.userInteractionEnabled = !isSmiliesBoardVisible;
             }];
         }
     }
