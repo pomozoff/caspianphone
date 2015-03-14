@@ -44,16 +44,16 @@ static NSString *caspianPasswordKey = @"uk.co.onecallcaspian.phone.password";
 static NSString *caspianDomain      = @"uk.co.onecallcaspian.phone.domain";
 static NSString *caspianActivationCodeKey = @"uk.co.onecallcaspian.phone.activationCode";
 
-static NSString *caspianSelectCountry = @"Select Country";
+static NSString *caspianSelectCountry    = @"Select Country";
 static NSString *caspianEnterPhoneNumber = @"Enter Phone Number";
-static NSString *caspianEnterName = @"Enter First and Last Names";
+static NSString *caspianEnterName        = @"Enter First and Last Names";
 
-static NSString *caspianCountryListUrl = @"http://www.onecallcaspian.co.uk/mobile/country2";
-static NSString *caspianCreateAccountUrl = @"http://www.onecallcaspian.co.uk/mobile/create?phone_code=%@&phone_number=%@&firstname=%@&lastname=%@&activation_way=%@";
+static NSString *caspianCountryListUrl           = @"http://www.onecallcaspian.co.uk/mobile/country2";
+static NSString *caspianCreateAccountUrl         = @"http://www.onecallcaspian.co.uk/mobile/create?phone_code=%@&phone_number=%@&firstname=%@&lastname=%@&activation_way=%@";
 static NSString *caspianConfirmActivationCodeUrl = @"http://www.onecallcaspian.co.uk/mobile/confirm?code=%@";
-static NSString *caspianForgotPasswordUrl = @"http://www.onecallcaspian.co.uk/mobile/forgotPassword?phone_code=%@&phone_number=%@";
+static NSString *caspianForgotPasswordUrl        = @"http://www.onecallcaspian.co.uk/mobile/forgotPassword?phone_code=%@&phone_number=%@";
 
-static NSString *caspianCountriesListTopKey = @"Countries";
+static NSString *caspianCountriesListTopKey    = @"Countries";
 static NSString *caspianCountryObjectFieldCode = @"Code";
 static NSString *caspianCountryObjectFieldName = @"Name";
 static NSString *caspianCountryObjectFieldCall = @"Call";
