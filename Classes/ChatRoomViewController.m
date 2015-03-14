@@ -79,15 +79,13 @@ static NSTimeInterval animationDuration = 0.3f;
             [self resizeViewBackAnimationDuration:animationDuration completionBlock:^(BOOL finished) {
                 [self.smiliesBoard.collectionView removeFromSuperview];
                 _isSmiliesBoardVisible = isSmiliesBoardVisible;
-                listTapGestureRecognizer.enabled = isSmiliesBoardVisible;
-                tableController.tableView.userInteractionEnabled = !isSmiliesBoardVisible;
+                [self switchControlsForGesturesEnabled:!isSmiliesBoardVisible];
             }];
         } else {
             [self.view addSubview:self.smiliesBoard.collectionView];
             [self liftViewUpToEndFrame:[self smiliesBoardSizeForStateVisible:YES] animationDuration:animationDuration completionBlock:^(BOOL finished) {
                 _isSmiliesBoardVisible = isSmiliesBoardVisible;
-                listTapGestureRecognizer.enabled = isSmiliesBoardVisible;
-                tableController.tableView.userInteractionEnabled = !isSmiliesBoardVisible;
+                [self switchControlsForGesturesEnabled:isSmiliesBoardVisible];
             }];
         }
     }
@@ -543,14 +541,12 @@ static void message_status(LinphoneChatMessage* msg,LinphoneChatMessageState sta
         [tableController setEditing:FALSE animated:TRUE];
         [editButton setOff];
     }
-    tableController.tableView.userInteractionEnabled = NO;
-    [listTapGestureRecognizer setEnabled:TRUE];
+    [self switchControlsForGesturesEnabled:YES];
     return TRUE;
 }
 
 - (BOOL)growingTextViewShouldEndEditing:(HPGrowingTextView *)growingTextView {
-    tableController.tableView.userInteractionEnabled = YES;
-    [listTapGestureRecognizer setEnabled:FALSE];
+    [self switchControlsForGesturesEnabled:NO];
     return TRUE;
 }
 
@@ -942,6 +938,11 @@ static void message_status(LinphoneChatMessage* msg,LinphoneChatMessageState sta
     CGRect frame = self.view.frame;
     CGRect result = isVisible ? CGRectMake(0.0f, frame.size.height - smiliesBoardHeight, frame.size.width, smiliesBoardHeight) : CGRectMake(0.0f, frame.size.height, frame.size.width, 0.0f);
     return result;
+}
+
+- (void)switchControlsForGesturesEnabled:(BOOL)isEnabled {
+    listTapGestureRecognizer.enabled = isEnabled;
+    tableController.tableView.userInteractionEnabled = !isEnabled;
 }
 
 @end
