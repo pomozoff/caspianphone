@@ -11,5 +11,6 @@
 @interface COCTextField : UITextField
 
 @property (nonatomic, assign) UIEdgeInsets edgeInsets;
+@property (nonatomic, assign) BOOL editable;
 
 @end

@@ -14,6 +14,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.edgeInsets = UIEdgeInsetsMake(0, 10, 0, 10);
+        self.editable = YES;
     }
     return self;
 }
@@ -30,6 +31,13 @@
 }
 - (CGRect)editingRectForBounds:(CGRect)bounds {
     return [super editingRectForBounds:UIEdgeInsetsInsetRect(bounds, self.edgeInsets)];
+}
+
+- (BOOL)canPerformAction:(SEL)action withSender:(id)sender {
+    if (action == @selector(paste:) || action == @selector(cut:)) {
+        return self.editable;
+    }
+    return [super canPerformAction:action withSender:sender];
 }
 
 @end

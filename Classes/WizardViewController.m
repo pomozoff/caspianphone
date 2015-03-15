@@ -364,6 +364,10 @@ static UICompositeViewDescription *compositeDescription = nil;
     self.phoneNumberFoundPhoneNumberField.inputView = self.dummyView;
     self.phoneNumberExistsPhoneNumberField.inputView = self.dummyView;
 
+    self.phoneNumberAskPhoneNumberField.editable = NO;
+    self.phoneNumberFoundPhoneNumberField.editable = NO;
+    self.phoneNumberExistsPhoneNumberField.editable = NO;
+    
     self.confirmView.layer.cornerRadius = 5.0f;
     self.confirmView.layer.masksToBounds = YES;
 }
