@@ -1559,7 +1559,12 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (BOOL)isStatusSuccess:(NSDictionary *)jsonAnswer {
     NSString *status = jsonAnswer[@"status"];
-    return [status isEqualToString:@"success"];
+    if (status) {
+        return [status isEqualToString:@"success"];
+    } else {
+        status = jsonAnswer[@"success"];
+        return [status boolValue];
+    }
 }
 
 - (BOOL)checkCountryCode:(NSString *)code {

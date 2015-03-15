@@ -2442,6 +2442,9 @@ static void audioRouteChangeListenerCallback (
             if (isError) {
                 NSMutableDictionary *details = [NSMutableDictionary dictionary];
                 NSString *message = jsonAnswer[@"message"];
+                if (!message) {
+                    message = jsonAnswer[@"mgs"];
+                }
                 [details setValue:NSLocalizedString(message ? message : @"Unknown error", nil) forKey:NSLocalizedDescriptionKey];
                 error = [NSError errorWithDomain:caspianErrorDomain code:caspianErrorCode userInfo:details];
             } else {
