@@ -46,6 +46,7 @@
 static NSString *caspianSharingServerUri = @"https://www.linphone.org:444/upload.php";
 static NSString *caspianDomainIpLocal = @"212.159.80.157";
 NSInteger caspianErrorCode = 480;
+NSString *caspianErrorDomain = @"uk.co.onecallcaspian.phone";
 
 static void audioRouteChangeListenerCallback (
 											  void                   *inUserData,                                 // 1
@@ -72,8 +73,6 @@ NSString *const kLinphoneBluetoothAvailabilityUpdate = @"LinphoneBluetoothAvaila
 NSString *const kLinphoneConfiguringStateUpdate = @"LinphoneConfiguringStateUpdate";
 NSString *const kLinphoneGlobalStateUpdate = @"LinphoneGlobalStateUpdate";
 NSString *const kLinphoneNotifyReceived = @"LinphoneNotifyReceived";
-
-static NSString *caspianErrorDomain = @"uk.co.onecallcaspian.phone";
 
 const int kLinphoneAudioVbrCodecDefaultBitrate=36; /*you can override this from linphonerc or linphonerc-factory*/
 
