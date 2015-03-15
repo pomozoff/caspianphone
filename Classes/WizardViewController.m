@@ -1738,7 +1738,7 @@ static UICompositeViewDescription *compositeDescription = nil;
         [self checkPhoneNumberRegistered:fullPhoneNumber completion:^{
             [self checkPhoneNumberExists:fullPhoneNumber completion:^{
                 NSString *createAccountUrl = [NSString stringWithFormat:caspianCreateAccountUrl
-                                              , [[LinphoneManager instance] removePrefix:@"+" fromString:countryCode]
+                                              , [[LinphoneManager instance] removeUnneededPrefixes:countryCode]
                                               , cleanedPhoneNumber
                                               , firstName
                                               , lastName
