@@ -57,12 +57,14 @@ static NSString *caspianRemoveAccountUrl         = @"https://onecallcaspian.co.u
 static NSString *caspianCreateAccountUrl         = @"https://onecallcaspian.co.uk/mobile/create?phone_code=%@&phone_number=%@&firstname=%@&lastname=%@&activation_way=%@";
 static NSString *caspianConfirmActivationCodeUrl = @"https://onecallcaspian.co.uk/mobile/confirm?code=%@";
 static NSString *caspianForgotPasswordUrl        = @"https://onecallcaspian.co.uk/mobile/forgotPassword?phone_code=%@&phone_number=%@";
+static NSString *caspianCountryFlagUrl           = @"https://onecallcaspian.co.uk/images/flags/Countries/%@";
 
 static NSString *caspianCountriesListTopKey    = @"Countries";
 static NSString *caspianCountryObjectFieldCode = @"Code";
 static NSString *caspianCountryObjectFieldName = @"Name";
 static NSString *caspianCountryObjectFieldCall = @"Call";
 static NSString *caspianCountryObjectFieldSms  = @"Sms";
+static NSString *caspianCountryObjectFieldFlag = @"Image";
 
 extern NSInteger caspianErrorCode;
 extern NSString *caspianErrorDomain;
@@ -262,6 +264,10 @@ extern NSString *caspianErrorDomain;
     [_phoneNumberFoundPhoneNumberField release];
     [_phoneNumberExistsPhoneNumberField release];
     
+    [_countryFlagSignUpImage release];
+    [_flagLoadingSignUpActivityIndicator release];
+    [_countryFlagForgotPasswordImage release];
+    [_flagLoadingForgotPasswordActivityIndicator release];
     [super dealloc];
 }
 
@@ -1669,6 +1675,12 @@ static UICompositeViewDescription *compositeDescription = nil;
     self.currentCountryRow = row;
     NSDictionary *country = [self countryAtIndex:row];
 
+    if (currentView == self.signUpView) {
+        [self updateCountryFlag:country[caspianCountryObjectFieldFlag] activityIndicator:self.flagLoadingSignUpActivityIndicator flagImageView:self.countryFlagSignUpImage];
+    } else if (currentView == self.forgotPasswordView) {
+        [self updateCountryFlag:country[caspianCountryObjectFieldFlag] activityIndicator:self.flagLoadingForgotPasswordActivityIndicator flagImageView:self.countryFlagForgotPasswordImage];
+    }
+    
     self.selectedCountryCode = country[caspianCountryObjectFieldCode];
     NSString *fullCountryCode = [@"+" stringByAppendingString:self.selectedCountryCode != nil ? self.selectedCountryCode : @""];
     
@@ -1890,6 +1902,27 @@ static UICompositeViewDescription *compositeDescription = nil;
                 
                 NSString *errorMessage = error.userInfo[NSLocalizedDescriptionKey];
                 [weakSelf alertErrorMessage:errorMessage withTitle:errorTitle withCompletion:nil];
+            }];
+        }];
+    }];
+}
+
+- (void)updateCountryFlag:(NSString *)flagFileName activityIndicator:(UIActivityIndicatorView *)activityIndicator flagImageView:(UIImageView *)flagImageView {
+    activityIndicator.hidden = NO;
+    [activityIndicator startAnimating];
+    [self.internetQueue addOperationWithBlock:^{
+        NSString *removeAccountUrl = [NSString stringWithFormat:caspianCountryFlagUrl, flagFileName];
+        [[LinphoneManager instance] dataFromUrlString:removeAccountUrl completionBlock:^(UIImage *flagImage) {
+            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                activityIndicator.hidden = YES;
+                [activityIndicator stopAnimating];
+                flagImageView.image = flagImage;
+            }];
+        } errorBlock:^(NSError *error) {
+            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                activityIndicator.hidden = YES;
+                [activityIndicator stopAnimating];
+                flagImageView.image = [UIImage imageNamed:@"flag_placeholder.png"];
             }];
         }];
     }];

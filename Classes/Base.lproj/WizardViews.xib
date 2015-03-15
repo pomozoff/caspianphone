@@ -18,12 +18,16 @@
                 <outlet property="continueSignUpField" destination="H8Y-aP-oNG" id="72v-i8-V9X"/>
                 <outlet property="countryCodeForgotPasswordField" destination="FiX-Ng-zLc" id="fS2-OY-xBb"/>
                 <outlet property="countryCodeSignUpField" destination="7O8-ON-sNh" id="eV1-f4-lix"/>
+                <outlet property="countryFlagForgotPasswordImage" destination="ZSO-Bt-M1Y" id="lkm-XF-Zz8"/>
+                <outlet property="countryFlagSignUpImage" destination="1Lf-fd-HGv" id="SvQ-24-OVo"/>
                 <outlet property="countryNameForgotPasswordField" destination="Pia-aI-MSv" id="tfY-lE-MAZ"/>
                 <outlet property="countryNameSignUpField" destination="k1G-aF-7Q7" id="aPa-Ox-dat"/>
                 <outlet property="countryPickerDoneToolbar" destination="30B-mp-hrW" id="tnV-eX-7QE"/>
                 <outlet property="countryPickerView" destination="9QR-C9-FbJ" id="sCV-Dg-r4q"/>
                 <outlet property="domainRegisterField" destination="gEd-ol-qpf" id="gZv-uz-yuN"/>
                 <outlet property="firstNameSignUpField" destination="Ubi-Sf-uTh" id="aZE-in-Gwa"/>
+                <outlet property="flagLoadingForgotPasswordActivityIndicator" destination="wkJ-zr-zkc" id="Czb-YC-Qo6"/>
+                <outlet property="flagLoadingSignUpActivityIndicator" destination="hh6-br-3OS" id="pW5-QK-tht"/>
                 <outlet property="forgotPasswordView" destination="56" id="p8y-aO-gLF"/>
                 <outlet property="lastNameSignUpField" destination="mqJ-ZT-EO8" id="R5R-NO-51y"/>
                 <outlet property="numKeypadDoneToolbar" destination="h8o-F2-ZnK" id="Gu6-Yw-ljB"/>
@@ -71,7 +75,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <accessibility key="accessibilityConfiguration" label="Account setup assistant"/>
                     <fontDescription key="fontDescription" type="italicSystem" pointSize="20"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                     <color key="shadowColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     <size key="shadowOffset" width="-1" height="-1"/>
@@ -136,8 +140,16 @@
                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="flag_placeholder.png" id="1Lf-fd-HGv" userLabel="Country Flag">
+                    <rect key="frame" x="0.0" y="110" width="59" height="40"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </imageView>
+                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="white" id="hh6-br-3OS" userLabel="Flag Activity Indicator">
+                    <rect key="frame" x="20" y="120" width="20" height="20"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </activityIndicatorView>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Country" adjustsFontSizeToFit="NO" minimumFontSize="18" background="Rectangle.png" id="k1G-aF-7Q7" userLabel="Country" customClass="COCTextField">
-                    <rect key="frame" x="0.0" y="110" width="320" height="41"/>
+                    <rect key="frame" x="60" y="110" width="260" height="41"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <nil key="textColor"/>
                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
@@ -379,7 +391,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <accessibility key="accessibilityConfiguration" label="Account setup assistant"/>
                     <fontDescription key="fontDescription" type="italicSystem" pointSize="20"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                     <color key="shadowColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     <size key="shadowOffset" width="-1" height="-1"/>
@@ -471,8 +483,16 @@
                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="flag_placeholder.png" id="ZSO-Bt-M1Y" userLabel="Country Flag">
+                    <rect key="frame" x="0.0" y="110" width="59" height="40"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </imageView>
+                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="white" id="wkJ-zr-zkc" userLabel="Flag Activity Indicator">
+                    <rect key="frame" x="20" y="120" width="20" height="20"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </activityIndicatorView>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Country" adjustsFontSizeToFit="NO" minimumFontSize="18" background="Rectangle.png" id="Pia-aI-MSv" userLabel="Country" customClass="COCTextField">
-                    <rect key="frame" x="0.0" y="110" width="320" height="41"/>
+                    <rect key="frame" x="60" y="110" width="260" height="41"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <nil key="textColor"/>
                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
@@ -622,7 +642,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <accessibility key="accessibilityConfiguration" label="Account setup assistant"/>
                     <fontDescription key="fontDescription" type="italicSystem" pointSize="20"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                     <color key="shadowColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     <size key="shadowOffset" width="-1" height="-1"/>
@@ -683,7 +703,7 @@
                     </connections>
                 </button>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="These parameters were retrieved from a remote provisioning profile." textAlignment="center" lineBreakMode="wordWrap" numberOfLines="7" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="RHE-hi-dfB" userLabel="remoteParamsLabel">
-                    <rect key="frame" x="34" y="269.00000052632026" width="254" height="53"/>
+                    <rect key="frame" x="34" y="269.0000019583353" width="254" height="53"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -1077,6 +1097,7 @@
         <image name="continue-selected.png" width="272" height="54"/>
         <image name="continue.png" width="272" height="54"/>
         <image name="field_background.png" width="542" height="88"/>
+        <image name="flag_placeholder.png" width="60" height="40"/>
         <image name="large-blue-button.png" width="640" height="284"/>
         <image name="logo-small.png" width="392" height="237"/>
         <image name="no-button.png" width="272" height="54"/>

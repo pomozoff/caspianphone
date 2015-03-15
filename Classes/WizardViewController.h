@@ -83,6 +83,8 @@
 @property (nonatomic, retain) IBOutlet UIToolbar *numKeypadDoneToolbar;
 
 @property (nonatomic, retain) IBOutlet UILabel *registrationNextStepSignUpLabel;
+@property (retain, nonatomic) IBOutlet UIImageView *countryFlagSignUpImage;
+@property (retain, nonatomic) IBOutlet UIActivityIndicatorView *flagLoadingSignUpActivityIndicator;
 @property (nonatomic, retain) IBOutlet UITextField *countryCodeSignUpField;
 @property (nonatomic, retain) IBOutlet COCTextField *countryNameSignUpField;
 @property (nonatomic, retain) IBOutlet COCTextField *phoneNumberSignUpField;
@@ -102,6 +104,8 @@
 
 @property (nonatomic, retain) IBOutlet COCTextField *passwordFinishField;
 
+@property (retain, nonatomic) IBOutlet UIImageView *countryFlagForgotPasswordImage;
+@property (retain, nonatomic) IBOutlet UIActivityIndicatorView *flagLoadingForgotPasswordActivityIndicator;
 @property (nonatomic, retain) IBOutlet UITextField *countryCodeForgotPasswordField;
 @property (nonatomic, retain) IBOutlet COCTextField *countryNameForgotPasswordField;
 @property (nonatomic, retain) IBOutlet COCTextField *phoneNumberForgotPasswordField;
