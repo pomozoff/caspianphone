@@ -27,6 +27,7 @@
 #import <XMLRPCRequest.h>
 
 #import "DTAlertView.h"
+#import "COCAlertView.h"
 
 typedef enum _ViewElement {
     ViewElement_Username            = 100,
@@ -1521,15 +1522,18 @@ static UICompositeViewDescription *compositeDescription = nil;
 #pragma mark - Private
 
 - (void)alertErrorMessageEmptyCountry {
-    [self alertErrorMessage:NSLocalizedString(@"Can't determine a country code, please enter correct phone number or press NO and select a country from list", nil) withTitle:NSLocalizedString(@"Wrong phone number", nil)];
+    [self alertErrorMessage:NSLocalizedString(@"Can't determine a country code, please enter correct phone number or press NO and select a country from list", nil)
+                  withTitle:NSLocalizedString(@"Wrong phone number", nil)
+             withCompletion:nil];
 }
 
-- (void)alertErrorMessage:(NSString *)message withTitle:(NSString *)title {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
-                                                    message:message
-                                                   delegate:nil
-                                          cancelButtonTitle:@"OK"
-                                          otherButtonTitles:nil];
+- (void)alertErrorMessage:(NSString *)message withTitle:(NSString *)title withCompletion:(void(^)(void))completion {
+    COCAlertView *alert = [[COCAlertView alloc] initWithTitle:title
+                                                      message:message
+                                                     delegate:self
+                                            cancelButtonTitle:@"OK"
+                                            otherButtonTitles:nil];
+    alert.completion = completion;
     [alert show];
     [alert release];
 }
@@ -1546,7 +1550,7 @@ static UICompositeViewDescription *compositeDescription = nil;
                 }];
             } errorBlock:^(NSError *error) {
                 [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                    [weakSelf alertErrorMessage:error.localizedDescription withTitle:NSLocalizedString(@"Error retrieving country list", nil)];
+                    [weakSelf alertErrorMessage:error.localizedDescription withTitle:NSLocalizedString(@"Error retrieving country list", nil) withCompletion:nil];
                 }];
             }];
         }];
@@ -1561,7 +1565,8 @@ static UICompositeViewDescription *compositeDescription = nil;
 - (BOOL)checkCountryCode:(NSString *)code {
     if (code.length == 0) {
         [self alertErrorMessage:NSLocalizedString(@"Please select country first", nil)
-                      withTitle:NSLocalizedString(@"Undefined country", nil)];
+                      withTitle:NSLocalizedString(@"Undefined country", nil)
+                 withCompletion:nil];
     }
     return code.length > 0;
 }
@@ -1719,10 +1724,12 @@ static UICompositeViewDescription *compositeDescription = nil;
 - (void)activateAccountWithCode:(NSString *)userInputActivationCode {
     if (userInputActivationCode.length == 0) {
         [self alertErrorMessage:NSLocalizedString(@"Please enter activation code first", nil)
-                      withTitle:NSLocalizedString(@"No activation code", nil)];
+                      withTitle:NSLocalizedString(@"No activation code", nil)
+                 withCompletion:nil];
     } else if (userInputActivationCode.length <= 2) {
         [self alertErrorMessage:NSLocalizedString(@"Please enter more than two characters", nil)
-                      withTitle:NSLocalizedString(@"Too short activation code", nil)];
+                      withTitle:NSLocalizedString(@"Too short activation code", nil)
+                 withCompletion:nil];
     } else if ([userInputActivationCode isEqualToString:self.activationCode]) {
         waitView.hidden = NO;
         NSString *confirmCodeUrl = [NSString stringWithFormat:caspianConfirmActivationCodeUrl, userInputActivationCode];
@@ -1742,20 +1749,23 @@ static UICompositeViewDescription *compositeDescription = nil;
                         [weakSelf changeView:passwordReceivedView back:NO animation:YES];
                     } else {
                         [weakSelf alertErrorMessage:NSLocalizedString(@"Fail", nil)
-                                          withTitle:NSLocalizedString(@"Error activating account", nil)];
+                                          withTitle:NSLocalizedString(@"Error activating account", nil)
+                                     withCompletion:nil];
                     }
                 }];
             } errorBlock:^(NSError *error) {
                 [[NSOperationQueue mainQueue] addOperationWithBlock:^{
                     waitView.hidden = YES;
                     [weakSelf alertErrorMessage:error.localizedDescription
-                                      withTitle:NSLocalizedString(@"Error activating account", nil)];
+                                      withTitle:NSLocalizedString(@"Error activating account", nil)
+                                 withCompletion:nil];
                 }];
             }];
         }];
     } else {
         [self alertErrorMessage:NSLocalizedString(@"Please enter correct activation code", nil)
-                      withTitle:NSLocalizedString(@"Wrong activation code", nil)];
+                      withTitle:NSLocalizedString(@"Wrong activation code", nil)
+                 withCompletion:nil];
     }
 }
 
@@ -1777,20 +1787,22 @@ static UICompositeViewDescription *compositeDescription = nil;
                     
                     if ([weakSelf isStatusSuccess:jsonAnswer]) {
                         [weakSelf alertErrorMessage:NSLocalizedString(@"Password has been sent to your phone number by sms", nil)
-                                          withTitle:NSLocalizedString(@"Successful", nil)];
-
+                                          withTitle:NSLocalizedString(@"Successful", nil)
+                                     withCompletion:nil];
                         weakSelf.password = @"";
                         [weakSelf changeView:signInView back:YES animation:YES];
                     } else {
                         [weakSelf alertErrorMessage:NSLocalizedString(@"Phone number not found", nil)
-                                          withTitle:NSLocalizedString(@"Error recovering password", nil)];
+                                          withTitle:NSLocalizedString(@"Error recovering password", nil)
+                                     withCompletion:nil];
                     }
                 }];
             } errorBlock:^(NSError *error) {
                 [[NSOperationQueue mainQueue] addOperationWithBlock:^{
                     waitView.hidden = YES;
                     [weakSelf alertErrorMessage:error.localizedDescription
-                                      withTitle:NSLocalizedString(@"Error recovering password", nil)];
+                                      withTitle:NSLocalizedString(@"Error recovering password", nil)
+                                 withCompletion:nil];
                 }];
             }];
         }];

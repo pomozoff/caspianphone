@@ -133,6 +133,7 @@
 		263CE08F1A94FBAD002983F9 /* UISmileCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 263CE08E1A94FBAD002983F9 /* UISmileCollectionViewCell.m */; };
 		2645CC701A8F9CFB00D993A0 /* smile256.png in Resources */ = {isa = PBXBuildFile; fileRef = 2645CC6E1A8F9CFB00D993A0 /* smile256.png */; };
 		2645CC711A8F9CFB00D993A0 /* smile512.png in Resources */ = {isa = PBXBuildFile; fileRef = 2645CC6F1A8F9CFB00D993A0 /* smile512.png */; };
+		266D5B9F1AB5C013003F9E30 /* COCAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 266D5B9E1AB5C013003F9E30 /* COCAlertView.m */; };
 		26E7F2F31A816E200033D3C0 /* NSMutableArray+SWUtilityButtons.m in Sources */ = {isa = PBXBuildFile; fileRef = 26E7F2E81A816E200033D3C0 /* NSMutableArray+SWUtilityButtons.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		26E7F2F41A816E200033D3C0 /* SWCellScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 26E7F2EA1A816E200033D3C0 /* SWCellScrollView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		26E7F2F51A816E200033D3C0 /* SWLongPressGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 26E7F2EC1A816E200033D3C0 /* SWLongPressGestureRecognizer.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -1137,6 +1138,8 @@
 		263CE08E1A94FBAD002983F9 /* UISmileCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UISmileCollectionViewCell.m; sourceTree = "<group>"; };
 		2645CC6E1A8F9CFB00D993A0 /* smile256.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = smile256.png; sourceTree = "<group>"; };
 		2645CC6F1A8F9CFB00D993A0 /* smile512.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = smile512.png; sourceTree = "<group>"; };
+		266D5B9D1AB5C012003F9E30 /* COCAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = COCAlertView.h; sourceTree = "<group>"; };
+		266D5B9E1AB5C013003F9E30 /* COCAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = COCAlertView.m; sourceTree = "<group>"; };
 		26E7F2E71A816E200033D3C0 /* NSMutableArray+SWUtilityButtons.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+SWUtilityButtons.h"; sourceTree = "<group>"; };
 		26E7F2E81A816E200033D3C0 /* NSMutableArray+SWUtilityButtons.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+SWUtilityButtons.m"; sourceTree = "<group>"; };
 		26E7F2E91A816E200033D3C0 /* SWCellScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWCellScrollView.h; sourceTree = "<group>"; };
@@ -2248,6 +2251,8 @@
 				D35E7594159460560066B1C1 /* ChatViewController.h */,
 				D35E7595159460560066B1C1 /* ChatViewController.m */,
 				D38187B415FE340500C3EDCA /* ChatViewController.xib */,
+				266D5B9D1AB5C012003F9E30 /* COCAlertView.h */,
+				266D5B9E1AB5C013003F9E30 /* COCAlertView.m */,
 				261F4BE01A8A7A8F0060F003 /* COCSmiliesManager.h */,
 				261F4BE11A8A7A8F0060F003 /* COCSmiliesManager.m */,
 				2634D3681A83E52E006533C5 /* COCTextAttachment.h */,
@@ -4496,6 +4501,7 @@
 				26E7F3F21A8171170033D3C0 /* COCTextField.m in Sources */,
 				C90FAA7915AF54E6002091CB /* HistoryDetailsViewController.m in Sources */,
 				63FB30351A680E73008CA393 /* UIRoundedImageView.m in Sources */,
+				266D5B9F1AB5C013003F9E30 /* COCAlertView.m in Sources */,
 				F066515517F9A02E0064280C /* UITransparentTVCell.m in Sources */,
 				D3F9A9EE15AF277E0045320F /* UACellBackgroundView.m in Sources */,
 				D35860D615B549B500513429 /* Utils.m in Sources */,
