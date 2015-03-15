@@ -79,6 +79,8 @@ extern NSString *caspianErrorDomain;
 @property (nonatomic, retain) NSOperationQueue *serialCountryListPullQueue;
 @property (nonatomic, retain) NSOperationQueue *internetQueue;
 
+@property (nonatomic, assign) NSInteger currentCountryRow;
+
 @end
 
 @implementation WizardViewController
@@ -372,6 +374,8 @@ static UICompositeViewDescription *compositeDescription = nil;
     
     self.confirmView.layer.cornerRadius = 5.0f;
     self.confirmView.layer.masksToBounds = YES;
+    
+    self.currentCountryRow = 0;
 }
 
 
@@ -915,9 +919,13 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
     activeTextField = textField;
-    if (textField == self.countryNameSignUpField && self.countryAndCode.count == 0) {
-        waitView.hidden = NO;
-        [self pullCountries];
+    if (textField == self.countryNameSignUpField) {
+        if (self.countryAndCode.count == 0) {
+            waitView.hidden = NO;
+            [self pullCountries];
+        } else {
+            [self didSelectCountryAtRow:self.currentCountryRow];
+        }
     }
 }
 
@@ -1659,6 +1667,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 }
 
 - (void)didSelectCountryAtRow:(NSInteger)row {
+    self.currentCountryRow = row;
     NSDictionary *country = [self countryAtIndex:row];
 
     self.selectedCountryCode = country[caspianCountryObjectFieldCode];
