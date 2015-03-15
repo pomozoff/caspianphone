@@ -133,6 +133,7 @@
 		263CE08F1A94FBAD002983F9 /* UISmileCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 263CE08E1A94FBAD002983F9 /* UISmileCollectionViewCell.m */; };
 		2645CC701A8F9CFB00D993A0 /* smile256.png in Resources */ = {isa = PBXBuildFile; fileRef = 2645CC6E1A8F9CFB00D993A0 /* smile256.png */; };
 		2645CC711A8F9CFB00D993A0 /* smile512.png in Resources */ = {isa = PBXBuildFile; fileRef = 2645CC6F1A8F9CFB00D993A0 /* smile512.png */; };
+		2668D6E41AB62274009630D3 /* flag_placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 2668D6E31AB62274009630D3 /* flag_placeholder.png */; };
 		266D5B9F1AB5C013003F9E30 /* COCAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 266D5B9E1AB5C013003F9E30 /* COCAlertView.m */; };
 		26E7F2F31A816E200033D3C0 /* NSMutableArray+SWUtilityButtons.m in Sources */ = {isa = PBXBuildFile; fileRef = 26E7F2E81A816E200033D3C0 /* NSMutableArray+SWUtilityButtons.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		26E7F2F41A816E200033D3C0 /* SWCellScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 26E7F2EA1A816E200033D3C0 /* SWCellScrollView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -1138,6 +1139,7 @@
 		263CE08E1A94FBAD002983F9 /* UISmileCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UISmileCollectionViewCell.m; sourceTree = "<group>"; };
 		2645CC6E1A8F9CFB00D993A0 /* smile256.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = smile256.png; sourceTree = "<group>"; };
 		2645CC6F1A8F9CFB00D993A0 /* smile512.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = smile512.png; sourceTree = "<group>"; };
+		2668D6E31AB62274009630D3 /* flag_placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flag_placeholder.png; sourceTree = "<group>"; };
 		266D5B9D1AB5C012003F9E30 /* COCAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = COCAlertView.h; sourceTree = "<group>"; };
 		266D5B9E1AB5C013003F9E30 /* COCAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = COCAlertView.m; sourceTree = "<group>"; };
 		26E7F2E71A816E200033D3C0 /* NSMutableArray+SWUtilityButtons.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+SWUtilityButtons.h"; sourceTree = "<group>"; };
@@ -2566,6 +2568,7 @@
 				26E7F3311A81709F0033D3C0 /* dialer.png */,
 				26E7F3321A81709F0033D3C0 /* edit-large.png */,
 				26E7F3331A81709F0033D3C0 /* edit-small.png */,
+				2668D6E31AB62274009630D3 /* flag_placeholder.png */,
 				26E7F3341A81709F0033D3C0 /* history-hover.png */,
 				26E7F3351A81709F0033D3C0 /* history.png */,
 				26E7F3361A81709F0033D3C0 /* large-blue-button.png */,
@@ -4295,6 +4298,7 @@
 				D37E3ED01619DCC50087659A /* licenses.html in Resources */,
 				D33E1F08164CF35100CFA363 /* callbar_left_padding.png in Resources */,
 				D33E1F0A164CF35100CFA363 /* callbar_right_padding.png in Resources */,
+				2668D6E41AB62274009630D3 /* flag_placeholder.png in Resources */,
 				15AF3C5416F37A3E00FC52EC /* route_bluetooth_off_default.png in Resources */,
 				15AF3C5616F37A3E00FC52EC /* route_bluetooth_off_disabled.png in Resources */,
 				15AF3C5816F37A3E00FC52EC /* route_bluetooth_off_over.png in Resources */,
