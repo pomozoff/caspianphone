@@ -48,6 +48,7 @@ static NSString *caspianActivationCodeKey = @"uk.co.onecallcaspian.phone.activat
 static NSString *caspianSelectCountry    = @"Select Country";
 static NSString *caspianEnterPhoneNumber = @"Enter Phone Number";
 static NSString *caspianEnterName        = @"Enter First and Last Names";
+static NSString *caspianContinue         = @"Press continue";
 
 static NSString *caspianCountryListUrl           = @"https://onecallcaspian.co.uk/mobile/country2";
 static NSString *caspianCheckAccountExistUrl     = @"https://onecallcaspian.co.uk/mobile/accountexist?phone_number=%@";
@@ -930,9 +931,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
-    if (textField == self.phoneNumberSignUpField) {
-        [self checkNextStep];
-    }
+    [self checkNextStep];
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
@@ -1690,8 +1689,16 @@ static UICompositeViewDescription *compositeDescription = nil;
 - (void)checkNextStep {
     BOOL isPhoneNumberValid = NO;
     if (self.countryCodeSignUpField.text.length > 0) {
-        isPhoneNumberValid = self.phoneNumberSignUpField.text.length > 0;
-        self.registrationNextStepSignUpLabel.text = isPhoneNumberValid ? NSLocalizedString(caspianEnterName, nil) : NSLocalizedString(caspianEnterPhoneNumber, nil);
+        if (self.phoneNumberSignUpField.text.length > 0) {
+            isPhoneNumberValid = YES;
+            if (self.firstNameSignUpField.text.length > 0 && self.lastNameSignUpField.text.length > 0) {
+                self.registrationNextStepSignUpLabel.text = NSLocalizedString(caspianContinue, nil);
+            } else {
+                self.registrationNextStepSignUpLabel.text = NSLocalizedString(caspianEnterName, nil);
+            }
+        } else {
+            self.registrationNextStepSignUpLabel.text = NSLocalizedString(caspianEnterPhoneNumber, nil);
+        }
     } else {
         self.registrationNextStepSignUpLabel.text = caspianSelectCountry;
     }
