@@ -2437,7 +2437,7 @@ static void audioRouteChangeListenerCallback (
     
     if (!error) {
         NSDictionary *jsonAnswer = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
-        if (!error && completionBlock) {
+        if (!error) {
             BOOL isError = [jsonAnswer[@"error"] boolValue];
             if (isError) {
                 NSMutableDictionary *details = [NSMutableDictionary dictionary];
@@ -2447,8 +2447,18 @@ static void audioRouteChangeListenerCallback (
                 }
                 [details setValue:NSLocalizedString(message ? message : @"Unknown error", nil) forKey:NSLocalizedDescriptionKey];
                 error = [NSError errorWithDomain:caspianErrorDomain code:caspianErrorCode userInfo:details];
-            } else {
+            } else if (completionBlock) {
                 completionBlock(jsonAnswer);
+            }
+        } else {
+            UIImage *image = [UIImage imageWithData:data];
+            if (!image) {
+                NSMutableDictionary *details = [NSMutableDictionary dictionary];
+                [details setValue:NSLocalizedString(@"Unknown format", nil) forKey:NSLocalizedDescriptionKey];
+                error = [NSError errorWithDomain:@"" code:-1 userInfo:details];
+            } else {
+                error = nil;
+                completionBlock([[image retain] autorelease]);
             }
         }
     }
