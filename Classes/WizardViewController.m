@@ -1076,7 +1076,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     } else {
         [self checkIsSameUserSigningIn:phone];
         [self.waitView setHidden:false];
-        [self addProxyConfig:[[LinphoneManager instance] cleanPhoneNumber:phone] password:password domain:domain withTransport:@"tcp"];
+        [self addProxyConfig:[[LinphoneManager instance] removeUnneededPrefixes:phone] password:password domain:domain withTransport:@"tcp"];
     }
 }
 
@@ -1658,7 +1658,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 - (NSString *)correctPhoneNumber:(NSString *)phoneNumber andCountryCode:(NSString *)countryCode {
     NSString *fullPhoneNumber = nil;
     if ([self checkCountryCode:countryCode]) {
-        NSString *cleanedPhoneNumber = [[LinphoneManager instance] cleanPhoneNumber:phoneNumber];
+        NSString *cleanedPhoneNumber = [[LinphoneManager instance] removeUnneededPrefixes:phoneNumber];
         fullPhoneNumber = [countryCode stringByAppendingString:cleanedPhoneNumber];
     }
     return fullPhoneNumber;
@@ -1820,9 +1820,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     
     [self checkIsSameUserSigningIn:phone];
     [self.waitView setHidden:false];
-    [self addProxyConfig:[[LinphoneManager instance] cleanPhoneNumber:phone] password:password domain:domain withTransport:@"tcp"];
-
-    
+    [self addProxyConfig:[[LinphoneManager instance] removeUnneededPrefixes:phone] password:password domain:domain withTransport:@"tcp"];
 }
 
 @end

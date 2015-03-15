@@ -147,7 +147,7 @@ typedef struct _LinphoneManagerSounds {
 - (void)dataFromUrl:(NSURL *)url completionBlock:(void(^)(id result))completionBlock errorBlock:(void(^)(NSError *error))errorBlock;
 
 - (NSString *)removePrefix:(NSString *)prefix fromString:(NSString *)string;
-- (NSString *)cleanPhoneNumber:(NSString *)username;
+- (NSString *)removeUnneededPrefixes:(NSString *)username;
 - (NSString *)caspianDomainIp;
 - (NSString *)sipAddressFromPhoneNumber:(NSString *)phoneNumber;
 

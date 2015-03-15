@@ -102,7 +102,7 @@
     }
 
     if (addressField.text.length > 0) {
-        NSString *address = [[LinphoneManager instance] cleanPhoneNumber:addressField.text];
+        NSString *address = [[LinphoneManager instance] removeUnneededPrefixes:addressField.text];
         ABRecordRef contact = [[[LinphoneManager instance] fastAddressBook] getContact:address];
         if(contact) {
             displayName = [FastAddressBook getContactDisplayName:contact];

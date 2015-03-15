@@ -2462,7 +2462,7 @@ static void audioRouteChangeListenerCallback (
     return string;
 }
 
-- (NSString *)cleanPhoneNumber:(NSString *)phoneNumber {
+- (NSString *)removeUnneededPrefixes:(NSString *)phoneNumber {
     if (phoneNumber.length < 1) {
         return phoneNumber;
     }
