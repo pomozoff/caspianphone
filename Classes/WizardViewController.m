@@ -1255,7 +1255,8 @@ static UICompositeViewDescription *compositeDescription = nil;
 #pragma mark - UIAlertViewDelegate
 
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    if (buttonIndex == 1) { /* fetch */
+    /*
+    if (buttonIndex == 1) { // fetch
         NSString* url = [alertView textFieldAtIndex:0].text;
         if( [url length] > 0 ){
             // missing prefix will result in http:// being used
@@ -1270,6 +1271,13 @@ static UICompositeViewDescription *compositeDescription = nil;
         }
     } else {
         [LinphoneLogger log:LinphoneLoggerLog format:@"Canceled remote provisioning"];
+    }
+    */
+    if ([alertView isKindOfClass:[COCAlertView class]]) {
+        COCAlertView *ownAlertView = (COCAlertView *)alertView;
+        if (ownAlertView.completion) {
+            ownAlertView.completion();
+        }
     }
 }
 
