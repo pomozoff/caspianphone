@@ -111,6 +111,7 @@ extern NSString *caspianErrorDomain;
 
 @synthesize activationCode = _activationCode;
 
+
 #pragma mark - Properties
 
 - (NSOperationQueue *)serialCountryListPullQueue {
@@ -155,6 +156,7 @@ extern NSString *caspianErrorDomain;
     }
     return _dummyView;
 }
+
 
 #pragma mark - Lifecycle Functions
 
@@ -800,6 +802,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     return [uri substringFromIndex:[scheme length] + 1];
 }
 
+
 #pragma mark - Linphone XMLRPC
 
 - (void)checkUserExist:(NSString*)username {
@@ -844,6 +847,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     [request release];
     [waitView setHidden:false];
 }
+
 
 #pragma mark -
 
@@ -896,6 +900,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     [[LinphoneManager instance] lpConfigSetInt:1 forKey:@"transient_provisioning" forSection:@"misc"];
     [[LinphoneManager instance] resetLinphoneCore];
 }
+
 
 #pragma mark - UITextFieldDelegate Functions
 
@@ -968,6 +973,7 @@ static UICompositeViewDescription *compositeDescription = nil;
          ];
     }
 }
+
 
 #pragma mark - Action Functions
 
@@ -1279,6 +1285,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     [self removePhoneNumberFromCard:self.phoneNumberExistsPhoneNumberField.text];
 }
 
+
 #pragma mark - UIAlertViewDelegate
 
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
@@ -1498,6 +1505,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     
 }
 
+
 #pragma mark - TPMultiLayoutViewController Functions
 
 - (NSDictionary*)attributesForView:(UIView*)view {
@@ -1522,6 +1530,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     view.autoresizingMask = [[attributes objectForKey:@"autoresizingMask"] integerValue];
 }
 
+
 #pragma mark - UIGestureRecognizerDelegate Functions
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
@@ -1533,6 +1542,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     }
     return YES;
 }
+
 
 #pragma mark - Picker view data source
 
@@ -1547,11 +1557,13 @@ static UICompositeViewDescription *compositeDescription = nil;
     return country[caspianCountryObjectFieldName];
 }
 
+
 #pragma mark - Picker view delegate
 
 -(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
     [self didSelectCountryAtRow:row];
 }
+
 
 #pragma mark - Private
 
@@ -1622,6 +1634,7 @@ static UICompositeViewDescription *compositeDescription = nil;
         [[LinphoneManager instance] cleanCallHistory];
     }
 }
+
 
 #pragma mark - Sign Up
 
@@ -1866,6 +1879,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     }];
 }
 
+
 #pragma mark - Activation
 
 - (void)activateAccountWithCode:(NSString *)userInputActivationCode {
@@ -1916,6 +1930,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     }
 }
 
+
 #pragma mark - Forgot Password
 
 - (void)recoverPasswordForPhoneNumber:(NSString *)phoneNumber andCountryCode:(NSString *)countryCode {
@@ -1958,7 +1973,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 # pragma mark - Resign
 
-- (void) resign {
+- (void)resign {
     NSString *phone    = self.phoneNumberRegisterField.text;
     NSString *password = self.passwordRegisterField.text;
     NSString *domain   = self.domainRegisterField.text;
