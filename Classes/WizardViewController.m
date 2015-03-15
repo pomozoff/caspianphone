@@ -50,6 +50,9 @@ static NSString *caspianEnterPhoneNumber = @"Enter Phone Number";
 static NSString *caspianEnterName        = @"Enter First and Last Names";
 
 static NSString *caspianCountryListUrl           = @"http://www.onecallcaspian.co.uk/mobile/country2";
+static NSString *caspianCheckAccountExistUrl     = @"https://onecallcaspian.co.uk/mobile/accountexist?phone_number=%@";
+static NSString *caspianCheckCardExistUrl        = @"https://onecallcaspian.co.uk/mobile/cardexist?phone_number=%@";
+static NSString *caspianRemoveAccountUrl         = @"https://onecallcaspian.co.uk/mobile/remove?card_id=%@&phone_number=%@";
 static NSString *caspianCreateAccountUrl         = @"http://www.onecallcaspian.co.uk/mobile/create?phone_code=%@&phone_number=%@&firstname=%@&lastname=%@&activation_way=%@";
 static NSString *caspianConfirmActivationCodeUrl = @"http://www.onecallcaspian.co.uk/mobile/confirm?code=%@";
 static NSString *caspianForgotPasswordUrl        = @"http://www.onecallcaspian.co.uk/mobile/forgotPassword?phone_code=%@&phone_number=%@";
@@ -61,6 +64,7 @@ static NSString *caspianCountryObjectFieldCall = @"Call";
 static NSString *caspianCountryObjectFieldSms  = @"Sms";
 
 extern NSInteger caspianErrorCode;
+extern NSString *caspianErrorDomain;
 
 @interface WizardViewController ()
 
@@ -71,6 +75,7 @@ extern NSInteger caspianErrorCode;
 @property (nonatomic, copy) NSString *activationCode;
 @property (nonatomic, copy) NSString *phoneNumber;
 @property (nonatomic, copy) NSString *password;
+@property (nonatomic, copy) NSString *caspianCardId;
 @property (nonatomic, retain) NSOperationQueue *serialCountryListPullQueue;
 @property (nonatomic, retain) NSOperationQueue *internetQueue;
 
@@ -212,6 +217,7 @@ extern NSInteger caspianErrorCode;
     [_selectedCountryCode release];
     [_activationCode release];
     [_password release];
+    [_caspianCardId release];
     
     [_firstNameSignUpField release];
     [_lastNameSignUpField release];
@@ -245,6 +251,12 @@ extern NSInteger caspianErrorCode;
     
     [_transportChooser release];
 
+    [_phoneNumberFoundView release];
+    [_phoneNumberExistsView release];
+    
+    [_phoneNumberFoundPhoneNumberField release];
+    [_phoneNumberExistsPhoneNumberField release];
+    
     [super dealloc];
 }
 
@@ -349,6 +361,8 @@ static UICompositeViewDescription *compositeDescription = nil;
     self.phoneNumberForgotPasswordField.inputAccessoryView = self.numKeypadDoneToolbar;
     
     self.phoneNumberAskPhoneNumberField.inputView = self.dummyView;
+    self.phoneNumberFoundPhoneNumberField.inputView = self.dummyView;
+    self.phoneNumberExistsPhoneNumberField.inputView = self.dummyView;
 
     self.confirmView.layer.cornerRadius = 5.0f;
     self.confirmView.layer.masksToBounds = YES;
@@ -1210,11 +1224,11 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (IBAction)onOkConfirmTap:(UIButton *)sender {
     [self animateConfirmViewHide:YES];
-    [self createAccountForPhoneNumber:self.phoneNumberSignUpField.text
-                          countryCode:self.countryCodeSignUpField.text
-                            firstName:self.firstNameSignUpField.text
-                             lastName:self.lastNameSignUpField.text
-                        activateBySms:self.activateBySignUpSegmented.selectedSegmentIndex == 0];
+    [self checkAndCreateAccountForPhoneNumber:self.phoneNumberSignUpField.text
+                                  countryCode:self.countryCodeSignUpField.text
+                                    firstName:self.firstNameSignUpField.text
+                                     lastName:self.lastNameSignUpField.text
+                                activateBySms:self.activateBySignUpSegmented.selectedSegmentIndex == 0];
 }
 
 - (IBAction)onCountinueActivatingTap:(id)sender {
@@ -1250,6 +1264,15 @@ static UICompositeViewDescription *compositeDescription = nil;
     } else {
         [self alertErrorMessageEmptyCountry];
     }
+}
+
+- (IBAction)onSmsMePassword:(UIButton *)sender {
+    [self recoverPasswordForPhoneNumber:self.phoneNumberSignUpField.text
+                         andCountryCode:self.countryCodeSignUpField.text];
+}
+
+- (IBAction)onRemovePhoneFromCard:(UIButton *)sender {
+    [self removePhoneNumberFromCard:self.phoneNumberExistsPhoneNumberField.text];
 }
 
 #pragma mark - UIAlertViewDelegate
@@ -1676,59 +1699,167 @@ static UICompositeViewDescription *compositeDescription = nil;
     return fullPhoneNumber;
 }
 
-- (void)createAccountForPhoneNumber:(NSString *)phoneNumber
-                        countryCode:(NSString *)countryCode
-                          firstName:(NSString *)firstName
-                           lastName:(NSString *)lastName
-                      activateBySms:(BOOL)activateBySms {
+- (void)checkAndCreateAccountForPhoneNumber:(NSString *)phoneNumber
+                                countryCode:(NSString *)countryCode
+                                  firstName:(NSString *)firstName
+                                   lastName:(NSString *)lastName
+                              activateBySms:(BOOL)activateBySms {
     if ([self checkCountryCode:countryCode]) {
         waitView.hidden = NO;
-        NSString *cleanedPhoneNumber = [[LinphoneManager instance] cleanPhoneNumber:phoneNumber];
-        NSString *createAccountUrl = [NSString stringWithFormat:caspianCreateAccountUrl
-                                      , [[LinphoneManager instance] removePrefix:@"+" fromString:countryCode]
-                                      , cleanedPhoneNumber
-                                      , firstName
-                                      , lastName
-                                      , activateBySms ? @"sms" : @"call"
-                                      ];
-        __block WizardViewController *weakSelf = self;
-        [self.internetQueue addOperationWithBlock:^{
-            [[LinphoneManager instance] dataFromUrlString:createAccountUrl completionBlock:^(NSDictionary *jsonAnswer) {
-                [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                    waitView.hidden = YES;
-                    
-                    if ([weakSelf isStatusSuccess:jsonAnswer]) {
-                        id activationCode = jsonAnswer[@"activation_code"];
-                        weakSelf.activationCode = [NSString stringWithFormat:@"%@", activationCode];
-                        
-                        [weakSelf changeView:activateAccountView back:NO animation:YES];
-                    } else {
-                        [weakSelf alertErrorMessage:NSLocalizedString(@"Fail", nil)
-                                          withTitle:NSLocalizedString(@"Error creating account", nil)];
-                    }
-                }];
-            } errorBlock:^(NSError *error) {
-                [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                    waitView.hidden = YES;
-
-                    NSString *errorTitle = @"";
-                    NSString *errorMessage = @"";
-
-                    if (activateBySms && error.code == caspianErrorCode) {
-                        errorTitle = NSLocalizedString(@"Activation by sms failed", nil);
-                        errorMessage = NSLocalizedString(@"Try to activate your account by call", nil);
-                        
-                        [weakSelf switchToActivationByCall];
-                    } else {
-                        errorTitle = NSLocalizedString(@"Error creating account", nil);
-                        errorMessage = error.localizedDescription;
-                    }
-                    
-                    [weakSelf alertErrorMessage:errorMessage withTitle:errorTitle];
-                }];
+        NSString *cleanedPhoneNumber = [[LinphoneManager instance] removeUnneededPrefixes:phoneNumber];
+        NSString *cleanedCountryCode = [[LinphoneManager instance] removeUnneededPrefixes:countryCode];
+        NSString *fullPhoneNumber = [cleanedCountryCode stringByAppendingString:cleanedPhoneNumber];
+        [self checkPhoneNumberRegistered:fullPhoneNumber completion:^{
+            [self checkPhoneNumberExists:phoneNumber completion:^{
+                NSString *createAccountUrl = [NSString stringWithFormat:caspianCreateAccountUrl
+                                              , [[LinphoneManager instance] removePrefix:@"+" fromString:countryCode]
+                                              , cleanedPhoneNumber
+                                              , firstName
+                                              , lastName
+                                              , activateBySms ? @"sms" : @"call"
+                                              ];
+                [self createCaspianAccountByUrl:createAccountUrl activateType:activateBySms];
             }];
         }];
     }
+}
+
+- (void)checkPhoneNumberRegistered:(NSString *)phoneNumber completion:(void(^)(void))completion {
+    __block WizardViewController *weakSelf = self;
+    
+    [self.internetQueue addOperationWithBlock:^{
+        NSString *errorTitle = NSLocalizedString(@"Checking phone number failed", nil);
+        NSString *checkAccountExistUrl = [NSString stringWithFormat:caspianCheckAccountExistUrl, phoneNumber];
+        [[LinphoneManager instance] dataFromUrlString:checkAccountExistUrl completionBlock:^(NSDictionary *jsonAnswer) {
+            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                waitView.hidden = YES;
+                if ([weakSelf isStatusSuccess:jsonAnswer]) {
+                    // Account exists, it needs to be recovered
+                    self.phoneNumberFoundPhoneNumberField.text = phoneNumber;
+                    [weakSelf changeView:self.phoneNumberFoundView back:NO animation:YES];
+                } else {
+                    NSString *errorMessage = NSLocalizedString(@"Try to create account again", nil);
+                    [weakSelf alertErrorMessage:errorMessage withTitle:errorTitle withCompletion:nil];
+                }
+            }];
+        } errorBlock:^(NSError *error) {
+            NSString *errorMessage = error.userInfo[NSLocalizedDescriptionKey];
+            if (error.code == caspianErrorCode && [error.domain isEqualToString:caspianErrorDomain] && [errorMessage isEqualToString:@"System can not find user"]) {
+                // Account was not found, creating a new one
+                completion();
+            } else {
+                [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                    waitView.hidden = YES;
+                    [weakSelf alertErrorMessage:errorMessage withTitle:errorTitle withCompletion:nil];
+                }];
+            }
+        }];
+    }];
+}
+
+- (void)checkPhoneNumberExists:(NSString *)phoneNumber completion:(void(^)(void))completion {
+    __block WizardViewController *weakSelf = self;
+    
+    [self.internetQueue addOperationWithBlock:^{
+        NSString *errorTitle = NSLocalizedString(@"Checking phone number failed", nil);
+        NSString *checkCardExistUrl = [NSString stringWithFormat:caspianCheckCardExistUrl, phoneNumber];
+        [[LinphoneManager instance] dataFromUrlString:checkCardExistUrl completionBlock:^(NSDictionary *jsonAnswer) {
+            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                waitView.hidden = YES;
+                if ([weakSelf isStatusSuccess:jsonAnswer]) {
+                    // Card exists, it needs to remove phone number
+                    self.phoneNumberExistsPhoneNumberField.text = phoneNumber;
+                    self.caspianCardId = jsonAnswer[@"card_id"];
+                    [weakSelf changeView:self.phoneNumberExistsView back:NO animation:YES];
+                } else {
+                    NSString *errorMessage = NSLocalizedString(@"Try to create account again", nil);
+                    [weakSelf alertErrorMessage:errorMessage withTitle:errorTitle withCompletion:nil];
+                }
+            }];
+        } errorBlock:^(NSError *error) {
+            NSString *errorMessage = error.userInfo[NSLocalizedDescriptionKey];
+            if (error.code == caspianErrorCode && [error.domain isEqualToString:caspianErrorDomain] && [errorMessage isEqualToString:@"System can not find card"]) {
+                // Card was not found, creating a new one
+                completion();
+            } else {
+                [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                    waitView.hidden = YES;
+                    [weakSelf alertErrorMessage:errorMessage withTitle:errorTitle withCompletion:nil];
+                }];
+            }
+        }];
+    }];
+}
+
+- (void)createCaspianAccountByUrl:(NSString *)createAccountUrl activateType:(BOOL)activateBySms {
+    __block WizardViewController *weakSelf = self;
+
+    [self.internetQueue addOperationWithBlock:^{
+        [[LinphoneManager instance] dataFromUrlString:createAccountUrl completionBlock:^(NSDictionary *jsonAnswer) {
+            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                waitView.hidden = YES;
+                if ([weakSelf isStatusSuccess:jsonAnswer]) {
+                    id activationCode = jsonAnswer[@"activation_code"];
+                    weakSelf.activationCode = [NSString stringWithFormat:@"%@", activationCode];
+                    [weakSelf changeView:activateAccountView back:NO animation:YES];
+                } else {
+                    [weakSelf alertErrorMessage:NSLocalizedString(@"Fail", nil)
+                                      withTitle:NSLocalizedString(@"Error creating account", nil)
+                                 withCompletion:nil];
+                }
+            }];
+        } errorBlock:^(NSError *error) {
+            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                waitView.hidden = YES;
+                
+                NSString *errorTitle = @"";
+                NSString *errorMessage = @"";
+                
+                if (activateBySms && error.code == caspianErrorCode) {
+                    errorTitle = NSLocalizedString(@"Activation by sms failed", nil);
+                    errorMessage = NSLocalizedString(@"Try to activate your account by call", nil);
+                    [weakSelf switchToActivationByCall];
+                } else {
+                    errorTitle = NSLocalizedString(@"Error creating account", nil);
+                    errorMessage = error.localizedDescription;
+                }
+                [weakSelf alertErrorMessage:errorMessage withTitle:errorTitle withCompletion:nil];
+            }];
+        }];
+    }];
+}
+
+- (void)removePhoneNumberFromCard:(NSString *)phoneNumber {
+    waitView.hidden = NO;
+    __block WizardViewController *weakSelf = self;
+    
+    [self.internetQueue addOperationWithBlock:^{
+        NSString *errorTitle = NSLocalizedString(@"Removing phone number failed", nil);
+        NSString *removeAccountUrl = [NSString stringWithFormat:caspianRemoveAccountUrl, self.caspianCardId, phoneNumber];
+        [[LinphoneManager instance] dataFromUrlString:removeAccountUrl completionBlock:^(NSDictionary *jsonAnswer) {
+            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                waitView.hidden = YES;
+                if ([weakSelf isStatusSuccess:jsonAnswer]) {
+                    // Account successfully removed
+                    [weakSelf checkAndCreateAccountForPhoneNumber:self.phoneNumberSignUpField.text
+                                                      countryCode:self.countryCodeSignUpField.text
+                                                        firstName:self.firstNameSignUpField.text
+                                                         lastName:self.lastNameSignUpField.text
+                                                    activateBySms:self.activateBySignUpSegmented.selectedSegmentIndex == 0];
+                } else {
+                    NSString *errorMessage = NSLocalizedString(@"Try to create account again", nil);
+                    [weakSelf alertErrorMessage:errorMessage withTitle:errorTitle withCompletion:nil];
+                }
+            }];
+        } errorBlock:^(NSError *error) {
+            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                waitView.hidden = YES;
+                
+                NSString *errorMessage = error.userInfo[NSLocalizedDescriptionKey];
+                [weakSelf alertErrorMessage:errorMessage withTitle:errorTitle withCompletion:nil];
+            }];
+        }];
+    }];
 }
 
 #pragma mark - Activation
@@ -1744,9 +1875,9 @@ static UICompositeViewDescription *compositeDescription = nil;
                  withCompletion:nil];
     } else if ([userInputActivationCode isEqualToString:self.activationCode]) {
         waitView.hidden = NO;
-        NSString *confirmCodeUrl = [NSString stringWithFormat:caspianConfirmActivationCodeUrl, userInputActivationCode];
         __block WizardViewController *weakSelf = self;
         [self.internetQueue addOperationWithBlock:^{
+            NSString *confirmCodeUrl = [NSString stringWithFormat:caspianConfirmActivationCodeUrl, userInputActivationCode];
             [[LinphoneManager instance] dataFromUrlString:confirmCodeUrl completionBlock:^(NSDictionary *jsonAnswer) {
                 [[NSOperationQueue mainQueue] addOperationWithBlock:^{
                     waitView.hidden = YES;
@@ -1786,13 +1917,13 @@ static UICompositeViewDescription *compositeDescription = nil;
 - (void)recoverPasswordForPhoneNumber:(NSString *)phoneNumber andCountryCode:(NSString *)countryCode {
     if ([self checkCountryCode:countryCode]) {
         waitView.hidden = NO;
-        NSString *cleanedPhoneNumber = [[LinphoneManager instance] cleanPhoneNumber:phoneNumber];
-        NSString *forgotPasswordUrl = [NSString stringWithFormat:caspianForgotPasswordUrl
-                                      , [[LinphoneManager instance] removePrefix:@"+" fromString:countryCode]
-                                      , cleanedPhoneNumber
-                                       ];
         __block WizardViewController *weakSelf = self;
         [self.internetQueue addOperationWithBlock:^{
+            NSString *cleanedPhoneNumber = [[LinphoneManager instance] removeUnneededPrefixes:phoneNumber];
+            NSString *forgotPasswordUrl = [NSString stringWithFormat:caspianForgotPasswordUrl
+                                           , [[LinphoneManager instance] removeUnneededPrefixes:countryCode]
+                                           , cleanedPhoneNumber
+                                           ];
             [[LinphoneManager instance] dataFromUrlString:forgotPasswordUrl completionBlock:^(NSDictionary *jsonAnswer) {
                 [[NSOperationQueue mainQueue] addOperationWithBlock:^{
                     waitView.hidden = YES;
