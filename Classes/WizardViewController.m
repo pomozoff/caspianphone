@@ -1736,7 +1736,7 @@ static UICompositeViewDescription *compositeDescription = nil;
         NSString *cleanedCountryCode = [[LinphoneManager instance] removeUnneededPrefixes:countryCode];
         NSString *fullPhoneNumber = [cleanedCountryCode stringByAppendingString:cleanedPhoneNumber];
         [self checkPhoneNumberRegistered:fullPhoneNumber completion:^{
-            [self checkPhoneNumberExists:phoneNumber completion:^{
+            [self checkPhoneNumberExists:fullPhoneNumber completion:^{
                 NSString *createAccountUrl = [NSString stringWithFormat:caspianCreateAccountUrl
                                               , [[LinphoneManager instance] removePrefix:@"+" fromString:countryCode]
                                               , cleanedPhoneNumber
