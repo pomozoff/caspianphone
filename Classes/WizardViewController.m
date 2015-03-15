@@ -347,7 +347,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     self.activationCodeActivateField.inputAccessoryView = self.numKeypadDoneToolbar;
     self.passwordFinishField.inputView = self.dummyView;
     self.phoneNumberForgotPasswordField.inputAccessoryView = self.numKeypadDoneToolbar;
-
+    
     self.phoneNumberAskPhoneNumberField.inputView = self.dummyView;
 
     self.confirmView.layer.cornerRadius = 5.0f;
@@ -1495,7 +1495,6 @@ static UICompositeViewDescription *compositeDescription = nil;
     view.autoresizingMask = [[attributes objectForKey:@"autoresizingMask"] integerValue];
 }
 
-
 #pragma mark - UIGestureRecognizerDelegate Functions
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
@@ -1825,11 +1824,9 @@ static UICompositeViewDescription *compositeDescription = nil;
 # pragma mark - Resign
 
 - (void) resign {
-    
     NSString *phone    = self.phoneNumberRegisterField.text;
     NSString *password = self.passwordRegisterField.text;
     NSString *domain   = self.domainRegisterField.text;
-    
     
     [self checkIsSameUserSigningIn:phone];
     [self.waitView setHidden:false];
