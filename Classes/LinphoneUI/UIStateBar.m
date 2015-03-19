@@ -123,6 +123,7 @@ int messagesUnreadCount;
 		self->callSecurityImage = nil;
 		self->callQualityImage = nil;
 		self->securitySheet = nil;
+        self.username=nil;
 	}
 	return self;
 }
