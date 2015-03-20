@@ -86,7 +86,6 @@ static NSTimeInterval balanceIntervalCurrent = balanceIntervalMax;
                 NSString *currentUusername = [NSString stringWithUTF8String:linphone_address_get_username(addr)];
                 if (_username != currentUusername) {
                     _username = [currentUusername retain];
-                    self.balanceLabel.text = @"...";
                 }
                 linphone_address_destroy(addr);
             }
@@ -123,7 +122,6 @@ int messagesUnreadCount;
 		self->callSecurityImage = nil;
 		self->callQualityImage = nil;
 		self->securitySheet = nil;
-        self.username=nil;
 	}
 	return self;
 }
@@ -157,7 +155,7 @@ int messagesUnreadCount;
 #pragma mark - ViewController Functions
 
 - (void)viewWillAppear:(BOOL)animated {
-	[super viewWillAppear:animated];
+    [super viewWillAppear:animated];
     
     [self cleanBalance];
 
@@ -249,8 +247,6 @@ int messagesUnreadCount;
         [self.balanceTimer invalidate];
         self.balanceTimer = nil;
     }
-    
-    [self cleanBalance];
 }
 
 
@@ -533,6 +529,7 @@ int messagesUnreadCount;
     self.balanceUrl = nil;
     self.username = nil;
     self.password = nil;
+    self.balanceLabel.text = @"...";
 }
 
 @end
