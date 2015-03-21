@@ -1960,7 +1960,10 @@ static UICompositeViewDescription *compositeDescription = nil;
                         weakSelf.phoneNumber = [NSString stringWithFormat:@"%@", phoneNumber];
                         weakSelf.password = [NSString stringWithFormat:@"%@", password];
 
-                        [weakSelf changeView:passwordReceivedView back:NO animation:YES];
+                        weakSelf.phoneNumberRegisterField.text = phoneNumber;
+                        weakSelf.passwordRegisterField.text = password;
+
+                        [weakSelf changeView:signInView back:YES animation:YES];
                     } else {
                         [weakSelf alertErrorMessage:NSLocalizedString(@"Fail", nil)
                                           withTitle:NSLocalizedString(@"Error activating account", nil)
