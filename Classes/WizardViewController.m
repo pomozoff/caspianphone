@@ -660,6 +660,7 @@ static UICompositeViewDescription *compositeDescription = nil;
             }
         }
         */
+        [self.countryNameForgotPasswordField becomeFirstResponder];
     }
     
     // Animation
