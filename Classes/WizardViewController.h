@@ -111,7 +111,6 @@
 @property (nonatomic, retain) IBOutlet COCTextField *phoneNumberForgotPasswordField;
 
 @property (nonatomic, retain) IBOutlet COCTextField *phoneNumberAskPhoneNumberField;
-
 @property (nonatomic, retain) IBOutlet COCTextField *phoneNumberFoundPhoneNumberField;
 @property (nonatomic, retain) IBOutlet COCTextField *phoneNumberExistsPhoneNumberField;
 

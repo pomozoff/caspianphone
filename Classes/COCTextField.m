@@ -20,7 +20,7 @@
 }
 - (id)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
-    if(self){
+    if(self) {
         self.edgeInsets = UIEdgeInsetsMake(0, 10, 0, 10);
     }
     return self;
