@@ -643,6 +643,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 
         self.phoneNumberAskPhoneNumberField.text = phoneNumber;
     } else if (view == forgotPasswordView) {
+        /*
         if (self.rememberMeRegisterSwitch.isEnabled) {
             NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
             NSString *phoneNumber = [userDefaults objectForKey:caspianPhoneNumber];
@@ -658,6 +659,7 @@ static UICompositeViewDescription *compositeDescription = nil;
                 [self alertErrorMessageEmptyCountry];
             }
         }
+        */
     }
     
     // Animation
