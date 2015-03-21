@@ -340,8 +340,6 @@ static UICompositeViewDescription *compositeDescription = nil;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self pullCountries];
-    
     [viewTapGestureRecognizer setCancelsTouchesInView:FALSE];
     [viewTapGestureRecognizer setDelegate:self];
     //[contentView addGestureRecognizer:viewTapGestureRecognizer];
@@ -930,11 +928,11 @@ static UICompositeViewDescription *compositeDescription = nil;
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
     activeTextField = textField;
     if (textField == self.countryNameSignUpField || textField == self.countryNameForgotPasswordField) {
-        if (self.countryAndCode.count == 0) {
+        if (self.countryAndCode.count > self.currentCountryRow) {
+            [self didSelectCountryAtRow:self.currentCountryRow];
+        } else {
             waitView.hidden = NO;
             [self pullCountries];
-        } else {
-            [self didSelectCountryAtRow:self.currentCountryRow];
         }
     }
 }
