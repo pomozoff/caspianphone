@@ -1121,11 +1121,8 @@ static UICompositeViewDescription *compositeDescription = nil;
 }
 
 - (IBAction)onSignInClick:(id)sender {
-    NSString *username = [WizardViewController findTextField:ViewElement_Username  view:contentView].text;
-    NSString *password = [WizardViewController findTextField:ViewElement_Password  view:contentView].text;
-
 	// domain and server will be configured from the default proxy values
-    [self verificationSignInWithUsername:username password:password domain:nil withTransport:nil];
+    [self verificationSignInWithUsername:self.phoneNumberRegisterField.text password:self.passwordRegisterField.text domain:nil withTransport:nil];
 }
 
 - (IBAction)onSignUpClick:(id)sender {
