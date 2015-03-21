@@ -135,6 +135,7 @@
 		2645CC711A8F9CFB00D993A0 /* smile512.png in Resources */ = {isa = PBXBuildFile; fileRef = 2645CC6F1A8F9CFB00D993A0 /* smile512.png */; };
 		2668D6E41AB62274009630D3 /* flag_placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 2668D6E31AB62274009630D3 /* flag_placeholder.png */; };
 		266D5B9F1AB5C013003F9E30 /* COCAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 266D5B9E1AB5C013003F9E30 /* COCAlertView.m */; };
+		2690B65E1ABE213E000ACD65 /* countries_list.json in Resources */ = {isa = PBXBuildFile; fileRef = 2690B65D1ABE213E000ACD65 /* countries_list.json */; };
 		26E7F2F31A816E200033D3C0 /* NSMutableArray+SWUtilityButtons.m in Sources */ = {isa = PBXBuildFile; fileRef = 26E7F2E81A816E200033D3C0 /* NSMutableArray+SWUtilityButtons.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		26E7F2F41A816E200033D3C0 /* SWCellScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 26E7F2EA1A816E200033D3C0 /* SWCellScrollView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		26E7F2F51A816E200033D3C0 /* SWLongPressGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 26E7F2EC1A816E200033D3C0 /* SWLongPressGestureRecognizer.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -1142,6 +1143,7 @@
 		2668D6E31AB62274009630D3 /* flag_placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flag_placeholder.png; sourceTree = "<group>"; };
 		266D5B9D1AB5C012003F9E30 /* COCAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = COCAlertView.h; sourceTree = "<group>"; };
 		266D5B9E1AB5C013003F9E30 /* COCAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = COCAlertView.m; sourceTree = "<group>"; };
+		2690B65D1ABE213E000ACD65 /* countries_list.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = countries_list.json; path = Resources/countries_list.json; sourceTree = "<group>"; };
 		26E7F2E71A816E200033D3C0 /* NSMutableArray+SWUtilityButtons.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+SWUtilityButtons.h"; sourceTree = "<group>"; };
 		26E7F2E81A816E200033D3C0 /* NSMutableArray+SWUtilityButtons.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+SWUtilityButtons.m"; sourceTree = "<group>"; };
 		26E7F2E91A816E200033D3C0 /* SWCellScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWCellScrollView.h; sourceTree = "<group>"; };
@@ -2693,6 +2695,7 @@
 				F0B89C2518DC973E0050B60E /* wizard_linphone_create.rc */,
 				F0B89C2618DC973E0050B60E /* wizard_linphone_existing.rc */,
 				F0B89C2718DC973E0050B60E /* wizard_remote.rc */,
+				2690B65D1ABE213E000ACD65 /* countries_list.json */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -4110,6 +4113,7 @@
 				D3A74F2E15C69392001500B9 /* settings_default_landscape~ipad.png in Resources */,
 				2634D3541A83D5FD006533C5 /* smilie_64_burger.png in Resources */,
 				F0C1F9111A28781F009402C9 /* corner-left-top.png in Resources */,
+				2690B65E1ABE213E000ACD65 /* countries_list.json in Resources */,
 				D3A74F3015C69392001500B9 /* settings_default~ipad.png in Resources */,
 				D3A74F3215C69392001500B9 /* settings_over_landscape~ipad.png in Resources */,
 				2634D34F1A83D5FD006533C5 /* smilie_64_angel.png in Resources */,
