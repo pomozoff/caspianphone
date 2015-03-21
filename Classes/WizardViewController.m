@@ -929,7 +929,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
     activeTextField = textField;
-    if (textField == self.countryNameSignUpField) {
+    if (textField == self.countryNameSignUpField || textField == self.countryNameForgotPasswordField) {
         if (self.countryAndCode.count == 0) {
             waitView.hidden = NO;
             [self pullCountries];
