@@ -1848,7 +1848,7 @@ static UICompositeViewDescription *compositeDescription = nil;
             [[NSOperationQueue mainQueue] addOperationWithBlock:^{
                 waitView.hidden = YES;
                 if ([weakSelf isStatusSuccess:jsonAnswer]) {
-                    id activationCode = jsonAnswer[@"activation_code"];
+                    NSString *activationCode = jsonAnswer[@"activation_code"];
                     weakSelf.activationCode = [NSString stringWithFormat:@"%@", activationCode];
                     [weakSelf changeView:activateAccountView back:NO animation:YES];
                 } else {
@@ -1954,11 +1954,11 @@ static UICompositeViewDescription *compositeDescription = nil;
                     waitView.hidden = YES;
                     
                     if ([weakSelf isStatusSuccess:jsonAnswer]) {
-                        id password = jsonAnswer[@"password"];
-                        weakSelf.password = [NSString stringWithFormat:@"%@", password];
+                        NSString *phoneNumber = jsonAnswer[@"phone_number"];
+                        NSString *password = jsonAnswer[@"password"];
 
-                        id phoneNumber = jsonAnswer[@"phone_number"];
                         weakSelf.phoneNumber = [NSString stringWithFormat:@"%@", phoneNumber];
+                        weakSelf.password = [NSString stringWithFormat:@"%@", password];
 
                         [weakSelf changeView:passwordReceivedView back:NO animation:YES];
                     } else {
