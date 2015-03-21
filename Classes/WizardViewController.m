@@ -1602,12 +1602,25 @@ static UICompositeViewDescription *compositeDescription = nil;
             [[LinphoneManager instance] dataFromUrlString:caspianCountryListUrl completionBlock:^(NSDictionary *countries) {
                 [[NSOperationQueue mainQueue] addOperationWithBlock:^{
                     waitView.hidden = YES;
-                    weakSelf.countryAndCode = countries[caspianCountriesListTopKey];
-                    [weakSelf.countryPickerView reloadAllComponents];
+                    [weakSelf fillCountryAndCodeArray:countries];
                 }];
             } errorBlock:^(NSError *error) {
                 [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                    [weakSelf alertErrorMessage:error.localizedDescription withTitle:NSLocalizedString(@"Error retrieving country list", nil) withCompletion:nil];
+                    waitView.hidden = YES;
+
+                    NSString *path = [[NSBundle mainBundle] pathForResource:@"countries_list" ofType:@"json"];
+                    NSString *jsonString = [[NSString alloc] initWithContentsOfFile:path encoding:NSUTF8StringEncoding error:NULL];
+
+                    NSError *jsonError = nil;
+                    NSDictionary *countries = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding]
+                                                                              options:NSJSONReadingMutableContainers
+                                                                                error:&jsonError];
+                    if (!jsonError) {
+                        [weakSelf fillCountryAndCodeArray:countries];
+                    } else {
+                        weakSelf.countryAndCode = nil;
+                        [weakSelf alertErrorMessage:error.localizedDescription withTitle:NSLocalizedString(@"Error retrieving country list", nil) withCompletion:nil];
+                    }
                 }];
             }];
         }];
@@ -1644,6 +1657,12 @@ static UICompositeViewDescription *compositeDescription = nil;
     if (![phoneNumber isEqualToString:lastPhoneNumber]) {
         [[LinphoneManager instance] cleanCallHistory];
     }
+}
+
+- (void)fillCountryAndCodeArray:(NSDictionary *)countries {
+    self.countryAndCode = countries[caspianCountriesListTopKey];
+    [self.countryPickerView reloadAllComponents];
+    [self didSelectCountryAtRow:self.currentCountryRow];
 }
 
 
