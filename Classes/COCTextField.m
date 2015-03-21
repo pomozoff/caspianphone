@@ -22,6 +22,7 @@
     self = [super initWithCoder:aDecoder];
     if(self) {
         self.edgeInsets = UIEdgeInsetsMake(0, 10, 0, 10);
+        self.editable = YES;
     }
     return self;
 }
