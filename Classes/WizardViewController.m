@@ -1678,11 +1678,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     self.currentCountryRow = row;
     NSDictionary *country = [self countryAtIndex:row];
 
-    if (currentView == self.signUpView) {
-        [self updateCountryFlag:country[caspianCountryObjectFieldFlag] activityIndicator:self.flagLoadingSignUpActivityIndicator flagImageView:self.countryFlagSignUpImage];
-    } else if (currentView == self.forgotPasswordView) {
-        [self updateCountryFlag:country[caspianCountryObjectFieldFlag] activityIndicator:self.flagLoadingForgotPasswordActivityIndicator flagImageView:self.countryFlagForgotPasswordImage];
-    }
+    [self updateFlagForCountry:country];
     
     self.selectedCountryCode = country[caspianCountryObjectFieldCode];
     NSString *fullCountryCode = [@"+" stringByAppendingString:self.selectedCountryCode != nil ? self.selectedCountryCode : @""];
@@ -1695,6 +1691,14 @@ static UICompositeViewDescription *compositeDescription = nil;
     
     [self checkNextStep];
     [self activationAvailableForCountry:country];
+}
+
+- (void)updateFlagForCountry:(NSDictionary *)country {
+    if (currentView == self.signUpView) {
+        [self updateCountryFlag:country[caspianCountryObjectFieldFlag] activityIndicator:self.flagLoadingSignUpActivityIndicator flagImageView:self.countryFlagSignUpImage];
+    } else if (currentView == self.forgotPasswordView) {
+        [self updateCountryFlag:country[caspianCountryObjectFieldFlag] activityIndicator:self.flagLoadingForgotPasswordActivityIndicator flagImageView:self.countryFlagForgotPasswordImage];
+    }
 }
 
 - (NSDictionary *)countryAtIndex:(NSInteger)index {
