@@ -145,6 +145,9 @@
                                     <rect key="frame" x="43" y="6" width="202" height="38"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <accessibility key="accessibilityConfiguration" label="Message field">
+                                        <bool key="isElement" value="YES"/>
+                                    </accessibility>
                                 </view>
                                 <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="15" userLabel="sendButton">
                                     <rect key="frame" x="255" y="5" width="58" height="40"/>

@@ -20,14 +20,14 @@
 #
 ############################################################################
 
-host?=armv7-apple-darwin
+host?=armv7-apple-darwin.ios
+enable_i386?=no
 config_site:=iphone-config.site
 library_mode:= --disable-shared --enable-static
 linphone_configure_controls = \
 				--with-readline=none  \
 				--enable-gtk_ui=no \
 				--enable-console_ui=no \
-				--enable-bellesip \
 				--with-gsm=$(prefix) \
 				--with-srtp=$(prefix) \
 				--with-antlr=$(prefix) \
@@ -38,7 +38,9 @@ linphone_configure_controls = \
 				--disable-x11 \
 				--disable-tutorials \
 				--disable-tools \
-				--enable-msg-storage=yes
+				--enable-msg-storage=yes \
+				--with-polarssl=$(prefix) \
+				--enable-dtls
 
 
 #path
@@ -218,25 +220,34 @@ include builders.d/*.mk
 ####################################################################
 
 multi-arch:
-	arm_archives=`find $(prefix) -name *.a` ;\
+	@arm_archives=`find $(prefix) -name *.a` ;\
 	mkdir -p $(prefix)/../apple-darwin; \
 	cp -rf $(prefix)/include  $(prefix)/../apple-darwin/. ; \
 	cp -rf $(prefix)/share  $(prefix)/../apple-darwin/. ; \
 	for archive in $$arm_archives ; do \
 		i386_path=`echo $$archive | sed -e "s/armv7/i386/"` ;\
 		arm64_path=`echo $$archive | sed -e "s/armv7/aarch64/"` ;\
-		if  test ! -f "$$arm64_path"; then \
-			arm64_path= ; \
+		x64_path=`echo $$archive | sed -e "s/armv7/x86_64/"` ;\
+		destpath=`echo $$archive | sed -e "s/-debug//" | sed -e "s/armv7-//" | sed -e "s/\.ios//"` ;\
+		all_paths=`echo $$archive $$arm64_path`; \
+		all_archs="armv7,aarch64"; \
+		mkdir -p `dirname $$destpath` ; \
+		if test $(enable_i386) = yes ; then \
+			if test -f "$$i386_path"; then \
+				all_paths=`echo $$all_paths $$i386_path`; \
+				all_archs="$$all_archs,i386" ; \
+			else \
+				echo "WARNING: archive `basename $$archive` exists in arm tree but does not exists in i386 tree: $$i386_path."; \
+			fi; \
 		fi; \
-		destpath=`echo $$archive | sed -e "s/-debug//"` ;\
-		destpath=`echo $$destpath | sed -e "s/armv7-//"` ;\
-		if test -f "$$i386_path"; then \
-			echo "Mixing $$archive into $$destpath"; \
-			mkdir -p `dirname $$destpath` ; \
-			lipo -create $$archive $$arm64_path $$i386_path -output $$destpath; \
+		if test -f "$$x64_path"; then \
+			all_paths=`echo $$all_paths $$x64_path`; \
+			all_archs="$$all_archs,x86_64" ; \
 		else \
-			echo "WARNING: archive `basename $$archive` exists in arm tree but does not exists in i386 tree."; \
-		fi \
+			echo "WARNING: archive `basename $$archive` exists in arm tree but does not exists in x86_64 tree: $$x64_path."; \
+		fi; \
+		echo "[$$all_archs] Mixing `basename $$archive` in $$destpath"; \
+		lipo -create $$all_paths -output $$destpath; \
 	done
 	if ! test -f $(prefix)/../apple-darwin/lib/libtunnel.a ; then \
 		cp -f $(BUILDER_SRC_DIR)/../submodules/binaries/libdummy.a $(prefix)/../apple-darwin/lib/libtunnel.a ; \

@@ -72,7 +72,7 @@
     [self setHighlighted:false animated:true];
 }
 
-- (NSString *)accessibilityValue {
+- (NSString *)accessibilityLabel {
     return [NSString stringWithFormat:@"%@ %@", firstNameLabel.text, lastNameLabel.text];
 }
 

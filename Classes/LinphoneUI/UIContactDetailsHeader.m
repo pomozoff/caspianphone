@@ -97,6 +97,8 @@
 
     avatarImage.layer.cornerRadius = avatarImage.frame.size.height / 2;
     avatarImage.clipsToBounds = YES;
+
+    tableView.accessibilityIdentifier = @"Contact Name Table";
 }
 
 

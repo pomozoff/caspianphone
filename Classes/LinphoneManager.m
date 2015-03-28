@@ -29,6 +29,7 @@
 #import <SystemConfiguration/SystemConfiguration.h>
 #import <CoreTelephony/CTCallCenter.h>
 #import <SystemConfiguration/CaptiveNetwork.h>
+#import <CoreTelephony/CTTelephonyNetworkInfo.h>
 
 #import "LinphoneManager.h"
 #import "LinphoneCoreSettingsStore.h"
@@ -215,6 +216,12 @@ struct codec_name_pref_table codec_pref_table[] = {
 #endif
 }
 
++ (BOOL)isRunningTests {
+    NSDictionary *environment = [[NSProcessInfo processInfo] environment];
+    NSString *injectBundle = environment[@"XCInjectBundle"];
+    return [[injectBundle pathExtension] isEqualToString:@"xctest"];
+}
+
 + (BOOL)isNotIphone3G
 {
 	static BOOL done=FALSE;
@@ -293,6 +300,7 @@ struct codec_name_pref_table codec_pref_table[] = {
 		[self copyDefaultSettings];
 		pushCallIDs = [[NSMutableArray alloc] init ];
 		photoLibrary = [[ALAssetsLibrary alloc] init];
+        self->_isTesting = [LinphoneManager isRunningTests];
 
 		NSString* factoryConfig = [LinphoneManager bundleFile:[LinphoneManager runningOnIpad]?@"linphonerc-factory~ipad":@"linphonerc-factory"];
         NSString *confiFileName = [LinphoneManager documentFile:@".linphonerc"];
@@ -333,6 +341,14 @@ struct codec_name_pref_table codec_pref_table[] = {
 	[super dealloc];
 }
 
+- (void)silentPushFailed:(NSTimer*)timer
+{
+	if( silentPushCompletion ){
+		[LinphoneLogger log:LinphoneLoggerLog format:@"silentPush failed, silentPushCompletion block: %p", silentPushCompletion ];
+		silentPushCompletion(UIBackgroundFetchResultNoData);
+		silentPushCompletion = nil;
+	}
+}
 
 #pragma mark - Database Functions
 
@@ -587,10 +603,9 @@ static void linphone_iphone_log(struct _LinphoneCore * lc, const char * message)
 
 - (void)displayStatus:(NSString*) message {
 	// Post event
-	NSDictionary* dict = [NSDictionary dictionaryWithObjectsAndKeys:
-						   message, @"message",
-						   nil];
-	[[NSNotificationCenter defaultCenter] postNotificationName:kLinphoneDisplayStatusUpdate object:self userInfo:dict];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kLinphoneDisplayStatusUpdate
+                                                        object:self
+                                                      userInfo:@{@"message":message}];
 }
 
 
@@ -801,10 +816,9 @@ static void linphone_iphone_display_status(struct _LinphoneCore * lc, const char
 		[self setupGSMInteraction];
 	}
 	// Post event
-	NSDictionary* dict = [NSDictionary dictionaryWithObjectsAndKeys:
-						   [NSValue valueWithPointer:call], @"call",
-						   [NSNumber numberWithInt:state], @"state",
-						   [NSString stringWithUTF8String:message], @"message", nil];
+    NSDictionary* dict = @{@"call":   [NSValue valueWithPointer:call],
+                           @"state":  [NSNumber numberWithInt:state],
+                           @"message":[NSString stringWithUTF8String:message]};
 	[[NSNotificationCenter defaultCenter] postNotificationName:kLinphoneCallUpdate object:self userInfo:dict];
 }
 
@@ -915,6 +929,7 @@ static void linphone_iphone_registration_state(LinphoneCore *lc, LinphoneProxyCo
     const LinphoneAddress* remoteAddress = linphone_chat_message_get_from_address(msg);
     char* c_address                      = linphone_address_as_string_uri_only(remoteAddress);
     NSString* address                    = [NSString stringWithUTF8String:c_address];
+    NSString* remote_uri                 = [NSString stringWithUTF8String:c_address];
     const char* call_id                  = linphone_chat_message_get_custom_header(msg, "Call-ID");
     NSString* callID                     = [NSString stringWithUTF8String:call_id];
     NSString *message                    = [NSString stringWithUTF8String:linphone_chat_message_get_text(msg)];
@@ -948,7 +963,7 @@ static void linphone_iphone_registration_state(LinphoneCore *lc, LinphoneProxyCo
 			notif.alertBody      = [NSString  stringWithFormat:@"%@: %@", address, message];
 			notif.alertAction    = NSLocalizedString(@"Show", nil);
 			notif.soundName      = @"msg.caf";
-			notif.userInfo       = @{@"from":address, @"call-id":callID};
+			notif.userInfo       = @{@"from":address, @"from_addr":remote_uri, @"call-id":callID};
 
 			[[UIApplication sharedApplication] presentLocalNotificationNow:notif];
 		}
@@ -1226,18 +1241,30 @@ void networkReachabilityCallBack(SCNetworkReachabilityRef target, SCNetworkReach
 }
 
 - (NetworkType)network {
-	UIApplication *app = [UIApplication sharedApplication];
-	NSArray *subviews = [[[app valueForKey:@"statusBar"] valueForKey:@"foregroundView"]    subviews];
-	NSNumber *dataNetworkItemView = nil;
+	if( [[[UIDevice currentDevice] systemVersion] floatValue] < 7 ){
+		UIApplication *app = [UIApplication sharedApplication];
+		NSArray *subviews = [[[app valueForKey:@"statusBar"] valueForKey:@"foregroundView"]    subviews];
+		NSNumber *dataNetworkItemView = nil;
 
-	for (id subview in subviews) {
-		if([subview isKindOfClass:[NSClassFromString(@"UIStatusBarDataNetworkItemView") class]]) {
-			dataNetworkItemView = subview;
-			break;
+		for (id subview in subviews) {
+			if([subview isKindOfClass:[NSClassFromString(@"UIStatusBarDataNetworkItemView") class]]) {
+				dataNetworkItemView = subview;
+				break;
+			}
 		}
+
+		NSNumber *number = (NSNumber*)[dataNetworkItemView valueForKey:@"dataNetworkType"];
+		return [number intValue];
+	} else {
+		CTTelephonyNetworkInfo* info = [[CTTelephonyNetworkInfo alloc] init];
+		NSString* currentRadio = info.currentRadioAccessTechnology;
+		if( [currentRadio isEqualToString:CTRadioAccessTechnologyEdge]){
+			return network_2g;
+		} else if ([currentRadio isEqualToString:CTRadioAccessTechnologyLTE]){
+			return network_4g;
+		}
+		return network_3g;
 	}
-	NSNumber *number = (NSNumber*)[dataNetworkItemView valueForKey:@"dataNetworkType"];
-	return [number intValue];
 }
 
 
@@ -1598,15 +1625,8 @@ static BOOL libStarted = FALSE;
     libmsbcg729_init(); // load g729 plugin
 #endif
 
-    /*to make sure we don't loose debug trace*/
-    //if ([self lpConfigBoolForKey:@"debugenable_preference"]) {
-        linphone_core_enable_logs_with_cb((OrtpLogFunc)linphone_iphone_log_handler);
-        ortp_set_log_level_mask(ORTP_DEBUG|ORTP_MESSAGE|ORTP_WARNING|ORTP_ERROR|ORTP_FATAL);
-		/*must be done before creating linphone core to get its traces too*/
-    //}
 	linphone_core_set_log_collection_path([[LinphoneManager cacheDirectory] UTF8String]);
-	//linphone_core_enable_log_collection([self lpConfigBoolForKey:@"debugenable_preference"]);
-    linphone_core_enable_log_collection(YES);
+	[self setLogsEnabled:[self lpConfigBoolForKey:@"debugenable_preference"]];
 
 	theLinphoneCore = linphone_core_new_with_config (&linphonec_vtable
 										 ,configDb
@@ -1619,7 +1639,8 @@ static BOOL libStarted = FALSE;
     /* set the CA file no matter what, since the remote provisioning could be hitting an HTTPS server */
 	const char* lRootCa = [[LinphoneManager bundleFile:@"rootca.pem"] cStringUsingEncoding:[NSString defaultCStringEncoding]];
 	linphone_core_set_root_ca(theLinphoneCore, lRootCa);
-
+	linphone_core_set_user_certificates_path(theLinphoneCore,[[LinphoneManager cacheDirectory] UTF8String]);
+	
 	/* The core will call the linphone_iphone_configuring_status_changed callback when the remote provisioning is loaded (or skipped).
 	 Wait for this to finish the code configuration */
 
@@ -2226,16 +2247,16 @@ static void audioRouteChangeListenerCallback (
 }
 
 -(void)setLogsEnabled:(BOOL)enabled {
-    /*
 	if (enabled) {
+		NSLog(@"Enabling debug logs");
 		linphone_core_enable_logs_with_cb((OrtpLogFunc)linphone_iphone_log_handler);
 		ortp_set_log_level_mask(ORTP_DEBUG|ORTP_MESSAGE|ORTP_WARNING|ORTP_ERROR|ORTP_FATAL);
 		linphone_core_enable_log_collection(enabled);
 	} else {
-		//linphone_core_enable_log_collection(enabled);
-		//linphone_core_disable_logs();
+		NSLog(@"Disabling debug logs");
+		linphone_core_enable_log_collection(enabled);
+		linphone_core_disable_logs();
 	}
-    */
 }
 
 +(id)getMessageAppDataForKey:(NSString*)key inMessage:(LinphoneChatMessage*)msg {
@@ -2329,15 +2350,6 @@ static void audioRouteChangeListenerCallback (
 - (BOOL)lpConfigBoolForKey:(NSString*)key forSection:(NSString *)section {
 	return [self lpConfigIntForKey:key forSection:section] == 1;
 }
-
-- (void)silentPushFailed:(NSTimer*)timer {
-	if( silentPushCompletion ){
-		[LinphoneLogger log:LinphoneLoggerLog format:@"silentPush failed, silentPushCompletion block: %p", silentPushCompletion ];
-		silentPushCompletion(UIBackgroundFetchResultNoData);
-		silentPushCompletion = nil;
-	}
-}
-
 
 #pragma mark - GSM management
 

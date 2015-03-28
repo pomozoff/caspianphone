@@ -29,6 +29,13 @@ endif
 ifneq (,$(findstring aarch64-,$(host)))
 	ARCH=arm64
 endif
+ifneq (,$(findstring x86_64-,$(host)))
+	ARCH=x86_64
+endif
+
+ifeq (,$(ARCH))
+$(error Undefined arch for openh264)
+endif
 
 openh264_dir?=externals/openh264
 
@@ -39,7 +46,9 @@ $(BUILDER_SRC_DIR)/$(openh264_dir)/openh264-permissive.patch.stamp:
 
 patch-openh264: $(BUILDER_SRC_DIR)/$(openh264_dir)/openh264-permissive.patch.stamp 
 
-update-openh264: patch-openh264
+#update 03/2015; with openh264 v1.4.0 patches seems no longer useful.
+
+update-openh264:
 	mkdir -p $(BUILDER_BUILD_DIR)/$(openh264_dir) \
 	&& cd $(BUILDER_BUILD_DIR)/$(openh264_dir)/ \
 	&& rsync -rvLpgoc --exclude ".git"  $(BUILDER_SRC_DIR)/$(openh264_dir)/* .
