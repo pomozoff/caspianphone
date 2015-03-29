@@ -107,10 +107,97 @@ static UICompositeViewDescription *compositeDescription = nil;
     return compositeDescription;
 }
 
+// Added by  on 9 March 2015 for SMS View Controller Segue
+static UICompositeViewDescription *smsConversationController = nil;
+
++ (UICompositeViewDescription *)smsConversationViewController {
+    if(smsConversationController == nil) {
+        smsConversationController = [[UICompositeViewDescription alloc] init:@"SMSConversationViewController"
+                                                                content:@"SMSConversationViewController"
+                                                               stateBar:nil
+                                                        stateBarEnabled:false
+                                                                 tabBar: @"UIMainBar"
+                                                          tabBarEnabled:true
+                                                             fullscreen:false
+                                                          landscapeMode:[LinphoneManager runningOnIpad]
+                                                           portraitMode:true];
+        smsConversationController.statusBarMargin = 0.0f;
+        smsConversationController.darkBackground = NO;
+        smsConversationController.statusBarColor = [UIColor colorWithWhite:0.935f alpha:0.0f];
+    }
+    return smsConversationController;
+}
+
+// End
+
+// Added by  on 4 March 2015 for Activate SMS scene
+
+static UICompositeViewDescription *compositeSMSDescription = nil;
+
++ (UICompositeViewDescription *)compositeSMSViewDescription {
+    if(compositeSMSDescription == nil) {
+        compositeSMSDescription = [[UICompositeViewDescription alloc] init:@"ActivateSMSViewController"
+                                                                content:@"ActivateSMSViewController"
+                                                               stateBar:nil
+                                                        stateBarEnabled:false
+                                                                 tabBar: @"UIMainBar"
+                                                          tabBarEnabled:true
+                                                             fullscreen:false
+                                                          landscapeMode:[LinphoneManager runningOnIpad]
+                                                           portraitMode:true];
+    //    compositeSMSDescription.statusBarMargin = 0.0f;
+     //   compositeSMSDescription.darkBackground = NO;
+       // compositeSMSDescription.statusBarColor = [UIColor colorWithWhite:0.935f alpha:0.0f];
+    }
+    return compositeSMSDescription;
+}
+
+static UICompositeViewDescription *compositeProcessSMSDescription = nil;
+
++ (UICompositeViewDescription *)compositeProcessSMSViewDescription {
+    if(compositeProcessSMSDescription == nil) {
+        compositeProcessSMSDescription = [[UICompositeViewDescription alloc] init:@"ProcessSMSViewController"
+                                                                   content:@"ProcessSMSViewController"
+                                                                  stateBar:nil
+                                                           stateBarEnabled:false
+                                                                    tabBar: @"UIMainBar"
+                                                             tabBarEnabled:true
+                                                                fullscreen:false
+                                                             landscapeMode:[LinphoneManager runningOnIpad]
+                                                              portraitMode:true];
+        //    compositeSMSDescription.statusBarMargin = 0.0f;
+        //   compositeSMSDescription.darkBackground = NO;
+        // compositeSMSDescription.statusBarColor = [UIColor colorWithWhite:0.935f alpha:0.0f];
+    }
+    return compositeProcessSMSDescription;
+}
+
+static UICompositeViewDescription *compositeSMSViewController = nil;
+
++ (UICompositeViewDescription *)compositeSMSViewController {
+    if(compositeSMSViewController == nil) {
+        compositeSMSViewController = [[UICompositeViewDescription alloc] init:@"SmsCaspianVC"
+                                                                      content:@"SmsCaspianVC"
+                                                                     stateBar:nil
+                                                              stateBarEnabled:false
+                                                                       tabBar: @"UIMainBar"
+                                                            tabBarEnabled:true
+                                                                   fullscreen:false
+                                                                landscapeMode:[LinphoneManager runningOnIpad]
+                                                                 portraitMode:true];
+            compositeSMSDescription.statusBarMargin = 0.0f;
+           compositeSMSDescription.darkBackground = NO;
+        
+        compositeSMSDescription.statusBarColor = [UIColor colorWithWhite:0.935f alpha:0.0f];
+    }
+    return compositeSMSViewController;
+}
+
+// End of added by  for Activate SMS scene
 
 #pragma mark - Action Functions
 
--(void) startChatRoom {
+- (void)startChatRoom {
 	//Push ChatRoom
     LinphoneChatRoom* room = linphone_core_get_or_create_chat_room([LinphoneManager getLc], [addressField.text UTF8String]);
     if( room != nil ){

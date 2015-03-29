@@ -294,6 +294,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 }
 
 - (IBAction)onEditClick:(id)event {
+    [[NSNotificationCenter defaultCenter]postNotificationName:@"Remove_Buttons" object:nil];
     if([tableController isEditing]) {
         if([tableController isValid]) {
             [self disableEdit:TRUE];

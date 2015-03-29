@@ -177,6 +177,30 @@ static UICompositeViewDescription *compositeDescription = nil;
 }
 
 
+// Added by  on 10 March for segue to SMSConversationViewController
+
+static UICompositeViewDescription *smsConversationController = nil;
+
++ (UICompositeViewDescription *)smsConversationViewController {
+    if(smsConversationController == nil) {
+        smsConversationController = [[UICompositeViewDescription alloc] init:@"SMSConversationViewController"
+                                                                content:@"SMSConversationViewController"
+                                                               stateBar:nil
+                                                        stateBarEnabled:false
+                                                                 tabBar:/*@"UIMainBar"*/nil
+                                                          tabBarEnabled:false /*to keep room for chat*/
+                                                             fullscreen:false
+                                                          landscapeMode:true
+                                                           portraitMode:true];
+        smsConversationController.darkBackground = NO;
+        smsConversationController.statusBarMargin = 0.0f;
+        smsConversationController.statusBarColor = [UIColor colorWithWhite:0.935f alpha:0.0f];
+        smsConversationController.statusBarStyle = UIStatusBarStyleLightContent;
+    }
+    return smsConversationController;
+}
+// END
+
 #pragma mark - ViewController Functions
 
 - (void)viewDidLoad {

@@ -281,6 +281,9 @@
                             </state>
                             <state key="disabled" image="sms-hover.png"/>
                             <state key="highlighted" image="sms-hover.png"/>
+                            <connections>
+                                <action selector="onActivateSMS:" destination="-1" eventType="touchUpInside" id="WT1-8P-zC0"/>
+                            </connections>
                         </button>
                         <button hidden="YES" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="184" userLabel="addCallButton" customClass="UICallButton">
                             <rect key="frame" x="105" y="0.0" width="111" height="64"/>

@@ -55,8 +55,12 @@
 
 @protocol UICompositeViewDelegate <NSObject>
 
+@optional
 + (UICompositeViewDescription*) compositeViewDescription;
-
++ (UICompositeViewDescription*) compositeSMSViewDescription;
++ (UICompositeViewDescription*) compositeProcessSMSViewDescription;
++ (UICompositeViewDescription*) compositeSMSViewController;
+// Added by  on 5 March 2015 for Activate SMS change
 @end
 
 @interface UICompositeViewController : TPMultiLayoutViewController {

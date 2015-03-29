@@ -39,10 +39,10 @@ typedef enum _ViewElement {
     ViewElement_Username_Error      = 404
 } ViewElement;
 
-static NSString *caspianPhoneNumber = @"uk.co.onecallcaspian.phone.phoneNumber";
-static NSString *caspianPasswordKey = @"uk.co.onecallcaspian.phone.password";
-static NSString *caspianDomain      = @"uk.co.onecallcaspian.phone.domain";
-static NSString *caspianActivationCodeKey = @"uk.co.onecallcaspian.phone.activationCode";
+NSString *caspianPhoneNumber = @"uk.co.onecallcaspian.phone.phoneNumber";
+NSString *caspianPasswordKey = @"uk.co.onecallcaspian.phone.password";
+NSString *caspianDomain      = @"uk.co.onecallcaspian.phone.domain";
+NSString *caspianActivationCodeKey = @"uk.co.onecallcaspian.phone.activationCode";
 
 static NSString *caspianSelectCountry = @"Select Country";
 static NSString *caspianEnterPhoneNumber = @"Enter Phone Number";

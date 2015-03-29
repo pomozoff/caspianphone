@@ -25,6 +25,9 @@
 #import "Utils.h"
 #import "DTActionSheet.h"
 
+// Added by  for SMS functionality
+#import "SmsCaspianVC.h"
+#import "SmsCaspianConversationVC.h"
 
 static RootViewManager* rootViewManagerInstance = nil;
 
@@ -479,10 +482,11 @@ static RootViewManager* rootViewManagerInstance = nil;
 
 + (CATransition*)getTransition:(UICompositeViewDescription *)old new:(UICompositeViewDescription *)new {
     bool left = false;
-    
+    // Modified by  for SMS functionality
     if([old equal:[ChatViewController compositeViewDescription]]) {
         if([new equal:[ContactsViewController compositeViewDescription]] ||
            [new equal:[DialerViewController   compositeViewDescription]] ||
+           [new equal:[SmsCaspianVC   compositeViewDescription]] ||
            [new equal:[HistoryViewController  compositeViewDescription]]) {
             left = true;
         }
@@ -490,11 +494,21 @@ static RootViewManager* rootViewManagerInstance = nil;
         if([new equal:[DialerViewController   compositeViewDescription]] ||
            [new equal:[ContactsViewController compositeViewDescription]] ||
            [new equal:[HistoryViewController  compositeViewDescription]] ||
+           [new equal:[SmsCaspianVC   compositeViewDescription]] ||
+           [new equal:[ChatViewController     compositeViewDescription]]) {
+            left = true;
+        }
+    } else if([old equal:[SmsCaspianVC compositeViewDescription]]) {
+        if([new equal:[ContactsViewController compositeViewDescription]] ||
+           [new equal:[DialerViewController   compositeViewDescription]] ||
+           [new equal:[HistoryViewController  compositeViewDescription]] ||
+           [new equal:[SmsCaspianVC   compositeViewDescription]] ||
            [new equal:[ChatViewController     compositeViewDescription]]) {
             left = true;
         }
     } else if([old equal:[DialerViewController compositeViewDescription]]) {
         if([new equal:[ContactsViewController  compositeViewDescription]] ||
+           [new equal:[SmsCaspianVC  compositeViewDescription]] ||
            [new equal:[HistoryViewController   compositeViewDescription]]) {
             left = true;
         }

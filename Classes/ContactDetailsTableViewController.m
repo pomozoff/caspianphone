@@ -4,18 +4,18 @@
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 2 of the License, or   
- *  (at your option) any later version.                                 
- *                                                                      
- *  This program is distributed in the hope that it will be useful,     
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of      
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the       
- *  GNU General Public License for more details.                
- *                                                                      
- *  You should have received a copy of the GNU General Public License   
- *  along with this program; if not, write to the Free Software         
+ *  the Free Software Foundation; either version 2 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
- */ 
+ */
 
 #import "ContactDetailsTableViewController.h"
 #import "PhoneMainView.h"
@@ -25,11 +25,16 @@
 #import "OrderedDictionary.h"
 #import "FastAddressBook.h"
 #import "Utils.h"
+#import "SmsCaspianConversationVC.h" //sms
 
 @interface Entry : NSObject
 
 @property (assign) ABMultiValueIdentifier identifier;
 
+@property (nonatomic, retain) IBOutlet UIButton *btn1;   // SMS functionality
+@property (nonatomic, retain) IBOutlet UIButton *btn2;   // SMS functionality
+@property (nonatomic, retain) IBOutlet UIButton *btn3;   // SMS functionality
+@property (nonatomic, retain) IBOutlet UIButton *btn4;   // SMS functionality
 @end
 
 @implementation Entry
@@ -48,6 +53,7 @@
 
 - (void)dealloc {
     [super dealloc];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"Remove_Buttons" object:nil]; // sunil
 }
 
 @end
@@ -74,15 +80,17 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
 
 - (void)initContactDetailsTableViewController {
     dataCache = [[NSMutableArray alloc] init];
-
-	// pre-fill the data-cache with empty arrays
-	for(int i=ContactSections_Number; i< ContactSections_MAX; i++){
-		[dataCache addObject:@[]];
-	}
-
+    
+    // pre-fill the data-cache with empty arrays
+    for(int i=ContactSections_Number; i< ContactSections_MAX; i++){
+        NSLog(@"om namah shivay");
+        NSLog(@"Phone object is:%d",ContactSections_Number);
+        [dataCache addObject:@[]];
+    }
+    
     labelArray = [[NSMutableArray alloc] initWithObjects:
                   [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"],
-                  [NSString stringWithString:(NSString*)kABPersonPhoneMobileLabel], 
+                  [NSString stringWithString:(NSString*)kABPersonPhoneMobileLabel],
                   [NSString stringWithString:(NSString*)kABPersonPhoneIPhoneLabel],
                   [NSString stringWithString:(NSString*)kABPersonPhoneMainLabel], nil];
     editingIndexPath = nil;
@@ -102,7 +110,7 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
         [self initContactDetailsTableViewController];
     }
     return self;
-}   
+}
 
 - (void)dealloc {
     if(contact != nil && ABRecordGetRecordID(contact) == kABRecordInvalidID) {
@@ -116,7 +124,17 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
     
     [super dealloc];
 }
-
+- (void)removeBtn {
+    NSLog(@"Inside remove button");
+    
+    int buttonTagConstant=200;
+    for (UIView* subV in self.view.subviews)
+    {
+        if ([subV isKindOfClass:[UIButton class]] && subV.tag >= buttonTagConstant && subV.tag < 250)
+        {
+            [subV removeFromSuperview];
+        }}
+}
 
 #pragma mark - ViewController Functions
 
@@ -124,6 +142,12 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
     [super viewDidLoad];
     [headerController view]; // Force view load
     [footerController view]; // Force view load
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(removeBtn) name:@"Remove_Buttons" object:nil];
+    
+}
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
@@ -183,15 +207,70 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
 - (void)loadData {
     [dataCache removeAllObjects];
     
-    if(contact == NULL) 
+    if(contact == NULL)
         return;
     
     [LinphoneLogger logc:LinphoneLoggerLog format:"Load data from contact %p", contact];
-    // Phone numbers 
+    // Phone numbers
     {
         ABMultiValueRef lMap = ABRecordCopyValue(contact, kABPersonPhoneProperty);
         NSMutableArray *subArray = [NSMutableArray array];
         if(lMap) {
+            // SMS functionality
+            // Declare a constant
+            
+            int buttonTagConstant = 200;
+            
+            // Before creating the buttons, delete the old ones first.
+            for (UIView* subV in self.view.subviews)
+            {
+                if ([subV isKindOfClass:[UIButton class]] && subV.tag >= buttonTagConstant && subV.tag < 250)
+                {
+                    [subV removeFromSuperview];
+                }
+            }
+            //SMS
+            if (ABMultiValueGetCount(lMap)==0)  {
+                
+                UIButton *btn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+                UIButton *btn10 = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+                btn.frame = CGRectMake(230, 115, 32, 25); //The position and size of the button (x,y,width,height)
+                btn10.frame = CGRectMake(275, 115, 32, 25); //The position and size of the button
+                [btn setTitle:@"SMS" forState:UIControlStateNormal];
+                UIImage * buttonImage = [UIImage imageNamed:@"Message-50.png"];
+                UIImage * buttonImageChat = [UIImage imageNamed:@"Chat-50.png"];
+                [btn setBackgroundImage:buttonImage forState:UIControlStateNormal];
+                [btn10 setBackgroundImage:buttonImageChat forState:UIControlStateNormal];
+                [btn addTarget:self action:@selector(showAbout:) forControlEvents:(UIControlEvents)UIControlEventTouchUpInside];
+                [btn10 addTarget:self action:@selector(showAbout10:) forControlEvents:(UIControlEvents)UIControlEventTouchUpInside];
+                btn.tag = buttonTagConstant;
+                btn10.tag = buttonTagConstant;
+                [self.view addSubview:btn];
+                [self.view addSubview:btn10];
+            }
+            
+            int y_of_the_button = 110;
+            
+            for (int i=0;i<ABMultiValueGetCount(lMap);i++)
+            {
+                UIButton *btn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+                UIButton *btn10 = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+                btn.frame = CGRectMake(230, y_of_the_button, 32, 25); //The position and size of the button (x,y,width,height)
+                btn10.frame = CGRectMake(275, y_of_the_button, 32, 25); //The position and size of the button (x,y,width,height)
+                [btn setTitle:@"SMS" forState:UIControlStateNormal];
+                UIImage * buttonImage = [UIImage imageNamed:@"Message-50.png"];
+                UIImage * buttonImageChat = [UIImage imageNamed:@"Chat-50.png"];
+                
+                [btn setBackgroundImage:buttonImage forState:UIControlStateNormal];
+                [btn10 setBackgroundImage:buttonImageChat forState:UIControlStateNormal];
+                [btn addTarget:self action:@selector(showAbout:) forControlEvents:(UIControlEvents)UIControlEventTouchUpInside];
+                [btn10 addTarget:self action:@selector(showAbout10:) forControlEvents:(UIControlEvents)UIControlEventTouchUpInside];
+                btn.tag = buttonTagConstant+i;
+                btn10.tag = buttonTagConstant+i;
+                [self.view addSubview:btn];
+                [self.view addSubview:btn10];
+                y_of_the_button += 45;
+            }
             for(int i = 0; i < ABMultiValueGetCount(lMap); ++i) {
                 ABMultiValueIdentifier identifier = ABMultiValueGetIdentifierAtIndex(lMap, i);
                 Entry *entry = [[Entry alloc] initWithData:identifier];
@@ -216,29 +295,29 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
                     if(CFStringCompare((CFStringRef)[LinphoneManager instance].contactSipField, CFDictionaryGetValue(lDict, kABPersonInstantMessageServiceKey), kCFCompareCaseInsensitive) == 0) {
                         add = true;
                     }
-				} else {
-					//check domain
-					LinphoneAddress* address = linphone_address_new([(NSString*)CFDictionaryGetValue(lDict,kABPersonInstantMessageUsernameKey) UTF8String]);
-					if (address) {
-						if ([[ContactSelection getSipFilter] compare:@"*" options:NSCaseInsensitiveSearch] == NSOrderedSame) {
-							add = true;
-						} else {
-							NSString* domain = [NSString stringWithCString:linphone_address_get_domain(address)
-																  encoding:[NSString defaultCStringEncoding]];
-							add = [domain compare:[ContactSelection getSipFilter] options:NSCaseInsensitiveSearch] == NSOrderedSame;
-						}
-						linphone_address_destroy(address);
-					} else {
-						add = false;
-					}
-				}
-				if(add) {
-					Entry *entry = [[Entry alloc] initWithData:identifier];
-					[subArray addObject: entry];
-					[entry release];
-				}
-				CFRelease(lDict);
-			}
+                } else {
+                    //check domain
+                    LinphoneAddress* address = linphone_address_new([(NSString*)CFDictionaryGetValue(lDict,kABPersonInstantMessageUsernameKey) UTF8String]);
+                    if (address) {
+                        if ([[ContactSelection getSipFilter] compare:@"*" options:NSCaseInsensitiveSearch] == NSOrderedSame) {
+                            add = true;
+                        } else {
+                            NSString* domain = [NSString stringWithCString:linphone_address_get_domain(address)
+                                                                  encoding:[NSString defaultCStringEncoding]];
+                            add = [domain compare:[ContactSelection getSipFilter] options:NSCaseInsensitiveSearch] == NSOrderedSame;
+                        }
+                        linphone_address_destroy(address);
+                    } else {
+                        add = false;
+                    }
+                }
+                if(add) {
+                    Entry *entry = [[Entry alloc] initWithData:identifier];
+                    [subArray addObject: entry];
+                    [entry release];
+                }
+                CFRelease(lDict);
+            }
             CFRelease(lMap);
         }
         [dataCache addObject:subArray];
@@ -262,59 +341,59 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
         }
         [dataCache addObject:subArray];
     }
-
+    
     if(contactDetailsDelegate != nil) {
         [contactDetailsDelegate onModification:nil];
     }
     [self.tableView reloadData];
 }
 
--(Entry *) setOrCreateSipContactEntry:(Entry *)entry withValue:(NSString*)value {
-	ABMultiValueRef lcMap = ABRecordCopyValue(contact, kABPersonInstantMessageProperty);
-	ABMutableMultiValueRef lMap;
-	if(lcMap != NULL) {
-		lMap = ABMultiValueCreateMutableCopy(lcMap);
-		CFRelease(lcMap);
-	} else {
-		lMap = ABMultiValueCreateMutable(kABStringPropertyType);
-	}
-	CFIndex index;
-	NSError* error = NULL;
-	
-	CFStringRef keys[] = { kABPersonInstantMessageUsernameKey,  kABPersonInstantMessageServiceKey};
-	CFTypeRef values[] = { [value copy], [LinphoneManager instance].contactSipField };
-	CFDictionaryRef lDict = CFDictionaryCreate(NULL, (const void **)&keys, (const void **)&values, 2, NULL, NULL);
-	if (entry) {
-		index = ABMultiValueGetIndexForIdentifier(lMap, [entry identifier]);
-		ABMultiValueReplaceValueAtIndex(lMap, lDict, index);
-	} else {
+- (Entry *)setOrCreateSipContactEntry:(Entry *)entry withValue:(NSString*)value {
+    ABMultiValueRef lcMap = ABRecordCopyValue(contact, kABPersonInstantMessageProperty);
+    ABMutableMultiValueRef lMap;
+    if(lcMap != NULL) {
+        lMap = ABMultiValueCreateMutableCopy(lcMap);
+        CFRelease(lcMap);
+    } else {
+        lMap = ABMultiValueCreateMutable(kABStringPropertyType);
+    }
+    CFIndex index;
+    NSError* error = NULL;
+    
+    CFStringRef keys[] = { kABPersonInstantMessageUsernameKey,  kABPersonInstantMessageServiceKey};
+    CFTypeRef values[] = { [value copy], [LinphoneManager instance].contactSipField };
+    CFDictionaryRef lDict = CFDictionaryCreate(NULL, (const void **)&keys, (const void **)&values, 2, NULL, NULL);
+    if (entry) {
+        index = ABMultiValueGetIndexForIdentifier(lMap, [entry identifier]);
+        ABMultiValueReplaceValueAtIndex(lMap, lDict, index);
+    } else {
         CFStringRef label = (CFStringRef)[labelArray objectAtIndex:0];
         ABMultiValueIdentifier identifier;
-		ABMultiValueAddValueAndLabel(lMap, lDict, label, &identifier);
+        ABMultiValueAddValueAndLabel(lMap, lDict, label, &identifier);
         index = identifier;
-	}
-
-	if (!ABRecordSetValue(contact, kABPersonInstantMessageProperty, lMap, (CFErrorRef*)&error)) {
-		[LinphoneLogger log:LinphoneLoggerLog format:@"Can't set contact with value [%@] cause [%@]", value,[error localizedDescription]];
+    }
+    
+    if (!ABRecordSetValue(contact, kABPersonInstantMessageProperty, lMap, (CFErrorRef*)&error)) {
+        [LinphoneLogger log:LinphoneLoggerLog format:@"Can't set contact with value [%@] cause [%@]", value,[error localizedDescription]];
         CFRelease(lMap);
-	} else {
-		if (entry == nil) {
-			entry = [[[Entry alloc] initWithData:(ABMultiValueIdentifier)index] autorelease];
-		}
-		CFRelease(lDict);
+    } else {
+        if (entry == nil) {
+            entry = [[[Entry alloc] initWithData:(ABMultiValueIdentifier)index] autorelease];
+        }
+        CFRelease(lDict);
         CFRelease(lMap);
-
-		/*check if message type is kept or not*/
-		lcMap = ABRecordCopyValue(contact, kABPersonInstantMessageProperty);
-		lMap = ABMultiValueCreateMutableCopy(lcMap);
-		CFRelease(lcMap);
-		index = ABMultiValueGetIndexForIdentifier(lMap, [entry identifier]);
-		lDict = ABMultiValueCopyValueAtIndex(lMap,index);
-		if(!CFDictionaryContainsKey(lDict, kABPersonInstantMessageServiceKey)) {
-			/*too bad probably a gtalk number, storing uri*/
-			NSString* username = CFDictionaryGetValue(lDict, kABPersonInstantMessageUsernameKey);
-			LinphoneAddress* address = linphone_core_interpret_url([LinphoneManager getLc]
-																   ,[username UTF8String]);
+        
+        /*check if message type is kept or not*/
+        lcMap = ABRecordCopyValue(contact, kABPersonInstantMessageProperty);
+        lMap = ABMultiValueCreateMutableCopy(lcMap);
+        CFRelease(lcMap);
+        index = ABMultiValueGetIndexForIdentifier(lMap, [entry identifier]);
+        lDict = ABMultiValueCopyValueAtIndex(lMap,index);
+        if(!CFDictionaryContainsKey(lDict, kABPersonInstantMessageServiceKey)) {
+            /*too bad probably a gtalk number, storing uri*/
+            NSString* username = CFDictionaryGetValue(lDict, kABPersonInstantMessageUsernameKey);
+            LinphoneAddress* address = linphone_core_interpret_url([LinphoneManager getLc]
+                                                                   ,[username UTF8String]);
             if(address){
                 char* uri = linphone_address_as_string_uri_only(address);
                 CFStringRef keys[] = { kABPersonInstantMessageUsernameKey,  kABPersonInstantMessageServiceKey};
@@ -328,16 +407,16 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
                 linphone_address_destroy(address);
                 ms_free(uri);
             }
-		}
+        }
         CFRelease(lMap);
-	}
-	CFRelease(lDict);
-	
-	return entry;
+    }
+    CFRelease(lDict);
+    
+    return entry;
 }
 
--(void) setSipContactEntry:(Entry *)entry withValue:(NSString*)value {
-	[self setOrCreateSipContactEntry:entry withValue:value];
+- (void)setSipContactEntry:(Entry *)entry withValue:(NSString*)value {
+    [self setOrCreateSipContactEntry:entry withValue:value];
 }
 - (void)addEntry:(UITableView*)tableview section:(NSInteger)section animated:(BOOL)animated {
     [self addEntry:tableview section:section animated:animated value:@""];
@@ -375,12 +454,12 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
     } else if(contactSections[section] == ContactSections_Sip) {
         Entry *entry = [self setOrCreateSipContactEntry:nil withValue:value];
         if (entry) {
-			[sectionArray addObject:entry];
-			added=true;
-		} else {
-			added=false;
-			[LinphoneLogger log:LinphoneLoggerError format:@"Can't add entry for value: %@", value];
-		}
+            [sectionArray addObject:entry];
+            added=true;
+        } else {
+            added=false;
+            [LinphoneLogger log:LinphoneLoggerError format:@"Can't add entry for value: %@", value];
+        }
     } else if(contactSections[section] == ContactSections_Email) {
         ABMultiValueIdentifier identifier;
         ABMultiValueRef lcMap = ABRecordCopyValue(contact, kABPersonEmailProperty);
@@ -424,7 +503,7 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
     NSInteger row = [sectionDict count] - 1;
     if(row >= 0) {
         Entry *entry = [sectionDict objectAtIndex:row];
-
+        
         ABPropertyID property = [self propertyIDForSection:contactSections[section]];
         if( property != kABInvalidPropertyType ){
             ABMultiValueRef lMap = ABRecordCopyValue(contact, property);
@@ -440,7 +519,7 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
             }
             CFRelease(toRelease);
             CFRelease(lMap);
-
+            
         }
     }
     if(contactDetailsDelegate != nil) {
@@ -452,7 +531,7 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
     NSMutableArray *sectionArray = [self getSectionData:[indexPath section]];
     Entry *entry                 = [sectionArray objectAtIndex:[indexPath row]];
     ABPropertyID property        = [self propertyIDForSection:contactSections[indexPath.section]];
-
+    
     if( property != kABInvalidPropertyType ){
         ABMultiValueRef lcMap = ABRecordCopyValue(contact, property);
         ABMutableMultiValueRef lMap = ABMultiValueCreateMutableCopy(lcMap);
@@ -462,7 +541,7 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
         ABRecordSetValue(contact, property, lMap, nil);
         CFRelease(lMap);
     }
-
+    
     [sectionArray removeObjectAtIndex:[indexPath row]];
     
     NSArray *tagInsertIndexPath = [NSArray arrayWithObject:indexPath];
@@ -484,9 +563,9 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
 }
 
 - (void)addPhoneField:(NSString*)number {
-       int i = 0;
-       while(i < ContactSections_MAX && contactSections[i] != ContactSections_Number) ++i;
-       [self addEntry:[self tableView] section:i animated:FALSE value:number];
+    int i = 0;
+    while(i < ContactSections_MAX && contactSections[i] != ContactSections_Number) ++i;
+    [self addEntry:[self tableView] section:i animated:FALSE value:number];
 }
 
 - (void)addSipField:(NSString*)address {
@@ -515,7 +594,7 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *kCellId = @"ContactDetailsCell";
     UIEditableTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kCellId];
-    if (cell == nil) {  
+    if (cell == nil) {
         cell = [[[UIEditableTableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:kCellId] autorelease];
         [cell.detailTextField setDelegate:self];
         [cell.detailTextField setAutocapitalizationType:UITextAutocapitalizationTypeNone];
@@ -541,10 +620,39 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
         CFStringRef labelRef = ABMultiValueCopyLabelAtIndex(lMap, index);
         if(labelRef != NULL) {
             label = [ContactDetailsTableViewController localizeLabel:(NSString*) labelRef];
+            [[NSUserDefaults standardUserDefaults] setObject:label forKey:@"mobile_label"]; // sms
+            [[NSUserDefaults standardUserDefaults] synchronize];    // sms
             CFRelease(labelRef);
         }
         CFStringRef valueRef = ABMultiValueCopyValueAtIndex(lMap, index);
         if(valueRef != NULL) {
+            // SMS functionality
+            if (index==0)   {
+                NSString *str_ValueRef1 = [NSString stringWithFormat:@"%@",valueRef];
+                [[NSUserDefaults standardUserDefaults] setObject:str_ValueRef1 forKey:@"valueRef1"];
+                [[NSUserDefaults standardUserDefaults] synchronize];
+            }
+            else if (index==1)  {
+                NSString *str_ValueRef2 = [NSString stringWithFormat:@"%@",valueRef];
+                [[NSUserDefaults standardUserDefaults] setObject:str_ValueRef2 forKey:@"valueRef2"];
+                [[NSUserDefaults standardUserDefaults] synchronize];
+            }
+            else if(index==2)   {
+                NSString *str_ValueRef3 = [NSString stringWithFormat:@"%@",valueRef];
+                [[NSUserDefaults standardUserDefaults] setObject:str_ValueRef3 forKey:@"valueRef3"];
+                [[NSUserDefaults standardUserDefaults] synchronize];
+            }
+            else if(index==3)   {
+                NSString *str_ValueRef4 = [NSString stringWithFormat:@"%@",valueRef];
+                [[NSUserDefaults standardUserDefaults] setObject:str_ValueRef4 forKey:@"valueRef4"];
+                [[NSUserDefaults standardUserDefaults] synchronize];
+            }
+            else if(index==4)   {
+                NSString *str_ValueRef5 = [NSString stringWithFormat:@"%@",valueRef];
+                [[NSUserDefaults standardUserDefaults] setObject:str_ValueRef5 forKey:@"valueRef5"];
+                [[NSUserDefaults standardUserDefaults] synchronize];
+            }
+            //End
             value = [ContactDetailsTableViewController localizeLabel:(NSString*) valueRef];
             CFRelease(valueRef);
         }
@@ -560,17 +668,22 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
         CFDictionaryRef lDict = ABMultiValueCopyValueAtIndex(lMap, index);
         CFStringRef valueRef = CFDictionaryGetValue(lDict, kABPersonInstantMessageUsernameKey);
         if(valueRef != NULL) {
-			LinphoneAddress* addr=NULL;
+            // SMS
+            NSString *str_ValueRef1 = [NSString stringWithFormat:@"%@",valueRef];
+            [[NSUserDefaults standardUserDefaults] setObject:str_ValueRef1 forKey:@"valueRef1"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            //End
+            LinphoneAddress* addr=NULL;
             if ([[LinphoneManager instance] lpConfigBoolForKey:@"contact_display_username_only"]
-				&& (addr=linphone_address_new([(NSString *)valueRef UTF8String]))) {
-				if (linphone_address_get_username(addr)) {
-					value = [NSString stringWithCString:linphone_address_get_username(addr)
-											   encoding:[NSString defaultCStringEncoding]];
-				} /*else value=@""*/
-			} else {
-				value = [NSString stringWithString:(NSString*) valueRef];
-			}
-			if (addr) linphone_address_destroy(addr);
+                && (addr=linphone_address_new([(NSString *)valueRef UTF8String]))) {
+                if (linphone_address_get_username(addr)) {
+                    value = [NSString stringWithCString:linphone_address_get_username(addr)
+                                               encoding:[NSString defaultCStringEncoding]];
+                } /*else value=@""*/
+            } else {
+                value = [NSString stringWithString:(NSString*) valueRef];
+            }
+            if (addr) linphone_address_destroy(addr);
         }
         CFRelease(lDict);
         CFRelease(lMap);
@@ -604,7 +717,271 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
     }
     return cell;
 }
+- (void)showAbout:(id)sender {
+    UIButton *clicked = (UIButton *) sender;
+    NSString *str_sender = [NSString stringWithFormat:@"%ld",(long)clicked.tag];
+    
+    int str_sender1 = [str_sender intValue];
+    NSLog(@"SMS button pressed:%d",str_sender1);
+    
+    if (str_sender1==200)  {
+        NSLog(@"Button first");
+        NSString *str_valueRef = [[NSUserDefaults standardUserDefaults] objectForKey:@"valueRef1"];
+        
+        str_valueRef = [str_valueRef stringByReplacingOccurrencesOfString:@"-" withString:@""];
+        str_valueRef = [str_valueRef stringByReplacingOccurrencesOfString:@"(" withString:@""];
+        str_valueRef = [str_valueRef stringByReplacingOccurrencesOfString:@")" withString:@""];
+        str_valueRef = [str_valueRef stringByReplacingOccurrencesOfString:@" " withString:@""];
+        NSLog(@"Corrected Phone number:%@",str_valueRef);
+        NSString *finalPhoneNumber = [NSString stringWithFormat:@"%@",str_valueRef];
+        
+        if ([finalPhoneNumber length])   {
+            [[NSUserDefaults standardUserDefaults] setObject:finalPhoneNumber forKey:@"finalPhoneNumber"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            NSLog(@"Sync successful");
+        }
+    }
+    else if (str_sender1==201)  {
+        NSLog(@"Button two");
+        NSString *str_valueRef = [[NSUserDefaults standardUserDefaults] objectForKey:@"valueRef2"];
+        
+        str_valueRef = [str_valueRef stringByReplacingOccurrencesOfString:@"-" withString:@""];
+        str_valueRef = [str_valueRef stringByReplacingOccurrencesOfString:@"(" withString:@""];
+        str_valueRef = [str_valueRef stringByReplacingOccurrencesOfString:@")" withString:@""];
+        str_valueRef = [str_valueRef stringByReplacingOccurrencesOfString:@" " withString:@""];
+        NSLog(@"Corrected Phone number:%@",str_valueRef);
+        NSString *finalPhoneNumber = [NSString stringWithFormat:@"%@",str_valueRef];
+        
+        if ([finalPhoneNumber length])   {
+            [[NSUserDefaults standardUserDefaults] setObject:finalPhoneNumber forKey:@"finalPhoneNumber"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            NSLog(@"Sync successful");
+        }
+    }
+    else if (str_sender1==202)  {
+        NSLog(@"Button three");
+        NSString *str_valueRef = [[NSUserDefaults standardUserDefaults] objectForKey:@"valueRef3"];
+        
+        str_valueRef = [str_valueRef stringByReplacingOccurrencesOfString:@"-" withString:@""];
+        str_valueRef = [str_valueRef stringByReplacingOccurrencesOfString:@"(" withString:@""];
+        str_valueRef = [str_valueRef stringByReplacingOccurrencesOfString:@")" withString:@""];
+        str_valueRef = [str_valueRef stringByReplacingOccurrencesOfString:@" " withString:@""];
+        NSLog(@"Corrected Phone number:%@",str_valueRef);
+        NSString *finalPhoneNumber = [NSString stringWithFormat:@"%@",str_valueRef];
+        
+        if ([finalPhoneNumber length])   {
+            [[NSUserDefaults standardUserDefaults] setObject:finalPhoneNumber forKey:@"finalPhoneNumber"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            NSLog(@"Sync successful");
+        }
+    }
+    else if (str_sender1==203)  {
+        NSLog(@"Button four");
+        NSString *str_valueRef = [[NSUserDefaults standardUserDefaults] objectForKey:@"valueRef4"];
+        
+        str_valueRef = [str_valueRef stringByReplacingOccurrencesOfString:@"-" withString:@""];
+        str_valueRef = [str_valueRef stringByReplacingOccurrencesOfString:@"(" withString:@""];
+        str_valueRef = [str_valueRef stringByReplacingOccurrencesOfString:@")" withString:@""];
+        str_valueRef = [str_valueRef stringByReplacingOccurrencesOfString:@" " withString:@""];
+        NSLog(@"Corrected Phone number:%@",str_valueRef);
+        NSString *finalPhoneNumber = [NSString stringWithFormat:@"%@",str_valueRef];
+        
+        if ([finalPhoneNumber length])   {
+            [[NSUserDefaults standardUserDefaults] setObject:finalPhoneNumber forKey:@"finalPhoneNumber"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            NSLog(@"Sync successful");
+        }
+    }
+    else if (str_sender1==204)  {
+        NSLog(@"Button five");
+        NSString *str_valueRef = [[NSUserDefaults standardUserDefaults] objectForKey:@"valueRef5"];
+        
+        str_valueRef = [str_valueRef stringByReplacingOccurrencesOfString:@"-" withString:@""];
+        str_valueRef = [str_valueRef stringByReplacingOccurrencesOfString:@"(" withString:@""];
+        str_valueRef = [str_valueRef stringByReplacingOccurrencesOfString:@")" withString:@""];
+        str_valueRef = [str_valueRef stringByReplacingOccurrencesOfString:@" " withString:@""];
+        NSLog(@"Corrected Phone number:%@",str_valueRef);
+        NSString *finalPhoneNumber = [NSString stringWithFormat:@"%@",str_valueRef];
+        
+        if ([finalPhoneNumber length])   {
+            [[NSUserDefaults standardUserDefaults] setObject:finalPhoneNumber forKey:@"finalPhoneNumber"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            NSLog(@"Sync successful");
+        }
+    }
+    SmsCaspianConversationVC *controller = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[SmsCaspianConversationVC compositeViewDescription]
+                                                                                               push:TRUE], SmsCaspianConversationVC);
+    if (controller) {   NSLog(@"Moving to SMS Conversation");    }
+    
+    
+}
+- (void)showAbout10:(id)sender {
+    UIButton *clicked = (UIButton *) sender;
+    NSString *str_sender = [NSString stringWithFormat:@"%ld",(long)clicked.tag];
+    
+    int str_sender1 = [str_sender intValue];
+    NSLog(@"SMS button pressed:%d",str_sender1);
+    
+    if (str_sender1==200)  {
+        NSLog(@"Button first");
+        NSString *str_valueRef = [[NSUserDefaults standardUserDefaults] objectForKey:@"valueRef1"];
+        
+        str_valueRef = [str_valueRef stringByReplacingOccurrencesOfString:@"-" withString:@""];
+        str_valueRef = [str_valueRef stringByReplacingOccurrencesOfString:@"(" withString:@""];
+        str_valueRef = [str_valueRef stringByReplacingOccurrencesOfString:@")" withString:@""];
+        str_valueRef = [str_valueRef stringByReplacingOccurrencesOfString:@" " withString:@""];
+        NSLog(@"Corrected Phone number:%@",str_valueRef);
+        NSString *finalPhoneNumber = [NSString stringWithFormat:@"%@",str_valueRef];
+        
+        if ([finalPhoneNumber length])   {
+            [[NSUserDefaults standardUserDefaults] setObject:finalPhoneNumber forKey:@"finalPhoneNumber"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            NSLog(@"Sync successful");
+        }
+    }
+    else if (str_sender1==201)  {
+        NSLog(@"Button two");
+        NSString *str_valueRef = [[NSUserDefaults standardUserDefaults] objectForKey:@"valueRef2"];
+        
+        str_valueRef = [str_valueRef stringByReplacingOccurrencesOfString:@"-" withString:@""];
+        str_valueRef = [str_valueRef stringByReplacingOccurrencesOfString:@"(" withString:@""];
+        str_valueRef = [str_valueRef stringByReplacingOccurrencesOfString:@")" withString:@""];
+        str_valueRef = [str_valueRef stringByReplacingOccurrencesOfString:@" " withString:@""];
+        NSLog(@"Corrected Phone number:%@",str_valueRef);
+        NSString *finalPhoneNumber = [NSString stringWithFormat:@"%@",str_valueRef];
+        
+        if ([finalPhoneNumber length])   {
+            [[NSUserDefaults standardUserDefaults] setObject:finalPhoneNumber forKey:@"finalPhoneNumber"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            NSLog(@"Sync successful");
+        }
+    }
+    else if (str_sender1==202)  {
+        NSLog(@"Button three");
+        NSString *str_valueRef = [[NSUserDefaults standardUserDefaults] objectForKey:@"valueRef3"];
+        
+        str_valueRef = [str_valueRef stringByReplacingOccurrencesOfString:@"-" withString:@""];
+        str_valueRef = [str_valueRef stringByReplacingOccurrencesOfString:@"(" withString:@""];
+        str_valueRef = [str_valueRef stringByReplacingOccurrencesOfString:@")" withString:@""];
+        str_valueRef = [str_valueRef stringByReplacingOccurrencesOfString:@" " withString:@""];
+        NSLog(@"Corrected Phone number:%@",str_valueRef);
+        NSString *finalPhoneNumber = [NSString stringWithFormat:@"%@",str_valueRef];
+        
+        if ([finalPhoneNumber length])   {
+            [[NSUserDefaults standardUserDefaults] setObject:finalPhoneNumber forKey:@"finalPhoneNumber"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            NSLog(@"Sync successful");
+        }
+    }
+    else if (str_sender1==203)  {
+        NSLog(@"Button four");
+        NSString *str_valueRef = [[NSUserDefaults standardUserDefaults] objectForKey:@"valueRef4"];
+        
+        str_valueRef = [str_valueRef stringByReplacingOccurrencesOfString:@"-" withString:@""];
+        str_valueRef = [str_valueRef stringByReplacingOccurrencesOfString:@"(" withString:@""];
+        str_valueRef = [str_valueRef stringByReplacingOccurrencesOfString:@")" withString:@""];
+        str_valueRef = [str_valueRef stringByReplacingOccurrencesOfString:@" " withString:@""];
+        NSLog(@"Corrected Phone number:%@",str_valueRef);
+        NSString *finalPhoneNumber = [NSString stringWithFormat:@"%@",str_valueRef];
+        
+        if ([finalPhoneNumber length])   {
+            [[NSUserDefaults standardUserDefaults] setObject:finalPhoneNumber forKey:@"finalPhoneNumber"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            NSLog(@"Sync successful");
+        }
+    }
+    else if (str_sender1==204)  {
+        NSLog(@"Button five");
+        NSString *str_valueRef = [[NSUserDefaults standardUserDefaults] objectForKey:@"valueRef5"];
+        
+        str_valueRef = [str_valueRef stringByReplacingOccurrencesOfString:@"-" withString:@""];
+        str_valueRef = [str_valueRef stringByReplacingOccurrencesOfString:@"(" withString:@""];
+        str_valueRef = [str_valueRef stringByReplacingOccurrencesOfString:@")" withString:@""];
+        str_valueRef = [str_valueRef stringByReplacingOccurrencesOfString:@" " withString:@""];
+        NSLog(@"Corrected Phone number:%@",str_valueRef);
+        NSString *finalPhoneNumber = [NSString stringWithFormat:@"%@",str_valueRef];
+        
+        if ([finalPhoneNumber length])   {
+            [[NSUserDefaults standardUserDefaults] setObject:finalPhoneNumber forKey:@"finalPhoneNumber"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            NSLog(@"Sync successful");
+        }
+    }
+    [[PhoneMainView instance] popToView:[ChatViewController compositeViewDescription]]; // Got to Chat and push ChatRoom
+    ChatRoomViewController *controller = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[ChatRoomViewController compositeViewDescription] push:TRUE], ChatRoomViewController);
+    if(controller != nil) {
+        NSString *str_valueRef = [[NSUserDefaults standardUserDefaults] objectForKey:@"finalPhoneNumber"]; //sms
+        NSString *dest = [ContactDetailsTableViewController localizeLabel:(NSString*) str_valueRef];
+        LinphoneChatRoom* room = linphone_core_get_or_create_chat_room([LinphoneManager getLc], [dest UTF8String]);
+        [controller setChatRoom:room];
+    }
+}
 
+// SMS pop view
+- (void)actionSheet:(UIActionSheet *)popup clickedButtonAtIndex:(NSInteger)buttonIndex {
+    
+    switch (popup.tag) {
+        case 1: {
+            switch (buttonIndex) {
+                case 0:
+                    // [self FBShare];
+                    NSLog(@"Call button pressed");
+                    NSString *displayName = [FastAddressBook getContactDisplayName:contact];
+                    //   Go to dialer view
+                    DialerViewController *controller = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[DialerViewController compositeViewDescription]], DialerViewController);
+                    if(controller != nil) {
+                        NSString *str_valueRef = [[NSUserDefaults standardUserDefaults] objectForKey:@"valueRef"]; //sms
+                        NSString *dest = [ContactDetailsTableViewController localizeLabel:(NSString*) str_valueRef];
+                        [controller call:dest displayName:displayName];
+                    }
+                    break;
+                case 1:
+                    // [self TwitterShare];
+                    NSLog(@"SMS button pressed");
+                    NSString *str_valueRef = [[NSUserDefaults standardUserDefaults] objectForKey:@"valueRef"]; //sms
+                    
+                    str_valueRef = [str_valueRef stringByReplacingOccurrencesOfString:@"-" withString:@""];
+                    str_valueRef = [str_valueRef stringByReplacingOccurrencesOfString:@"(" withString:@""];
+                    str_valueRef = [str_valueRef stringByReplacingOccurrencesOfString:@")" withString:@""];
+                    str_valueRef = [str_valueRef stringByReplacingOccurrencesOfString:@" " withString:@""];
+                    NSLog(@"Corrected Phone number:%@",str_valueRef);
+                    NSString *finalPhoneNumber = [NSString stringWithFormat:@"%@",str_valueRef];
+                    
+                    if ([finalPhoneNumber length])   {
+                        [[NSUserDefaults standardUserDefaults] setObject:finalPhoneNumber forKey:@"finalPhoneNumber"];
+                        [[NSUserDefaults standardUserDefaults] synchronize];
+                        NSLog(@"Sync successful");
+                    }
+                    if (buttonIndex==1) {
+                        SmsCaspianConversationVC *controller = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[SmsCaspianConversationVC compositeViewDescription]
+                                                                                                                   push:TRUE], SmsCaspianConversationVC);
+                        if (controller) {   NSLog(@"Moving to SMS Conversation");    }
+                    }
+                    break;
+                case 2:
+                    // [self TwitterShare];
+                    NSLog(@"Chat button pressed");
+                    // Go to Chat room view
+                    if(buttonIndex==2){
+                        [[PhoneMainView instance] popToView:[ChatViewController compositeViewDescription]]; // Got to Chat and push ChatRoom
+                        ChatRoomViewController *controller = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[ChatRoomViewController compositeViewDescription] push:TRUE], ChatRoomViewController);
+                        if(controller != nil) {
+                            NSString *str_valueRef = [[NSUserDefaults standardUserDefaults] objectForKey:@"valueRef"]; //sms
+                            NSString *dest = [ContactDetailsTableViewController localizeLabel:(NSString*) str_valueRef];
+                            LinphoneChatRoom* room = linphone_core_get_or_create_chat_room([LinphoneManager getLc], [dest UTF8String]);
+                            [controller setChatRoom:room];
+                        }}
+                    break;
+                default:
+                    break;
+            }
+            break;
+        }
+        default:
+            break;
+    }
+}
+// End
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     NSMutableArray *sectionDict = [self getSectionData:[indexPath section]];
@@ -615,6 +992,13 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
             ABMultiValueRef lMap = ABRecordCopyValue(contact, kABPersonPhoneProperty);
             NSInteger index = ABMultiValueGetIndexForIdentifier(lMap, [entry identifier]);
             CFStringRef valueRef = ABMultiValueCopyValueAtIndex(lMap, index);
+            // Added for SMS functionality for ActionSheet
+            [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"valueRef"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            NSString *setValueref = [NSString stringWithFormat:@"%@",valueRef];
+            [[NSUserDefaults standardUserDefaults] setObject:setValueref forKey:@"valueRef"];  //SMS
+            [[NSUserDefaults standardUserDefaults] synchronize];  // SMS
+            
             if(valueRef != NULL) {
                 dest = [ContactDetailsTableViewController localizeLabel:(NSString*) valueRef];
                 CFRelease(valueRef);
@@ -625,6 +1009,12 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
             NSInteger index = ABMultiValueGetIndexForIdentifier(lMap, [entry identifier]);
             CFDictionaryRef lDict = ABMultiValueCopyValueAtIndex(lMap, index);
             CFStringRef valueRef = CFDictionaryGetValue(lDict, kABPersonInstantMessageUsernameKey);
+            // Added for SMS functionality for ActionSheet
+            [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"valueRef"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            NSString *setValueref = [NSString stringWithFormat:@"%@",valueRef];
+            [[NSUserDefaults standardUserDefaults] setObject:setValueref forKey:@"valueRef"];  //SMS
+            [[NSUserDefaults standardUserDefaults] synchronize];  // SMS
             dest = [FastAddressBook normalizeSipURI:[NSString stringWithString:(NSString*) valueRef]];
             CFRelease(lDict);
             CFRelease(lMap);
@@ -632,6 +1022,12 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
             ABMultiValueRef lMap = ABRecordCopyValue(contact, kABPersonEmailProperty);
             NSInteger index = ABMultiValueGetIndexForIdentifier(lMap, [entry identifier]);
             CFStringRef valueRef = ABMultiValueCopyValueAtIndex(lMap, index);
+            // Added for SMS functionality for ActionSheet
+            [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"valueRef"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            NSString *setValueref = [NSString stringWithFormat:@"%@",valueRef];
+            [[NSUserDefaults standardUserDefaults] setObject:setValueref forKey:@"valueRef"];  //SMS
+            [[NSUserDefaults standardUserDefaults] synchronize];  // SMS
             if(valueRef != NULL) {
                 dest = [FastAddressBook normalizeSipURI:[NSString stringWithString:(NSString*) valueRef]];
                 CFRelease(valueRef);
@@ -652,14 +1048,14 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
                 ChatRoomViewController *controller = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[ChatRoomViewController compositeViewDescription] push:TRUE], ChatRoomViewController);
                 if(controller != nil) {
                     LinphoneChatRoom* room = linphone_core_get_or_create_chat_room([LinphoneManager getLc], [dest UTF8String]);
-                   [controller setChatRoom:room];
+                    [controller setChatRoom:room];
                 }
             }
         }
     } else {
         NSString *key = nil;
         ABPropertyID property = [self propertyIDForSection:contactSections[indexPath.section]];
-
+        
         if( property != kABInvalidPropertyType ){
             ABMultiValueRef lMap = ABRecordCopyValue(contact, property);
             NSInteger index = ABMultiValueGetIndexForIdentifier(lMap, [entry identifier]);
@@ -706,7 +1102,7 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
     if(!editing) {
         [LinphoneUtils findAndResignFirstResponder:[self tableView]];
     }
-
+    
     [headerController setEditing:editing animated:animated];
     [footerController setEditing:editing animated:animated];
     
@@ -715,22 +1111,22 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
     }
     if(editing) {
         /*
-        // add phone entries so that the user can add new data
-        for (int section = 0; section < [self numberOfSectionsInTableView:[self tableView]]; ++section) {
-            if(contactSections[section] == ContactSections_Number ||
-               contactSections[section] == ContactSections_Sip ||
-               (showEmails && contactSections[section] == ContactSections_Email)) {
-                [self addEntry:self.tableView section:section animated:animated];
-            }
-        }
-        */
+         // add phone entries so that the user can add new data
+         for (int section = 0; section < [self numberOfSectionsInTableView:[self tableView]]; ++section) {
+         if(contactSections[section] == ContactSections_Number ||
+         contactSections[section] == ContactSections_Sip ||
+         (showEmails && contactSections[section] == ContactSections_Email)) {
+         [self addEntry:self.tableView section:section animated:animated];
+         }
+         }
+         */
     } else {
         for (int section = 0; section < [self numberOfSectionsInTableView:[self tableView]]; ++section) {
             // remove phony entries that were not filled by the user
             if(contactSections[section] == ContactSections_Number ||
                contactSections[section] == ContactSections_Sip    ||
                (showEmails && contactSections[section] == ContactSections_Email)) {
-
+                
                 [self removeEmptyEntry:self.tableView section:section animated:animated];
                 if( [[self getSectionData:section] count] == 0 && animated ) { // the section is empty -> remove titles
                     [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:section]
@@ -757,7 +1153,7 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
     return UITableViewCellEditingStyleDelete;
 }
 
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {   
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     if(section == ContactSections_None) {
         return [headerController view];
     } else {
@@ -765,7 +1161,7 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
     }
 }
 
-- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {   
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
     if(section == (ContactSections_MAX - 1)) {
         if(ABRecordGetRecordID(contact) != kABRecordInvalidID) {
             return [footerController view];
@@ -776,7 +1172,7 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
 
 - (NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     if( [[self getSectionData:section] count] == 0) return nil;
-
+    
     if(contactSections[section] == ContactSections_Number) {
         return NSLocalizedString(@"Phone numbers", nil);
     } else if(contactSections[section] == ContactSections_Sip) {
@@ -791,14 +1187,14 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
     return nil;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section { 
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     if(section == ContactSections_None) {
         return [UIContactDetailsHeader height:[headerController isEditing]];
     } else {
         // Hide section if nothing in it
         if([[self getSectionData:section] count] > 0)
             return 22;
-        else 
+        else
             return 0.000001f; // Hack UITableView = 0
     }
 }
@@ -825,7 +1221,7 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
         NSMutableArray *sectionDict  = [self getSectionData:section];
         ABPropertyID property        = [self propertyIDForSection:(int)section];
         Entry *entry                 = [sectionDict objectAtIndex:editingIndexPath.row];
-
+        
         if( property != kABInvalidPropertyType ){
             ABMultiValueRef lcMap = ABRecordCopyValue(contact, property);
             ABMutableMultiValueRef lMap = ABMultiValueCreateMutableCopy(lcMap);
@@ -835,7 +1231,7 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
             ABRecordSetValue(contact, property, lMap, nil);
             CFRelease(lMap);
         }
-
+        
         [self.tableView beginUpdates];
         [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject: editingIndexPath] withRowAnimation:FALSE];
         [self.tableView reloadSectionIndexTitles];
@@ -856,12 +1252,12 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    [textField resignFirstResponder];    
+    [textField resignFirstResponder];
     return YES;
 }
 
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
-    UIView *view = [textField superview]; 
+    UIView *view = [textField superview];
     // Find TableViewCell
     while(view != nil && ![view isKindOfClass:[UIEditableTableViewCell class]]) view = [view superview];
     if(view != nil) {
@@ -870,10 +1266,10 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
         NSMutableArray *sectionDict = [self getSectionData:[path section]];
         Entry *entry = [sectionDict objectAtIndex:[path row]];
         ContactSections_e sect = contactSections[[path section]];
-
+        
         ABPropertyID property = [self propertyIDForSection:sect];
         NSString *value = [textField text];
-
+        
         if(sect == ContactSections_Sip) {
             [self setSipContactEntry:entry withValue:value];
         } else if( property != kABInvalidPropertyType ){
@@ -885,7 +1281,7 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
             ABRecordSetValue(contact, property, lMap, nil);
             CFRelease(lMap);
         }
-
+        
         [cell.detailTextLabel setText:value];
     } else {
         [LinphoneLogger logc:LinphoneLoggerError format:"Not valid UIEditableTableViewCell"];

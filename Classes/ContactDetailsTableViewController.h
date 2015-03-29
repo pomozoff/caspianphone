@@ -25,12 +25,16 @@
 #import "UIContactDetailsHeader.h"
 #import "UIContactDetailsFooter.h"
 
-@interface ContactDetailsTableViewController : UITableViewController<ContactDetailsLabelViewDelegate, UITextFieldDelegate> {
+// UIActionSheetDelegate added for Action sheet pop up for selection of SMS / Call
+
+@interface ContactDetailsTableViewController : UITableViewController<UIActionSheetDelegate, ContactDetailsLabelViewDelegate, UITextFieldDelegate> {
 @private
     NSMutableArray *dataCache;
     NSMutableArray *labelArray;
     NSIndexPath *editingIndexPath;
 }
+
+@property (retain, nonatomic) IBOutlet UIButton *showPopupBtn;    //sms
 
 @property (nonatomic, assign) ABRecordRef contact;
 @property (nonatomic, retain) IBOutlet id<ContactDetailsDelegate> contactDetailsDelegate;

@@ -25,6 +25,8 @@
 #import "LinphoneManager.h"
 #import "PhoneMainView.h"
 #import "Utils.h"
+#import "ActivateSMSViewController.h"
+#import "SmsCaspianVC.h"
 
 #include "linphone/linphonecore.h"
 
@@ -384,7 +386,8 @@ static UICompositeViewDescription *compositeDescription = nil;
 }
 
 - (IBAction)onBackClick: (id) event {
-    [[PhoneMainView instance] changeCurrentView:[InCallViewController compositeViewDescription]];
+    NSLog(@"Activate SMS");
+    // Commented by  on 8 March for SMS Change  [[PhoneMainView instance] changeCurrentView:[InCallViewController compositeViewDescription]];
 }
 
 - (IBAction)onAddressChange: (id)sender {
@@ -400,7 +403,32 @@ static UICompositeViewDescription *compositeDescription = nil;
         [transferButton setEnabled:FALSE];
     }
 }
+// Added by  on 4 March 2015 for Activate SMS scene
+- (IBAction)onActivateSMS:(id)sender {
+        NSString *str_SMS_Active_State = [[NSUserDefaults standardUserDefaults] objectForKey:@"SMS_Active_State"];
+    int initialValue = 1;
+    NSString *initState = [NSString stringWithFormat: @"%d", initialValue];
+    if (![str_SMS_Active_State isEqualToString:initState])   {
+    NSLog(@"Activate SMS");
 
+    ChatViewController *controller = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[ChatViewController compositeSMSViewDescription]
+                                                                                         push:TRUE], ChatViewController);
+        if (controller) {
+            NSLog(@"Switching view to SMS view controller");
+        }
+    }
+    else {
+        NSLog(@"The User has already been verified. Code being forwarded to SMS screen");
+        SmsCaspianVC *controller = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[SmsCaspianVC compositeViewDescription]
+                                                                                             push:TRUE], SmsCaspianVC);
+        if (controller) {
+            NSLog(@"Changing to smsCaspianVC View Controller");
+        }
+        
+    }
+}
+// End
+          
 - (IBAction)onChatTap:(id)sender {
     ChatViewController *controller = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[ChatViewController compositeViewDescription]
                                                                                          push:TRUE], ChatViewController);
