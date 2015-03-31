@@ -83,6 +83,9 @@ extern NSString *caspianErrorDomain;
 @property (nonatomic, retain) NSOperationQueue *internetQueue;
 
 @property (nonatomic, assign) NSInteger currentCountryRow;
+@property (nonatomic, assign) NSInteger indexNumberCountryDefault;
+
+@property (nonatomic, copy) NSString *caspianCountryDefaultName;
 
 @end
 
@@ -381,6 +384,8 @@ static UICompositeViewDescription *compositeDescription = nil;
     self.confirmView.layer.masksToBounds = YES;
     
     self.currentCountryRow = 0;
+    self.indexNumberCountryDefault = 0;
+    self.caspianCountryDefaultName = @"United Kingdom";
 }
 
 
@@ -629,6 +634,7 @@ static UICompositeViewDescription *compositeDescription = nil;
             [self fillCredentials];
         }
     } else if (view == signUpView) {
+        [self cleanUpSignUpView];
         [self.countryNameSignUpField becomeFirstResponder];
     } else if (view == activateAccountView) {
         self.activationCodeActivateField.text = @"";
@@ -1661,10 +1667,9 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (void)fillCountryAndCodeArray:(NSDictionary *)countries {
     self.countryAndCode = countries[caspianCountriesListTopKey];
-    [self.countryPickerView reloadAllComponents];
-    [self didSelectCountryAtRow:self.currentCountryRow];
+    [self findAndSetIndexNumberCountryDefault];
+    [self didSelectCountryAtRow:self.indexNumberCountryDefault];
 }
-
 
 #pragma mark - Sign Up
 
@@ -1686,6 +1691,32 @@ static UICompositeViewDescription *compositeDescription = nil;
         } completion:^(BOOL finished) {
         }];
     }
+}
+- (void)cleanUpSignUpView {
+    
+    self.phoneNumberSignUpField.text = @"";
+    self.firstNameSignUpField.text = @"";
+    self.lastNameSignUpField.text = @"";
+    
+    if (self.currentCountryRow != self.indexNumberCountryDefault && self.indexNumberCountryDefault > 0) {
+        self.currentCountryRow = self.indexNumberCountryDefault;
+        [self.countryPickerView reloadAllComponents];
+        [self.countryPickerView selectRow:self.currentCountryRow inComponent:0 animated:YES];
+    }
+}
+
+- (void)findAndSetIndexNumberCountryDefault {
+    for (NSDictionary *object in self.countryAndCode) {
+        
+        NSDictionary *my_country = [[NSDictionary alloc] init];
+        my_country = object;
+        
+        if ([[my_country valueForKey:@"Name"] isEqualToString:self.caspianCountryDefaultName]) {
+            self.indexNumberCountryDefault = [self.countryAndCode indexOfObject:object];
+        }
+    }
+    [self.countryPickerView reloadAllComponents];
+    [self.countryPickerView selectRow:self.indexNumberCountryDefault inComponent:0 animated:YES];
 }
 
 - (void)didSelectCountryAtRow:(NSInteger)row {
