@@ -629,6 +629,7 @@ static UICompositeViewDescription *compositeDescription = nil;
             [self fillCredentials];
         }
     } else if (view == signUpView) {
+        [self cleanUpSignUpView];
         [self.countryNameSignUpField becomeFirstResponder];
     } else if (view == activateAccountView) {
         self.activationCodeActivateField.text = @"";
@@ -1686,6 +1687,13 @@ static UICompositeViewDescription *compositeDescription = nil;
         } completion:^(BOOL finished) {
         }];
     }
+}
+
+- (void) cleanUpSignUpView {
+    [WizardViewController cleanTextField:signUpView];
+    self.currentCountryRow = 0;
+    [self.countryPickerView reloadAllComponents];
+    [self.countryPickerView selectRow:0 inComponent:0 animated:YES];
 }
 
 - (void)didSelectCountryAtRow:(NSInteger)row {
