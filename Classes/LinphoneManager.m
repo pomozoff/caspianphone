@@ -1512,7 +1512,7 @@ static BOOL libStarted = FALSE;
     
     // Network
     lp_config_set_int(config, LINPHONERC_APPLICATION_KEY, "edge_opt_preference", YES);           // EDGE optimizations is ON
-    linphone_core_set_stun_server(lc, "212.159.80.154");                                         // STUN server
+    linphone_core_set_stun_server(lc, "194.72.111.166");                                         // STUN server
     linphone_core_set_firewall_policy(lc, LinphonePolicyUseIce);                                 // ICE is ON
     lp_config_set_int(config, LINPHONERC_APPLICATION_KEY, "random_port_preference", YES);        // Random port is ON
     linphone_core_set_audio_port_range(lc, 7076, 7076);                                          // Audio port is 7076

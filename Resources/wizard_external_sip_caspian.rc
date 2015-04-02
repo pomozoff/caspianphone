@@ -19,13 +19,13 @@
 		<entry name="pushnotification_preference" overwrite="true">1</entry>
         <entry name="sharing_server_preference" overwrite="true">https://www.linphone.org:444/upload.php</entry>
 		<entry name="ice_preference" overwrite="true">1</entry>
-		<entry name="stun_preference" overwrite="true">212.159.80.154</entry>
+		<entry name="stun_preference" overwrite="true">194.72.111.166</entry>
 		<entry name="random_port_preference" overwrite="true">1</entry>
 	</section>
 
 	<section name="net">
 		<entry name="firewall_policy" overwrite="true">ice</entry>
-		<entry name="stun_server" overwrite="true">212.159.80.154</entry>
+		<entry name="stun_server" overwrite="true">194.72.111.166</entry>
 	</section>
 
 	<section name="sip">
