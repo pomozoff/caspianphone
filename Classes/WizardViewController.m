@@ -726,9 +726,9 @@ static UICompositeViewDescription *compositeDescription = nil;
         /*
          This line of code cuts off specefied transport type in uri from xml config
          for example here is setting from xml config:
-         sip:212.159.80.157:5060;transport=tcp
+         sip:194.72.111.163:5060;transport=tcp
          this line changes uri to:
-         sip:212.159.80.157
+         sip:194.72.111.163
         */
         //linphone_proxy_config_set_server_addr(proxyCfg, [server_address UTF8String]);
         linphone_address_set_domain(linphoneAddress, [domain UTF8String]);
