@@ -3648,6 +3648,7 @@
 			buildConfigurationList = 1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "linphone" */;
 			buildPhases = (
 				1D60588D0D05DD3D006BFB54 /* Resources */,
+				26CE80151ACFE64300FC7606 /* ShellScript */,
 				63DCC71D1A07B08E00916627 /* Run Script */,
 				D33CF34715D3985000CD4B85 /* ShellScript */,
 				1D60588E0D05DD3D006BFB54 /* Sources */,
@@ -4585,6 +4586,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		26CE80151ACFE64300FC7606 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Crashlytics.framework/run 33dd028ded3a518de0afb500f5a3839a2af9f021 00be292e53678c94c0057937e1509ff25df44b4ecac3369157624a267c41e3e2";
+		};
 		63DCC71D1A07B08E00916627 /* Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
