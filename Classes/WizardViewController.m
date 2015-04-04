@@ -65,6 +65,7 @@ static NSString *caspianCountryObjectFieldName = @"Name";
 static NSString *caspianCountryObjectFieldCall = @"Call";
 static NSString *caspianCountryObjectFieldSms  = @"Sms";
 static NSString *caspianCountryObjectFieldFlag = @"Image";
+static NSString *caspianCountryDefaultName     = @"United Kingdom";
 
 extern NSInteger caspianErrorCode;
 extern NSString *caspianErrorDomain;
