@@ -1709,6 +1709,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     for (NSDictionary *country in self.countryAndCode) {
         if ([[country valueForKey:caspianCountryObjectFieldName] isEqualToString:self.caspianCountryDefaultName]) {
             self.indexNumberCountryDefault = [self.countryAndCode indexOfObject:country];
+            break;
         }
     }
     [self.countryPickerView reloadAllComponents];
