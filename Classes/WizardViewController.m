@@ -383,10 +383,6 @@ static UICompositeViewDescription *compositeDescription = nil;
     
     self.confirmView.layer.cornerRadius = 5.0f;
     self.confirmView.layer.masksToBounds = YES;
-    
-    self.currentCountryRow = 0;
-    self.indexOfDefaultCountry = 0;
-    self.caspianCountryDefaultName = @"United Kingdom";
 }
 
 
