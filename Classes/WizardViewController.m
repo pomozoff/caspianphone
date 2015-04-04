@@ -1967,6 +1967,8 @@ static UICompositeViewDescription *compositeDescription = nil;
 }
 
 - (void)updateCountryFlag:(NSString *)flagFileName activityIndicator:(UIActivityIndicatorView *)activityIndicator flagImageView:(UIImageView *)flagImageView {
+    flagImageView.image = [UIImage imageNamed:@"flag_placeholder.png"];
+
     activityIndicator.hidden = NO;
     [activityIndicator startAnimating];
     [self.internetQueue addOperationWithBlock:^{
@@ -1981,7 +1983,6 @@ static UICompositeViewDescription *compositeDescription = nil;
             [[NSOperationQueue mainQueue] addOperationWithBlock:^{
                 activityIndicator.hidden = YES;
                 [activityIndicator stopAnimating];
-                flagImageView.image = [UIImage imageNamed:@"flag_placeholder.png"];
             }];
         }];
     }];
