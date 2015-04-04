@@ -136,13 +136,13 @@
 		2668D6E41AB62274009630D3 /* flag_placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 2668D6E31AB62274009630D3 /* flag_placeholder.png */; };
 		266D5B9F1AB5C013003F9E30 /* COCAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 266D5B9E1AB5C013003F9E30 /* COCAlertView.m */; };
 		2690B65E1ABE213E000ACD65 /* countries_list.json in Resources */ = {isa = PBXBuildFile; fileRef = 2690B65D1ABE213E000ACD65 /* countries_list.json */; };
+		26CE801F1ACFE8EB00FC7606 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26CE801E1ACFE8EB00FC7606 /* Crashlytics.framework */; };
 		26E7F2F31A816E200033D3C0 /* NSMutableArray+SWUtilityButtons.m in Sources */ = {isa = PBXBuildFile; fileRef = 26E7F2E81A816E200033D3C0 /* NSMutableArray+SWUtilityButtons.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		26E7F2F41A816E200033D3C0 /* SWCellScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 26E7F2EA1A816E200033D3C0 /* SWCellScrollView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		26E7F2F51A816E200033D3C0 /* SWLongPressGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 26E7F2EC1A816E200033D3C0 /* SWLongPressGestureRecognizer.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		26E7F2F61A816E200033D3C0 /* SWTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 26E7F2EE1A816E200033D3C0 /* SWTableViewCell.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		26E7F2F71A816E200033D3C0 /* SWUtilityButtonTapGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 26E7F2F01A816E200033D3C0 /* SWUtilityButtonTapGestureRecognizer.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		26E7F2F81A816E200033D3C0 /* SWUtilityButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 26E7F2F21A816E200033D3C0 /* SWUtilityButtonView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		26E7F2FA1A816E8C0033D3C0 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26E7F2F91A816E8C0033D3C0 /* Crashlytics.framework */; };
 		26E7F3761A81709F0033D3C0 /* #-hover.png in Resources */ = {isa = PBXBuildFile; fileRef = 26E7F2FC1A81709F0033D3C0 /* #-hover.png */; };
 		26E7F3771A81709F0033D3C0 /* #.png in Resources */ = {isa = PBXBuildFile; fileRef = 26E7F2FD1A81709F0033D3C0 /* #.png */; };
 		26E7F3781A81709F0033D3C0 /* 0-hover.png in Resources */ = {isa = PBXBuildFile; fileRef = 26E7F2FE1A81709F0033D3C0 /* 0-hover.png */; };
@@ -1201,6 +1201,7 @@
 		266D5B9D1AB5C012003F9E30 /* COCAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = COCAlertView.h; sourceTree = "<group>"; };
 		266D5B9E1AB5C013003F9E30 /* COCAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = COCAlertView.m; sourceTree = "<group>"; };
 		2690B65D1ABE213E000ACD65 /* countries_list.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = countries_list.json; path = Resources/countries_list.json; sourceTree = "<group>"; };
+		26CE801E1ACFE8EB00FC7606 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		26E7F2E71A816E200033D3C0 /* NSMutableArray+SWUtilityButtons.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+SWUtilityButtons.h"; sourceTree = "<group>"; };
 		26E7F2E81A816E200033D3C0 /* NSMutableArray+SWUtilityButtons.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+SWUtilityButtons.m"; sourceTree = "<group>"; };
 		26E7F2E91A816E200033D3C0 /* SWCellScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWCellScrollView.h; sourceTree = "<group>"; };
@@ -1213,7 +1214,6 @@
 		26E7F2F01A816E200033D3C0 /* SWUtilityButtonTapGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWUtilityButtonTapGestureRecognizer.m; sourceTree = "<group>"; };
 		26E7F2F11A816E200033D3C0 /* SWUtilityButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWUtilityButtonView.h; sourceTree = "<group>"; };
 		26E7F2F21A816E200033D3C0 /* SWUtilityButtonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWUtilityButtonView.m; sourceTree = "<group>"; };
-		26E7F2F91A816E8C0033D3C0 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		26E7F2FC1A81709F0033D3C0 /* #-hover.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "#-hover.png"; sourceTree = "<group>"; };
 		26E7F2FD1A81709F0033D3C0 /* #.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "#.png"; sourceTree = "<group>"; };
 		26E7F2FE1A81709F0033D3C0 /* 0-hover.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "0-hover.png"; sourceTree = "<group>"; };
@@ -2228,7 +2228,6 @@
 				223148E41178A08200637D6A /* libilbc.a in Frameworks */,
 				F476004B147AAF2800FFF19B /* liblinphone.a in Frameworks */,
 				D37EE10916032DA4003608A6 /* libmediastreamer_base.a in Frameworks */,
-				26E7F2FA1A816E8C0033D3C0 /* Crashlytics.framework in Frameworks */,
 				D37EE10A16032DA4003608A6 /* libmediastreamer_voip.a in Frameworks */,
 				226F2ED81344B0EF00F6EF27 /* libmsamr.a in Frameworks */,
 				223148E61178A09900637D6A /* libmsilbc.a in Frameworks */,
@@ -2242,6 +2241,7 @@
 				220FAD3910765B400068D98F /* libspeexdsp.a in Frameworks */,
 				226183AE1472527D0037138E /* libsrtp.a in Frameworks */,
 				226183AD1472527D0037138E /* libSKP_SILK_SDK.a in Frameworks */,
+				26CE801F1ACFE8EB00FC7606 /* Crashlytics.framework in Frameworks */,
 				22276E8513C73D3100210156 /* libswscale.a in Frameworks */,
 				7066FC0C13E830E400EFC6DC /* libvpx.a in Frameworks */,
 				22AA8AFD13D7125600B30535 /* libx264.a in Frameworks */,
@@ -2785,7 +2785,7 @@
 			children = (
 				F0B026F21AA710AF00FF49F7 /* libiconv.dylib */,
 				F05BAA611A5D594E00411815 /* libz.dylib */,
-				26E7F2F91A816E8C0033D3C0 /* Crashlytics.framework */,
+				26CE801E1ACFE8EB00FC7606 /* Crashlytics.framework */,
 				22B5F03410CE6B2F00777D97 /* AddressBook.framework */,
 				22B5EFA210CE50BD00777D97 /* AddressBookUI.framework */,
 				22405EED1600B4E400B92522 /* AssetsLibrary.framework */,
