@@ -1667,7 +1667,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (void)fillCountryAndCodeArray:(NSDictionary *)countries {
     self.countryAndCode = countries[caspianCountriesListTopKey];
-    [self findAndSetIndexNumberCountryDefault];
+    [self selectDefaultCountry];
     [self didSelectCountryAtRow:self.indexNumberCountryDefault];
 }
 
@@ -1692,8 +1692,8 @@ static UICompositeViewDescription *compositeDescription = nil;
         }];
     }
 }
+
 - (void)cleanUpSignUpView {
-    
     self.phoneNumberSignUpField.text = @"";
     self.firstNameSignUpField.text = @"";
     self.lastNameSignUpField.text = @"";
@@ -1705,7 +1705,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     }
 }
 
-- (void)findAndSetIndexNumberCountryDefault {
+- (void)selectDefaultCountry {
     for (NSDictionary *object in self.countryAndCode) {
         
         NSDictionary *my_country = [[NSDictionary alloc] init];
