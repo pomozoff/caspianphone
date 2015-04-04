@@ -3740,7 +3740,7 @@
 					};
 					F0F951FF1A6AEB1000254160 = {
 						CreatedOnToolsVersion = 6.1.1;
-						DevelopmentTeam = Z2V957B3D6;
+						DevelopmentTeam = G4P9S2V6QP;
 						TestTargetID = 1D6058900D05DD3D006BFB54;
 					};
 				};
