@@ -1706,12 +1706,12 @@ static UICompositeViewDescription *compositeDescription = nil;
 }
 
 - (void)selectDefaultCountry {
-    for (NSDictionary *object in self.countryAndCode) {
+    for (NSDictionary *country in self.countryAndCode) {
         NSDictionary *my_country = [[NSDictionary alloc] init];
-        my_country = object;
+        my_country = country;
         
         if ([[my_country valueForKey:@"Name"] isEqualToString:self.caspianCountryDefaultName]) {
-            self.indexNumberCountryDefault = [self.countryAndCode indexOfObject:object];
+            self.indexNumberCountryDefault = [self.countryAndCode indexOfObject:country];
         }
     }
     [self.countryPickerView reloadAllComponents];
