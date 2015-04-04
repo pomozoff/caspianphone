@@ -1716,6 +1716,15 @@ static UICompositeViewDescription *compositeDescription = nil;
     [self.countryPickerView selectRow:self.indexNumberCountryDefault inComponent:0 animated:YES];
 }
 
+- (NSInteger)countryIndexByName:(NSString *)countryName {
+    for (NSDictionary *country in self.countryAndCode) {
+        if ([[country valueForKey:caspianCountryObjectFieldName] isEqualToString:countryName]) {
+            return [self.countryAndCode indexOfObject:country];
+        }
+    }
+    return 0;
+}
+
 - (void)didSelectCountryAtRow:(NSInteger)row {
     self.currentCountryRow = row;
     NSDictionary *country = [self countryAtIndex:row];
