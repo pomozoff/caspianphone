@@ -83,7 +83,7 @@ extern NSString *caspianErrorDomain;
 @property (nonatomic, retain) NSOperationQueue *internetQueue;
 
 @property (nonatomic, assign) NSInteger currentCountryRow;
-@property (nonatomic, assign) NSInteger indexNumberCountryDefault;
+@property (nonatomic, assign) NSInteger indexOfDefaultCountry;
 
 @property (nonatomic, copy) NSString *caspianCountryDefaultName;
 
@@ -384,7 +384,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     self.confirmView.layer.masksToBounds = YES;
     
     self.currentCountryRow = 0;
-    self.indexNumberCountryDefault = 0;
+    self.indexOfDefaultCountry = 0;
     self.caspianCountryDefaultName = @"United Kingdom";
 }
 
@@ -1668,7 +1668,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 - (void)fillCountryAndCodeArray:(NSDictionary *)countries {
     self.countryAndCode = countries[caspianCountriesListTopKey];
     [self selectDefaultCountry];
-    [self didSelectCountryAtRow:self.indexNumberCountryDefault];
+    [self didSelectCountryAtRow:self.indexOfDefaultCountry];
 }
 
 #pragma mark - Sign Up
@@ -1698,8 +1698,8 @@ static UICompositeViewDescription *compositeDescription = nil;
     self.firstNameSignUpField.text = @"";
     self.lastNameSignUpField.text = @"";
     
-    if (self.currentCountryRow != self.indexNumberCountryDefault && self.indexNumberCountryDefault > 0) {
-        self.currentCountryRow = self.indexNumberCountryDefault;
+    if (self.currentCountryRow != self.indexOfDefaultCountry && self.indexOfDefaultCountry > 0) {
+        self.currentCountryRow = self.indexOfDefaultCountry;
         [self.countryPickerView reloadAllComponents];
         [self.countryPickerView selectRow:self.currentCountryRow inComponent:0 animated:YES];
     }
@@ -1708,12 +1708,12 @@ static UICompositeViewDescription *compositeDescription = nil;
 - (void)selectDefaultCountry {
     for (NSDictionary *country in self.countryAndCode) {
         if ([[country valueForKey:caspianCountryObjectFieldName] isEqualToString:self.caspianCountryDefaultName]) {
-            self.indexNumberCountryDefault = [self.countryAndCode indexOfObject:country];
+            self.indexOfDefaultCountry = [self.countryAndCode indexOfObject:country];
             break;
         }
     }
     [self.countryPickerView reloadAllComponents];
-    [self.countryPickerView selectRow:self.indexNumberCountryDefault inComponent:0 animated:YES];
+    [self.countryPickerView selectRow:self.indexOfDefaultCountry inComponent:0 animated:YES];
 }
 
 - (NSInteger)countryIndexByName:(NSString *)countryName {
