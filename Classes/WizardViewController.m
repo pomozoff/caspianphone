@@ -644,23 +644,6 @@ static UICompositeViewDescription *compositeDescription = nil;
 
         self.phoneNumberAskPhoneNumberField.text = phoneNumber;
     } else if (view == forgotPasswordView) {
-        /*
-        if (self.rememberMeRegisterSwitch.isEnabled) {
-            NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-            NSString *phoneNumber = [userDefaults objectForKey:caspianPhoneNumber];
-            
-            NSDictionary *country = [self countryByPhoneNumber:phoneNumber];
-            self.countryNameForgotPasswordField.text = country[caspianCountryObjectFieldName];
-            
-            NSString *countryCode = country[caspianCountryObjectFieldCode];
-            self.countryCodeForgotPasswordField.text = countryCode;
-            if (countryCode) {
-                self.phoneNumberForgotPasswordField.text = [phoneNumber stringByReplacingOccurrencesOfString:countryCode withString:@""];
-            } else {
-                [self alertErrorMessageEmptyCountry];
-            }
-        }
-        */
         [self.countryNameForgotPasswordField becomeFirstResponder];
     }
     
