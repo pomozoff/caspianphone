@@ -632,7 +632,12 @@ static UICompositeViewDescription *compositeDescription = nil;
         }
     } else if (view == signUpView) {
         [self cleanUpSignUpView];
+
+        waitView.hidden = NO;
+        [self pullCountriesWithCompletion:^{
+            waitView.hidden = YES;
         [self.countryNameSignUpField becomeFirstResponder];
+        }];
     } else if (view == activateAccountView) {
         self.activationCodeActivateField.text = @"";
         [self.activationCodeActivateField becomeFirstResponder];
@@ -644,7 +649,11 @@ static UICompositeViewDescription *compositeDescription = nil;
 
         self.phoneNumberAskPhoneNumberField.text = phoneNumber;
     } else if (view == forgotPasswordView) {
+        waitView.hidden = NO;
+        [self pullCountriesWithCompletion:^{
+            waitView.hidden = YES;
         [self.countryNameForgotPasswordField becomeFirstResponder];
+        }];
     }
     
     // Animation
@@ -913,14 +922,6 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
     activeTextField = textField;
-    if (textField == self.countryNameSignUpField || textField == self.countryNameForgotPasswordField) {
-        if (self.countryAndCode.count > self.currentCountryRow) {
-            [self didSelectCountryAtRow:self.currentCountryRow];
-        } else {
-            waitView.hidden = NO;
-            [self pullCountries];
-        }
-    }
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
@@ -1581,19 +1582,17 @@ static UICompositeViewDescription *compositeDescription = nil;
     [alert release];
 }
 
-- (void)pullCountries {
+- (void)pullCountriesWithCompletion:(void(^)(void))completion {
     if (self.serialCountryListPullQueue.operationCount == 0) {
         __block WizardViewController *weakSelf = self;
         [self.serialCountryListPullQueue addOperationWithBlock:^{
             [[LinphoneManager instance] dataFromUrlString:caspianCountryListUrl completionBlock:^(NSDictionary *countries) {
                 [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                    waitView.hidden = YES;
+                    completion();
                     [weakSelf fillCountryAndCodeArray:countries];
                 }];
             } errorBlock:^(NSError *error) {
                 [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                    waitView.hidden = YES;
-
                     NSString *path = [[NSBundle mainBundle] pathForResource:@"countries_list" ofType:@"json"];
                     NSString *jsonString = [[NSString alloc] initWithContentsOfFile:path encoding:NSUTF8StringEncoding error:NULL];
 
@@ -1602,6 +1601,7 @@ static UICompositeViewDescription *compositeDescription = nil;
                                                                               options:NSJSONReadingMutableContainers
                                                                                 error:&jsonError];
                     if (!jsonError) {
+                        completion();
                         [weakSelf fillCountryAndCodeArray:countries];
                     } else {
                         weakSelf.countryAndCode = nil;
