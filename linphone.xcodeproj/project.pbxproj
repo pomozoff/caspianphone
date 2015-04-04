@@ -3636,11 +3636,11 @@
 			buildConfigurationList = 1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "linphone" */;
 			buildPhases = (
 				1D60588D0D05DD3D006BFB54 /* Resources */,
-				26CE80151ACFE64300FC7606 /* ShellScript */,
 				63DCC71D1A07B08E00916627 /* Run Script */,
 				D33CF34715D3985000CD4B85 /* ShellScript */,
 				1D60588E0D05DD3D006BFB54 /* Sources */,
 				1D60588F0D05DD3D006BFB54 /* Frameworks */,
+				26CE80151ACFE64300FC7606 /* ShellScript */,
 			);
 			buildRules = (
 			);
