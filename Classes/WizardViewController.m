@@ -1707,7 +1707,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (void)selectDefaultCountry {
     for (NSDictionary *country in self.countryAndCode) {
-        if ([[country valueForKey:@"Name"] isEqualToString:self.caspianCountryDefaultName]) {
+        if ([[country valueForKey:caspianCountryObjectFieldName] isEqualToString:self.caspianCountryDefaultName]) {
             self.indexNumberCountryDefault = [self.countryAndCode indexOfObject:country];
         }
     }
