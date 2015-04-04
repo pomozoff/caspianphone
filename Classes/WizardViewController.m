@@ -84,9 +84,6 @@ extern NSString *caspianErrorDomain;
 @property (nonatomic, retain) NSOperationQueue *internetQueue;
 
 @property (nonatomic, assign) NSInteger currentCountryRow;
-@property (nonatomic, assign) NSInteger indexOfDefaultCountry;
-
-@property (nonatomic, copy) NSString *caspianCountryDefaultName;
 
 @end
 
