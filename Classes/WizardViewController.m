@@ -1707,7 +1707,6 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (void)selectDefaultCountry {
     for (NSDictionary *object in self.countryAndCode) {
-        
         NSDictionary *my_country = [[NSDictionary alloc] init];
         my_country = object;
         
