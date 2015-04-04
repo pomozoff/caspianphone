@@ -642,7 +642,7 @@ static UICompositeViewDescription *compositeDescription = nil;
         waitView.hidden = NO;
         [self pullCountriesWithCompletion:^{
             waitView.hidden = YES;
-        [self.countryNameSignUpField becomeFirstResponder];
+            [self.countryNameSignUpField becomeFirstResponder];
         }];
     } else if (view == activateAccountView) {
         self.activationCodeActivateField.text = @"";
@@ -658,7 +658,7 @@ static UICompositeViewDescription *compositeDescription = nil;
         waitView.hidden = NO;
         [self pullCountriesWithCompletion:^{
             waitView.hidden = YES;
-        [self.countryNameForgotPasswordField becomeFirstResponder];
+            [self.countryNameForgotPasswordField becomeFirstResponder];
         }];
     }
     
@@ -1287,6 +1287,11 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (IBAction)onRemovePhoneFromCard:(UIButton *)sender {
     [self removePhoneNumberFromCard:self.phoneNumberExistsPhoneNumberField.text];
+}
+
+- (IBAction)onCountryListPullCancel:(UIButton *)sender {
+    [self.serialCountryListPullQueue cancelAllOperations];
+    [self onBackButtonClicked:sender];
 }
 
 
