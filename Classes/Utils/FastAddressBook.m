@@ -117,20 +117,23 @@ extern NSString *caspianDomainOldIpLocal;
     if ([phoneNumber hasPrefix:@"sip:"] || [phoneNumber rangeOfString:@"@"].location != NSNotFound) {
         return phoneNumber;
     }
-    return [[[NSString stringWithFormat:@"sip://%@@%@", [self normalizePhoneNumber:phoneNumber], caspianDomainIpLocal] retain] autorelease];
+    return [[[NSString stringWithFormat:@"sip://%@@%@", phoneNumber, caspianDomainIpLocal] retain] autorelease];
 }
 
 + (NSString*)normalizeSipURI:(NSString*)address {
     [LinphoneLogger log:LinphoneLoggerLog format:@"CASPIAN | [FastAddressBook normalizeSipURI:] | address input value: %@", address];
     // replace all whitespaces (non-breakable, utf8 nbsp etc.) by the "classical" whitespace
     address = [[address componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] componentsJoinedByString:@" "];
-    [LinphoneLogger log:LinphoneLoggerLog format:@"CASPIAN | [FastAddressBook normalizeSipURI:] | address removed whitespaces value: %@", address];
+    [LinphoneLogger log:LinphoneLoggerLog format:@"CASPIAN | [FastAddressBook normalizeSipURI:] | address normalized value: %@", address];
+    NSString *phoneNumber = [self takePhoneNumberFromAddress:address];
+    [LinphoneLogger log:LinphoneLoggerLog format:@"CASPIAN | [FastAddressBook normalizeSipURI:] | phoneNumber value: %@", phoneNumber];
     
-    address = [self makeUriFromPhoneNumber:address];
-    [LinphoneLogger log:LinphoneLoggerLog format:@"CASPIAN | [FastAddressBook normalizeSipURI:] | address as URI: %@", address];
+    /*
+    NSString *addressUri = [self makeUriFromPhoneNumber:address];
+    [LinphoneLogger log:LinphoneLoggerLog format:@"CASPIAN | [FastAddressBook normalizeSipURI:] | address as URI: %@", addressUri];
     
     NSString *normalizedSipAddress = nil;
-	LinphoneAddress* linphoneAddress = linphone_core_interpret_url([LinphoneManager getLc], [address UTF8String]);
+	LinphoneAddress* linphoneAddress = linphone_core_interpret_url([LinphoneManager getLc], [addressUri UTF8String]);
     
     if(linphoneAddress != NULL) {
         [LinphoneLogger log:LinphoneLoggerLog format:@"CASPIAN | [FastAddressBook normalizeSipURI:] | address before crash: %@", address];
@@ -148,6 +151,9 @@ extern NSString *caspianDomainOldIpLocal;
         linphone_address_destroy(linphoneAddress);
     }
     return [self replaceOldDomainToNewOne:normalizedSipAddress];
+     */
+
+    return [[phoneNumber retain] autorelease];
 }
 
 + (NSString *)normalizePhoneNumber:(NSString *)address {
@@ -199,8 +205,12 @@ extern NSString *caspianDomainOldIpLocal;
                                         withString:@""
                                            options:0
                                              range:NSMakeRange(0, [lNormalizedAddress length])];
+    [lNormalizedAddress replaceOccurrencesOfString:@"/"
+                                        withString:@""
+                                           options:0
+                                             range:NSMakeRange(0, [lNormalizedAddress length])];
     NSRange range = [lNormalizedAddress rangeOfString:@"@"];
-    return range.location != NSNotFound ? [lNormalizedAddress substringToIndex:range.location] : lNormalizedAddress;
+    return range.location != NSNotFound ? [[[lNormalizedAddress substringToIndex:range.location] retain] autorelease] : [[lNormalizedAddress retain] autorelease];
 }
 
 + (BOOL)isAuthorized {
