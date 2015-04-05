@@ -126,6 +126,9 @@ extern NSString *caspianDomainOldIpLocal;
     address = [[address componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] componentsJoinedByString:@" "];
     [LinphoneLogger log:LinphoneLoggerLog format:@"CASPIAN | [FastAddressBook normalizeSipURI:] | address removed whitespaces value: %@", address];
     
+    address = [self makeUriFromPhoneNumber:address];
+    [LinphoneLogger log:LinphoneLoggerLog format:@"CASPIAN | [FastAddressBook normalizeSipURI:] | address as URI: %@", address];
+    
     NSString *normalizedSipAddress = nil;
 	LinphoneAddress* linphoneAddress = linphone_core_interpret_url([LinphoneManager getLc], [address UTF8String]);
     
