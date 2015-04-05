@@ -2075,7 +2075,9 @@ static void audioRouteChangeListenerCallback (
         [error release];
 
     }
-	LinphoneAddress* linphoneAddress = linphone_core_interpret_url(theLinphoneCore, [readyAddress cStringUsingEncoding:[NSString defaultCStringEncoding]]);
+
+    NSString *cleanPhoneNumber = [[LinphoneManager instance] removeUnneededPrefixes:readyAddress];
+	LinphoneAddress* linphoneAddress = linphone_core_interpret_url(theLinphoneCore, [cleanPhoneNumber cStringUsingEncoding:[NSString defaultCStringEncoding]]);
 
 	if (linphoneAddress) {
 
@@ -2085,7 +2087,7 @@ static void audioRouteChangeListenerCallback (
 		if ([[LinphoneManager instance] lpConfigBoolForKey:@"override_domain_with_default_one"])
 			linphone_address_set_domain(linphoneAddress, [[[LinphoneManager instance] lpConfigStringForKey:@"domain" forSection:@"wizard"] cStringUsingEncoding:[NSString defaultCStringEncoding]]);
 		if(transfer) {
-			linphone_core_transfer_call(theLinphoneCore, linphone_core_get_current_call(theLinphoneCore), [readyAddress cStringUsingEncoding:[NSString defaultCStringEncoding]]);
+			linphone_core_transfer_call(theLinphoneCore, linphone_core_get_current_call(theLinphoneCore), [cleanPhoneNumber cStringUsingEncoding:[NSString defaultCStringEncoding]]);
 		} else {
 			call=linphone_core_invite_address_with_params(theLinphoneCore, linphoneAddress, lcallParams);
 		}
