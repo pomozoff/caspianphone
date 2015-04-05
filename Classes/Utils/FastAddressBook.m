@@ -135,6 +135,7 @@ extern NSString *caspianDomainOldIpLocal;
     if(linphoneAddress != NULL) {
         [LinphoneLogger log:LinphoneLoggerLog format:@"CASPIAN | [FastAddressBook normalizeSipURI:] | address before crash: %@", address];
         char *tmp = linphone_address_as_string_uri_only(linphoneAddress);
+        [LinphoneLogger log:LinphoneLoggerLog format:@"CASPIAN | [FastAddressBook normalizeSipURI:] | address after crash: %@", address];
         if(tmp != NULL) {
             normalizedSipAddress = [NSString stringWithUTF8String:tmp];
             // remove transport, if any
