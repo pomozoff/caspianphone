@@ -113,6 +113,13 @@ extern NSString *caspianDomainOldIpLocal;
     return [address stringByReplacingOccurrencesOfString:caspianDomainOldIpLocal withString:caspianDomainIpLocal];
 }
 
++ (NSString *)makeUriFromPhoneNumber:(NSString *)phoneNumber {
+    if ([phoneNumber hasPrefix:@"sip:"] || [phoneNumber rangeOfString:@"@"].location != NSNotFound) {
+        return phoneNumber;
+    }
+    return [NSString stringWithFormat:@"sip://%@@%@", phoneNumber, caspianDomainIpLocal];
+}
+
 + (NSString*)normalizeSipURI:(NSString*)address {
     [LinphoneLogger log:LinphoneLoggerLog format:@"CASPIAN | [FastAddressBook normalizeSipURI:] | address input value: %@", address];
     // replace all whitespaces (non-breakable, utf8 nbsp etc.) by the "classical" whitespace
