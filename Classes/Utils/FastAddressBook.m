@@ -107,11 +107,17 @@ static void sync_address_book (ABAddressBookRef addressBook, CFDictionaryRef inf
 }
 
 + (NSString*)normalizeSipURI:(NSString*)address {
-    // replace all whitespaces (non-breakable, utf8 nbsp etc.) by the "classical" whitespace 
+    [LinphoneLogger log:LinphoneLoggerLog format:@"CASPIAN | [FastAddressBook normalizeSipURI:] | address input value: %@", address];
+    // replace all whitespaces (non-breakable, utf8 nbsp etc.) by the "classical" whitespace
     address = [[address componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] componentsJoinedByString:@" "];
+    [LinphoneLogger log:LinphoneLoggerLog format:@"CASPIAN | [FastAddressBook normalizeSipURI:] | address removed whitespaces value: %@", address];
+    
     NSString *normalizedSipAddress = nil;
 	LinphoneAddress* linphoneAddress = linphone_core_interpret_url([LinphoneManager getLc], [address UTF8String]);
+    [LinphoneLogger log:LinphoneLoggerLog format:@"CASPIAN | [FastAddressBook normalizeSipURI:] | linphoneAddress initial value: %@", linphoneAddress];
+    
     if(linphoneAddress != NULL) {
+        [LinphoneLogger log:LinphoneLoggerLog format:@"CASPIAN | [FastAddressBook normalizeSipURI:] | before crash"];
         char *tmp = linphone_address_as_string_uri_only(linphoneAddress);
         if(tmp != NULL) {
             normalizedSipAddress = [NSString stringWithUTF8String:tmp];
