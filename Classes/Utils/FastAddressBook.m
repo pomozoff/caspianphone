@@ -150,11 +150,11 @@ extern NSString *caspianDomainOldIpLocal;
     if (address.length < 1) {
         return address;
     }
-    NSMutableString* lNormalizedAddress = [NSMutableString stringWithString:address];
-    [lNormalizedAddress replaceOccurrencesOfString:@" "
-                                        withString:@""
-                                           options:0
-                                             range:NSMakeRange(0, [lNormalizedAddress length])];
+
+    NSArray *words = [address componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    NSString *noSpacesString = [words componentsJoinedByString:@""];
+    
+    NSMutableString* lNormalizedAddress = [NSMutableString stringWithString:noSpacesString];
     [lNormalizedAddress replaceOccurrencesOfString:@"("
                                         withString:@""
                                            options:0
