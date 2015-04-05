@@ -114,7 +114,6 @@ static void sync_address_book (ABAddressBookRef addressBook, CFDictionaryRef inf
     
     NSString *normalizedSipAddress = nil;
 	LinphoneAddress* linphoneAddress = linphone_core_interpret_url([LinphoneManager getLc], [address UTF8String]);
-    [LinphoneLogger log:LinphoneLoggerLog format:@"CASPIAN | [FastAddressBook normalizeSipURI:] | linphoneAddress initial value: %@", linphoneAddress];
     
     if(linphoneAddress != NULL) {
         [LinphoneLogger log:LinphoneLoggerLog format:@"CASPIAN | [FastAddressBook normalizeSipURI:] | before crash"];
