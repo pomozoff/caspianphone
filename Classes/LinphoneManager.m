@@ -45,7 +45,10 @@
 #define LINPHONE_LOGS_MAX_ENTRY 5000
 
 static NSString *caspianSharingServerUri = @"https://www.linphone.org:444/upload.php";
-static NSString *caspianDomainIpLocal = @"194.72.111.163";
+
+NSString *caspianDomainIpLocal = @"194.72.111.163";
+NSString *caspianDomainOldIpLocal = @"212.159.80.157";
+
 NSInteger caspianErrorCode = 480;
 NSString *caspianErrorDomain = @"uk.co.onecallcaspian.phone";
 
