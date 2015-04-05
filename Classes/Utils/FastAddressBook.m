@@ -117,7 +117,7 @@ extern NSString *caspianDomainOldIpLocal;
     if ([phoneNumber hasPrefix:@"sip:"] || [phoneNumber rangeOfString:@"@"].location != NSNotFound) {
         return phoneNumber;
     }
-    return [NSString stringWithFormat:@"sip://%@@%@", [self normalizePhoneNumber:phoneNumber], caspianDomainIpLocal];
+    return [[[NSString stringWithFormat:@"sip://%@@%@", [self normalizePhoneNumber:phoneNumber], caspianDomainIpLocal] retain] autorelease];
 }
 
 + (NSString*)normalizeSipURI:(NSString*)address {
