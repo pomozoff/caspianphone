@@ -133,7 +133,7 @@ extern NSString *caspianDomainOldIpLocal;
 	LinphoneAddress* linphoneAddress = linphone_core_interpret_url([LinphoneManager getLc], [address UTF8String]);
     
     if(linphoneAddress != NULL) {
-        [LinphoneLogger log:LinphoneLoggerLog format:@"CASPIAN | [FastAddressBook normalizeSipURI:] | before crash"];
+        [LinphoneLogger log:LinphoneLoggerLog format:@"CASPIAN | [FastAddressBook normalizeSipURI:] | address before crash: %@", address];
         char *tmp = linphone_address_as_string_uri_only(linphoneAddress);
         if(tmp != NULL) {
             normalizedSipAddress = [NSString stringWithUTF8String:tmp];
