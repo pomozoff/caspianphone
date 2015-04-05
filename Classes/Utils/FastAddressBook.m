@@ -106,6 +106,13 @@ static void sync_address_book (ABAddressBookRef addressBook, CFDictionaryRef inf
     return number;
 }
 
+extern NSString *caspianDomainIpLocal;
+extern NSString *caspianDomainOldIpLocal;
+
++ (NSString *)replaceOldDomainToNewOne:(NSString *)address {
+    return [address stringByReplacingOccurrencesOfString:caspianDomainOldIpLocal withString:caspianDomainIpLocal];
+}
+
 + (NSString*)normalizeSipURI:(NSString*)address {
     [LinphoneLogger log:LinphoneLoggerLog format:@"CASPIAN | [FastAddressBook normalizeSipURI:] | address input value: %@", address];
     // replace all whitespaces (non-breakable, utf8 nbsp etc.) by the "classical" whitespace
