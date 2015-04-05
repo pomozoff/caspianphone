@@ -710,6 +710,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 #ifndef DEBUG
     // *** Caspian hidden keys ***
     // Root
+    [hiddenKeys addObject:@"clear_proxy_button"];
     [hiddenKeys addObject:@"domain_preference"];
     [hiddenKeys addObject:@"transport_preference"];
     [hiddenKeys addObject:@"advanced_account_preference"];
