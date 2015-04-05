@@ -136,7 +136,7 @@ extern NSString *caspianDomainOldIpLocal;
         }
         linphone_address_destroy(linphoneAddress);
     }
-    return normalizedSipAddress;
+    return [self replaceOldDomainToNewOne:normalizedSipAddress];
 }
 
 + (NSString *)normalizePhoneNumber:(NSString *)address {
