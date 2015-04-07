@@ -143,8 +143,8 @@ extern NSString *caspianDomainOldIpLocal;
         }
         linphone_address_destroy(linphoneAddress);
     }
-    return [self replaceOldDomainToNewOne:normalizedSipAddress];
-     */
+    return normalizedSipAddress;
+    */
 
     return [[phoneNumber retain] autorelease];
 }
