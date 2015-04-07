@@ -920,6 +920,10 @@ static void linphone_iphone_registration_state(LinphoneCore *lc, LinphoneProxyCo
 #pragma mark - Text Received Functions
 
 - (void)onMessageReceived:(LinphoneCore *)lc room:(LinphoneChatRoom *)room  message:(LinphoneChatMessage*)msg {
+    const char* cMessage = linphone_chat_message_get_text(msg);
+    if (!cMessage) {
+        return;
+    }
 
 	if (silentPushCompletion) {
 
