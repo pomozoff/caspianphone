@@ -1328,10 +1328,10 @@ static LinphoneCoreVTable linphonec_vtable = {
 
 - (void)updateCaspianIpAddress {
     LinphoneAddress *address = [self myLinphoneAddress];
-            if (address) {
+    if (address) {
         linphone_address_set_domain(address, [caspianDomainIpLocal UTF8String]);
-            }
-        }
+    }
+}
 
 - (NSString *)currentPhoneNumber {
     LinphoneAddress *address = [self myLinphoneAddress];
@@ -1668,6 +1668,9 @@ static BOOL libStarted = FALSE;
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(globalStateChangedNotificationHandler:) name:kLinphoneGlobalStateUpdate object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(configuringStateChangedNotificationHandler:) name:kLinphoneConfiguringStateUpdate object:nil];
 
+    // update caspian ip address
+    [self updateCaspianIpAddress];
+    
 	/*call iterate once immediately in order to initiate background connections with sip server or remote provisioning grab, if any */
 	linphone_core_iterate(theLinphoneCore);
 	// start scheduler
