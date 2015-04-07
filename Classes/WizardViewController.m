@@ -552,7 +552,8 @@ static UICompositeViewDescription *compositeDescription = nil;
 
     self.phoneNumberRegisterField.text = phoneNumber;
     self.passwordRegisterField.text = password;
-    self.domainRegisterField.text = domain.length != 0 ? domain : [[LinphoneManager instance] caspianDomainIp];
+    //self.domainRegisterField.text = domain.length != 0 ? domain : [[LinphoneManager instance] caspianDomainIp];
+    self.domainRegisterField.text = [[LinphoneManager instance] caspianDomainIp];
 }
 
 - (NSDictionary *)countryByPhoneNumber:(NSString *)phoneNUmber {
