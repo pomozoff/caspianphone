@@ -1313,17 +1313,30 @@ static LinphoneCoreVTable linphonec_vtable = {
 	}
 }
 
-- (NSString *)currentPhoneNumber {
+- (LinphoneAddress *)myLinphoneAddress {
+    LinphoneAddress *address = NULL;
     LinphoneProxyConfig *proxy_config = NULL;
     linphone_core_get_default_proxy(theLinphoneCore, &proxy_config);
     if (proxy_config != NULL) {
         const char *identity = linphone_proxy_config_get_identity(proxy_config);
         if (identity) {
-            LinphoneAddress *address = linphone_address_new( identity );
+            address = linphone_address_new( identity );
+        }
+    }
+    return address;
+}
+
+- (void)updateCaspianIpAddress {
+    LinphoneAddress *address = [self myLinphoneAddress];
             if (address) {
-                return [NSString stringWithUTF8String:linphone_address_get_username(address)];
+        linphone_address_set_domain(address, [caspianDomainIpLocal UTF8String]);
             }
         }
+
+- (NSString *)currentPhoneNumber {
+    LinphoneAddress *address = [self myLinphoneAddress];
+    if (address) {
+        return [NSString stringWithUTF8String:linphone_address_get_username(address)];
     }
     return nil;
 }
