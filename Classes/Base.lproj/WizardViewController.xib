@@ -96,7 +96,7 @@
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="b5L-dr-zv3">
                             <rect key="frame" x="135" y="300" width="50" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
-                            <state key="normal" title="Cancel">
+                            <state key="normal">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
