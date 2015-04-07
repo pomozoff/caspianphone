@@ -234,15 +234,6 @@
     return self;
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    
-    UIEdgeInsets inset = {0, 0, 100, 0};
-    UIScrollView *scrollView = self.tableView;
-    [scrollView setContentInset:inset];
-    [scrollView setScrollIndicatorInsets:inset];
-}
-
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
@@ -479,7 +470,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     
     [settingsStore transformLinphoneCoreToKeys]; // Sync settings with linphone core settings
     settingsController.hiddenKeys = [self findHiddenKeys];
-    [settingsController.tableView reloadData];	
+    [settingsController.tableView reloadData];
     
     // Set observer
     [[NSNotificationCenter defaultCenter] addObserver:self 
@@ -490,7 +481,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    
+
     // Fix bug after emailing debug logs
     CGRect currentFrame = self.view.frame;
     if (currentFrame.origin.y > 0) {

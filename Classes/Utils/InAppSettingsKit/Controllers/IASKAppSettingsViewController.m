@@ -91,7 +91,6 @@ CGRect IASKCGRectSwap(CGRect rect);
 		_file = [file copy];
 	}
 	
-    self.tableView.contentOffset = CGPointMake(0, 0);
 	self.settingsReader = nil; // automatically initializes itself
 	[_hiddenKeys release], _hiddenKeys = nil;
 	[self.tableView reloadData];
