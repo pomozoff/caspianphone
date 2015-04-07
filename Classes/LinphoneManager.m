@@ -1327,16 +1327,34 @@ static LinphoneCoreVTable linphonec_vtable = {
 }
 
 - (void)updateCaspianIpAddress {
-    LinphoneAddress *address = [self myLinphoneAddress];
-    if (address) {
-        linphone_address_set_domain(address, [caspianDomainIpLocal UTF8String]);
+    LinphoneProxyConfig *proxy_config = NULL;
+    linphone_core_get_default_proxy(theLinphoneCore, &proxy_config);
+    if (proxy_config) {
+        
+        LinphoneAddress* linphoneAddress = [self myLinphoneAddress];
+        linphone_address_set_domain(linphoneAddress, [caspianDomainIpLocal UTF8String]);
+        linphone_address_set_transport(linphoneAddress, LinphoneTransportTcp);
+        
+        const char* identity = linphone_address_as_string_uri_only(linphoneAddress);
+        char* proxy = linphone_address_as_string_uri_only(linphoneAddress);
+        
+        linphone_proxy_config_edit(proxy_config);
+
+        linphone_proxy_config_set_identity(proxy_config, identity);
+        linphone_proxy_config_set_server_addr(proxy_config, proxy);
+        
+        linphone_proxy_config_done(proxy_config);
+
+        linphone_address_destroy(linphoneAddress);
     }
 }
 
 - (NSString *)currentPhoneNumber {
-    LinphoneAddress *address = [self myLinphoneAddress];
-    if (address) {
-        return [NSString stringWithUTF8String:linphone_address_get_username(address)];
+    LinphoneAddress *linphoneAddress = [self myLinphoneAddress];
+    if (linphoneAddress) {
+        NSString *phoneNumber = [NSString stringWithUTF8String:linphone_address_get_username(linphoneAddress)];
+        linphone_address_destroy(linphoneAddress);
+        return [[phoneNumber retain] autorelease];
     }
     return nil;
 }
@@ -1667,7 +1685,7 @@ static BOOL libStarted = FALSE;
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(audioSessionInterrupted:) name:AVAudioSessionInterruptionNotification object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(globalStateChangedNotificationHandler:) name:kLinphoneGlobalStateUpdate object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(configuringStateChangedNotificationHandler:) name:kLinphoneConfiguringStateUpdate object:nil];
-
+    
     // update caspian ip address
     [self updateCaspianIpAddress];
     
