@@ -54,6 +54,10 @@
 @property (nonatomic, retain) IBOutlet UIView *askPhoneNumberView;
 
 @property (nonatomic, retain) IBOutlet UIView *waitView;
+@property (retain, nonatomic) IBOutlet UIView *welcomeView2;
+@property (retain, nonatomic) IBOutlet UIView *logInView;
+
+
 
 @property (nonatomic, retain) IBOutlet UIButton *cancelButton;
 @property (nonatomic, retain) IBOutlet UIButton *backButton;
@@ -62,6 +66,9 @@
 @property (nonatomic, retain) IBOutlet UIButton *connectAccountButton;
 @property (nonatomic, retain) IBOutlet UIButton *externalAccountButton;
 @property (nonatomic, retain) IBOutlet UIButton *remoteProvisioningButton;
+
+@property (nonatomic, retain) IBOutlet UIButton *logInButton;
+@property (nonatomic, retain) IBOutlet UIButton *logInButton2;
 
 @property (nonatomic, retain) IBOutlet UITextField *provisionedUsername;
 @property (nonatomic, retain) IBOutlet UITextField *provisionedPassword;
@@ -110,6 +117,9 @@
 @property (nonatomic, retain) IBOutlet COCTextField *countryNameForgotPasswordField;
 @property (nonatomic, retain) IBOutlet COCTextField *phoneNumberForgotPasswordField;
 
+@property (nonatomic, retain) IBOutlet COCTextField *countryNameForgotPasswordField_2;
+@property (nonatomic, retain) IBOutlet COCTextField *phoneNumberForgotPasswordField_2;
+
 @property (nonatomic, retain) IBOutlet COCTextField *phoneNumberAskPhoneNumberField;
 @property (nonatomic, retain) IBOutlet COCTextField *phoneNumberFoundPhoneNumberField;
 @property (nonatomic, retain) IBOutlet COCTextField *phoneNumberExistsPhoneNumberField;
@@ -131,6 +141,8 @@
 
 - (IBAction)onSignInClick:(id)sender;
 - (IBAction)onSignInExternalClick:(id)sender;
+//- (IBAction)onLogInClick:(id)sender;
+//- (IBAction)onLogInClick_2:(id)sender;
 - (IBAction)onRegisterClick:(id)sender;
 - (IBAction)onProvisionedLoginClick:(id)sender;
 

@@ -101,6 +101,9 @@ extern NSString *caspianErrorDomain;
 @synthesize activateAccountView;
 @synthesize provisionedAccountView;
 @synthesize waitView;
+@synthesize logInView;
+@synthesize welcomeView2;
+
 
 @synthesize cancelButton;
 @synthesize backButton;
@@ -179,6 +182,9 @@ extern NSString *caspianErrorDomain;
     self = [super initWithNibName:@"WizardViewController" bundle:[NSBundle mainBundle]];
     if (self != nil) {
         [[NSBundle mainBundle] loadNibNamed:@"WizardViews"
+                                      owner:self
+                                    options:nil];
+        [[NSBundle mainBundle] loadNibNamed:@"WizardViews_2"
                                       owner:self
                                     options:nil];
         self->historyViews = [[NSMutableArray alloc] init];
@@ -278,6 +284,8 @@ extern NSString *caspianErrorDomain;
     [_flagLoadingSignUpActivityIndicator release];
     [_countryFlagForgotPasswordImage release];
     [_flagLoadingForgotPasswordActivityIndicator release];
+    [welcomeView2 release];
+    [logInView release];
     [super dealloc];
 }
 
@@ -634,8 +642,12 @@ static UICompositeViewDescription *compositeDescription = nil;
     [[LinphoneManager instance] lpConfigSetBool:(view != signInView || back) forKey:@"animations_preference"];
     if (view == signInView) {
         if (!back) {
-            [self fillCredentials];
+            //[self fillCredentials];
         }
+    } else if (view == logInView) {
+        if (!back) {
+                [self fillCredentials];
+            }
     } else if (view == signUpView) {
         [self cleanUpSignUpView];
 
@@ -1292,6 +1304,10 @@ static UICompositeViewDescription *compositeDescription = nil;
 - (IBAction)onCountryListPullCancel:(UIButton *)sender {
     [self.serialCountryListPullQueue cancelAllOperations];
     [self onBackButtonClicked:sender];
+}
+
+- (IBAction)onLogInClick:(id)sender {
+    [self changeView:logInView back:FALSE animation:TRUE];
 }
 
 

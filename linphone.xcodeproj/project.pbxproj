@@ -294,6 +294,13 @@
 		7066FC0C13E830E400EFC6DC /* libvpx.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7066FC0B13E830E400EFC6DC /* libvpx.a */; };
 		70E542F313E147E3002BA2C0 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70E542F213E147E3002BA2C0 /* OpenGLES.framework */; };
 		70E542F513E147EB002BA2C0 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70E542F413E147EB002BA2C0 /* QuartzCore.framework */; };
+		C681BB201AE822760063B3A5 /* welcome.png in Resources */ = {isa = PBXBuildFile; fileRef = C681BB1F1AE822760063B3A5 /* welcome.png */; };
+		C681BB221AE823C60063B3A5 /* welcome_login_default.png in Resources */ = {isa = PBXBuildFile; fileRef = C681BB211AE823C60063B3A5 /* welcome_login_default.png */; };
+		C681BB241AE825090063B3A5 /* welcome_signup_default.png in Resources */ = {isa = PBXBuildFile; fileRef = C681BB231AE825090063B3A5 /* welcome_signup_default.png */; };
+		C681BB261AE825B90063B3A5 /* original.png in Resources */ = {isa = PBXBuildFile; fileRef = C681BB251AE825B90063B3A5 /* original.png */; };
+		C6863C8D1AF5608300652820 /* WizardViews_2.xib in Resources */ = {isa = PBXBuildFile; fileRef = C6863C8C1AF5608300652820 /* WizardViews_2.xib */; };
+		C6AD589F1AF26C4B00DD5375 /* welcome-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C6AD589D1AF26C4B00DD5375 /* welcome-568h@2x.png */; };
+		C6AD58A01AF26C4B00DD5375 /* welcome@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C6AD589E1AF26C4B00DD5375 /* welcome@2x.png */; };
 		C90FAA7915AF54E6002091CB /* HistoryDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C90FAA7715AF54E6002091CB /* HistoryDetailsViewController.m */; };
 		C9C8254315AE204D00D493FA /* options_add_disabled.png in Resources */ = {isa = PBXBuildFile; fileRef = C9C8253F15AE204D00D493FA /* options_add_disabled.png */; };
 		C9C8254515AE204D00D493FA /* options_transfer_disabled.png in Resources */ = {isa = PBXBuildFile; fileRef = C9C8254015AE204D00D493FA /* options_transfer_disabled.png */; };
@@ -1370,6 +1377,13 @@
 		70E542F213E147E3002BA2C0 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		70E542F413E147EB002BA2C0 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		8D1107310486CEB800E47090 /* linphone-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "linphone-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
+		C681BB1F1AE822760063B3A5 /* welcome.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = welcome.png; sourceTree = SOURCE_ROOT; };
+		C681BB211AE823C60063B3A5 /* welcome_login_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = welcome_login_default.png; path = Classes/welcome_login_default.png; sourceTree = SOURCE_ROOT; };
+		C681BB231AE825090063B3A5 /* welcome_signup_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = welcome_signup_default.png; sourceTree = SOURCE_ROOT; };
+		C681BB251AE825B90063B3A5 /* original.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = original.png; sourceTree = SOURCE_ROOT; };
+		C6863C8C1AF5608300652820 /* WizardViews_2.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WizardViews_2.xib; sourceTree = "<group>"; };
+		C6AD589D1AF26C4B00DD5375 /* welcome-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "welcome-568h@2x.png"; sourceTree = SOURCE_ROOT; };
+		C6AD589E1AF26C4B00DD5375 /* welcome@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "welcome@2x.png"; sourceTree = SOURCE_ROOT; };
 		C90FAA7615AF54E6002091CB /* HistoryDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryDetailsViewController.h; sourceTree = "<group>"; };
 		C90FAA7715AF54E6002091CB /* HistoryDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryDetailsViewController.m; sourceTree = "<group>"; };
 		C9B3A6FD15B485DB006F52EE /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Utils.h; path = Utils/Utils.h; sourceTree = "<group>"; };
@@ -2399,6 +2413,7 @@
 				D38187E015FE348A00C3EDCA /* WizardViewController.xib */,
 				D3D5126E160B3AD400946DF8 /* WizardViewController~ipad.xib */,
 				D3D5126A160B3A8E00946DF8 /* WizardViews.xib */,
+				C6863C8C1AF5608300652820 /* WizardViews_2.xib */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -2740,6 +2755,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				C681BB1E1AE8223A0063B3A5 /* image caspian new graphics */,
 				D3C714B2159DB84400705B8E /* hold.wav */,
 				F0B4FB5C1A65550B00637027 /* Images.xcassets */,
 				F0B89C2318DC90850050B60E /* images */,
@@ -2843,6 +2859,19 @@
 				F03A9B7E18C0D9C900C4D7FE /* libcunit.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C681BB1E1AE8223A0063B3A5 /* image caspian new graphics */ = {
+			isa = PBXGroup;
+			children = (
+				C681BB1F1AE822760063B3A5 /* welcome.png */,
+				C6AD589D1AF26C4B00DD5375 /* welcome-568h@2x.png */,
+				C6AD589E1AF26C4B00DD5375 /* welcome@2x.png */,
+				C681BB251AE825B90063B3A5 /* original.png */,
+				C681BB231AE825090063B3A5 /* welcome_signup_default.png */,
+				C681BB211AE823C60063B3A5 /* welcome_login_default.png */,
+			);
+			name = "image caspian new graphics";
 			sourceTree = "<group>";
 		};
 		D326483415887D4400930C67 /* Utils */ = {
@@ -3875,6 +3904,7 @@
 				D3F83F20158205A100336684 /* speaker_on_default.png in Resources */,
 				D3F83F22158205A100336684 /* speaker_on_over.png in Resources */,
 				F01A77EB18ED989B00E287CA /* shortring.caf in Resources */,
+				C681BB221AE823C60063B3A5 /* welcome_login_default.png in Resources */,
 				D3F83F24158205A100336684 /* video_off_default.png in Resources */,
 				D3F83F26158205A100336684 /* video_off_over.png in Resources */,
 				D3F83F28158205A100336684 /* video_on_default.png in Resources */,
@@ -3909,6 +3939,7 @@
 				D3F83F6A1582223B00336684 /* numpad_nine_over.png in Resources */,
 				D3F83F6C1582223B00336684 /* numpad_sharp_default.png in Resources */,
 				D3F83F6E1582223B00336684 /* numpad_sharp_over.png in Resources */,
+				C681BB201AE822760063B3A5 /* welcome.png in Resources */,
 				D3F83F721582223B00336684 /* numpad_star_default.png in Resources */,
 				26E7F37E1A81709F0033D3C0 /* 3-hover.png in Resources */,
 				26E7F3A71A81709F0033D3C0 /* delete.png in Resources */,
@@ -4072,6 +4103,7 @@
 				D350F21E15A43D3400149E54 /* setup_back_over.png in Resources */,
 				2634D3581A83D5FD006533C5 /* smilie_64_football.png in Resources */,
 				D350F22015A43D3400149E54 /* setup_cancel_default.png in Resources */,
+				C681BB261AE825B90063B3A5 /* original.png in Resources */,
 				D350F22215A43D3400149E54 /* setup_cancel_over.png in Resources */,
 				D350F22415A43D3400149E54 /* field_background.png in Resources */,
 				26E7F3CC1A81709F0033D3C0 /* Plus.png in Resources */,
@@ -4274,6 +4306,7 @@
 				F070E6371A2622EC00E17AFD /* incall_padding_right_landscape.png in Resources */,
 				D3A74F1E15C69392001500B9 /* options_selected~ipad.png in Resources */,
 				26E7F3AA1A81709F0033D3C0 /* dialer-hover.png in Resources */,
+				C6AD58A01AF26C4B00DD5375 /* welcome@2x.png in Resources */,
 				D3A74F2015C69392001500B9 /* options_transfer_default~ipad.png in Resources */,
 				D3A74F2215C69392001500B9 /* options_transfer_disabled~ipad.png in Resources */,
 				26E7F3891A81709F0033D3C0 /* 7.png in Resources */,
@@ -4295,6 +4328,7 @@
 				D3A74F3415C69392001500B9 /* settings_over~ipad.png in Resources */,
 				D3A74F3615C69392001500B9 /* settings_selected_landscape~ipad.png in Resources */,
 				D3A74F3815C69392001500B9 /* settings_selected~ipad.png in Resources */,
+				C681BB241AE825090063B3A5 /* welcome_signup_default.png in Resources */,
 				D3A74F3A15C69392001500B9 /* speaker_off_default~ipad.png in Resources */,
 				D3A74F3C15C69392001500B9 /* speaker_off_disabled~ipad.png in Resources */,
 				26E7F3C91A81709F0033D3C0 /* phone.png in Resources */,
@@ -4436,6 +4470,7 @@
 				D3D5124E160B213900946DF8 /* setup_cancel_default~ipad.png in Resources */,
 				D3D51250160B213900946DF8 /* setup_cancel_over~ipad.png in Resources */,
 				D3D51255160B35CB00946DF8 /* chat_message_background.9.png in Resources */,
+				C6863C8D1AF5608300652820 /* WizardViews_2.xib in Resources */,
 				D3D51257160B35CB00946DF8 /* chat_message_background.9@2x.png in Resources */,
 				D3D5126C160B3A8E00946DF8 /* WizardViews.xib in Resources */,
 				26E7F3B31A81709F0033D3C0 /* linphone_splashscreen@2x.png in Resources */,
@@ -4470,6 +4505,7 @@
 				D3D52A851614495300DEB00A /* decline_default_landscape~ipad.png in Resources */,
 				D3D52A871614495300DEB00A /* decline_default~ipad.png in Resources */,
 				D3D52A891614495300DEB00A /* decline_over_landscape~ipad.png in Resources */,
+				C6AD589F1AF26C4B00DD5375 /* welcome-568h@2x.png in Resources */,
 				2634D3521A83D5FD006533C5 /* smilie_64_balloons.png in Resources */,
 				D3D52A8B1614495300DEB00A /* decline_over~ipad.png in Resources */,
 				D37E3ED01619DCC50087659A /* licenses.html in Resources */,
