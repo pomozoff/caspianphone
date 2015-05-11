@@ -30,6 +30,7 @@
 #include "linphone/linphonecore.h"
 
 #import <Crashlytics/Crashlytics.h>
+#import <Parse/Parse.h>
 
 @implementation LinphoneAppDelegate
 
@@ -176,6 +177,9 @@
     [Crashlytics startWithAPIKey:@"33dd028ded3a518de0afb500f5a3839a2af9f021"];
 #endif
     
+    [Parse setApplicationId:@"luA3Brt78jW29ZezmpUynfCeUlBFGk7IobmVQa7H"
+                  clientKey:@"pf0k6fBSrZdMmTprnG5gB6kyjNHyKXfVqex7Ntwa"];
+    
     UIApplication* app= [UIApplication sharedApplication];
     UIApplicationState state = app.applicationState;
 
@@ -321,6 +325,7 @@
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
     Linphone_log(@"%@ : %@", NSStringFromSelector(_cmd), userInfo);
 
+    [PFPush handlePush:userInfo];
 	[self processRemoteNotification:userInfo];
 }
 
@@ -405,6 +410,11 @@
 - (void)application:(UIApplication*)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData*)deviceToken {
     Linphone_log(@"%@ : %@", NSStringFromSelector(_cmd), deviceToken);
     [[LinphoneManager instance] setPushNotificationToken:deviceToken];
+
+    // Store the deviceToken in the current installation and save it to Parse.
+    PFInstallation *currentInstallation = [PFInstallation currentInstallation];
+    [currentInstallation setDeviceTokenFromData:deviceToken];
+    [currentInstallation saveInBackground];
 }
 
 - (void)application:(UIApplication*)application didFailToRegisterForRemoteNotificationsWithError:(NSError*)error {
