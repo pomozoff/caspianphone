@@ -30,7 +30,13 @@
 #include "linphone/linphonecore.h"
 
 #import <Crashlytics/Crashlytics.h>
-#import <Parse/Parse.h>
+
+@interface LinphoneAppDelegate ()
+
+@property (nonatomic) BOOL fromBackground;
+@property (nonatomic) BOOL applicationFirstRun;
+
+@end
 
 @implementation LinphoneAppDelegate
 
@@ -59,6 +65,8 @@
 - (void)applicationDidEnterBackground:(UIApplication *)application{
 	Linphone_log(@"%@", NSStringFromSelector(_cmd));
 	[[LinphoneManager instance] enterBackgroundMode];
+    self.fromBackground = YES;
+    self.applicationFirstRun = NO;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
@@ -115,6 +123,8 @@
             [self fixRing];
         }
     }
+    
+    self.fromBackground = NO;
 }
 
 - (UIUserNotificationCategory*)getMessageNotificationCategory {
@@ -177,8 +187,7 @@
     [Crashlytics startWithAPIKey:@"33dd028ded3a518de0afb500f5a3839a2af9f021"];
 #endif
     
-    [Parse setApplicationId:@"luA3Brt78jW29ZezmpUynfCeUlBFGk7IobmVQa7H"
-                  clientKey:@"pf0k6fBSrZdMmTprnG5gB6kyjNHyKXfVqex7Ntwa"];
+    self.applicationFirstRun = YES;
     
     UIApplication* app= [UIApplication sharedApplication];
     UIApplicationState state = app.applicationState;
@@ -286,11 +295,11 @@
 - (void)processRemoteNotification:(NSDictionary*)userInfo{
 
 	NSDictionary *aps = [userInfo objectForKey:@"aps"];
-	
+    
     if(aps != nil) {
-        NSDictionary *alert = [aps objectForKey:@"alert"];
-        if(alert != nil) {
-            NSString *loc_key = [alert objectForKey:@"loc-key"];
+        id alert = [aps objectForKey:@"alert"];
+        if(alert != nil && [alert isKindOfClass:[NSDictionary class]]) {
+            NSString *loc_key = [(NSDictionary *)alert objectForKey:@"loc-key"];
 			/*if we receive a remote notification, it is probably because our TCP background socket was no more working.
 			 As a result, break it and refresh registers in order to make sure to receive incoming INVITE or MESSAGE*/
 			LinphoneCore *lc = [LinphoneManager getLc];
@@ -319,13 +328,60 @@
 				}
 			}
         }
+        else if (alert != nil && [alert isKindOfClass:[NSString class]]) {
+            
+            NSString *notifType = [aps objectForKey:@"notif_type"];
+            if ([notifType isEqualToString:@"chat"]) {
+                if (self.applicationFirstRun == YES) {
+                    self.applicationFirstRun = NO;
+                    UIView *transparentBG = [[UIView alloc] initWithFrame:[PhoneMainView instance].view.frame];
+                    transparentBG.backgroundColor = [UIColor whiteColor];
+                    transparentBG.alpha = 0.5;
+                    [[PhoneMainView instance].view addSubview:transparentBG];
+                    
+                    UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+                    [spinner setColor:[UIColor grayColor]];
+                    spinner.center = [PhoneMainView instance].view.center;
+                    [[PhoneMainView instance].view addSubview:spinner];
+                    [spinner startAnimating];
+                    
+                    // Added delay when application is opened from push notif
+                    // to allow data to load first before opening conversation
+                    dispatch_time_t delayTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5.0 * NSEC_PER_SEC));
+                    dispatch_after(delayTime, dispatch_get_main_queue(), ^(void){
+                        [self pushChatViewController:aps];
+                        [spinner stopAnimating];
+                        [spinner removeFromSuperview];
+                        [transparentBG removeFromSuperview];
+                    });
+                }
+                else {
+                    if (self.fromBackground) {
+                        [self pushChatViewController:aps];
+                    }
+                }
+            }
+            else if ([notifType isEqualToString:@"call"]) {
+                if (self.applicationFirstRun == NO) {
+                    [[PhoneMainView instance] popCurrentView];
+                }
+            }
+        }
+    }
+}
+
+- (void)pushChatViewController:(NSDictionary *)aps
+{
+    ChatViewController *controller = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[ChatViewController compositeViewDescription] push:TRUE], ChatViewController);
+    NSString *senderID = [aps objectForKey:@"sender_id"];
+    if (senderID.length != 0) {
+        controller.addressField.text = senderID;
+        [controller onAddClick:nil];
     }
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
     Linphone_log(@"%@ : %@", NSStringFromSelector(_cmd), userInfo);
-
-    [PFPush handlePush:userInfo];
 	[self processRemoteNotification:userInfo];
 }
 
@@ -402,6 +458,8 @@
 		lm.connectivity=none; /*force connectivity to be discovered again*/
 		[lm refreshRegisters];
 	}
+    
+    [self processRemoteNotification:userInfo];
 }
 
 
@@ -410,11 +468,11 @@
 - (void)application:(UIApplication*)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData*)deviceToken {
     Linphone_log(@"%@ : %@", NSStringFromSelector(_cmd), deviceToken);
     [[LinphoneManager instance] setPushNotificationToken:deviceToken];
-
-    // Store the deviceToken in the current installation and save it to Parse.
-    PFInstallation *currentInstallation = [PFInstallation currentInstallation];
-    [currentInstallation setDeviceTokenFromData:deviceToken];
-    [currentInstallation saveInBackground];
+    
+    NSString *newToken = [deviceToken description];
+    newToken = [newToken stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]];
+    newToken = [newToken stringByReplacingOccurrencesOfString:@" " withString:@""];
+    NSLog(@"Device Token: %@", newToken);
 }
 
 - (void)application:(UIApplication*)application didFailToRegisterForRemoteNotificationsWithError:(NSError*)error {
@@ -536,6 +594,5 @@
     [[LinphoneManager instance] startLibLinphone];
 
 }
-
 
 @end
