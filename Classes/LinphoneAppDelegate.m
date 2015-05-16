@@ -108,7 +108,7 @@
             }
             instance->currentCallContextBeforeGoingBackground.call = 0;
         } else if ( linphone_call_get_state(call) == LinphoneCallIncomingReceived ) {
-            [[PhoneMainView  instance ] displayIncomingCall:call];
+            [[PhoneMainView  instance] displayIncomingCall:call];
             // in this case, the ringing sound comes from the notification.
             // To stop it we have to do the iOS7 ring fix...
             [self fixRing];
@@ -280,10 +280,8 @@
 }
 
 - (void)processRemoteNotification:(NSDictionary*)userInfo{
-
 	NSDictionary *aps = [userInfo objectForKey:@"aps"];
-    
-    if(aps != nil) {
+    if (aps != nil) {
         id alert = [aps objectForKey:@"alert"];
         if(alert != nil && [alert isKindOfClass:[NSDictionary class]]) {
             NSString *loc_key = [(NSDictionary *)alert objectForKey:@"loc-key"];
@@ -322,8 +320,7 @@
     }
 }
 
-- (void)pushChatViewController:(NSDictionary *)aps
-{
+- (void)pushChatViewController:(NSDictionary *)aps {
     ChatViewController *controller = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[ChatViewController compositeViewDescription] push:TRUE], ChatViewController);
     NSString *senderID = [aps objectForKey:@"sender_id"];
     if (senderID.length != 0) {
@@ -405,9 +402,9 @@
 	LinphoneCore *lc=[LinphoneManager getLc];
 	// If no call is yet received at this time, then force Linphone to drop the current socket and make new one to register, so that we get
 	// a better chance to receive the INVITE.
-	if (linphone_core_get_calls(lc)==NULL){
+	if (linphone_core_get_calls(lc) == NULL) {
 		linphone_core_set_network_reachable(lc, FALSE);
-		lm.connectivity=none; /*force connectivity to be discovered again*/
+		lm.connectivity = none; /*force connectivity to be discovered again*/
 		[lm refreshRegisters];
 	}
     
