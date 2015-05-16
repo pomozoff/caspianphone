@@ -266,8 +266,7 @@ static void chatTable_free_chatrooms(void *data){
     const char *username = linphone_address_get_username(linphoneAddress);
     NSString *dirtyAddress = [NSString stringWithUTF8String:username];
     NSString *address = [[LinphoneManager instance] removeUnneededPrefixes:dirtyAddress];
-    
-    return address;
+    return [[address retain] autorelease];
 }
 
 - (NSString *)displayNameForRow:(NSInteger)row {
