@@ -259,6 +259,9 @@ static void chatTable_free_chatrooms(void *data){
 
 - (NSString *)phoneNumberForCellAtRow:(NSInteger)row {
     LinphoneChatRoom *chatRoom = (LinphoneChatRoom*)ms_list_nth_data(data, (int)row);
+    if (!chatRoom) {
+        return nil;
+    }
     const LinphoneAddress *linphoneAddress = linphone_chat_room_get_peer_address(chatRoom);
     const char *username = linphone_address_get_username(linphoneAddress);
     NSString *dirtyAddress = [NSString stringWithUTF8String:username];
