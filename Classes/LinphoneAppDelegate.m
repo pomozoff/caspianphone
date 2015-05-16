@@ -310,8 +310,26 @@
 			}
         } else
         */
+        if (alert != nil && [alert isKindOfClass:[NSString class]]) {
+            LinphoneCore *lc = [LinphoneManager getLc];
+            if (linphone_core_get_calls(lc) == NULL) { // if there are calls, obviously our TCP socket shall be working
+                linphone_core_set_network_reachable(lc, FALSE);
+                [LinphoneManager instance].connectivity = none; // force connectivity to be discovered again
+                [[LinphoneManager instance] refreshRegisters];
+
+                NSString *notifType = [aps objectForKey:@"notif_type"];
+                if ([notifType isEqualToString:@"chat"]) {
+                    UIApplicationState state = [[UIApplication sharedApplication] applicationState];
+                    if (state == UIApplicationStateBackground || state == UIApplicationStateInactive) {
+                        PhoneMainView *phoneMainView = [PhoneMainView instance];
+                        phoneMainView.completionBlock = ^{
+                            [self pushChatViewController:aps];
+                        };
+                    } else {
                         [self pushChatViewController:aps];
                     }
+                } else if ([notifType isEqualToString:@"call"]) {
+                    [[PhoneMainView instance] changeCurrentView:[DialerViewController compositeViewDescription]];
                 }
             }
         }
