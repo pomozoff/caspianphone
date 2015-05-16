@@ -31,13 +31,6 @@
 
 #import <Crashlytics/Crashlytics.h>
 
-@interface LinphoneAppDelegate ()
-
-@property (nonatomic) BOOL fromBackground;
-@property (nonatomic) BOOL applicationFirstRun;
-
-@end
-
 @implementation LinphoneAppDelegate
 
 @synthesize configURL;
@@ -65,8 +58,6 @@
 - (void)applicationDidEnterBackground:(UIApplication *)application{
 	Linphone_log(@"%@", NSStringFromSelector(_cmd));
 	[[LinphoneManager instance] enterBackgroundMode];
-    self.fromBackground = YES;
-    self.applicationFirstRun = NO;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
@@ -123,8 +114,6 @@
             [self fixRing];
         }
     }
-    
-    self.fromBackground = NO;
 }
 
 - (UIUserNotificationCategory*)getMessageNotificationCategory {
@@ -186,8 +175,6 @@
 #ifndef DEBUG
     [Crashlytics startWithAPIKey:@"33dd028ded3a518de0afb500f5a3839a2af9f021"];
 #endif
-    
-    self.applicationFirstRun = YES;
     
     UIApplication* app= [UIApplication sharedApplication];
     UIApplicationState state = app.applicationState;
@@ -327,43 +314,8 @@
 					}
 				}
 			}
-        }
-        else if (alert != nil && [alert isKindOfClass:[NSString class]]) {
-            
-            NSString *notifType = [aps objectForKey:@"notif_type"];
-            if ([notifType isEqualToString:@"chat"]) {
-                if (self.applicationFirstRun == YES) {
-                    self.applicationFirstRun = NO;
-                    UIView *transparentBG = [[UIView alloc] initWithFrame:[PhoneMainView instance].view.frame];
-                    transparentBG.backgroundColor = [UIColor whiteColor];
-                    transparentBG.alpha = 0.5;
-                    [[PhoneMainView instance].view addSubview:transparentBG];
-                    
-                    UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-                    [spinner setColor:[UIColor grayColor]];
-                    spinner.center = [PhoneMainView instance].view.center;
-                    [[PhoneMainView instance].view addSubview:spinner];
-                    [spinner startAnimating];
-                    
-                    // Added delay when application is opened from push notif
-                    // to allow data to load first before opening conversation
-                    dispatch_time_t delayTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5.0 * NSEC_PER_SEC));
-                    dispatch_after(delayTime, dispatch_get_main_queue(), ^(void){
-                        [self pushChatViewController:aps];
-                        [spinner stopAnimating];
-                        [spinner removeFromSuperview];
-                        [transparentBG removeFromSuperview];
-                    });
-                }
-                else {
-                    if (self.fromBackground) {
                         [self pushChatViewController:aps];
                     }
-                }
-            }
-            else if ([notifType isEqualToString:@"call"]) {
-                if (self.applicationFirstRun == NO) {
-                    [[PhoneMainView instance] popCurrentView];
                 }
             }
         }
