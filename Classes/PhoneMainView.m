@@ -300,6 +300,13 @@ static RootViewManager* rootViewManagerInstance = nil;
 		[error show];
 		[error release];
 	}
+    if (state == LinphoneGlobalOn) {
+        if (self.completionBlock != nil) {
+            self.completionBlock();
+            [self.completionBlock release];
+            self.completionBlock = nil;
+        }
+    }
 }
 
 - (void)onGlobalStateChanged:(NSNotification*)notif {
