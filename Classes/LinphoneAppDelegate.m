@@ -338,7 +338,7 @@
 
 - (void)pushChatViewController:(NSDictionary *)aps {
     ChatViewController *controller = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[ChatViewController compositeViewDescription] push:TRUE], ChatViewController);
-    NSString *senderID = [aps objectForKey:@"sender_id"];
+    NSString *senderID = [aps objectForKey:@"senderID"];
     if (senderID.length != 0) {
         controller.addressField.text = senderID;
         [controller onAddClick:nil];
