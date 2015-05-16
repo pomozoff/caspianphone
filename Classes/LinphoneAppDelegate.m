@@ -30,7 +30,6 @@
 #include "linphone/linphonecore.h"
 
 #import <Crashlytics/Crashlytics.h>
-#import <Parse/Parse.h>
 
 @implementation LinphoneAppDelegate
 
@@ -109,7 +108,7 @@
             }
             instance->currentCallContextBeforeGoingBackground.call = 0;
         } else if ( linphone_call_get_state(call) == LinphoneCallIncomingReceived ) {
-            [[PhoneMainView  instance ] displayIncomingCall:call];
+            [[PhoneMainView  instance] displayIncomingCall:call];
             // in this case, the ringing sound comes from the notification.
             // To stop it we have to do the iOS7 ring fix...
             [self fixRing];
@@ -176,9 +175,6 @@
 #ifndef DEBUG
     [Crashlytics startWithAPIKey:@"33dd028ded3a518de0afb500f5a3839a2af9f021"];
 #endif
-    
-    [Parse setApplicationId:@"luA3Brt78jW29ZezmpUynfCeUlBFGk7IobmVQa7H"
-                  clientKey:@"pf0k6fBSrZdMmTprnG5gB6kyjNHyKXfVqex7Ntwa"];
     
     UIApplication* app= [UIApplication sharedApplication];
     UIApplicationState state = app.applicationState;
@@ -284,48 +280,73 @@
 }
 
 - (void)processRemoteNotification:(NSDictionary*)userInfo{
-
 	NSDictionary *aps = [userInfo objectForKey:@"aps"];
-	
-    if(aps != nil) {
-        NSDictionary *alert = [aps objectForKey:@"alert"];
-        if(alert != nil) {
-            NSString *loc_key = [alert objectForKey:@"loc-key"];
-			/*if we receive a remote notification, it is probably because our TCP background socket was no more working.
-			 As a result, break it and refresh registers in order to make sure to receive incoming INVITE or MESSAGE*/
+    if (aps != nil) {
+        id alert = [aps objectForKey:@"alert"];
+        /*
+        if(alert != nil && [alert isKindOfClass:[NSDictionary class]]) {
+            NSString *loc_key = [(NSDictionary *)alert objectForKey:@"loc-key"];
+			// if we receive a remote notification, it is probably because our TCP background socket was no more working.
+			// As a result, break it and refresh registers in order to make sure to receive incoming INVITE or MESSAGE
 			LinphoneCore *lc = [LinphoneManager getLc];
-			if (linphone_core_get_calls(lc)==NULL){ //if there are calls, obviously our TCP socket shall be working
+			if (linphone_core_get_calls(lc) == NULL) { // if there are calls, obviously our TCP socket shall be working
 				linphone_core_set_network_reachable(lc, FALSE);
-				[LinphoneManager instance].connectivity=none; /*force connectivity to be discovered again*/
+				[LinphoneManager instance].connectivity = none; // force connectivity to be discovered again
                 [[LinphoneManager instance] refreshRegisters];
-				if(loc_key != nil) {
-
+				if (loc_key != nil) {
 					NSString* callId = [userInfo objectForKey:@"call-id"];
-					if( callId != nil ){
+					if ( callId != nil ) {
 						[[LinphoneManager instance] addPushCallId:callId];
 					} else {
 						[LinphoneLogger log:LinphoneLoggerError format:@"PushNotification: does not have call-id yet, fix it !"];
 					}
 
-					if( [loc_key isEqualToString:@"IM_MSG"] ) {
-
+					if ( [loc_key isEqualToString:@"IM_MSG"] ) {
 						[[PhoneMainView instance] changeCurrentView:[ChatViewController compositeViewDescription]];
-
-					} else if( [loc_key isEqualToString:@"IC_MSG"] ) {
-
+					} else if ( [loc_key isEqualToString:@"IC_MSG"] ) {
 						[self fixRing];
-
 					}
 				}
 			}
+        } else
+        */
+        if (alert != nil && [alert isKindOfClass:[NSString class]]) {
+            LinphoneCore *lc = [LinphoneManager getLc];
+            if (linphone_core_get_calls(lc) == NULL) { // if there are calls, obviously our TCP socket shall be working
+                linphone_core_set_network_reachable(lc, FALSE);
+                [LinphoneManager instance].connectivity = none; // force connectivity to be discovered again
+                [[LinphoneManager instance] refreshRegisters];
+
+                NSString *notifType = [aps objectForKey:@"notif_type"];
+                if ([notifType isEqualToString:@"chat"]) {
+                    UIApplicationState state = [[UIApplication sharedApplication] applicationState];
+                    if (state == UIApplicationStateBackground || state == UIApplicationStateInactive) {
+                        PhoneMainView *phoneMainView = [PhoneMainView instance];
+                        phoneMainView.completionBlock = ^{
+                            [self pushChatViewController:aps];
+                        };
+                    } else {
+                        [self pushChatViewController:aps];
+                    }
+                } else if ([notifType isEqualToString:@"call"]) {
+                    [[PhoneMainView instance] changeCurrentView:[DialerViewController compositeViewDescription]];
+                }
+            }
         }
+    }
+}
+
+- (void)pushChatViewController:(NSDictionary *)aps {
+    ChatViewController *controller = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[ChatViewController compositeViewDescription] push:TRUE], ChatViewController);
+    NSString *senderID = [aps objectForKey:@"senderID"];
+    if (senderID.length != 0) {
+        controller.addressField.text = senderID;
+        [controller onAddClick:nil];
     }
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
     Linphone_log(@"%@ : %@", NSStringFromSelector(_cmd), userInfo);
-
-    [PFPush handlePush:userInfo];
 	[self processRemoteNotification:userInfo];
 }
 
@@ -397,11 +418,13 @@
 	LinphoneCore *lc=[LinphoneManager getLc];
 	// If no call is yet received at this time, then force Linphone to drop the current socket and make new one to register, so that we get
 	// a better chance to receive the INVITE.
-	if (linphone_core_get_calls(lc)==NULL){
+	if (linphone_core_get_calls(lc) == NULL) {
 		linphone_core_set_network_reachable(lc, FALSE);
-		lm.connectivity=none; /*force connectivity to be discovered again*/
+		lm.connectivity = none; /*force connectivity to be discovered again*/
 		[lm refreshRegisters];
 	}
+    
+    [self processRemoteNotification:userInfo];
 }
 
 
@@ -410,11 +433,11 @@
 - (void)application:(UIApplication*)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData*)deviceToken {
     Linphone_log(@"%@ : %@", NSStringFromSelector(_cmd), deviceToken);
     [[LinphoneManager instance] setPushNotificationToken:deviceToken];
-
-    // Store the deviceToken in the current installation and save it to Parse.
-    PFInstallation *currentInstallation = [PFInstallation currentInstallation];
-    [currentInstallation setDeviceTokenFromData:deviceToken];
-    [currentInstallation saveInBackground];
+    
+    NSString *newToken = [deviceToken description];
+    newToken = [newToken stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]];
+    newToken = [newToken stringByReplacingOccurrencesOfString:@" " withString:@""];
+    NSLog(@"Device Token: %@", newToken);
 }
 
 - (void)application:(UIApplication*)application didFailToRegisterForRemoteNotificationsWithError:(NSError*)error {
@@ -536,6 +559,5 @@
     [[LinphoneManager instance] startLibLinphone];
 
 }
-
 
 @end

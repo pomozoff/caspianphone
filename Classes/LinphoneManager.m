@@ -2547,7 +2547,7 @@ static void audioRouteChangeListenerCallback (
             }
         }
     } while (![cleanPhoneNumber isEqual:previousPhoneNumber]);
-    return cleanPhoneNumber;
+    return [[cleanPhoneNumber retain] autorelease];
 }
 
 - (NSString *)caspianDomainIp {
