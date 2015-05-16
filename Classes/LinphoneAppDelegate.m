@@ -283,35 +283,33 @@
 	NSDictionary *aps = [userInfo objectForKey:@"aps"];
     if (aps != nil) {
         id alert = [aps objectForKey:@"alert"];
+        /*
         if(alert != nil && [alert isKindOfClass:[NSDictionary class]]) {
             NSString *loc_key = [(NSDictionary *)alert objectForKey:@"loc-key"];
-			/*if we receive a remote notification, it is probably because our TCP background socket was no more working.
-			 As a result, break it and refresh registers in order to make sure to receive incoming INVITE or MESSAGE*/
+			// if we receive a remote notification, it is probably because our TCP background socket was no more working.
+			// As a result, break it and refresh registers in order to make sure to receive incoming INVITE or MESSAGE
 			LinphoneCore *lc = [LinphoneManager getLc];
-			if (linphone_core_get_calls(lc)==NULL){ //if there are calls, obviously our TCP socket shall be working
+			if (linphone_core_get_calls(lc) == NULL) { // if there are calls, obviously our TCP socket shall be working
 				linphone_core_set_network_reachable(lc, FALSE);
-				[LinphoneManager instance].connectivity=none; /*force connectivity to be discovered again*/
+				[LinphoneManager instance].connectivity = none; // force connectivity to be discovered again
                 [[LinphoneManager instance] refreshRegisters];
-				if(loc_key != nil) {
-
+				if (loc_key != nil) {
 					NSString* callId = [userInfo objectForKey:@"call-id"];
-					if( callId != nil ){
+					if ( callId != nil ) {
 						[[LinphoneManager instance] addPushCallId:callId];
 					} else {
 						[LinphoneLogger log:LinphoneLoggerError format:@"PushNotification: does not have call-id yet, fix it !"];
 					}
 
-					if( [loc_key isEqualToString:@"IM_MSG"] ) {
-
+					if ( [loc_key isEqualToString:@"IM_MSG"] ) {
 						[[PhoneMainView instance] changeCurrentView:[ChatViewController compositeViewDescription]];
-
-					} else if( [loc_key isEqualToString:@"IC_MSG"] ) {
-
+					} else if ( [loc_key isEqualToString:@"IC_MSG"] ) {
 						[self fixRing];
-
 					}
 				}
 			}
+        } else
+        */
                         [self pushChatViewController:aps];
                     }
                 }
