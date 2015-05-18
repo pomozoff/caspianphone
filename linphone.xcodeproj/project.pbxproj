@@ -295,6 +295,12 @@
 		639CEB091A1DF4FA004DE38F /* UIChatCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 639CEB0B1A1DF4FA004DE38F /* UIChatCell.xib */; };
 		63CD4B4F1A5AAC8C00B84282 /* DTAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 63CD4B4E1A5AAC8C00B84282 /* DTAlertView.m */; };
 		63FB30351A680E73008CA393 /* UIRoundedImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 63FB30341A680E73008CA393 /* UIRoundedImageView.m */; };
+		6E503A591B09D5C40081DB97 /* APIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E503A581B09D5C40081DB97 /* APIManager.m */; };
+		6E503A601B09D5D10081DB97 /* SMSActivationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E503A5B1B09D5D10081DB97 /* SMSActivationViewController.m */; };
+		6E503A611B09D5D10081DB97 /* SMSActivationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E503A5C1B09D5D10081DB97 /* SMSActivationViewController.xib */; };
+		6E503A621B09D5D10081DB97 /* SMSViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E503A5E1B09D5D10081DB97 /* SMSViewController.m */; };
+		6E503A631B09D5D10081DB97 /* SMSViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E503A5F1B09D5D10081DB97 /* SMSViewController.xib */; };
+		6E503A661B09D5E20081DB97 /* ProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E503A651B09D5E20081DB97 /* ProgressHUD.m */; };
 		70571E1A13FABCB000CDD3C2 /* rootca.pem in Resources */ = {isa = PBXBuildFile; fileRef = 70571E1913FABCB000CDD3C2 /* rootca.pem */; };
 		7066FC0C13E830E400EFC6DC /* libvpx.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7066FC0B13E830E400EFC6DC /* libvpx.a */; };
 		70E542F313E147E3002BA2C0 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70E542F213E147E3002BA2C0 /* OpenGLES.framework */; };
@@ -1375,6 +1381,16 @@
 		63EF7FDC1A24B5810017A416 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/AboutViewController.strings; sourceTree = "<group>"; };
 		63FB30331A680E73008CA393 /* UIRoundedImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIRoundedImageView.h; sourceTree = "<group>"; };
 		63FB30341A680E73008CA393 /* UIRoundedImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIRoundedImageView.m; sourceTree = "<group>"; };
+		6E503A571B09D5C40081DB97 /* APIManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APIManager.h; sourceTree = "<group>"; };
+		6E503A581B09D5C40081DB97 /* APIManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APIManager.m; sourceTree = "<group>"; };
+		6E503A5A1B09D5D10081DB97 /* SMSActivationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMSActivationViewController.h; sourceTree = "<group>"; };
+		6E503A5B1B09D5D10081DB97 /* SMSActivationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMSActivationViewController.m; sourceTree = "<group>"; };
+		6E503A5C1B09D5D10081DB97 /* SMSActivationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SMSActivationViewController.xib; sourceTree = "<group>"; };
+		6E503A5D1B09D5D10081DB97 /* SMSViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMSViewController.h; sourceTree = "<group>"; };
+		6E503A5E1B09D5D10081DB97 /* SMSViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMSViewController.m; sourceTree = "<group>"; };
+		6E503A5F1B09D5D10081DB97 /* SMSViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SMSViewController.xib; sourceTree = "<group>"; };
+		6E503A641B09D5E20081DB97 /* ProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgressHUD.h; sourceTree = "<group>"; };
+		6E503A651B09D5E20081DB97 /* ProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgressHUD.m; sourceTree = "<group>"; };
 		70571E1913FABCB000CDD3C2 /* rootca.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = rootca.pem; path = "liblinphone-sdk/apple-darwin/share/linphone/rootca.pem"; sourceTree = "<group>"; };
 		7066FC0B13E830E400EFC6DC /* libvpx.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libvpx.a; path = "liblinphone-sdk/apple-darwin/lib/libvpx.a"; sourceTree = "<group>"; };
 		70E542F213E147E3002BA2C0 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -2324,6 +2340,8 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				6E503A561B09D5A60081DB97 /* Managers */,
+				6E503A551B09D59F0081DB97 /* SMS */,
 				22E0A81D111C44E100B04932 /* AboutViewController.h */,
 				22E0A81C111C44E100B04932 /* AboutViewController.m */,
 				636316D31A1DEBCB0009B839 /* AboutViewController.xib */,
@@ -2866,9 +2884,33 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		6E503A551B09D59F0081DB97 /* SMS */ = {
+			isa = PBXGroup;
+			children = (
+				6E503A5A1B09D5D10081DB97 /* SMSActivationViewController.h */,
+				6E503A5B1B09D5D10081DB97 /* SMSActivationViewController.m */,
+				6E503A5C1B09D5D10081DB97 /* SMSActivationViewController.xib */,
+				6E503A5D1B09D5D10081DB97 /* SMSViewController.h */,
+				6E503A5E1B09D5D10081DB97 /* SMSViewController.m */,
+				6E503A5F1B09D5D10081DB97 /* SMSViewController.xib */,
+			);
+			name = SMS;
+			sourceTree = "<group>";
+		};
+		6E503A561B09D5A60081DB97 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				6E503A571B09D5C40081DB97 /* APIManager.h */,
+				6E503A581B09D5C40081DB97 /* APIManager.m */,
+			);
+			name = Managers;
+			sourceTree = "<group>";
+		};
 		D326483415887D4400930C67 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				6E503A641B09D5E20081DB97 /* ProgressHUD.h */,
+				6E503A651B09D5E20081DB97 /* ProgressHUD.m */,
 				D37E3ECA1619C27A0087659A /* CAAnimationBlocks */,
 				D380801215C299D0005BE9BC /* ColorSpaceUtilites.m */,
 				D380801115C29984005BE9BC /* ColorSpaceUtilities.h */,
@@ -4053,6 +4095,7 @@
 				D3D6A3A2159B0EEF005F692C /* add_call_over.png in Resources */,
 				26E7F39A1A81709F0033D3C0 /* call_quality_indicator_1.png in Resources */,
 				D3D6A3AD159B0EFE005F692C /* security_pending.png in Resources */,
+				6E503A631B09D5D10081DB97 /* SMSViewController.xib in Resources */,
 				D3D6A3AF159B0EFE005F692C /* security_ok.png in Resources */,
 				D3D6A3B1159B0EFE005F692C /* options_default.png in Resources */,
 				D3D6A3B3159B0EFE005F692C /* options_disabled.png in Resources */,
@@ -4354,6 +4397,7 @@
 				D33988B615C6DD1600CAF1E4 /* conference_over_landscape~ipad.png in Resources */,
 				D33988B815C6DD1600CAF1E4 /* dialer_alt_default_landscape~ipad.png in Resources */,
 				D33988BA15C6DD1600CAF1E4 /* dialer_alt_over_landscape~ipad.png in Resources */,
+				6E503A611B09D5D10081DB97 /* SMSActivationViewController.xib in Resources */,
 				D33988BC15C6DD1600CAF1E4 /* hangup_default_landscape~ipad.png in Resources */,
 				D33988BE15C6DD1600CAF1E4 /* hangup_over_landscape~ipad.png in Resources */,
 				D33988C015C6DD1600CAF1E4 /* micro_off_default_landscape~ipad.png in Resources */,
@@ -4690,6 +4734,7 @@
 				26E7F2F71A816E200033D3C0 /* SWUtilityButtonTapGestureRecognizer.m in Sources */,
 				D32648441588F6FC00930C67 /* UIToggleButton.m in Sources */,
 				261F4BE21A8A7A8F0060F003 /* COCSmiliesManager.m in Sources */,
+				6E503A621B09D5D10081DB97 /* SMSViewController.m in Sources */,
 				263CE0861A94F6CD002983F9 /* UISmiliesBoardViewController.m in Sources */,
 				D36FB2D51589EF7C0036F6F2 /* UIPauseButton.m in Sources */,
 				D31C9C98158A1CDF00756B45 /* UIHistoryCell.m in Sources */,
@@ -4722,6 +4767,7 @@
 				636316DE1A1DEF2F0009B839 /* UIButtonShrinkable.m in Sources */,
 				D3C6526715AC1A8F0092A874 /* UIEditableTableViewCell.m in Sources */,
 				263CE08F1A94FBAD002983F9 /* UISmileCollectionViewCell.m in Sources */,
+				6E503A591B09D5C40081DB97 /* APIManager.m in Sources */,
 				D378906515AC373B00BD776C /* ContactDetailsLabelViewController.m in Sources */,
 				D3E8F68615ADE05B0065A226 /* UIContactDetailsFooter.m in Sources */,
 				26E7F3F21A8171170033D3C0 /* COCTextField.m in Sources */,
@@ -4750,9 +4796,11 @@
 				631C4FB719D2C3A6004BFE77 /* UIDigitButtonLongVoiceMail.m in Sources */,
 				D3807FFC15C2894A005BE9BC /* IASKPSTitleValueSpecifierViewCell.m in Sources */,
 				D3807FFE15C2894A005BE9BC /* IASKSlider.m in Sources */,
+				6E503A661B09D5E20081DB97 /* ProgressHUD.m in Sources */,
 				D380800015C2894A005BE9BC /* IASKSwitch.m in Sources */,
 				D380800215C2894A005BE9BC /* IASKTextField.m in Sources */,
 				D380800515C28A7A005BE9BC /* UILinphone.m in Sources */,
+				6E503A601B09D5D10081DB97 /* SMSActivationViewController.m in Sources */,
 				D380801315C299D0005BE9BC /* ColorSpaceUtilites.m in Sources */,
 				D378AB2A15DCDB4A0098505D /* ImagePickerViewController.m in Sources */,
 				22405F001601C19200B92522 /* ImageViewController.m in Sources */,
@@ -5286,7 +5334,7 @@
 				ORDER_FILE = "";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = linphone;
-				PROVISIONING_PROFILE = "a63dc8db-824b-4d9d-8af6-82b3ca61c77e";
+				PROVISIONING_PROFILE = "d7b335f0-1bda-43b4-84fc-11df2804ec6c";
 				SKIP_INSTALL = NO;
 				TARGETED_DEVICE_FAMILY = 1;
 				WARNING_CFLAGS = (
@@ -5335,7 +5383,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = "";
-				CODE_SIGN_IDENTITY = "iPhone Distribution: CASPIAN MARKETS LTD (G4P9S2V6QP)";
+				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COMPRESS_PNG_FILES = NO;
 				COPY_PHASE_STRIP = NO;
@@ -5373,7 +5421,7 @@
 				ORDER_FILE = "";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = linphone;
-				PROVISIONING_PROFILE = "ee645e0b-5ab1-439b-997a-b12e09c73a14";
+				PROVISIONING_PROFILE = "d7b335f0-1bda-43b4-84fc-11df2804ec6c";
 				SKIP_INSTALL = NO;
 				TARGETED_DEVICE_FAMILY = 1;
 				WARNING_CFLAGS = (
@@ -5421,7 +5469,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: CASPIAN MARKETS LTD (G4P9S2V6QP)";
+				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COMPRESS_PNG_FILES = NO;
 				COPY_PHASE_STRIP = NO;
@@ -5459,7 +5507,7 @@
 				ORDER_FILE = "";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = linphone;
-				PROVISIONING_PROFILE = "ee645e0b-5ab1-439b-997a-b12e09c73a14";
+				PROVISIONING_PROFILE = "d7b335f0-1bda-43b4-84fc-11df2804ec6c";
 				SKIP_INSTALL = NO;
 				TARGETED_DEVICE_FAMILY = 1;
 				WARNING_CFLAGS = (
@@ -5508,7 +5556,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = "";
-				CODE_SIGN_IDENTITY = "iPhone Distribution: CASPIAN MARKETS LTD (G4P9S2V6QP)";
+				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COMPRESS_PNG_FILES = NO;
 				COPY_PHASE_STRIP = NO;
@@ -5546,7 +5594,7 @@
 				ORDER_FILE = "";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = linphone;
-				PROVISIONING_PROFILE = "ee645e0b-5ab1-439b-997a-b12e09c73a14";
+				PROVISIONING_PROFILE = "d7b335f0-1bda-43b4-84fc-11df2804ec6c";
 				SKIP_INSTALL = NO;
 				TARGETED_DEVICE_FAMILY = 1;
 				WARNING_CFLAGS = (

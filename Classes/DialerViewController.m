@@ -26,8 +26,12 @@
 #import "LinphoneManager.h"
 #import "PhoneMainView.h"
 #import "Utils.h"
+#import "SMSActivationViewController.h"
+#import "SMSViewController.h"
 
 #include "linphone/linphonecore.h"
+
+static NSString *caspianSMSStatus = @"uk.co.onecallcaspian.phone.smsStatus";
 
 @interface DialerViewController()
 
@@ -500,6 +504,15 @@ static UICompositeViewDescription *compositeDescription = nil;
     if (addressField.text.length != 0) {
         controller.addressField.text = addressField.text;
         [controller onAddClick:nil];
+    }
+}
+
+- (IBAction)onSMSTap:(id)sender {
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:caspianSMSStatus]) {
+        DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[SMSViewController compositeViewDescription] push:TRUE], SMSViewController);
+    }
+    else {
+        DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[SMSActivationViewController compositeViewDescription] push:TRUE], SMSActivationViewController);
     }
 }
 
