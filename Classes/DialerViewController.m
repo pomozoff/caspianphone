@@ -27,7 +27,7 @@
 #import "PhoneMainView.h"
 #import "Utils.h"
 #import "SMSActivationViewController.h"
-#import "SMSViewController.h"
+#import "SMSTableViewController.h"
 
 #include "linphone/linphonecore.h"
 
@@ -509,7 +509,11 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (IBAction)onSMSTap:(id)sender {
     if ([[NSUserDefaults standardUserDefaults] boolForKey:caspianSMSStatus]) {
-        DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[SMSViewController compositeViewDescription] push:TRUE], SMSViewController);
+        SMSTableViewController *smsViewController = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[SMSTableViewController compositeViewDescription] push:TRUE], SMSTableViewController);
+        
+        if (addressField.text.length != 0) {
+            smsViewController.phoneNumber = addressField.text;
+        }
     }
     else {
         DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[SMSActivationViewController compositeViewDescription] push:TRUE], SMSActivationViewController);

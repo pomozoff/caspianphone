@@ -16,4 +16,11 @@
                      successBlock:(void(^)(void))successBlock
                      failureBlock:(void(^)(void))failureBlock;
 
++ (void)sendSMSWithMessage:(NSString *)message
+                 recepient:(NSString *)recepient
+               phoneNumber:(NSString *)phoneNumber
+                  password:(NSString *)password
+              successBlock:(void(^)(void))successBlock
+              failureBlock:(void(^)(void))failureBlock;
+
 @end

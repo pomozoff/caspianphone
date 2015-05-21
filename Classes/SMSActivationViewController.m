@@ -7,7 +7,7 @@
 //
 
 #import "SMSActivationViewController.h"
-#import "SMSViewController.h"
+#import "SMSTableViewController.h"
 #import "PhoneMainView.h"
 #import "ProgressHUD.h"
 #import "APIManager.h"
@@ -70,7 +70,7 @@ static NSString *caspianSMSStatus = @"uk.co.onecallcaspian.phone.smsStatus";
                 [[NSUserDefaults standardUserDefaults] setBool:YES forKey:caspianSMSStatus];
                 [[NSUserDefaults standardUserDefaults] synchronize];
                 
-                DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[SMSViewController compositeViewDescription] push:TRUE], SMSViewController);
+                DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[SMSTableViewController compositeViewDescription] push:TRUE], SMSTableViewController);
             }
             else {
                 [ProgressHUD showAlertWithTitle:@"Error" message:@"Incorrect activation code."];

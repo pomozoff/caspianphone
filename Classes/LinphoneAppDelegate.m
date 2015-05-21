@@ -30,6 +30,7 @@
 #include "linphone/linphonecore.h"
 
 #import <Crashlytics/Crashlytics.h>
+#import "CoreDataManager.h"
 
 @implementation LinphoneAppDelegate
 
@@ -183,6 +184,7 @@
     BOOL background_mode = [instance lpConfigBoolForKey:@"backgroundmode_preference"];
     BOOL start_at_boot   = [instance lpConfigBoolForKey:@"start_at_boot_preference"];
     
+    [[CoreDataManager sharedManager] setupCoreData];
     
     if( !instance.isTesting ){
         if( [app respondsToSelector:@selector(registerUserNotificationSettings:)] ){
