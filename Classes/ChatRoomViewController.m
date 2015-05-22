@@ -354,6 +354,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     }
 	char *tmp = linphone_address_as_string_uri_only(linphoneAddress);
 	NSString *normalizedSipAddress = [NSString stringWithUTF8String:tmp];
+    normalizedSipAddress = [FastAddressBook replaceOldDomainToNewOne:normalizedSipAddress];
 	ms_free(tmp);
 
     ABRecordRef acontact = [[[LinphoneManager instance] fastAddressBook] getContact:normalizedSipAddress];

@@ -50,7 +50,7 @@
 "Average" = "Average";
 
 /* No comment provided by engineer. */
-"Bad credentials, check your account settings" = "Bad credentials, check your account settings";
+"Bad credentials, check your account settings" = "Wrong password";
 
 /* No comment provided by engineer. */
 "Battery is running low. Stop video ?" = "Battery is running low. Stop video ?";
@@ -311,7 +311,7 @@
 "Registration failed" = "Failed";
 
 /* No comment provided by engineer. */
-"Registration failure" = "Registration failure";
+"Registration failure" = "Sign In Error";
 
 /* No comment provided by engineer. */
 "Registration in progress" = "Please Wait";

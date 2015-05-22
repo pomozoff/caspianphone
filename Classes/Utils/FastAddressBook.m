@@ -106,11 +106,30 @@ static void sync_address_book (ABAddressBookRef addressBook, CFDictionaryRef inf
     return number;
 }
 
+extern NSString *caspianDomainIpLocal;
+extern NSString *caspianDomainOldIpLocal;
+
++ (NSString *)replaceOldDomainToNewOne:(NSString *)address {
+    return [address stringByReplacingOccurrencesOfString:caspianDomainOldIpLocal withString:caspianDomainIpLocal];
+}
+
++ (NSString *)makeUriFromPhoneNumber:(NSString *)phoneNumber {
+    if ([phoneNumber hasPrefix:@"sip:"] || [phoneNumber rangeOfString:@"@"].location != NSNotFound) {
+        return phoneNumber;
+    }
+    return [[[NSString stringWithFormat:@"sip://%@@%@", phoneNumber, caspianDomainIpLocal] retain] autorelease];
+}
+
 + (NSString*)normalizeSipURI:(NSString*)address {
-    // replace all whitespaces (non-breakable, utf8 nbsp etc.) by the "classical" whitespace 
+    // replace all whitespaces (non-breakable, utf8 nbsp etc.) by the "classical" whitespace
     address = [[address componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] componentsJoinedByString:@" "];
+    NSString *phoneNumber = [self takePhoneNumberFromAddress:address];
+    
+    /*
+    NSString *addressUri = [self makeUriFromPhoneNumber:address];
     NSString *normalizedSipAddress = nil;
-	LinphoneAddress* linphoneAddress = linphone_core_interpret_url([LinphoneManager getLc], [address UTF8String]);
+	LinphoneAddress* linphoneAddress = linphone_core_interpret_url([LinphoneManager getLc], [addressUri UTF8String]);
+    
     if(linphoneAddress != NULL) {
         char *tmp = linphone_address_as_string_uri_only(linphoneAddress);
         if(tmp != NULL) {
@@ -125,17 +144,20 @@ static void sync_address_book (ABAddressBookRef addressBook, CFDictionaryRef inf
         linphone_address_destroy(linphoneAddress);
     }
     return normalizedSipAddress;
+    */
+
+    return [[phoneNumber retain] autorelease];
 }
 
 + (NSString *)normalizePhoneNumber:(NSString *)address {
     if (address.length < 1) {
         return address;
     }
-    NSMutableString* lNormalizedAddress = [NSMutableString stringWithString:address];
-    [lNormalizedAddress replaceOccurrencesOfString:@" "
-                                        withString:@""
-                                           options:0
-                                             range:NSMakeRange(0, [lNormalizedAddress length])];
+
+    NSArray *words = [address componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    NSString *noSpacesString = [words componentsJoinedByString:@""];
+    
+    NSMutableString* lNormalizedAddress = [NSMutableString stringWithString:noSpacesString];
     [lNormalizedAddress replaceOccurrencesOfString:@"("
                                         withString:@""
                                            options:0
@@ -176,8 +198,12 @@ static void sync_address_book (ABAddressBookRef addressBook, CFDictionaryRef inf
                                         withString:@""
                                            options:0
                                              range:NSMakeRange(0, [lNormalizedAddress length])];
+    [lNormalizedAddress replaceOccurrencesOfString:@"/"
+                                        withString:@""
+                                           options:0
+                                             range:NSMakeRange(0, [lNormalizedAddress length])];
     NSRange range = [lNormalizedAddress rangeOfString:@"@"];
-    return range.location != NSNotFound ? [lNormalizedAddress substringToIndex:range.location] : lNormalizedAddress;
+    return range.location != NSNotFound ? [[[lNormalizedAddress substringToIndex:range.location] retain] autorelease] : [[lNormalizedAddress retain] autorelease];
 }
 
 + (BOOL)isAuthorized {

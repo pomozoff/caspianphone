@@ -130,8 +130,9 @@
     NSString* address = nil;
     if(addr != NULL) {
         BOOL useLinphoneAddress = true;
-        // contact name 
-        char* lAddress = linphone_address_as_string_uri_only(addr);
+        // contact name
+        //char* lAddress = linphone_address_as_string_uri_only(addr);
+        const char* lAddress = linphone_address_get_username(addr);
         if(lAddress) {
             NSString *normalizedSipAddress = [FastAddressBook normalizeSipURI:[NSString stringWithUTF8String:lAddress]];
             ABRecordRef contact = [[[LinphoneManager instance] fastAddressBook] getContact:normalizedSipAddress];
@@ -139,7 +140,7 @@
                 address = [FastAddressBook getContactDisplayName:contact];
                 useLinphoneAddress = false;
             }
-            ms_free(lAddress);
+            //ms_free(lAddress);
         }
         if(useLinphoneAddress) {
             const char* lDisplayName = NULL; //linphone_address_get_display_name(addr);

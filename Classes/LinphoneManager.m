@@ -45,7 +45,10 @@
 #define LINPHONE_LOGS_MAX_ENTRY 5000
 
 static NSString *caspianSharingServerUri = @"https://www.linphone.org:444/upload.php";
-static NSString *caspianDomainIpLocal = @"194.72.111.163";
+
+NSString *caspianDomainIpLocal = @"194.72.111.163";
+NSString *caspianDomainOldIpLocal = @"212.159.80.157";
+
 NSInteger caspianErrorCode = 480;
 NSString *caspianErrorDomain = @"uk.co.onecallcaspian.phone";
 
@@ -917,6 +920,10 @@ static void linphone_iphone_registration_state(LinphoneCore *lc, LinphoneProxyCo
 #pragma mark - Text Received Functions
 
 - (void)onMessageReceived:(LinphoneCore *)lc room:(LinphoneChatRoom *)room  message:(LinphoneChatMessage*)msg {
+    const char* cMessage = linphone_chat_message_get_text(msg);
+    if (!cMessage) {
+        return;
+    }
 
 	if (silentPushCompletion) {
 
@@ -1306,17 +1313,48 @@ static LinphoneCoreVTable linphonec_vtable = {
 	}
 }
 
-- (NSString *)currentPhoneNumber {
+- (LinphoneAddress *)myLinphoneAddress {
+    LinphoneAddress *address = NULL;
     LinphoneProxyConfig *proxy_config = NULL;
     linphone_core_get_default_proxy(theLinphoneCore, &proxy_config);
     if (proxy_config != NULL) {
         const char *identity = linphone_proxy_config_get_identity(proxy_config);
         if (identity) {
-            LinphoneAddress *address = linphone_address_new( identity );
-            if (address) {
-                return [NSString stringWithUTF8String:linphone_address_get_username(address)];
-            }
+            address = linphone_address_new( identity );
         }
+    }
+    return address;
+}
+
+- (void)updateCaspianIpAddress {
+    LinphoneProxyConfig *proxy_config = NULL;
+    linphone_core_get_default_proxy(theLinphoneCore, &proxy_config);
+    if (proxy_config) {
+        
+        LinphoneAddress* linphoneAddress = [self myLinphoneAddress];
+        linphone_address_set_domain(linphoneAddress, [caspianDomainIpLocal UTF8String]);
+        linphone_address_set_transport(linphoneAddress, LinphoneTransportTcp);
+        
+        const char* identity = linphone_address_as_string_uri_only(linphoneAddress);
+        char* proxy = linphone_address_as_string_uri_only(linphoneAddress);
+        
+        linphone_proxy_config_edit(proxy_config);
+
+        linphone_proxy_config_set_identity(proxy_config, identity);
+        linphone_proxy_config_set_server_addr(proxy_config, proxy);
+        
+        linphone_proxy_config_done(proxy_config);
+
+        linphone_address_destroy(linphoneAddress);
+    }
+}
+
+- (NSString *)currentPhoneNumber {
+    LinphoneAddress *linphoneAddress = [self myLinphoneAddress];
+    if (linphoneAddress) {
+        NSString *phoneNumber = [NSString stringWithUTF8String:linphone_address_get_username(linphoneAddress)];
+        linphone_address_destroy(linphoneAddress);
+        return [[phoneNumber retain] autorelease];
     }
     return nil;
 }
@@ -1647,7 +1685,10 @@ static BOOL libStarted = FALSE;
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(audioSessionInterrupted:) name:AVAudioSessionInterruptionNotification object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(globalStateChangedNotificationHandler:) name:kLinphoneGlobalStateUpdate object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(configuringStateChangedNotificationHandler:) name:kLinphoneConfiguringStateUpdate object:nil];
-
+    
+    // update caspian ip address
+    [self updateCaspianIpAddress];
+    
 	/*call iterate once immediately in order to initiate background connections with sip server or remote provisioning grab, if any */
 	linphone_core_iterate(theLinphoneCore);
 	// start scheduler
@@ -2072,7 +2113,9 @@ static void audioRouteChangeListenerCallback (
         [error release];
 
     }
-	LinphoneAddress* linphoneAddress = linphone_core_interpret_url(theLinphoneCore, [readyAddress cStringUsingEncoding:[NSString defaultCStringEncoding]]);
+
+    NSString *cleanPhoneNumber = [[LinphoneManager instance] removeUnneededPrefixes:readyAddress];
+	LinphoneAddress* linphoneAddress = linphone_core_interpret_url(theLinphoneCore, [cleanPhoneNumber cStringUsingEncoding:[NSString defaultCStringEncoding]]);
 
 	if (linphoneAddress) {
 
@@ -2082,7 +2125,7 @@ static void audioRouteChangeListenerCallback (
 		if ([[LinphoneManager instance] lpConfigBoolForKey:@"override_domain_with_default_one"])
 			linphone_address_set_domain(linphoneAddress, [[[LinphoneManager instance] lpConfigStringForKey:@"domain" forSection:@"wizard"] cStringUsingEncoding:[NSString defaultCStringEncoding]]);
 		if(transfer) {
-			linphone_core_transfer_call(theLinphoneCore, linphone_core_get_current_call(theLinphoneCore), [readyAddress cStringUsingEncoding:[NSString defaultCStringEncoding]]);
+			linphone_core_transfer_call(theLinphoneCore, linphone_core_get_current_call(theLinphoneCore), [cleanPhoneNumber cStringUsingEncoding:[NSString defaultCStringEncoding]]);
 		} else {
 			call=linphone_core_invite_address_with_params(theLinphoneCore, linphoneAddress, lcallParams);
 		}
@@ -2154,7 +2197,7 @@ static void audioRouteChangeListenerCallback (
 #define APPMODE_SUFFIX @"prod"
 #endif
         //NSString *params = [NSString stringWithFormat:@"app-id=%@.%@;pn-type=apple;pn-tok=%@;pn-msg-str=IM_MSG;pn-call-str=IC_MSG", [[NSBundle mainBundle] bundleIdentifier],APPMODE_SUFFIX,tokenString];
-        NSString *params = [NSString stringWithFormat:@"app-id=%@.%@;pn-tok=%@;pn-call-snd=ring.caf;pn-msg-snd=msg.caf", [[NSBundle mainBundle] bundleIdentifier],APPMODE_SUFFIX,tokenString];
+        NSString *params = [NSString stringWithFormat:@"app-id=%@;pn-type=iphone;pn-tok=%@;%@", [[NSBundle mainBundle] bundleIdentifier], tokenString, APPMODE_SUFFIX];
 
         linphone_proxy_config_set_contact_uri_parameters(proxyCfg, [params UTF8String]);
         linphone_proxy_config_set_contact_parameters(proxyCfg, NULL);
@@ -2504,7 +2547,7 @@ static void audioRouteChangeListenerCallback (
             }
         }
     } while (![cleanPhoneNumber isEqual:previousPhoneNumber]);
-    return cleanPhoneNumber;
+    return [[cleanPhoneNumber retain] autorelease];
 }
 
 - (NSString *)caspianDomainIp {

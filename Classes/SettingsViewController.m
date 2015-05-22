@@ -234,15 +234,6 @@
     return self;
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    
-    UIEdgeInsets inset = {0, 0, 100, 0};
-    UIScrollView *scrollView = self.tableView;
-    [scrollView setContentInset:inset];
-    [scrollView setScrollIndicatorInsets:inset];
-}
-
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
@@ -479,7 +470,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     
     [settingsStore transformLinphoneCoreToKeys]; // Sync settings with linphone core settings
     settingsController.hiddenKeys = [self findHiddenKeys];
-    [settingsController.tableView reloadData];	
+    [settingsController.tableView reloadData];
     
     // Set observer
     [[NSNotificationCenter defaultCenter] addObserver:self 
@@ -490,7 +481,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    
+
     // Fix bug after emailing debug logs
     CGRect currentFrame = self.view.frame;
     if (currentFrame.origin.y > 0) {
@@ -710,6 +701,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 #ifndef DEBUG
     // *** Caspian hidden keys ***
     // Root
+    [hiddenKeys addObject:@"clear_proxy_button"];
     [hiddenKeys addObject:@"domain_preference"];
     [hiddenKeys addObject:@"transport_preference"];
     [hiddenKeys addObject:@"advanced_account_preference"];
@@ -855,11 +847,11 @@ static UICompositeViewDescription *compositeDescription = nil;
 		picker.mailComposeDelegate = self;
 
 		[picker setSubject:NSLocalizedString(@"Linphone Logs",nil)];
-		[picker setToRecipients:[NSArray arrayWithObjects:@"", nil]];
 		[picker setMessageBody:NSLocalizedString(@"Linphone logs", nil) isHTML:NO];
 		[picker addAttachmentData:attachment mimeType:type fileName:attachmentName];
 
-		[self presentViewController:picker animated:true completion:nil];
+        UIViewController *rootVC = [[[[UIApplication sharedApplication] delegate] window] rootViewController];
+		[rootVC presentViewController:picker animated:true completion:nil];
 		[picker release];
 	} else {
 		UIAlertView* error = [[UIAlertView alloc]	initWithTitle:NSLocalizedString(@"Cannot send email",nil)
@@ -880,7 +872,8 @@ static UICompositeViewDescription *compositeDescription = nil;
 	} else {
 		[LinphoneLogger log:LinphoneLoggerLog format:@"Mail completed with status: %d", result];
 	}
-	[self dismissViewControllerAnimated:true completion:nil];
+    UIViewController *rootVC = [[[[UIApplication sharedApplication] delegate] window] rootViewController];
+	[rootVC dismissViewControllerAnimated:true completion:nil];
 }
 
 @end

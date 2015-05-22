@@ -43,6 +43,7 @@
 #import "IncomingCallViewController.h"
 #import "ImageViewController.h"
 
+typedef void (^CompletionStartBlock)(void);
 
 @class PhoneMainView;
 
@@ -69,6 +70,8 @@
 @property (nonatomic, retain) NSString* name;
 @property (readonly) UICompositeViewDescription *currentView;
 @property (readonly, retain) MPVolumeView* volumeView;
+
+@property (nonatomic, copy) CompletionStartBlock completionBlock;
 
 - (UIViewController*)changeCurrentView:(UICompositeViewDescription *)currentView;
 - (UIViewController*)changeCurrentView:(UICompositeViewDescription *)currentView push:(BOOL)push;

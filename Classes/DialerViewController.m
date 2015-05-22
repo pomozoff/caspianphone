@@ -423,8 +423,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 }
 
 - (void)call:(NSString*)address displayName:(NSString *)displayName {
-    NSString *cleanPhoneNumber = [[LinphoneManager instance] removeUnneededPrefixes:address];
-    [[LinphoneManager instance] call:cleanPhoneNumber displayName:displayName transfer:transferMode];
+    [[LinphoneManager instance] call:address displayName:displayName transfer:transferMode];
 }
 
 
