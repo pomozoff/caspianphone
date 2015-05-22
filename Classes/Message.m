@@ -2,7 +2,7 @@
 //  Message.m
 //  linphone
 //
-//  Created by Art on 5/18/15.
+//  Created by Art on 5/21/15.
 //
 //
 
@@ -12,8 +12,10 @@
 
 @implementation Message
 
-@dynamic timestamp;
 @dynamic content;
+@dynamic timestamp;
+@dynamic status;
+@dynamic recepientNumber;
 @dynamic conversation;
 
 @end

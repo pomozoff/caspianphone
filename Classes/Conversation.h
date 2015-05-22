@@ -2,7 +2,7 @@
 //  Conversation.h
 //  linphone
 //
-//  Created by Art on 5/18/15.
+//  Created by Art on 5/21/15.
 //
 //
 
@@ -13,10 +13,11 @@
 
 @interface Conversation : NSManagedObject
 
-@property (nonatomic, retain) NSString * recepient;
-@property (nonatomic, retain) NSString * lastMessage;
-@property (nonatomic, retain) NSDate * timestamp;
 @property (nonatomic, retain) NSData * image;
+@property (nonatomic, retain) NSString * lastMessage;
+@property (nonatomic, retain) NSString * recepientName;
+@property (nonatomic, retain) NSDate * timestamp;
+@property (nonatomic, retain) NSString * recepientNumber;
 @property (nonatomic, retain) NSSet *messages;
 @end
 

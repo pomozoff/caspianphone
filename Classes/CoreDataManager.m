@@ -88,8 +88,8 @@
               sortDescriptors:(NSArray *)sortDescriptors
                  successBlock:(void(^)(NSArray *retrievedObjects))successBlock
 {
-    [self.backgroundContext performBlock:^{
-        NSEntityDescription *entity = [NSEntityDescription entityForName:managedObjectName inManagedObjectContext:self.backgroundContext];
+    [self.mainContext performBlock:^{
+        NSEntityDescription *entity = [NSEntityDescription entityForName:managedObjectName inManagedObjectContext:self.mainContext];
         NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
         fetchRequest.entity = entity;
         fetchRequest.returnsObjectsAsFaults = NO;
@@ -102,7 +102,7 @@
         }
         
         NSError *error = nil;
-        NSArray *fetchedObjectsFromBackgroundContext = [self.backgroundContext executeFetchRequest:fetchRequest error:&error];
+        NSArray *fetchedObjectsFromBackgroundContext = [self.mainContext executeFetchRequest:fetchRequest error:&error];
         
         if (successBlock) {
             successBlock(fetchedObjectsFromBackgroundContext);
@@ -115,6 +115,7 @@
                                                    sortDescriptorArray:(NSArray *)sortDescriptorArray
                                                  andSectionNameKeyPath:(NSString *)sectionNameKeyPath
 {
+    [NSFetchedResultsController deleteCacheWithName:nil];
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:className inManagedObjectContext:self.mainContext];
     [fetchRequest setEntity:entity];

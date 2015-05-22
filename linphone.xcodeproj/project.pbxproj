@@ -295,6 +295,10 @@
 		639CEB091A1DF4FA004DE38F /* UIChatCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 639CEB0B1A1DF4FA004DE38F /* UIChatCell.xib */; };
 		63CD4B4F1A5AAC8C00B84282 /* DTAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 63CD4B4E1A5AAC8C00B84282 /* DTAlertView.m */; };
 		63FB30351A680E73008CA393 /* UIRoundedImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 63FB30341A680E73008CA393 /* UIRoundedImageView.m */; };
+		6E360D2D1B0DF6D5009A5D55 /* SMSMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E360D2C1B0DF6D5009A5D55 /* SMSMessageCell.m */; };
+		6E360D301B0E0D46009A5D55 /* Conversation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E360D2F1B0E0D46009A5D55 /* Conversation.m */; };
+		6E360D331B0E0D47009A5D55 /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E360D321B0E0D47009A5D55 /* Message.m */; };
+		6E360D351B0E2A37009A5D55 /* chat_bubble_outgoing_triangle.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E360D341B0E2A37009A5D55 /* chat_bubble_outgoing_triangle.png */; };
 		6E503A591B09D5C40081DB97 /* APIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E503A581B09D5C40081DB97 /* APIManager.m */; };
 		6E503A601B09D5D10081DB97 /* SMSActivationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E503A5B1B09D5D10081DB97 /* SMSActivationViewController.m */; };
 		6E503A611B09D5D10081DB97 /* SMSActivationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E503A5C1B09D5D10081DB97 /* SMSActivationViewController.xib */; };
@@ -302,12 +306,12 @@
 		6E503A691B09D6C70081DB97 /* CoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E503A681B09D6C70081DB97 /* CoreDataManager.m */; };
 		6E503A6C1B09D6F90081DB97 /* SMS.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6E503A6A1B09D6F90081DB97 /* SMS.xcdatamodeld */; };
 		6E503A741B09DBA30081DB97 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E503A731B09DBA30081DB97 /* CoreData.framework */; };
-		6E503A771B09DC470081DB97 /* Conversation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E503A761B09DC470081DB97 /* Conversation.m */; };
-		6E503A7A1B09DC470081DB97 /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E503A791B09DC470081DB97 /* Message.m */; };
 		6E503A7E1B09E4AD0081DB97 /* SMSTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E503A7C1B09E4AD0081DB97 /* SMSTableViewController.m */; };
 		6E503A7F1B09E4AD0081DB97 /* SMSTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E503A7D1B09E4AD0081DB97 /* SMSTableViewController.xib */; };
 		6E5767B51B0AEEEA0060D464 /* SMSTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E5767B31B0AEEEA0060D464 /* SMSTableViewCell.m */; };
 		6E5767B61B0AEEEA0060D464 /* SMSTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E5767B41B0AEEEA0060D464 /* SMSTableViewCell.xib */; };
+		6EBB9D871B0D5B7F0017B5FC /* SMSConversationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EBB9D851B0D5B7F0017B5FC /* SMSConversationViewController.m */; };
+		6EBB9D881B0D5B7F0017B5FC /* SMSConversationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EBB9D861B0D5B7F0017B5FC /* SMSConversationViewController.xib */; };
 		70571E1A13FABCB000CDD3C2 /* rootca.pem in Resources */ = {isa = PBXBuildFile; fileRef = 70571E1913FABCB000CDD3C2 /* rootca.pem */; };
 		7066FC0C13E830E400EFC6DC /* libvpx.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7066FC0B13E830E400EFC6DC /* libvpx.a */; };
 		70E542F313E147E3002BA2C0 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70E542F213E147E3002BA2C0 /* OpenGLES.framework */; };
@@ -1388,6 +1392,13 @@
 		63EF7FDC1A24B5810017A416 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/AboutViewController.strings; sourceTree = "<group>"; };
 		63FB30331A680E73008CA393 /* UIRoundedImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIRoundedImageView.h; sourceTree = "<group>"; };
 		63FB30341A680E73008CA393 /* UIRoundedImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIRoundedImageView.m; sourceTree = "<group>"; };
+		6E360D2B1B0DF6D5009A5D55 /* SMSMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMSMessageCell.h; sourceTree = "<group>"; };
+		6E360D2C1B0DF6D5009A5D55 /* SMSMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMSMessageCell.m; sourceTree = "<group>"; };
+		6E360D2E1B0E0D46009A5D55 /* Conversation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Conversation.h; sourceTree = "<group>"; };
+		6E360D2F1B0E0D46009A5D55 /* Conversation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Conversation.m; sourceTree = "<group>"; };
+		6E360D311B0E0D47009A5D55 /* Message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Message.h; sourceTree = "<group>"; };
+		6E360D321B0E0D47009A5D55 /* Message.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Message.m; sourceTree = "<group>"; };
+		6E360D341B0E2A37009A5D55 /* chat_bubble_outgoing_triangle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chat_bubble_outgoing_triangle.png; sourceTree = "<group>"; };
 		6E503A571B09D5C40081DB97 /* APIManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APIManager.h; sourceTree = "<group>"; };
 		6E503A581B09D5C40081DB97 /* APIManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APIManager.m; sourceTree = "<group>"; };
 		6E503A5A1B09D5D10081DB97 /* SMSActivationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMSActivationViewController.h; sourceTree = "<group>"; };
@@ -1399,16 +1410,15 @@
 		6E503A681B09D6C70081DB97 /* CoreDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataManager.m; sourceTree = "<group>"; };
 		6E503A6B1B09D6F90081DB97 /* SMS.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SMS.xcdatamodel; sourceTree = "<group>"; };
 		6E503A731B09DBA30081DB97 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
-		6E503A751B09DC470081DB97 /* Conversation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Conversation.h; sourceTree = "<group>"; };
-		6E503A761B09DC470081DB97 /* Conversation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Conversation.m; sourceTree = "<group>"; };
-		6E503A781B09DC470081DB97 /* Message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Message.h; sourceTree = "<group>"; };
-		6E503A791B09DC470081DB97 /* Message.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Message.m; sourceTree = "<group>"; };
 		6E503A7B1B09E4AD0081DB97 /* SMSTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMSTableViewController.h; sourceTree = "<group>"; };
 		6E503A7C1B09E4AD0081DB97 /* SMSTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMSTableViewController.m; sourceTree = "<group>"; };
 		6E503A7D1B09E4AD0081DB97 /* SMSTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SMSTableViewController.xib; sourceTree = "<group>"; };
 		6E5767B21B0AEEEA0060D464 /* SMSTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMSTableViewCell.h; sourceTree = "<group>"; };
 		6E5767B31B0AEEEA0060D464 /* SMSTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMSTableViewCell.m; sourceTree = "<group>"; };
 		6E5767B41B0AEEEA0060D464 /* SMSTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SMSTableViewCell.xib; sourceTree = "<group>"; };
+		6EBB9D841B0D5B7F0017B5FC /* SMSConversationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMSConversationViewController.h; sourceTree = "<group>"; };
+		6EBB9D851B0D5B7F0017B5FC /* SMSConversationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMSConversationViewController.m; sourceTree = "<group>"; };
+		6EBB9D861B0D5B7F0017B5FC /* SMSConversationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SMSConversationViewController.xib; sourceTree = "<group>"; };
 		70571E1913FABCB000CDD3C2 /* rootca.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = rootca.pem; path = "liblinphone-sdk/apple-darwin/share/linphone/rootca.pem"; sourceTree = "<group>"; };
 		7066FC0B13E830E400EFC6DC /* libvpx.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libvpx.a; path = "liblinphone-sdk/apple-darwin/lib/libvpx.a"; sourceTree = "<group>"; };
 		70E542F213E147E3002BA2C0 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -2916,6 +2926,11 @@
 				6E5767B21B0AEEEA0060D464 /* SMSTableViewCell.h */,
 				6E5767B31B0AEEEA0060D464 /* SMSTableViewCell.m */,
 				6E5767B41B0AEEEA0060D464 /* SMSTableViewCell.xib */,
+				6EBB9D841B0D5B7F0017B5FC /* SMSConversationViewController.h */,
+				6EBB9D851B0D5B7F0017B5FC /* SMSConversationViewController.m */,
+				6EBB9D861B0D5B7F0017B5FC /* SMSConversationViewController.xib */,
+				6E360D2B1B0DF6D5009A5D55 /* SMSMessageCell.h */,
+				6E360D2C1B0DF6D5009A5D55 /* SMSMessageCell.m */,
 			);
 			name = SMS;
 			sourceTree = "<group>";
@@ -2928,10 +2943,10 @@
 				6E503A671B09D6C70081DB97 /* CoreDataManager.h */,
 				6E503A681B09D6C70081DB97 /* CoreDataManager.m */,
 				6E503A6A1B09D6F90081DB97 /* SMS.xcdatamodeld */,
-				6E503A781B09DC470081DB97 /* Message.h */,
-				6E503A791B09DC470081DB97 /* Message.m */,
-				6E503A751B09DC470081DB97 /* Conversation.h */,
-				6E503A761B09DC470081DB97 /* Conversation.m */,
+				6E360D311B0E0D47009A5D55 /* Message.h */,
+				6E360D321B0E0D47009A5D55 /* Message.m */,
+				6E360D2E1B0E0D46009A5D55 /* Conversation.h */,
+				6E360D2F1B0E0D46009A5D55 /* Conversation.m */,
 			);
 			name = Managers;
 			sourceTree = "<group>";
@@ -3226,6 +3241,7 @@
 				D3A8BB7715A6CC3200F96BE5 /* chat_bubble_incoming.png */,
 				D389363815A6D53200A3A3AA /* chat_bubble_outgoing.9.png */,
 				D3A8BB7615A6CC3200F96BE5 /* chat_bubble_outgoing.png */,
+				6E360D341B0E2A37009A5D55 /* chat_bubble_outgoing_triangle.png */,
 				D3F5F8DA1609A86700D3DA1A /* chat_cancel_default.png */,
 				D3F5F8DB1609A86700D3DA1A /* chat_cancel_over.png */,
 				D3A74E6E15C69392001500B9 /* chat_default_landscape~ipad.png */,
@@ -4137,6 +4153,7 @@
 				26E7F3901A81709F0033D3C0 /* arrowback.png in Resources */,
 				D3211BA6159C3D410098460B /* call_state_outgoing_default.png in Resources */,
 				D38187F015FE354000C3EDCA /* UIConferenceHeader.xib in Resources */,
+				6E360D351B0E2A37009A5D55 /* chat_bubble_outgoing_triangle.png in Resources */,
 				D3211BB9159C8A820098460B /* cell_call_first.png in Resources */,
 				D3211BBE159CBFD60098460B /* back_default.png in Resources */,
 				D3211BC0159CBFD70098460B /* back_disabled.png in Resources */,
@@ -4562,6 +4579,7 @@
 				D3012CC616105ECF007CD926 /* bubble.png in Resources */,
 				D3D52A731614480700DEB00A /* IncomingCallViewController~ipad.xib in Resources */,
 				D3D52A7D1614495300DEB00A /* accept_default_landscape~ipad.png in Resources */,
+				6EBB9D881B0D5B7F0017B5FC /* SMSConversationViewController.xib in Resources */,
 				D3D52A7F1614495300DEB00A /* accept_default~ipad.png in Resources */,
 				D3D52A811614495300DEB00A /* accept_over_landscape~ipad.png in Resources */,
 				D3D52A831614495300DEB00A /* accept_over~ipad.png in Resources */,
@@ -4790,7 +4808,6 @@
 				D32B9DFC15A2F131000B6DEC /* FastAddressBook.m in Sources */,
 				D3196D3E15A32BD8007FEEBA /* UITransferButton.m in Sources */,
 				D350F20E15A43BB100149E54 /* WizardViewController.m in Sources */,
-				6E503A7A1B09DC470081DB97 /* Message.m in Sources */,
 				D3F795D615A582810077328B /* ChatRoomViewController.m in Sources */,
 				D32B6E2915A5BC440033019F /* ChatRoomTableViewController.m in Sources */,
 				D3A8BB7015A6C7D500F96BE5 /* UIChatRoomCell.m in Sources */,
@@ -4802,6 +4819,7 @@
 				263CE08F1A94FBAD002983F9 /* UISmileCollectionViewCell.m in Sources */,
 				6E503A591B09D5C40081DB97 /* APIManager.m in Sources */,
 				D378906515AC373B00BD776C /* ContactDetailsLabelViewController.m in Sources */,
+				6E360D301B0E0D46009A5D55 /* Conversation.m in Sources */,
 				D3E8F68615ADE05B0065A226 /* UIContactDetailsFooter.m in Sources */,
 				6E503A691B09D6C70081DB97 /* CoreDataManager.m in Sources */,
 				26E7F3F21A8171170033D3C0 /* COCTextField.m in Sources */,
@@ -4809,7 +4827,6 @@
 				63FB30351A680E73008CA393 /* UIRoundedImageView.m in Sources */,
 				266D5B9F1AB5C013003F9E30 /* COCAlertView.m in Sources */,
 				F066515517F9A02E0064280C /* UITransparentTVCell.m in Sources */,
-				6E503A771B09DC470081DB97 /* Conversation.m in Sources */,
 				D3F9A9EE15AF277E0045320F /* UACellBackgroundView.m in Sources */,
 				D35860D615B549B500513429 /* Utils.m in Sources */,
 				D3F7998115BD32370018C273 /* TPMultiLayoutViewController.m in Sources */,
@@ -4826,6 +4843,7 @@
 				D3807FF215C2894A005BE9BC /* IASKSettingsStoreFile.m in Sources */,
 				D3807FF415C2894A005BE9BC /* IASKSettingsStoreUserDefaults.m in Sources */,
 				D3807FF615C2894A005BE9BC /* IASKSpecifier.m in Sources */,
+				6EBB9D871B0D5B7F0017B5FC /* SMSConversationViewController.m in Sources */,
 				D3807FF815C2894A005BE9BC /* IASKPSSliderSpecifierViewCell.m in Sources */,
 				D3807FFA15C2894A005BE9BC /* IASKPSTextFieldSpecifierViewCell.m in Sources */,
 				631C4FB719D2C3A6004BFE77 /* UIDigitButtonLongVoiceMail.m in Sources */,
@@ -4848,6 +4866,8 @@
 				D35E91F8160CA4FF0023116B /* UILinphoneButton.m in Sources */,
 				26E7F2F51A816E200033D3C0 /* SWLongPressGestureRecognizer.m in Sources */,
 				26E7F2F31A816E200033D3C0 /* NSMutableArray+SWUtilityButtons.m in Sources */,
+				6E360D331B0E0D47009A5D55 /* Message.m in Sources */,
+				6E360D2D1B0DF6D5009A5D55 /* SMSMessageCell.m in Sources */,
 				D306459E1611EC2A00BB571E /* UILoadingImageView.m in Sources */,
 				D37E3ECD1619C27A0087659A /* CAAnimation+Blocks.m in Sources */,
 			);

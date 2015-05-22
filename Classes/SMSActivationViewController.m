@@ -42,22 +42,6 @@ static NSString *caspianSMSStatus = @"uk.co.onecallcaspian.phone.smsStatus";
 {
     if ([self.firstButton.titleLabel.text isEqualToString:@"Yes"]) {
         self.messageLabel.text = @"Activation in progress. You should receive an SMS with the activation code. Input the code here and click Activate.";
-        [self.firstButton setTitle:@"Activate" forState:UIControlStateNormal];
-        [self.secondButton setTitle:@"Cancel" forState:UIControlStateNormal];
-        
-        [UIView animateWithDuration:0.5 animations:^{
-            CGRect firstButtonFrame = self.firstButton.frame;
-            firstButtonFrame.origin.y = firstButtonFrame.origin.y + 45;
-            self.firstButton.frame = firstButtonFrame;
-            CGRect secondButtonFrame = self.secondButton.frame;
-            secondButtonFrame.origin.y = secondButtonFrame.origin.y + 45;
-            self.secondButton.frame = secondButtonFrame;
-        } completion:^(BOOL finished) {
-            [UIView animateWithDuration:0.5 animations:^{
-                self.codeTextField.alpha = 1.0;
-            }];
-        }];
-        
         [self requestActivationCode];
     }
     else if ([self.firstButton.titleLabel.text isEqualToString:@"Activate"]) {
@@ -120,6 +104,22 @@ static NSString *caspianSMSStatus = @"uk.co.onecallcaspian.phone.smsStatus";
     [APIManager sendSMSActivationWithCode:randomCode phoneNumber:phoneNumber password:password successBlock:^{
         [ProgressHUD hideLoadingInView:self.view];
         [ProgressHUD showAlertWithTitle:@"SMS Activation" message:@"Activation code sent!"];
+        
+        [self.firstButton setTitle:@"Activate" forState:UIControlStateNormal];
+        [self.secondButton setTitle:@"Cancel" forState:UIControlStateNormal];
+        
+        [UIView animateWithDuration:0.5 animations:^{
+            CGRect firstButtonFrame = self.firstButton.frame;
+            firstButtonFrame.origin.y = firstButtonFrame.origin.y + 45;
+            self.firstButton.frame = firstButtonFrame;
+            CGRect secondButtonFrame = self.secondButton.frame;
+            secondButtonFrame.origin.y = secondButtonFrame.origin.y + 45;
+            self.secondButton.frame = secondButtonFrame;
+        } completion:^(BOOL finished) {
+            [UIView animateWithDuration:0.5 animations:^{
+                self.codeTextField.alpha = 1.0;
+            }];
+        }];
     } failureBlock:^{
         [ProgressHUD hideLoadingInView:self.view];
         [ProgressHUD showAlertWithTitle:@"SMS Activation" message:@"Failed to send activation code. Please try again."];

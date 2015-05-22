@@ -7,8 +7,10 @@
 //
 
 #import "SMSTableViewController.h"
+#import "SMSConversationViewController.h"
 #import "SMSTableViewCell.h"
 #import "CoreDataManager.h"
+#import "PhoneMainView.h"
 #import "Conversation.h"
 #import "Message.h"
 
@@ -26,8 +28,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackOpaque];
     
     self.tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
     self.tableView.contentInset = UIEdgeInsetsMake(20, 0, 0, 0);
@@ -81,7 +81,14 @@
     UIImage *profilePicture = [UIImage imageWithData:conversation.image];
     
     SMSTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[SMSTableViewCell reuseIdentifier]];
-    cell.nameLabel.text = conversation.recepient;
+    
+    if (conversation.recepientName) {
+        cell.nameLabel.text = conversation.recepientName;
+    }
+    else {
+        cell.nameLabel.text = conversation.recepientNumber;
+    }
+    
     cell.messageLabel.text = conversation.lastMessage;
     cell.dateLabel.text = [dateFormat stringFromDate:conversation.timestamp];
     
@@ -96,7 +103,9 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     Conversation *conversation = (Conversation *)[self.fetchedResultsController objectAtIndexPath:indexPath];
-    NSLog(@"%@", conversation);
+    
+    SMSConversationViewController *controller = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[SMSConversationViewController compositeViewDescription] push:TRUE], SMSConversationViewController);
+    controller.conversation = conversation;
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
@@ -192,27 +201,21 @@ static UICompositeViewDescription *compositeDescription = nil;
 - (void)populateCoreData
 {
     Conversation *conversation1 = (Conversation *)[[CoreDataManager sharedManager] createManagedObject:@"Conversation"];
-    conversation1.recepient = @"639473371503";
-    conversation1.lastMessage = @"Hi";
+    conversation1.recepientName = @"Darcy";
+    conversation1.recepientNumber = @"639995163632";
+    conversation1.lastMessage = @"Message";
     conversation1.timestamp = [NSDate date];
     
-    for (int i = 0; i <= 9; i++) {
-        Message *message = (Message *)[[CoreDataManager sharedManager] createManagedObject:@"Message"];
-        message.content = [NSString stringWithFormat:@"Test message %d", i];
-        message.timestamp = [NSDate date];
-        [conversation1 addMessagesObject:message];
-    }
-    
-    Conversation *conversation2 = (Conversation *)[[CoreDataManager sharedManager] createManagedObject:@"Conversation"];
-    conversation2.recepient = @"639995163632";
-    conversation2.lastMessage = @"Hello! How are you?";
-    conversation2.timestamp = [NSDate date];
+    NSString *msg = @"Message";
     
     for (int i = 0; i <= 19; i++) {
+        msg = [NSString stringWithFormat:@"%@ message", msg];
         Message *message = (Message *)[[CoreDataManager sharedManager] createManagedObject:@"Message"];
-        message.content = [NSString stringWithFormat:@"Test message %d", i];
+        message.content = msg;
         message.timestamp = [NSDate date];
-        [conversation2 addMessagesObject:message];
+        message.status = [NSNumber numberWithBool:NO];
+        message.recepientNumber = @"639995163632";
+        [conversation1 addMessagesObject:message];
     }
     
     [[CoreDataManager sharedManager] saveContextSuccessBlock:nil];

@@ -2,7 +2,7 @@
 //  Conversation.m
 //  linphone
 //
-//  Created by Art on 5/18/15.
+//  Created by Art on 5/21/15.
 //
 //
 
@@ -12,10 +12,11 @@
 
 @implementation Conversation
 
-@dynamic recepient;
-@dynamic lastMessage;
-@dynamic timestamp;
 @dynamic image;
+@dynamic lastMessage;
+@dynamic recepientName;
+@dynamic timestamp;
+@dynamic recepientNumber;
 @dynamic messages;
 
 @end
