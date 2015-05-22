@@ -85,6 +85,9 @@
 @property (nonatomic, retain) IBOutlet UITextField *domainRegisterField;
 @property (nonatomic, retain) IBOutlet UIToolbar *phoneNumberNextToolbar;
 
+@property (retain, nonatomic) IBOutlet UIToolbar *phoneNumberNextSignInToolbar;
+@property (retain, nonatomic) IBOutlet UIToolbar *numKeypadDoneSignInToolbar;
+
 @property (nonatomic, retain) IBOutlet UIPickerView *countryPickerView;
 @property (nonatomic, retain) IBOutlet UIToolbar *countryPickerDoneToolbar;
 @property (nonatomic, retain) IBOutlet UIToolbar *numKeypadDoneToolbar;

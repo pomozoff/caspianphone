@@ -301,6 +301,7 @@
 		C6863C8D1AF5608300652820 /* WizardViews_2.xib in Resources */ = {isa = PBXBuildFile; fileRef = C6863C8C1AF5608300652820 /* WizardViews_2.xib */; };
 		C6AD589F1AF26C4B00DD5375 /* welcome-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C6AD589D1AF26C4B00DD5375 /* welcome-568h@2x.png */; };
 		C6AD58A01AF26C4B00DD5375 /* welcome@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C6AD589E1AF26C4B00DD5375 /* welcome@2x.png */; };
+		C6BECC6A1B0F2BA400A6B703 /* signup_back_default.png in Resources */ = {isa = PBXBuildFile; fileRef = C6BECC691B0F2BA400A6B703 /* signup_back_default.png */; };
 		C90FAA7915AF54E6002091CB /* HistoryDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C90FAA7715AF54E6002091CB /* HistoryDetailsViewController.m */; };
 		C9C8254315AE204D00D493FA /* options_add_disabled.png in Resources */ = {isa = PBXBuildFile; fileRef = C9C8253F15AE204D00D493FA /* options_add_disabled.png */; };
 		C9C8254515AE204D00D493FA /* options_transfer_disabled.png in Resources */ = {isa = PBXBuildFile; fileRef = C9C8254015AE204D00D493FA /* options_transfer_disabled.png */; };
@@ -1384,6 +1385,7 @@
 		C6863C8C1AF5608300652820 /* WizardViews_2.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WizardViews_2.xib; sourceTree = "<group>"; };
 		C6AD589D1AF26C4B00DD5375 /* welcome-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "welcome-568h@2x.png"; sourceTree = SOURCE_ROOT; };
 		C6AD589E1AF26C4B00DD5375 /* welcome@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "welcome@2x.png"; sourceTree = SOURCE_ROOT; };
+		C6BECC691B0F2BA400A6B703 /* signup_back_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = signup_back_default.png; sourceTree = "<group>"; };
 		C90FAA7615AF54E6002091CB /* HistoryDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryDetailsViewController.h; sourceTree = "<group>"; };
 		C90FAA7715AF54E6002091CB /* HistoryDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryDetailsViewController.m; sourceTree = "<group>"; };
 		C9B3A6FD15B485DB006F52EE /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Utils.h; path = Utils/Utils.h; sourceTree = "<group>"; };
@@ -2864,6 +2866,7 @@
 		C681BB1E1AE8223A0063B3A5 /* image caspian new graphics */ = {
 			isa = PBXGroup;
 			children = (
+				C6BECC691B0F2BA400A6B703 /* signup_back_default.png */,
 				C681BB1F1AE822760063B3A5 /* welcome.png */,
 				C6AD589D1AF26C4B00DD5375 /* welcome-568h@2x.png */,
 				C6AD589E1AF26C4B00DD5375 /* welcome@2x.png */,
@@ -4110,6 +4113,7 @@
 				2634D35E1A83D5FD006533C5 /* smilie_64_icetea.png in Resources */,
 				D350F22615A43D3400149E54 /* setup_start_default.png in Resources */,
 				26E7F3B21A81709F0033D3C0 /* linphone_splashscreen.png in Resources */,
+				C6BECC6A1B0F2BA400A6B703 /* signup_back_default.png in Resources */,
 				D350F22815A43D3400149E54 /* setup_start_over.png in Resources */,
 				D350F22C15A43D3400149E54 /* setup_welcome_logo.png in Resources */,
 				D35406F715A47E9E007E7E81 /* button_background_default.png in Resources */,

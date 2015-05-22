@@ -286,6 +286,8 @@ extern NSString *caspianErrorDomain;
     [_flagLoadingForgotPasswordActivityIndicator release];
     [welcomeView2 release];
     [logInView release];
+    [_phoneNumberNextSignInToolbar release];
+    [_numKeypadDoneSignInToolbar release];
     [super dealloc];
 }
 
@@ -382,7 +384,8 @@ static UICompositeViewDescription *compositeDescription = nil;
     self.countryNameForgotPasswordField.inputView = self.countryPickerView;
     self.countryNameForgotPasswordField.inputAccessoryView = self.countryPickerDoneToolbar;
     
-    self.phoneNumberRegisterField.inputAccessoryView = self.numKeypadDoneToolbar;
+    self.phoneNumberRegisterField.inputAccessoryView = self.phoneNumberNextSignInToolbar;
+    //self.passwordRegisterField.inputAccessoryView = self.numKeypadDoneSignInToolbar;
     self.activationCodeActivateField.inputAccessoryView = self.numKeypadDoneToolbar;
     self.passwordFinishField.inputView = self.dummyView;
     self.phoneNumberForgotPasswordField.inputAccessoryView = self.numKeypadDoneToolbar;
@@ -1223,6 +1226,9 @@ static UICompositeViewDescription *compositeDescription = nil;
     [self.firstNameSignUpField becomeFirstResponder];
 }
 
+- (IBAction)onPhoneNumberSignInNextTap:(id)sender {
+    [self.passwordRegisterField becomeFirstResponder];
+}
 - (IBAction)onDoneNumKeypad:(id)sender {
     [self.view endEditing:YES];
 }
