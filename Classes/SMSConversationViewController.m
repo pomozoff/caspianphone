@@ -82,8 +82,10 @@ static NSString *caspianPasswordKey = @"uk.co.onecallcaspian.phone.password";
     NSSortDescriptor *sortDescriptor =  [[NSSortDescriptor alloc] initWithKey:@"timestamp" ascending:YES];
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"recepientNumber = %@", self.conversation.recepientNumber];
     [[CoreDataManager sharedManager] retrieveManagedObject:@"Message" predicate:predicate sortDescriptors:@[sortDescriptor] successBlock:^(NSArray *retrievedObjects) {
-        NSIndexPath *lastMessage = [NSIndexPath indexPathForRow:[retrievedObjects count] - 1 inSection:0];
-        [self.tableView scrollToRowAtIndexPath:lastMessage atScrollPosition:UITableViewScrollPositionBottom animated:animated];
+        if ([retrievedObjects count] > 0) {
+            NSIndexPath *lastMessage = [NSIndexPath indexPathForRow:[retrievedObjects count] - 1 inSection:0];
+            [self.tableView scrollToRowAtIndexPath:lastMessage atScrollPosition:UITableViewScrollPositionBottom animated:animated];
+        }
     }];
 }
 
@@ -109,8 +111,6 @@ static NSString *caspianPasswordKey = @"uk.co.onecallcaspian.phone.password";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     Message *message = (Message *)[self.fetchedResultsController objectAtIndexPath:indexPath];
-    NSLog(@"%@", message.conversation.recepientNumber);
-    
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setDateFormat:@"MMM dd, yyyy, hh:mm a"];
     
@@ -197,6 +197,14 @@ static NSString *caspianPasswordKey = @"uk.co.onecallcaspian.phone.password";
         self.nameLabel.text = conversation.recepientNumber;
     }
     
+    UIImage *profilePicture = [UIImage imageWithData:conversation.image];
+    if (profilePicture != nil) {
+        self.profileImageView.image = profilePicture;
+    }
+    else {
+        self.profileImageView.image = [UIImage imageNamed:@"profile-picture-small"];
+    }
+    
     [self scrollToBottomAnimated:NO];
 }
 
@@ -221,6 +229,9 @@ static NSString *caspianPasswordKey = @"uk.co.onecallcaspian.phone.password";
     message.status = [NSNumber numberWithBool:NO];
     message.recepientNumber = self.conversation.recepientNumber;
     [conversationFromBackground addMessagesObject:message];
+    
+    conversationFromBackground.timestamp = message.timestamp;
+    conversationFromBackground.lastMessage = message.content;
     
     [[CoreDataManager sharedManager] saveContextSuccessBlock:^{
         [APIManager sendSMSWithMessage:messageString recepient:self.conversation.recepientNumber phoneNumber:phoneNumber password:password successBlock:^{

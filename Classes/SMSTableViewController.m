@@ -51,7 +51,9 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    self.fetchedResultsController = nil;
     [self.fetchedResultsController performFetch:nil];
+    [self.tableView reloadData];
 }
 
 #pragma mark - UITableViewDelegate and UITableViewDataSource methods
@@ -74,7 +76,6 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
     Conversation *conversation = (Conversation *)[self.fetchedResultsController objectAtIndexPath:indexPath];
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setDateFormat:@"MMM dd, hh:mm a"];
@@ -134,7 +135,7 @@
 - (NSFetchedResultsController *)fetchedResultsController
 {
     if (!_fetchedResultsController) {
-        NSSortDescriptor *sortDescriptor =  [[NSSortDescriptor alloc] initWithKey:@"timestamp" ascending:YES];
+        NSSortDescriptor *sortDescriptor =  [[NSSortDescriptor alloc] initWithKey:@"timestamp" ascending:NO];
         _fetchedResultsController = [[CoreDataManager sharedManager] fetchedResultsControllerWithEntityName:@"Conversation" predicate:nil sortDescriptorArray:@[sortDescriptor] andSectionNameKeyPath:nil];
         _fetchedResultsController.delegate = self;
     }
@@ -170,6 +171,106 @@
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
 {
     [self.tableView endUpdates];
+}
+
+#pragma mark - Custom Setters
+
+- (void)setPhoneNumber:(NSString *)phoneNumber
+{
+    _phoneNumber = phoneNumber;
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"recepientNumber = %@", phoneNumber];
+    [[CoreDataManager sharedManager] retrieveManagedObject:@"Conversation" predicate:predicate sortDescriptors:nil successBlock:^(NSArray *retrievedObjects) {
+        if ([retrievedObjects count] <= 0) {
+            [self getContactSuccessBlock:^(NSString *name, NSString *number, NSData *image) {
+                Conversation *conversation = (Conversation *)[[CoreDataManager sharedManager] createManagedObject:@"Conversation"];
+                
+                if ([name isEqualToString:@""]) {
+                    // Create conversation without data from contacts
+                    conversation.recepientNumber = phoneNumber;
+                }
+                else {
+                    // Create conversation with data from contacts
+                    conversation.recepientName = name;
+                    conversation.recepientNumber = number;
+                    conversation.image = image;
+                }
+                
+                [[CoreDataManager sharedManager] saveContextSuccessBlock:^{
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        SMSConversationViewController *controller = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[SMSConversationViewController compositeViewDescription] push:TRUE], SMSConversationViewController);
+                        controller.conversation = conversation;
+                    });
+                }];
+            }];
+        }
+        else {
+            // Open existing conversation
+            Conversation *conversation = (Conversation *)retrievedObjects[0];
+            SMSConversationViewController *controller = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[SMSConversationViewController compositeViewDescription] push:TRUE], SMSConversationViewController);
+            controller.conversation = conversation;
+        }
+    }];
+}
+
+- (void)getContactSuccessBlock:(void(^)(NSString *name, NSString *number, NSData *image))successBlock
+
+{
+    CFErrorRef *error = NULL;
+    ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL, error);
+    CFArrayRef allPeople = ABAddressBookCopyArrayOfAllPeople(addressBook);
+    CFIndex numberOfPeople = ABAddressBookGetPersonCount(addressBook);
+    
+    BOOL isNumberExisting = NO;
+    NSString *name = @"";
+    NSString *number = @"";
+    NSData *image;
+    
+    for (int i = 0; i < numberOfPeople; i++) {
+        
+        ABRecordRef person = CFArrayGetValueAtIndex(allPeople, i);
+        
+        NSString *firstName = (__bridge NSString *)(ABRecordCopyValue(person, kABPersonFirstNameProperty));
+        NSString *lastName = (__bridge NSString *)(ABRecordCopyValue(person, kABPersonLastNameProperty));
+        
+        ABMultiValueRef phoneNumbers = ABRecordCopyValue(person, kABPersonPhoneProperty);
+        
+        for (CFIndex i = 0; i < ABMultiValueGetCount(phoneNumbers); i++) {
+            NSString *phoneNumber = (NSString *)ABMultiValueCopyValueAtIndex(phoneNumbers, i);
+            phoneNumber = [phoneNumber stringByReplacingOccurrencesOfString:@" " withString:@""];
+            phoneNumber = [phoneNumber stringByReplacingOccurrencesOfString:@"+" withString:@""];
+            phoneNumber = [phoneNumber stringByReplacingOccurrencesOfString:@"(" withString:@""];
+            phoneNumber = [phoneNumber stringByReplacingOccurrencesOfString:@")" withString:@""];
+            
+            if ([phoneNumber isEqualToString:self.phoneNumber]) {
+                isNumberExisting = YES;
+                number = phoneNumber;
+                break;
+            }
+        }
+        
+        if (isNumberExisting) {
+            if (firstName && lastName) {
+                name = [NSString stringWithFormat:@"%@ %@", firstName, lastName];
+            }
+            else if (firstName && !lastName) {
+                name = firstName;
+            }
+            else if (!firstName && lastName) {
+                name = lastName;
+            }
+            
+            CFDataRef imageData = ABPersonCopyImageData(person);
+            image = (NSData *)imageData;
+            if (imageData) {
+                CFRelease(imageData);
+            }
+            break;
+        }
+    }
+    
+    if (successBlock) {
+        successBlock(name, number, image);
+    }
 }
 
 #pragma mark - UICompositeViewDelegate Functions

@@ -299,6 +299,8 @@
 		6E360D301B0E0D46009A5D55 /* Conversation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E360D2F1B0E0D46009A5D55 /* Conversation.m */; };
 		6E360D331B0E0D47009A5D55 /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E360D321B0E0D47009A5D55 /* Message.m */; };
 		6E360D351B0E2A37009A5D55 /* chat_bubble_outgoing_triangle.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E360D341B0E2A37009A5D55 /* chat_bubble_outgoing_triangle.png */; };
+		6E360D371B10DAF5009A5D55 /* sms-contacts.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E360D361B10DAF5009A5D55 /* sms-contacts.png */; };
+		6E360D3A1B10DFD1009A5D55 /* SMSButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E360D391B10DFD1009A5D55 /* SMSButton.m */; };
 		6E503A591B09D5C40081DB97 /* APIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E503A581B09D5C40081DB97 /* APIManager.m */; };
 		6E503A601B09D5D10081DB97 /* SMSActivationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E503A5B1B09D5D10081DB97 /* SMSActivationViewController.m */; };
 		6E503A611B09D5D10081DB97 /* SMSActivationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E503A5C1B09D5D10081DB97 /* SMSActivationViewController.xib */; };
@@ -1399,6 +1401,9 @@
 		6E360D311B0E0D47009A5D55 /* Message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Message.h; sourceTree = "<group>"; };
 		6E360D321B0E0D47009A5D55 /* Message.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Message.m; sourceTree = "<group>"; };
 		6E360D341B0E2A37009A5D55 /* chat_bubble_outgoing_triangle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chat_bubble_outgoing_triangle.png; sourceTree = "<group>"; };
+		6E360D361B10DAF5009A5D55 /* sms-contacts.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sms-contacts.png"; sourceTree = "<group>"; };
+		6E360D381B10DFD1009A5D55 /* SMSButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMSButton.h; sourceTree = "<group>"; };
+		6E360D391B10DFD1009A5D55 /* SMSButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMSButton.m; sourceTree = "<group>"; };
 		6E503A571B09D5C40081DB97 /* APIManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APIManager.h; sourceTree = "<group>"; };
 		6E503A581B09D5C40081DB97 /* APIManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APIManager.m; sourceTree = "<group>"; };
 		6E503A5A1B09D5D10081DB97 /* SMSActivationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMSActivationViewController.h; sourceTree = "<group>"; };
@@ -2461,6 +2466,8 @@
 				D38187E015FE348A00C3EDCA /* WizardViewController.xib */,
 				D3D5126E160B3AD400946DF8 /* WizardViewController~ipad.xib */,
 				D3D5126A160B3A8E00946DF8 /* WizardViews.xib */,
+				6E360D381B10DFD1009A5D55 /* SMSButton.h */,
+				6E360D391B10DFD1009A5D55 /* SMSButton.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -2753,6 +2760,7 @@
 				26E7F3651A81709F0033D3C0 /* sign-up-normal.png */,
 				26E7F3661A81709F0033D3C0 /* sms-black-hover.png */,
 				26E7F3671A81709F0033D3C0 /* sms-black.png */,
+				6E360D361B10DAF5009A5D55 /* sms-contacts.png */,
 				26E7F3681A81709F0033D3C0 /* sms-hover.png */,
 				26E7F3691A81709F0033D3C0 /* sms.png */,
 				26E7F36A1A81709F0033D3C0 /* speaker-off-button.png */,
@@ -4131,6 +4139,7 @@
 				D38187D915FE347700C3EDCA /* IncomingCallViewController.xib in Resources */,
 				F0C1F90E1A28781F009402C9 /* background-launch.png in Resources */,
 				D3F26BF715986DAD005F9CAB /* history_ok_default.png in Resources */,
+				6E360D371B10DAF5009A5D55 /* sms-contacts.png in Resources */,
 				D3F26BF915986DAD005F9CAB /* history_ok_over.png in Resources */,
 				D3F26BFC15987083005F9CAB /* header_incoming.png in Resources */,
 				639CEB031A1DF4EB004DE38F /* UICompositeViewController.xib in Resources */,
@@ -4756,6 +4765,7 @@
 				22F2508E107141E100AC9B3F /* DialerViewController.m in Sources */,
 				22E0A822111C44E100B04932 /* AboutViewController.m in Sources */,
 				631C4FB119D2A8F2004BFE77 /* UIDigitButtonLongPlus.m in Sources */,
+				6E360D3A1B10DFD1009A5D55 /* SMSButton.m in Sources */,
 				26E7F2F41A816E200033D3C0 /* SWCellScrollView.m in Sources */,
 				2248E90E12F7E4CF00220D9C /* UIDigitButton.m in Sources */,
 				2214EB7A12F846B1002A5394 /* UICallButton.m in Sources */,
