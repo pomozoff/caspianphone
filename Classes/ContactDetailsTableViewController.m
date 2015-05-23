@@ -26,6 +26,10 @@
 #import "FastAddressBook.h"
 #import "Utils.h"
 
+#import "SMSConversationViewController.h"
+#import "CoreDataManager.h"
+#import "Conversation.h"
+
 @interface Entry : NSObject
 
 @property (assign) ABMultiValueIdentifier identifier;
@@ -520,6 +524,9 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
         UACellBackgroundView *selectedBackgroundView = [[[UACellBackgroundView alloc] initWithFrame:CGRectZero] autorelease];
         cell.selectedBackgroundView = selectedBackgroundView;
         [selectedBackgroundView setBackgroundColor:LINPHONE_TABLE_CELL_BACKGROUND_COLOR];
+        
+        cell.smsButton.indexPath = indexPath;
+        [cell.smsButton addTarget:self action:@selector(sendSMS:) forControlEvents:UIControlEventTouchUpInside];
     }
     
     NSMutableArray *sectionDict = [self getSectionData:[indexPath section]];
@@ -888,6 +895,72 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
         [self performSelector:@selector(updateModification) withObject:nil afterDelay:0];
     }
     return TRUE;
+}
+
+- (void)sendSMS:(SMSButton *)smsButton
+{
+    NSMutableArray *sectionDict = [self getSectionData:smsButton.indexPath.section];
+    Entry *entry  = [sectionDict objectAtIndex:smsButton.indexPath.row];
+    
+    
+    NSString *name = @"";
+    NSString *firstName = (__bridge NSString *)(ABRecordCopyValue(contact, kABPersonFirstNameProperty));
+    NSString *lastName = (__bridge NSString *)(ABRecordCopyValue(contact, kABPersonLastNameProperty));
+    if (firstName && lastName) {
+        name = [NSString stringWithFormat:@"%@ %@", firstName, lastName];
+    }
+    else if (firstName && !lastName) {
+        name = firstName;
+    }
+    else if (!firstName && lastName) {
+        name = lastName;
+    }
+    
+    ABMultiValueRef lMap = ABRecordCopyValue(contact, kABPersonPhoneProperty);
+    NSInteger index = ABMultiValueGetIndexForIdentifier(lMap, [entry identifier]);
+    NSString *phoneNumber = (NSString *)ABMultiValueCopyValueAtIndex(lMap, index);
+    phoneNumber = [phoneNumber stringByReplacingOccurrencesOfString:@" " withString:@""];
+    phoneNumber = [phoneNumber stringByReplacingOccurrencesOfString:@"+" withString:@""];
+    phoneNumber = [phoneNumber stringByReplacingOccurrencesOfString:@"(" withString:@""];
+    phoneNumber = [phoneNumber stringByReplacingOccurrencesOfString:@")" withString:@""];
+    
+    NSData *image;
+    CFDataRef imageData = ABPersonCopyImageData(contact);
+    image = (NSData *)imageData;
+    if (imageData) {
+        CFRelease(imageData);
+    }
+    
+    [self pushConversationVC:name phoneNumber:phoneNumber image:image];
+}
+
+- (void)pushConversationVC:(NSString *)name
+               phoneNumber:(NSString *)phoneNumber
+                     image:(NSData *)image
+{
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"recepientNumber = %@", phoneNumber];
+    [[CoreDataManager sharedManager] retrieveManagedObject:@"Conversation" predicate:predicate sortDescriptors:nil successBlock:^(NSArray *retrievedObjects) {
+        if ([retrievedObjects count] <= 0) {
+            Conversation *conversation = (Conversation *)[[CoreDataManager sharedManager] createManagedObject:@"Conversation"];
+            
+            conversation.recepientName = name;
+            conversation.recepientNumber = phoneNumber;
+            conversation.image = image;
+            
+            [[CoreDataManager sharedManager] saveContextSuccessBlock:^{
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    SMSConversationViewController *controller = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[SMSConversationViewController compositeViewDescription] push:TRUE], SMSConversationViewController);
+                    controller.conversation = conversation;
+                });
+            }];
+        }
+        else {
+            // Open existing conversation
+            Conversation *conversation = (Conversation *)retrievedObjects[0];
+            SMSConversationViewController *controller = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[SMSConversationViewController compositeViewDescription] push:TRUE], SMSConversationViewController);
+            controller.conversation = conversation;
+        }
+    }];
 }
 
 @end
