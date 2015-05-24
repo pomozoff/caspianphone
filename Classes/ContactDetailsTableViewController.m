@@ -26,6 +26,10 @@
 #import "FastAddressBook.h"
 #import "Utils.h"
 
+#import "SMSConversationViewController.h"
+#import "CoreDataManager.h"
+#import "Conversation.h"
+
 @interface Entry : NSObject
 
 @property (assign) ABMultiValueIdentifier identifier;
@@ -520,6 +524,9 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
         UACellBackgroundView *selectedBackgroundView = [[[UACellBackgroundView alloc] initWithFrame:CGRectZero] autorelease];
         cell.selectedBackgroundView = selectedBackgroundView;
         [selectedBackgroundView setBackgroundColor:LINPHONE_TABLE_CELL_BACKGROUND_COLOR];
+        
+        cell.smsButton.indexPath = indexPath;
+        [cell.smsButton addTarget:self action:@selector(sendSMS:) forControlEvents:UIControlEventTouchUpInside];
     }
     
     NSMutableArray *sectionDict = [self getSectionData:[indexPath section]];
@@ -888,6 +895,51 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
         [self performSelector:@selector(updateModification) withObject:nil afterDelay:0];
     }
     return TRUE;
+}
+
+- (void)sendSMS:(SMSButton *)smsButton
+{
+    NSMutableArray *sectionDict = [self getSectionData:smsButton.indexPath.section];
+    Entry *entry  = [sectionDict objectAtIndex:smsButton.indexPath.row];
+    ABMultiValueRef lMap = ABRecordCopyValue(contact, kABPersonPhoneProperty);
+    NSInteger index = ABMultiValueGetIndexForIdentifier(lMap, [entry identifier]);
+    NSString *number = (NSString *)ABMultiValueCopyValueAtIndex(lMap, index);
+    number = [FastAddressBook normalizePhoneNumber:number];
+    NSString *name = [FastAddressBook getContactDisplayName:contact];
+    UIImage *image = [FastAddressBook getContactImage:contact thumbnail:NO];
+    
+    [self pushConversationVC:name phoneNumber:number image:image];
+}
+
+- (void)pushConversationVC:(NSString *)name
+               phoneNumber:(NSString *)phoneNumber
+                     image:(UIImage *)image
+{
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"recepientNumber = %@", phoneNumber];
+    [[CoreDataManager sharedManager] retrieveManagedObject:@"Conversation" predicate:predicate sortDescriptors:nil successBlock:^(NSArray *retrievedObjects) {
+        if ([retrievedObjects count] <= 0) {
+            // Create conversation with data from contacts
+            Conversation *conversation = (Conversation *)[[CoreDataManager sharedManager] createManagedObject:@"Conversation"];
+            
+            NSData *imageData = UIImagePNGRepresentation(image);
+            conversation.recepientName = name;
+            conversation.recepientNumber = phoneNumber;
+            conversation.image = imageData;
+            
+            [[CoreDataManager sharedManager] saveContextSuccessBlock:^{
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    SMSConversationViewController *controller = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[SMSConversationViewController compositeViewDescription] push:TRUE], SMSConversationViewController);
+                    controller.conversation = conversation;
+                });
+            }];
+        }
+        else {
+            // Open existing conversation
+            Conversation *conversation = (Conversation *)retrievedObjects[0];
+            SMSConversationViewController *controller = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[SMSConversationViewController compositeViewDescription] push:TRUE], SMSConversationViewController);
+            controller.conversation = conversation;
+        }
+    }];
 }
 
 @end
