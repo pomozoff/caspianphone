@@ -8,8 +8,8 @@
 
 #import "APIManager.h"
 
-#define SMS_ACTIVATION_API  @"https://onecallcaspian.co.uk/mobile/sms?phone_number=%@&password=%@&from=onecall&text=Your verification code is %@&receiver=%@"
-#define SMS_API             @"https://onecallcaspian.co.uk/mobile/sms?phone_number=%@&password=%@&from=%@&text=%@&receiver=%@"
+static NSString *smsActivationAPI = @"https://onecallcaspian.co.uk/mobile/sms?phone_number=%@&password=%@&from=onecall&text=Your verification code is %@&receiver=%@";
+static NSString *smsAPI = @"https://onecallcaspian.co.uk/mobile/sms?phone_number=%@&password=%@&from=%@&text=%@&receiver=%@";
 
 @implementation APIManager
 
@@ -19,7 +19,7 @@
                      successBlock:(void(^)(void))successBlock
                      failureBlock:(void(^)(void))failureBlock
 {
-    NSString *urlRequestString = [NSString stringWithFormat:SMS_ACTIVATION_API, phoneNumber, password, code, phoneNumber];
+    NSString *urlRequestString = [NSString stringWithFormat:smsActivationAPI, phoneNumber, password, code, phoneNumber];
     NSString *urlEncodedString = [urlRequestString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlEncodedString] cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:3000];
@@ -51,7 +51,7 @@
               successBlock:(void(^)(void))successBlock
               failureBlock:(void(^)(void))failureBlock
 {
-    NSString *urlRequestString = [NSString stringWithFormat:SMS_API, phoneNumber, password, phoneNumber, message, recepient];
+    NSString *urlRequestString = [NSString stringWithFormat:smsAPI, phoneNumber, password, phoneNumber, message, recepient];
     NSString *urlEncodedString = [urlRequestString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlEncodedString] cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:3000];
