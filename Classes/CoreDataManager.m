@@ -67,12 +67,13 @@
 
 - (void)saveContextSuccessBlock:(void(^)())successBlock
 {
+    __block CoreDataManager *blockSelf = self;
     [self.backgroundContext performBlock:^{
-        [self.backgroundContext save:nil];
-        [self.mainContext performBlock:^{
-            [self.mainContext save:nil];
-            [self.rootContext performBlock:^{
-                [self.rootContext save:nil];
+        [blockSelf.backgroundContext save:nil];
+        [blockSelf.mainContext performBlock:^{
+            [blockSelf.mainContext save:nil];
+            [blockSelf.rootContext performBlock:^{
+                [blockSelf.rootContext save:nil];
                 if (successBlock) {
                     successBlock();
                 }
@@ -88,8 +89,9 @@
               sortDescriptors:(NSArray *)sortDescriptors
                  successBlock:(void(^)(NSArray *retrievedObjects))successBlock
 {
+    __block CoreDataManager *blockSelf = self;
     [self.mainContext performBlock:^{
-        NSEntityDescription *entity = [NSEntityDescription entityForName:managedObjectName inManagedObjectContext:self.mainContext];
+        NSEntityDescription *entity = [NSEntityDescription entityForName:managedObjectName inManagedObjectContext:blockSelf.mainContext];
         NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
         fetchRequest.entity = entity;
         fetchRequest.returnsObjectsAsFaults = NO;
@@ -102,7 +104,7 @@
         }
         
         NSError *error = nil;
-        NSArray *fetchedObjectsFromBackgroundContext = [self.mainContext executeFetchRequest:fetchRequest error:&error];
+        NSArray *fetchedObjectsFromBackgroundContext = [blockSelf.mainContext executeFetchRequest:fetchRequest error:&error];
         
         if (successBlock) {
             successBlock(fetchedObjectsFromBackgroundContext);

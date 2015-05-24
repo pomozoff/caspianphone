@@ -300,11 +300,11 @@
 		6E360D331B0E0D47009A5D55 /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E360D321B0E0D47009A5D55 /* Message.m */; };
 		6E360D351B0E2A37009A5D55 /* chat_bubble_outgoing_triangle.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E360D341B0E2A37009A5D55 /* chat_bubble_outgoing_triangle.png */; };
 		6E360D371B10DAF5009A5D55 /* sms-contacts.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E360D361B10DAF5009A5D55 /* sms-contacts.png */; };
-		6E360D3A1B10DFD1009A5D55 /* SMSButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E360D391B10DFD1009A5D55 /* SMSButton.m */; };
-		6E503A591B09D5C40081DB97 /* APIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E503A581B09D5C40081DB97 /* APIManager.m */; };
+		6E360D3A1B10DFD1009A5D55 /* SMSButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E360D391B10DFD1009A5D55 /* SMSButton.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6E503A591B09D5C40081DB97 /* APIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E503A581B09D5C40081DB97 /* APIManager.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6E503A601B09D5D10081DB97 /* SMSActivationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E503A5B1B09D5D10081DB97 /* SMSActivationViewController.m */; };
 		6E503A611B09D5D10081DB97 /* SMSActivationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E503A5C1B09D5D10081DB97 /* SMSActivationViewController.xib */; };
-		6E503A661B09D5E20081DB97 /* ProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E503A651B09D5E20081DB97 /* ProgressHUD.m */; };
+		6E503A661B09D5E20081DB97 /* ProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E503A651B09D5E20081DB97 /* ProgressHUD.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6E503A691B09D6C70081DB97 /* CoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E503A681B09D6C70081DB97 /* CoreDataManager.m */; };
 		6E503A6C1B09D6F90081DB97 /* SMS.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6E503A6A1B09D6F90081DB97 /* SMS.xcdatamodeld */; };
 		6E503A741B09DBA30081DB97 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E503A731B09DBA30081DB97 /* CoreData.framework */; };
