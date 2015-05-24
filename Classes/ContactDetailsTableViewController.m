@@ -901,51 +901,30 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
 {
     NSMutableArray *sectionDict = [self getSectionData:smsButton.indexPath.section];
     Entry *entry  = [sectionDict objectAtIndex:smsButton.indexPath.row];
-    
-    
-    NSString *name = @"";
-    NSString *firstName = (__bridge NSString *)(ABRecordCopyValue(contact, kABPersonFirstNameProperty));
-    NSString *lastName = (__bridge NSString *)(ABRecordCopyValue(contact, kABPersonLastNameProperty));
-    if (firstName && lastName) {
-        name = [NSString stringWithFormat:@"%@ %@", firstName, lastName];
-    }
-    else if (firstName && !lastName) {
-        name = firstName;
-    }
-    else if (!firstName && lastName) {
-        name = lastName;
-    }
-    
     ABMultiValueRef lMap = ABRecordCopyValue(contact, kABPersonPhoneProperty);
     NSInteger index = ABMultiValueGetIndexForIdentifier(lMap, [entry identifier]);
-    NSString *phoneNumber = (NSString *)ABMultiValueCopyValueAtIndex(lMap, index);
-    phoneNumber = [phoneNumber stringByReplacingOccurrencesOfString:@" " withString:@""];
-    phoneNumber = [phoneNumber stringByReplacingOccurrencesOfString:@"+" withString:@""];
-    phoneNumber = [phoneNumber stringByReplacingOccurrencesOfString:@"(" withString:@""];
-    phoneNumber = [phoneNumber stringByReplacingOccurrencesOfString:@")" withString:@""];
+    NSString *number = (NSString *)ABMultiValueCopyValueAtIndex(lMap, index);
+    number = [FastAddressBook normalizePhoneNumber:number];
+    NSString *name = [FastAddressBook getContactDisplayName:contact];
+    UIImage *image = [FastAddressBook getContactImage:contact thumbnail:NO];
     
-    NSData *image;
-    CFDataRef imageData = ABPersonCopyImageData(contact);
-    image = (NSData *)imageData;
-    if (imageData) {
-        CFRelease(imageData);
-    }
-    
-    [self pushConversationVC:name phoneNumber:phoneNumber image:image];
+    [self pushConversationVC:name phoneNumber:number image:image];
 }
 
 - (void)pushConversationVC:(NSString *)name
                phoneNumber:(NSString *)phoneNumber
-                     image:(NSData *)image
+                     image:(UIImage *)image
 {
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"recepientNumber = %@", phoneNumber];
     [[CoreDataManager sharedManager] retrieveManagedObject:@"Conversation" predicate:predicate sortDescriptors:nil successBlock:^(NSArray *retrievedObjects) {
         if ([retrievedObjects count] <= 0) {
+            // Create conversation with data from contacts
             Conversation *conversation = (Conversation *)[[CoreDataManager sharedManager] createManagedObject:@"Conversation"];
             
+            NSData *imageData = UIImagePNGRepresentation(image);
             conversation.recepientName = name;
             conversation.recepientNumber = phoneNumber;
-            conversation.image = image;
+            conversation.image = imageData;
             
             [[CoreDataManager sharedManager] saveContextSuccessBlock:^{
                 dispatch_async(dispatch_get_main_queue(), ^{
