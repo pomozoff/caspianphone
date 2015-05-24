@@ -51,9 +51,6 @@ static NSString *caspianPasswordKey = @"uk.co.onecallcaspian.phone.password";
     self.tableView.delegate = self;
     [self.view addSubview:self.tableView];
     [self.view bringSubviewToFront:self.textEditView];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 }
 
 - (void)viewWillLayoutSubviews
@@ -67,6 +64,17 @@ static NSString *caspianPasswordKey = @"uk.co.onecallcaspian.phone.password";
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:UIKeyboardWillShowNotification];
+    [[NSNotificationCenter defaultCenter] removeObserver:UIKeyboardWillHideNotification];
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
