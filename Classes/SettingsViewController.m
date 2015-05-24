@@ -847,11 +847,11 @@ static UICompositeViewDescription *compositeDescription = nil;
 		picker.mailComposeDelegate = self;
 
 		[picker setSubject:NSLocalizedString(@"Linphone Logs",nil)];
-		[picker setToRecipients:[NSArray arrayWithObjects:@"", nil]];
 		[picker setMessageBody:NSLocalizedString(@"Linphone logs", nil) isHTML:NO];
 		[picker addAttachmentData:attachment mimeType:type fileName:attachmentName];
 
-		[self presentViewController:picker animated:true completion:nil];
+        UIViewController *rootVC = [[[[UIApplication sharedApplication] delegate] window] rootViewController];
+		[rootVC presentViewController:picker animated:true completion:nil];
 		[picker release];
 	} else {
 		UIAlertView* error = [[UIAlertView alloc]	initWithTitle:NSLocalizedString(@"Cannot send email",nil)
@@ -872,7 +872,8 @@ static UICompositeViewDescription *compositeDescription = nil;
 	} else {
 		[LinphoneLogger log:LinphoneLoggerLog format:@"Mail completed with status: %d", result];
 	}
-	[self dismissViewControllerAnimated:true completion:nil];
+    UIViewController *rootVC = [[[[UIApplication sharedApplication] delegate] window] rootViewController];
+	[rootVC dismissViewControllerAnimated:true completion:nil];
 }
 
 @end
