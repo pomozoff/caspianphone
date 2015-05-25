@@ -23,6 +23,7 @@ static NSString *caspianSMSStatus = @"uk.co.onecallcaspian.phone.smsStatus";
 @property (retain, nonatomic) IBOutlet UITextField *codeTextField;
 @property (retain, nonatomic) IBOutlet UIButton *firstButton;
 @property (retain, nonatomic) IBOutlet UIButton *secondButton;
+@property (retain, nonatomic) IBOutlet UIButton *skipButton;
 
 @end
 
@@ -83,9 +84,18 @@ static NSString *caspianSMSStatus = @"uk.co.onecallcaspian.phone.smsStatus";
                 CGRect secondButtonFrame = self.secondButton.frame;
                 secondButtonFrame.origin.y = secondButtonFrame.origin.y - 45;
                 self.secondButton.frame = secondButtonFrame;
+                self.skipButton.alpha = 1;
             }];
         }];
     }
+}
+
+- (IBAction)skipButtonTapped:(id)sender
+{
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:caspianSMSStatus];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[SMSTableViewController compositeViewDescription] push:TRUE], SMSTableViewController);
 }
 
 #pragma mark - Other Methods
@@ -115,6 +125,7 @@ static NSString *caspianSMSStatus = @"uk.co.onecallcaspian.phone.smsStatus";
             CGRect secondButtonFrame = self.secondButton.frame;
             secondButtonFrame.origin.y = secondButtonFrame.origin.y + 45;
             self.secondButton.frame = secondButtonFrame;
+            self.skipButton.alpha = 0;
         } completion:^(BOOL finished) {
             [UIView animateWithDuration:0.5 animations:^{
                 self.codeTextField.alpha = 1.0;
@@ -165,6 +176,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     [_secondButton release];
     [_firstButton release];
     [_secondButton release];
+    [_skipButton release];
     [super dealloc];
 }
 @end
