@@ -61,6 +61,14 @@ static NSString *smsAPI = @"https://onecallcaspian.co.uk/mobile/sms?phone_number
     self.tableView.frame = frame;
 }
 
+- (void)viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
+    
+    self.textEditView.frame = CGRectMake(0, self.view.frame.size.height - self.textEditView.frame.size.height, self.textEditView.frame.size.width, self.textEditView.frame.size.height);
+    [self.view bringSubviewToFront:self.textEditView];
+}
+
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
