@@ -2477,6 +2477,31 @@ static void audioRouteChangeListenerCallback (
 
 #pragma mark - Public
 
+- (void)dataFromUrlStringGET:(NSString *)urlString completionBlock:(void(^)(void))completionBlock errorBlock:(void(^)(void))errorBlock {
+    NSString *urlEncodedString = [urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlEncodedString] cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:3000];
+    [request setHTTPMethod: @"GET"];
+    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+    
+    [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+        if (connectionError == nil) {
+            if (completionBlock) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    completionBlock();
+                });
+            }
+        }
+        else {
+            if (errorBlock) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    errorBlock();
+                });
+            }
+        }
+    }];
+}
+
 - (void)dataFromUrlString:(NSString *)urlString completionBlock:(void(^)(id result))completionBlock errorBlock:(void(^)(NSError *error))errorBlock {
     NSURL *url = [NSURL URLWithString:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     [self dataFromUrl:url completionBlock:completionBlock errorBlock:errorBlock];

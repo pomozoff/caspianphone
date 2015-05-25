@@ -301,7 +301,6 @@
 		6E360D351B0E2A37009A5D55 /* chat_bubble_outgoing_triangle.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E360D341B0E2A37009A5D55 /* chat_bubble_outgoing_triangle.png */; };
 		6E360D371B10DAF5009A5D55 /* sms-contacts.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E360D361B10DAF5009A5D55 /* sms-contacts.png */; };
 		6E360D3A1B10DFD1009A5D55 /* SMSButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E360D391B10DFD1009A5D55 /* SMSButton.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		6E503A591B09D5C40081DB97 /* APIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E503A581B09D5C40081DB97 /* APIManager.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6E503A601B09D5D10081DB97 /* SMSActivationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E503A5B1B09D5D10081DB97 /* SMSActivationViewController.m */; };
 		6E503A611B09D5D10081DB97 /* SMSActivationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E503A5C1B09D5D10081DB97 /* SMSActivationViewController.xib */; };
 		6E503A661B09D5E20081DB97 /* ProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E503A651B09D5E20081DB97 /* ProgressHUD.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -1404,8 +1403,6 @@
 		6E360D361B10DAF5009A5D55 /* sms-contacts.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sms-contacts.png"; sourceTree = "<group>"; };
 		6E360D381B10DFD1009A5D55 /* SMSButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMSButton.h; sourceTree = "<group>"; };
 		6E360D391B10DFD1009A5D55 /* SMSButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMSButton.m; sourceTree = "<group>"; };
-		6E503A571B09D5C40081DB97 /* APIManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APIManager.h; sourceTree = "<group>"; };
-		6E503A581B09D5C40081DB97 /* APIManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APIManager.m; sourceTree = "<group>"; };
 		6E503A5A1B09D5D10081DB97 /* SMSActivationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMSActivationViewController.h; sourceTree = "<group>"; };
 		6E503A5B1B09D5D10081DB97 /* SMSActivationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMSActivationViewController.m; sourceTree = "<group>"; };
 		6E503A5C1B09D5D10081DB97 /* SMSActivationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SMSActivationViewController.xib; sourceTree = "<group>"; };
@@ -2946,8 +2943,6 @@
 		6E503A561B09D5A60081DB97 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
-				6E503A571B09D5C40081DB97 /* APIManager.h */,
-				6E503A581B09D5C40081DB97 /* APIManager.m */,
 				6E503A671B09D6C70081DB97 /* CoreDataManager.h */,
 				6E503A681B09D6C70081DB97 /* CoreDataManager.m */,
 				6E503A6A1B09D6F90081DB97 /* SMS.xcdatamodeld */,
@@ -4827,7 +4822,6 @@
 				636316DE1A1DEF2F0009B839 /* UIButtonShrinkable.m in Sources */,
 				D3C6526715AC1A8F0092A874 /* UIEditableTableViewCell.m in Sources */,
 				263CE08F1A94FBAD002983F9 /* UISmileCollectionViewCell.m in Sources */,
-				6E503A591B09D5C40081DB97 /* APIManager.m in Sources */,
 				D378906515AC373B00BD776C /* ContactDetailsLabelViewController.m in Sources */,
 				6E360D301B0E0D46009A5D55 /* Conversation.m in Sources */,
 				D3E8F68615ADE05B0065A226 /* UIContactDetailsFooter.m in Sources */,
