@@ -8,14 +8,15 @@
 
 #import "SMSActivationViewController.h"
 #import "SMSTableViewController.h"
+#import "LinphoneManager.h"
 #import "PhoneMainView.h"
 #import "ProgressHUD.h"
-#import "APIManager.h"
 
 static NSString *caspianPhoneNumber = @"uk.co.onecallcaspian.phone.phoneNumber";
 static NSString *caspianPasswordKey = @"uk.co.onecallcaspian.phone.password";
 static NSString *caspianRandomCode = @"uk.co.onecallcaspian.phone.randomCode";
 static NSString *caspianSMSStatus = @"uk.co.onecallcaspian.phone.smsStatus";
+static NSString *smsActivationAPI = @"https://onecallcaspian.co.uk/mobile/sms?phone_number=%@&password=%@&from=onecall&text=Your verification code is %@&receiver=%@";
 
 @interface SMSActivationViewController ()
 
@@ -23,6 +24,7 @@ static NSString *caspianSMSStatus = @"uk.co.onecallcaspian.phone.smsStatus";
 @property (retain, nonatomic) IBOutlet UITextField *codeTextField;
 @property (retain, nonatomic) IBOutlet UIButton *firstButton;
 @property (retain, nonatomic) IBOutlet UIButton *secondButton;
+@property (retain, nonatomic) IBOutlet UIButton *skipButton;
 
 @end
 
@@ -83,9 +85,18 @@ static NSString *caspianSMSStatus = @"uk.co.onecallcaspian.phone.smsStatus";
                 CGRect secondButtonFrame = self.secondButton.frame;
                 secondButtonFrame.origin.y = secondButtonFrame.origin.y - 45;
                 self.secondButton.frame = secondButtonFrame;
+                self.skipButton.alpha = 1;
             }];
         }];
     }
+}
+
+- (IBAction)skipButtonTapped:(id)sender
+{
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:caspianSMSStatus];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[SMSTableViewController compositeViewDescription] push:TRUE], SMSTableViewController);
 }
 
 #pragma mark - Other Methods
@@ -101,7 +112,8 @@ static NSString *caspianSMSStatus = @"uk.co.onecallcaspian.phone.smsStatus";
     
     [ProgressHUD showLoadingInView:self.view];
     
-    [APIManager sendSMSActivationWithCode:randomCode phoneNumber:phoneNumber password:password successBlock:^{
+    NSString *urlString = [NSString stringWithFormat:smsActivationAPI, phoneNumber, password, randomCode, phoneNumber];
+    [[LinphoneManager instance] dataFromUrlStringGET:urlString completionBlock:^{
         [ProgressHUD hideLoadingInView:self.view];
         [ProgressHUD showAlertWithTitle:@"SMS Activation" message:@"Activation code sent!"];
         
@@ -115,12 +127,13 @@ static NSString *caspianSMSStatus = @"uk.co.onecallcaspian.phone.smsStatus";
             CGRect secondButtonFrame = self.secondButton.frame;
             secondButtonFrame.origin.y = secondButtonFrame.origin.y + 45;
             self.secondButton.frame = secondButtonFrame;
+            self.skipButton.alpha = 0;
         } completion:^(BOOL finished) {
             [UIView animateWithDuration:0.5 animations:^{
                 self.codeTextField.alpha = 1.0;
             }];
         }];
-    } failureBlock:^{
+    } errorBlock:^{
         [ProgressHUD hideLoadingInView:self.view];
         [ProgressHUD showAlertWithTitle:@"SMS Activation" message:@"Failed to send activation code. Please try again."];
     }];
@@ -165,6 +178,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     [_secondButton release];
     [_firstButton release];
     [_secondButton release];
+    [_skipButton release];
     [super dealloc];
 }
 @end

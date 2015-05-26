@@ -11,11 +11,11 @@
 #import "SMSMessageCell.h"
 #import "PhoneMainView.h"
 #import "Conversation.h"
-#import "APIManager.h"
 #import "Message.h"
 
 static NSString *caspianPhoneNumber = @"uk.co.onecallcaspian.phone.phoneNumber";
 static NSString *caspianPasswordKey = @"uk.co.onecallcaspian.phone.password";
+static NSString *smsAPI = @"https://onecallcaspian.co.uk/mobile/sms?phone_number=%@&password=%@&from=%@&text=%@&receiver=%@";
 
 @interface SMSConversationViewController () <UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate>
 
@@ -59,6 +59,14 @@ static NSString *caspianPasswordKey = @"uk.co.onecallcaspian.phone.password";
     
     CGRect frame = CGRectMake(0, 70, self.view.frame.size.width, self.view.frame.size.height - 122);
     self.tableView.frame = frame;
+}
+
+- (void)viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
+    
+    self.textEditView.frame = CGRectMake(0, self.view.frame.size.height - self.textEditView.frame.size.height, self.textEditView.frame.size.width, self.textEditView.frame.size.height);
+    [self.view bringSubviewToFront:self.textEditView];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -242,10 +250,11 @@ static NSString *caspianPasswordKey = @"uk.co.onecallcaspian.phone.password";
     conversationFromBackground.lastMessage = message.content;
     
     [[CoreDataManager sharedManager] saveContextSuccessBlock:^{
-        [APIManager sendSMSWithMessage:messageString recepient:self.conversation.recepientNumber phoneNumber:phoneNumber password:password successBlock:^{
+        NSString *urlString = [NSString stringWithFormat:smsAPI, phoneNumber, password, phoneNumber, messageString, self.conversation.recepientNumber];
+        [[LinphoneManager instance] dataFromUrlStringGET:urlString completionBlock:^{
             message.status = [NSNumber numberWithBool:YES];
             [[CoreDataManager sharedManager] saveContextSuccessBlock:nil];
-        } failureBlock:nil];
+        } errorBlock:nil];
     }];
 }
 
