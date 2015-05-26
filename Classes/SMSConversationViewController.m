@@ -251,7 +251,7 @@ static NSString *smsAPI = @"https://onecallcaspian.co.uk/mobile/sms?phone_number
     
     [[CoreDataManager sharedManager] saveContextSuccessBlock:^{
         NSString *urlString = [NSString stringWithFormat:smsAPI, phoneNumber, password, phoneNumber, messageString, self.conversation.recepientNumber];
-        [[LinphoneManager instance] dataFromUrlStringGET:urlString completionBlock:^{
+        [[LinphoneManager instance] dataFromUrlString:urlString method:@"GET" completionBlock:^{
             message.status = [NSNumber numberWithBool:YES];
             [[CoreDataManager sharedManager] saveContextSuccessBlock:nil];
         } errorBlock:nil];

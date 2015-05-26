@@ -113,7 +113,7 @@ static NSString *smsActivationAPI = @"https://onecallcaspian.co.uk/mobile/sms?ph
     [ProgressHUD showLoadingInView:self.view];
     
     NSString *urlString = [NSString stringWithFormat:smsActivationAPI, phoneNumber, password, randomCode, phoneNumber];
-    [[LinphoneManager instance] dataFromUrlStringGET:urlString completionBlock:^{
+    [[LinphoneManager instance] dataFromUrlString:urlString method:@"GET" completionBlock:^{
         [ProgressHUD hideLoadingInView:self.view];
         [ProgressHUD showAlertWithTitle:@"SMS Activation" message:@"Activation code sent!"];
         

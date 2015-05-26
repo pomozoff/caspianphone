@@ -2477,11 +2477,13 @@ static void audioRouteChangeListenerCallback (
 
 #pragma mark - Public
 
-- (void)dataFromUrlStringGET:(NSString *)urlString completionBlock:(void(^)(void))completionBlock errorBlock:(void(^)(void))errorBlock {
+- (void)dataFromUrlString:(NSString *)urlString method:(NSString *)method completionBlock:(void(^)(void))completionBlock errorBlock:(void(^)(void))errorBlock {
     NSString *urlEncodedString = [urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlEncodedString] cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:3000];
-    [request setHTTPMethod: @"GET"];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlEncodedString]
+                                                           cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
+                                                       timeoutInterval:3000];
+    [request setHTTPMethod:method];
     NSOperationQueue *queue = [[NSOperationQueue alloc] init];
     
     [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
