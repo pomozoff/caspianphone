@@ -19,6 +19,14 @@
 			<string>IASKButtonSpecifier</string>
 		</dict>
 		<dict>
+			<key>Key</key>
+			<string>activate_sms_button</string>
+			<key>Title</key>
+			<string>Activate SMS</string>
+			<key>Type</key>
+			<string>IASKButtonSpecifier</string>
+		</dict>
+		<dict>
 			<key>AutocapitalizationType</key>
 			<string>None</string>
 			<key>AutocorrectionType</key>
