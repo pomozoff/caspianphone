@@ -22,6 +22,7 @@
 #import "PhoneMainView.h"
 #import "UILinphone.h"
 #import "UACellBackgroundView.h"
+#import "SMSActivationViewController.h"
 
 #import "DCRoundSwitch.h"
 
@@ -33,6 +34,9 @@
 #include "linphone/lpconfig.h"
 
 #import "DTAlertView.h"
+#import "ProgressHUD.h"
+
+static NSString *caspianSMSStatus = @"uk.co.onecallcaspian.phone.smsStatus";
 
 #ifdef DEBUG
 @interface UIDevice (debug)
@@ -773,7 +777,15 @@ static UICompositeViewDescription *compositeDescription = nil;
         [[NSNotificationCenter defaultCenter] postNotificationName:UIDeviceBatteryLevelDidChangeNotification object:self];
     } else
 #endif
-    if ([key isEqual:@"reset_button"]) {
+    if ([key isEqual:@"activate_sms_button"]) {
+        if ([[NSUserDefaults standardUserDefaults] boolForKey:caspianSMSStatus]) {
+            [ProgressHUD showAlertWithTitle:@"Activate SMS" message:@"SMS already activated."];
+        }
+        else {
+            DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[SMSActivationViewController compositeViewDescription] push:TRUE], SMSActivationViewController);
+        }
+    }
+    else if ([key isEqual:@"reset_button"]) {
         //[[PhoneMainView instance] resetToDefaults];
         [[LinphoneManager instance] resetSettingsToDefault:[LinphoneManager getLc]];
         [settingsStore transformLinphoneCoreToKeys];
@@ -823,6 +835,9 @@ static UICompositeViewDescription *compositeDescription = nil;
         [controller reset];
     }
     [[LinphoneManager instance] resetLinphoneCore];
+    
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:caspianSMSStatus];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 #pragma mark - Mail composer for send log
