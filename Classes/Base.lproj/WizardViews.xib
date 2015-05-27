@@ -252,17 +252,17 @@
                                 <action selector="onOkConfirmTap:" destination="-1" eventType="touchUpInside" id="8Qw-qX-OP1"/>
                             </connections>
                         </button>
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Phone Number" adjustsFontSizeToFit="NO" minimumFontSize="18" background="Rectangle.png" translatesAutoresizingMaskIntoConstraints="NO" id="4PV-ab-MvO" userLabel="Phone Number" customClass="COCTextField">
+                            <rect key="frame" x="70" y="69" width="230" height="41"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                            <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numberPad" returnKeyType="done"/>
+                            <connections>
+                                <outlet property="delegate" destination="-1" id="TYH-ah-Uv9"/>
+                            </connections>
+                        </textField>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Phone Number" adjustsFontSizeToFit="NO" minimumFontSize="18" background="Rectangle.png" translatesAutoresizingMaskIntoConstraints="NO" id="4PV-ab-MvO" userLabel="Phone Number" customClass="COCTextField">
-                    <rect key="frame" x="90" y="150" width="230" height="41"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                    <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numberPad" returnKeyType="done"/>
-                    <connections>
-                        <outlet property="delegate" destination="-1" id="TYH-ah-Uv9"/>
-                    </connections>
-                </textField>
             </subviews>
             <color key="backgroundColor" red="0.52156865600000002" green="0.76862752440000004" blue="0.91372555489999996" alpha="1" colorSpace="deviceRGB"/>
             <gestureRecognizers/>
