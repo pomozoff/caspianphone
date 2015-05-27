@@ -778,12 +778,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     } else
 #endif
     if ([key isEqual:@"activate_sms_button"]) {
-        if ([[NSUserDefaults standardUserDefaults] boolForKey:caspianSMSStatus]) {
-            [ProgressHUD showAlertWithTitle:@"Activate SMS" message:@"SMS already activated."];
-        }
-        else {
-            DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[SMSActivationViewController compositeViewDescription] push:TRUE], SMSActivationViewController);
-        }
+        DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[SMSActivationViewController compositeViewDescription] push:TRUE], SMSActivationViewController);
     }
     else if ([key isEqual:@"reset_button"]) {
         //[[PhoneMainView instance] resetToDefaults];
