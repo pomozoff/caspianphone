@@ -101,6 +101,9 @@ extern NSString *caspianErrorDomain;
 @synthesize activateAccountView;
 @synthesize provisionedAccountView;
 @synthesize waitView;
+@synthesize logInView;
+@synthesize welcomeView2;
+
 
 @synthesize cancelButton;
 @synthesize backButton;
@@ -179,6 +182,9 @@ extern NSString *caspianErrorDomain;
     self = [super initWithNibName:@"WizardViewController" bundle:[NSBundle mainBundle]];
     if (self != nil) {
         [[NSBundle mainBundle] loadNibNamed:@"WizardViews"
+                                      owner:self
+                                    options:nil];
+        [[NSBundle mainBundle] loadNibNamed:@"WizardViews_2"
                                       owner:self
                                     options:nil];
         self->historyViews = [[NSMutableArray alloc] init];
@@ -278,6 +284,11 @@ extern NSString *caspianErrorDomain;
     [_flagLoadingSignUpActivityIndicator release];
     [_countryFlagForgotPasswordImage release];
     [_flagLoadingForgotPasswordActivityIndicator release];
+    [welcomeView2 release];
+    [logInView release];
+    [_phoneNumberNextSignInToolbar release];
+    [_numKeypadDoneSignInToolbar release];
+    [_dismissKeyboardButton release];
     [super dealloc];
 }
 
@@ -374,7 +385,8 @@ static UICompositeViewDescription *compositeDescription = nil;
     self.countryNameForgotPasswordField.inputView = self.countryPickerView;
     self.countryNameForgotPasswordField.inputAccessoryView = self.countryPickerDoneToolbar;
     
-    self.phoneNumberRegisterField.inputAccessoryView = self.numKeypadDoneToolbar;
+    self.phoneNumberRegisterField.inputAccessoryView = self.phoneNumberNextSignInToolbar;
+    //self.passwordRegisterField.inputAccessoryView = self.numKeypadDoneSignInToolbar;
     self.activationCodeActivateField.inputAccessoryView = self.numKeypadDoneToolbar;
     self.passwordFinishField.inputView = self.dummyView;
     self.phoneNumberForgotPasswordField.inputAccessoryView = self.numKeypadDoneToolbar;
@@ -635,8 +647,12 @@ static UICompositeViewDescription *compositeDescription = nil;
     [[LinphoneManager instance] lpConfigSetBool:(view != signInView || back) forKey:@"animations_preference"];
     if (view == signInView) {
         if (!back) {
-            [self fillCredentials];
+            //[self fillCredentials];
         }
+    } else if (view == logInView) {
+        if (!back) {
+                [self fillCredentials];
+            }
     } else if (view == signUpView) {
         [self cleanUpSignUpView];
 
@@ -919,6 +935,9 @@ static UICompositeViewDescription *compositeDescription = nil;
 #pragma mark - UITextFieldDelegate Functions
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    if (textField == self.passwordRegisterField) {
+        [self loginInMethod];
+    } else
     if (textField == self.firstNameSignUpField) {
         [self.lastNameSignUpField becomeFirstResponder];
     } else {
@@ -934,7 +953,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 - (void)textFieldDidEndEditing:(UITextField *)textField {
     [self checkNextStep];
 }
-
+    
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     if (textField == self.countryNameSignUpField || textField == self.passwordFinishField) {
         return NO;
@@ -982,6 +1001,37 @@ static UICompositeViewDescription *compositeDescription = nil;
     }
 }
 
+-(void) loginInMethod {
+    NSString *phone    = self.phoneNumberRegisterField.text;
+    NSString *password = self.passwordRegisterField.text;
+    NSString *domain   = self.domainRegisterField.text;
+    
+    NSMutableString *errors = [NSMutableString string];
+    if ([phone length] == 0) {
+        
+        [errors appendString:[NSString stringWithFormat:NSLocalizedString(@"Please enter a username.\n", nil)]];
+    }
+    
+    /*
+     if ([domain length] == 0) {
+     [errors appendString:[NSString stringWithFormat:NSLocalizedString(@"Please enter a domain.\n", nil)]];
+     }
+     */
+    
+    if([errors length]) {
+        UIAlertView* errorView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Check error(s)",nil)
+                                                            message:[errors substringWithRange:NSMakeRange(0, [errors length] - 1)]
+                                                           delegate:nil
+                                                  cancelButtonTitle:NSLocalizedString(@"Continue",nil)
+                                                  otherButtonTitles:nil,nil];
+        [errorView show];
+        [errorView release];
+    } else {
+        [self checkIsSameUserSigningIn:phone];
+        [self.waitView setHidden:false];
+        [self addProxyConfig:[[LinphoneManager instance] removeUnneededPrefixes:phone] password:password domain:domain withTransport:@"tcp"];
+    }
+}
 
 #pragma mark - Action Functions
 
@@ -1081,35 +1131,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 }
 
 - (IBAction)onSignInExternalClick:(id)sender {
-    NSString *phone    = self.phoneNumberRegisterField.text;
-    NSString *password = self.passwordRegisterField.text;
-    NSString *domain   = self.domainRegisterField.text;
-    
-    NSMutableString *errors = [NSMutableString string];
-    if ([phone length] == 0) {
-        
-        [errors appendString:[NSString stringWithFormat:NSLocalizedString(@"Please enter a username.\n", nil)]];
-    }
-    
-    /*
-    if ([domain length] == 0) {
-        [errors appendString:[NSString stringWithFormat:NSLocalizedString(@"Please enter a domain.\n", nil)]];
-    }
-    */
-    
-    if([errors length]) {
-        UIAlertView* errorView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Check error(s)",nil)
-                                                            message:[errors substringWithRange:NSMakeRange(0, [errors length] - 1)]
-                                                           delegate:nil
-                                                  cancelButtonTitle:NSLocalizedString(@"Continue",nil)
-                                                  otherButtonTitles:nil,nil];
-        [errorView show];
-        [errorView release];
-    } else {
-        [self checkIsSameUserSigningIn:phone];
-        [self.waitView setHidden:false];
-        [self addProxyConfig:[[LinphoneManager instance] removeUnneededPrefixes:phone] password:password domain:domain withTransport:@"tcp"];
-    }
+    [self loginInMethod];
 }
 
 - (IBAction)onSignInClick:(id)sender {
@@ -1212,6 +1234,9 @@ static UICompositeViewDescription *compositeDescription = nil;
     [self.firstNameSignUpField becomeFirstResponder];
 }
 
+- (IBAction)onPhoneNumberSignInNextTap:(id)sender {
+    [self.passwordRegisterField becomeFirstResponder];
+}
 - (IBAction)onDoneNumKeypad:(id)sender {
     [self.view endEditing:YES];
 }
@@ -1295,6 +1320,17 @@ static UICompositeViewDescription *compositeDescription = nil;
     [self onBackButtonClicked:sender];
 }
 
+- (IBAction)onLogInClick:(id)sender {
+    [self changeView:logInView back:FALSE animation:TRUE];
+}
+
+- (IBAction)onDismissKeyboardButton:(id)sender {
+    if ([self.phoneNumberRegisterField isFirstResponder]) {
+        [self.phoneNumberRegisterField resignFirstResponder];
+    } else if ([self.passwordRegisterField isFirstResponder]) {
+        [self.passwordRegisterField resignFirstResponder];
+    }
+}
 
 #pragma mark - UIAlertViewDelegate
 

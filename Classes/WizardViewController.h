@@ -54,6 +54,10 @@
 @property (nonatomic, retain) IBOutlet UIView *askPhoneNumberView;
 
 @property (nonatomic, retain) IBOutlet UIView *waitView;
+@property (retain, nonatomic) IBOutlet UIView *welcomeView2;
+@property (retain, nonatomic) IBOutlet UIView *logInView;
+
+
 
 @property (nonatomic, retain) IBOutlet UIButton *cancelButton;
 @property (nonatomic, retain) IBOutlet UIButton *backButton;
@@ -62,6 +66,9 @@
 @property (nonatomic, retain) IBOutlet UIButton *connectAccountButton;
 @property (nonatomic, retain) IBOutlet UIButton *externalAccountButton;
 @property (nonatomic, retain) IBOutlet UIButton *remoteProvisioningButton;
+
+@property (nonatomic, retain) IBOutlet UIButton *logInButton;
+@property (nonatomic, retain) IBOutlet UIButton *logInButton2;
 
 @property (nonatomic, retain) IBOutlet UITextField *provisionedUsername;
 @property (nonatomic, retain) IBOutlet UITextField *provisionedPassword;
@@ -78,6 +85,9 @@
 @property (nonatomic, retain) IBOutlet UITextField *domainRegisterField;
 @property (nonatomic, retain) IBOutlet UIToolbar *phoneNumberNextToolbar;
 
+@property (retain, nonatomic) IBOutlet UIToolbar *phoneNumberNextSignInToolbar;
+@property (retain, nonatomic) IBOutlet UIToolbar *numKeypadDoneSignInToolbar;
+
 @property (nonatomic, retain) IBOutlet UIPickerView *countryPickerView;
 @property (nonatomic, retain) IBOutlet UIToolbar *countryPickerDoneToolbar;
 @property (nonatomic, retain) IBOutlet UIToolbar *numKeypadDoneToolbar;
@@ -92,6 +102,8 @@
 @property (nonatomic, retain) IBOutlet COCTextField *lastNameSignUpField;
 @property (nonatomic, retain) IBOutlet UISegmentedControl *activateBySignUpSegmented;
 @property (nonatomic, retain) IBOutlet UIButton *continueSignUpField;
+
+@property (retain, nonatomic) IBOutlet UIButton *dismissKeyboardButton;
 
 @property (nonatomic, retain) IBOutlet UIView *confirmView;
 @property (nonatomic, retain) IBOutlet UIImageView *smsImageConfirmView;
@@ -109,6 +121,9 @@
 @property (nonatomic, retain) IBOutlet UITextField *countryCodeForgotPasswordField;
 @property (nonatomic, retain) IBOutlet COCTextField *countryNameForgotPasswordField;
 @property (nonatomic, retain) IBOutlet COCTextField *phoneNumberForgotPasswordField;
+
+@property (nonatomic, retain) IBOutlet COCTextField *countryNameForgotPasswordField_2;
+@property (nonatomic, retain) IBOutlet COCTextField *phoneNumberForgotPasswordField_2;
 
 @property (nonatomic, retain) IBOutlet COCTextField *phoneNumberAskPhoneNumberField;
 @property (nonatomic, retain) IBOutlet COCTextField *phoneNumberFoundPhoneNumberField;
@@ -131,6 +146,8 @@
 
 - (IBAction)onSignInClick:(id)sender;
 - (IBAction)onSignInExternalClick:(id)sender;
+//- (IBAction)onLogInClick:(id)sender;
+//- (IBAction)onLogInClick_2:(id)sender;
 - (IBAction)onRegisterClick:(id)sender;
 - (IBAction)onProvisionedLoginClick:(id)sender;
 
