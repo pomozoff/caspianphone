@@ -244,6 +244,12 @@
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="welcome.png" translatesAutoresizingMaskIntoConstraints="NO" id="afi-3Y-AGb">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                 </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Country" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jYS-WO-pvD">
+                    <rect key="frame" x="122" y="188" width="77" height="29"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dE2-ec-AaQ" userLabel="countryNameField">
                     <rect key="frame" x="33" y="225" width="255" height="30"/>
                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
@@ -272,12 +278,9 @@
                         <action selector="onBackClick:" destination="-1" eventType="touchUpInside" id="xfV-7k-rHk"/>
                     </connections>
                 </button>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Country" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jYS-WO-pvD">
-                    <rect key="frame" x="122" y="188" width="77" height="29"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                    <nil key="highlightedColor"/>
-                </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="bullets1.png" translatesAutoresizingMaskIntoConstraints="NO" id="ZVH-H5-D71">
+                    <rect key="frame" x="132" y="54" width="56" height="25"/>
+                </imageView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
@@ -315,6 +318,7 @@
         </toolbar>
     </objects>
     <resources>
+        <image name="bullets1.png" width="56" height="25"/>
         <image name="original.png" width="820" height="500"/>
         <image name="signup_back_default.png" width="3766" height="1707"/>
         <image name="signup_next_default.png" width="3766" height="1707"/>
