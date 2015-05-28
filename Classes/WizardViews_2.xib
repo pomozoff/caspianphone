@@ -237,15 +237,32 @@
             </variation>
             <point key="canvasLocation" x="272" y="805"/>
         </view>
-        <view contentMode="scaleToFill" id="BQg-LE-IQC" userLabel="countyLoginView">
+        <view contentMode="scaleToFill" id="BQg-LE-IQC" userLabel="countryLoginView">
             <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="welcome.png" translatesAutoresizingMaskIntoConstraints="NO" id="afi-3Y-AGb">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                 </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i8y-3c-pS2">
+                    <rect key="frame" x="26" y="314" width="110" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="110" id="X4x-A2-Cz6"/>
+                        <constraint firstAttribute="height" constant="50" id="hwa-DS-o5O"/>
+                    </constraints>
+                    <state key="normal" image="signup_back_default.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="onBackClick:" destination="-1" eventType="touchUpInside" id="xfV-7k-rHk"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="i8y-3c-pS2" secondAttribute="bottom" constant="116" id="JX6-FA-Ge5"/>
+                <constraint firstItem="i8y-3c-pS2" firstAttribute="leading" secondItem="BQg-LE-IQC" secondAttribute="leading" constant="26" id="rJu-Rz-22c"/>
+            </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="664" y="258"/>
         </view>
