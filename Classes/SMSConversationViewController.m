@@ -75,22 +75,19 @@ static NSString *smsAPI = @"https://onecallcaspian.co.uk/mobile/sms?phone_number
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+    
+    UITapGestureRecognizer * tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
+    [self.view addGestureRecognizer:tapGesture];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
     
-    [[NSNotificationCenter defaultCenter] removeObserver:UIKeyboardWillShowNotification];
-    [[NSNotificationCenter defaultCenter] removeObserver:UIKeyboardWillHideNotification];
-}
-
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
-{
-    UITouch * touch = [touches anyObject];
-    if(touch.phase == UITouchPhaseBegan) {
-        [self.view endEditing:YES];
-    }
+    self.messageTextView.text = @"";
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
 }
 
 - (void)scrollToBottomAnimated:(BOOL)animated
@@ -103,6 +100,11 @@ static NSString *smsAPI = @"https://onecallcaspian.co.uk/mobile/sms?phone_number
             [self.tableView scrollToRowAtIndexPath:lastMessage atScrollPosition:UITableViewScrollPositionBottom animated:animated];
         }
     }];
+}
+
+- (void)hideKeyboard
+{
+    [self.messageTextView resignFirstResponder];
 }
 
 #pragma mark - UITableViewDelegate and UITableViewDataSource methods
