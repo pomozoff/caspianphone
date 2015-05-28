@@ -19,11 +19,13 @@
 
 #import <UIKit/UIKit.h>
 #import "UITransparentTVCell.h"
+#import "SMSButton.h"
 
 @interface UIEditableTableViewCell : UITransparentTVCell {
 }
 
 @property (nonatomic, retain) IBOutlet UIView *verticalSep;
 @property (nonatomic, retain) IBOutlet UITextField *detailTextField;
+@property (nonatomic, retain) IBOutlet SMSButton *smsButton;
 
 @end
