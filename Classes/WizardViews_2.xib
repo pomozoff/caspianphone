@@ -235,7 +235,19 @@
                     <exclude reference="4vG-jv-RYe"/>
                 </mask>
             </variation>
-            <point key="canvasLocation" x="315" y="805"/>
+            <point key="canvasLocation" x="272" y="805"/>
+        </view>
+        <view contentMode="scaleToFill" id="BQg-LE-IQC" userLabel="countyLoginView">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="welcome.png" translatesAutoresizingMaskIntoConstraints="NO" id="afi-3Y-AGb">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                </imageView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="664" y="258"/>
         </view>
         <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="gsN-F0-qZp">
             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
