@@ -54,6 +54,20 @@
 	</array>
 	<key>CFBundleVersion</key>
 	<string>2.2.6.10</string>
+	<key>Fabric</key>
+	<dict>
+		<key>APIKey</key>
+		<string>33dd028ded3a518de0afb500f5a3839a2af9f021</string>
+		<key>Kits</key>
+		<array>
+			<dict>
+				<key>KitInfo</key>
+				<dict/>
+				<key>KitName</key>
+				<string>Crashlytics</string>
+			</dict>
+		</array>
+	</dict>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>UIApplicationExitsOnSuspend</key>
