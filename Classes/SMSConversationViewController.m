@@ -17,7 +17,7 @@ static NSString *caspianPhoneNumber = @"uk.co.onecallcaspian.phone.phoneNumber";
 static NSString *caspianPasswordKey = @"uk.co.onecallcaspian.phone.password";
 static NSString *smsAPI = @"https://onecallcaspian.co.uk/mobile/sms?phone_number=%@&password=%@&from=%@&text=%@&receiver=%@";
 
-@interface SMSConversationViewController () <UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate>
+@interface SMSConversationViewController () <UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate, SMSMessageCellDelegate>
 
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 @property (nonatomic, strong) UITableView *tableView;
@@ -133,10 +133,10 @@ static NSString *smsAPI = @"https://onecallcaspian.co.uk/mobile/sms?phone_number
     [dateFormat setDateFormat:@"MMM dd, yyyy, hh:mm a"];
     
     SMSMessageCell *cell = [[SMSMessageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
+    cell.delegate = self;
     cell.messageLabel.text = message.content;
     cell.timestampLabel.text = [dateFormat stringFromDate:message.timestamp];
-    UIImage *messageStatus = ([message.status boolValue]) ? [UIImage imageNamed:@"chat_message_delivered"] : [UIImage imageNamed:@"chat_message_inprogress"];
-    cell.statusImageView.image = messageStatus;
+    cell.status = [message.status integerValue];
     
     return cell;
 }
@@ -185,8 +185,7 @@ static NSString *smsAPI = @"https://onecallcaspian.co.uk/mobile/sms?phone_number
         {
             Message *message = (Message *)[self.fetchedResultsController objectAtIndexPath:indexPath];
             SMSMessageCell *cell = (SMSMessageCell *)[self.tableView cellForRowAtIndexPath:indexPath];
-            UIImage *messageStatus = ([message.status boolValue]) ? [UIImage imageNamed:@"chat_message_delivered"] : [UIImage imageNamed:@"chat_message_inprogress"];
-            cell.statusImageView.image = messageStatus;
+            cell.status = [message.status integerValue];
             break;
         }
             
@@ -198,6 +197,30 @@ static NSString *smsAPI = @"https://onecallcaspian.co.uk/mobile/sms?phone_number
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
 {
     [self.tableView endUpdates];
+}
+
+#pragma mark - SMSMessageCellDelegate
+
+- (void)resendTapped:(SMSMessageCell *)cell
+{
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+    Message *message = (Message *)[self.fetchedResultsController objectAtIndexPath:indexPath];
+    message.status = [NSNumber numberWithInteger:MessageStatusSending];
+    [[CoreDataManager sharedManager] saveContextSuccessBlock:nil];
+    cell.status = [message.status integerValue];
+    
+    NSString *phoneNumber = [[NSUserDefaults standardUserDefaults] objectForKey:caspianPhoneNumber];
+    NSString *password = [[NSUserDefaults standardUserDefaults] objectForKey:caspianPasswordKey];
+    NSString *urlString = [NSString stringWithFormat:smsAPI, phoneNumber, password, phoneNumber, message.content, self.conversation.recepientNumber];
+    [[LinphoneManager instance] dataFromUrlString:urlString method:@"GET" completionBlock:^{
+        message.status = [NSNumber numberWithInteger:MessageStatusSent];
+        [[CoreDataManager sharedManager] saveContextSuccessBlock:nil];
+        cell.status = [message.status integerValue];
+    } errorBlock:^{
+        message.status = [NSNumber numberWithInteger:MessageStatusFailed];
+        [[CoreDataManager sharedManager] saveContextSuccessBlock:nil];
+        cell.status = [message.status integerValue];
+    }];
 }
 
 #pragma mark - Custom Setters
@@ -244,7 +267,7 @@ static NSString *smsAPI = @"https://onecallcaspian.co.uk/mobile/sms?phone_number
     Message *message = (Message *)[[CoreDataManager sharedManager] createManagedObject:@"Message"];
     message.content = messageString;
     message.timestamp = [NSDate date];
-    message.status = [NSNumber numberWithBool:NO];
+    message.status = [NSNumber numberWithInteger:MessageStatusSending];
     message.recepientNumber = self.conversation.recepientNumber;
     [conversationFromBackground addMessagesObject:message];
     
@@ -254,9 +277,12 @@ static NSString *smsAPI = @"https://onecallcaspian.co.uk/mobile/sms?phone_number
     [[CoreDataManager sharedManager] saveContextSuccessBlock:^{
         NSString *urlString = [NSString stringWithFormat:smsAPI, phoneNumber, password, phoneNumber, messageString, self.conversation.recepientNumber];
         [[LinphoneManager instance] dataFromUrlString:urlString method:@"GET" completionBlock:^{
-            message.status = [NSNumber numberWithBool:YES];
+            message.status = [NSNumber numberWithInteger:MessageStatusSent];
             [[CoreDataManager sharedManager] saveContextSuccessBlock:nil];
-        } errorBlock:nil];
+        } errorBlock:^{
+            message.status = [NSNumber numberWithInteger:MessageStatusFailed];
+            [[CoreDataManager sharedManager] saveContextSuccessBlock:nil];
+        }];
     }];
 }
 

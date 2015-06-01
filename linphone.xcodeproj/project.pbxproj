@@ -295,7 +295,7 @@
 		639CEB091A1DF4FA004DE38F /* UIChatCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 639CEB0B1A1DF4FA004DE38F /* UIChatCell.xib */; };
 		63CD4B4F1A5AAC8C00B84282 /* DTAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 63CD4B4E1A5AAC8C00B84282 /* DTAlertView.m */; };
 		63FB30351A680E73008CA393 /* UIRoundedImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 63FB30341A680E73008CA393 /* UIRoundedImageView.m */; };
-		6E360D2D1B0DF6D5009A5D55 /* SMSMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E360D2C1B0DF6D5009A5D55 /* SMSMessageCell.m */; };
+		6E360D2D1B0DF6D5009A5D55 /* SMSMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E360D2C1B0DF6D5009A5D55 /* SMSMessageCell.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6E360D301B0E0D46009A5D55 /* Conversation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E360D2F1B0E0D46009A5D55 /* Conversation.m */; };
 		6E360D331B0E0D47009A5D55 /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E360D321B0E0D47009A5D55 /* Message.m */; };
 		6E360D351B0E2A37009A5D55 /* chat_bubble_outgoing_triangle.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E360D341B0E2A37009A5D55 /* chat_bubble_outgoing_triangle.png */; };
@@ -1393,6 +1393,7 @@
 		63EF7FDC1A24B5810017A416 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/AboutViewController.strings; sourceTree = "<group>"; };
 		63FB30331A680E73008CA393 /* UIRoundedImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIRoundedImageView.h; sourceTree = "<group>"; };
 		63FB30341A680E73008CA393 /* UIRoundedImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIRoundedImageView.m; sourceTree = "<group>"; };
+		6E25F8A51B1CF46A00B2019C /* SMS 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "SMS 2.xcdatamodel"; sourceTree = "<group>"; };
 		6E360D2B1B0DF6D5009A5D55 /* SMSMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMSMessageCell.h; sourceTree = "<group>"; };
 		6E360D2C1B0DF6D5009A5D55 /* SMSMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMSMessageCell.m; sourceTree = "<group>"; };
 		6E360D2E1B0E0D46009A5D55 /* Conversation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Conversation.h; sourceTree = "<group>"; };
@@ -6355,9 +6356,10 @@
 		6E503A6A1B09D6F90081DB97 /* SMS.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				6E25F8A51B1CF46A00B2019C /* SMS 2.xcdatamodel */,
 				6E503A6B1B09D6F90081DB97 /* SMS.xcdatamodel */,
 			);
-			currentVersion = 6E503A6B1B09D6F90081DB97 /* SMS.xcdatamodel */;
+			currentVersion = 6E25F8A51B1CF46A00B2019C /* SMS 2.xcdatamodel */;
 			path = SMS.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

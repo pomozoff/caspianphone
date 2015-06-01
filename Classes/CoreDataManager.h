@@ -9,6 +9,12 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
+typedef NS_ENUM (NSUInteger, MessageStatus) {
+    MessageStatusSending = 0,
+    MessageStatusSent,
+    MessageStatusFailed
+};
+
 @interface CoreDataManager : NSObject
 
 @property (strong, nonatomic, readonly) NSManagedObjectContext *mainContext;
