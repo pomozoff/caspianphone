@@ -295,7 +295,7 @@
 		639CEB091A1DF4FA004DE38F /* UIChatCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 639CEB0B1A1DF4FA004DE38F /* UIChatCell.xib */; };
 		63CD4B4F1A5AAC8C00B84282 /* DTAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 63CD4B4E1A5AAC8C00B84282 /* DTAlertView.m */; };
 		63FB30351A680E73008CA393 /* UIRoundedImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 63FB30341A680E73008CA393 /* UIRoundedImageView.m */; };
-		6E360D2D1B0DF6D5009A5D55 /* SMSMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E360D2C1B0DF6D5009A5D55 /* SMSMessageCell.m */; };
+		6E360D2D1B0DF6D5009A5D55 /* SMSMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E360D2C1B0DF6D5009A5D55 /* SMSMessageCell.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6E360D301B0E0D46009A5D55 /* Conversation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E360D2F1B0E0D46009A5D55 /* Conversation.m */; };
 		6E360D331B0E0D47009A5D55 /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E360D321B0E0D47009A5D55 /* Message.m */; };
 		6E360D351B0E2A37009A5D55 /* chat_bubble_outgoing_triangle.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E360D341B0E2A37009A5D55 /* chat_bubble_outgoing_triangle.png */; };
@@ -1401,13 +1401,14 @@
 		63EF7FDC1A24B5810017A416 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/AboutViewController.strings; sourceTree = "<group>"; };
 		63FB30331A680E73008CA393 /* UIRoundedImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIRoundedImageView.h; sourceTree = "<group>"; };
 		63FB30341A680E73008CA393 /* UIRoundedImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIRoundedImageView.m; sourceTree = "<group>"; };
+		6E25F8A51B1CF46A00B2019C /* SMS 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "SMS 2.xcdatamodel"; sourceTree = "<group>"; };
 		6E360D2B1B0DF6D5009A5D55 /* SMSMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMSMessageCell.h; sourceTree = "<group>"; };
 		6E360D2C1B0DF6D5009A5D55 /* SMSMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMSMessageCell.m; sourceTree = "<group>"; };
 		6E360D2E1B0E0D46009A5D55 /* Conversation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Conversation.h; sourceTree = "<group>"; };
 		6E360D2F1B0E0D46009A5D55 /* Conversation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Conversation.m; sourceTree = "<group>"; };
 		6E360D311B0E0D47009A5D55 /* Message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Message.h; sourceTree = "<group>"; };
 		6E360D321B0E0D47009A5D55 /* Message.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Message.m; sourceTree = "<group>"; };
-		6E360D341B0E2A37009A5D55 /* chat_bubble_outgoing_triangle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chat_bubble_outgoing_triangle.png; sourceTree = "<group>"; };
+		6E360D341B0E2A37009A5D55 /* chat_bubble_outgoing_triangle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = chat_bubble_outgoing_triangle.png; path = ../../chat_bubble_outgoing_triangle.png; sourceTree = "<group>"; };
 		6E360D361B10DAF5009A5D55 /* sms-contacts.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sms-contacts.png"; sourceTree = "<group>"; };
 		6E360D381B10DFD1009A5D55 /* SMSButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMSButton.h; sourceTree = "<group>"; };
 		6E360D391B10DFD1009A5D55 /* SMSButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMSButton.m; sourceTree = "<group>"; };
@@ -2692,8 +2693,8 @@
 				26E7F3141A81709F0033D3C0 /* add-contacts-hover.png */,
 				26E7F3151A81709F0033D3C0 /* add-contacts.png */,
 				26E7F3161A81709F0033D3C0 /* arrowback.png */,
-				26E7F3171A81709F0033D3C0 /* back-medium.png */,
 				26E7F3181A81709F0033D3C0 /* back-medium_hover.png */,
+				26E7F3171A81709F0033D3C0 /* back-medium.png */,
 				26E7F3191A81709F0033D3C0 /* background-1.png */,
 				26E7F31A1A81709F0033D3C0 /* background-3.png */,
 				26E7F31B1A81709F0033D3C0 /* bgcontact.png */,
@@ -2705,6 +2706,7 @@
 				26E7F3211A81709F0033D3C0 /* call_quality_indicator_2.png */,
 				26E7F3221A81709F0033D3C0 /* call_quality_indicator_3.png */,
 				26E7F3231A81709F0033D3C0 /* cancel-button.png */,
+				6E360D341B0E2A37009A5D55 /* chat_bubble_outgoing_triangle.png */,
 				26E7F3241A81709F0033D3C0 /* chat-black-hover.png */,
 				26E7F3251A81709F0033D3C0 /* chat-black.png */,
 				26E7F3261A81709F0033D3C0 /* chat-hover.png */,
@@ -2715,8 +2717,8 @@
 				26E7F32B1A81709F0033D3C0 /* continue.png */,
 				26E7F32C1A81709F0033D3C0 /* delete-hover.png */,
 				26E7F32D1A81709F0033D3C0 /* delete.png */,
-				26E7F32E1A81709F0033D3C0 /* dialer-button.png */,
 				26E7F32F1A81709F0033D3C0 /* dialer-button_hover.png */,
+				26E7F32E1A81709F0033D3C0 /* dialer-button.png */,
 				26E7F3301A81709F0033D3C0 /* dialer-hover.png */,
 				26E7F3311A81709F0033D3C0 /* dialer.png */,
 				26E7F3321A81709F0033D3C0 /* edit-large.png */,
@@ -2736,8 +2738,6 @@
 				26E7F33F1A81709F0033D3C0 /* micro-on-button.png */,
 				26E7F3401A81709F0033D3C0 /* no-button.png */,
 				26E7F3411A81709F0033D3C0 /* ok-button.png */,
-				26E7F3421A81709F0033D3C0 /* onecall_icon_120.png */,
-				26E7F3431A81709F0033D3C0 /* onecall_icon_152.png */,
 				26E7F3441A81709F0033D3C0 /* onecall_icon_57.png */,
 				26E7F3451A81709F0033D3C0 /* onecall_icon_57@2x.png */,
 				26E7F3461A81709F0033D3C0 /* onecall_icon_60@2x.png */,
@@ -2745,12 +2745,21 @@
 				26E7F3481A81709F0033D3C0 /* onecall_icon_72@2x.png */,
 				26E7F3491A81709F0033D3C0 /* onecall_icon_76.png */,
 				26E7F34A1A81709F0033D3C0 /* onecall_icon_76@2x.png */,
+				26E7F3421A81709F0033D3C0 /* onecall_icon_120.png */,
+				26E7F3431A81709F0033D3C0 /* onecall_icon_152.png */,
 				26E7F34B1A81709F0033D3C0 /* onecall_logo.png */,
+				26E7F35E1A81709F0033D3C0 /* onecall_security_ko.png */,
+				26E7F3581A81709F0033D3C0 /* onecall_security-ok-dark.png */,
+				26E7F3591A81709F0033D3C0 /* onecall_security-ok-hover.png */,
+				26E7F35A1A81709F0033D3C0 /* onecall_security-ok.png */,
+				26E7F35B1A81709F0033D3C0 /* onecall_security-pending-dark.png */,
+				26E7F35C1A81709F0033D3C0 /* onecall_security-pending-hover.png */,
+				26E7F35D1A81709F0033D3C0 /* onecall_security-pending.png */,
 				26E7F34C1A81709F0033D3C0 /* pause-button.png */,
-				26E7F34D1A81709F0033D3C0 /* phone-button.png */,
-				26E7F34E1A81709F0033D3C0 /* phone-button_hover.png */,
-				26E7F34F1A81709F0033D3C0 /* phone.png */,
 				26E7F3501A81709F0033D3C0 /* phone_hover.png */,
+				26E7F34E1A81709F0033D3C0 /* phone-button_hover.png */,
+				26E7F34D1A81709F0033D3C0 /* phone-button.png */,
+				26E7F34F1A81709F0033D3C0 /* phone.png */,
 				26E7F3511A81709F0033D3C0 /* play.png */,
 				26E7F3521A81709F0033D3C0 /* Plus.png */,
 				26E7F3531A81709F0033D3C0 /* Plus@2x.png */,
@@ -2758,13 +2767,6 @@
 				26E7F3551A81709F0033D3C0 /* profile-picture-medium.png */,
 				26E7F3561A81709F0033D3C0 /* profile-picture-small.png */,
 				26E7F3571A81709F0033D3C0 /* Rectangle.png */,
-				26E7F3581A81709F0033D3C0 /* onecall_security-ok-dark.png */,
-				26E7F3591A81709F0033D3C0 /* onecall_security-ok-hover.png */,
-				26E7F35A1A81709F0033D3C0 /* onecall_security-ok.png */,
-				26E7F35B1A81709F0033D3C0 /* onecall_security-pending-dark.png */,
-				26E7F35C1A81709F0033D3C0 /* onecall_security-pending-hover.png */,
-				26E7F35D1A81709F0033D3C0 /* onecall_security-pending.png */,
-				26E7F35E1A81709F0033D3C0 /* onecall_security_ko.png */,
 				26E7F35F1A81709F0033D3C0 /* send-button.png */,
 				26E7F3601A81709F0033D3C0 /* settings-hover.png */,
 				26E7F3611A81709F0033D3C0 /* settings.png */,
@@ -3276,7 +3278,6 @@
 				D3A8BB7715A6CC3200F96BE5 /* chat_bubble_incoming.png */,
 				D389363815A6D53200A3A3AA /* chat_bubble_outgoing.9.png */,
 				D3A8BB7615A6CC3200F96BE5 /* chat_bubble_outgoing.png */,
-				6E360D341B0E2A37009A5D55 /* chat_bubble_outgoing_triangle.png */,
 				D3F5F8DA1609A86700D3DA1A /* chat_cancel_default.png */,
 				D3F5F8DB1609A86700D3DA1A /* chat_cancel_over.png */,
 				D3A74E6E15C69392001500B9 /* chat_default_landscape~ipad.png */,
@@ -6395,9 +6396,10 @@
 		6E503A6A1B09D6F90081DB97 /* SMS.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				6E25F8A51B1CF46A00B2019C /* SMS 2.xcdatamodel */,
 				6E503A6B1B09D6F90081DB97 /* SMS.xcdatamodel */,
 			);
-			currentVersion = 6E503A6B1B09D6F90081DB97 /* SMS.xcdatamodel */;
+			currentVersion = 6E25F8A51B1CF46A00B2019C /* SMS 2.xcdatamodel */;
 			path = SMS.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
