@@ -652,8 +652,12 @@ static UICompositeViewDescription *compositeDescription = nil;
     } else if (view == askPhoneNumberView) {
         NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
         NSString *phoneNumber = [userDefaults objectForKey:caspianPhoneNumber];
-
-        self.phoneNumberAskPhoneNumberField.text = phoneNumber;
+        
+        waitView.hidden = NO;
+        [self pullCountriesWithCompletion:^{
+            waitView.hidden = YES;
+            self.phoneNumberAskPhoneNumberField.text = phoneNumber;
+        }];
     } else if (view == forgotPasswordView) {
         waitView.hidden = NO;
         [self pullCountriesWithCompletion:^{
@@ -1273,7 +1277,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     NSDictionary *country = [self countryByPhoneNumber:self.phoneNumberAskPhoneNumberField.text];
     NSString *countryCode = country[caspianCountryObjectFieldCode];
     if (countryCode) {
-        NSString *phoneNumber = [self.phoneNumberAskPhoneNumberField.text stringByReplacingOccurrencesOfString:countryCode withString:@""];
+        NSString *phoneNumber = [self.phoneNumberAskPhoneNumberField.text substringFromIndex:countryCode.length];
         [self recoverPasswordForPhoneNumber:phoneNumber andCountryCode:countryCode];
     } else {
         [self alertErrorMessageEmptyCountry];
