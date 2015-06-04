@@ -1300,7 +1300,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     NSDictionary *country = [self countryByPhoneNumber:self.phoneNumberAskPhoneNumberField.text];
     NSString *countryCode = country[caspianCountryObjectFieldCode];
     if (countryCode) {
-        NSString *phoneNumber = [self.phoneNumberAskPhoneNumberField.text stringByReplacingOccurrencesOfString:countryCode withString:@""];
+        NSString *phoneNumber = [self.phoneNumberAskPhoneNumberField.text substringFromIndex:countryCode.length];
         [self recoverPasswordForPhoneNumber:phoneNumber andCountryCode:countryCode];
     } else {
         [self alertErrorMessageEmptyCountry];
