@@ -904,11 +904,13 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
     ABMultiValueRef lMap = ABRecordCopyValue(contact, kABPersonPhoneProperty);
     NSInteger index = ABMultiValueGetIndexForIdentifier(lMap, [entry identifier]);
     NSString *number = (NSString *)ABMultiValueCopyValueAtIndex(lMap, index);
-    number = [FastAddressBook normalizePhoneNumber:number];
+    CFRelease(lMap);
+    NSString *normNnumber = [FastAddressBook normalizePhoneNumber:number];
+    [number release];
     NSString *name = [FastAddressBook getContactDisplayName:contact];
     UIImage *image = [FastAddressBook getContactImage:contact thumbnail:NO];
     
-    [self pushConversationVC:name phoneNumber:number image:image];
+    [self pushConversationVC:name phoneNumber:normNnumber image:image];
 }
 
 - (void)pushConversationVC:(NSString *)name

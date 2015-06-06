@@ -560,7 +560,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     
     NSString *phoneNumber = [userDefaults objectForKey:caspianPhoneNumber];
     NSString *password    = [userDefaults objectForKey:caspianPasswordKey];
-    NSString *domain      = [userDefaults objectForKey:caspianDomain];
+    //NSString *domain      = [userDefaults objectForKey:caspianDomain];
 
     self.phoneNumberRegisterField.text = phoneNumber;
     self.passwordRegisterField.text = password;
@@ -726,7 +726,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 - (BOOL)addProxyConfig:(NSString*)username password:(NSString*)password domain:(NSString*)domain withTransport:(NSString*)transport {
     LinphoneCore* lc = [LinphoneManager getLc];
 	LinphoneProxyConfig* proxyCfg = linphone_core_create_proxy_config(lc);
-	NSString* server_address = domain;
+	//NSString* server_address = domain;
 
     NSString *uriSuffix = [NSString stringWithFormat:@"%@:5060;transport=tcp", domain];
     linphone_proxy_config_set_server_addr(proxyCfg, [uriSuffix cStringUsingEncoding:[NSString defaultCStringEncoding]]);
@@ -741,9 +741,11 @@ static UICompositeViewDescription *compositeDescription = nil;
     linphone_address_set_username(linphoneAddress, normalizedUserName);
 
     if( domain && [domain length] != 0) {
+        /*
 		if( transport != nil ){
 			server_address = [NSString stringWithFormat:@"%@;transport=%@", server_address, [transport lowercaseString]];
 		}
+        */
         // when the domain is specified (for external login), take it as the server address
         /*
          This line of code cuts off specefied transport type in uri from xml config
@@ -1652,6 +1654,7 @@ static UICompositeViewDescription *compositeDescription = nil;
                     NSDictionary *countries = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding]
                                                                               options:NSJSONReadingMutableContainers
                                                                                 error:&jsonError];
+                    [jsonString release];
                     if (!jsonError) {
                         completion();
                         [weakSelf fillCountryAndCodeArray:countries];

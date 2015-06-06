@@ -266,8 +266,4 @@ static UICompositeViewDescription *compositeDescription = nil;
     [[CoreDataManager sharedManager] saveContextSuccessBlock:nil];
 }
 
-- (void)dealloc {
-    [super dealloc];
-}
-
 @end

@@ -21,7 +21,9 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        self.selectedBackgroundView = [UIView new];
+        UIView *newBackground = [UIView new];
+        self.selectedBackgroundView = newBackground;
+        [newBackground release];
         self.backgroundColor = [UIColor clearColor];
         
         _bubbleView = [[UIView alloc] initWithFrame:CGRectZero];

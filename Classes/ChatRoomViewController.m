@@ -68,7 +68,6 @@ static NSTimeInterval animationDuration = 0.3f;
     if (!_smiliesBoard) {
         _smiliesBoard = [[UISmiliesBoardViewController alloc] initWithNibName:@"UISmiliesBoardViewController" bundle:nil];
         _smiliesBoard.collectionView.frame = [self smiliesBoardSizeForStateVisible:NO];
-        [_smiliesBoard.collectionView retain];
         _smiliesBoard.delegate = self;
     }
     return _smiliesBoard;
@@ -146,7 +145,6 @@ static NSTimeInterval animationDuration = 0.3f;
     [composeLabel release];
     [composeIndicatorView release];
     
-    [_smiliesBoard.collectionView release];
     self.smiliesBoard = nil;
     
     [super dealloc];

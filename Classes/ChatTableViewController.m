@@ -128,7 +128,7 @@ static void chatTable_free_chatrooms(void *data){
     if (cell == nil) {
         cell = [[[UIChatCell alloc] initWithIdentifier:kCellId] autorelease];
         cell.rightUtilityButtons = [self isRowWithOneCallCaspianSupport:indexPath.row] ? [self rightButtonsCall] : [self rightButtonsAll];
-        [cell.rightUtilityButtons autorelease];
+        //[cell.rightUtilityButtons autorelease];
         cell.delegate = self;
         
         // Background View
@@ -245,7 +245,7 @@ static void chatTable_free_chatrooms(void *data){
     NSMutableArray *rightUtilityButtons = [[NSMutableArray alloc] init];
     [rightUtilityButtons sw_addUtilityButtonWithColor:callColor title:@"Call"];
     
-    return rightUtilityButtons;
+    return [rightUtilityButtons autorelease];
 }
 
 - (NSMutableArray *)rightButtonsAll {
