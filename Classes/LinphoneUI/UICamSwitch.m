@@ -58,8 +58,8 @@
 
 
 - (void)dealloc {
-    [super dealloc];
 	[preview release];
+    [super dealloc];
 }
 
 
