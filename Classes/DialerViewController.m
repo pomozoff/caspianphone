@@ -112,7 +112,7 @@ static NSString *caspianSMSStatus = @"uk.co.onecallcaspian.phone.smsStatus";
     [videoPreview release];
     [videoCameraSwitch release];
     
-    [_dummyView release];
+    self.dummyView = nil;
 
     // Remove all observers
     [[NSNotificationCenter defaultCenter] removeObserver:self];
