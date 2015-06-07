@@ -657,9 +657,17 @@ static UICompositeViewDescription *compositeDescription = nil;
         if (!back) {
             //[self fillCredentials];
         }
+    } else if (view == countryLoginView) {
+        if (!back) {
+            waitView.hidden = NO;
+            [self pullCountriesWithCompletion:^{
+               waitView.hidden = YES;
+            [self.countryNameLoginViewField becomeFirstResponder];
+            }];
+        }
     } else if (view == logInView) {
         if (!back) {
-                [self fillCredentials];
+                [self procedureCountryFill];
             }
     } else if (view == signUpView) {
         [self cleanUpSignUpView];
@@ -1329,6 +1337,25 @@ static UICompositeViewDescription *compositeDescription = nil;
 }
 
 - (IBAction)onLogInClick:(id)sender {
+    [self changeView:countryLoginView back:FALSE animation:TRUE];
+}
+
+- (IBAction)onNextLogInClick:(id)sender {
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSString *country = [userDefaults objectForKey:caspianCountryName];
+    NSString *countryCode = [userDefaults objectForKey:caspianCountryCode];
+    
+    countryCode = self.selectedCountryCode;
+    country = self.countryNameLoginViewField.text;
+    
+    NSLog(@"Переменная country = %@, ", country);
+    NSLog(@"Переменная countryCode = %@, ", countryCode);
+    
+    [userDefaults setObject:countryCode forKey:caspianCountryCode];
+    [userDefaults setObject:country forKey:caspianCountryName];
+    
+    [userDefaults synchronize];
+    
     [self changeView:logInView back:FALSE animation:TRUE];
 }
 
@@ -1702,9 +1729,31 @@ static UICompositeViewDescription *compositeDescription = nil;
 }
 
 - (void)fillCountryAndCodeArray:(NSDictionary *)countries {
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSString *country = [userDefaults objectForKey:caspianCountryName];
+    
     self.countryAndCode = countries[caspianCountriesListTopKey];
+    if (currentView == countryLoginView && country != NULL) {
+        self.currentCountryRow = [self indexOfCountryWithName:country];
+    } else {
     self.currentCountryRow = [self indexOfCountryWithName:caspianCountryDefaultName];
+    }
 }
+#pragma mark - LogIn (Sign IN)
+
+- (void) procedureCountryFill {
+ 
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSString *countryCode = [userDefaults objectForKey:caspianCountryCode];
+    NSString *lastPhoneNumber = [userDefaults objectForKey:caspianPhoneNumber];
+    
+    if (lastPhoneNumber == NULL) {
+        self.phoneNumberRegisterField.text = countryCode;
+    } else {
+        [self fillCredentials];
+    }
+}
+
 
 #pragma mark - Sign Up
 

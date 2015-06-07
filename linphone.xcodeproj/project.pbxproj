@@ -2993,7 +2993,7 @@
 				C681BB211AE823C60063B3A5 /* welcome_login_default.png */,
 			);
 			name = "image caspian new graphics";
-			sourceTree = "<unknown>";
+			sourceTree = SOURCE_ROOT;
 		};
 		D326483415887D4400930C67 /* Utils */ = {
 			isa = PBXGroup;

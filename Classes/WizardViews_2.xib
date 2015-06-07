@@ -188,7 +188,7 @@
                         <action selector="onSignInExternalClick:" destination="-1" eventType="touchUpInside" id="qyk-wx-wwk"/>
                     </connections>
                 </button>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bullets2png" translatesAutoresizingMaskIntoConstraints="NO" id="2JW-XI-GER">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bullets2.png" translatesAutoresizingMaskIntoConstraints="NO" id="2JW-XI-GER">
                     <rect key="frame" x="132" y="54" width="56" height="25"/>
                 </imageView>
             </subviews>
@@ -325,10 +325,22 @@
             </items>
             <point key="canvasLocation" x="269" y="1243"/>
         </toolbar>
+        <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="CyC-Ek-vo0">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+            <items>
+                <barButtonItem style="plain" systemItem="flexibleSpace" id="A71-qY-6eS"/>
+                <barButtonItem title="Next" id="Rc1-bu-xtb">
+                    <connections>
+                        <action selector="onNextLogInClick:" destination="-1" id="hgS-5x-W0r"/>
+                    </connections>
+                </barButtonItem>
+            </items>
+        </toolbar>
     </objects>
     <resources>
         <image name="bullets1.png" width="56" height="25"/>
-        <image name="bullets2png" width="56" height="25"/>
+        <image name="bullets2.png" width="56" height="25"/>
         <image name="original.png" width="820" height="500"/>
         <image name="signup_back_default.png" width="3766" height="1707"/>
         <image name="signup_next_default.png" width="3766" height="1707"/>
