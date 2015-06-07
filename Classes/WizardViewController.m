@@ -1753,6 +1753,8 @@ static UICompositeViewDescription *compositeDescription = nil;
     self.countryCodeSignUpField.text = self.selectedCountryCode.length > 0 ? fullCountryCode : @"";
     self.countryNameSignUpField.text = country[caspianCountryObjectFieldName];
     
+    self.countryNameLoginViewField.text = self.countryNameSignUpField.text;
+    
     self.countryCodeForgotPasswordField.text = self.countryCodeSignUpField.text;
     self.countryNameForgotPasswordField.text = self.countryNameSignUpField.text;
     
