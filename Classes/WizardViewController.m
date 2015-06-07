@@ -566,14 +566,19 @@ static UICompositeViewDescription *compositeDescription = nil;
 - (void)fillCredentials {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     
+    NSString *countryCode = [userDefaults objectForKey:caspianCountryCode];
     NSString *phoneNumber = [userDefaults objectForKey:caspianPhoneNumber];
     NSString *password    = [userDefaults objectForKey:caspianPasswordKey];
     NSString *domain      = [userDefaults objectForKey:caspianDomain];
-
-    self.phoneNumberRegisterField.text = phoneNumber;
-    self.passwordRegisterField.text = password;
-    //self.domainRegisterField.text = domain.length != 0 ? domain : [[LinphoneManager instance] caspianDomainIp];
-    self.domainRegisterField.text = [[LinphoneManager instance] caspianDomainIp];
+    
+    if (phoneNumber == NULL) {
+        self.phoneNumberRegisterField.text = countryCode;
+    } else {
+        self.phoneNumberRegisterField.text = phoneNumber;
+        self.passwordRegisterField.text = password;
+        //self.domainRegisterField.text = domain.length != 0 ? domain : [[LinphoneManager instance] caspianDomainIp];
+        self.domainRegisterField.text = [[LinphoneManager instance] caspianDomainIp];
+    }
 }
 
 - (NSDictionary *)countryByPhoneNumber:(NSString *)phoneNUmber {
@@ -667,7 +672,7 @@ static UICompositeViewDescription *compositeDescription = nil;
         }
     } else if (view == logInView) {
         if (!back) {
-                [self procedureCountryFill];
+                [self fillCredentials];
             }
     } else if (view == signUpView) {
         [self cleanUpSignUpView];
@@ -1742,7 +1747,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 #pragma mark - LogIn (Sign IN)
 
 - (void) procedureCountryFill {
- 
+ /*
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSString *countryCode = [userDefaults objectForKey:caspianCountryCode];
     NSString *lastPhoneNumber = [userDefaults objectForKey:caspianPhoneNumber];
@@ -1751,7 +1756,7 @@ static UICompositeViewDescription *compositeDescription = nil;
         self.phoneNumberRegisterField.text = countryCode;
     } else {
         [self fillCredentials];
-    }
+    } */
 }
 
 
