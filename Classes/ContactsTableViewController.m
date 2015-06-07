@@ -221,6 +221,7 @@ static int ms_strcmpfuz(const char * fuzzy_word, const char * sentence) {
     if (multiPhone != NULL) {
         ABMultiValueAddValueAndLabel(multiPhone, [FastAddressBook caspianSupportPhoneNumber], (CFStringRef)caspianSupportPhoneLabel, NULL);
         ABRecordSetValue(lPerson, kABPersonPhoneProperty, multiPhone, nil);
+        CFRelease(multiPhone);
         
         if(ABRecordGetRecordID(lPerson) == kABRecordInvalidID) {
             CFErrorRef anError = NULL;

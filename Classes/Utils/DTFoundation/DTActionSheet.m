@@ -81,7 +81,7 @@
 	if (block)
 	{
 		NSNumber *key = [NSNumber numberWithInteger:retIndex];
-		[_actionsPerIndex setObject:[block copy] forKey:key];
+		[_actionsPerIndex setObject:[[block copy] autorelease] forKey:key];
 	}
 
 	return retIndex;

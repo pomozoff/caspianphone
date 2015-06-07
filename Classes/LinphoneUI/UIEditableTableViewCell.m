@@ -51,7 +51,10 @@
 
         [self.contentView addSubview:verticalSep];
         
-        self.smsButton = [[SMSButton alloc] initWithFrame:CGRectMake(self.contentView.frame.size.width - 50, 2, 40, 40)];
+        SMSButton *tmpSmsButton = [[SMSButton alloc] initWithFrame:CGRectMake(self.contentView.frame.size.width - 50, 2, 40, 40)];
+        self.smsButton = tmpSmsButton;
+        [tmpSmsButton release];
+        
         [self.smsButton setBackgroundImage:[UIImage imageNamed:@"sms-contacts"] forState:UIControlStateNormal];
         [self.contentView addSubview:self.smsButton];
         

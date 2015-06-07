@@ -72,6 +72,7 @@ static dispatch_once_t once_token = 0;
                 COCTextAttachment *textAttachment = [[COCTextAttachment alloc] init];
                 textAttachment.image = self.smiliesCollection[smile];
                 NSAttributedString *attrStringWithImage = [NSAttributedString attributedStringWithAttachment:textAttachment];
+                [textAttachment release];
                 
                 NSMutableAttributedString *attributedString = [attr_text mutableCopy];
                 [attributedString replaceCharactersInRange:foundRange withAttributedString:attrStringWithImage];

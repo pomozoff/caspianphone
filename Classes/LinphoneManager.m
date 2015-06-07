@@ -1265,6 +1265,7 @@ void networkReachabilityCallBack(SCNetworkReachabilityRef target, SCNetworkReach
 	} else {
 		CTTelephonyNetworkInfo* info = [[CTTelephonyNetworkInfo alloc] init];
 		NSString* currentRadio = info.currentRadioAccessTechnology;
+        [info release];
 		if( [currentRadio isEqualToString:CTRadioAccessTechnologyEdge]){
 			return network_2g;
 		} else if ([currentRadio isEqualToString:CTRadioAccessTechnologyLTE]){
@@ -1493,12 +1494,10 @@ static LinphoneCoreVTable linphonec_vtable = {
 static BOOL libStarted = FALSE;
 
 - (void)processCodecs:(const MSList *)elem linphoneCore:(LinphoneCore *)lc {
-    bool_t value;
     for (; elem != NULL; elem = elem->next) {
         PayloadType *pt = (PayloadType *)elem->data;
         BOOL isUsed = [LinphoneManager isSupportedCodec:pt->mime_type withRate:pt->clock_rate];
         linphone_core_enable_payload_type(lc, pt, isUsed);
-        value = linphone_core_payload_type_enabled(lc, pt);
     }
 }
 
@@ -2149,10 +2148,12 @@ static void audioRouteChangeListenerCallback (
 		// - (void)onCall:StateChanged:withMessage:. If not, we are in big trouble and expect it to crash
 		// We are NOT responsible for creating the AppData. 
 		LinphoneCallAppData* data=(LinphoneCallAppData*)linphone_call_get_user_pointer(call);
-		if (data==nil)
+        if (!data) {
 			[LinphoneLogger log:LinphoneLoggerError format:@"New call instanciated but app data was not set. Expect it to crash."];
-		/* will be used later to notify user if video was not activated because of the linphone core*/
-		data->videoRequested = linphone_call_params_video_enabled(lcallParams);
+        } else {
+            /* will be used later to notify user if video was not activated because of the linphone core*/
+            data->videoRequested = linphone_call_params_video_enabled(lcallParams);
+        }
 	}
 	linphone_call_params_destroy(lcallParams);
 }
