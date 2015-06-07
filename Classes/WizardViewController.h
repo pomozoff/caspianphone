@@ -104,7 +104,11 @@
 @property (nonatomic, retain) IBOutlet UISegmentedControl *activateBySignUpSegmented;
 @property (nonatomic, retain) IBOutlet UIButton *continueSignUpField;
 
-@property (retain, nonatomic) IBOutlet UIButton *dismissKeyboardButton;
+@property (retain, nonatomic) IBOutlet COCTextField *countryNameLoginViewField;
+
+@property (retain, nonatomic) IBOutlet UIToolbar *countryPickerLoginNextToolbar;
+
+@property (nonatomic, retain) IBOutlet UIButton *dismissKeyboardButton;
 
 @property (nonatomic, retain) IBOutlet UIView *confirmView;
 @property (nonatomic, retain) IBOutlet UIImageView *smsImageConfirmView;
