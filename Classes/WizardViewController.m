@@ -381,6 +381,9 @@ static UICompositeViewDescription *compositeDescription = nil;
         [LinphoneUtils adjustFontSize:provisionedAccountView mult:2.22f];
     }
     
+    self.countryNameLoginViewField.inputView = self.countryPickerView;
+    self.countryNameLoginViewField.inputAccessoryView = self.countryPickerLoginNextToolbar;
+    
     self.countryNameSignUpField.inputView = self.countryPickerView;
     self.countryNameSignUpField.inputAccessoryView = self.countryPickerDoneToolbar;
     self.phoneNumberSignUpField.inputAccessoryView = self.phoneNumberNextToolbar;
