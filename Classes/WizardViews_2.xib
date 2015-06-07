@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="13F1077" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WizardViewController">
             <connections>
+                <outlet property="countryLoginView" destination="BQg-LE-IQC" id="Egk-3p-cmj"/>
+                <outlet property="countryNameLoginViewField" destination="dE2-ec-AaQ" id="2dn-oc-1G1"/>
+                <outlet property="countryPickerLoginNextToolbar" destination="CyC-Ek-vo0" id="9Pa-vM-cXO"/>
                 <outlet property="dismissKeyboardButton" destination="Hue-7e-WRO" id="Pnh-nn-e60"/>
                 <outlet property="logInView" destination="Gg3-pV-WTb" id="vwv-2A-3Qy"/>
                 <outlet property="numKeypadDoneSignInToolbar" destination="iIz-Nj-Lot" id="12M-JW-CY7"/>

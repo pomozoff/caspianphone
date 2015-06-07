@@ -57,6 +57,7 @@
 @property (retain, nonatomic) IBOutlet UIView *welcomeView2;
 @property (retain, nonatomic) IBOutlet UIView *logInView;
 
+@property (retain, nonatomic) IBOutlet UIView *countryLoginView;
 
 
 @property (nonatomic, retain) IBOutlet UIButton *cancelButton;
