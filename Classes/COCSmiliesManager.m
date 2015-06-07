@@ -121,6 +121,7 @@ static dispatch_once_t once_token = 0;
     self.smiliesList = nil;
 
     [_sharedInstance release];
+    _sharedInstance = nil;
     
     [super dealloc];
 }

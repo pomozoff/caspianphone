@@ -272,6 +272,7 @@
 		26E7F3EF1A81709F0033D3C0 /* yes-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 26E7F3751A81709F0033D3C0 /* yes-button.png */; };
 		26E7F3F21A8171170033D3C0 /* COCTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 26E7F3F11A8171170033D3C0 /* COCTextField.m */; };
 		26E7F3F41A81747E0033D3C0 /* wizard_external_sip_caspian.rc in Resources */ = {isa = PBXBuildFile; fileRef = 26E7F3F31A81747E0033D3C0 /* wizard_external_sip_caspian.rc */; };
+		26FCF4B71B1CE8C20078010F /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26FCF4B51B1CE8C20078010F /* Fabric.framework */; };
 		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
 		340751971506459A00B89C47 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 340751961506459A00B89C47 /* CoreTelephony.framework */; };
 		340751E7150F38FD00B89C47 /* UIVideoButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 340751E6150F38FD00B89C47 /* UIVideoButton.m */; };
@@ -882,7 +883,6 @@
 		F088488A19FF8C41007FFCF3 /* UIContactCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F088488D19FF8C41007FFCF3 /* UIContactCell.xib */; };
 		F08BDC3D1A35E60F006210C9 /* liblinphonetester.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F0BB8C0F193623F200974404 /* liblinphonetester.a */; };
 		F08D468D1AA86849001E8CB5 /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F0B026F21AA710AF00FF49F7 /* libiconv.dylib */; };
-		F08F118519C09C6B007D70C2 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F03A9B3318C0CF7000C4D7FE /* XCTest.framework */; };
 		F08F118619C09C6B007D70C2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		F08F118719C09C6B007D70C2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		F08F118D19C09C6B007D70C2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F08F118B19C09C6B007D70C2 /* InfoPlist.strings */; };
@@ -1109,7 +1109,6 @@
 		1D3623250D0F684500981E51 /* LinphoneAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LinphoneAppDelegate.m; sourceTree = "<group>"; };
 		1D6058910D05DD3D006BFB54 /* linphone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = linphone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		1FE76362DA6217E7341ED1DF /* libPods-KifTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-KifTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		220FAD2910765B400068D98F /* libgsm.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libgsm.a; path = "liblinphone-sdk/apple-darwin/lib/libgsm.a"; sourceTree = "<group>"; };
 		220FAD2C10765B400068D98F /* libortp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libortp.a; path = "liblinphone-sdk/apple-darwin/lib/libortp.a"; sourceTree = "<group>"; };
 		220FAD2F10765B400068D98F /* libspeex.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libspeex.a; path = "liblinphone-sdk/apple-darwin/lib/libspeex.a"; sourceTree = "<group>"; };
@@ -1226,8 +1225,6 @@
 		26DB69301B013B6F006AD5C9 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		26DB69351B013BE1006AD5C9 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		26DB69371B013BEB006AD5C9 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
-		26DB695D1B014425006AD5C9 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
-		26DB695F1B01443A006AD5C9 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
 		26DB69881B015019006AD5C9 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		26E7F2E71A816E200033D3C0 /* NSMutableArray+SWUtilityButtons.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+SWUtilityButtons.h"; sourceTree = "<group>"; };
 		26E7F2E81A816E200033D3C0 /* NSMutableArray+SWUtilityButtons.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+SWUtilityButtons.m"; sourceTree = "<group>"; };
@@ -1366,6 +1363,7 @@
 		26E7F3F01A8171170033D3C0 /* COCTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = COCTextField.h; sourceTree = "<group>"; };
 		26E7F3F11A8171170033D3C0 /* COCTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = COCTextField.m; sourceTree = "<group>"; };
 		26E7F3F31A81747E0033D3C0 /* wizard_external_sip_caspian.rc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = wizard_external_sip_caspian.rc; path = Resources/wizard_external_sip_caspian.rc; sourceTree = "<group>"; };
+		26FCF4B51B1CE8C20078010F /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		288765FC0DF74451002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* linphone_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = linphone_Prefix.pch; sourceTree = "<group>"; };
@@ -2046,7 +2044,6 @@
 		F0022B081A370915009B51FD /* messages.db */ = {isa = PBXFileReference; lastKnownFileType = file; name = messages.db; path = submodules/linphone/tester/messages.db; sourceTree = SOURCE_ROOT; };
 		F0181B6B18BF7B1200A9A357 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		F01A77EA18ED989B00E287CA /* shortring.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = shortring.caf; path = Resources/shortring.caf; sourceTree = "<group>"; };
-		F03A9B3318C0CF7000C4D7FE /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		F03A9B7E18C0D9C900C4D7FE /* libcunit.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcunit.a; path = "liblinphone-sdk/apple-darwin/lib/libcunit.a"; sourceTree = "<group>"; };
 		F03A9B9418C0DAE100C4D7FE /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
 		F03A9B9718C0DB6F00C4D7FE /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
@@ -2317,6 +2314,7 @@
 				22276E8513C73D3100210156 /* libswscale.a in Frameworks */,
 				7066FC0C13E830E400EFC6DC /* libvpx.a in Frameworks */,
 				22AA8AFD13D7125600B30535 /* libx264.a in Frameworks */,
+				26FCF4B71B1CE8C20078010F /* Fabric.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2325,7 +2323,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				F08BDC3D1A35E60F006210C9 /* liblinphonetester.a in Frameworks */,
-				F08F118519C09C6B007D70C2 /* XCTest.framework in Frameworks */,
 				F08F118719C09C6B007D70C2 /* UIKit.framework in Frameworks */,
 				F08F118619C09C6B007D70C2 /* Foundation.framework in Frameworks */,
 			);
@@ -2864,14 +2861,13 @@
 			children = (
 				6E503A731B09DBA30081DB97 /* CoreData.framework */,
 				26DB69881B015019006AD5C9 /* StoreKit.framework */,
-				26DB695F1B01443A006AD5C9 /* Bolts.framework */,
-				26DB695D1B014425006AD5C9 /* Parse.framework */,
 				26DB69371B013BEB006AD5C9 /* Social.framework */,
 				26DB69351B013BE1006AD5C9 /* Accounts.framework */,
 				26DB69301B013B6F006AD5C9 /* CoreLocation.framework */,
 				F0B026F21AA710AF00FF49F7 /* libiconv.dylib */,
 				F05BAA611A5D594E00411815 /* libz.dylib */,
 				26CE801E1ACFE8EB00FC7606 /* Crashlytics.framework */,
+				26FCF4B51B1CE8C20078010F /* Fabric.framework */,
 				22B5F03410CE6B2F00777D97 /* AddressBook.framework */,
 				22B5EFA210CE50BD00777D97 /* AddressBookUI.framework */,
 				22405EED1600B4E400B92522 /* AssetsLibrary.framework */,
@@ -2912,7 +2908,6 @@
 				22509041196BD902007863F6 /* libopenh264.a */,
 				22AF73C11754C0D000BE8398 /* libopus.a */,
 				220FAD2C10765B400068D98F /* libortp.a */,
-				1FE76362DA6217E7341ED1DF /* libPods-KifTests.a */,
 				57B0E35F173C010400A476B8 /* libpolarssl.a */,
 				F0BB8C34193624C800974404 /* libresolv.9.dylib */,
 				22D1B68012A3E0BE001AE361 /* libresolv.dylib */,
@@ -2937,7 +2932,6 @@
 				F0181B6B18BF7B1200A9A357 /* SenTestingKit.framework */,
 				2264B6D111200342002C2C53 /* SystemConfiguration.framework */,
 				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
-				F03A9B3318C0CF7000C4D7FE /* XCTest.framework */,
 				F03A9B7E18C0D9C900C4D7FE /* libcunit.a */,
 			);
 			name = Frameworks;
