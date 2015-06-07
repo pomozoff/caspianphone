@@ -579,14 +579,14 @@ static UICompositeViewDescription *compositeDescription = nil;
         //self.domainRegisterField.text = domain.length != 0 ? domain : [[LinphoneManager instance] caspianDomainIp];
         self.domainRegisterField.text = [[LinphoneManager instance] caspianDomainIp];
     }
-=======
+
     //NSString *domain      = [userDefaults objectForKey:caspianDomain];
 
     self.phoneNumberRegisterField.text = phoneNumber;
     self.passwordRegisterField.text = password;
     //self.domainRegisterField.text = domain.length != 0 ? domain : [[LinphoneManager instance] caspianDomainIp];
     self.domainRegisterField.text = [[LinphoneManager instance] caspianDomainIp];
->>>>>>> 3116c939b37573fd9c2da6201de3d9aced8251ec
+
 }
 
 - (NSDictionary *)countryByPhoneNumber:(NSString *)phoneNUmber {
