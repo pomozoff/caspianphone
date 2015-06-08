@@ -21,12 +21,12 @@ static NSString *smsAPI = @"https://onecallcaspian.co.uk/mobile/sms?phone_number
 
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 @property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) IBOutlet UILabel *nameLabel;
+@property (nonatomic, strong) IBOutlet UIImageView *profileImageView;
+@property (nonatomic, strong) IBOutlet UIView *textEditView;
+@property (nonatomic, strong) IBOutlet UITextView *messageTextView;
+@property (nonatomic, strong) IBOutlet UIButton *sendButton;
 @property (nonatomic) BOOL keyboardShown;
-@property (retain, nonatomic) IBOutlet UILabel *nameLabel;
-@property (retain, nonatomic) IBOutlet UIImageView *profileImageView;
-@property (retain, nonatomic) IBOutlet UIView *textEditView;
-@property (retain, nonatomic) IBOutlet UITextView *messageTextView;
-@property (retain, nonatomic) IBOutlet UIButton *sendButton;
 
 @end
 
@@ -321,15 +321,6 @@ static UICompositeViewDescription *compositeDescription = nil;
         compositeDescription.statusBarStyle = UIStatusBarStyleLightContent;
     }
     return compositeDescription;
-}
-
-- (void)dealloc {
-    [_nameLabel release];
-    [_profileImageView release];
-    [_messageTextView release];
-    [_sendButton release];
-    [_textEditView release];
-    [super dealloc];
 }
 
 @end

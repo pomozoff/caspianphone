@@ -240,30 +240,4 @@ static UICompositeViewDescription *compositeDescription = nil;
     return compositeDescription;
 }
 
-#pragma mark - Populate CoreData
-
-// Remove after implementing SMS functionality
-- (void)populateCoreData
-{
-    Conversation *conversation1 = (Conversation *)[[CoreDataManager sharedManager] createManagedObject:@"Conversation"];
-    conversation1.recepientName = @"Darcy";
-    conversation1.recepientNumber = @"639995163632";
-    conversation1.lastMessage = @"Message";
-    conversation1.timestamp = [NSDate date];
-    
-    NSString *msg = @"Message";
-    
-    for (int i = 0; i <= 19; i++) {
-        msg = [NSString stringWithFormat:@"%@ message", msg];
-        Message *message = (Message *)[[CoreDataManager sharedManager] createManagedObject:@"Message"];
-        message.content = msg;
-        message.timestamp = [NSDate date];
-        message.status = [NSNumber numberWithBool:NO];
-        message.recepientNumber = @"639995163632";
-        [conversation1 addMessagesObject:message];
-    }
-    
-    [[CoreDataManager sharedManager] saveContextSuccessBlock:nil];
-}
-
 @end

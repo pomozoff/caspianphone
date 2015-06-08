@@ -136,7 +136,6 @@
 		2668D6E41AB62274009630D3 /* flag_placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 2668D6E31AB62274009630D3 /* flag_placeholder.png */; };
 		266D5B9F1AB5C013003F9E30 /* COCAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 266D5B9E1AB5C013003F9E30 /* COCAlertView.m */; };
 		2690B65E1ABE213E000ACD65 /* countries_list.json in Resources */ = {isa = PBXBuildFile; fileRef = 2690B65D1ABE213E000ACD65 /* countries_list.json */; };
-		26CE801F1ACFE8EB00FC7606 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26CE801E1ACFE8EB00FC7606 /* Crashlytics.framework */; };
 		26DB69311B013B6F006AD5C9 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26DB69301B013B6F006AD5C9 /* CoreLocation.framework */; };
 		26DB69321B013B95006AD5C9 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22744043106F33FC006EC466 /* Security.framework */; };
 		26DB69361B013BE1006AD5C9 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26DB69351B013BE1006AD5C9 /* Accounts.framework */; };
@@ -272,7 +271,6 @@
 		26E7F3EF1A81709F0033D3C0 /* yes-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 26E7F3751A81709F0033D3C0 /* yes-button.png */; };
 		26E7F3F21A8171170033D3C0 /* COCTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 26E7F3F11A8171170033D3C0 /* COCTextField.m */; };
 		26E7F3F41A81747E0033D3C0 /* wizard_external_sip_caspian.rc in Resources */ = {isa = PBXBuildFile; fileRef = 26E7F3F31A81747E0033D3C0 /* wizard_external_sip_caspian.rc */; };
-		26FCF4B71B1CE8C20078010F /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26FCF4B51B1CE8C20078010F /* Fabric.framework */; };
 		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
 		340751971506459A00B89C47 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 340751961506459A00B89C47 /* CoreTelephony.framework */; };
 		340751E7150F38FD00B89C47 /* UIVideoButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 340751E6150F38FD00B89C47 /* UIVideoButton.m */; };
@@ -302,7 +300,7 @@
 		6E360D351B0E2A37009A5D55 /* chat_bubble_outgoing_triangle.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E360D341B0E2A37009A5D55 /* chat_bubble_outgoing_triangle.png */; };
 		6E360D371B10DAF5009A5D55 /* sms-contacts.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E360D361B10DAF5009A5D55 /* sms-contacts.png */; };
 		6E360D3A1B10DFD1009A5D55 /* SMSButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E360D391B10DFD1009A5D55 /* SMSButton.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		6E503A601B09D5D10081DB97 /* SMSActivationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E503A5B1B09D5D10081DB97 /* SMSActivationViewController.m */; };
+		6E503A601B09D5D10081DB97 /* SMSActivationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E503A5B1B09D5D10081DB97 /* SMSActivationViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6E503A611B09D5D10081DB97 /* SMSActivationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E503A5C1B09D5D10081DB97 /* SMSActivationViewController.xib */; };
 		6E503A661B09D5E20081DB97 /* ProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E503A651B09D5E20081DB97 /* ProgressHUD.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6E503A691B09D6C70081DB97 /* CoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E503A681B09D6C70081DB97 /* CoreDataManager.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -310,10 +308,13 @@
 		6E503A741B09DBA30081DB97 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E503A731B09DBA30081DB97 /* CoreData.framework */; };
 		6E503A7E1B09E4AD0081DB97 /* SMSTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E503A7C1B09E4AD0081DB97 /* SMSTableViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6E503A7F1B09E4AD0081DB97 /* SMSTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E503A7D1B09E4AD0081DB97 /* SMSTableViewController.xib */; };
-		6E5767B51B0AEEEA0060D464 /* SMSTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E5767B31B0AEEEA0060D464 /* SMSTableViewCell.m */; };
+		6E5767B51B0AEEEA0060D464 /* SMSTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E5767B31B0AEEEA0060D464 /* SMSTableViewCell.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6E5767B61B0AEEEA0060D464 /* SMSTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E5767B41B0AEEEA0060D464 /* SMSTableViewCell.xib */; };
-		6EBB9D871B0D5B7F0017B5FC /* SMSConversationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EBB9D851B0D5B7F0017B5FC /* SMSConversationViewController.m */; };
+		6EBB9D871B0D5B7F0017B5FC /* SMSConversationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EBB9D851B0D5B7F0017B5FC /* SMSConversationViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6EBB9D881B0D5B7F0017B5FC /* SMSConversationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EBB9D861B0D5B7F0017B5FC /* SMSConversationViewController.xib */; };
+		6EE56D481B25CA5100D60D4A /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EE56D451B25CA5100D60D4A /* libc++.dylib */; };
+		6EE56D491B25CA5100D60D4A /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EE56D461B25CA5100D60D4A /* Fabric.framework */; };
+		6EE56D4A1B25CA5100D60D4A /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EE56D471B25CA5100D60D4A /* Crashlytics.framework */; };
 		70571E1A13FABCB000CDD3C2 /* rootca.pem in Resources */ = {isa = PBXBuildFile; fileRef = 70571E1913FABCB000CDD3C2 /* rootca.pem */; };
 		7066FC0C13E830E400EFC6DC /* libvpx.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7066FC0B13E830E400EFC6DC /* libvpx.a */; };
 		70E542F313E147E3002BA2C0 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70E542F213E147E3002BA2C0 /* OpenGLES.framework */; };
@@ -1218,7 +1219,6 @@
 		266D5B9D1AB5C012003F9E30 /* COCAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = COCAlertView.h; sourceTree = "<group>"; };
 		266D5B9E1AB5C013003F9E30 /* COCAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = COCAlertView.m; sourceTree = "<group>"; };
 		2690B65D1ABE213E000ACD65 /* countries_list.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = countries_list.json; path = Resources/countries_list.json; sourceTree = "<group>"; };
-		26CE801E1ACFE8EB00FC7606 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		26DB69301B013B6F006AD5C9 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		26DB69351B013BE1006AD5C9 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		26DB69371B013BEB006AD5C9 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
@@ -1360,7 +1360,6 @@
 		26E7F3F01A8171170033D3C0 /* COCTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = COCTextField.h; sourceTree = "<group>"; };
 		26E7F3F11A8171170033D3C0 /* COCTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = COCTextField.m; sourceTree = "<group>"; };
 		26E7F3F31A81747E0033D3C0 /* wizard_external_sip_caspian.rc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = wizard_external_sip_caspian.rc; path = Resources/wizard_external_sip_caspian.rc; sourceTree = "<group>"; };
-		26FCF4B51B1CE8C20078010F /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		288765FC0DF74451002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* linphone_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = linphone_Prefix.pch; sourceTree = "<group>"; };
@@ -1427,6 +1426,9 @@
 		6EBB9D841B0D5B7F0017B5FC /* SMSConversationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMSConversationViewController.h; sourceTree = "<group>"; };
 		6EBB9D851B0D5B7F0017B5FC /* SMSConversationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMSConversationViewController.m; sourceTree = "<group>"; };
 		6EBB9D861B0D5B7F0017B5FC /* SMSConversationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SMSConversationViewController.xib; sourceTree = "<group>"; };
+		6EE56D451B25CA5100D60D4A /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
+		6EE56D461B25CA5100D60D4A /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
+		6EE56D471B25CA5100D60D4A /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		70571E1913FABCB000CDD3C2 /* rootca.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = rootca.pem; path = "liblinphone-sdk/apple-darwin/share/linphone/rootca.pem"; sourceTree = "<group>"; };
 		7066FC0B13E830E400EFC6DC /* libvpx.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libvpx.a; path = "liblinphone-sdk/apple-darwin/lib/libvpx.a"; sourceTree = "<group>"; };
 		70E542F213E147E3002BA2C0 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -2254,6 +2256,7 @@
 				F05BAA621A5D594E00411815 /* libz.dylib in Frameworks */,
 				1560821F18EEF26100765332 /* libmsopenh264.a in Frameworks */,
 				22509042196BD902007863F6 /* libopenh264.a in Frameworks */,
+				6EE56D4A1B25CA5100D60D4A /* Crashlytics.framework in Frameworks */,
 				15017E701773578400784ACB /* libxml2.a in Frameworks */,
 				22AF73C21754C0D100BE8398 /* libopus.a in Frameworks */,
 				57B0E360173C010400A476B8 /* libpolarssl.a in Frameworks */,
@@ -2265,6 +2268,7 @@
 				22B5F03510CE6B2F00777D97 /* AddressBook.framework in Frameworks */,
 				22B5EFA310CE50BD00777D97 /* AddressBookUI.framework in Frameworks */,
 				22405EEE1600B4E400B92522 /* AssetsLibrary.framework in Frameworks */,
+				6EE56D491B25CA5100D60D4A /* Fabric.framework in Frameworks */,
 				2274402F106F335E006EC466 /* AudioToolbox.framework in Frameworks */,
 				224567C2107B968500F10948 /* AVFoundation.framework in Frameworks */,
 				228697C411AC29B800E9E0CA /* CFNetwork.framework in Frameworks */,
@@ -2304,11 +2308,10 @@
 				220FAD3910765B400068D98F /* libspeexdsp.a in Frameworks */,
 				226183AE1472527D0037138E /* libsrtp.a in Frameworks */,
 				226183AD1472527D0037138E /* libSKP_SILK_SDK.a in Frameworks */,
-				26CE801F1ACFE8EB00FC7606 /* Crashlytics.framework in Frameworks */,
 				22276E8513C73D3100210156 /* libswscale.a in Frameworks */,
 				7066FC0C13E830E400EFC6DC /* libvpx.a in Frameworks */,
+				6EE56D481B25CA5100D60D4A /* libc++.dylib in Frameworks */,
 				22AA8AFD13D7125600B30535 /* libx264.a in Frameworks */,
-				26FCF4B71B1CE8C20078010F /* Fabric.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2853,6 +2856,9 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6EE56D451B25CA5100D60D4A /* libc++.dylib */,
+				6EE56D461B25CA5100D60D4A /* Fabric.framework */,
+				6EE56D471B25CA5100D60D4A /* Crashlytics.framework */,
 				6E503A731B09DBA30081DB97 /* CoreData.framework */,
 				26DB69881B015019006AD5C9 /* StoreKit.framework */,
 				26DB69371B013BEB006AD5C9 /* Social.framework */,
@@ -2860,8 +2866,6 @@
 				26DB69301B013B6F006AD5C9 /* CoreLocation.framework */,
 				F0B026F21AA710AF00FF49F7 /* libiconv.dylib */,
 				F05BAA611A5D594E00411815 /* libz.dylib */,
-				26CE801E1ACFE8EB00FC7606 /* Crashlytics.framework */,
-				26FCF4B51B1CE8C20078010F /* Fabric.framework */,
 				22B5F03410CE6B2F00777D97 /* AddressBook.framework */,
 				22B5EFA210CE50BD00777D97 /* AddressBookUI.framework */,
 				22405EED1600B4E400B92522 /* AssetsLibrary.framework */,
@@ -4740,7 +4744,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "./Crashlytics.framework/run 33dd028ded3a518de0afb500f5a3839a2af9f021 00be292e53678c94c0057937e1509ff25df44b4ecac3369157624a267c41e3e2   ";
+			shellScript = "./Fabric.framework/run 33dd028ded3a518de0afb500f5a3839a2af9f021 00be292e53678c94c0057937e1509ff25df44b4ecac3369157624a267c41e3e2";
 		};
 		63DCC71D1A07B08E00916627 /* Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
