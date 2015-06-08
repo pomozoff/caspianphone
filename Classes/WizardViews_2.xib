@@ -280,8 +280,8 @@
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bullets1.png" translatesAutoresizingMaskIntoConstraints="NO" id="ZVH-H5-D71">
                     <rect key="frame" x="132" y="54" width="56" height="25"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="56" id="C1e-NP-Qd3"/>
-                        <constraint firstAttribute="height" constant="25" id="nza-SX-Krf"/>
+                        <constraint firstAttribute="width" constant="56" id="LgY-yB-BZo"/>
+                        <constraint firstAttribute="height" constant="25" id="ler-Zw-jKH"/>
                     </constraints>
                 </imageView>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dE2-ec-AaQ" userLabel="countryNameField" customClass="COCTextField">
@@ -307,17 +307,17 @@
                 <constraint firstItem="dE2-ec-AaQ" firstAttribute="top" secondItem="jYS-WO-pvD" secondAttribute="bottom" constant="8" symbolic="YES" id="3Xz-d1-6w5"/>
                 <constraint firstItem="l5A-gX-dpX" firstAttribute="bottom" secondItem="i8y-3c-pS2" secondAttribute="bottom" id="7JT-r6-lDg"/>
                 <constraint firstAttribute="bottom" secondItem="i8y-3c-pS2" secondAttribute="bottom" constant="88" id="JX6-FA-Ge5"/>
-                <constraint firstItem="ZVH-H5-D71" firstAttribute="top" secondItem="BQg-LE-IQC" secondAttribute="top" constant="54" id="OY7-JK-v0c"/>
+                <constraint firstItem="ZVH-H5-D71" firstAttribute="top" secondItem="BQg-LE-IQC" secondAttribute="top" constant="54" id="Qn2-tQ-Gal"/>
                 <constraint firstItem="afi-3Y-AGb" firstAttribute="top" secondItem="BQg-LE-IQC" secondAttribute="top" id="Qof-Oz-l0j"/>
+                <constraint firstItem="ZVH-H5-D71" firstAttribute="centerX" secondItem="jYS-WO-pvD" secondAttribute="centerX" id="Rn9-L7-aK6"/>
                 <constraint firstAttribute="trailing" secondItem="l5A-gX-dpX" secondAttribute="trailing" constant="26" id="RzK-2K-bmA"/>
                 <constraint firstItem="dE2-ec-AaQ" firstAttribute="leading" secondItem="BQg-LE-IQC" secondAttribute="leading" constant="33" id="SxY-fn-RoK"/>
                 <constraint firstItem="jYS-WO-pvD" firstAttribute="centerX" secondItem="dE2-ec-AaQ" secondAttribute="centerX" id="bFA-tV-xtT"/>
                 <constraint firstItem="afi-3Y-AGb" firstAttribute="leading" secondItem="BQg-LE-IQC" secondAttribute="leading" id="cVn-OP-6Nr"/>
                 <constraint firstItem="l5A-gX-dpX" firstAttribute="leading" secondItem="i8y-3c-pS2" secondAttribute="trailing" constant="48" id="dfA-Ik-OzE"/>
                 <constraint firstItem="dE2-ec-AaQ" firstAttribute="centerY" secondItem="afi-3Y-AGb" secondAttribute="centerY" id="fzI-oJ-wXj"/>
-                <constraint firstItem="afi-3Y-AGb" firstAttribute="centerX" secondItem="ZVH-H5-D71" secondAttribute="centerX" id="m2c-ph-5pq"/>
-                <constraint firstItem="jYS-WO-pvD" firstAttribute="centerX" secondItem="ZVH-H5-D71" secondAttribute="centerX" id="mq6-ml-ErA"/>
                 <constraint firstItem="i8y-3c-pS2" firstAttribute="leading" secondItem="BQg-LE-IQC" secondAttribute="leading" constant="26" id="rJu-Rz-22c"/>
+                <constraint firstItem="ZVH-H5-D71" firstAttribute="centerX" secondItem="afi-3Y-AGb" secondAttribute="centerX" id="vhg-3J-Mvg"/>
                 <constraint firstItem="l5A-gX-dpX" firstAttribute="top" secondItem="i8y-3c-pS2" secondAttribute="top" id="wdS-tQ-2mJ"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

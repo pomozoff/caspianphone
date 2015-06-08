@@ -569,24 +569,24 @@ static UICompositeViewDescription *compositeDescription = nil;
     NSString *countryCode = [userDefaults objectForKey:caspianCountryCode];
     NSString *phoneNumber = [userDefaults objectForKey:caspianPhoneNumber];
     NSString *password    = [userDefaults objectForKey:caspianPasswordKey];
-    NSString *domain      = [userDefaults objectForKey:caspianDomain];
+    //NSString *domain      = [userDefaults objectForKey:caspianDomain];
     
-    if (phoneNumber == NULL) {
+    /*if (phoneNumber == NULL) {
         self.phoneNumberRegisterField.text = countryCode;
     } else {
         self.phoneNumberRegisterField.text = phoneNumber;
         self.passwordRegisterField.text = password;
         //self.domainRegisterField.text = domain.length != 0 ? domain : [[LinphoneManager instance] caspianDomainIp];
         self.domainRegisterField.text = [[LinphoneManager instance] caspianDomainIp];
-    }
-
-    //NSString *domain      = [userDefaults objectForKey:caspianDomain];
-
+    }*/
     self.phoneNumberRegisterField.text = phoneNumber;
     self.passwordRegisterField.text = password;
     //self.domainRegisterField.text = domain.length != 0 ? domain : [[LinphoneManager instance] caspianDomainIp];
     self.domainRegisterField.text = [[LinphoneManager instance] caspianDomainIp];
-
+    
+    if (phoneNumber == NULL) {
+        self.phoneNumberRegisterField.text = countryCode;
+    }
 }
 
 - (NSDictionary *)countryByPhoneNumber:(NSString *)phoneNUmber {
