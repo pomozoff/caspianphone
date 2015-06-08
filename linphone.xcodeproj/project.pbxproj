@@ -136,7 +136,6 @@
 		2668D6E41AB62274009630D3 /* flag_placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 2668D6E31AB62274009630D3 /* flag_placeholder.png */; };
 		266D5B9F1AB5C013003F9E30 /* COCAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 266D5B9E1AB5C013003F9E30 /* COCAlertView.m */; };
 		2690B65E1ABE213E000ACD65 /* countries_list.json in Resources */ = {isa = PBXBuildFile; fileRef = 2690B65D1ABE213E000ACD65 /* countries_list.json */; };
-		26CE801F1ACFE8EB00FC7606 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26CE801E1ACFE8EB00FC7606 /* Crashlytics.framework */; };
 		26DB69311B013B6F006AD5C9 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26DB69301B013B6F006AD5C9 /* CoreLocation.framework */; };
 		26DB69321B013B95006AD5C9 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22744043106F33FC006EC466 /* Security.framework */; };
 		26DB69361B013BE1006AD5C9 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26DB69351B013BE1006AD5C9 /* Accounts.framework */; };
@@ -326,6 +325,7 @@
 		C6AD589F1AF26C4B00DD5375 /* welcome-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C6AD589D1AF26C4B00DD5375 /* welcome-568h@2x.png */; };
 		C6AD58A01AF26C4B00DD5375 /* welcome@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C6AD589E1AF26C4B00DD5375 /* welcome@2x.png */; };
 		C6BECC6A1B0F2BA400A6B703 /* signup_back_default.png in Resources */ = {isa = PBXBuildFile; fileRef = C6BECC691B0F2BA400A6B703 /* signup_back_default.png */; };
+		C6BF8F4C1B25A6C2005E81A9 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6BF8F4B1B25A6C2005E81A9 /* Crashlytics.framework */; };
 		C6EAFDC21B17887B008020CB /* signup_next_default.png in Resources */ = {isa = PBXBuildFile; fileRef = C6EAFDC11B17887B008020CB /* signup_next_default.png */; };
 		C6EAFDCB1B178F6C008020CB /* bullets1.png in Resources */ = {isa = PBXBuildFile; fileRef = C6EAFDC91B178F6C008020CB /* bullets1.png */; };
 		C6EAFDCD1B17B60B008020CB /* bullets2.png in Resources */ = {isa = PBXBuildFile; fileRef = C6EAFDCC1B17B60B008020CB /* bullets2.png */; };
@@ -1221,7 +1221,6 @@
 		266D5B9D1AB5C012003F9E30 /* COCAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = COCAlertView.h; sourceTree = "<group>"; };
 		266D5B9E1AB5C013003F9E30 /* COCAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = COCAlertView.m; sourceTree = "<group>"; };
 		2690B65D1ABE213E000ACD65 /* countries_list.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = countries_list.json; path = Resources/countries_list.json; sourceTree = "<group>"; };
-		26CE801E1ACFE8EB00FC7606 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		26DB69301B013B6F006AD5C9 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		26DB69351B013BE1006AD5C9 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		26DB69371B013BEB006AD5C9 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
@@ -1443,6 +1442,7 @@
 		C6AD589D1AF26C4B00DD5375 /* welcome-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "welcome-568h@2x.png"; sourceTree = SOURCE_ROOT; };
 		C6AD589E1AF26C4B00DD5375 /* welcome@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "welcome@2x.png"; sourceTree = SOURCE_ROOT; };
 		C6BECC691B0F2BA400A6B703 /* signup_back_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = signup_back_default.png; sourceTree = "<group>"; };
+		C6BF8F4B1B25A6C2005E81A9 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		C6EAFDC11B17887B008020CB /* signup_next_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = signup_next_default.png; sourceTree = SOURCE_ROOT; };
 		C6EAFDC91B178F6C008020CB /* bullets1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bullets1.png; path = "Resources/image caspian new graphics/bullets1.png"; sourceTree = SOURCE_ROOT; };
 		C6EAFDCC1B17B60B008020CB /* bullets2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bullets2.png; path = "Resources/image caspian new graphics/bullets2.png"; sourceTree = SOURCE_ROOT; };
@@ -2291,6 +2291,7 @@
 				D32B6E2F15A5C0AC0033019F /* libsqlite3.dylib in Frameworks */,
 				344ABDF214850AE9007420B6 /* libstdc++.6.dylib in Frameworks */,
 				22D1B68112A3E0BE001AE361 /* libresolv.dylib in Frameworks */,
+				C6BF8F4C1B25A6C2005E81A9 /* Crashlytics.framework in Frameworks */,
 				22276E8313C73D3100210156 /* libavcodec.a in Frameworks */,
 				22276E8413C73D3100210156 /* libavutil.a in Frameworks */,
 				220FAD3210765B400068D98F /* libgsm.a in Frameworks */,
@@ -2310,7 +2311,6 @@
 				220FAD3910765B400068D98F /* libspeexdsp.a in Frameworks */,
 				226183AE1472527D0037138E /* libsrtp.a in Frameworks */,
 				226183AD1472527D0037138E /* libSKP_SILK_SDK.a in Frameworks */,
-				26CE801F1ACFE8EB00FC7606 /* Crashlytics.framework in Frameworks */,
 				22276E8513C73D3100210156 /* libswscale.a in Frameworks */,
 				7066FC0C13E830E400EFC6DC /* libvpx.a in Frameworks */,
 				22AA8AFD13D7125600B30535 /* libx264.a in Frameworks */,
@@ -2859,6 +2859,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C6BF8F4B1B25A6C2005E81A9 /* Crashlytics.framework */,
 				6E503A731B09DBA30081DB97 /* CoreData.framework */,
 				26DB69881B015019006AD5C9 /* StoreKit.framework */,
 				26DB69371B013BEB006AD5C9 /* Social.framework */,
@@ -2866,7 +2867,6 @@
 				26DB69301B013B6F006AD5C9 /* CoreLocation.framework */,
 				F0B026F21AA710AF00FF49F7 /* libiconv.dylib */,
 				F05BAA611A5D594E00411815 /* libz.dylib */,
-				26CE801E1ACFE8EB00FC7606 /* Crashlytics.framework */,
 				26FCF4B51B1CE8C20078010F /* Fabric.framework */,
 				22B5F03410CE6B2F00777D97 /* AddressBook.framework */,
 				22B5EFA210CE50BD00777D97 /* AddressBookUI.framework */,
@@ -4743,16 +4743,17 @@
 /* Begin PBXShellScriptBuildPhase section */
 		26CE80151ACFE64300FC7606 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 8;
 			files = (
 			);
 			inputPaths = (
 			);
 			outputPaths = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
+			runOnlyForDeploymentPostprocessing = 1;
 			shellPath = /bin/sh;
 			shellScript = "./Crashlytics.framework/run 33dd028ded3a518de0afb500f5a3839a2af9f021 00be292e53678c94c0057937e1509ff25df44b4ecac3369157624a267c41e3e2   ";
+			showEnvVarsInLog = 0;
 		};
 		63DCC71D1A07B08E00916627 /* Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -5438,7 +5439,10 @@
 				LINK_WITH_STANDARD_LIBRARIES = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				ORDER_FILE = "";
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-v",
+				);
 				PRODUCT_NAME = linphone;
 				PROVISIONING_PROFILE = "a63dc8db-824b-4d9d-8af6-82b3ca61c77e";
 				SKIP_INSTALL = NO;
@@ -5525,7 +5529,10 @@
 				LINK_WITH_STANDARD_LIBRARIES = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				ORDER_FILE = "";
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-v",
+				);
 				PRODUCT_NAME = linphone;
 				PROVISIONING_PROFILE = "ee645e0b-5ab1-439b-997a-b12e09c73a14";
 				SKIP_INSTALL = NO;
@@ -5611,7 +5618,10 @@
 				LINK_WITH_STANDARD_LIBRARIES = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				ORDER_FILE = "";
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-v",
+				);
 				PRODUCT_NAME = linphone;
 				PROVISIONING_PROFILE = "ee645e0b-5ab1-439b-997a-b12e09c73a14";
 				SKIP_INSTALL = NO;
@@ -5698,7 +5708,10 @@
 				LINK_WITH_STANDARD_LIBRARIES = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				ORDER_FILE = "";
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-v",
+				);
 				PRODUCT_NAME = linphone;
 				PROVISIONING_PROFILE = "ee645e0b-5ab1-439b-997a-b12e09c73a14";
 				SKIP_INSTALL = NO;
