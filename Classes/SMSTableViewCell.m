@@ -14,7 +14,6 @@
     UIView *selectionColor = [[UIView alloc] init];
     selectionColor.backgroundColor = [UIColor colorWithRed:(102/255.0) green:(167/255.0) blue:(200/255.0) alpha:1];
     self.selectedBackgroundView = selectionColor;
-    [selectionColor release];
     self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.width / 2;
 }
 
@@ -29,11 +28,4 @@
     return @"SMSTableViewCellIdentifier";
 }
 
-- (void)dealloc {
-    [_profileImageView release];
-    [_nameLabel release];
-    [_messageLabel release];
-    [_dateLabel release];
-    [super dealloc];
-}
 @end

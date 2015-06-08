@@ -20,11 +20,11 @@ static NSString *smsActivationAPI = @"https://onecallcaspian.co.uk/mobile/sms?ph
 
 @interface SMSActivationViewController ()
 
-@property (retain, nonatomic) IBOutlet UILabel *messageLabel;
-@property (retain, nonatomic) IBOutlet UITextField *codeTextField;
-@property (retain, nonatomic) IBOutlet UIButton *firstButton;
-@property (retain, nonatomic) IBOutlet UIButton *secondButton;
-@property (retain, nonatomic) IBOutlet UIButton *skipButton;
+@property (nonatomic, strong) IBOutlet UILabel *messageLabel;
+@property (nonatomic, strong) IBOutlet UITextField *codeTextField;
+@property (nonatomic, strong) IBOutlet UIButton *firstButton;
+@property (nonatomic, strong) IBOutlet UIButton *secondButton;
+@property (nonatomic, strong) IBOutlet UIButton *skipButton;
 
 @end
 
@@ -171,14 +171,4 @@ static UICompositeViewDescription *compositeDescription = nil;
     return compositeDescription;
 }
 
-- (void)dealloc {
-    [_messageLabel release];
-    [_codeTextField release];
-    [_firstButton release];
-    [_secondButton release];
-    [_firstButton release];
-    [_secondButton release];
-    [_skipButton release];
-    [super dealloc];
-}
 @end
