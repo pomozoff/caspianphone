@@ -272,7 +272,6 @@
 		26E7F3EF1A81709F0033D3C0 /* yes-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 26E7F3751A81709F0033D3C0 /* yes-button.png */; };
 		26E7F3F21A8171170033D3C0 /* COCTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 26E7F3F11A8171170033D3C0 /* COCTextField.m */; };
 		26E7F3F41A81747E0033D3C0 /* wizard_external_sip_caspian.rc in Resources */ = {isa = PBXBuildFile; fileRef = 26E7F3F31A81747E0033D3C0 /* wizard_external_sip_caspian.rc */; };
-		26FCF4B71B1CE8C20078010F /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26FCF4B51B1CE8C20078010F /* Fabric.framework */; };
 		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
 		340751971506459A00B89C47 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 340751961506459A00B89C47 /* CoreTelephony.framework */; };
 		340751E7150F38FD00B89C47 /* UIVideoButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 340751E6150F38FD00B89C47 /* UIVideoButton.m */; };
@@ -1363,7 +1362,6 @@
 		26E7F3F01A8171170033D3C0 /* COCTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = COCTextField.h; sourceTree = "<group>"; };
 		26E7F3F11A8171170033D3C0 /* COCTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = COCTextField.m; sourceTree = "<group>"; };
 		26E7F3F31A81747E0033D3C0 /* wizard_external_sip_caspian.rc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = wizard_external_sip_caspian.rc; path = Resources/wizard_external_sip_caspian.rc; sourceTree = "<group>"; };
-		26FCF4B51B1CE8C20078010F /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		288765FC0DF74451002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* linphone_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = linphone_Prefix.pch; sourceTree = "<group>"; };
@@ -2314,7 +2312,6 @@
 				22276E8513C73D3100210156 /* libswscale.a in Frameworks */,
 				7066FC0C13E830E400EFC6DC /* libvpx.a in Frameworks */,
 				22AA8AFD13D7125600B30535 /* libx264.a in Frameworks */,
-				26FCF4B71B1CE8C20078010F /* Fabric.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2867,7 +2864,6 @@
 				F0B026F21AA710AF00FF49F7 /* libiconv.dylib */,
 				F05BAA611A5D594E00411815 /* libz.dylib */,
 				26CE801E1ACFE8EB00FC7606 /* Crashlytics.framework */,
-				26FCF4B51B1CE8C20078010F /* Fabric.framework */,
 				22B5F03410CE6B2F00777D97 /* AddressBook.framework */,
 				22B5EFA210CE50BD00777D97 /* AddressBookUI.framework */,
 				22405EED1600B4E400B92522 /* AssetsLibrary.framework */,
