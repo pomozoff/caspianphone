@@ -10,10 +10,10 @@
 
 @interface SMSTableViewCell : UITableViewCell
 
-@property (retain, nonatomic) IBOutlet UIImageView *profileImageView;
-@property (retain, nonatomic) IBOutlet UILabel *nameLabel;
-@property (retain, nonatomic) IBOutlet UILabel *messageLabel;
-@property (retain, nonatomic) IBOutlet UILabel *dateLabel;
+@property (nonatomic, strong) IBOutlet UIImageView *profileImageView;
+@property (nonatomic, strong) IBOutlet UILabel *nameLabel;
+@property (nonatomic, strong) IBOutlet UILabel *messageLabel;
+@property (nonatomic, strong) IBOutlet UILabel *dateLabel;
 
 + (NSString *)reuseIdentifier;
 
