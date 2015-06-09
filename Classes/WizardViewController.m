@@ -1762,21 +1762,6 @@ static UICompositeViewDescription *compositeDescription = nil;
     self.currentCountryRow = [self indexOfCountryWithName:caspianCountryDefaultName];
     }
 }
-#pragma mark - LogIn (Sign IN)
-
-- (void) procedureCountryFill {
- /*
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    NSString *countryCode = [userDefaults objectForKey:caspianCountryCode];
-    NSString *lastPhoneNumber = [userDefaults objectForKey:caspianPhoneNumber];
-    
-    if (lastPhoneNumber == NULL) {
-        self.phoneNumberRegisterField.text = countryCode;
-    } else {
-        [self fillCredentials];
-    } */
-}
-
 
 #pragma mark - Sign Up
 
