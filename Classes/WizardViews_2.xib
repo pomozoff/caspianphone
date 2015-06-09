@@ -45,7 +45,7 @@
                     </variation>
                 </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="original.png" translatesAutoresizingMaskIntoConstraints="NO" id="AtB-js-x74">
-                    <rect key="frame" x="60" y="69" width="200" height="120"/>
+                    <rect key="frame" x="48" y="69" width="225" height="135"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="AtB-js-x74" secondAttribute="height" multiplier="5:3" id="f68-KV-ebQ"/>
                     </constraints>
@@ -88,7 +88,7 @@
                 <constraint firstItem="1pl-Pj-XSO" firstAttribute="height" secondItem="9Ia-3Q-ujT" secondAttribute="height" id="nU5-oG-2k2"/>
                 <constraint firstItem="1pl-Pj-XSO" firstAttribute="bottom" secondItem="9Ia-3Q-ujT" secondAttribute="bottom" id="oKw-2l-lFP"/>
                 <constraint firstItem="9Ia-3Q-ujT" firstAttribute="leading" secondItem="fH4-ZS-Blo" secondAttribute="leading" constant="26" id="sgr-CE-hKk"/>
-                <constraint firstItem="AtB-js-x74" firstAttribute="leading" secondItem="fH4-ZS-Blo" secondAttribute="leading" constant="60" id="wDz-hY-MLZ"/>
+                <constraint firstItem="AtB-js-x74" firstAttribute="leading" secondItem="fH4-ZS-Blo" secondAttribute="leading" constant="48" id="wDz-hY-MLZ"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
