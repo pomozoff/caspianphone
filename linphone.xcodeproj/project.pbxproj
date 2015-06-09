@@ -1437,16 +1437,16 @@
 		70E542F213E147E3002BA2C0 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		70E542F413E147EB002BA2C0 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		8D1107310486CEB800E47090 /* linphone-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "linphone-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
-		C637B52D1B2629E80054336B /* bullets1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bullets1.png; path = Classes/bullets1.png; sourceTree = "<group>"; };
-		C637B52F1B262A7F0054336B /* bullets2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bullets2.png; path = "Resources/image caspian new graphics/bullets2.png"; sourceTree = "<group>"; };
+		C637B52D1B2629E80054336B /* bullets1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bullets1.png; sourceTree = "<group>"; };
+		C637B52F1B262A7F0054336B /* bullets2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bullets2.png; sourceTree = "<group>"; };
 		C637B5311B262AFE0054336B /* signup_next_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = signup_next_default.png; sourceTree = "<group>"; };
-		C681BB1F1AE822760063B3A5 /* welcome.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = welcome.png; sourceTree = SOURCE_ROOT; };
-		C681BB211AE823C60063B3A5 /* welcome_login_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = welcome_login_default.png; path = Classes/welcome_login_default.png; sourceTree = SOURCE_ROOT; };
-		C681BB231AE825090063B3A5 /* welcome_signup_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = welcome_signup_default.png; sourceTree = SOURCE_ROOT; };
-		C681BB251AE825B90063B3A5 /* original.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = original.png; sourceTree = SOURCE_ROOT; };
+		C681BB1F1AE822760063B3A5 /* welcome.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = welcome.png; sourceTree = "<group>"; };
+		C681BB211AE823C60063B3A5 /* welcome_login_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = welcome_login_default.png; sourceTree = "<group>"; };
+		C681BB231AE825090063B3A5 /* welcome_signup_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = welcome_signup_default.png; sourceTree = "<group>"; };
+		C681BB251AE825B90063B3A5 /* original.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = original.png; sourceTree = "<group>"; };
 		C6863C8C1AF5608300652820 /* WizardViews_2.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WizardViews_2.xib; sourceTree = "<group>"; };
-		C6AD589D1AF26C4B00DD5375 /* welcome-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "welcome-568h@2x.png"; sourceTree = SOURCE_ROOT; };
-		C6AD589E1AF26C4B00DD5375 /* welcome@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "welcome@2x.png"; sourceTree = SOURCE_ROOT; };
+		C6AD589D1AF26C4B00DD5375 /* welcome-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "welcome-568h@2x.png"; sourceTree = "<group>"; };
+		C6AD589E1AF26C4B00DD5375 /* welcome@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "welcome@2x.png"; sourceTree = "<group>"; };
 		C6BECC691B0F2BA400A6B703 /* signup_back_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = signup_back_default.png; sourceTree = "<group>"; };
 		C90FAA7615AF54E6002091CB /* HistoryDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryDetailsViewController.h; sourceTree = "<group>"; };
 		C90FAA7715AF54E6002091CB /* HistoryDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryDetailsViewController.m; sourceTree = "<group>"; };
@@ -2991,6 +2991,7 @@
 				C681BB211AE823C60063B3A5 /* welcome_login_default.png */,
 			);
 			name = "image caspian new graphics";
+			path = "Resources/image caspian new graphics";
 			sourceTree = SOURCE_ROOT;
 		};
 		D326483415887D4400930C67 /* Utils */ = {

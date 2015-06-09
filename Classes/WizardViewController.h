@@ -110,6 +110,8 @@
 
 @property (nonatomic, retain) IBOutlet UIButton *dismissKeyboardButton;
 
+@property (retain, nonatomic) IBOutlet UIButton *dismissKeyboardButtonCountryLoginView;
+
 @property (nonatomic, retain) IBOutlet UIView *confirmView;
 @property (nonatomic, retain) IBOutlet UIImageView *smsImageConfirmView;
 @property (nonatomic, retain) IBOutlet UIImageView *callImageConfirmView;

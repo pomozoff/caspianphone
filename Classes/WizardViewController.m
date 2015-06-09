@@ -294,6 +294,7 @@ extern NSString *caspianErrorDomain;
     [countryLoginView release];
     
     [_countryPickerLoginNextToolbar release];
+    [_dismissKeyboardButtonCountryLoginView release];
     [super dealloc];
 }
 
@@ -1379,7 +1380,9 @@ static UICompositeViewDescription *compositeDescription = nil;
 }
 
 - (IBAction)onDismissKeyboardButton:(id)sender {
-    if ([self.phoneNumberRegisterField isFirstResponder]) {
+    if ([self.countryNameLoginViewField isFirstResponder]) {
+        [self.countryNameLoginViewField resignFirstResponder];
+    } else if ([self.phoneNumberRegisterField isFirstResponder]) {
         [self.phoneNumberRegisterField resignFirstResponder];
     } else if ([self.passwordRegisterField isFirstResponder]) {
         [self.passwordRegisterField resignFirstResponder];
