@@ -292,8 +292,8 @@ extern NSString *caspianErrorDomain;
     [_numKeypadDoneSignInToolbar release];
     [_dismissKeyboardButton release];
     [countryLoginView release];
-    
     [_countryPickerLoginNextToolbar release];
+    [_dismissKeyboardButtonCountryLoginView release];
     [super dealloc];
 }
 
@@ -571,22 +571,22 @@ static UICompositeViewDescription *compositeDescription = nil;
     NSString *password    = [userDefaults objectForKey:caspianPasswordKey];
     //NSString *domain      = [userDefaults objectForKey:caspianDomain];
     
-    if (phoneNumber == NULL) {
+    /*if (phoneNumber == NULL) {
         self.phoneNumberRegisterField.text = countryCode;
     } else {
         self.phoneNumberRegisterField.text = phoneNumber;
         self.passwordRegisterField.text = password;
         //self.domainRegisterField.text = domain.length != 0 ? domain : [[LinphoneManager instance] caspianDomainIp];
         self.domainRegisterField.text = [[LinphoneManager instance] caspianDomainIp];
-    }
-
-    //NSString *domain      = [userDefaults objectForKey:caspianDomain];
-
+    }*/
     self.phoneNumberRegisterField.text = phoneNumber;
     self.passwordRegisterField.text = password;
     //self.domainRegisterField.text = domain.length != 0 ? domain : [[LinphoneManager instance] caspianDomainIp];
     self.domainRegisterField.text = [[LinphoneManager instance] caspianDomainIp];
-
+    
+    if (phoneNumber == NULL) {
+        self.phoneNumberRegisterField.text = countryCode;
+    }
 }
 
 - (NSDictionary *)countryByPhoneNumber:(NSString *)phoneNUmber {
@@ -1379,7 +1379,9 @@ static UICompositeViewDescription *compositeDescription = nil;
 }
 
 - (IBAction)onDismissKeyboardButton:(id)sender {
-    if ([self.phoneNumberRegisterField isFirstResponder]) {
+    if ([self.countryNameLoginViewField isFirstResponder]) {
+        [self.countryNameLoginViewField resignFirstResponder];
+    } else if ([self.phoneNumberRegisterField isFirstResponder]) {
         [self.phoneNumberRegisterField resignFirstResponder];
     } else if ([self.passwordRegisterField isFirstResponder]) {
         [self.passwordRegisterField resignFirstResponder];
@@ -1759,21 +1761,6 @@ static UICompositeViewDescription *compositeDescription = nil;
     self.currentCountryRow = [self indexOfCountryWithName:caspianCountryDefaultName];
     }
 }
-#pragma mark - LogIn (Sign IN)
-
-- (void) procedureCountryFill {
- /*
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    NSString *countryCode = [userDefaults objectForKey:caspianCountryCode];
-    NSString *lastPhoneNumber = [userDefaults objectForKey:caspianPhoneNumber];
-    
-    if (lastPhoneNumber == NULL) {
-        self.phoneNumberRegisterField.text = countryCode;
-    } else {
-        [self fillCredentials];
-    } */
-}
-
 
 #pragma mark - Sign Up
 
