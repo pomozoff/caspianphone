@@ -1360,22 +1360,8 @@ static UICompositeViewDescription *compositeDescription = nil;
 }
 
 - (IBAction)onNextLogInClick:(id)sender {
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    NSString *country = [userDefaults objectForKey:caspianCountryName];
-    NSString *countryCode = [userDefaults objectForKey:caspianCountryCode];
-    
-    countryCode = self.selectedCountryCode;
-    country = self.countryNameLoginViewField.text;
-    
-    NSLog(@"Переменная country = %@, ", country);
-    NSLog(@"Переменная countryCode = %@, ", countryCode);
-    
-    [userDefaults setObject:countryCode forKey:caspianCountryCode];
-    [userDefaults setObject:country forKey:caspianCountryName];
-    
-    [userDefaults synchronize];
-    
-    [self changeView:logInView back:FALSE animation:TRUE];
+    [self saveSelectedCountry];
+    [self changeView:logInView back:NO animation:YES];
 }
 
 - (IBAction)onDismissKeyboardButton:(id)sender {
@@ -1774,6 +1760,16 @@ static UICompositeViewDescription *compositeDescription = nil;
     } */
 }
 
+#pragma mark - Private
+
+-(void)saveSelectedCountry {
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    
+    [userDefaults setObject:self.selectedCountryCode forKey:caspianCountryCode];
+    [userDefaults setObject:self.countryNameLoginViewField.text forKey:caspianCountryName];
+    
+    [userDefaults synchronize];
+}
 
 #pragma mark - Sign Up
 
