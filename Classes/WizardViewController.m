@@ -569,7 +569,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     NSString *countryCode = [userDefaults objectForKey:caspianCountryCode];
     NSString *phoneNumber = [userDefaults objectForKey:caspianPhoneNumber];
     NSString *password    = [userDefaults objectForKey:caspianPasswordKey];
-    NSString *domain      = [userDefaults objectForKey:caspianDomain];
+    //NSString *domain      = [userDefaults objectForKey:caspianDomain];
     
     if (phoneNumber == NULL) {
         self.phoneNumberRegisterField.text = countryCode;
