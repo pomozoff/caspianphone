@@ -5528,7 +5528,7 @@
 					"$(PROJECT_DIR)/liblinphone-sdk/apple-darwin/lib",
 				);
 				LINK_WITH_STANDARD_LIBRARIES = YES;
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				ORDER_FILE = "";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = linphone;
@@ -5614,7 +5614,7 @@
 					"$(PROJECT_DIR)/liblinphone-sdk/apple-darwin/lib",
 				);
 				LINK_WITH_STANDARD_LIBRARIES = YES;
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				ORDER_FILE = "";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = linphone;
@@ -5701,7 +5701,7 @@
 					"$(PROJECT_DIR)/liblinphone-sdk/apple-darwin/lib",
 				);
 				LINK_WITH_STANDARD_LIBRARIES = YES;
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				ORDER_FILE = "";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = linphone;
