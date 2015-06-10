@@ -294,7 +294,7 @@
 		639CEB091A1DF4FA004DE38F /* UIChatCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 639CEB0B1A1DF4FA004DE38F /* UIChatCell.xib */; };
 		63CD4B4F1A5AAC8C00B84282 /* DTAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 63CD4B4E1A5AAC8C00B84282 /* DTAlertView.m */; };
 		63FB30351A680E73008CA393 /* UIRoundedImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 63FB30341A680E73008CA393 /* UIRoundedImageView.m */; };
-		6E360D2D1B0DF6D5009A5D55 /* SMSMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E360D2C1B0DF6D5009A5D55 /* SMSMessageCell.m */; };
+		6E360D2D1B0DF6D5009A5D55 /* SMSMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E360D2C1B0DF6D5009A5D55 /* SMSMessageCell.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6E360D301B0E0D46009A5D55 /* Conversation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E360D2F1B0E0D46009A5D55 /* Conversation.m */; };
 		6E360D331B0E0D47009A5D55 /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E360D321B0E0D47009A5D55 /* Message.m */; };
 		6E360D351B0E2A37009A5D55 /* chat_bubble_outgoing_triangle.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E360D341B0E2A37009A5D55 /* chat_bubble_outgoing_triangle.png */; };
