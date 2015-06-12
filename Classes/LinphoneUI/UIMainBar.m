@@ -134,7 +134,7 @@ static NSString * const kDisappearAnimation = @"disappear";
     {
         UIButton *historyButtonLandscape = (UIButton*) [landscapeView viewWithTag:[historyButton tag]];
         // Set selected+over background: IB lack !
-        [historyButton setBackgroundImage:[UIImage imageNamed:@"history-hover.png"]
+        [historyButton setBackgroundImage:[UIImage imageNamed:@"home_chat_pressed"]
                                  forState:(UIControlStateHighlighted | UIControlStateSelected)];
 
         // Set selected+over background: IB lack !
@@ -148,7 +148,7 @@ static NSString * const kDisappearAnimation = @"disappear";
     {
         UIButton *contactsButtonLandscape = (UIButton*) [landscapeView viewWithTag:[contactsButton tag]];
         // Set selected+over background: IB lack !
-        [contactsButton setBackgroundImage:[UIImage imageNamed:@"contacts-hover.png"]
+        [contactsButton setBackgroundImage:[UIImage imageNamed:@"home_contacts_pressed"]
                                   forState:(UIControlStateHighlighted | UIControlStateSelected)];
 
         // Set selected+over background: IB lack !
@@ -161,7 +161,7 @@ static NSString * const kDisappearAnimation = @"disappear";
     {
         UIButton *dialerButtonLandscape = (UIButton*) [landscapeView viewWithTag:[dialerButton tag]];
         // Set selected+over background: IB lack !
-        [dialerButton setBackgroundImage:[UIImage imageNamed:@"dialer-hover.png"]
+        [dialerButton setBackgroundImage:[UIImage imageNamed:@"main_dialer_pressed"]
                                 forState:(UIControlStateHighlighted | UIControlStateSelected)];
 
         // Set selected+over background: IB lack !
@@ -174,7 +174,7 @@ static NSString * const kDisappearAnimation = @"disappear";
     {
         UIButton *settingsButtonLandscape = (UIButton*) [landscapeView viewWithTag:[settingsButton tag]];
         // Set selected+over background: IB lack !
-        [settingsButton setBackgroundImage:[UIImage imageNamed:@"settings-hover.png"]
+        [settingsButton setBackgroundImage:[UIImage imageNamed:@"home_settings_pressed"]
                                   forState:(UIControlStateHighlighted | UIControlStateSelected)];
 
         // Set selected+over background: IB lack !

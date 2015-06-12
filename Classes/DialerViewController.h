@@ -43,7 +43,12 @@
 @property (nonatomic, retain) IBOutlet UITransferButton* transferButton;
 @property (nonatomic, retain) IBOutlet UIButton* backButton;
 @property (nonatomic, retain) IBOutlet UIEraseButton* eraseButton;
+@property (retain, nonatomic) IBOutlet UILabel *balanceLabel;
+@property (retain, nonatomic) IBOutlet UILabel *registrationStateLabel;
+@property (retain, nonatomic) IBOutlet UIImageView *registrationStateImage;
+@property (retain, nonatomic) IBOutlet UITableView *tableView;
 
+@property (retain, nonatomic) IBOutlet UIView *keypadView;
 @property (nonatomic, retain) IBOutlet UIDigitButton* oneButton;
 @property (nonatomic, retain) IBOutlet UIDigitButton* twoButton;
 @property (nonatomic, retain) IBOutlet UIDigitButton* threeButton;

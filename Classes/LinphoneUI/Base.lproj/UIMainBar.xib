@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UIMainBar">
@@ -25,31 +25,18 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="77"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <view hidden="YES" autoresizesSubviews="NO" opaque="NO" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" tag="-1" contentMode="scaleToFill" id="4" userLabel="mask">
-                    <rect key="frame" x="0.0" y="11" width="320" height="66"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" red="0.0" green="1" blue="0.090924573910000001" alpha="1" colorSpace="calibratedRGB"/>
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kmn-5Q-vFe" userLabel="circle">
+                    <rect key="frame" x="100" y="0.0" width="120" height="120"/>
+                    <color key="backgroundColor" red="0.25098039220000001" green="0.87843137250000003" blue="0.098039215690000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="60"/>
+                    </userDefinedRuntimeAttributes>
                 </view>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="6" userLabel="history">
-                    <rect key="frame" x="0.0" y="0.0" width="64" height="77"/>
+                <view autoresizesSubviews="NO" opaque="NO" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" tag="-1" contentMode="scaleToFill" id="4" userLabel="mask">
+                    <rect key="frame" x="0.0" y="17" width="320" height="60"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <accessibility key="accessibilityConfiguration" label="History"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <inset key="titleEdgeInsets" minX="0.0" minY="40" maxX="0.0" maxY="0.0"/>
-                    <state key="normal" title="History" backgroundImage="history.png">
-                        <color key="titleColor" red="0.35686274509999999" green="0.39607843139999999" blue="0.43529411759999997" alpha="1" colorSpace="deviceRGB"/>
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <state key="selected" backgroundImage="history-hover.png">
-                        <color key="titleColor" red="0.35326856109999999" green="0.65043422920000005" blue="0.99017458550000004" alpha="1" colorSpace="calibratedRGB"/>
-                    </state>
-                    <state key="highlighted" backgroundImage="history-hover.png">
-                        <color key="titleColor" red="0.72549019609999998" green="0.76862745099999996" blue="0.79607843140000001" alpha="1" colorSpace="deviceRGB"/>
-                    </state>
-                    <connections>
-                        <action selector="onHistoryClick:" destination="-1" eventType="touchUpInside" id="22"/>
-                    </connections>
-                </button>
+                    <color key="backgroundColor" red="0.25098039220000001" green="0.87843137250000003" blue="0.098039215690000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                </view>
                 <view hidden="YES" autoresizesSubviews="NO" userInteractionEnabled="NO" contentMode="scaleToFill" id="32" userLabel="historyNotificationView">
                     <rect key="frame" x="38" y="1" width="21" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -71,79 +58,93 @@
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="8" userLabel="contacts">
-                    <rect key="frame" x="64" y="0.0" width="64" height="77"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6" userLabel="history">
+                    <rect key="frame" x="1" y="17" width="60" height="60"/>
+                    <accessibility key="accessibilityConfiguration" label="History"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <inset key="titleEdgeInsets" minX="0.0" minY="40" maxX="0.0" maxY="0.0"/>
+                    <state key="normal" title="Chat" backgroundImage="home_chat_default.png">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <state key="selected" backgroundImage="home_chat_pressed.png">
+                        <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <state key="highlighted" backgroundImage="home_chat_pressed.png">
+                        <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="onHistoryClick:" destination="-1" eventType="touchUpInside" id="22"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8" userLabel="contacts">
+                    <rect key="frame" x="60" y="17" width="60" height="60"/>
                     <accessibility key="accessibilityConfiguration" label="Contacts"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <inset key="titleEdgeInsets" minX="0.0" minY="40" maxX="0.0" maxY="0.0"/>
-                    <state key="normal" title="Contacts" backgroundImage="contacts.png">
-                        <color key="titleColor" red="0.35686274509999999" green="0.39607843139999999" blue="0.43529411759999997" alpha="1" colorSpace="deviceRGB"/>
+                    <state key="normal" title="Contacts" backgroundImage="home_contacts_default.png">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
-                    <state key="selected" backgroundImage="contacts-hover.png">
-                        <color key="titleColor" red="0.33333333333333331" green="0.58823529411764708" blue="0.73333333333333328" alpha="1" colorSpace="deviceRGB"/>
+                    <state key="selected" backgroundImage="home_contacts_pressed.png">
+                        <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
-                    <state key="highlighted" backgroundImage="contacts-hover.png">
-                        <color key="titleColor" red="0.72549019609999998" green="0.76862745099999996" blue="0.79607843140000001" alpha="1" colorSpace="deviceRGB"/>
+                    <state key="highlighted" backgroundImage="home_contacts_pressed.png">
+                        <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
                         <action selector="onContactsClick:" destination="-1" eventType="touchUpInside" id="23"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="9" userLabel="settings">
-                    <rect key="frame" x="256" y="0.0" width="64" height="77"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9" userLabel="settings">
+                    <rect key="frame" x="260" y="17" width="60" height="60"/>
                     <accessibility key="accessibilityConfiguration" label="Settings"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <inset key="titleEdgeInsets" minX="0.0" minY="40" maxX="0.0" maxY="0.0"/>
-                    <state key="normal" title="Settings" backgroundImage="settings.png">
-                        <color key="titleColor" red="0.35686274509999999" green="0.39607843139999999" blue="0.43529411759999997" alpha="1" colorSpace="deviceRGB"/>
+                    <state key="normal" title="Settings" backgroundImage="home_settings_default.png">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
-                    <state key="selected" backgroundImage="settings-hover.png">
-                        <color key="titleColor" red="0.33333333329999998" green="0.58823529409999997" blue="0.73333333329999995" alpha="1" colorSpace="deviceRGB"/>
+                    <state key="selected" backgroundImage="home_settings_pressed.png">
+                        <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
-                    <state key="highlighted" backgroundImage="settings-hover.png">
-                        <color key="titleColor" red="0.72549019609999998" green="0.76862745099999996" blue="0.79607843140000001" alpha="1" colorSpace="deviceRGB"/>
+                    <state key="highlighted" backgroundImage="home_settings_pressed.png">
+                        <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
                         <action selector="onSettingsClick:" destination="-1" eventType="touchUpInside" id="25"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="7" userLabel="dialer">
-                    <rect key="frame" x="128" y="0.0" width="64" height="77"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <accessibility key="accessibilityConfiguration" label="Dialer"/>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                    <state key="normal" image="dialer.png">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <state key="disabled" image="dialer.png"/>
-                    <state key="selected" image="dialer-hover.png">
-                        <color key="titleColor" red="0.33333333329999998" green="0.58823529409999997" blue="0.73333333329999995" alpha="1" colorSpace="deviceRGB"/>
-                    </state>
-                    <state key="highlighted" image="dialer-hover.png"/>
-                    <connections>
-                        <action selector="onDialerClick:" destination="-1" eventType="touchUpInside" id="24"/>
-                    </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="5" userLabel="shop">
-                    <rect key="frame" x="192" y="0.0" width="64" height="77"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5" userLabel="shop">
+                    <rect key="frame" x="200" y="17" width="60" height="60"/>
                     <accessibility key="accessibilityConfiguration" label="Shop"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <inset key="titleEdgeInsets" minX="0.0" minY="40" maxX="0.0" maxY="0.0"/>
-                    <state key="normal" title="Shop" backgroundImage="shop.png">
-                        <color key="titleColor" red="0.35686274509999999" green="0.39607843139999999" blue="0.43529411759999997" alpha="1" colorSpace="deviceRGB"/>
+                    <state key="normal" title="Shop" backgroundImage="home_shop_default.png">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
-                    <state key="selected" backgroundImage="shop-hover.png">
-                        <color key="titleColor" red="0.33333333329999998" green="0.58823529409999997" blue="0.73333333329999995" alpha="1" colorSpace="deviceRGB"/>
+                    <state key="selected" backgroundImage="home_shop_pressed.png">
+                        <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
-                    <state key="highlighted" backgroundImage="shop-hover.png">
-                        <color key="titleColor" red="0.72549019609999998" green="0.76862745099999996" blue="0.79607843140000001" alpha="1" colorSpace="deviceRGB"/>
+                    <state key="highlighted" backgroundImage="home_shop_pressed.png">
+                        <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="7" userLabel="dialer">
+                    <rect key="frame" x="132" y="12" width="56" height="53"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <accessibility key="accessibilityConfiguration" label="Dialer"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                    <state key="normal" backgroundImage="main_dial_default.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <state key="disabled" image="dialer.png"/>
+                    <state key="selected" backgroundImage="main_dial_pressed.png"/>
+                    <state key="highlighted" backgroundImage="main_dial_pressed.png"/>
+                    <connections>
+                        <action selector="onDialerClick:" destination="-1" eventType="touchUpInside" id="24"/>
+                    </connections>
                 </button>
                 <view hidden="YES" autoresizesSubviews="NO" userInteractionEnabled="NO" contentMode="scaleToFill" id="37" userLabel="chatNotificationView">
                     <rect key="frame" x="220" y="-60" width="21" height="21"/>
@@ -167,24 +168,25 @@
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
             </subviews>
-            <color key="backgroundColor" red="0.0" green="1" blue="0.19194547549999999" alpha="0.0" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" red="0.25098039220000001" green="0.87843137250000003" blue="0.098039215690000001" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="166" y="164.5"/>
         </view>
     </objects>
     <resources>
-        <image name="contacts-hover.png" width="128" height="154"/>
-        <image name="contacts.png" width="128" height="154"/>
-        <image name="dialer-hover.png" width="128" height="154"/>
         <image name="dialer.png" width="128" height="154"/>
-        <image name="history-hover.png" width="128" height="154"/>
-        <image name="history.png" width="128" height="154"/>
         <image name="history_notification.png" width="43" height="43"/>
-        <image name="settings-hover.png" width="128" height="154"/>
-        <image name="settings.png" width="128" height="154"/>
-        <image name="shop-hover.png" width="128" height="154"/>
-        <image name="shop.png" width="128" height="154"/>
+        <image name="home_chat_default.png" width="320" height="360"/>
+        <image name="home_chat_pressed.png" width="320" height="360"/>
+        <image name="home_contacts_default.png" width="320" height="360"/>
+        <image name="home_contacts_pressed.png" width="320" height="360"/>
+        <image name="home_settings_default.png" width="320" height="360"/>
+        <image name="home_settings_pressed.png" width="320" height="360"/>
+        <image name="home_shop_default.png" width="320" height="360"/>
+        <image name="home_shop_pressed.png" width="320" height="360"/>
+        <image name="main_dial_default.png" width="250" height="250"/>
+        <image name="main_dial_pressed.png" width="250" height="250"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
