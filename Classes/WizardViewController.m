@@ -672,8 +672,8 @@ static UICompositeViewDescription *compositeDescription = nil;
         }
     } else if (view == logInView) {
         if (!back) {
-                [self fillCredentials];
-            }
+            [self fillCredentials];
+        }
     } else if (view == signUpView) {
         [self cleanUpSignUpView];
 
@@ -705,23 +705,24 @@ static UICompositeViewDescription *compositeDescription = nil;
     }
     
     // Animation
-    if(animation && [[LinphoneManager instance] lpConfigBoolForKey:@"animations_preference"] == true) {
+    if (animation && [[LinphoneManager instance] lpConfigBoolForKey:@"animations_preference"] == YES) {
       CATransition* trans = [CATransition animation];
       [trans setType:kCATransitionPush];
       [trans setDuration:0.35];
       [trans setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
-      if(back) {
+      if (back) {
           [trans setSubtype:kCATransitionFromLeft];
-      }else {
+      } else {
           [trans setSubtype:kCATransitionFromRight];
       }
       [contentView.layer addAnimation:trans forKey:@"Transition"];
     }
     
     // Stack current view
-    if(currentView != nil) {
-        if(!back)
+    if (currentView != nil) {
+        if (!back) {
             [historyViews addObject:currentView];
+        }
         [currentView removeFromSuperview];
     }
     
