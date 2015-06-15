@@ -577,7 +577,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     self.domainRegisterField.text = [[LinphoneManager instance] caspianDomainIp];
     
     if (phoneNumber == NULL) {
-        self.phoneNumberRegisterField.text = countryCode;
+        self.phoneNumberRegisterField.text = countryCode; //insert country code
     }
 }
 
