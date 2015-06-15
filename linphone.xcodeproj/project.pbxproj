@@ -310,11 +310,10 @@
 		6E503A7F1B09E4AD0081DB97 /* SMSTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E503A7D1B09E4AD0081DB97 /* SMSTableViewController.xib */; };
 		6E5767B51B0AEEEA0060D464 /* SMSTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E5767B31B0AEEEA0060D464 /* SMSTableViewCell.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6E5767B61B0AEEEA0060D464 /* SMSTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E5767B41B0AEEEA0060D464 /* SMSTableViewCell.xib */; };
+		6EAFFC031B2ABB71004E14A2 /* main_call_default.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EAFFC011B2ABB71004E14A2 /* main_call_default.png */; };
+		6EAFFC041B2ABB71004E14A2 /* main_call_pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EAFFC021B2ABB71004E14A2 /* main_call_pressed.png */; };
 		6EBB9D871B0D5B7F0017B5FC /* SMSConversationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EBB9D851B0D5B7F0017B5FC /* SMSConversationViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6EBB9D881B0D5B7F0017B5FC /* SMSConversationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EBB9D861B0D5B7F0017B5FC /* SMSConversationViewController.xib */; };
-		6EE56D481B25CA5100D60D4A /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EE56D451B25CA5100D60D4A /* libc++.dylib */; };
-		6EE56D491B25CA5100D60D4A /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EE56D461B25CA5100D60D4A /* Fabric.framework */; };
-		6EE56D4A1B25CA5100D60D4A /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EE56D471B25CA5100D60D4A /* Crashlytics.framework */; };
 		6EE56C8D1B1FAE1800D60D4A /* input_delete_default.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EE56C8B1B1FAE1800D60D4A /* input_delete_default.png */; };
 		6EE56C8E1B1FAE1800D60D4A /* input_delete_pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EE56C8C1B1FAE1800D60D4A /* input_delete_pressed.png */; };
 		6EE56CA71B1FB1D300D60D4A /* keypad_eight_default.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EE56C8F1B1FB1D300D60D4A /* keypad_eight_default.png */; };
@@ -351,6 +350,9 @@
 		6EE56CD01B1FB79E00D60D4A /* home_shop_pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EE56CC61B1FB79E00D60D4A /* home_shop_pressed.png */; };
 		6EE56CD11B1FB79E00D60D4A /* main_dial_default.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EE56CC71B1FB79E00D60D4A /* main_dial_default.png */; };
 		6EE56CD21B1FB79E00D60D4A /* main_dial_pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EE56CC81B1FB79E00D60D4A /* main_dial_pressed.png */; };
+		6EE56D481B25CA5100D60D4A /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EE56D451B25CA5100D60D4A /* libc++.dylib */; };
+		6EE56D491B25CA5100D60D4A /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EE56D461B25CA5100D60D4A /* Fabric.framework */; };
+		6EE56D4A1B25CA5100D60D4A /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EE56D471B25CA5100D60D4A /* Crashlytics.framework */; };
 		70571E1A13FABCB000CDD3C2 /* rootca.pem in Resources */ = {isa = PBXBuildFile; fileRef = 70571E1913FABCB000CDD3C2 /* rootca.pem */; };
 		7066FC0C13E830E400EFC6DC /* libvpx.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7066FC0B13E830E400EFC6DC /* libvpx.a */; };
 		70E542F313E147E3002BA2C0 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70E542F213E147E3002BA2C0 /* OpenGLES.framework */; };
@@ -1462,12 +1464,11 @@
 		6E5767B21B0AEEEA0060D464 /* SMSTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMSTableViewCell.h; sourceTree = "<group>"; };
 		6E5767B31B0AEEEA0060D464 /* SMSTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMSTableViewCell.m; sourceTree = "<group>"; };
 		6E5767B41B0AEEEA0060D464 /* SMSTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SMSTableViewCell.xib; sourceTree = "<group>"; };
+		6EAFFC011B2ABB71004E14A2 /* main_call_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = main_call_default.png; sourceTree = "<group>"; };
+		6EAFFC021B2ABB71004E14A2 /* main_call_pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = main_call_pressed.png; sourceTree = "<group>"; };
 		6EBB9D841B0D5B7F0017B5FC /* SMSConversationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMSConversationViewController.h; sourceTree = "<group>"; };
 		6EBB9D851B0D5B7F0017B5FC /* SMSConversationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMSConversationViewController.m; sourceTree = "<group>"; };
 		6EBB9D861B0D5B7F0017B5FC /* SMSConversationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SMSConversationViewController.xib; sourceTree = "<group>"; };
-		6EE56D451B25CA5100D60D4A /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
-		6EE56D461B25CA5100D60D4A /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
-		6EE56D471B25CA5100D60D4A /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		6EE56C8B1B1FAE1800D60D4A /* input_delete_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = input_delete_default.png; sourceTree = "<group>"; };
 		6EE56C8C1B1FAE1800D60D4A /* input_delete_pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = input_delete_pressed.png; sourceTree = "<group>"; };
 		6EE56C8F1B1FB1D300D60D4A /* keypad_eight_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = keypad_eight_default.png; sourceTree = "<group>"; };
@@ -1504,6 +1505,9 @@
 		6EE56CC61B1FB79E00D60D4A /* home_shop_pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_shop_pressed.png; sourceTree = "<group>"; };
 		6EE56CC71B1FB79E00D60D4A /* main_dial_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = main_dial_default.png; sourceTree = "<group>"; };
 		6EE56CC81B1FB79E00D60D4A /* main_dial_pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = main_dial_pressed.png; sourceTree = "<group>"; };
+		6EE56D451B25CA5100D60D4A /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
+		6EE56D461B25CA5100D60D4A /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
+		6EE56D471B25CA5100D60D4A /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		70571E1913FABCB000CDD3C2 /* rootca.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = rootca.pem; path = "liblinphone-sdk/apple-darwin/share/linphone/rootca.pem"; sourceTree = "<group>"; };
 		7066FC0B13E830E400EFC6DC /* libvpx.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libvpx.a; path = "liblinphone-sdk/apple-darwin/lib/libvpx.a"; sourceTree = "<group>"; };
 		70E542F213E147E3002BA2C0 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -2752,6 +2756,8 @@
 				6EE56CC61B1FB79E00D60D4A /* home_shop_pressed.png */,
 				6EE56CC71B1FB79E00D60D4A /* main_dial_default.png */,
 				6EE56CC81B1FB79E00D60D4A /* main_dial_pressed.png */,
+				6EAFFC011B2ABB71004E14A2 /* main_call_default.png */,
+				6EAFFC021B2ABB71004E14A2 /* main_call_pressed.png */,
 				6EE56C8F1B1FB1D300D60D4A /* keypad_eight_default.png */,
 				6EE56C901B1FB1D300D60D4A /* keypad_eight_pressed.png */,
 				6EE56C911B1FB1D300D60D4A /* keypad_five_default.png */,
@@ -4268,6 +4274,7 @@
 				D35E758915932DE60066B1C1 /* backspace_disabled.png in Resources */,
 				D35E758D15934F360066B1C1 /* call_disabled.png in Resources */,
 				26E7F3CB1A81709F0033D3C0 /* play.png in Resources */,
+				6EAFFC031B2ABB71004E14A2 /* main_call_default.png in Resources */,
 				D38187B115FE340500C3EDCA /* ChatViewController.xib in Resources */,
 				636316D41A1DEC650009B839 /* SettingsViewController.xib in Resources */,
 				26E7F3E41A81709F0033D3C0 /* speaker-off-button.png in Resources */,
@@ -4497,6 +4504,7 @@
 				D3A74EBC15C69392001500B9 /* add_contact_over~ipad.png in Resources */,
 				D3A74EBE15C69392001500B9 /* back_default~ipad.png in Resources */,
 				26E7F3851A81709F0033D3C0 /* 5.png in Resources */,
+				6EAFFC041B2ABB71004E14A2 /* main_call_pressed.png in Resources */,
 				26E7F3EC1A81709F0033D3C0 /* video-off.png in Resources */,
 				26E7F37A1A81709F0033D3C0 /* 1-hover.png in Resources */,
 				D3A74EC015C69392001500B9 /* back_disabled~ipad.png in Resources */,

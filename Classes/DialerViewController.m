@@ -179,6 +179,16 @@ static UICompositeViewDescription *compositeDescription = nil;
                                              selector:@selector(globalStateUpdate:)
                                                  name:kLinphoneGlobalStateUpdate
                                                object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(didTapCallButton)
+                                                 name:@"didTapCallButton"
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(onChatTap:)
+                                                 name:@"didTapChatButton"
+                                               object:nil];
 
     // technically not needed, but older versions of linphone had this button
     // disabled by default. In this case, updating by pushing a new version with
@@ -251,6 +261,17 @@ static UICompositeViewDescription *compositeDescription = nil;
     [[NSNotificationCenter defaultCenter] removeObserver:self
                                                     name:kLinphoneCoreUpdate
                                                   object:nil];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:@"didTapCallButton"
+                                                  object:nil];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:@"didTapChatButton"
+                                                  object:nil];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"mainBarHideCallButton"
+                                                        object:nil];
 }
 
 - (void)viewDidLoad {
@@ -279,6 +300,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     }
     
     addressField.inputView = self.dummyView;
+    [addressField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
     
     UITapGestureRecognizer *tapHideKeypad = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeypadAnimated:)];
     [self.view addGestureRecognizer:tapHideKeypad];
@@ -509,21 +531,22 @@ static UICompositeViewDescription *compositeDescription = nil;
     return YES;
 }
 
-//- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
-//{
-//    if ([text isEqualToString:@"\n"]) {
-//        [self hideKeypadAnimated:YES];
-//        [self.addressField resignFirstResponder];
-//    }
-//    return YES;
-//}
-
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *) event
 {
     UITouch *touch = [[event allTouches] anyObject];
     if ([self.addressField isFirstResponder] && (self.addressField != touch.view) && self.addressField.text.length == 0) {
         [self hideKeypadAnimated:YES];
         [self.addressField resignFirstResponder];
+    }
+}
+
+-(void)textFieldDidChange:(UITextField *)textField
+{
+    if (textField.text.length > 0) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"mainBarShowCallButton" object:nil];
+    }
+    else {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"mainBarHideCallButton" object:nil];
     }
 }
 
@@ -679,6 +702,11 @@ static UICompositeViewDescription *compositeDescription = nil;
         _balanceUrl = [[NSURL URLWithString:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]] retain];
     }
     return _balanceUrl;
+}
+
+- (void)didTapCallButton
+{
+    [self call:self.addressField.text];
 }
 
 #pragma mark -

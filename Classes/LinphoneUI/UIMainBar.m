@@ -21,6 +21,12 @@
 #import "PhoneMainView.h"
 #import "CAAnimation+Blocks.h"
 
+@interface UIMainBar ()
+
+@property (nonatomic) BOOL onCallButton;
+
+@end
+
 @implementation UIMainBar
 
 
@@ -82,6 +88,15 @@ static NSString * const kDisappearAnimation = @"disappear";
                                              selector:@selector(settingsUpdate:)
                                                  name:kLinphoneSettingsUpdate
                                                object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(showCallButton)
+                                                 name:@"mainBarShowCallButton"
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(hideCallButton)
+                                                 name:@"mainBarHideCallButton"
+                                               object:nil];
+    
     [self update:FALSE];
     
     // Fix linphone bug updating unread messages
@@ -106,7 +121,13 @@ static NSString * const kDisappearAnimation = @"disappear";
                                                   object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self
                                                  name:kLinphoneSettingsUpdate
-                                               object:nil];
+                                                  object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:@"mainBarShowCallButton"
+                                                  object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:@"mainBarHideCallButton"
+                                                  object:nil];
 }
 
 - (void)flipImageForButton:(UIButton*)button {
@@ -431,8 +452,7 @@ static NSString * const kDisappearAnimation = @"disappear";
 #pragma mark - Action Functions
 
 - (IBAction)onHistoryClick:(id)event {
-    chatNotificationView.hidden = YES;
-    [[PhoneMainView instance] changeCurrentView:[HistoryViewController compositeViewDescription]];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"didTapChatButton" object:nil];
 }
 
 - (IBAction)onContactsClick:(id)event {
@@ -447,8 +467,13 @@ static NSString * const kDisappearAnimation = @"disappear";
 }
 
 - (IBAction)onDialerClick:(id)event {
-    chatNotificationView.hidden = NO;
-    [[PhoneMainView instance] changeCurrentView:[DialerViewController compositeViewDescription]];
+    if (self.onCallButton) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"didTapCallButton" object:nil];
+    }
+    else {
+        chatNotificationView.hidden = NO;
+        [[PhoneMainView instance] changeCurrentView:[DialerViewController compositeViewDescription]];
+    }
 }
 
 - (IBAction)onSettingsClick:(id)event {
@@ -486,6 +511,28 @@ static NSString * const kDisappearAnimation = @"disappear";
         [LinphoneUtils buttonMultiViewApplyAttributes:attributes button:button];
     }
     view.autoresizingMask = [[attributes objectForKey:@"autoresizingMask"] integerValue];
+}
+
+- (void)showCallButton
+{
+    [dialerButton setBackgroundImage:[UIImage imageNamed:@"main_call_default"]
+                            forState:UIControlStateNormal];
+    [dialerButton setBackgroundImage:[UIImage imageNamed:@"main_call_pressed"]
+                            forState:UIControlStateHighlighted];
+    [dialerButton setBackgroundImage:[UIImage imageNamed:@"main_call_pressed"]
+                            forState:UIControlStateSelected];
+    self.onCallButton = YES;
+}
+
+- (void)hideCallButton
+{
+    [dialerButton setBackgroundImage:[UIImage imageNamed:@"main_dial_default"]
+                            forState:UIControlStateNormal];
+    [dialerButton setBackgroundImage:[UIImage imageNamed:@"main_dial_pressed"]
+                            forState:UIControlStateHighlighted];
+    [dialerButton setBackgroundImage:[UIImage imageNamed:@"main_dial_pressed"]
+                            forState:UIControlStateSelected];
+    self.onCallButton = NO;
 }
 
 @end
