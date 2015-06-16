@@ -980,6 +980,9 @@ static UICompositeViewDescription *compositeDescription = nil;
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
+    if (textField == self.countryNameLoginViewField) {
+        self.dismissKeyboardButtonCountryLoginView.enabled = YES;
+    }
     activeTextField = textField;
 }
 
@@ -1365,6 +1368,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     } else if ([self.passwordRegisterField isFirstResponder]) {
         [self.passwordRegisterField resignFirstResponder];
     }
+    self.dismissKeyboardButtonCountryLoginView.enabled = NO;
 }
 
 
