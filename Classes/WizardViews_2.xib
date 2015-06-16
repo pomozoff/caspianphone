@@ -51,8 +51,8 @@
                         <constraint firstAttribute="width" secondItem="AtB-js-x74" secondAttribute="height" multiplier="5:3" id="f68-KV-ebQ"/>
                     </constraints>
                 </imageView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1pl-Pj-XSO">
-                    <rect key="frame" x="184" y="314" width="110" height="50"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1pl-Pj-XSO" userLabel="Sign Up Button">
+                    <rect key="frame" x="184" y="330" width="110" height="50"/>
                     <state key="normal" image="welcome_signup_default.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
@@ -60,8 +60,8 @@
                         <action selector="onSignUpClick:" destination="-1" eventType="touchUpInside" id="iPv-yR-ojO"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Ia-3Q-ujT">
-                    <rect key="frame" x="26" y="314" width="110" height="50"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Ia-3Q-ujT" userLabel="Login Button">
+                    <rect key="frame" x="26" y="330" width="110" height="50"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="50" id="9rC-CO-PJT"/>
                     </constraints>
@@ -80,7 +80,7 @@
                 <constraint firstAttribute="trailing" secondItem="dhk-OS-hbX" secondAttribute="trailing" id="723-gF-HtL"/>
                 <constraint firstItem="dhk-OS-hbX" firstAttribute="centerY" secondItem="fH4-ZS-Blo" secondAttribute="centerY" id="7dw-gI-79r"/>
                 <constraint firstItem="dhk-OS-hbX" firstAttribute="centerX" secondItem="AtB-js-x74" secondAttribute="centerX" id="A0m-Ys-Hzs"/>
-                <constraint firstAttribute="bottom" secondItem="9Ia-3Q-ujT" secondAttribute="bottom" constant="116" id="FLN-jB-8Mn"/>
+                <constraint firstAttribute="bottom" secondItem="9Ia-3Q-ujT" secondAttribute="bottom" constant="100" id="FLN-jB-8Mn"/>
                 <constraint firstItem="dhk-OS-hbX" firstAttribute="top" secondItem="fH4-ZS-Blo" secondAttribute="top" constant="-1" id="Ow5-Bb-Ur7"/>
                 <constraint firstAttribute="trailing" secondItem="1pl-Pj-XSO" secondAttribute="trailing" constant="27" id="PYc-ek-7nz"/>
                 <constraint firstItem="9Ia-3Q-ujT" firstAttribute="top" secondItem="1pl-Pj-XSO" secondAttribute="top" id="RYK-rL-aao"/>
@@ -112,7 +112,7 @@
                     </connections>
                 </button>
                 <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="du9-K8-zFf" userLabel="forgotPasswordButton">
-                    <rect key="frame" x="90" y="415" width="141" height="33"/>
+                    <rect key="frame" x="90" y="402" width="141" height="33"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <state key="normal" title="Forgot Password?">
                         <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -128,7 +128,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Remember Me" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qt7-wu-jHR">
-                    <rect key="frame" x="84" y="282" width="114" height="27"/>
+                    <rect key="frame" x="84" y="280" width="114" height="27"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
@@ -143,7 +143,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5ag-kU-eRI">
-                    <rect key="frame" x="221" y="278" width="51" height="31"/>
+                    <rect key="frame" x="221" y="276" width="51" height="31"/>
                 </switch>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2PF-pc-Ho6" userLabel="passwordField">
                     <rect key="frame" x="33" y="226" width="255" height="30"/>
@@ -165,7 +165,7 @@
                     </connections>
                 </textField>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WpJ-Em-r86" userLabel="backSignInButton">
-                    <rect key="frame" x="26" y="342" width="110" height="50"/>
+                    <rect key="frame" x="26" y="329" width="110" height="50"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="110" id="edd-zk-mWb"/>
                         <constraint firstAttribute="height" constant="50" id="nGA-RF-nO1"/>
@@ -178,7 +178,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aVV-PA-ZSU" userLabel="signInButton">
-                    <rect key="frame" x="184" y="342" width="110" height="50"/>
+                    <rect key="frame" x="184" y="329" width="110" height="50"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="110" id="TtE-mo-OMr"/>
                         <constraint firstAttribute="height" constant="50" id="mCh-rD-RpT"/>
@@ -225,7 +225,7 @@
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="5ag-kU-eRI" secondAttribute="trailing" constant="50" id="f2D-jm-zsY"/>
                 <constraint firstItem="WpJ-Em-r86" firstAttribute="top" secondItem="aVV-PA-ZSU" secondAttribute="top" id="fEc-M3-MXf"/>
                 <constraint firstAttribute="bottom" secondItem="rK5-dF-Ocv" secondAttribute="bottom" id="hJK-JA-jPX"/>
-                <constraint firstItem="qt7-wu-jHR" firstAttribute="top" secondItem="2PF-pc-Ho6" secondAttribute="bottom" constant="26" id="iXp-7s-u2u"/>
+                <constraint firstItem="qt7-wu-jHR" firstAttribute="top" secondItem="2PF-pc-Ho6" secondAttribute="bottom" constant="24" id="iXp-7s-u2u"/>
                 <constraint firstAttribute="trailing" secondItem="rK5-dF-Ocv" secondAttribute="trailing" id="iuJ-Z8-4Wz"/>
                 <constraint firstItem="2PF-pc-Ho6" firstAttribute="leading" secondItem="Gg3-pV-WTb" secondAttribute="leading" constant="33" id="kgR-TD-Zas"/>
                 <constraint firstItem="qt7-wu-jHR" firstAttribute="leading" secondItem="Gg3-pV-WTb" secondAttribute="leading" constant="84" id="mGd-Wx-K38"/>
@@ -233,7 +233,7 @@
                 <constraint firstItem="d6I-Ep-mWq" firstAttribute="top" secondItem="o8G-iI-1Tv" secondAttribute="bottom" constant="2" id="oYf-7X-c5U"/>
                 <constraint firstItem="WpJ-Em-r86" firstAttribute="leading" secondItem="2PF-pc-Ho6" secondAttribute="leading" constant="-7" id="p9q-Wi-gwe"/>
                 <constraint firstItem="d6I-Ep-mWq" firstAttribute="centerX" secondItem="rK5-dF-Ocv" secondAttribute="centerX" constant="0.5" id="qpa-Z8-ZWt"/>
-                <constraint firstItem="aVV-PA-ZSU" firstAttribute="top" secondItem="5ag-kU-eRI" secondAttribute="bottom" constant="33" id="rH1-PV-nIb"/>
+                <constraint firstItem="aVV-PA-ZSU" firstAttribute="top" secondItem="5ag-kU-eRI" secondAttribute="bottom" constant="22" id="rH1-PV-nIb"/>
                 <constraint firstItem="d6I-Ep-mWq" firstAttribute="top" secondItem="o8G-iI-1Tv" secondAttribute="bottom" constant="2" placeholder="YES" id="rvd-JI-yC9"/>
                 <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="du9-K8-zFf" secondAttribute="bottom" constant="18" id="wdB-Ja-toP"/>
                 <constraint firstItem="rK5-dF-Ocv" firstAttribute="top" secondItem="Gg3-pV-WTb" secondAttribute="top" id="y6r-mI-wtz"/>
@@ -257,28 +257,6 @@
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="welcome.png" translatesAutoresizingMaskIntoConstraints="NO" id="afi-3Y-AGb">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                 </imageView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l5A-gX-dpX">
-                    <rect key="frame" x="184" y="342" width="110" height="50"/>
-                    <state key="normal" image="signup_next_default.png">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="onNextLogInClick:" destination="-1" eventType="touchUpInside" id="JMW-Pa-ppS"/>
-                    </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i8y-3c-pS2">
-                    <rect key="frame" x="26" y="342" width="110" height="50"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="110" id="X4x-A2-Cz6"/>
-                        <constraint firstAttribute="height" constant="50" id="hwa-DS-o5O"/>
-                    </constraints>
-                    <state key="normal" image="signup_back_default.png">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="onBackClick:" destination="-1" eventType="touchUpInside" id="xfV-7k-rHk"/>
-                    </connections>
-                </button>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bullets1.png" translatesAutoresizingMaskIntoConstraints="NO" id="ZVH-H5-D71">
                     <rect key="frame" x="132" y="54" width="56" height="25"/>
                     <constraints>
@@ -286,6 +264,24 @@
                         <constraint firstAttribute="height" constant="25" id="ler-Zw-jKH"/>
                     </constraints>
                 </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Country" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jYS-WO-pvD" userLabel="Country Label">
+                    <rect key="frame" x="122" y="188" width="77" height="29"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="29" id="ZzA-WR-m6W"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mb0-zD-ihR" userLabel="Dismiss Button">
+                    <rect key="frame" x="0.0" y="0.0" width="312" height="488"/>
+                    <state key="normal">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="onDismissKeyboardButton:" destination="-1" eventType="touchUpInside" id="KpX-it-ndc"/>
+                    </connections>
+                </button>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dE2-ec-AaQ" userLabel="countryNameField" customClass="COCTextField">
                     <rect key="frame" x="33" y="225" width="255" height="30"/>
                     <accessibility key="accessibilityConfiguration">
@@ -297,22 +293,26 @@
                         <outlet property="delegate" destination="-1" id="mQj-fg-BJG"/>
                     </connections>
                 </textField>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Country" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jYS-WO-pvD">
-                    <rect key="frame" x="122" y="188" width="77" height="29"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="29" id="ZzA-WR-m6W"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mb0-zD-ihR">
-                    <rect key="frame" x="0.0" y="0.0" width="312" height="488"/>
-                    <state key="normal">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l5A-gX-dpX" userLabel="Next Button">
+                    <rect key="frame" x="184" y="330" width="110" height="50"/>
+                    <state key="normal" image="signup_next_default.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="onDismissKeyboardButton:" destination="-1" eventType="touchUpInside" id="KpX-it-ndc"/>
+                        <action selector="onNextLogInClick:" destination="-1" eventType="touchUpInside" id="JMW-Pa-ppS"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i8y-3c-pS2" userLabel="Back Button">
+                    <rect key="frame" x="26" y="330" width="110" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="110" id="X4x-A2-Cz6"/>
+                        <constraint firstAttribute="height" constant="50" id="hwa-DS-o5O"/>
+                    </constraints>
+                    <state key="normal" image="signup_back_default.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="onBackClick:" destination="-1" eventType="touchUpInside" id="xfV-7k-rHk"/>
                     </connections>
                 </button>
             </subviews>
@@ -321,7 +321,7 @@
                 <constraint firstAttribute="bottom" secondItem="Mb0-zD-ihR" secondAttribute="bottom" constant="-8" id="04X-5o-dbk"/>
                 <constraint firstItem="dE2-ec-AaQ" firstAttribute="top" secondItem="jYS-WO-pvD" secondAttribute="bottom" constant="8" symbolic="YES" id="3Xz-d1-6w5"/>
                 <constraint firstItem="l5A-gX-dpX" firstAttribute="bottom" secondItem="i8y-3c-pS2" secondAttribute="bottom" id="7JT-r6-lDg"/>
-                <constraint firstAttribute="bottom" secondItem="i8y-3c-pS2" secondAttribute="bottom" constant="88" id="JX6-FA-Ge5"/>
+                <constraint firstAttribute="bottom" secondItem="i8y-3c-pS2" secondAttribute="bottom" constant="100" id="JX6-FA-Ge5"/>
                 <constraint firstAttribute="bottom" secondItem="afi-3Y-AGb" secondAttribute="bottom" id="NM7-ja-fan"/>
                 <constraint firstItem="ZVH-H5-D71" firstAttribute="top" secondItem="BQg-LE-IQC" secondAttribute="top" constant="54" id="Qn2-tQ-Gal"/>
                 <constraint firstItem="afi-3Y-AGb" firstAttribute="top" secondItem="BQg-LE-IQC" secondAttribute="top" id="Qof-Oz-l0j"/>
