@@ -86,6 +86,7 @@ extern NSString *caspianErrorDomain;
 @property (nonatomic, retain) NSOperationQueue *internetQueue;
 
 @property (nonatomic, assign) NSInteger currentCountryRow;
+@property (nonatomic, assign) NSInteger countryChanged;
 
 @end
 
@@ -294,6 +295,7 @@ extern NSString *caspianErrorDomain;
     [countryLoginView release];
     [_countryPickerLoginNextToolbar release];
     [_dismissKeyboardButtonCountryLoginView release];
+    [_countryChanged release];
     [super dealloc];
 }
 
@@ -578,6 +580,9 @@ static UICompositeViewDescription *compositeDescription = nil;
     
     if (!phoneNumber) {
         self.phoneNumberRegisterField.text = countryCode; //insert country code
+    } else if (self.countryChanged == 1) {
+                self.phoneNumberRegisterField.text = countryCode;
+                self.passwordRegisterField.text = @"";
     }
 }
 
@@ -1721,9 +1726,13 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (void)saveSelectedCountry {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSString *countryCode = [userDefaults objectForKey:caspianCountryCode];
     
-    [userDefaults setObject:self.selectedCountryCode forKey:caspianCountryCode];
-    [userDefaults setObject:self.countryNameLoginViewField.text forKey:caspianCountryName];
+    if (self.selectedCountryCode != countryCode) {
+        [userDefaults setObject:self.selectedCountryCode forKey:caspianCountryCode];
+        [userDefaults setObject:self.countryNameLoginViewField.text forKey:caspianCountryName];
+        self.countryChanged = 1;
+    }
     
     [userDefaults synchronize];
 }
