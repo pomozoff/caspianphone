@@ -1111,7 +1111,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     [remoteInput release];
 }
 
-- (void) verificationSignInWithUsername:(NSString*)username password:(NSString*)password domain:(NSString*)domain withTransport:(NSString*)transport {
+- (void)verificationSignInWithUsername:(NSString*)username password:(NSString*)password domain:(NSString*)domain withTransport:(NSString*)transport {
 	NSMutableString *errors = [NSMutableString string];
 	if ([username length] == 0) {
 		[errors appendString:[NSString stringWithFormat:NSLocalizedString(@"Please enter a valid username.\n", nil)]];
