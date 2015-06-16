@@ -1029,24 +1029,17 @@ static UICompositeViewDescription *compositeDescription = nil;
     }
 }
 
--(void) loginInMethod {
+- (void)loginInMethod {
     NSString *phone    = self.phoneNumberRegisterField.text;
     NSString *password = self.passwordRegisterField.text;
     NSString *domain   = self.domainRegisterField.text;
     
     NSMutableString *errors = [NSMutableString string];
     if ([phone length] == 0) {
-        
         [errors appendString:[NSString stringWithFormat:NSLocalizedString(@"Please enter a username.\n", nil)]];
     }
     
-    /*
-     if ([domain length] == 0) {
-     [errors appendString:[NSString stringWithFormat:NSLocalizedString(@"Please enter a domain.\n", nil)]];
-     }
-     */
-    
-    if([errors length]) {
+    if ([errors length]) {
         UIAlertView* errorView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Check error(s)",nil)
                                                             message:[errors substringWithRange:NSMakeRange(0, [errors length] - 1)]
                                                            delegate:nil
@@ -1060,6 +1053,7 @@ static UICompositeViewDescription *compositeDescription = nil;
         [self addProxyConfig:[[LinphoneManager instance] removeUnneededPrefixes:phone] password:password domain:domain withTransport:@"tcp"];
     }
 }
+
 
 #pragma mark - Action Functions
 
@@ -1265,6 +1259,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 - (IBAction)onPhoneNumberSignInNextTap:(id)sender {
     [self.passwordRegisterField becomeFirstResponder];
 }
+
 - (IBAction)onDoneNumKeypad:(id)sender {
     [self.view endEditing:YES];
 }
@@ -1367,27 +1362,10 @@ static UICompositeViewDescription *compositeDescription = nil;
     }
 }
 
+
 #pragma mark - UIAlertViewDelegate
 
--(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    /*
-    if (buttonIndex == 1) { // fetch
-        NSString* url = [alertView textFieldAtIndex:0].text;
-        if( [url length] > 0 ){
-            // missing prefix will result in http:// being used
-            if( [url rangeOfString:@"://"].location == NSNotFound )
-                url = [NSString stringWithFormat:@"http://%@", url];
-
-            [LinphoneLogger log:LinphoneLoggerLog format:@"Should use remote provisioning URL %@", url];
-            linphone_core_set_provisioning_uri([LinphoneManager getLc], [url UTF8String]);
-
-            [waitView setHidden:false];
-            [[LinphoneManager instance] resetLinphoneCore];
-        }
-    } else {
-        [LinphoneLogger log:LinphoneLoggerLog format:@"Canceled remote provisioning"];
-    }
-    */
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if ([alertView isKindOfClass:[COCAlertView class]]) {
         COCAlertView *ownAlertView = (COCAlertView *)alertView;
         if (ownAlertView.completion) {
@@ -1641,7 +1619,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 #pragma mark - Picker view delegate
 
--(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
     [self didSelectCountryAtRow:row];
 }
 
@@ -1740,24 +1718,8 @@ static UICompositeViewDescription *compositeDescription = nil;
     self.currentCountryRow = [self indexOfCountryWithName:caspianCountryDefaultName];
     }
 }
-#pragma mark - LogIn (Sign IN)
 
-- (void) procedureCountryFill {
- /*
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    NSString *countryCode = [userDefaults objectForKey:caspianCountryCode];
-    NSString *lastPhoneNumber = [userDefaults objectForKey:caspianPhoneNumber];
-    
-    if (lastPhoneNumber == NULL) {
-        self.phoneNumberRegisterField.text = countryCode;
-    } else {
-        [self fillCredentials];
-    } */
-}
-
-#pragma mark - Private
-
--(void)saveSelectedCountry {
+- (void)saveSelectedCountry {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     
     [userDefaults setObject:self.selectedCountryCode forKey:caspianCountryCode];
@@ -2161,7 +2123,8 @@ static UICompositeViewDescription *compositeDescription = nil;
     }
 }
 
-# pragma mark - Resign
+
+#pragma mark - Resign
 
 - (void)resign {
     NSString *phone    = self.phoneNumberRegisterField.text;
