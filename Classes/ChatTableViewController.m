@@ -98,7 +98,7 @@ static int sorted_history_comparison(LinphoneChatRoom *to_insert, LinphoneChatRo
 static void chatTable_free_chatrooms(void *data){
     LinphoneChatMessage* lastMsg = linphone_chat_room_get_user_data(data);
     if( lastMsg ){
-        linphone_chat_message_unref(linphone_chat_room_get_user_data(data));
+        linphone_chat_message_unref(lastMsg);
         linphone_chat_room_set_user_data(data, NULL);
     }
     linphone_chat_room_unref(data);

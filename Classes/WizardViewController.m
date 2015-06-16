@@ -576,7 +576,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     //self.domainRegisterField.text = domain.length != 0 ? domain : [[LinphoneManager instance] caspianDomainIp];
     self.domainRegisterField.text = [[LinphoneManager instance] caspianDomainIp];
     
-    if (phoneNumber == NULL) {
+    if (!phoneNumber) {
         self.phoneNumberRegisterField.text = countryCode; //insert country code
     }
 }
@@ -672,8 +672,8 @@ static UICompositeViewDescription *compositeDescription = nil;
         }
     } else if (view == logInView) {
         if (!back) {
-                [self fillCredentials];
-            }
+            [self fillCredentials];
+        }
     } else if (view == signUpView) {
         [self cleanUpSignUpView];
 
@@ -705,23 +705,24 @@ static UICompositeViewDescription *compositeDescription = nil;
     }
     
     // Animation
-    if(animation && [[LinphoneManager instance] lpConfigBoolForKey:@"animations_preference"] == true) {
+    if (animation && [[LinphoneManager instance] lpConfigBoolForKey:@"animations_preference"] == YES) {
       CATransition* trans = [CATransition animation];
       [trans setType:kCATransitionPush];
       [trans setDuration:0.35];
       [trans setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
-      if(back) {
+      if (back) {
           [trans setSubtype:kCATransitionFromLeft];
-      }else {
+      } else {
           [trans setSubtype:kCATransitionFromRight];
       }
       [contentView.layer addAnimation:trans forKey:@"Transition"];
     }
     
     // Stack current view
-    if(currentView != nil) {
-        if(!back)
+    if (currentView != nil) {
+        if (!back) {
             [historyViews addObject:currentView];
+        }
         [currentView removeFromSuperview];
     }
     
@@ -1352,22 +1353,8 @@ static UICompositeViewDescription *compositeDescription = nil;
 }
 
 - (IBAction)onNextLogInClick:(id)sender {
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    NSString *country = [userDefaults objectForKey:caspianCountryName];
-    NSString *countryCode = [userDefaults objectForKey:caspianCountryCode];
-    
-    countryCode = self.selectedCountryCode;
-    country = self.countryNameLoginViewField.text;
-    
-    NSLog(@"Переменная country = %@, ", country);
-    NSLog(@"Переменная countryCode = %@, ", countryCode);
-    
-    [userDefaults setObject:countryCode forKey:caspianCountryCode];
-    [userDefaults setObject:country forKey:caspianCountryName];
-    
-    [userDefaults synchronize];
-    
-    [self changeView:logInView back:FALSE animation:TRUE];
+    [self saveSelectedCountry];
+    [self changeView:logInView back:NO animation:YES];
 }
 
 - (IBAction)onDismissKeyboardButton:(id)sender {
@@ -1752,6 +1739,31 @@ static UICompositeViewDescription *compositeDescription = nil;
     } else {
     self.currentCountryRow = [self indexOfCountryWithName:caspianCountryDefaultName];
     }
+}
+#pragma mark - LogIn (Sign IN)
+
+- (void) procedureCountryFill {
+ /*
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSString *countryCode = [userDefaults objectForKey:caspianCountryCode];
+    NSString *lastPhoneNumber = [userDefaults objectForKey:caspianPhoneNumber];
+    
+    if (lastPhoneNumber == NULL) {
+        self.phoneNumberRegisterField.text = countryCode;
+    } else {
+        [self fillCredentials];
+    } */
+}
+
+#pragma mark - Private
+
+-(void)saveSelectedCountry {
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    
+    [userDefaults setObject:self.selectedCountryCode forKey:caspianCountryCode];
+    [userDefaults setObject:self.countryNameLoginViewField.text forKey:caspianCountryName];
+    
+    [userDefaults synchronize];
 }
 
 #pragma mark - Sign Up
