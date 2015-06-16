@@ -671,8 +671,8 @@ static UICompositeViewDescription *compositeDescription = nil;
         if (!back) {
             waitView.hidden = NO;
             [self pullCountriesWithCompletion:^{
-               waitView.hidden = YES;
-            [self.countryNameLoginViewField becomeFirstResponder];
+                waitView.hidden = YES;
+                [self.countryNameLoginViewField becomeFirstResponder];
             }];
         }
     } else if (view == logInView) {
@@ -1736,6 +1736,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     
     [userDefaults synchronize];
 }
+
 
 #pragma mark - Sign Up
 
