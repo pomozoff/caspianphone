@@ -295,7 +295,7 @@ extern NSString *caspianErrorDomain;
     [countryLoginView release];
     [_countryPickerLoginNextToolbar release];
     [_dismissKeyboardButtonCountryLoginView release];
-    [_countryChanged release];
+
     [super dealloc];
 }
 
