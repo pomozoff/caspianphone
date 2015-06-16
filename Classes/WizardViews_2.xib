@@ -4,6 +4,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WizardViewController">
@@ -256,15 +257,6 @@
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="welcome.png" translatesAutoresizingMaskIntoConstraints="NO" id="afi-3Y-AGb">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                 </imageView>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mb0-zD-ihR">
-                    <rect key="frame" x="0.0" y="0.0" width="312" height="488"/>
-                    <state key="normal">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="onDismissKeyboardButton:" destination="-1" eventType="touchUpInside" id="KpX-it-ndc"/>
-                    </connections>
-                </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l5A-gX-dpX">
                     <rect key="frame" x="184" y="342" width="110" height="50"/>
                     <state key="normal" image="signup_next_default.png">
@@ -314,24 +306,39 @@
                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mb0-zD-ihR">
+                    <rect key="frame" x="0.0" y="0.0" width="312" height="488"/>
+                    <state key="normal">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="onDismissKeyboardButton:" destination="-1" eventType="touchUpInside" id="KpX-it-ndc"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstAttribute="bottom" secondItem="Mb0-zD-ihR" secondAttribute="bottom" constant="-8" id="04X-5o-dbk"/>
                 <constraint firstItem="dE2-ec-AaQ" firstAttribute="top" secondItem="jYS-WO-pvD" secondAttribute="bottom" constant="8" symbolic="YES" id="3Xz-d1-6w5"/>
                 <constraint firstItem="l5A-gX-dpX" firstAttribute="bottom" secondItem="i8y-3c-pS2" secondAttribute="bottom" id="7JT-r6-lDg"/>
                 <constraint firstAttribute="bottom" secondItem="i8y-3c-pS2" secondAttribute="bottom" constant="88" id="JX6-FA-Ge5"/>
+                <constraint firstAttribute="bottom" secondItem="afi-3Y-AGb" secondAttribute="bottom" id="NM7-ja-fan"/>
                 <constraint firstItem="ZVH-H5-D71" firstAttribute="top" secondItem="BQg-LE-IQC" secondAttribute="top" constant="54" id="Qn2-tQ-Gal"/>
                 <constraint firstItem="afi-3Y-AGb" firstAttribute="top" secondItem="BQg-LE-IQC" secondAttribute="top" id="Qof-Oz-l0j"/>
                 <constraint firstItem="ZVH-H5-D71" firstAttribute="centerX" secondItem="jYS-WO-pvD" secondAttribute="centerX" id="Rn9-L7-aK6"/>
                 <constraint firstAttribute="trailing" secondItem="l5A-gX-dpX" secondAttribute="trailing" constant="26" id="RzK-2K-bmA"/>
                 <constraint firstItem="dE2-ec-AaQ" firstAttribute="leading" secondItem="BQg-LE-IQC" secondAttribute="leading" constant="33" id="SxY-fn-RoK"/>
+                <constraint firstItem="Mb0-zD-ihR" firstAttribute="top" secondItem="afi-3Y-AGb" secondAttribute="top" id="Xj2-cP-i8F"/>
                 <constraint firstItem="jYS-WO-pvD" firstAttribute="centerX" secondItem="dE2-ec-AaQ" secondAttribute="centerX" id="bFA-tV-xtT"/>
                 <constraint firstItem="afi-3Y-AGb" firstAttribute="leading" secondItem="BQg-LE-IQC" secondAttribute="leading" id="cVn-OP-6Nr"/>
                 <constraint firstItem="l5A-gX-dpX" firstAttribute="leading" secondItem="i8y-3c-pS2" secondAttribute="trailing" constant="48" id="dfA-Ik-OzE"/>
+                <constraint firstItem="Mb0-zD-ihR" firstAttribute="leading" secondItem="afi-3Y-AGb" secondAttribute="leading" id="eBc-fE-AeI"/>
                 <constraint firstItem="dE2-ec-AaQ" firstAttribute="centerY" secondItem="afi-3Y-AGb" secondAttribute="centerY" id="fzI-oJ-wXj"/>
                 <constraint firstItem="i8y-3c-pS2" firstAttribute="leading" secondItem="BQg-LE-IQC" secondAttribute="leading" constant="26" id="rJu-Rz-22c"/>
+                <constraint firstAttribute="trailing" secondItem="afi-3Y-AGb" secondAttribute="trailing" id="vUD-3x-Sm8"/>
                 <constraint firstItem="ZVH-H5-D71" firstAttribute="centerX" secondItem="afi-3Y-AGb" secondAttribute="centerX" id="vhg-3J-Mvg"/>
                 <constraint firstItem="l5A-gX-dpX" firstAttribute="top" secondItem="i8y-3c-pS2" secondAttribute="top" id="wdS-tQ-2mJ"/>
+                <constraint firstItem="Mb0-zD-ihR" firstAttribute="trailing" secondItem="BQg-LE-IQC" secondAttribute="trailingMargin" id="wr0-Oe-1bJ"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="664" y="258"/>
