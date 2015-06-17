@@ -276,10 +276,6 @@ static UICompositeViewDescription *compositeDescription = nil;
                                                     name:@"didTapCallButton"
                                                   object:nil];
     
-    [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                    name:@"didTapChatButton"
-                                                  object:nil];
-    
     [[NSNotificationCenter defaultCenter] postNotificationName:@"mainBarHideCallButton"
                                                         object:nil];
 }
@@ -682,7 +678,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     ABRecordRef contact = [[[LinphoneManager instance] fastAddressBook] getContact:history.number];
     UIImage *avatar = [FastAddressBook getContactImage:contact thumbnail:YES];
     
-    HistoryCell *cell = [tableView dequeueReusableCellWithIdentifier:[HistoryCell reuseIdentifier]];
+    HistoryCell *cell = [[tableView dequeueReusableCellWithIdentifier:[HistoryCell reuseIdentifier]] autorelease];
     cell.delegate = self;
     cell.nameLabel.text = history.name;
     cell.numberLabel.text = history.number;
