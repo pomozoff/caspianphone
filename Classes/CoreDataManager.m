@@ -84,7 +84,7 @@
 
 #pragma mark - Retrieve
 
-- (void)retrieveManagedObject:(NSString*)managedObjectName
+- (void)retrieveManagedObject:(NSString *)managedObjectName
                     predicate:(NSPredicate *)predicate
               sortDescriptors:(NSArray *)sortDescriptors
                  successBlock:(void(^)(NSArray *retrievedObjects))successBlock
