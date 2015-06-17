@@ -7,12 +7,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DialerViewController">
             <connections>
-                <outlet property="addCallButton" destination="184" id="227"/>
-                <outlet property="addContactButton" destination="222" id="225"/>
                 <outlet property="addressField" destination="4" id="205"/>
-                <outlet property="backButton" destination="183" id="254"/>
                 <outlet property="balanceLabel" destination="5V8-p6-LX3" id="WAY-WM-9Sq"/>
-                <outlet property="callButton" destination="224" id="231"/>
                 <outlet property="eightButton" destination="35" id="204"/>
                 <outlet property="eraseButton" destination="185" id="202"/>
                 <outlet property="fiveButton" destination="31" id="195"/>
@@ -28,7 +24,6 @@
                 <outlet property="starButton" destination="39" id="199"/>
                 <outlet property="tableView" destination="bdz-kN-05e" id="MPi-At-o7t"/>
                 <outlet property="threeButton" destination="29" id="193"/>
-                <outlet property="transferButton" destination="236" id="253"/>
                 <outlet property="twoButton" destination="37" id="192"/>
                 <outlet property="view" destination="171" id="176"/>
                 <outlet property="zeroButton" destination="40" id="198"/>
@@ -286,127 +281,8 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="-172" y="165"/>
         </view>
-        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="222" userLabel="addContactButton">
-            <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
-            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <accessibility key="accessibilityConfiguration" label="Add to contact"/>
-            <state key="normal" image="add-contacts.png"/>
-            <state key="disabled" image="add-contacts-hover.png"/>
-            <state key="highlighted" image="add-contacts-hover.png"/>
-            <connections>
-                <action selector="onAddContactClick:" destination="-1" eventType="touchUpInside" id="230"/>
-            </connections>
-            <point key="canvasLocation" x="-437" y="54"/>
-        </button>
-        <view contentMode="scaleToFill" id="182" userLabel="toolBar">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-            <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="large-blue-button.png" id="0hz-MS-Ji4" userLabel="background">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                </imageView>
-                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="183" userLabel="backButton">
-                    <rect key="frame" x="0.0" y="504" width="105" height="64"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <accessibility key="accessibilityConfiguration" label="Back"/>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                    <state key="normal" image="back-medium.png">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <state key="disabled" image="back-medium_hover.png"/>
-                    <state key="highlighted" image="back_over.png"/>
-                    <connections>
-                        <action selector="onBackClick:" destination="-1" eventType="touchUpInside" id="233"/>
-                    </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="Dsp-hP-Iu2" userLabel="smsButton">
-                    <rect key="frame" x="0.0" y="504" width="105" height="64"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <accessibility key="accessibilityConfiguration" label="Back"/>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                    <state key="normal" image="sms.png">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <state key="disabled" image="sms-hover.png"/>
-                    <state key="highlighted" image="sms-hover.png"/>
-                    <connections>
-                        <action selector="onSMSTap:" destination="-1" eventType="touchUpInside" id="A3a-f6-OXO"/>
-                    </connections>
-                </button>
-                <button hidden="YES" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="184" userLabel="addCallButton" customClass="UICallButton">
-                    <rect key="frame" x="105" y="504" width="111" height="64"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <accessibility key="accessibilityConfiguration" label="Add call"/>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                    <state key="normal" image="add_call_default.png">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <state key="disabled" image="add_call_disabled.png"/>
-                    <state key="highlighted" image="add_call_over.png"/>
-                    <connections>
-                        <outlet property="addressField" destination="4" id="234"/>
-                    </connections>
-                </button>
-                <button hidden="YES" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="236" userLabel="transferButton" customClass="UITransferButton">
-                    <rect key="frame" x="105" y="504" width="111" height="64"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <accessibility key="accessibilityConfiguration" label="Transfer call"/>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                    <state key="normal" image="transfer_call_default.png">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <state key="disabled" image="transfer_call_disabled.png"/>
-                    <state key="highlighted" image="transfer_call_over.png"/>
-                    <connections>
-                        <outlet property="addressField" destination="4" id="237"/>
-                    </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="224" userLabel="callButton" customClass="UICallButton">
-                    <rect key="frame" x="105" y="504" width="111" height="64"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <accessibility key="accessibilityConfiguration" label="Call"/>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                    <state key="normal" image="phone.png">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <state key="disabled" image="phone-button.png"/>
-                    <state key="highlighted" image="phone-button.png"/>
-                    <connections>
-                        <outlet property="addressField" destination="4" id="235"/>
-                    </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="Thb-Pf-iHr" userLabel="chatButton">
-                    <rect key="frame" x="215" y="504" width="105" height="64"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMinY="YES"/>
-                    <accessibility key="accessibilityConfiguration" label="Back"/>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                    <state key="normal" image="chat.png">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <state key="disabled" image="chat-hover.png"/>
-                    <state key="highlighted" image="chat-hover.png"/>
-                    <connections>
-                        <action selector="onChatTap:" destination="-1" eventType="touchUpInside" id="NwK-0W-0SH"/>
-                    </connections>
-                </button>
-            </subviews>
-            <color key="backgroundColor" white="1" alpha="0.0" colorSpace="custom" customColorSpace="calibratedWhite"/>
-            <point key="canvasLocation" x="-245" y="732"/>
-        </view>
     </objects>
     <resources>
-        <image name="add-contacts-hover.png" width="131" height="131"/>
-        <image name="add-contacts.png" width="131" height="131"/>
-        <image name="add_call_default.png" width="214" height="138"/>
-        <image name="add_call_disabled.png" width="214" height="138"/>
-        <image name="add_call_over.png" width="214" height="138"/>
-        <image name="back-medium.png" width="215" height="102"/>
-        <image name="back-medium_hover.png" width="215" height="102"/>
-        <image name="back_over.png" width="213" height="138"/>
-        <image name="chat-hover.png" width="216" height="131"/>
-        <image name="chat.png" width="216" height="131"/>
         <image name="input_delete_default.png" width="2944" height="1707"/>
         <image name="input_delete_pressed.png" width="2944" height="1707"/>
         <image name="keypad_eight_default.png" width="3780" height="1707"/>
@@ -433,15 +309,7 @@
         <image name="keypad_two_pressed.png" width="3780" height="1707"/>
         <image name="keypad_zero_default.png" width="3780" height="1707"/>
         <image name="keypad_zero_pressed.png" width="3780" height="1707"/>
-        <image name="large-blue-button.png" width="640" height="284"/>
         <image name="led_disconnected.png" width="18" height="17"/>
-        <image name="phone-button.png" width="218" height="128"/>
-        <image name="phone.png" width="218" height="131"/>
-        <image name="sms-hover.png" width="216" height="131"/>
-        <image name="sms.png" width="216" height="131"/>
-        <image name="transfer_call_default.png" width="214" height="138"/>
-        <image name="transfer_call_disabled.png" width="214" height="138"/>
-        <image name="transfer_call_over.png" width="214" height="138"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

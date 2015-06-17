@@ -20,19 +20,29 @@
     // Configure the view for the selected state
 }
 
-- (IBAction)didTapChatButton:(id)sender {
+- (IBAction)didTapChatButton:(id)sender
+{
+    [self.delegate didTapChatButton:self];
 }
 
-- (IBAction)didTapSMSButton:(id)sender {
+- (IBAction)didTapSMSButton:(id)sender
+{
+    [self.delegate didTapSMSButton:self];
 }
 
-- (IBAction)didTapCallButton:(id)sender {
+- (IBAction)didTapCallButton:(id)sender
+{
+    [self.delegate didTapCallButton:self];
 }
 
-- (IBAction)didTapAddButton:(id)sender {
+- (IBAction)didTapAddButton:(id)sender
+{
+    [self.delegate didTapAddButton:self];
 }
 
-- (IBAction)didTapLogoButton:(id)sender {
+- (IBAction)didTapLogoButton:(id)sender
+{
+    [self.delegate didTapLogoButton:self];
 }
 
 + (NSString *)reuseIdentifier

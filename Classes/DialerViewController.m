@@ -38,7 +38,7 @@
 static NSString *caspianSMSStatus = @"uk.co.onecallcaspian.phone.smsStatus";
 static NSString *caspianBalanceUrl = @"https://onecallcaspian.co.uk/mobile/credit?phone_number=%@&password=%@";
 
-@interface DialerViewController() <UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate>
+@interface DialerViewController() <UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate, HistoryCellDelegate>
 
 @property (nonatomic, retain) NSOperationQueue *balanceQueue;
 @property (nonatomic, retain) NSNumberFormatter *numberFormatter;
@@ -566,6 +566,20 @@ static UICompositeViewDescription *compositeDescription = nil;
     else {
         [[NSNotificationCenter defaultCenter] postNotificationName:@"mainBarHideCallButton" object:nil];
     }
+    
+    if (addressField.text.length > 0) {
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"number beginswith[c] %@", addressField.text];
+        [[CoreDataManager sharedManager] retrieveManagedObject:@"History" predicate:predicate sortDescriptors:nil successBlock:^(NSArray *retrievedObjects) {
+            self.dataSource = retrievedObjects;
+            [self.tableView reloadData];
+        }];
+    }
+    else {
+        [self getHistory:^(NSArray *historyArray) {
+            self.dataSource = historyArray;
+            [self.tableView reloadData];
+        }];
+    }
 }
 
 #pragma mark - MFComposeMailDelegate
@@ -669,14 +683,75 @@ static UICompositeViewDescription *compositeDescription = nil;
     UIImage *avatar = [FastAddressBook getContactImage:contact thumbnail:YES];
     
     HistoryCell *cell = [tableView dequeueReusableCellWithIdentifier:[HistoryCell reuseIdentifier]];
+    cell.delegate = self;
     cell.nameLabel.text = history.name;
     cell.numberLabel.text = history.number;
     cell.dateLabel.text = [dateFormat stringFromDate:history.timestamp];
     if (avatar) {
         cell.avatarImageView.image = avatar;
     }
+    else {
+        cell.avatarImageView.image = [UIImage imageNamed:@"profile-picture-large"];
+    }
     
     return cell;
+}
+
+#pragma mark - HistoryCellDelegate
+
+- (void)didTapChatButton:(HistoryCell *)historyCell
+{
+    ChatViewController *controller = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[ChatViewController compositeViewDescription] push:TRUE], ChatViewController);
+    controller.addressField.text = historyCell.numberLabel.text;
+    [controller onAddClick:nil];
+}
+
+- (void)didTapSMSButton:(HistoryCell *)historyCell
+{
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:caspianSMSStatus]) {
+        SMSTableViewController *smsViewController = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[SMSTableViewController compositeViewDescription] push:TRUE], SMSTableViewController);
+        smsViewController.phoneNumber = historyCell.numberLabel.text;
+    }
+    else {
+        DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[SMSActivationViewController compositeViewDescription] push:TRUE], SMSActivationViewController);
+    }
+}
+
+- (void)didTapCallButton:(HistoryCell *)historyCell
+{
+    [self call:historyCell.numberLabel.text displayName:historyCell.nameLabel.text];
+}
+
+- (void)didTapAddButton:(HistoryCell *)historyCell
+{
+    ABRecordRef contact = [[[LinphoneManager instance] fastAddressBook] getContact:historyCell.numberLabel.text];
+    
+    if (contact) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"Contact already exist" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+        [alert release];
+    }
+    else {
+        [ContactSelection setSelectionMode:ContactSelectionModeEdit];
+        [ContactSelection setAddAddress:historyCell.numberLabel.text];
+        [ContactSelection setSipFilter:nil];
+        [ContactSelection setNameOrEmailFilter:nil];
+        [ContactSelection enableEmailFilter:FALSE];
+        
+        ContactDetailsViewController *controller = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[ContactDetailsViewController compositeViewDescription] push:TRUE], ContactDetailsViewController);
+        if(controller != nil) {
+            if (addressField.text.length == 0) {
+                [controller newContact];
+            } else {
+                [controller newContact:addressField.text];
+            }
+        }
+    }
+}
+
+- (void)didTapLogoButton:(HistoryCell *)historyCell
+{
+    // Logo button tapped
 }
 
 #pragma mark - New UI
@@ -767,7 +842,9 @@ static UICompositeViewDescription *compositeDescription = nil;
     history.number = [FastAddressBook takePhoneNumberFromAddress:self.addressField.text];
     history.timestamp = [NSDate date];
     history.name = (contact) ? [FastAddressBook getContactDisplayName:contact] : @"Unknown";
-    [[CoreDataManager sharedManager] saveContextSuccessBlock:nil];
+    [[CoreDataManager sharedManager] saveContextSuccessBlock:^{
+        [self.tableView reloadData];
+    }];
 }
 
 - (void)getHistory:(void(^)(NSArray *historyArray))successBlock
