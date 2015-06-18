@@ -28,14 +28,26 @@
 #import "Utils.h"
 #import "SMSActivationViewController.h"
 #import "SMSTableViewController.h"
+#import "HistoryCell.h"
+#import "FastAddressBook.h"
+#import "CoreDataManager.h"
+#import "History.h"
 
 #include "linphone/linphonecore.h"
 
 static NSString *caspianSMSStatus = @"uk.co.onecallcaspian.phone.smsStatus";
+static NSString *caspianBalanceUrl = @"https://onecallcaspian.co.uk/mobile/credit?phone_number=%@&password=%@";
 
-@interface DialerViewController()
+@interface DialerViewController() <UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate, HistoryCellDelegate>
 
+@property (nonatomic, retain) NSOperationQueue *balanceQueue;
+@property (nonatomic, retain) NSNumberFormatter *numberFormatter;
 @property (nonatomic, retain) UIView *dummyView;
+@property (nonatomic, copy) NSString *username;
+@property (nonatomic, copy) NSString *password;
+@property (nonatomic, retain) NSURL *balanceUrl;
+@property (nonatomic, retain) NSArray *dataSource;
+@property (nonatomic) CGRect keypadFrame;
 
 @end
 
@@ -117,6 +129,11 @@ static NSString *caspianSMSStatus = @"uk.co.onecallcaspian.phone.smsStatus";
     // Remove all observers
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     
+    [_balanceLabel release];
+    [_registrationStateLabel release];
+    [_registrationStateImage release];
+    [_keypadView release];
+    [_tableView release];
 	[super dealloc];
 }
 
@@ -129,8 +146,8 @@ static UICompositeViewDescription *compositeDescription = nil;
     if(compositeDescription == nil) {
         compositeDescription = [[UICompositeViewDescription alloc] init:@"Dialer"
                                                                 content:@"DialerViewController"
-                                                               stateBar:@"UIStateBar"
-                                                        stateBarEnabled:true
+                                                               stateBar:nil
+                                                        stateBarEnabled:false
                                                                  tabBar:@"UIMainBar"
                                                           tabBarEnabled:true
                                                              fullscreen:false
@@ -156,6 +173,26 @@ static UICompositeViewDescription *compositeDescription = nil;
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(coreUpdateEvent:)
                                                  name:kLinphoneCoreUpdate
+                                               object:nil];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(registrationUpdate:)
+                                                 name:kLinphoneRegistrationUpdate
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(globalStateUpdate:)
+                                                 name:kLinphoneGlobalStateUpdate
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(didTapCallButton)
+                                                 name:@"didTapCallButton"
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(onChatTap:)
+                                                 name:@"didTapChatButton"
                                                object:nil];
 
     // technically not needed, but older versions of linphone had this button
@@ -197,7 +234,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_6_0 // attributed string only available since iOS6
     if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7) {
         // fix placeholder bar color in iOS7
-        UIColor *color = [UIColor grayColor];
+        UIColor *color = [UIColor lightGrayColor];
         NSAttributedString* placeHolderString = [[NSAttributedString alloc]
                                                  initWithString:NSLocalizedString(@"Enter an address", @"Enter an address")
                                                  attributes:@{NSForegroundColorAttributeName: color}];
@@ -205,7 +242,22 @@ static UICompositeViewDescription *compositeDescription = nil;
         [placeHolderString release];
     }
 #endif
-
+    
+    [self pullBalanceCompletionBlock:^(NSString *balance) {
+        self.balanceLabel.text = balance;
+    }];
+    
+    // Update to default state
+    LinphoneProxyConfig* config = NULL;
+    linphone_core_get_default_proxy([LinphoneManager getLc], &config);
+    [self proxyConfigUpdate: config];
+    
+    [self showKeypadAnimated:YES];
+    
+    [self getHistory:^(NSArray *historyArray) {
+        self.dataSource = historyArray;
+        [self.tableView reloadData];
+    }];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -219,6 +271,13 @@ static UICompositeViewDescription *compositeDescription = nil;
     [[NSNotificationCenter defaultCenter] removeObserver:self
                                                     name:kLinphoneCoreUpdate
                                                   object:nil];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:@"didTapCallButton"
+                                                  object:nil];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"mainBarHideCallButton"
+                                                        object:nil];
 }
 
 - (void)viewDidLoad {
@@ -247,10 +306,46 @@ static UICompositeViewDescription *compositeDescription = nil;
     }
     
     addressField.inputView = self.dummyView;
+    [addressField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+    
+    UITapGestureRecognizer *tapHideKeypad = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeypadAnimated:)];
+    [self.view addGestureRecognizer:tapHideKeypad];
+    
+    self.tableView.tableFooterView = [UIView new];
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableView.allowsSelection = NO;
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
+    
+    [self.tableView registerNib:[UINib nibWithNibName:@"HistoryCell" bundle:nil] forCellReuseIdentifier:[HistoryCell reuseIdentifier]];
 }
 
-- (void)viewDidUnload {
-    [super viewDidUnload];
+- (void)showKeypadAnimated:(BOOL)animated
+{
+    if (animated) {
+        [UIView animateWithDuration:0.7 animations:^{
+            self.keypadView.frame = CGRectMake(0, self.view.frame.size.height - self.keypadView.frame.size.height, self.keypadView.frame.size.width, self.keypadView.frame.size.height);
+            self.tableView.frame = CGRectMake(self.tableView.frame.origin.x, self.tableView.frame.origin.y, self.tableView.frame.size.width, self.view.frame.size.height - self.tableView.frame.origin.y - self.keypadView.frame.size.height - 8);
+        }];
+    }
+    else {
+        self.keypadView.frame = CGRectMake(0, self.view.frame.size.height - self.keypadView.frame.size.height, self.keypadView.frame.size.width, self.keypadView.frame.size.height);
+        self.tableView.frame = CGRectMake(self.tableView.frame.origin.x, self.tableView.frame.origin.y, self.tableView.frame.size.width, 100);
+    }
+}
+
+- (void)hideKeypadAnimated:(BOOL)animated
+{
+    [self.addressField resignFirstResponder];
+    if (animated) {
+        [UIView animateWithDuration:0.7 animations:^{
+            self.keypadView.frame = CGRectMake(0, self.view.frame.size.height, self.keypadView.frame.size.width, self.keypadView.frame.size.height);
+            self.tableView.frame = CGRectMake(self.tableView.frame.origin.x, self.tableView.frame.origin.y, self.tableView.frame.size.width, self.view.frame.size.height - self.tableView.frame.origin.y - 8);
+        }];
+    }
+    else {
+        self.keypadView.frame = CGRectMake(0, self.view.frame.size.height, self.keypadView.frame.size.width, self.keypadView.frame.size.height);
+    }
 }
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
@@ -445,6 +540,44 @@ static UICompositeViewDescription *compositeDescription = nil;
     return YES;
 }
 
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
+    [self showKeypadAnimated:YES];
+    return YES;
+}
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *) event
+{
+    UITouch *touch = [[event allTouches] anyObject];
+    if ([self.addressField isFirstResponder] && (self.addressField != touch.view) && self.addressField.text.length == 0) {
+        [self hideKeypadAnimated:YES];
+    }
+}
+
+-(void)textFieldDidChange:(UITextField *)textField
+{
+    if (textField.text.length > 0) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"mainBarShowCallButton" object:nil];
+    }
+    else {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"mainBarHideCallButton" object:nil];
+    }
+    
+    if (addressField.text.length > 0) {
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"number beginswith[c] %@", addressField.text];
+        [[CoreDataManager sharedManager] retrieveManagedObject:@"History" predicate:predicate sortDescriptors:nil successBlock:^(NSArray *retrievedObjects) {
+            self.dataSource = retrievedObjects;
+            [self.tableView reloadData];
+        }];
+    }
+    else {
+        [self getHistory:^(NSArray *historyArray) {
+            self.dataSource = historyArray;
+            [self.tableView reloadData];
+        }];
+    }
+}
+
 #pragma mark - MFComposeMailDelegate
 
 -(void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error {
@@ -518,6 +651,271 @@ static UICompositeViewDescription *compositeDescription = nil;
     else {
         DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[SMSActivationViewController compositeViewDescription] push:TRUE], SMSActivationViewController);
     }
+}
+
+#pragma mark - UITableView data source and delegate
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 110;
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return [self.dataSource count];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    History *history = (History *)[self.dataSource objectAtIndex:indexPath.row];
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat:@"MMM dd, yyyy, hh:mm a"];
+    ABRecordRef contact = [[[LinphoneManager instance] fastAddressBook] getContact:history.number];
+    UIImage *avatar = [FastAddressBook getContactImage:contact thumbnail:YES];
+    
+    HistoryCell *cell = [[tableView dequeueReusableCellWithIdentifier:[HistoryCell reuseIdentifier]] autorelease];
+    cell.delegate = self;
+    cell.nameLabel.text = history.name;
+    cell.numberLabel.text = history.number;
+    cell.dateLabel.text = [dateFormat stringFromDate:history.timestamp];
+    if (avatar) {
+        cell.avatarImageView.image = avatar;
+    }
+    else {
+        cell.avatarImageView.image = [UIImage imageNamed:@"profile-picture-large"];
+    }
+    
+    return cell;
+}
+
+#pragma mark - HistoryCellDelegate
+
+- (void)didTapChatButton:(HistoryCell *)historyCell
+{
+    ChatViewController *controller = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[ChatViewController compositeViewDescription] push:TRUE], ChatViewController);
+    controller.addressField.text = historyCell.numberLabel.text;
+    [controller onAddClick:nil];
+}
+
+- (void)didTapSMSButton:(HistoryCell *)historyCell
+{
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:caspianSMSStatus]) {
+        SMSTableViewController *smsViewController = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[SMSTableViewController compositeViewDescription] push:TRUE], SMSTableViewController);
+        smsViewController.phoneNumber = historyCell.numberLabel.text;
+    }
+    else {
+        DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[SMSActivationViewController compositeViewDescription] push:TRUE], SMSActivationViewController);
+    }
+}
+
+- (void)didTapCallButton:(HistoryCell *)historyCell
+{
+    [self call:historyCell.numberLabel.text displayName:historyCell.nameLabel.text];
+}
+
+- (void)didTapAddButton:(HistoryCell *)historyCell
+{
+    ABRecordRef contact = [[[LinphoneManager instance] fastAddressBook] getContact:historyCell.numberLabel.text];
+    
+    if (contact) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"Contact already exist" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+        [alert release];
+    }
+    else {
+        [ContactSelection setSelectionMode:ContactSelectionModeEdit];
+        [ContactSelection setAddAddress:historyCell.numberLabel.text];
+        [ContactSelection setSipFilter:nil];
+        [ContactSelection setNameOrEmailFilter:nil];
+        [ContactSelection enableEmailFilter:FALSE];
+        
+        ContactDetailsViewController *controller = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[ContactDetailsViewController compositeViewDescription] push:TRUE], ContactDetailsViewController);
+        if(controller != nil) {
+            if (addressField.text.length == 0) {
+                [controller newContact];
+            } else {
+                [controller newContact:addressField.text];
+            }
+        }
+    }
+}
+
+- (void)didTapLogoButton:(HistoryCell *)historyCell
+{
+    // Logo button tapped
+}
+
+#pragma mark - New UI
+
+- (void)pullBalanceCompletionBlock:(void(^)(NSString *))block {
+    if (self.balanceQueue.operationCount == 0) {
+        __block DialerViewController *weakSelf = self;
+        [self.balanceQueue addOperationWithBlock:^{
+            [[LinphoneManager instance] dataFromUrl:weakSelf.balanceUrl completionBlock:^(NSDictionary *jsonAnswer) {
+                NSString *accurateBalance = jsonAnswer[@"balance"];
+                NSDecimalNumber *digitBalance = [NSDecimalNumber decimalNumberWithString:accurateBalance];
+                if (digitBalance != nil) {
+                    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                        NSString *balance = [weakSelf.numberFormatter stringFromNumber:digitBalance];
+                        block(balance);
+                    }];
+                }
+            } errorBlock:nil];
+        }];
+    }
+}
+
+- (NSOperationQueue *)balanceQueue {
+    if (!_balanceQueue) {
+        _balanceQueue = [[NSOperationQueue alloc] init];
+        _balanceQueue.name = @"Balance queue";
+        _balanceQueue.maxConcurrentOperationCount = 1;
+    }
+    return _balanceQueue;
+}
+
+- (NSNumberFormatter *)numberFormatter {
+    if (!_numberFormatter) {
+        _numberFormatter = [[NSNumberFormatter alloc] init];
+        _numberFormatter.numberStyle = NSNumberFormatterCurrencyStyle;
+        _numberFormatter.maximumFractionDigits = 2;
+        _numberFormatter.currencyCode = @"GBP";
+    }
+    return _numberFormatter;
+}
+
+- (NSString *)username {
+    if (!_username) {
+        LinphoneCore *lc = [LinphoneManager getLc];
+        LinphoneProxyConfig *cfg = NULL;
+        linphone_core_get_default_proxy(lc, &cfg);
+        if (cfg) {
+            const char *identity = linphone_proxy_config_get_identity(cfg);
+            LinphoneAddress *addr = linphone_address_new(identity);
+            if (addr) {
+                NSString *currentUusername = [NSString stringWithUTF8String:linphone_address_get_username(addr)];
+                if (_username != currentUusername) {
+                    _username = [currentUusername retain];
+                }
+                linphone_address_destroy(addr);
+            }
+        }
+    }
+    return _username;
+}
+
+- (NSString *)password {
+    if (!_password) {
+        LinphoneAuthInfo *ai;
+        LinphoneCore *lc = [LinphoneManager getLc];
+        const MSList *elem = linphone_core_get_auth_info_list(lc);
+        if (elem && (ai = (LinphoneAuthInfo *)elem->data)) {
+            _password = [[NSString stringWithUTF8String:linphone_auth_info_get_passwd(ai)] retain];
+        }
+    }
+    return _password;
+}
+
+- (NSURL *)balanceUrl {
+    if (!_balanceUrl) {
+        NSString *urlString = [NSString stringWithFormat:caspianBalanceUrl, self.username, self.password];
+        _balanceUrl = [[NSURL URLWithString:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]] retain];
+    }
+    return _balanceUrl;
+}
+
+- (void)didTapCallButton
+{
+    [self call:self.addressField.text];
+    
+    ABRecordRef contact = [[[LinphoneManager instance] fastAddressBook] getContact:self.addressField.text];
+    History *history = (History *)[[CoreDataManager sharedManager] createManagedObject:@"History"];
+    history.number = [FastAddressBook takePhoneNumberFromAddress:self.addressField.text];
+    history.timestamp = [NSDate date];
+    history.name = (contact) ? [FastAddressBook getContactDisplayName:contact] : @"Unknown";
+    [[CoreDataManager sharedManager] saveContextSuccessBlock:^{
+        [self.tableView reloadData];
+    }];
+}
+
+- (void)getHistory:(void(^)(NSArray *historyArray))successBlock
+{
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"timestamp" ascending:NO];
+    [[CoreDataManager sharedManager] retrieveManagedObject:@"History" predicate:nil sortDescriptors:@[sortDescriptor] successBlock:^(NSArray *retrievedObjects) {
+        if (successBlock) {
+            successBlock(retrievedObjects);
+        }
+    }];
+}
+
+#pragma mark -
+
+- (void)proxyConfigUpdate: (LinphoneProxyConfig*) config {
+    LinphoneRegistrationState state = LinphoneRegistrationNone;
+    NSString* message = nil;
+    UIImage* image = nil;
+    LinphoneCore* lc = [LinphoneManager getLc];
+    LinphoneGlobalState gstate = linphone_core_get_global_state(lc);
+    
+    if( gstate == LinphoneGlobalConfiguring ){
+        message = NSLocalizedString(@"Fetching remote configuration", nil);
+    } else if (config == NULL) {
+        state = LinphoneRegistrationNone;
+        if(linphone_core_is_network_reachable([LinphoneManager getLc]))
+            message = NSLocalizedString(@"No SIP account configured", nil);
+        else
+            message = NSLocalizedString(@"Network down", nil);
+    } else {
+        state = linphone_proxy_config_get_state(config);
+        
+        switch (state) {
+            case LinphoneRegistrationOk:
+                message = NSLocalizedString(@"Registered", nil); break;
+            case LinphoneRegistrationNone:
+            case LinphoneRegistrationCleared:
+                message =  NSLocalizedString(@"Not registered", nil); break;
+            case LinphoneRegistrationFailed:
+                message =  NSLocalizedString(@"Registration failed", nil); break;
+            case LinphoneRegistrationProgress:
+                message =  NSLocalizedString(@"Registration in progress", nil); break;
+            default: break;
+        }
+    }
+    
+    switch(state) {
+        case LinphoneRegistrationFailed:
+            image = [UIImage imageNamed:@"led_error.png"];
+            break;
+        case LinphoneRegistrationCleared:
+        case LinphoneRegistrationNone:
+            image = [UIImage imageNamed:@"led_disconnected.png"];
+            break;
+        case LinphoneRegistrationProgress:
+            image = [UIImage imageNamed:@"led_inprogress.png"];
+            break;
+        case LinphoneRegistrationOk:
+            image = [UIImage imageNamed:@"led_connected.png"];
+            break;
+    }
+    [self.registrationStateLabel setText:message];
+    [self.registrationStateImage setImage:image];
+}
+
+#pragma mark - Event Functions
+
+- (void)registrationUpdate: (NSNotification*) notif {
+    LinphoneProxyConfig* config = NULL;
+    linphone_core_get_default_proxy([LinphoneManager getLc], &config);
+    [self proxyConfigUpdate:config];
+}
+
+- (void) globalStateUpdate:(NSNotification*) notif {
+    [self registrationUpdate:notif];
 }
 
 @end
