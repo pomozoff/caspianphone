@@ -499,18 +499,10 @@ static UICompositeViewDescription *compositeDescription = nil;
     [[LinphoneManager instance] lpConfigSetString:@"" forKey:@"sharing_server_preference"];
     [[LinphoneManager instance] lpConfigSetBool:YES   forKey:@"ice_preference"];
     [[LinphoneManager instance] lpConfigSetString:@"" forKey:@"stun_preference"];
+
     linphone_core_set_stun_server(lc, NULL);
     linphone_core_set_firewall_policy(lc, LinphonePolicyNoFirewall);
 
-    /*
-    [self resetTextFields];
-    if ([[LinphoneManager instance] lpConfigBoolForKey:@"hide_wizard_welcome_view_preference"] == true) {
-        [self changeView:choiceView back:FALSE animation:FALSE];
-    } else {
-        [self changeView:welcomeView back:FALSE animation:FALSE];
-    }
-    */
-    
     waitView.hidden = YES;
     
     [self loadWizardConfig:@"wizard_external_sip_caspian.rc"];
