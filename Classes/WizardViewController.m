@@ -86,7 +86,6 @@ extern NSString *caspianErrorDomain;
 @property (nonatomic, retain) NSOperationQueue *internetQueue;
 
 @property (nonatomic, assign) NSInteger currentCountryRow;
-@property (nonatomic, assign) NSInteger countryChanged;
 
 @end
 
@@ -572,11 +571,11 @@ static UICompositeViewDescription *compositeDescription = nil;
     //self.domainRegisterField.text = domain.length != 0 ? domain : [[LinphoneManager instance] caspianDomainIp];
     self.domainRegisterField.text = [[LinphoneManager instance] caspianDomainIp];
     
-    if (!phoneNumber) {
-        self.phoneNumberRegisterField.text = countryCode; //insert country code
-    } else if (self.countryChanged == 1) {
-                self.phoneNumberRegisterField.text = countryCode;
-                self.passwordRegisterField.text = @"";
+    if (!phoneNumber || [phoneNumber isEqualToString:@""]) {
+        self.phoneNumberRegisterField.text = countryCode;
+        [self.phoneNumberRegisterField becomeFirstResponder];
+    } else if (!password || [password isEqualToString:@""]) {
+        [self.passwordRegisterField becomeFirstResponder];
     }
 }
 
@@ -1725,7 +1724,9 @@ static UICompositeViewDescription *compositeDescription = nil;
     if (self.selectedCountryCode != countryCode) {
         [userDefaults setObject:self.selectedCountryCode forKey:caspianCountryCode];
         [userDefaults setObject:self.countryNameLoginViewField.text forKey:caspianCountryName];
-        self.countryChanged = 1;
+
+        [userDefaults setObject:@"" forKey:caspianPhoneNumber];
+        [userDefaults setObject:@"" forKey:caspianPasswordKey];
     }
     
     [userDefaults synchronize];
