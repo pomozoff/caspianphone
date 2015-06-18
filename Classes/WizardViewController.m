@@ -1713,7 +1713,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSString *countryCode = [userDefaults objectForKey:caspianCountryCode];
     
-    if (self.selectedCountryCode != countryCode) {
+    if (![self.selectedCountryCode isEqualToString:countryCode]) {
         [userDefaults setObject:self.selectedCountryCode forKey:caspianCountryCode];
         [userDefaults setObject:self.countryNameLoginViewField.text forKey:caspianCountryName];
 
