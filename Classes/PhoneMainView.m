@@ -450,7 +450,7 @@ static RootViewManager* rootViewManagerInstance = nil;
 - (void)resetToDefaults {
     WizardViewController *controller = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[WizardViewController compositeViewDescription]], WizardViewController);
     if(controller != nil) {
-        [controller resetToDefaults];
+        [controller reset];
     }
 }
 
