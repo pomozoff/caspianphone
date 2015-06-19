@@ -48,6 +48,7 @@ static NSString *caspianBalanceUrl = @"https://onecallcaspian.co.uk/mobile/credi
 @property (nonatomic, retain) NSURL *balanceUrl;
 @property (nonatomic, retain) NSArray *dataSource;
 @property (nonatomic) CGRect keypadFrame;
+@property (nonatomic, retain) NSDateFormatter *dateFormat;
 
 @end
 
@@ -80,6 +81,8 @@ static NSString *caspianBalanceUrl = @"https://onecallcaspian.co.uk/mobile/credi
 @synthesize videoPreview;
 @synthesize videoCameraSwitch;
 
+@synthesize dateFormat = _dateFormat;
+
 #pragma mark - Properties
 
 - (UIView *)dummyView {
@@ -87,6 +90,12 @@ static NSString *caspianBalanceUrl = @"https://onecallcaspian.co.uk/mobile/credi
         _dummyView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
     }
     return _dummyView;
+}
+- (NSDateFormatter *)dateFormat {
+    if (!_dateFormat) {
+        _dateFormat = [[NSDateFormatter alloc] init];
+    }
+    return _dateFormat;
 }
 
 #pragma mark - Lifecycle Functions
@@ -134,6 +143,9 @@ static NSString *caspianBalanceUrl = @"https://onecallcaspian.co.uk/mobile/credi
     [_registrationStateImage release];
     [_keypadView release];
     [_tableView release];
+    
+    [_dateFormat release];
+    
 	[super dealloc];
 }
 
@@ -673,8 +685,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     History *history = (History *)[self.dataSource objectAtIndex:indexPath.row];
-    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-    [dateFormat setDateFormat:@"MMM dd, yyyy, hh:mm a"];
+    [self.dateFormat setDateFormat:@"MMM dd, yyyy, hh:mm a"];
     ABRecordRef contact = [[[LinphoneManager instance] fastAddressBook] getContact:history.number];
     UIImage *avatar = [FastAddressBook getContactImage:contact thumbnail:YES];
     
@@ -682,7 +693,8 @@ static UICompositeViewDescription *compositeDescription = nil;
     cell.delegate = self;
     cell.nameLabel.text = history.name;
     cell.numberLabel.text = history.number;
-    cell.dateLabel.text = [dateFormat stringFromDate:history.timestamp];
+    cell.dateLabel.text = [self.dateFormat stringFromDate:history.timestamp];
+
     if (avatar) {
         cell.avatarImageView.image = avatar;
     }
