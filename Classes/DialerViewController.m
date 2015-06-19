@@ -522,7 +522,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 }
 
 - (void)call:(NSString*)address displayName:(NSString *)displayName {
-    [[LinphoneManager instance] call:address displayName:displayName transfer:transferMode];
+    [[LinphoneManager instance] call:address displayName:displayName transfer:FALSE];
 }
 
 
