@@ -522,7 +522,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 }
 
 - (void)call:(NSString*)address displayName:(NSString *)displayName {
-    [[LinphoneManager instance] call:address displayName:displayName transfer:transferMode];
+    [[LinphoneManager instance] call:address displayName:displayName transfer:FALSE];
 }
 
 
@@ -678,7 +678,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     ABRecordRef contact = [[[LinphoneManager instance] fastAddressBook] getContact:history.number];
     UIImage *avatar = [FastAddressBook getContactImage:contact thumbnail:YES];
     
-    HistoryCell *cell = [[tableView dequeueReusableCellWithIdentifier:[HistoryCell reuseIdentifier]] autorelease];
+    HistoryCell *cell = [tableView dequeueReusableCellWithIdentifier:[HistoryCell reuseIdentifier]];
     cell.delegate = self;
     cell.nameLabel.text = history.name;
     cell.numberLabel.text = history.number;
@@ -839,7 +839,9 @@ static UICompositeViewDescription *compositeDescription = nil;
     history.timestamp = [NSDate date];
     history.name = (contact) ? [FastAddressBook getContactDisplayName:contact] : @"Unknown";
     [[CoreDataManager sharedManager] saveContextSuccessBlock:^{
-        [self.tableView reloadData];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.tableView reloadData];
+        });
     }];
 }
 
