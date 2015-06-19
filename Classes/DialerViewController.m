@@ -323,7 +323,9 @@ static UICompositeViewDescription *compositeDescription = nil;
     UITapGestureRecognizer *tapHideKeypad = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeypadAnimated:)];
     [self.view addGestureRecognizer:tapHideKeypad];
     
-    self.tableView.tableFooterView = [UIView new];
+    UIView *newView = [UIView new];
+    self.tableView.tableFooterView = newView;
+    [newView release];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.allowsSelection = NO;
     self.tableView.dataSource = self;
@@ -865,6 +867,7 @@ static UICompositeViewDescription *compositeDescription = nil;
             successBlock(retrievedObjects);
         }
     }];
+    [sortDescriptor release];
 }
 
 #pragma mark -
