@@ -376,6 +376,9 @@
 		70E542F313E147E3002BA2C0 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70E542F213E147E3002BA2C0 /* OpenGLES.framework */; };
 		70E542F513E147EB002BA2C0 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70E542F413E147EB002BA2C0 /* QuartzCore.framework */; };
 		C6863C8D1AF5608300652820 /* WizardViews_2.xib in Resources */ = {isa = PBXBuildFile; fileRef = C6863C8C1AF5608300652820 /* WizardViews_2.xib */; };
+		C68961CA1B3750D80032B907 /* bullets1.png in Resources */ = {isa = PBXBuildFile; fileRef = C68961C81B3750D80032B907 /* bullets1.png */; };
+		C68961CB1B3750D80032B907 /* bullets2.png in Resources */ = {isa = PBXBuildFile; fileRef = C68961C91B3750D80032B907 /* bullets2.png */; };
+		C68961CD1B3750E50032B907 /* signup_next_default.png in Resources */ = {isa = PBXBuildFile; fileRef = C68961CC1B3750E50032B907 /* signup_next_default.png */; };
 		C90FAA7915AF54E6002091CB /* HistoryDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C90FAA7715AF54E6002091CB /* HistoryDetailsViewController.m */; };
 		C9C8254315AE204D00D493FA /* options_add_disabled.png in Resources */ = {isa = PBXBuildFile; fileRef = C9C8253F15AE204D00D493FA /* options_add_disabled.png */; };
 		C9C8254515AE204D00D493FA /* options_transfer_disabled.png in Resources */ = {isa = PBXBuildFile; fileRef = C9C8254015AE204D00D493FA /* options_transfer_disabled.png */; };
@@ -1544,6 +1547,9 @@
 		70E542F413E147EB002BA2C0 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		8D1107310486CEB800E47090 /* linphone-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "linphone-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 		C6863C8C1AF5608300652820 /* WizardViews_2.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WizardViews_2.xib; sourceTree = "<group>"; };
+		C68961C81B3750D80032B907 /* bullets1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bullets1.png; sourceTree = "<group>"; };
+		C68961C91B3750D80032B907 /* bullets2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bullets2.png; sourceTree = "<group>"; };
+		C68961CC1B3750E50032B907 /* signup_next_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = signup_next_default.png; sourceTree = "<group>"; };
 		C90FAA7615AF54E6002091CB /* HistoryDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryDetailsViewController.h; sourceTree = "<group>"; };
 		C90FAA7715AF54E6002091CB /* HistoryDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryDetailsViewController.m; sourceTree = "<group>"; };
 		C9B3A6FD15B485DB006F52EE /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Utils.h; path = Utils/Utils.h; sourceTree = "<group>"; };
@@ -3092,6 +3098,9 @@
 		6E0CA8BA1B2F6C7F00CB9B87 /* image caspian new graphics */ = {
 			isa = PBXGroup;
 			children = (
+				C68961CC1B3750E50032B907 /* signup_next_default.png */,
+				C68961C81B3750D80032B907 /* bullets1.png */,
+				C68961C91B3750D80032B907 /* bullets2.png */,
 				6EFBB6991B316EC20040181A /* original.png */,
 				6EFBB69A1B316EC20040181A /* signup_back_default.png */,
 				6EFBB69B1B316EC20040181A /* welcome_login_default.png */,
@@ -3101,6 +3110,7 @@
 				6EFBB69F1B316EC20040181A /* welcome@2x.png */,
 			);
 			name = "image caspian new graphics";
+			path = "Resources/image caspian new graphics";
 			sourceTree = "<group>";
 		};
 		6E503A551B09D59F0081DB97 /* SMS */ = {
@@ -4457,6 +4467,7 @@
 				D3E84F2615B00F4100420DAC /* dialer_alt_back_default.png in Resources */,
 				D3E84F2815B00F4100420DAC /* dialer_alt_back_over.png in Resources */,
 				D3E84F2A15B00F4100420DAC /* dialer_alt_background.png in Resources */,
+				C68961CB1B3750D80032B907 /* bullets2.png in Resources */,
 				D3E84F3815B011AF00420DAC /* contact_cancel_default.png in Resources */,
 				D3E84F3A15B011AF00420DAC /* contact_cancel_over.png in Resources */,
 				D3157A8A15B4466F00DD8C4C /* history_details_add_default.png in Resources */,
@@ -4572,6 +4583,7 @@
 				D3A74EE815C69392001500B9 /* contacts_over~ipad.png in Resources */,
 				D3A74EEA15C69392001500B9 /* contacts_selected_landscape~ipad.png in Resources */,
 				26E7F3E51A81709F0033D3C0 /* speaker-on-button.png in Resources */,
+				C68961CD1B3750E50032B907 /* signup_next_default.png in Resources */,
 				D3A74EEC15C69392001500B9 /* contacts_selected~ipad.png in Resources */,
 				2634D3651A83D5FD006533C5 /* smilie_64_sun.png in Resources */,
 				D3A74EEE15C69392001500B9 /* dialer_address_background_landscape~ipad.png in Resources */,
@@ -4873,6 +4885,7 @@
 				1599105F16F746B2007BF52B /* route_phone_off_over_landscape.png in Resources */,
 				1599106116F746B2007BF52B /* route_phone_on_default_landscape.png in Resources */,
 				1599106316F746B2007BF52B /* route_speaker_off_default_landscape.png in Resources */,
+				C68961CA1B3750D80032B907 /* bullets1.png in Resources */,
 				1599106516F746B2007BF52B /* route_speaker_off_disabled_landscape.png in Resources */,
 				1599106716F746B2007BF52B /* route_speaker_off_over_landscape.png in Resources */,
 				1599106916F746B2007BF52B /* route_speaker_on_default_landscape.png in Resources */,
@@ -5596,8 +5609,8 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COMPRESS_PNG_FILES = NO;
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)";
@@ -5635,7 +5648,7 @@
 				ORDER_FILE = "";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = linphone;
-				PROVISIONING_PROFILE = "971784ec-3fd1-4285-b1b6-44e86cf9b3f7";
+				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = NO;
 				TARGETED_DEVICE_FAMILY = 1;
 				WARNING_CFLAGS = (
@@ -5684,8 +5697,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = "";
-				CODE_SIGN_IDENTITY = "iPhone Distribution: CASPIAN MARKETS LTD (G4P9S2V6QP)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: CASPIAN MARKETS LTD (G4P9S2V6QP)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COMPRESS_PNG_FILES = NO;
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)";
@@ -5722,7 +5735,7 @@
 				ORDER_FILE = "";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = linphone;
-				PROVISIONING_PROFILE = "971784ec-3fd1-4285-b1b6-44e86cf9b3f7";
+				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = NO;
 				TARGETED_DEVICE_FAMILY = 1;
 				WARNING_CFLAGS = (
@@ -5770,8 +5783,8 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: CASPIAN MARKETS LTD (G4P9S2V6QP)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: CASPIAN MARKETS LTD (G4P9S2V6QP)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COMPRESS_PNG_FILES = NO;
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)";
@@ -5808,7 +5821,7 @@
 				ORDER_FILE = "";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = linphone;
-				PROVISIONING_PROFILE = "971784ec-3fd1-4285-b1b6-44e86cf9b3f7";
+				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = NO;
 				TARGETED_DEVICE_FAMILY = 1;
 				WARNING_CFLAGS = (
@@ -5857,8 +5870,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = "";
-				CODE_SIGN_IDENTITY = "iPhone Distribution: CASPIAN MARKETS LTD (G4P9S2V6QP)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: CASPIAN MARKETS LTD (G4P9S2V6QP)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COMPRESS_PNG_FILES = NO;
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)";
@@ -5895,7 +5908,7 @@
 				ORDER_FILE = "";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = linphone;
-				PROVISIONING_PROFILE = "971784ec-3fd1-4285-b1b6-44e86cf9b3f7";
+				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = NO;
 				TARGETED_DEVICE_FAMILY = 1;
 				WARNING_CFLAGS = (
