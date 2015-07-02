@@ -177,14 +177,14 @@
     <resources>
         <image name="dialer.png" width="128" height="154"/>
         <image name="history_notification.png" width="43" height="43"/>
-        <image name="home_chat_default.png" width="320" height="360"/>
-        <image name="home_chat_pressed.png" width="320" height="360"/>
-        <image name="home_contacts_default.png" width="320" height="360"/>
-        <image name="home_contacts_pressed.png" width="320" height="360"/>
-        <image name="home_settings_default.png" width="320" height="360"/>
-        <image name="home_settings_pressed.png" width="320" height="360"/>
-        <image name="home_shop_default.png" width="320" height="360"/>
-        <image name="home_shop_pressed.png" width="320" height="360"/>
+        <image name="home_chat_default.png" width="192" height="216"/>
+        <image name="home_chat_pressed.png" width="192" height="216"/>
+        <image name="home_contacts_default.png" width="192" height="216"/>
+        <image name="home_contacts_pressed.png" width="192" height="216"/>
+        <image name="home_settings_default.png" width="192" height="216"/>
+        <image name="home_settings_pressed.png" width="192" height="216"/>
+        <image name="home_shop_default.png" width="192" height="216"/>
+        <image name="home_shop_pressed.png" width="192" height="216"/>
         <image name="main_dial_default.png" width="250" height="250"/>
         <image name="main_dial_pressed.png" width="250" height="250"/>
     </resources>
