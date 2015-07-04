@@ -104,16 +104,16 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="history_add_default.png" width="1707" height="1707"/>
-        <image name="history_add_pressed.png" width="1707" height="1707"/>
-        <image name="history_call_default.png" width="1707" height="1707"/>
-        <image name="history_call_pressed.png" width="1707" height="1707"/>
-        <image name="history_chat_default.png" width="1707" height="1707"/>
-        <image name="history_chat_pressed.png" width="1707" height="1707"/>
-        <image name="history_logo_default.png" width="1707" height="1707"/>
-        <image name="history_logo_pressed.png" width="400" height="400"/>
-        <image name="history_sms_default.png" width="1707" height="1707"/>
-        <image name="history_sms_pressed.png" width="1707" height="1707"/>
+        <image name="history_add_default.png" width="192" height="192"/>
+        <image name="history_add_pressed.png" width="192" height="192"/>
+        <image name="history_call_default.png" width="192" height="192"/>
+        <image name="history_call_pressed.png" width="192" height="192"/>
+        <image name="history_chat_default.png" width="192" height="192"/>
+        <image name="history_chat_pressed.png" width="192" height="192"/>
+        <image name="history_logo_default.png" width="192" height="192"/>
+        <image name="history_logo_pressed.png" width="192" height="192"/>
+        <image name="history_sms_default.png" width="192" height="192"/>
+        <image name="history_sms_pressed.png" width="192" height="192"/>
         <image name="profile-picture-large.png" width="251" height="259"/>
     </resources>
 </document>
