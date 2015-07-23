@@ -1269,6 +1269,7 @@
 		2668D6E31AB62274009630D3 /* flag_placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flag_placeholder.png; sourceTree = "<group>"; };
 		266D5B9D1AB5C012003F9E30 /* COCAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = COCAlertView.h; sourceTree = "<group>"; };
 		266D5B9E1AB5C013003F9E30 /* COCAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = COCAlertView.m; sourceTree = "<group>"; };
+		268E6F011B61143A0024A525 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/PhoneMainView.xib; sourceTree = "<group>"; };
 		2690B65D1ABE213E000ACD65 /* countries_list.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = countries_list.json; path = Resources/countries_list.json; sourceTree = "<group>"; };
 		26DB69301B013B6F006AD5C9 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		26DB69351B013BE1006AD5C9 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
@@ -1432,7 +1433,6 @@
 		633E388219FFB0F400936D1C /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		636316D21A1DEBCB0009B839 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/AboutViewController.xib; sourceTree = "<group>"; };
 		636316D51A1DEC650009B839 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/SettingsViewController.xib; sourceTree = "<group>"; };
-		636316D81A1DECC90009B839 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/PhoneMainView.xib; sourceTree = "<group>"; };
 		636316DA1A1DEDD40009B839 /* fr */ = {isa = PBXFileReference; fileEncoding = 2483028224; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/HistoryDetailsViewController.strings; sourceTree = "<group>"; };
 		636316DB1A1DEDD80009B839 /* ru */ = {isa = PBXFileReference; fileEncoding = 2483028224; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/HistoryDetailsViewController.strings; sourceTree = "<group>"; };
 		636316DC1A1DEECB0009B839 /* UIButtonShrinkable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIButtonShrinkable.h; sourceTree = "<group>"; };
@@ -2282,7 +2282,6 @@
 		F0AF070A1A24BA770086C9C1 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/UIMainBar.strings; sourceTree = "<group>"; };
 		F0AF070B1A24BA770086C9C1 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = "ar.lproj/UIMainBar~ipad.strings"; sourceTree = "<group>"; };
 		F0AF070C1A24BA770086C9C1 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/UIStateBar.strings; sourceTree = "<group>"; };
-		F0AF070D1A24BA770086C9C1 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/PhoneMainView.strings; sourceTree = "<group>"; };
 		F0AF070E1A24BA770086C9C1 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/SettingsViewController.strings; sourceTree = "<group>"; };
 		F0AF070F1A24BA770086C9C1 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/WizardViewController.strings; sourceTree = "<group>"; };
 		F0AF07101A24BA770086C9C1 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = "ar.lproj/WizardViewController~ipad.strings"; sourceTree = "<group>"; };
@@ -2577,7 +2576,7 @@
 				F0642EF019DAC891009DB336 /* MainStoryboard.storyboard */,
 				D3F83F8C158229C500336684 /* PhoneMainView.h */,
 				D3F83F8D15822ABD00336684 /* PhoneMainView.m */,
-				636316D71A1DECC90009B839 /* PhoneMainView.xib */,
+				268E6F001B61143A0024A525 /* PhoneMainView.xib */,
 				D35E759C159460B50066B1C1 /* SettingsViewController.h */,
 				D35E759D159460B50066B1C1 /* SettingsViewController.m */,
 				636316D61A1DEC650009B839 /* SettingsViewController.xib */,
@@ -5206,6 +5205,14 @@
 			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
+		268E6F001B61143A0024A525 /* PhoneMainView.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				268E6F011B61143A0024A525 /* Base */,
+			);
+			name = PhoneMainView.xib;
+			sourceTree = "<group>";
+		};
 		636316D31A1DEBCB0009B839 /* AboutViewController.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -5223,15 +5230,6 @@
 				F0AF070E1A24BA770086C9C1 /* ar */,
 			);
 			name = SettingsViewController.xib;
-			sourceTree = "<group>";
-		};
-		636316D71A1DECC90009B839 /* PhoneMainView.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				636316D81A1DECC90009B839 /* Base */,
-				F0AF070D1A24BA770086C9C1 /* ar */,
-			);
-			name = PhoneMainView.xib;
 			sourceTree = "<group>";
 		};
 		639CEAFF1A1DF4D9004DE38F /* UIStateBar.xib */ = {
