@@ -284,6 +284,7 @@
 		631C4FB119D2A8F2004BFE77 /* UIDigitButtonLongPlus.m in Sources */ = {isa = PBXBuildFile; fileRef = 631C4FB019D2A8F2004BFE77 /* UIDigitButtonLongPlus.m */; };
 		631C4FB719D2C3A6004BFE77 /* UIDigitButtonLongVoiceMail.m in Sources */ = {isa = PBXBuildFile; fileRef = 631C4FB619D2C3A6004BFE77 /* UIDigitButtonLongVoiceMail.m */; };
 		636316D41A1DEC650009B839 /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 636316D61A1DEC650009B839 /* SettingsViewController.xib */; };
+		636316D91A1DECC90009B839 /* PhoneMainView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 636316D71A1DECC90009B839 /* PhoneMainView.xib */; };
 		636316DE1A1DEF2F0009B839 /* UIButtonShrinkable.m in Sources */ = {isa = PBXBuildFile; fileRef = 636316DD1A1DEF2F0009B839 /* UIButtonShrinkable.m */; };
 		639CEAFD1A1DF4D9004DE38F /* UIStateBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 639CEAFF1A1DF4D9004DE38F /* UIStateBar.xib */; };
 		639CEB001A1DF4E4004DE38F /* UIHistoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 639CEB021A1DF4E4004DE38F /* UIHistoryCell.xib */; };
@@ -2576,7 +2577,7 @@
 				F0642EF019DAC891009DB336 /* MainStoryboard.storyboard */,
 				D3F83F8C158229C500336684 /* PhoneMainView.h */,
 				D3F83F8D15822ABD00336684 /* PhoneMainView.m */,
-				268E6F001B61143A0024A525 /* PhoneMainView.xib */,
+				636316D71A1DECC90009B839 /* PhoneMainView.xib */,
 				D35E759C159460B50066B1C1 /* SettingsViewController.h */,
 				D35E759D159460B50066B1C1 /* SettingsViewController.m */,
 				636316D61A1DEC650009B839 /* SettingsViewController.xib */,
@@ -4210,6 +4211,7 @@
 				26E7F38B1A81709F0033D3C0 /* 8.png in Resources */,
 				D3F83F5C1582223B00336684 /* numpad_six_default.png in Resources */,
 				26E7F3801A81709F0033D3C0 /* 3d-logo-2-large.png in Resources */,
+				636316D91A1DECC90009B839 /* PhoneMainView.xib in Resources */,
 				D3F83F5E1582223B00336684 /* numpad_six_over.png in Resources */,
 				2634D3631A83D5FD006533C5 /* smilie_64_sleepy.png in Resources */,
 				26E7F3911A81709F0033D3C0 /* back-medium.png in Resources */,
@@ -5205,14 +5207,6 @@
 			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
-		268E6F001B61143A0024A525 /* PhoneMainView.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				268E6F011B61143A0024A525 /* Base */,
-			);
-			name = PhoneMainView.xib;
-			sourceTree = "<group>";
-		};
 		636316D31A1DEBCB0009B839 /* AboutViewController.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -5230,6 +5224,14 @@
 				F0AF070E1A24BA770086C9C1 /* ar */,
 			);
 			name = SettingsViewController.xib;
+			sourceTree = "<group>";
+		};
+		636316D71A1DECC90009B839 /* PhoneMainView.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				268E6F011B61143A0024A525 /* Base */,
+			);
+			name = PhoneMainView.xib;
 			sourceTree = "<group>";
 		};
 		639CEAFF1A1DF4D9004DE38F /* UIStateBar.xib */ = {
@@ -5607,8 +5609,8 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COMPRESS_PNG_FILES = NO;
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)";
@@ -5646,7 +5648,7 @@
 				ORDER_FILE = "";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = linphone;
-				PROVISIONING_PROFILE = "971784ec-3fd1-4285-b1b6-44e86cf9b3f7";
+				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = NO;
 				TARGETED_DEVICE_FAMILY = 1;
 				WARNING_CFLAGS = (
@@ -5733,7 +5735,7 @@
 				ORDER_FILE = "";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = linphone;
-				PROVISIONING_PROFILE = "971784ec-3fd1-4285-b1b6-44e86cf9b3f7";
+				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = NO;
 				TARGETED_DEVICE_FAMILY = 1;
 				WARNING_CFLAGS = (
@@ -5819,7 +5821,7 @@
 				ORDER_FILE = "";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = linphone;
-				PROVISIONING_PROFILE = "971784ec-3fd1-4285-b1b6-44e86cf9b3f7";
+				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = NO;
 				TARGETED_DEVICE_FAMILY = 1;
 				WARNING_CFLAGS = (
@@ -5906,7 +5908,7 @@
 				ORDER_FILE = "";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = linphone;
-				PROVISIONING_PROFILE = "971784ec-3fd1-4285-b1b6-44e86cf9b3f7";
+				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = NO;
 				TARGETED_DEVICE_FAMILY = 1;
 				WARNING_CFLAGS = (
