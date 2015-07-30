@@ -283,6 +283,7 @@
 		57F005CA15EE2D9200914747 /* linphonerc-factory~ipad in Resources */ = {isa = PBXBuildFile; fileRef = 57F005C715EE2D9200914747 /* linphonerc-factory~ipad */; };
 		631C4FB119D2A8F2004BFE77 /* UIDigitButtonLongPlus.m in Sources */ = {isa = PBXBuildFile; fileRef = 631C4FB019D2A8F2004BFE77 /* UIDigitButtonLongPlus.m */; };
 		631C4FB719D2C3A6004BFE77 /* UIDigitButtonLongVoiceMail.m in Sources */ = {isa = PBXBuildFile; fileRef = 631C4FB619D2C3A6004BFE77 /* UIDigitButtonLongVoiceMail.m */; };
+		636316D11A1DEBCB0009B839 /* AboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 636316D31A1DEBCB0009B839 /* AboutViewController.xib */; };
 		636316D41A1DEC650009B839 /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 636316D61A1DEC650009B839 /* SettingsViewController.xib */; };
 		636316D91A1DECC90009B839 /* PhoneMainView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 636316D71A1DECC90009B839 /* PhoneMainView.xib */; };
 		636316DE1A1DEF2F0009B839 /* UIButtonShrinkable.m in Sources */ = {isa = PBXBuildFile; fileRef = 636316DD1A1DEF2F0009B839 /* UIButtonShrinkable.m */; };
@@ -4147,6 +4148,7 @@
 				2237D4091084D7A9001383EE /* ring.wav in Resources */,
 				225CB2FA11ABB76400628906 /* linphone-banner.png in Resources */,
 				26E7F3CA1A81709F0033D3C0 /* phone_hover.png in Resources */,
+				636316D11A1DEBCB0009B839 /* AboutViewController.xib in Resources */,
 				2242E313125235120061DDCE /* ring.caf in Resources */,
 				6EE56CD01B1FB79E00D60D4A /* home_shop_pressed.png in Resources */,
 				2214783D1386A2030020F8B8 /* Localizable.strings in Resources */,
