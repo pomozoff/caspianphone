@@ -314,7 +314,7 @@ static NSString * const kDisappearAnimation = @"disappear";
     int unreadMessage = [LinphoneManager unreadMessageCount];
     if (unreadMessage > 0) {
         if([chatNotificationView isHidden] && [PhoneMainView.instance.currentView equal:[DialerViewController compositeViewDescription]]) {
-            [chatNotificationView setHidden:FALSE];
+            //[chatNotificationView setHidden:FALSE];
             if([[LinphoneManager instance] lpConfigBoolForKey:@"animations_preference"] == true) {
                 if(appear) {
                     [self appearAnimation:kAppearAnimation target:chatNotificationView completion:^(BOOL finished){
@@ -444,8 +444,8 @@ static NSString * const kDisappearAnimation = @"disappear";
     }
     */
     
-    int unreadMessage = [LinphoneManager unreadMessageCount];
-    self.chatNotificationView.hidden = ![PhoneMainView.instance.currentView equal:[DialerViewController compositeViewDescription]] || unreadMessage < 1;
+    //int unreadMessage = [LinphoneManager unreadMessageCount];
+    //self.chatNotificationView.hidden = ![PhoneMainView.instance.currentView equal:[DialerViewController compositeViewDescription]] || unreadMessage < 1;
 }
 
 
@@ -471,7 +471,7 @@ static NSString * const kDisappearAnimation = @"disappear";
         [[NSNotificationCenter defaultCenter] postNotificationName:@"didTapCallButton" object:nil];
     }
     else {
-        chatNotificationView.hidden = NO;
+        //chatNotificationView.hidden = NO;
         [[PhoneMainView instance] changeCurrentView:[DialerViewController compositeViewDescription]];
     }
 }
