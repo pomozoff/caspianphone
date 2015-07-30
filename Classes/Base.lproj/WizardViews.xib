@@ -7,44 +7,28 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WizardViewController">
             <connections>
-                <outlet property="activateAccountView" destination="101" id="Dsl-aw-Z1K"/>
                 <outlet property="activateBySignUpSegmented" destination="IqE-i2-ujj" id="79d-P5-DCa"/>
-                <outlet property="activationCodeActivateField" destination="WRl-8r-d3C" id="zSo-as-RcW"/>
                 <outlet property="callImageConfirmView" destination="u6H-Qk-eSU" id="kiW-w2-V47"/>
-                <outlet property="callTextConfirmView" destination="ClV-sn-idb" id="7cb-tt-XCG"/>
-                <outlet property="confirmView" destination="Ejh-ZW-TaI" id="HiQ-7L-hZm"/>
                 <outlet property="connectAccountView" destination="52" id="71"/>
-                <outlet property="continueSignUpField" destination="H8Y-aP-oNG" id="72v-i8-V9X"/>
                 <outlet property="countryCodeForgotPasswordField" destination="FiX-Ng-zLc" id="fS2-OY-xBb"/>
                 <outlet property="countryCodeSignUpField" destination="7O8-ON-sNh" id="eV1-f4-lix"/>
                 <outlet property="countryFlagForgotPasswordImage" destination="ZSO-Bt-M1Y" id="lkm-XF-Zz8"/>
                 <outlet property="countryFlagSignUpImage" destination="1Lf-fd-HGv" id="SvQ-24-OVo"/>
-                <outlet property="countryNameSignUpField" destination="k1G-aF-7Q7" id="aPa-Ox-dat"/>
                 <outlet property="countryPickerDoneToolbar" destination="30B-mp-hrW" id="tnV-eX-7QE"/>
                 <outlet property="countryPickerView" destination="9QR-C9-FbJ" id="sCV-Dg-r4q"/>
                 <outlet property="domainRegisterField" destination="gEd-ol-qpf" id="gZv-uz-yuN"/>
-                <outlet property="firstNameSignUpField" destination="Ubi-Sf-uTh" id="aZE-in-Gwa"/>
                 <outlet property="flagLoadingForgotPasswordActivityIndicator" destination="wkJ-zr-zkc" id="Czb-YC-Qo6"/>
                 <outlet property="flagLoadingSignUpActivityIndicator" destination="hh6-br-3OS" id="pW5-QK-tht"/>
-                <outlet property="lastNameSignUpField" destination="mqJ-ZT-EO8" id="R5R-NO-51y"/>
                 <outlet property="numKeypadDoneToolbar" destination="h8o-F2-ZnK" id="Gu6-Yw-ljB"/>
                 <outlet property="passwordFinishField" destination="241-LL-aD2" id="NfS-DN-zMk"/>
                 <outlet property="passwordReceivedView" destination="44" id="rHa-TL-MeI"/>
-                <outlet property="phoneNumberConfirmView" destination="ooe-YL-gdt" id="VsM-vf-BRZ"/>
-                <outlet property="phoneNumberExistsPhoneNumberField" destination="TBi-0O-2Sa" id="tuW-fe-b5n"/>
-                <outlet property="phoneNumberExistsView" destination="FPp-cW-sJI" id="1zs-ZB-KqZ"/>
-                <outlet property="phoneNumberFoundPhoneNumberField" destination="2AR-gd-MGP" id="VoP-42-sDe"/>
-                <outlet property="phoneNumberFoundView" destination="5GD-if-mnj" id="ygd-Xt-4tq"/>
                 <outlet property="phoneNumberNextToolbar" destination="soq-SC-fBu" id="rdC-CM-KmM"/>
-                <outlet property="phoneNumberSignUpField" destination="4PV-ab-MvO" id="cfi-Fc-It8"/>
                 <outlet property="provisionedAccountView" destination="xVK-hL-6pe" id="jZM-mc-m1Q"/>
                 <outlet property="provisionedDomain" destination="wRB-Sh-K8J" id="Ieb-x8-yL4"/>
                 <outlet property="provisionedPassword" destination="ClH-fT-a8N" id="h61-p1-4qG"/>
                 <outlet property="provisionedUsername" destination="MyR-eX-QTa" id="gmr-FI-hpH"/>
                 <outlet property="registrationNextStepSignUpLabel" destination="4Ay-Kl-yKQ" id="ZIq-Fp-wFl"/>
-                <outlet property="signUpView" destination="33" id="yiK-7V-lcc"/>
                 <outlet property="smsImageConfirmView" destination="Esr-4T-w26" id="6ae-OT-na9"/>
-                <outlet property="smsTextConfirmView" destination="5Gm-l5-79k" id="y2a-LV-WXW"/>
                 <outlet property="transportChooser" destination="Nrv-SM-lMf" id="7iR-aG-eQf"/>
                 <outlet property="welcomeView" destination="21" id="28"/>
             </connections>
@@ -159,7 +143,7 @@
                         <outlet property="delegate" destination="-1" id="BeK-Q8-Adl"/>
                     </connections>
                 </textField>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="First Name" adjustsFontSizeToFit="NO" minimumFontSize="18" background="Rectangle.png" id="Ubi-Sf-uTh" userLabel="First Name" customClass="COCTextField">
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="First Name" adjustsFontSizeToFit="NO" minimumFontSize="18" background="Rectangle.png" id="Ubi-Sf-uTh" userLabel="First Name_old" customClass="COCTextField">
                     <rect key="frame" x="0.0" y="190" width="320" height="41"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <nil key="textColor"/>
@@ -169,7 +153,7 @@
                         <outlet property="delegate" destination="-1" id="bGG-MS-BOO"/>
                     </connections>
                 </textField>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Last Name" adjustsFontSizeToFit="NO" minimumFontSize="18" background="Rectangle.png" id="mqJ-ZT-EO8" userLabel="Last Name" customClass="COCTextField">
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Last Name" adjustsFontSizeToFit="NO" minimumFontSize="18" background="Rectangle.png" id="mqJ-ZT-EO8" userLabel="Last Name_old" customClass="COCTextField">
                     <rect key="frame" x="0.0" y="230" width="320" height="41"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <nil key="textColor"/>
@@ -195,7 +179,7 @@
                     </segments>
                     <color key="tintColor" red="0.40000000000000002" green="0.65098039220000004" blue="0.78823529410000004" alpha="1" colorSpace="calibratedRGB"/>
                 </segmentedControl>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="H8Y-aP-oNG" userLabel="Continue button">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="H8Y-aP-oNG" userLabel="Continue button_old">
                     <rect key="frame" x="35" y="410" width="250" height="50"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -205,11 +189,8 @@
                     </state>
                     <state key="selected" image="continue-selected.png"/>
                     <state key="highlighted" image="continue-selected.png"/>
-                    <connections>
-                        <action selector="onContinueCreatingAccountTap:" destination="-1" eventType="touchUpInside" id="SnS-U9-qdh"/>
-                    </connections>
                 </button>
-                <view hidden="YES" contentMode="scaleToFill" id="Ejh-ZW-TaI" userLabel="Confirm View">
+                <view hidden="YES" contentMode="scaleToFill" id="Ejh-ZW-TaI" userLabel="Confirm View_old">
                     <rect key="frame" x="20" y="80" width="280" height="380"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
@@ -217,7 +198,7 @@
                             <rect key="frame" x="80" y="40" width="120" height="100"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </imageView>
-                        <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="u6H-Qk-eSU" userLabel="call view">
+                        <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="u6H-Qk-eSU" userLabel="call view_old">
                             <rect key="frame" x="80" y="40" width="120" height="100"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </imageView>
@@ -228,14 +209,7 @@
                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="We shall call to this number to say you a verification code" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ClV-sn-idb">
-                            <rect key="frame" x="20" y="170" width="240" height="41"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Phone Number" textAlignment="center" adjustsFontSizeToFit="NO" minimumFontSize="18" background="Rectangle.png" id="ooe-YL-gdt" userLabel="Phone Number" customClass="COCTextField">
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Phone Number" textAlignment="center" adjustsFontSizeToFit="NO" minimumFontSize="18" background="Rectangle.png" id="ooe-YL-gdt" userLabel="Phone Number_Old" customClass="COCTextField">
                             <rect key="frame" x="20" y="220" width="240" height="41"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
@@ -254,9 +228,6 @@
                             </state>
                             <state key="selected" image="continue-selected.png"/>
                             <state key="highlighted" image="continue-selected.png"/>
-                            <connections>
-                                <action selector="onCancelConfirmTap:" destination="-1" eventType="touchUpInside" id="uDF-HM-QOg"/>
-                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="cJw-ce-jLu" userLabel="Ok button">
                             <rect key="frame" x="150" y="300" width="110" height="50"/>
@@ -268,10 +239,14 @@
                             </state>
                             <state key="selected" image="continue-selected.png"/>
                             <state key="highlighted" image="continue-selected.png"/>
-                            <connections>
-                                <action selector="onOkConfirmTap:" destination="-1" eventType="touchUpInside" id="8Qw-qX-OP1"/>
-                            </connections>
                         </button>
+                        <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="We shall call to this number to say you a verification code" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ClV-sn-idb">
+                            <rect key="frame" x="20" y="169" width="240" height="41"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
@@ -755,9 +730,6 @@
                     </state>
                     <state key="selected" image="continue-selected.png"/>
                     <state key="highlighted" image="continue-selected.png"/>
-                    <connections>
-                        <action selector="onCountinueActivatingTap:" destination="-1" eventType="touchUpInside" id="F1n-tM-irg"/>
-                    </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" red="0.52156865600000002" green="0.76862752440000004" blue="0.91372555489999996" alpha="1" colorSpace="deviceRGB"/>
@@ -893,7 +865,7 @@
             </items>
             <point key="canvasLocation" x="406" y="1099"/>
         </toolbar>
-        <view contentMode="scaleToFill" id="5GD-if-mnj" userLabel="phoneNumberFoundView">
+        <view contentMode="scaleToFill" id="5GD-if-mnj" userLabel="phoneNumberFoundView_old">
             <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
@@ -906,7 +878,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <inset key="insetFor6xAndEarlier" minX="0.0" minY="20" maxX="0.0" maxY="-20"/>
                 </imageView>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Phone Number Found" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="jhX-zA-Ov7" userLabel="Phone Number Found Label">
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Phone Number Found" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="jhX-zA-Ov7" userLabel="Phone Number Found Label_old">
                     <rect key="frame" x="39" y="20" width="242" height="50"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="25"/>
@@ -924,7 +896,7 @@
                         <action selector="onBackClick:" destination="-1" eventType="touchUpInside" id="yr9-Tv-eDn"/>
                     </connections>
                 </button>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Phone Number" textAlignment="center" adjustsFontSizeToFit="NO" minimumFontSize="18" background="Rectangle.png" id="2AR-gd-MGP" userLabel="Phone Number" customClass="COCTextField">
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Phone Number" textAlignment="center" adjustsFontSizeToFit="NO" minimumFontSize="18" background="Rectangle.png" id="2AR-gd-MGP" userLabel="Phone Number_old" customClass="COCTextField">
                     <rect key="frame" x="0.0" y="110" width="320" height="41"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
@@ -933,7 +905,7 @@
                         <outlet property="delegate" destination="-1" id="ZlC-et-jic"/>
                     </connections>
                 </textField>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Nk9-UT-PgS" userLabel="Details label">
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Nk9-UT-PgS" userLabel="Details label_old">
                     <rect key="frame" x="10" y="150" width="300" height="150"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <string key="text">This phone number was already registered. You may either press back and try to Sign Up with another phone number, or press Submit button to receive the password for this phone number by sms.</string>
@@ -941,7 +913,7 @@
                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="87J-W5-pmU" userLabel="Sms me the password button">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="87J-W5-pmU" userLabel="Sms me the password button_old">
                     <rect key="frame" x="35" y="390" width="250" height="50"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -951,9 +923,6 @@
                     </state>
                     <state key="selected" backgroundImage="blue-button-background.png"/>
                     <state key="highlighted" backgroundImage="blue-button-background.png"/>
-                    <connections>
-                        <action selector="onSmsMePassword:" destination="-1" eventType="touchUpInside" id="lSQ-UB-q7D"/>
-                    </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" red="0.52156865600000002" green="0.76862752440000004" blue="0.91372555489999996" alpha="1" colorSpace="deviceRGB"/>
@@ -961,7 +930,7 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="832" y="769"/>
         </view>
-        <view contentMode="scaleToFill" id="FPp-cW-sJI" userLabel="cardFoundView">
+        <view contentMode="scaleToFill" id="FPp-cW-sJI" userLabel="cardFoundView_old">
             <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
@@ -1032,9 +1001,6 @@
                     </state>
                     <state key="selected" backgroundImage="blue-button-background.png"/>
                     <state key="highlighted" backgroundImage="blue-button-background.png"/>
-                    <connections>
-                        <action selector="onRemovePhoneFromCard:" destination="-1" eventType="touchUpInside" id="AYf-gK-Lyh"/>
-                    </connections>
                 </button>
                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="email: support@onecallcaspian.co.uk" textAlignment="center" id="ngS-uQ-xJ2">
                     <rect key="frame" x="10" y="342" width="300" height="37"/>

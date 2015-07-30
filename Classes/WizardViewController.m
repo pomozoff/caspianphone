@@ -87,6 +87,7 @@ extern NSString *caspianErrorDomain;
 
 @property (nonatomic, assign) NSInteger currentCountryRow;
 @property (nonatomic, assign) NSInteger countryChanged;
+@property (nonatomic, retain) NSString *firstName;
 
 @end
 
@@ -95,6 +96,8 @@ extern NSString *caspianErrorDomain;
 @synthesize contentView;
 
 @synthesize welcomeView;
+@synthesize countrySignUpView;
+@synthesize phoneNumberSignUpView;
 @synthesize signUpView;
 @synthesize passwordReceivedView;
 @synthesize connectAccountView;
@@ -107,6 +110,7 @@ extern NSString *caspianErrorDomain;
 @synthesize logInView;
 @synthesize welcomeView2;
 @synthesize countryLoginView;
+@synthesize getActivationByCodeView;
 
 @synthesize cancelButton;
 @synthesize backButton;
@@ -296,6 +300,9 @@ extern NSString *caspianErrorDomain;
     [_countryPickerLoginNextToolbar release];
     [_dismissKeyboardButtonCountryLoginView release];
     [_countryChanged release];
+    [countrySignUpView release];
+    [phoneNumberSignUpView release];
+    [getActivationByCodeView release];
     [super dealloc];
 }
 
@@ -679,14 +686,22 @@ static UICompositeViewDescription *compositeDescription = nil;
         if (!back) {
             [self fillCredentials];
         }
-    } else if (view == signUpView) {
-        [self cleanUpSignUpView];
+    } else if (view == countrySignUpView) {
+            //[self cleanUpSignUpView];
 
         waitView.hidden = NO;
         [self pullCountriesWithCompletion:^{
             waitView.hidden = YES;
             [self.countryNameSignUpField becomeFirstResponder];
         }];
+    } else if (view == phoneNumberSignUpView) {
+            if (!back) {
+                [self.phoneNumberSignUpField becomeFirstResponder];
+            }
+    } else if (view == signUpView) {
+        if (!back) {
+            [self.firstNameSignUpField becomeFirstResponder];
+        }
     } else if (view == activateAccountView) {
         self.activationCodeActivateField.text = @"";
         [self.activationCodeActivateField becomeFirstResponder];
@@ -1063,7 +1078,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 #pragma mark - Action Functions
 
 - (IBAction)onStartClick:(id)sender {
-    [self changeView:signUpView back:FALSE animation:TRUE];
+    [self changeView:countrySignUpView back:FALSE animation:TRUE];
 }
 
 - (IBAction)onBackClick:(id)sender {
@@ -1167,7 +1182,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 }
 
 - (IBAction)onSignUpClick:(id)sender {
-    [self changeView:signUpView back:FALSE animation:TRUE];
+    [self changeView:countrySignUpView back:FALSE animation:TRUE];
 }
 
 - (IBAction)onRegisterClick:(id)sender {
@@ -1269,22 +1284,14 @@ static UICompositeViewDescription *compositeDescription = nil;
     [self.view endEditing:YES];
 }
 
-- (IBAction)onContinueCreatingAccountTap:(id)sender {
-    NSString *phoneNumber = [self correctPhoneNumber:self.phoneNumberSignUpField.text andCountryCode:self.countryCodeSignUpField.text];
-    if (phoneNumber) {
-        self.phoneNumberConfirmView.text = phoneNumber;
-        
-        BOOL isSmsActivationSelected = self.activateBySignUpSegmented.selectedSegmentIndex == 0;
-        
-        self.smsImageConfirmView.hidden = !isSmsActivationSelected;
-        self.callImageConfirmView.hidden = isSmsActivationSelected;
-        
-        self.smsTextConfirmView.hidden = !isSmsActivationSelected;
-        self.callTextConfirmView.hidden = isSmsActivationSelected;
-        
-        [self animateConfirmViewHide:NO];
-    }
+- (IBAction)onSmsContinueCreatingAccountTap:(id)sender {
+    [self onContinueCreatingAccountTap:YES];
 }
+
+- (IBAction)onCallContinueCreatingAccountTap:(id)sender {
+    [self onContinueCreatingAccountTap:NO];
+}
+
 
 - (IBAction)onCancelConfirmTap:(UIButton *)sender {
     [self animateConfirmViewHide:YES];
@@ -1299,7 +1306,7 @@ static UICompositeViewDescription *compositeDescription = nil;
                                 activateBySms:self.activateBySignUpSegmented.selectedSegmentIndex == 0];
 }
 
-- (IBAction)onCountinueActivatingTap:(id)sender {
+- (IBAction)onContinueActivatingTap:(id)sender {
     [self activateAccountWithCode:self.activationCodeActivateField.text];
 }
 
@@ -1357,6 +1364,21 @@ static UICompositeViewDescription *compositeDescription = nil;
     [self changeView:logInView back:NO animation:YES];
 }
 
+- (IBAction)onNextCountrySignUpClick:(id)sender {
+        //[self saveSelectedCountry];
+    [self changeView:phoneNumberSignUpView back:NO animation:YES];
+}
+
+- (IBAction)onNextPhoneNumberSignUpClick:(id)sender {
+        //[self saveSelectedCountry];
+    [self changeView:signUpView back:NO animation:YES];
+}
+
+- (IBAction)onContinueSingUpView:(id)sender {
+        //[self saveSelectedCountry];
+    [self changeView:getActivationByCodeView back:NO animation:YES];
+}
+
 - (IBAction)onDismissKeyboardButton:(id)sender {
     if ([self.countryNameLoginViewField isFirstResponder]) {
         [self.countryNameLoginViewField resignFirstResponder];
@@ -1364,6 +1386,8 @@ static UICompositeViewDescription *compositeDescription = nil;
         [self.phoneNumberRegisterField resignFirstResponder];
     } else if ([self.passwordRegisterField isFirstResponder]) {
         [self.passwordRegisterField resignFirstResponder];
+    } else if ([self.countryNameSignUpField isFirstResponder]) {
+        [self.countryNameSignUpField resignFirstResponder];
     }
 }
 
@@ -1795,7 +1819,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 }
 
 - (void)updateFlagForCountry:(NSDictionary *)country {
-    if (currentView == self.signUpView) {
+    if (currentView == self.countrySignUpView) {
         [self updateCountryFlag:country[caspianCountryObjectFieldFlag] activityIndicator:self.flagLoadingSignUpActivityIndicator flagImageView:self.countryFlagSignUpImage];
     } else if (currentView == self.forgotPasswordView) {
         [self updateCountryFlag:country[caspianCountryObjectFieldFlag] activityIndicator:self.flagLoadingForgotPasswordActivityIndicator flagImageView:self.countryFlagForgotPasswordImage];
@@ -2035,6 +2059,25 @@ static UICompositeViewDescription *compositeDescription = nil;
             }];
         }];
     }];
+}
+
+- (void) onContinueCreatingAccountTap:(BOOL)isSmsActivationSelected {
+    NSString *phoneNumber = [self correctPhoneNumber:self.phoneNumberSignUpField.text andCountryCode:self.countryCodeSignUpField.text];
+    if (phoneNumber) {
+        self.phoneNumberConfirmView.text = phoneNumber;
+        
+        /* BOOL isSmsActivationSelected = self.activateBySignUpSegmented.selectedSegmentIndex == 0;
+         */
+            // BOOL isSmsActivationSelected = YES;
+        
+        self.smsImageConfirmView.hidden = !isSmsActivationSelected;
+        self.callImageConfirmView.hidden = isSmsActivationSelected;
+        
+        self.smsTextConfirmView.hidden = !isSmsActivationSelected;
+        self.callTextConfirmView.hidden = isSmsActivationSelected;
+        
+        [self animateConfirmViewHide:NO];
+    }
 }
 
 
