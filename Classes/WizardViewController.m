@@ -688,7 +688,7 @@ static UICompositeViewDescription *compositeDescription = nil;
             [self fillCredentials];
         }
     } else if (view == countrySignUpView) {
-            //[self cleanUpSignUpView];
+        [self cleanUpSignUpView];
 
         waitView.hidden = NO;
         [self pullCountriesWithCompletion:^{
