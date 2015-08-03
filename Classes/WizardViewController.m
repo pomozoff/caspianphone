@@ -1398,7 +1398,23 @@ static UICompositeViewDescription *compositeDescription = nil;
         [self.passwordRegisterField resignFirstResponder];
     } else if ([self.countryNameSignUpField isFirstResponder]) {
         [self.countryNameSignUpField resignFirstResponder];
+    } else if ([self.countryNameForgotPasswordField isFirstResponder]) {
+        [self.countryNameForgotPasswordField resignFirstResponder];
+    } else if ([self.phoneNumberForgotPasswordField isFirstResponder]) {
+        [self.phoneNumberForgotPasswordField resignFirstResponder];
+    } else if ([self.countryNameSignUpField isFirstResponder]) {
+        [self.countryNameSignUpField resignFirstResponder];
+    } else if ([self.phoneNumberSignUpField isFirstResponder]) {
+        [self.phoneNumberSignUpField resignFirstResponder];
+    } else if ([self.firstNameSignUpField isFirstResponder]) {
+        [self.firstNameSignUpField resignFirstResponder];
+    } else if ([self.lastNameSignUpField isFirstResponder]) {
+        [self.lastNameSignUpField resignFirstResponder];
+    } else if ([self.activationCodeActivateField isFirstResponder]) {
+        [self.activationCodeActivateField resignFirstResponder];
     }
+
+
 }
 
 
