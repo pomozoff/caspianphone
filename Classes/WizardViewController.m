@@ -1878,8 +1878,10 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (NSString *)correctPhoneNumber:(NSString *)phoneNumber andCountryCode:(NSString *)countryCode {
     NSString *fullPhoneNumber = nil;
+    NSString *cleanPhoneNumber = nil;
+    cleanPhoneNumber = [phoneNumber substringFromIndex:countryCode.length-1];
     if ([self checkCountryCode:countryCode]) {
-        NSString *cleanedPhoneNumber = [[LinphoneManager instance] removeUnneededPrefixes:phoneNumber];
+        NSString *cleanedPhoneNumber = [[LinphoneManager instance] removeUnneededPrefixes:cleanPhoneNumber];
         fullPhoneNumber = [countryCode stringByAppendingString:cleanedPhoneNumber];
     }
     return fullPhoneNumber;
