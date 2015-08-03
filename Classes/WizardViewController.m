@@ -1327,8 +1327,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 }
 
 - (IBAction)onSubmitForgotPasswordTap:(id)sender {
-    [self recoverPasswordForPhoneNumber:self.phoneNumberForgotPasswordField.text
-                         andCountryCode:self.countryCodeForgotPasswordField.text];
+    [self submitRecoveryPasswordAction];
 }
 
 - (IBAction)onNoAskPasswordTap:(UIButton *)sender {
