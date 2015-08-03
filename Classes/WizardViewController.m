@@ -1367,7 +1367,11 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (IBAction)onNextCountrySignUpClick:(id)sender {
         //[self saveSelectedCountry];
+    if (currentView == self.forgotPasswordView) {
+        [self.phoneNumberForgotPasswordField becomeFirstResponder];
+    } else {
     [self changeView:phoneNumberSignUpView back:NO animation:YES];
+    }
 }
 
 - (IBAction)onNextPhoneNumberSignUpClick:(id)sender {
