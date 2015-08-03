@@ -697,6 +697,7 @@ static UICompositeViewDescription *compositeDescription = nil;
         }];
     } else if (view == phoneNumberSignUpView) {
             if (!back) {
+                self.phoneNumberSignUpField.text = self.selectedCountryCode;
                 [self.phoneNumberSignUpField becomeFirstResponder];
             }
     } else if (view == signUpView) {
@@ -1299,8 +1300,11 @@ static UICompositeViewDescription *compositeDescription = nil;
 }
 
 - (IBAction)onOkConfirmTap:(UIButton *)sender {
+    NSString *cleanPhoneNumberSignUpField = self.phoneNumberSignUpField.text;
+    NSString *countryCode = self.countryCodeSignUpField.text;
     [self animateConfirmViewHide:YES];
-    [self checkAndCreateAccountForPhoneNumber:self.phoneNumberSignUpField.text
+    cleanPhoneNumberSignUpField = [cleanPhoneNumberSignUpField substringFromIndex:countryCode.length-1];
+    [self checkAndCreateAccountForPhoneNumber:cleanPhoneNumberSignUpField
                                   countryCode:self.countryCodeSignUpField.text
                                     firstName:self.firstNameSignUpField.text
                                      lastName:self.lastNameSignUpField.text
@@ -2141,6 +2145,11 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 
 #pragma mark - Forgot Password
+
+- (void) submitRecoveryPasswordAction {
+    [self recoverPasswordForPhoneNumber:self.phoneNumberForgotPasswordField.text
+                         andCountryCode:self.countryCodeForgotPasswordField.text];
+}
 
 - (void)recoverPasswordForPhoneNumber:(NSString *)phoneNumber andCountryCode:(NSString *)countryCode {
     if ([self checkCountryCode:countryCode]) {
