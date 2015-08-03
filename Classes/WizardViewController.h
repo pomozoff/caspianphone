@@ -137,6 +137,8 @@
 @property (nonatomic, retain) IBOutlet COCTextField *countryNameForgotPasswordField_2;
 @property (nonatomic, retain) IBOutlet COCTextField *phoneNumberForgotPasswordField_2;
 
+@property (retain, nonatomic) IBOutlet UIToolbar *doneNumKeyboardForgetPasswordToolbar;
+
 @property (nonatomic, retain) IBOutlet COCTextField *phoneNumberAskPhoneNumberField;
 @property (nonatomic, retain) IBOutlet COCTextField *phoneNumberFoundPhoneNumberField;
 @property (nonatomic, retain) IBOutlet COCTextField *phoneNumberExistsPhoneNumberField;

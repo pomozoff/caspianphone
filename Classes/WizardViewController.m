@@ -303,6 +303,7 @@ extern NSString *caspianErrorDomain;
     [countrySignUpView release];
     [phoneNumberSignUpView release];
     [getActivationByCodeView release];
+    [_doneNumKeyboardForgetPasswordToolbar release];
     [super dealloc];
 }
 
