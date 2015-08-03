@@ -14,15 +14,12 @@
                 <outlet property="countryCodeSignUpField" destination="7O8-ON-sNh" id="eV1-f4-lix"/>
                 <outlet property="countryFlagForgotPasswordImage" destination="ZSO-Bt-M1Y" id="lkm-XF-Zz8"/>
                 <outlet property="countryFlagSignUpImage" destination="1Lf-fd-HGv" id="SvQ-24-OVo"/>
-                <outlet property="countryPickerDoneToolbar" destination="30B-mp-hrW" id="tnV-eX-7QE"/>
                 <outlet property="countryPickerView" destination="9QR-C9-FbJ" id="sCV-Dg-r4q"/>
                 <outlet property="domainRegisterField" destination="gEd-ol-qpf" id="gZv-uz-yuN"/>
                 <outlet property="flagLoadingForgotPasswordActivityIndicator" destination="wkJ-zr-zkc" id="Czb-YC-Qo6"/>
                 <outlet property="flagLoadingSignUpActivityIndicator" destination="hh6-br-3OS" id="pW5-QK-tht"/>
-                <outlet property="numKeypadDoneToolbar" destination="h8o-F2-ZnK" id="Gu6-Yw-ljB"/>
                 <outlet property="passwordFinishField" destination="241-LL-aD2" id="NfS-DN-zMk"/>
                 <outlet property="passwordReceivedView" destination="44" id="rHa-TL-MeI"/>
-                <outlet property="phoneNumberNextToolbar" destination="soq-SC-fBu" id="rdC-CM-KmM"/>
                 <outlet property="provisionedAccountView" destination="xVK-hL-6pe" id="jZM-mc-m1Q"/>
                 <outlet property="provisionedDomain" destination="wRB-Sh-K8J" id="Ieb-x8-yL4"/>
                 <outlet property="provisionedPassword" destination="ClH-fT-a8N" id="h61-p1-4qG"/>
@@ -826,20 +823,16 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="19" y="215"/>
         </view>
-        <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="30B-mp-hrW" userLabel="Country Picker Toolbar">
+        <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="30B-mp-hrW" userLabel="Country Picker Toolbar_old">
             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
             <items>
                 <barButtonItem style="plain" systemItem="flexibleSpace" id="vxh-dj-ASN"/>
-                <barButtonItem title="Next" id="CZb-B5-rbI">
-                    <connections>
-                        <action selector="onCountryPickerNextTap:" destination="-1" id="f0W-IO-Mj5"/>
-                    </connections>
-                </barButtonItem>
+                <barButtonItem title="Next" id="CZb-B5-rbI"/>
             </items>
             <point key="canvasLocation" x="406" y="1289"/>
         </toolbar>
-        <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="h8o-F2-ZnK" userLabel="Done Num Keyboard Toolbar">
+        <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="h8o-F2-ZnK" userLabel="Done Num Keyboard Toolbar_old">
             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
             <items>
@@ -852,16 +845,12 @@
             </items>
             <point key="canvasLocation" x="406" y="1200"/>
         </toolbar>
-        <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="soq-SC-fBu" userLabel="Next Phone Number Toolbar">
+        <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="soq-SC-fBu" userLabel="Next Phone Number Toolbar_old">
             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
             <items>
                 <barButtonItem style="plain" systemItem="flexibleSpace" id="Kr9-iH-Z9y"/>
-                <barButtonItem title="Next" id="OAu-eR-i8x">
-                    <connections>
-                        <action selector="onPhoneNumberRegisterNextTap:" destination="-1" id="4S1-1t-WsW"/>
-                    </connections>
-                </barButtonItem>
+                <barButtonItem title="Next" id="OAu-eR-i8x"/>
             </items>
             <point key="canvasLocation" x="406" y="1099"/>
         </toolbar>
