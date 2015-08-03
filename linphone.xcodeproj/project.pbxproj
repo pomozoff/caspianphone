@@ -337,6 +337,8 @@
 		C681BB241AE825090063B3A5 /* welcome_signup_default.png in Resources */ = {isa = PBXBuildFile; fileRef = C681BB231AE825090063B3A5 /* welcome_signup_default.png */; };
 		C681BB261AE825B90063B3A5 /* original.png in Resources */ = {isa = PBXBuildFile; fileRef = C681BB251AE825B90063B3A5 /* original.png */; };
 		C6863C8D1AF5608300652820 /* WizardViews_2.xib in Resources */ = {isa = PBXBuildFile; fileRef = C6863C8C1AF5608300652820 /* WizardViews_2.xib */; };
+		C6A9AA191B6BEF36003EF579 /* Univesal_button_cyan.png in Resources */ = {isa = PBXBuildFile; fileRef = C6A9AA171B6BEF36003EF579 /* Univesal_button_cyan.png */; };
+		C6A9AA1A1B6BEF36003EF579 /* Univesal_button_green.png in Resources */ = {isa = PBXBuildFile; fileRef = C6A9AA181B6BEF36003EF579 /* Univesal_button_green.png */; };
 		C6AD589F1AF26C4B00DD5375 /* welcome-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C6AD589D1AF26C4B00DD5375 /* welcome-568h@2x.png */; };
 		C6AD58A01AF26C4B00DD5375 /* welcome@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C6AD589E1AF26C4B00DD5375 /* welcome@2x.png */; };
 		C6BECC6A1B0F2BA400A6B703 /* signup_back_default.png in Resources */ = {isa = PBXBuildFile; fileRef = C6BECC691B0F2BA400A6B703 /* signup_back_default.png */; };
@@ -1465,6 +1467,8 @@
 		C681BB231AE825090063B3A5 /* welcome_signup_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = welcome_signup_default.png; sourceTree = "<group>"; };
 		C681BB251AE825B90063B3A5 /* original.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = original.png; sourceTree = "<group>"; };
 		C6863C8C1AF5608300652820 /* WizardViews_2.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WizardViews_2.xib; sourceTree = "<group>"; };
+		C6A9AA171B6BEF36003EF579 /* Univesal_button_cyan.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Univesal_button_cyan.png; path = "Resources/image caspian new graphics/Univesal_button_cyan.png"; sourceTree = SOURCE_ROOT; };
+		C6A9AA181B6BEF36003EF579 /* Univesal_button_green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Univesal_button_green.png; path = "Resources/image caspian new graphics/Univesal_button_green.png"; sourceTree = SOURCE_ROOT; };
 		C6AD589D1AF26C4B00DD5375 /* welcome-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "welcome-568h@2x.png"; sourceTree = "<group>"; };
 		C6AD589E1AF26C4B00DD5375 /* welcome@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "welcome@2x.png"; sourceTree = "<group>"; };
 		C6BECC691B0F2BA400A6B703 /* signup_back_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = signup_back_default.png; sourceTree = "<group>"; };
@@ -2999,6 +3003,8 @@
 		C681BB1E1AE8223A0063B3A5 /* image caspian new graphics */ = {
 			isa = PBXGroup;
 			children = (
+				C6A9AA171B6BEF36003EF579 /* Univesal_button_cyan.png */,
+				C6A9AA181B6BEF36003EF579 /* Univesal_button_green.png */,
 				C67161C71B66AF4200994579 /* signup_continue_default.png */,
 				C67161C31B66A8B900994579 /* home_cancel_pressed.png */,
 				C67161C41B66A8B900994579 /* home_ok_pressed.png */,
@@ -4281,6 +4287,7 @@
 				D35406F715A47E9E007E7E81 /* button_background_default.png in Resources */,
 				D35406F915A47E9E007E7E81 /* button_background_over.png in Resources */,
 				26E7F3B71A81709F0033D3C0 /* messages.png in Resources */,
+				C6A9AA191B6BEF36003EF579 /* Univesal_button_cyan.png in Resources */,
 				D38187AD15FE340100C3EDCA /* ChatRoomViewController.xib in Resources */,
 				D3F795DD15A5831C0077328B /* chat_back_default.png in Resources */,
 				D3F795DF15A5831C0077328B /* chat_back_over.png in Resources */,
@@ -4481,6 +4488,7 @@
 				D3A74F2015C69392001500B9 /* options_transfer_default~ipad.png in Resources */,
 				D3A74F2215C69392001500B9 /* options_transfer_disabled~ipad.png in Resources */,
 				26E7F3891A81709F0033D3C0 /* 7.png in Resources */,
+				C6A9AA1A1B6BEF36003EF579 /* Univesal_button_green.png in Resources */,
 				D3A74F2415C69392001500B9 /* options_transfer_over~ipad.png in Resources */,
 				D3A74F2615C69392001500B9 /* pause_off_default~ipad.png in Resources */,
 				D3A74F2815C69392001500B9 /* pause_off_over~ipad.png in Resources */,
