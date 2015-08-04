@@ -2200,9 +2200,13 @@ static void audioRouteChangeListenerCallback (
         //NSString *params = [NSString stringWithFormat:@"app-id=%@.%@;pn-type=apple;pn-tok=%@;pn-msg-str=IM_MSG;pn-call-str=IC_MSG", [[NSBundle mainBundle] bundleIdentifier],APPMODE_SUFFIX,tokenString];
         NSString *params = [NSString stringWithFormat:@"app-id=%@;pn-type=iphone;pn-tok=%@;%@", [[NSBundle mainBundle] bundleIdentifier], tokenString, APPMODE_SUFFIX];
 
+        [LinphoneLogger log:LinphoneLoggerError format:@"Set push notification token: %@", tokenString];
+        [LinphoneLogger log:LinphoneLoggerError format:@"URI parameters: %@", params];
+        
         linphone_proxy_config_set_contact_uri_parameters(proxyCfg, [params UTF8String]);
         linphone_proxy_config_set_contact_parameters(proxyCfg, NULL);
 	} else {
+        [LinphoneLogger log:LinphoneLoggerError format:@"No push token set, token data: %@", tokenData];
 		// no push token:
 		linphone_proxy_config_set_contact_uri_parameters(proxyCfg, NULL);
 		linphone_proxy_config_set_contact_parameters(proxyCfg, NULL);
