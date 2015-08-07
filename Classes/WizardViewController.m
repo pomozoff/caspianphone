@@ -1271,37 +1271,32 @@ static UICompositeViewDescription *compositeDescription = nil;
     [self.view endEditing:YES];
 }
 
-- (IBAction)onContinueCreatingAccountTap:(id)sender {
-    NSString *phoneNumber = [self correctPhoneNumber:self.phoneNumberSignUpField.text andCountryCode:self.countryCodeSignUpField.text];
-    if (phoneNumber) {
-        self.phoneNumberConfirmView.text = phoneNumber;
-        
-        BOOL isSmsActivationSelected = self.activateBySignUpSegmented.selectedSegmentIndex == 0;
-        
-        self.smsImageConfirmView.hidden = !isSmsActivationSelected;
-        self.callImageConfirmView.hidden = isSmsActivationSelected;
-        
-        self.smsTextConfirmView.hidden = !isSmsActivationSelected;
-        self.callTextConfirmView.hidden = isSmsActivationSelected;
-        
-        [self animateConfirmViewHide:NO];
-    }
+- (IBAction)onSmsContinueCreatingAccountTap:(id)sender {
+    [self onContinueCreatingAccountTap:YES];
 }
+
+- (IBAction)onCallContinueCreatingAccountTap:(id)sender {
+    [self onContinueCreatingAccountTap:NO];
+}
+
 
 - (IBAction)onCancelConfirmTap:(UIButton *)sender {
     [self animateConfirmViewHide:YES];
 }
 
 - (IBAction)onOkConfirmTap:(UIButton *)sender {
+    NSString *cleanPhoneNumberSignUpField = self.phoneNumberSignUpField.text;
+    NSString *countryCode = self.countryCodeSignUpField.text;
     [self animateConfirmViewHide:YES];
-    [self checkAndCreateAccountForPhoneNumber:self.phoneNumberSignUpField.text
+    cleanPhoneNumberSignUpField = [cleanPhoneNumberSignUpField substringFromIndex:countryCode.length-1];
+    [self checkAndCreateAccountForPhoneNumber:cleanPhoneNumberSignUpField
                                   countryCode:self.countryCodeSignUpField.text
                                     firstName:self.firstNameSignUpField.text
                                      lastName:self.lastNameSignUpField.text
                                 activateBySms:self.activateBySignUpSegmented.selectedSegmentIndex == 0];
 }
 
-- (IBAction)onCountinueActivatingTap:(id)sender {
+- (IBAction)onContinueActivatingTap:(id)sender {
     [self activateAccountWithCode:self.activationCodeActivateField.text];
 }
 
@@ -1850,8 +1845,10 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (NSString *)correctPhoneNumber:(NSString *)phoneNumber andCountryCode:(NSString *)countryCode {
     NSString *fullPhoneNumber = nil;
+    NSString *cleanPhoneNumber = nil;
+    cleanPhoneNumber = [phoneNumber substringFromIndex:countryCode.length-1];
     if ([self checkCountryCode:countryCode]) {
-        NSString *cleanedPhoneNumber = [[LinphoneManager instance] removeUnneededPrefixes:phoneNumber];
+        NSString *cleanedPhoneNumber = [[LinphoneManager instance] removeUnneededPrefixes:cleanPhoneNumber];
         fullPhoneNumber = [countryCode stringByAppendingString:cleanedPhoneNumber];
     }
     return fullPhoneNumber;
@@ -2040,6 +2037,25 @@ static UICompositeViewDescription *compositeDescription = nil;
             }];
         }];
     }];
+}
+
+- (void) onContinueCreatingAccountTap:(BOOL)isSmsActivationSelected {
+    NSString *phoneNumber = [self correctPhoneNumber:self.phoneNumberSignUpField.text andCountryCode:self.countryCodeSignUpField.text];
+    if (phoneNumber) {
+        self.phoneNumberConfirmView.text = phoneNumber;
+        
+        /* BOOL isSmsActivationSelected = self.activateBySignUpSegmented.selectedSegmentIndex == 0;
+         */
+            // BOOL isSmsActivationSelected = YES;
+        
+        self.smsImageConfirmView.hidden = !isSmsActivationSelected;
+        self.callImageConfirmView.hidden = isSmsActivationSelected;
+        
+        self.smsTextConfirmView.hidden = !isSmsActivationSelected;
+        self.callTextConfirmView.hidden = isSmsActivationSelected;
+        
+        [self animateConfirmViewHide:NO];
+    }
 }
 
 
