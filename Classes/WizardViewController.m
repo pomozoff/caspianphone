@@ -678,6 +678,15 @@ static UICompositeViewDescription *compositeDescription = nil;
             waitView.hidden = YES;
             [self.countryNameSignUpField becomeFirstResponder];
         }];
+    } else if (view == phoneNumberSignUpView) {
+            if (!back) {
+                self.phoneNumberSignUpField.text = self.selectedCountryCode;
+                [self.phoneNumberSignUpField becomeFirstResponder];
+            }
+    } else if (view == signUpView) {
+        if (!back) {
+            [self.firstNameSignUpField becomeFirstResponder];
+        }
     } else if (view == activateAccountView) {
         self.activationCodeActivateField.text = @"";
         [self.activationCodeActivateField becomeFirstResponder];
