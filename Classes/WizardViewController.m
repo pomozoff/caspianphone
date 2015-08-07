@@ -1353,6 +1353,25 @@ static UICompositeViewDescription *compositeDescription = nil;
     [self changeView:logInView back:NO animation:YES];
 }
 
+- (IBAction)onNextCountrySignUpClick:(id)sender {
+        //[self saveSelectedCountry];
+    if (currentView == self.forgotPasswordView) {
+        [self.phoneNumberForgotPasswordField becomeFirstResponder];
+    } else {
+    [self changeView:phoneNumberSignUpView back:NO animation:YES];
+    }
+}
+
+- (IBAction)onNextPhoneNumberSignUpClick:(id)sender {
+        //[self saveSelectedCountry];
+    [self changeView:signUpView back:NO animation:YES];
+}
+
+- (IBAction)onContinueSingUpView:(id)sender {
+        //[self saveSelectedCountry];
+    [self changeView:getActivationByCodeView back:NO animation:YES];
+}
+
 - (IBAction)onDismissKeyboardButton:(id)sender {
     if ([self.countryNameLoginViewField isFirstResponder]) {
         [self.countryNameLoginViewField resignFirstResponder];
