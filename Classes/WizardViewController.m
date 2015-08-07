@@ -973,6 +973,8 @@ static UICompositeViewDescription *compositeDescription = nil;
     } else
     if (textField == self.firstNameSignUpField) {
         [self.lastNameSignUpField becomeFirstResponder];
+    } else if (textField == self.lastNameSignUpField) {
+        [self changeView:getActivationByCodeView back:NO animation:YES];
     } else {
         [textField resignFirstResponder];
     }
