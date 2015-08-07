@@ -662,15 +662,15 @@ static UICompositeViewDescription *compositeDescription = nil;
         if (!back) {
             waitView.hidden = NO;
             [self pullCountriesWithCompletion:^{
-                waitView.hidden = YES;
-                [self.countryNameLoginViewField becomeFirstResponder];
+               waitView.hidden = YES;
+            [self.countryNameLoginViewField becomeFirstResponder];
             }];
         }
     } else if (view == logInView) {
         if (!back) {
             [self fillCredentials];
         }
-    } else if (view == signUpView) {
+    } else if (view == countrySignUpView) {
         [self cleanUpSignUpView];
 
         waitView.hidden = NO;
