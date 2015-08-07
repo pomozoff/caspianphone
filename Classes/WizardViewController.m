@@ -94,6 +94,8 @@ extern NSString *caspianErrorDomain;
 @synthesize contentView;
 
 @synthesize welcomeView;
+@synthesize countrySignUpView;
+@synthesize phoneNumberSignUpView;
 @synthesize signUpView;
 @synthesize passwordReceivedView;
 @synthesize connectAccountView;
@@ -106,6 +108,7 @@ extern NSString *caspianErrorDomain;
 @synthesize logInView;
 @synthesize welcomeView2;
 @synthesize countryLoginView;
+@synthesize getActivationByCodeView;
 
 @synthesize cancelButton;
 @synthesize backButton;
@@ -294,7 +297,10 @@ extern NSString *caspianErrorDomain;
     [countryLoginView release];
     [_countryPickerLoginNextToolbar release];
     [_dismissKeyboardButtonCountryLoginView release];
-
+    [countrySignUpView release];
+    [phoneNumberSignUpView release];
+    [getActivationByCodeView release];
+    [_doneNumKeyboardForgetPasswordToolbar release];
     [super dealloc];
 }
 
