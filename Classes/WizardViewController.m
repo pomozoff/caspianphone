@@ -404,7 +404,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     //self.passwordRegisterField.inputAccessoryView = self.numKeypadDoneSignInToolbar;
     self.activationCodeActivateField.inputAccessoryView = self.numKeypadDoneToolbar;
     self.passwordFinishField.inputView = self.dummyView;
-    self.phoneNumberForgotPasswordField.inputAccessoryView = self.numKeypadDoneToolbar;
+    self.phoneNumberForgotPasswordField.inputAccessoryView = self.doneNumKeyboardForgetPasswordToolbar;
     
     self.phoneNumberAskPhoneNumberField.inputView = self.dummyView;
     self.phoneNumberFoundPhoneNumberField.inputView = self.dummyView;
