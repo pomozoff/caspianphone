@@ -706,6 +706,7 @@ static UICompositeViewDescription *compositeDescription = nil;
         [self pullCountriesWithCompletion:^{
             waitView.hidden = YES;
             [self.countryNameForgotPasswordField becomeFirstResponder];
+            self.phoneNumberForgotPasswordField.text = self.selectedCountryCode;
         }];
     }
     
@@ -1379,7 +1380,25 @@ static UICompositeViewDescription *compositeDescription = nil;
         [self.phoneNumberRegisterField resignFirstResponder];
     } else if ([self.passwordRegisterField isFirstResponder]) {
         [self.passwordRegisterField resignFirstResponder];
+    } else if ([self.countryNameSignUpField isFirstResponder]) {
+        [self.countryNameSignUpField resignFirstResponder];
+    } else if ([self.countryNameForgotPasswordField isFirstResponder]) {
+        [self.countryNameForgotPasswordField resignFirstResponder];
+    } else if ([self.phoneNumberForgotPasswordField isFirstResponder]) {
+        [self.phoneNumberForgotPasswordField resignFirstResponder];
+    } else if ([self.countryNameSignUpField isFirstResponder]) {
+        [self.countryNameSignUpField resignFirstResponder];
+    } else if ([self.phoneNumberSignUpField isFirstResponder]) {
+        [self.phoneNumberSignUpField resignFirstResponder];
+    } else if ([self.firstNameSignUpField isFirstResponder]) {
+        [self.firstNameSignUpField resignFirstResponder];
+    } else if ([self.lastNameSignUpField isFirstResponder]) {
+        [self.lastNameSignUpField resignFirstResponder];
+    } else if ([self.activationCodeActivateField isFirstResponder]) {
+        [self.activationCodeActivateField resignFirstResponder];
     }
+
+
 }
 
 
@@ -1807,6 +1826,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     
     self.countryCodeForgotPasswordField.text = self.countryCodeSignUpField.text;
     self.countryNameForgotPasswordField.text = self.countryNameSignUpField.text;
+    self.phoneNumberForgotPasswordField.text = self.selectedCountryCode;
     
     [self checkNextStep];
     [self activationAvailableForCountry:country];
