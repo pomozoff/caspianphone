@@ -1063,7 +1063,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 #pragma mark - Action Functions
 
 - (IBAction)onStartClick:(id)sender {
-    [self changeView:signUpView back:FALSE animation:TRUE];
+    [self changeView:countrySignUpView back:FALSE animation:TRUE];
 }
 
 - (IBAction)onBackClick:(id)sender {
@@ -1167,7 +1167,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 }
 
 - (IBAction)onSignUpClick:(id)sender {
-    [self changeView:signUpView back:FALSE animation:TRUE];
+    [self changeView:countrySignUpView back:FALSE animation:TRUE];
 }
 
 - (IBAction)onRegisterClick:(id)sender {
@@ -1798,7 +1798,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 }
 
 - (void)updateFlagForCountry:(NSDictionary *)country {
-    if (currentView == self.signUpView) {
+    if (currentView == self.countrySignUpView) {
         [self updateCountryFlag:country[caspianCountryObjectFieldFlag] activityIndicator:self.flagLoadingSignUpActivityIndicator flagImageView:self.countryFlagSignUpImage];
     } else if (currentView == self.forgotPasswordView) {
         [self updateCountryFlag:country[caspianCountryObjectFieldFlag] activityIndicator:self.flagLoadingForgotPasswordActivityIndicator flagImageView:self.countryFlagForgotPasswordImage];
