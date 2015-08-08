@@ -42,7 +42,12 @@
 @property (nonatomic, retain) IBOutlet UIScrollView *contentView;
 
 @property (nonatomic, retain) IBOutlet UIView *welcomeView;
+@property (retain, nonatomic) IBOutlet UIView *countrySignUpView;
+@property (retain, nonatomic) IBOutlet UIView *phoneNumberSignUpView;
 @property (nonatomic, retain) IBOutlet UIView *signUpView;
+
+@property (retain, nonatomic) IBOutlet UIView *getActivationByCodeView;
+
 @property (nonatomic, retain) IBOutlet UIView *phoneNumberFoundView;
 @property (nonatomic, retain) IBOutlet UIView *phoneNumberExistsView;
 @property (nonatomic, retain) IBOutlet UIView *passwordReceivedView;
@@ -131,6 +136,8 @@
 
 @property (nonatomic, retain) IBOutlet COCTextField *countryNameForgotPasswordField_2;
 @property (nonatomic, retain) IBOutlet COCTextField *phoneNumberForgotPasswordField_2;
+
+@property (retain, nonatomic) IBOutlet UIToolbar *doneNumKeyboardForgetPasswordToolbar;
 
 @property (nonatomic, retain) IBOutlet COCTextField *phoneNumberAskPhoneNumberField;
 @property (nonatomic, retain) IBOutlet COCTextField *phoneNumberFoundPhoneNumberField;
