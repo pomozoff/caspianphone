@@ -87,6 +87,9 @@ extern NSString *caspianErrorDomain;
 
 @property (nonatomic, assign) NSInteger currentCountryRow;
 
+@property (nonatomic, assign) BOOL isAvableActivateBySMS;
+@property (nonatomic, assign) BOOL isAvableActivated;
+
 @end
 
 @implementation WizardViewController
@@ -122,6 +125,9 @@ extern NSString *caspianErrorDomain;
 @synthesize choiceViewLogoImageView;
 @synthesize viewTapGestureRecognizer;
 @synthesize rememberMeRegisterSwitch;
+
+@synthesize isAvableActivateBySMS;
+@synthesize isAvableActivated;
 
 @synthesize activationCode = _activationCode;
 
@@ -1294,7 +1300,7 @@ static UICompositeViewDescription *compositeDescription = nil;
                                   countryCode:self.countryCodeSignUpField.text
                                     firstName:self.firstNameSignUpField.text
                                      lastName:self.lastNameSignUpField.text
-                                activateBySms:self.activateBySignUpSegmented.selectedSegmentIndex == 0];
+                                activateBySms:isAvableActivateBySMS]; //self.activateBySignUpSegmented.selectedSegmentIndex == 0]
 }
 
 - (IBAction)onContinueActivatingTap:(id)sender {
@@ -1734,7 +1740,8 @@ static UICompositeViewDescription *compositeDescription = nil;
 }
 
 - (void)switchToActivationByCall {
-    self.activateBySignUpSegmented.selectedSegmentIndex = 1;
+        //self.activateBySignUpSegmented.selectedSegmentIndex = 1;
+    isAvableActivateBySMS = NO;
 }
 
 - (void)checkIsSameUserSigningIn:(NSString *)phoneNumber {
@@ -1867,15 +1874,18 @@ static UICompositeViewDescription *compositeDescription = nil;
     BOOL isSmsAvailable = [country[caspianCountryObjectFieldSms] boolValue];
     BOOL isCallAvailable = [country[caspianCountryObjectFieldCall] boolValue];
 
-    [self.activateBySignUpSegmented setEnabled:isSmsAvailable forSegmentAtIndex:0];
-    [self.activateBySignUpSegmented setEnabled:isCallAvailable forSegmentAtIndex:1];
+        //[self.activateBySignUpSegmented setEnabled:isSmsAvailable forSegmentAtIndex:0];
+        //[self.activateBySignUpSegmented setEnabled:isCallAvailable forSegmentAtIndex:1];
     
     if (isSmsAvailable) {
-        [self.activateBySignUpSegmented setSelectedSegmentIndex:0];
+            //[self.activateBySignUpSegmented setSelectedSegmentIndex:0];
+        isAvableActivateBySMS = YES;
     } else if (isCallAvailable) {
-        [self.activateBySignUpSegmented setSelectedSegmentIndex:1];
+            //[self.activateBySignUpSegmented setSelectedSegmentIndex:1];
+        isAvableActivateBySMS = NO;
     } else {
-        [self.activateBySignUpSegmented setSelectedSegmentIndex:UISegmentedControlNoSegment];
+            //[self.activateBySignUpSegmented setSelectedSegmentIndex:UISegmentedControlNoSegment];
+        isAvableActivated = NO;
     }
     
     self.continueSignUpField.enabled = self.continueSignUpField.enabled && (isCallAvailable || isSmsAvailable);
@@ -2038,7 +2048,7 @@ static UICompositeViewDescription *compositeDescription = nil;
                                                       countryCode:self.countryCodeSignUpField.text
                                                         firstName:self.firstNameSignUpField.text
                                                          lastName:self.lastNameSignUpField.text
-                                                    activateBySms:self.activateBySignUpSegmented.selectedSegmentIndex == 0];
+                                                    activateBySms:isAvableActivateBySMS]; //self.activateBySignUpSegmented.selectedSegmentIndex == 0
                 } else {
                     NSString *errorMessage = NSLocalizedString(@"Try to create account again", nil);
                     [weakSelf alertErrorMessage:errorMessage withTitle:errorTitle withCompletion:nil];
