@@ -762,7 +762,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 	LinphoneProxyConfig* proxyCfg = linphone_core_create_proxy_config(lc);
 	//NSString* server_address = domain;
 
-    NSString *uriSuffix = [NSString stringWithFormat:@"%@:5060;transport=tcp", domain];
+    NSString *uriSuffix = [NSString stringWithFormat:@"%@:5060;transport=udp", domain];
     linphone_proxy_config_set_server_addr(proxyCfg, [uriSuffix cStringUsingEncoding:[NSString defaultCStringEncoding]]);
     
     char normalizedUserName[256];
@@ -1064,7 +1064,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     } else {
         [self checkIsSameUserSigningIn:phone];
         [self.waitView setHidden:false];
-        [self addProxyConfig:[[LinphoneManager instance] removeUnneededPrefixes:phone] password:password domain:domain withTransport:@"tcp"];
+        [self addProxyConfig:[[LinphoneManager instance] removeUnneededPrefixes:phone] password:password domain:domain withTransport:@"udp"];
     }
 }
 
@@ -2216,7 +2216,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     
     [self checkIsSameUserSigningIn:phone];
     [self.waitView setHidden:false];
-    [self addProxyConfig:[[LinphoneManager instance] removeUnneededPrefixes:phone] password:password domain:domain withTransport:@"tcp"];
+    [self addProxyConfig:[[LinphoneManager instance] removeUnneededPrefixes:phone] password:password domain:domain withTransport:@"udp"];
 }
 
 @end

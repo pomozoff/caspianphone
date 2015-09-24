@@ -46,7 +46,7 @@
 
 static NSString *caspianSharingServerUri = @"https://www.linphone.org:444/upload.php";
 
-NSString *caspianDomainIpLocal = @"194.72.111.163";
+NSString *caspianDomainIpLocal = @"194.72.111.173";
 NSString *caspianDomainOldIpLocal = @"212.159.80.157";
 
 NSInteger caspianErrorCode = 480;
