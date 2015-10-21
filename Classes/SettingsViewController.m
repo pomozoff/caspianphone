@@ -707,7 +707,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     // Root
     [hiddenKeys addObject:@"clear_proxy_button"];
     [hiddenKeys addObject:@"domain_preference"];
-    [hiddenKeys addObject:@"transport_preference"];
+    //[hiddenKeys addObject:@"transport_preference"];
     [hiddenKeys addObject:@"advanced_account_preference"];
     [hiddenKeys addObject:@"enable_video_preference"];
     [hiddenKeys addObject:@"call_menu"];
