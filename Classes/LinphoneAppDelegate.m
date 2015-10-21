@@ -29,7 +29,9 @@
 #include "LinphoneManager.h"
 #include "linphone/linphonecore.h"
 
+#import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
+
 #import "CoreDataManager.h"
 
 @implementation LinphoneAppDelegate
@@ -175,7 +177,7 @@
     UIApplication* app= [UIApplication sharedApplication];
     UIApplicationState state = app.applicationState;
     
-    [Crashlytics startWithAPIKey:@"33dd028ded3a518de0afb500f5a3839a2af9f021"];
+    [Fabric with:@[[Crashlytics class]]];
 
 	LinphoneManager* instance = [LinphoneManager instance];
     BOOL background_mode = [instance lpConfigBoolForKey:@"backgroundmode_preference"];
