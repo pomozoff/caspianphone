@@ -127,7 +127,6 @@
 			<array>
 				<string>UDP</string>
 				<string>TCP</string>
-				<string>TLS</string>
 			</array>
 			<key>Type</key>
 			<string>PSMultiValueSpecifier</string>

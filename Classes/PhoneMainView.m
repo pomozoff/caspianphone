@@ -239,7 +239,7 @@ static RootViewManager* rootViewManagerInstance = nil;
 }
 
 
-- (NSUInteger)supportedInterfaceOrientations {
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
     if( [LinphoneManager runningOnIpad ] || [mainViewController currentViewSupportsLandscape] )
         return UIInterfaceOrientationMaskAll;
     else {

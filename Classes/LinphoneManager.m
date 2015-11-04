@@ -2239,8 +2239,8 @@ static void audioRouteChangeListenerCallback (
 
 + (int)unreadMessageCount {
     int count = 0;
-    MSList* rooms = linphone_core_get_chat_rooms([LinphoneManager getLc]);
-    MSList* item = rooms;
+    const MSList* rooms = linphone_core_get_chat_rooms([LinphoneManager getLc]);
+    const MSList* item = rooms;
     while (item) {
         LinphoneChatRoom* room = (LinphoneChatRoom*)item->data;
         if( room ){

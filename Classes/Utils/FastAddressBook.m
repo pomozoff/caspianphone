@@ -207,7 +207,7 @@ extern NSString *caspianDomainOldIpLocal;
 }
 
 + (BOOL)isAuthorized {
-    return !ABAddressBookGetAuthorizationStatus || ABAddressBookGetAuthorizationStatus() ==  kABAuthorizationStatusAuthorized;
+    return !&ABAddressBookGetAuthorizationStatus || ABAddressBookGetAuthorizationStatus() ==  kABAuthorizationStatusAuthorized;
 }
 
 + (NSString *)caspianSupportPhoneNumber {

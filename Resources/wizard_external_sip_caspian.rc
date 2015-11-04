@@ -5,7 +5,7 @@
 		<entry name="reg_proxy" overwrite="true">&lt;sip:194.72.111.173:5060;transport=tcp&gt;</entry>
 		<entry name="reg_route" overwrite="true"></entry>
 		<entry name="reg_identity" overwrite="true">sip:?@194.72.111.173</entry>
-		<entry name="reg_expires" overwrite="true">36000</entry>
+		<entry name="reg_expires" overwrite="true">3600</entry>
 		<entry name="reg_sendregister" overwrite="true">1</entry>
 		<entry name="publish" overwrite="true">0</entry>
 		<entry name="dial_escape_plus" overwrite="true">1</entry>
